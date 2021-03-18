@@ -65,7 +65,7 @@ class LoginViewC: AlysieBaseViewC {
   }
   
   @IBAction func tapSignUp(_ sender: UIButton) {
-
+   
     self.btnSignUp.isUserInteractionEnabled = false
     self.postRequestToGetRoles()
   }
@@ -124,10 +124,13 @@ extension LoginViewC{
       }
     case 1:
       self.btnSignUp.isUserInteractionEnabled = true
-      let controller = pushViewController(withName: RoleViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? RoleViewC
+      //let controller = pushViewController(withName: RoleViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? RoleViewC
+        let controller = pushViewController(withName: SelectRoleViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? SelectRoleViewC
       let dicResponse = kSharedInstance.getDictionary(result)
       let dicData = kSharedInstance.getDictionary(dicResponse[APIConstants.kData])
       controller?.getRoleViewModel = GetRoleViewModel(dicData)
+    
+       
     default:
       break
     }

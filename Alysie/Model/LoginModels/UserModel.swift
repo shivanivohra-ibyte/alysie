@@ -20,13 +20,15 @@ class UserModel: NSObject{
   var firstName : String?
   var displayName : String?
   var address : String?
-  var avatarId : String?
+  //var avatarId : String?
   var accountEnabled : String?
   var logout : Bool = false
   
   var latitude : Double = 0.0
   var longitude : Double = 0.0
-  
+  var avatarId: String?
+ // var cover_id: AllProductsDataModel?
+    
   init(withDictionary dicResult: [String:Any]){
     
     super.init()
@@ -55,3 +57,7 @@ class UserModel: NSObject{
 
   }
 }
+
+//class UserImage: {
+//
+//}

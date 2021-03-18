@@ -12,6 +12,7 @@ class HubsViaCityCell: UITableViewCell , SelectList{
     @IBOutlet weak var lblHeading: UILabel!
     @IBOutlet weak var lblNoHub: UILabel!
     @IBOutlet weak var txtSearch: UITextField!
+    @IBOutlet weak var noHubImage: UIImageView!
     var hasCome:HasCome? = .hubs
     var hubsViaCity = HubsViaCity()
     var checkList: String?
@@ -27,8 +28,10 @@ class HubsViaCityCell: UITableViewCell , SelectList{
         self.hasCome == .hubs ? (txtSearch.isHidden = true) : (txtSearch.isHidden = false)
         self.filterHubs.hubs_array = hubsViaCity.hubs_array
         self.lblNoHub.isHidden = filterHubs.hubs_array?.isEmpty == false
+        self.noHubImage.isHidden = filterHubs.hubs_array?.isEmpty == false
         self.tableView.states = filterHubs.hubs_array
         self.tableView.selectDelegate = self
+        self.tableView.hasCome = .hubs
         self.txtSearch.addTarget(self, action: #selector(self.didchange(_:)), for: .editingChanged)
         self.setText()
     }
@@ -44,7 +47,9 @@ class HubsViaCityCell: UITableViewCell , SelectList{
         self.filterHubs.hubs_array?.removeAll()
         self.txtSearch.text?.count != 0  ? self.searchData() : (self.filterHubs.hubs_array = self.hubsViaCity.hubs_array ?? [] )
         self.lblNoHub.isHidden = filterHubs.hubs_array?.isEmpty == false
+        self.noHubImage.isHidden = filterHubs.hubs_array?.isEmpty == false
         self.tableView.states = filterHubs.hubs_array
+        
     }
     
     // MARK:- Function forb Search Data
@@ -53,6 +58,7 @@ class HubsViaCityCell: UITableViewCell , SelectList{
             let title = String.getString(tutorial.name).lowercased().range(of: self.txtSearch.text!.lowercased(), options: .anchored, range: nil,   locale: nil)
             title != nil ?  self.filterHubs.hubs_array?.append(tutorial) :  print("No Data found")
             self.lblNoHub.isHidden = filterHubs.hubs_array?.isEmpty == false
+            self.noHubImage.isHidden = filterHubs.hubs_array?.isEmpty == false
             self.tableView.states = filterHubs.hubs_array
         }
     }

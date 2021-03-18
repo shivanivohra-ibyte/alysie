@@ -34,7 +34,11 @@ class SignUpViewC: AlysieBaseViewC {
     kSharedInstance.signUpStepTwoOptionsModel = nil
     kSharedInstance.signUpViewModel = nil
     for controller in self.navigationController!.viewControllers as Array {
-        if controller.isKind(of: RoleViewC.self) {
+//        if controller.isKind(of: RoleViewC.self) {
+//            self.navigationController!.popToViewController(controller, animated: true)
+//            break
+//        }
+        if controller.isKind(of: SelectRoleViewC.self) {
             self.navigationController!.popToViewController(controller, animated: true)
             break
         }
@@ -79,7 +83,7 @@ class SignUpViewC: AlysieBaseViewC {
   
   private func openPicker(withArray arr: [String],model: SignUpStepOneDataModel,keyValue keyVal: String?) -> Void {
     
-    let picker = RSPickerView.init(view: self.view, arrayList: arr, keyValue: keyVal, prevSelectedValue: 0, handler: {(selectedIndex: NSInteger, response: Any?) in
+    let picker = RSPickerView.init(view: self.view, arrayList: arr, keyValue: keyVal, prevSelectedValue: 5, handler: {(selectedIndex: NSInteger, response: Any?) in
       
       if let strVal = response as? String{
         

@@ -13,7 +13,7 @@ class EditProfileTextViewTableCell: UITableViewCell {
   
   @IBOutlet weak var lblHeading: UILabel!
   @IBOutlet weak var txtView: UITextView!
-  
+    @IBOutlet weak var lblHeadingTopConst: NSLayoutConstraint!
   //MARK: - Properties -
   
   var model: SignUpStepOneDataModel!

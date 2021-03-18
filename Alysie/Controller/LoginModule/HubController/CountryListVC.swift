@@ -36,18 +36,20 @@ class CountryListVC: AlysieBaseViewC , SelectList {
         self.viewHeader.addShadow()
         self.tableVIew.hascome = .showCountry
         self.heightOFBottom.constant = hasCome == .showCountry ? 130 : 0
-        self.backButton.isHidden = hasCome == .showCountry
+        //self.backButton.isHidden = hasCome == .showCountry
+        self.backButton.isHidden = true
         self.btnBackWidth.constant = hasCome == .showCountry ? 0 : 40
        // self.changeRole.isHidden = hasCome != .showCountry
         self.viewBottom.isHidden = hasCome != .showCountry
-      if roleId == "3"{
+      //if roleId == "3"{
+        if kSharedUserDefaults.loggedInUserModal.memberRoleId == "3" {
             labelHeading.text = "Where you want to export?"
-        }else if roleId == "6"{
+        }else if (kSharedUserDefaults.loggedInUserModal.memberRoleId == "4" || kSharedUserDefaults.loggedInUserModal.memberRoleId == "5" || kSharedUserDefaults.loggedInUserModal.memberRoleId == "6"){
             labelHeading.text = "Where you import?"
         }else {
             labelHeading.text = "Loreum lore lreum reum um ruse"
         }
-        if hasCome == .showCountry && (roleId  == "6" || roleId  == "9"){
+        if hasCome == .showCountry && (kSharedUserDefaults.loggedInUserModal.memberRoleId  == "6" || kSharedUserDefaults.loggedInUserModal.memberRoleId  == "9"){
             self.tableVIew.isUserInteractionEnabled = false
         }else{
             self.tableVIew.isUserInteractionEnabled = true
@@ -101,10 +103,10 @@ class CountryListVC: AlysieBaseViewC , SelectList {
       let params = ["params":["selectedHubs":hubsID,"selectedCity":self.createCityJson(hubs: selectedCity)]]
       print(params)
 
-        self.postRequestToPostHubs(params)
-//      TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kPostHub, requestMethod: .POST, requestParameters: params, withProgressHUD: true) { (dictResposne, error, errorType, statuscode) in
-//          kSharedAppDelegate.pushToTabBarViewC()
-//      }
+       // self.postRequestToPostHubs(params)
+      TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kPostHub, requestMethod: .POST, requestParameters: params, withProgressHUD: true) { (dictResposne, error, errorType, statuscode) in
+          kSharedAppDelegate.pushToTabBarViewC()
+      }
     }
     }
   

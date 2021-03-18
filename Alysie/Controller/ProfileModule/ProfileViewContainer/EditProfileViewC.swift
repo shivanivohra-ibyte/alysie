@@ -68,6 +68,7 @@ class EditProfileViewC: AlysieBaseViewC{
       model.first?.selectedValue = self.createStringForProducts((model.first)!)
     }
     editProfileSelectTableCell.configure(withSignUpStepOneDataModel: self.signUpViewModel.arrSignUpStepOne[indexPath.row])
+    editProfileSelectTableCell.lblHeadingTopConst.constant = indexPath.row == 0 ? 60 : 20
     
     return editProfileSelectTableCell
   }
@@ -77,6 +78,7 @@ class EditProfileViewC: AlysieBaseViewC{
     let signUpMultiCheckboxTableCell = tableViewEditProfile.dequeueReusableCell(withIdentifier: SignUpMultiCheckboxTableCell.identifier(), for: indexPath) as! SignUpMultiCheckboxTableCell
     signUpMultiCheckboxTableCell.delegate = self
     signUpMultiCheckboxTableCell.configureStepOneData(withSignUpStepOneDataModel: self.signUpViewModel.arrSignUpStepOne[indexPath.row])
+    signUpMultiCheckboxTableCell.lblHeadingTopConst.constant = indexPath.row == 0 ? 60 : 20
     return signUpMultiCheckboxTableCell
   }
     
@@ -84,6 +86,7 @@ class EditProfileViewC: AlysieBaseViewC{
       
     let editProfileTextViewTableCell = self.tableViewEditProfile.dequeueReusableCell(withIdentifier: EditProfileTextViewTableCell.identifier(), for: indexPath) as! EditProfileTextViewTableCell
     editProfileTextViewTableCell.configure(withSignUpStepOneDataModel: self.signUpViewModel.arrSignUpStepOne[indexPath.row])
+    editProfileTextViewTableCell.lblHeadingTopConst.constant = indexPath.row == 0 ? 60 : 20
     return editProfileTextViewTableCell
   }
   
@@ -92,6 +95,7 @@ class EditProfileViewC: AlysieBaseViewC{
     let signUpFormTableCell = tableViewEditProfile.dequeueReusableCell(withIdentifier: SignUpFormTableCell.identifier(), for: indexPath) as! SignUpFormTableCell
     signUpFormTableCell.configure(withSignUpStepOneDataModel: self.signUpViewModel.arrSignUpStepOne[indexPath.row])
     signUpFormTableCell.delegate = self
+    signUpFormTableCell.lblHeadingTopConst.constant = indexPath.row == 0 ? 60 : 20
     return signUpFormTableCell
   }
   
@@ -197,11 +201,11 @@ class EditProfileViewC: AlysieBaseViewC{
   
   private func postRequestToUpdateUserProfile() -> Void{
 
-//    let compressProfileData = self.imgViewProfile.image!.jpegData(compressionQuality: 0.5)
-//    let compressedProfileImage = UIImage(data: compressProfileData!)
-//
-//    let compressCoverData = self.imgViewCoverPhoto.image!.jpegData(compressionQuality: 0.5)
-//    let compressedCoverImage = UIImage(data: compressCoverData!)
+    let compressProfileData = self.imgViewProfile.image!.jpegData(compressionQuality: 0.5)
+    let compressedProfileImage = UIImage(data: compressProfileData!)
+
+    let compressCoverData = self.imgViewCoverPhoto.image!.jpegData(compressionQuality: 0.5)
+    let compressedCoverImage = UIImage(data: compressCoverData!)
 //
 //    let dict: [String:Any] = ["avatar_id": compressedProfileImage!,
 //                              "cover_id": compressedCoverImage!]
@@ -214,10 +218,30 @@ class EditProfileViewC: AlysieBaseViewC{
     //imageParam[APIConstants.kImageName:APIConstants.k] =
     
     let dictStepOne = self.signUpViewModel.toDictionaryStepOne()
-  
+    let imageParamProfile:[String:Any] = [APIConstants.kImage: compressedProfileImage as Any,
+                                   APIConstants.kImageName: "avatar_id"
+                                        ]
+    let imageParamCover: [String:Any] = [
+                                   APIConstants.kImage : compressedCoverImage as Any,
+                                   APIConstants.kImageName: "cover_id"
+                                            ]
+    var imageParam = [[String:Any]]()
+    imageParam.append(imageParamProfile)
+    imageParam.append(imageParamCover)
+//    let dictUserImage : [String:Any] = [
+//        "avatar_id" : compressedProfileImage ?? UIImage(),
+//                         "cover_id" : compressedCoverImage ?? UIImage()
+//    ]
     let mergeDict = dictStepOne.compactMap { $0 }.reduce([:]) { $0.merging($1) { (current, _) in current } }
+    CommonUtil.sharedInstance.postToServerRequestMultiPart(APIUrl.kUpdateUserProfile, params: mergeDict, imageParams: imageParam, controller: self) { (dictReponse) in
+        
+        self.showAlert(withMessage: AlertMessage.kProfileUpdated){
+          self.navigationController?.popViewController(animated: true)
+        }
 
-    CommonUtil.sharedInstance.postRequestToImageUpload(withParameter: mergeDict, url: APIUrl.kUpdateUserProfile, image: [:], controller: self, type: 0)
+        //print("Success")
+    }
+    //CommonUtil.sharedInstance.postRequestToImageUpload(withParameter: mergeDict, url: APIUrl.kUpdateUserProfile, image: imageParam, controller: self, type: 0)
   }
 }
 
@@ -262,7 +286,8 @@ extension EditProfileViewC: UITableViewDelegate, UITableViewDataSource{
         if kSharedInstance.signUpStepTwoOptionsModel == nil{
           
           if (model.isHidden == false) || (model.parentId?.isEmpty == false){
-            return 110.0
+           // return 110.0
+            return 115.0
           }
           else{
             return 0.0
@@ -282,7 +307,8 @@ extension EditProfileViewC: UITableViewDelegate, UITableViewDataSource{
           
           if selectedIndex.contains(indexPath.row) || model.parentId?.isEmpty == true{
             model.isHidden = false
-            return 110.0
+           // return 110.0
+            return 115.0
           }
           else{
             model.isHidden = true
@@ -290,11 +316,12 @@ extension EditProfileViewC: UITableViewDelegate, UITableViewDataSource{
           }
          }
     case AppConstants.Multiselect,AppConstants.Checkbox:
-      return 105.0
+      return 150.0
     case AppConstants.Text:
-      return 200.0
+        return 230.0
     case AppConstants.Radio:
-      return 130.0
+      //return 130.0
+        return 150.0
     default:
       return 0.0
     }

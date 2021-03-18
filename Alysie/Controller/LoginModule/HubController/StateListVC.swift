@@ -30,9 +30,9 @@ class StateListVC: UIViewController , SelectList {
     }
     func setText(){
       
-      if roleId == "3"{
+      if kSharedUserDefaults.loggedInUserModal.memberRoleId == "3"{
             userType = "export"
-        }else if roleId == "6"{
+        }else if (kSharedUserDefaults.loggedInUserModal.memberRoleId == "4" || kSharedUserDefaults.loggedInUserModal.memberRoleId == "5" || kSharedUserDefaults.loggedInUserModal.memberRoleId == "6") {
             userType = "import"
         }else{
             userType = "loreum"
@@ -40,9 +40,9 @@ class StateListVC: UIViewController , SelectList {
         if let attributedString = self.createAttributedString(stringArray: ["Select the states from ","\(country?.name ?? "")", " where you \(userType ?? "")"], attributedPart: 1, attributes: [NSAttributedString.Key.foregroundColor: UIColor.blue]) {
             self.lblHeaderText.attributedText = attributedString
         }
-        if roleId == "3"{
+        if kSharedUserDefaults.loggedInUserModal.memberRoleId == "3"{
             labelHeading.text = "Where you want to export?"
-        }else if roleId == "6"{
+        }else if (kSharedUserDefaults.loggedInUserModal.memberRoleId == "4" || kSharedUserDefaults.loggedInUserModal.memberRoleId == "5" || kSharedUserDefaults.loggedInUserModal.memberRoleId == "6"){
             labelHeading.text = "Where you import?"
         }else {
             labelHeading.text = "Loreum lore lreum reum um ruse"

@@ -21,6 +21,7 @@ class SignUpMultiCheckboxTableCell: UITableViewCell{
   @IBOutlet weak var collectionViewMultiSelect: UICollectionView!
   @IBOutlet weak var lblHeading: UILabel!
   @IBOutlet weak var btnInfo: UIButton!
+  @IBOutlet weak var lblHeadingTopConst: NSLayoutConstraint!
   
   //MARK: - Properties -
   

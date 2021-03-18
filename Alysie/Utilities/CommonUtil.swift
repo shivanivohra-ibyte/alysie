@@ -131,7 +131,45 @@ class CommonUtil: NSObject {
     }
   }
   
-  
+    //MARK:- Multipart
+    func postToServerRequestMultiPart(_ url : String, params : [String:Any],imageParams : [[String : Any]], controller: UIViewController ,completionHandler : @escaping (_ params : [String : Any])->Void) {
+        
+        //CommonUtils.showHudWithNoInteraction(show: true)
+        SVProgressHUD.show()
+        
+        TANetworkManager.sharedInstance.requestMultiPart(withServiceName: url,
+                                                         requestMethod: .post,
+                                                         requestImages: imageParams,
+                                                         requestVideos: [:],
+                                                         requestData: params)
+        {[weak self] (result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
+            
+           // CommonUtils.showHudWithNoInteraction(show: false)
+            SVProgressHUD.dismiss()
+            if errorType == .requestSuccess {
+                
+                let dictResult = kSharedInstance.getDictionary(result)
+                
+                switch Int.getInt(statusCode) {
+                    
+                case 200:
+                    
+                    completionHandler(dictResult)
+                    
+                    
+                default:
+                    controller.showAlert(withMessage: String.getString(dictResult["errors"]))
+                    
+                }
+                
+            } else if errorType == .noNetwork {
+                controller.showAlert(withMessage: String.getString(AlertMessage.kNoInternet))
+            } else {
+                controller.showAlert(withMessage: String.getString(AlertMessage.kDefaultError))
+    
+            }
+        }
+    }
 //  func postRequestToMultipleImageUpload(withParameter params:[String: Any], url:String, image:[String: Any], controller: UIViewController, type: Int) {
 //    
 //    SVProgressHUD.show()

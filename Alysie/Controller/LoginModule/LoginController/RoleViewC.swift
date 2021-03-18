@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class RoleViewC: AlysieBaseViewC {
 
   //MARK:  - IBOutlet -
@@ -19,12 +20,26 @@ class RoleViewC: AlysieBaseViewC {
   var getRoleViewModel: GetRoleViewModel!
     
   //MARK:  - ViewLifeCycle Methods -
+    
+    //MARK:- Variable
+    var timer = Timer()
+    var counter = 0
+    var cellCount = 0
   
   override func viewDidLoad() {
   
     super.viewDidLoad()
     self.collectionViewRole.allowsSelection = true
+    
+    //MARK:- AnimationTimer
+    self.timer = Timer.scheduledTimer(timeInterval: 0.15, target: self, selector: #selector(addCellToCollectionView), userInfo: nil, repeats: true)
   }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.timer.invalidate()
+        
+    }
   
   //MARK:  - IBAction -
   
@@ -52,10 +67,24 @@ class RoleViewC: AlysieBaseViewC {
   private func getRoleCollectionCell(_ indexPath: IndexPath) -> UICollectionViewCell{
     
     let roleCollectionCell = self.collectionViewRole.dequeueReusableCell(withReuseIdentifier: RoleCollectionCell.identifier(), for: indexPath) as! RoleCollectionCell
-    roleCollectionCell.configureData(withGetRoleDataModel: self.getRoleViewModel.arrRoles[indexPath.item])
+    roleCollectionCell.configureData(withGetRoleDataModel: self.getRoleViewModel.arrRoles[indexPath.item], indexPath.item)
     return roleCollectionCell
   }
-  
+    
+    //MARK: - Timer Selector -
+    @objc func addCellToCollectionView(){
+        self.counter += 1
+        
+        if counter <= self.getRoleViewModel.arrRoles.count{
+            self.cellCount += 1
+          
+            let indexPath = IndexPath(item: cellCount-1, section: 0)
+            self.collectionViewRole.insertItems(at: [indexPath])
+        }else{
+            
+            self.timer.invalidate()
+        }
+    }
   //MARK: - WebService Methods -
   
   private func postRequestToGetWalkthorughScreens(_ selectedRoleId: String) -> Void{
@@ -69,7 +98,8 @@ class RoleViewC: AlysieBaseViewC {
 extension RoleViewC: UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
     
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return self.getRoleViewModel?.arrRoles.count ?? 0
+   // return self.getRoleViewModel?.arrRoles.count ?? 0
+    return cellCount
   }
     
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -91,7 +121,10 @@ extension RoleViewC: UICollectionViewDataSource,UICollectionViewDelegate,UIColle
     
     let model = self.getRoleViewModel.arrRoles[indexPath.item]
     model.isSelected = true
-    self.collectionViewRole.reloadData()
+     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        self.collectionViewRole.reloadData()
+
+    }
     
 //    switch indexPath.item {
 //    case 0,1:
@@ -107,6 +140,29 @@ extension RoleViewC: UICollectionViewDataSource,UICollectionViewDelegate,UIColle
 //      showAlert(withMessage: "Under Development")
 //    }
   }
+    
+    //MARK:- Animation
+    private func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        UIView.animate(withDuration: 0.6, animations: {
+            cell.alpha = 1
+        })
+    }
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        UIView.animate(withDuration: 0.5) {
+            if let cell = self.collectionViewRole.cellForItem(at: indexPath) as? RoleCollectionCell {
+                cell.imgRole.transform = .init(scaleX: 2, y: 2)
+                //cell.contentView.backgroundColor = UIColor.white
+            }
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        UIView.animate(withDuration: 0.5) {
+            if let cell = self.collectionViewRole.cellForItem(at: indexPath) as? RoleCollectionCell {
+                cell.imgRole.transform = .identity
+            }
+        }
+    }
 }
 
 extension RoleViewC{
@@ -117,9 +173,16 @@ extension RoleViewC{
     switch type {
     case 0:
       let model = self.getRoleViewModel.arrRoles.filter({$0.isSelected == true})
-      let controller = pushViewController(withName: MembersWalkthroughViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? MembersWalkthroughViewC
-      controller?.getRoleDataModel = model
-      controller?.getWalkThroughViewModel = GetWalkThroughViewModel(dicResponse)
+     // let controller = pushViewController(withName: MembersWalkthroughViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? MembersWalkthroughViewC
+     // controller?.getRoleDataModel = model
+     // controller?.getWalkThroughViewModel = GetWalkThroughViewModel(dicResponse)
+        
+        //MARK:- TESTING Change
+
+        let roleId = String.getString(model.first?.roleId)
+        let nextVC = CountryListVC()
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        nextVC.roleId = roleId
     default:
       break
     }

@@ -55,10 +55,12 @@ class LoginAccountViewC: AlysieBaseViewC{
   
   @IBAction func tapLogin(_ sender: UIButton) {
     
-    _ = pushViewController(withName: LoginViewC.id(), fromStoryboard: StoryBoardConstants.kLogin)
+    //_ = pushViewController(withName: LoginViewC.id(), fromStoryboard: StoryBoardConstants.kLogin)
+    showLoginView()
   }
   
   @IBAction func tapSignUp(_ sender: UIButton) {
+  
     
     self.btnSignUp.isUserInteractionEnabled = false
     self.btnLogin.isUserInteractionEnabled = false
@@ -85,7 +87,40 @@ class LoginAccountViewC: AlysieBaseViewC{
     player?.isMuted = true
     player?.play()
   }
-  
+    
+    @objc func showLoginView() {
+        let slideVC = OverLayLoginViewController()
+        slideVC.modalPresentationStyle = .custom
+        slideVC.transitioningDelegate = self
+        slideVC.btnCallback =  { tag, getRoleViewModel,userEmail, firstName in
+            switch tag {
+            case 1:
+                let controller = self.pushViewController(withName: OTPVerificationViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? OTPVerificationViewC
+                controller?.email = String.getString(userEmail)
+                controller?.userName = String.getString(firstName)
+                controller?.pushedFrom = .login
+            case 2:
+                let slideVC = OverLayForgetVC()
+                slideVC.modalPresentationStyle = .custom
+                slideVC.transitioningDelegate = self
+                slideVC.btnCallBack = { email in
+                    let controller = self.pushViewController(withName: OTPVerificationViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? OTPVerificationViewC
+                    controller?.email = String.getString(email)
+                    controller?.pushedFrom = .forgotPassword
+                }
+                self.present(slideVC, animated: true, completion: nil)
+            case 3:
+               // let controller = self.pushViewController(withName: RoleViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? RoleViewC
+                //controller?.getRoleViewModel = getRoleViewModel
+                let controller = self.pushViewController(withName: SelectRoleViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? SelectRoleViewC
+                 controller?.getRoleViewModel = getRoleViewModel
+            default:
+                print("Handle")
+            }
+            
+        }
+        self.present(slideVC, animated: true, completion: nil)
+    }
   //MARK:  - WebService Methods -
   
   private func postRequestToGetRoles() -> Void{
@@ -102,7 +137,8 @@ extension LoginAccountViewC{
   
   override func didUserGetData(from result: Any, type: Int) {
     
-    let controller = pushViewController(withName: RoleViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? RoleViewC
+    //let controller = pushViewController(withName: RoleViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? RoleViewC
+    let controller = pushViewController(withName: SelectRoleViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? SelectRoleViewC
     let dicResponse = kSharedInstance.getDictionary(result)
     let dicData = kSharedInstance.getDictionary(dicResponse[APIConstants.kData])
     controller?.getRoleViewModel = GetRoleViewModel(dicData)
@@ -110,3 +146,8 @@ extension LoginAccountViewC{
   }
 }
 
+extension LoginAccountViewC: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        PresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}

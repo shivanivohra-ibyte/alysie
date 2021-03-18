@@ -17,7 +17,6 @@ class EditUserSettingsViewC: AlysieBaseViewC {
   @IBOutlet weak var lblUserName: UILabel!
   @IBOutlet weak var lblUserEmail: UILabel!
   @IBOutlet weak var btnSave: UIButton!
-  
   //MARK: - Properties -
   
   var settingEditViewModel: SettingsEditViewModel!
@@ -29,6 +28,7 @@ class EditUserSettingsViewC: AlysieBaseViewC {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.setInitialData()
+    
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -56,12 +56,13 @@ class EditUserSettingsViewC: AlysieBaseViewC {
   //MARK: - Private Methods -
   
   private func setInitialData() -> Void{
-    
     self.lblUserName.text = kSharedUserDefaults.loggedInUserModal.displayName
     self.lblUserEmail.text = kSharedUserDefaults.loggedInUserModal.email
+    btnSave.setImage(UIImage(named: "blue_checkmark"), for: .normal)
     self.postRequestToGetUserSettings()
+    
   }
-  
+ 
   private func getEditUserSettingsTableCell(_ indexPath: IndexPath) -> UITableViewCell{
       
     let editUserSettingsTableCell = tblViewEditUserSettings.dequeueReusableCell(withIdentifier: EditUserSettingsTableCell.identifier(), for: indexPath) as! EditUserSettingsTableCell
@@ -108,6 +109,7 @@ class EditUserSettingsViewC: AlysieBaseViewC {
     self.currentProductTitle = navigationTitle
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetFeatureListing + featureListingId, method: .GET, controller: self, type: 2, param: [:], btnTapped: UIButton())
   }
+    
 }
 
  //MARK: - TableView Methods -
@@ -196,8 +198,8 @@ extension EditUserSettingsViewC{
       self.settingEditViewModel = SettingsEditViewModel(dicResult)
       self.tblViewEditUserSettings.reloadData()
     case 1:
-      
-      showAlert(withMessage: AlertMessage.kProfileUpdated){
+        self.btnSave.setImage(UIImage(named: "blue_checkmarked"), for: .normal)
+        showAlert(withMessage: AlertMessage.kProfileUpdated){
         kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: dicResult)
         self.lblUserName.text = kSharedUserDefaults.loggedInUserModal.displayName
         self.lblUserEmail.text = kSharedUserDefaults.loggedInUserModal.email
@@ -217,6 +219,7 @@ extension EditUserSettingsViewC{
     }
   }
 }
+
 
 //ProductAdded
 extension EditUserSettingsViewC: AddFeaturedProductCallBack{
@@ -242,4 +245,5 @@ extension EditUserSettingsViewC: AddProductCallBack{
     }
   }
 }
+
 

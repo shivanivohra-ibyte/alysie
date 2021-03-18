@@ -14,6 +14,7 @@ class EditProfileSelectTableCell: UITableViewCell {
   @IBOutlet weak var lblHeading: UILabel!
   @IBOutlet weak var txtField: UITextField!
   @IBOutlet weak var imgViewDropDown: UIImageView!
+  @IBOutlet weak var lblHeadingTopConst: NSLayoutConstraint!
   
   override func awakeFromNib() {
     super.awakeFromNib()

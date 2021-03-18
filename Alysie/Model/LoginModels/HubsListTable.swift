@@ -11,7 +11,7 @@ class HubsListTable: UITableView {
     var hubsViaCity:[HubsViaCity]?{didSet{self.reloadData()}}
     var hasCome:HasCome? = .hubs
     var country: CountryModel?
-  var roleId: String?
+     var roleId: String?
     // MARK:- life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,7 +39,7 @@ extension HubsListTable : UITableViewDelegate   , UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 330
+        return 350
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

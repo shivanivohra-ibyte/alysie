@@ -323,6 +323,7 @@ struct PlaceholderImages {
   static let kSelectedAddressOne = "selected_address_one"
   static let kSelectedAddressTwo = "selected_address_two"
   static let emoji = "emoji"
+
 }
 
 struct OtherConstant {
@@ -363,12 +364,12 @@ struct StaticArrayData {
                                  (image: "icons8_people", name: "Connections"),
                                  (image: "icons_pending", name: "Pending")]
   
-  static let kRoleSelectionDict = [(image: "select_role1", name: "Italian F&B Producers"),
-                                 (image: "select_role2", name: "US Importers & Distributors"),
-                                 (image: "select_role3", name: "Italian Restaurants in US"),
-                                 (image: "select_role4", name: "Voice of Experts"),
-                                 (image: "select_role5", name: "Travel Agencies"),
-                                 (image: "select_role6", name: "Voyagers")]
+//  static let kRoleSelectionDict = [(image: "select_role1", name: "Italian F&B Producers"),
+//                                 (image: "select_role2", name: "US Importers & Distributors"),
+//                                 (image: "select_role3", name: "Italian Restaurants in US"),
+//                                 (image: "select_role4", name: "Voice of Experts"),
+//                                 (image: "select_role5", name: "Travel Agencies"),
+//                                 (image: "select_role6", name: "Voyagers")]
   
   static let kImporterFilter = ["Horeca","Private Label","Alysei Brand Label"]
   
@@ -484,6 +485,11 @@ enum PushedFrom: Int {
   case selectHubCities
   case confirmSelection
   
+}
+
+enum LoadCell {
+    case stateList
+    case hubList
 }
 
 //MARK: - UIFont Constants -

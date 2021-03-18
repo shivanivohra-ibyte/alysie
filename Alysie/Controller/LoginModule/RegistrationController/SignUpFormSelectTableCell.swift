@@ -16,6 +16,7 @@ class SignUpFormSelectTableCell: UITableViewCell {
   @IBOutlet weak var imgViewDropDown: UIImageView!
   @IBOutlet weak var imgViewLocation: UIImageView!
   
+  
   //MARK: - Properties -
   
   var currentModel: SignUpStepTwoDataModel!

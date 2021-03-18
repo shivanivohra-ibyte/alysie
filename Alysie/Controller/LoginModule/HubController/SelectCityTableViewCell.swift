@@ -22,6 +22,7 @@ class SelectCityTableViewCell: UITableViewCell {
     var selectState:String?
     var selectStateId: String?
     var checkCase: CountryCityHubSelection?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -43,7 +44,6 @@ class SelectCityTableViewCell: UITableViewCell {
     }
    
     func configCell(_ data: CountryHubs?, _ index: Int, _ checkCase:CountryCityHubSelection ){
-        buttonRightCheckBox.isHidden = true
         buttonLeftCheckbox.isHidden = false
         buttonLeftCheckWidth.constant = 20
        labelCityName.text = data?.name

@@ -43,9 +43,9 @@ class HubSelectionTableViewCell: UITableViewCell {
   //MARK:- check role Id
     func initialSetup(){
         txtSearch.delegate = self
-        if roleId == "3"{
+        if kSharedUserDefaults.loggedInUserModal.memberRoleId == "3"{
             checkUserType = "export"
-        }else if roleId == "6"{
+        }else if (kSharedUserDefaults.loggedInUserModal.memberRoleId == "4" || kSharedUserDefaults.loggedInUserModal.memberRoleId == "5" || kSharedUserDefaults.loggedInUserModal.memberRoleId == "6") {
             checkUserType = "import"
         }else{
         }
@@ -66,6 +66,7 @@ class HubSelectionTableViewCell: UITableViewCell {
         self.country = country
         self.checkloadList = loadCell
         self.checkCase = checkCase
+       
         if data.hubs_array?.count == 0 || data.city_array?.count == 0 {
             self.lblNoHub.isHidden = false
         }else{

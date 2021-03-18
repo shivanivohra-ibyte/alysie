@@ -14,7 +14,7 @@ class StateListTable: UITableView {
     var selectDelegate:SelectList?
     var states:[CountryHubs]?{didSet{self.reloadData()}}
    var roleId: String?
-  
+    var hasCome: HasCome?
     // MARK:- life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,13 +45,15 @@ extension StateListTable : UITableViewDelegate   , UITableViewDataSource {
         guard let states = self.states?[indexPath.row] else { return UITableViewCell() }
         let cell = self.dequeueReusableCell(withIdentifier: "SelectCityTableViewCell", for: indexPath) as! SelectCityTableViewCell
         cell.selectionStyle = .none
+        cell.buttonRightCheckBox.isHidden = self.hasCome == .hubs ? false : true
         cell.configCell(states, indexPath.row, .city)
         return cell
     }
   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       
-      if  roleId == "9"{
+     // if  roleId == "9"{
+        if  kSharedUserDefaults.loggedInUserModal.memberRoleId == "9"{
             for i in 0..<(self.states?.count ?? 0){
             _ = self.states?[i].isSelected = false
         }

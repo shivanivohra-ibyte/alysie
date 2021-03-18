@@ -19,6 +19,7 @@ class SignUpFormTableCell: UITableViewCell {
   @IBOutlet weak var lblProperty: UILabel!
   @IBOutlet weak var btnInfo: UIButton!
   @IBOutlet weak var switchAnswer: UISwitch!
+  @IBOutlet weak var lblHeadingTopConst: NSLayoutConstraint!
   //@IBOutlet weak var txtFieldProperty: UITextField!
   
   @IBOutlet weak var lblValue: UILabel!
