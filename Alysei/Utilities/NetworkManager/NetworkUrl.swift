@@ -30,9 +30,12 @@ let kDeviceModel                = UIDevice.current.model
 */
 
 // wizz Server
-let kBASEURL                    = "http://alysei.ibyteinfomatics.com/public/api/"
-let kImageBaseUrl               = "http://alysei.ibyteinfomatics.com/"
-let kImageBaseUrl1               = "http://alysei.ibyteinfomatics.com"
+let domain                      = "https://http-alysei-ibyteinfomatics-com-3.moesif.net/eyJhcHAiOiIxOTg6MTE5MCIsInZlciI6IjIuMCIsIm9yZyI6Ijg4OjE2OTkiLCJpYXQiOjE2MTQ1NTY4MDB9.Xp9RY5TPnnE3Aczw11vAT_hR--ve9i8aQrNNFDKTYrA"
+
+//let domain                      = "http://alysei.ibyteinfomatics.com"
+let kBASEURL                    = "\(domain)/public/api/"
+let kImageBaseUrl               = "\(domain)"
+let kImageBaseUrl1              = "\(domain)"
 let kAuthentication             = "Authentication"      //Header key of request  encrypt data
 let kEncryptionKey              = ""                    //Encryption key replace this with your projectname
 
