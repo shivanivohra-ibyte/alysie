@@ -16,7 +16,7 @@ import UIKit
 
 let kHTTPUsername               = ""
 let kHTTPPassword               = ""
-//let kDeviceType               = "ios" //1-iOS 2- Andoid
+//let kDeviceType               = "iOS" //1-iOS 2- Andoid
 let OS                          = UIDevice.current.systemVersion
 let kAppVersion                 = "1.0"
 let kDeviceModel                = UIDevice.current.model
