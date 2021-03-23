@@ -4294,11 +4294,11 @@ any other devices.</string>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <view key="tableHeaderView" contentMode="scaleAspectFill" id="HCK-1b-ByU">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="219"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="270"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="producer_signup_bg" translatesAutoresizingMaskIntoConstraints="NO" id="dn9-9u-ezZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="219"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coverPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="dn9-9u-ezZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="202.5"/>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9s-tr-ac0">
                                             <rect key="frame" x="314" y="10" width="50" height="50"/>
@@ -4314,11 +4314,11 @@ any other devices.</string>
                                                 <action selector="tapCoverPhoto:" destination="DUF-ZK-xSP" eventType="touchUpInside" id="Ne1-bk-bVc"/>
                                             </connections>
                                         </button>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="user_icon_normal" translatesAutoresizingMaskIntoConstraints="NO" id="kKi-np-oGu" customClass="UIImageViewExtended" customModule="Alysei" customModuleProvider="target">
-                                            <rect key="frame" x="123" y="141" width="128" height="128"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_icon_normal" translatesAutoresizingMaskIntoConstraints="NO" id="kKi-np-oGu" customClass="UIImageViewExtended" customModule="Alysei" customModuleProvider="target">
+                                            <rect key="frame" x="137" y="152.5" width="100" height="100"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="128" id="GxL-zF-FYm"/>
-                                                <constraint firstAttribute="width" secondItem="kKi-np-oGu" secondAttribute="height" multiplier="1:1" id="NxI-VR-82b"/>
+                                                <constraint firstAttribute="width" secondItem="kKi-np-oGu" secondAttribute="height" multiplier="1:1" id="aiD-fv-GVL"/>
+                                                <constraint firstAttribute="width" constant="100" id="kwQ-Uj-tJr"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -4327,10 +4327,11 @@ any other devices.</string>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="makeCircle" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVa-rk-UoZ">
-                                            <rect key="frame" x="173" y="141" width="78" height="128"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVa-rk-UoZ">
+                                            <rect key="frame" x="209.5" y="238" width="30" height="30"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="0jY-B8-BTI"/>
+                                                <constraint firstAttribute="height" constant="30" id="Dxw-6E-pwr"/>
+                                                <constraint firstAttribute="width" constant="30" id="WxW-EH-ktB"/>
                                             </constraints>
                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <state key="normal" backgroundImage="Group 373"/>
@@ -4341,26 +4342,28 @@ any other devices.</string>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
+                                        <constraint firstItem="dn9-9u-ezZ" firstAttribute="height" secondItem="HCK-1b-ByU" secondAttribute="height" multiplier="0.75" id="0wU-DD-5kz"/>
                                         <constraint firstItem="dn9-9u-ezZ" firstAttribute="top" secondItem="HCK-1b-ByU" secondAttribute="top" id="6V6-Jm-40R"/>
-                                        <constraint firstAttribute="bottom" secondItem="dn9-9u-ezZ" secondAttribute="bottom" id="8Q1-ht-Q4N"/>
+                                        <constraint firstItem="kKi-np-oGu" firstAttribute="centerY" secondItem="dn9-9u-ezZ" secondAttribute="centerY" multiplier="2" id="9WQ-Yb-z7q"/>
+                                        <constraint firstItem="cVa-rk-UoZ" firstAttribute="centerX" secondItem="kKi-np-oGu" secondAttribute="centerX" multiplier="1.2" id="Ay0-H0-IeU"/>
+                                        <constraint firstItem="kKi-np-oGu" firstAttribute="centerX" secondItem="dn9-9u-ezZ" secondAttribute="centerX" id="MoP-cD-Sbe"/>
+                                        <constraint firstItem="cVa-rk-UoZ" firstAttribute="centerY" secondItem="kKi-np-oGu" secondAttribute="centerY" multiplier="1.25" id="RJ9-tD-GKM"/>
                                         <constraint firstItem="B9s-tr-ac0" firstAttribute="trailing" secondItem="dn9-9u-ezZ" secondAttribute="trailing" constant="-10" id="aZF-Mm-N4R"/>
                                         <constraint firstItem="B9s-tr-ac0" firstAttribute="top" secondItem="dn9-9u-ezZ" secondAttribute="top" constant="10" id="bHK-TJ-RCT"/>
-                                        <constraint firstItem="kKi-np-oGu" firstAttribute="centerX" secondItem="dn9-9u-ezZ" secondAttribute="centerX" id="bnO-hB-Trx"/>
                                         <constraint firstAttribute="trailing" secondItem="dn9-9u-ezZ" secondAttribute="trailing" id="bwE-PH-DWO"/>
                                         <constraint firstItem="dn9-9u-ezZ" firstAttribute="leading" secondItem="HCK-1b-ByU" secondAttribute="leading" id="jlS-Lf-fJu"/>
-                                        <constraint firstItem="kKi-np-oGu" firstAttribute="trailing" secondItem="cVa-rk-UoZ" secondAttribute="trailing" id="osv-fp-M1x"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EditProfileSelectTableCell" rowHeight="105" id="dcn-Jl-foW" customClass="EditProfileSelectTableCell" customModule="Alysei" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="247" width="374" height="105"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EditProfileSelectTableCell" rowHeight="90" id="dcn-Jl-foW" customClass="EditProfileSelectTableCell" customModule="Alysei" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="298" width="374" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dcn-Jl-foW" id="6kF-U9-22R">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="105"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" semanticContentAttribute="forceLeftToRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1l-Zq-FLF">
-                                                    <rect key="frame" x="15" y="20" width="339" height="18"/>
+                                                    <rect key="frame" x="15" y="10" width="339" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="vE4-jV-8Vu"/>
                                                     </constraints>
@@ -4369,7 +4372,7 @@ any other devices.</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yFF-C0-2Xd" customClass="UITextFieldExtended" customModule="Alysei" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="51" width="344" height="45"/>
+                                                    <rect key="frame" x="15" y="38" width="344" height="42"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="45" id="P26-en-EHJ"/>
                                                     </constraints>
@@ -4389,7 +4392,7 @@ any other devices.</string>
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
                                                 <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropdown_selector" translatesAutoresizingMaskIntoConstraints="NO" id="rHs-ZL-Xnf">
-                                                    <rect key="frame" x="331" y="69" width="13" height="9"/>
+                                                    <rect key="frame" x="331" y="54.5" width="13" height="9"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="9" id="4vi-17-aPg"/>
                                                         <constraint firstAttribute="width" constant="13" id="Jdb-f6-l77"/>
@@ -4400,10 +4403,11 @@ any other devices.</string>
                                                 <constraint firstAttribute="trailing" secondItem="yFF-C0-2Xd" secondAttribute="trailing" constant="15" id="26l-tp-9CH"/>
                                                 <constraint firstItem="yFF-C0-2Xd" firstAttribute="leading" secondItem="C1l-Zq-FLF" secondAttribute="leading" id="CQG-ja-0cc"/>
                                                 <constraint firstItem="C1l-Zq-FLF" firstAttribute="leading" secondItem="6kF-U9-22R" secondAttribute="leading" constant="15" id="I6F-XC-tri"/>
-                                                <constraint firstItem="yFF-C0-2Xd" firstAttribute="top" secondItem="C1l-Zq-FLF" secondAttribute="bottom" constant="13" id="WEX-KB-Cr9"/>
+                                                <constraint firstItem="yFF-C0-2Xd" firstAttribute="top" secondItem="C1l-Zq-FLF" secondAttribute="bottom" constant="10" id="WEX-KB-Cr9"/>
                                                 <constraint firstItem="rHs-ZL-Xnf" firstAttribute="centerY" secondItem="yFF-C0-2Xd" secondAttribute="centerY" id="aBE-Dc-5KL"/>
+                                                <constraint firstAttribute="bottom" secondItem="yFF-C0-2Xd" secondAttribute="bottom" constant="10" id="fZh-lz-9vk"/>
                                                 <constraint firstAttribute="trailing" secondItem="C1l-Zq-FLF" secondAttribute="trailing" constant="20" id="ffD-Rv-yeb"/>
-                                                <constraint firstItem="C1l-Zq-FLF" firstAttribute="top" secondItem="6kF-U9-22R" secondAttribute="top" constant="20" id="lXe-P9-PuK"/>
+                                                <constraint firstItem="C1l-Zq-FLF" firstAttribute="top" secondItem="6kF-U9-22R" secondAttribute="top" constant="10" id="lXe-P9-PuK"/>
                                                 <constraint firstItem="rHs-ZL-Xnf" firstAttribute="trailing" secondItem="yFF-C0-2Xd" secondAttribute="trailing" constant="-15" id="m00-4x-pi0"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -4415,7 +4419,7 @@ any other devices.</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EditProfileTextViewTableCell" rowHeight="200" id="EQB-lJ-uBK" customClass="EditProfileTextViewTableCell" customModule="Alysei" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="352" width="374" height="200"/>
+                                        <rect key="frame" x="0.0" y="388" width="374" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EQB-lJ-uBK" id="641-3L-NI6">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="200"/>
@@ -4463,7 +4467,7 @@ any other devices.</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SignUpFormTableCell" rowHeight="130" id="api-rx-6tw" customClass="SignUpFormTableCell" customModule="Alysei" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="552" width="374" height="130"/>
+                                        <rect key="frame" x="0.0" y="588" width="374" height="130"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="api-rx-6tw" id="V0M-ay-xNB">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="130"/>
@@ -4546,7 +4550,7 @@ any other devices.</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SignUpMultiCheckboxTableCell" rowHeight="118" id="Nld-lT-Lyp" customClass="SignUpMultiCheckboxTableCell" customModule="Alysei" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="682" width="374" height="118"/>
+                                        <rect key="frame" x="0.0" y="718" width="374" height="118"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Nld-lT-Lyp" id="ZNC-Kh-qLU">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="118"/>
@@ -4712,6 +4716,7 @@ any other devices.</string>
         <image name="cloud_icon_normal" width="51" height="43.5"/>
         <image name="contact_icon_active" width="14.5" height="15"/>
         <image name="contact_icon_normal" width="14.5" height="15"/>
+        <image name="coverPhoto" width="376" height="215"/>
         <image name="cross_icon_black" width="22" height="22"/>
         <image name="dropdown_selector" width="13" height="8.5"/>
         <image name="edit_icon_white" width="9.5" height="9.5"/>
@@ -4737,7 +4742,6 @@ any other devices.</string>
         <image name="notification_icon-2" width="16" height="20"/>
         <image name="posts_icon_active" width="15" height="15"/>
         <image name="posts_icon_normal" width="15" height="15"/>
-        <image name="producer_signup_bg" width="376" height="160"/>
         <image name="profile_icon" width="26" height="26"/>
         <image name="search_icon" width="20" height="19.5"/>
         <image name="search_icon_grey" width="18" height="18"/>

@@ -68,7 +68,7 @@ class EditProfileViewC: AlysieBaseViewC{
       model.first?.selectedValue = self.createStringForProducts((model.first)!)
     }
     editProfileSelectTableCell.configure(withSignUpStepOneDataModel: self.signUpViewModel.arrSignUpStepOne[indexPath.row])
-    editProfileSelectTableCell.lblHeadingTopConst.constant = indexPath.row == 0 ? 60 : 20
+    editProfileSelectTableCell.lblHeadingTopConst.constant = 5 // indexPath.row == 0 ? 60 : 20
     
     return editProfileSelectTableCell
   }
@@ -78,7 +78,7 @@ class EditProfileViewC: AlysieBaseViewC{
     let signUpMultiCheckboxTableCell = tableViewEditProfile.dequeueReusableCell(withIdentifier: SignUpMultiCheckboxTableCell.identifier(), for: indexPath) as! SignUpMultiCheckboxTableCell
     signUpMultiCheckboxTableCell.delegate = self
     signUpMultiCheckboxTableCell.configureStepOneData(withSignUpStepOneDataModel: self.signUpViewModel.arrSignUpStepOne[indexPath.row])
-    signUpMultiCheckboxTableCell.lblHeadingTopConst.constant = indexPath.row == 0 ? 60 : 20
+    signUpMultiCheckboxTableCell.lblHeadingTopConst.constant = 5 // indexPath.row == 0 ? 60 : 20
     return signUpMultiCheckboxTableCell
   }
     
@@ -86,7 +86,7 @@ class EditProfileViewC: AlysieBaseViewC{
       
     let editProfileTextViewTableCell = self.tableViewEditProfile.dequeueReusableCell(withIdentifier: EditProfileTextViewTableCell.identifier(), for: indexPath) as! EditProfileTextViewTableCell
     editProfileTextViewTableCell.configure(withSignUpStepOneDataModel: self.signUpViewModel.arrSignUpStepOne[indexPath.row])
-    editProfileTextViewTableCell.lblHeadingTopConst.constant = indexPath.row == 0 ? 60 : 20
+    editProfileTextViewTableCell.lblHeadingTopConst.constant = 5 // indexPath.row == 0 ? 60 : 20
     return editProfileTextViewTableCell
   }
   
@@ -95,7 +95,7 @@ class EditProfileViewC: AlysieBaseViewC{
     let signUpFormTableCell = tableViewEditProfile.dequeueReusableCell(withIdentifier: SignUpFormTableCell.identifier(), for: indexPath) as! SignUpFormTableCell
     signUpFormTableCell.configure(withSignUpStepOneDataModel: self.signUpViewModel.arrSignUpStepOne[indexPath.row])
     signUpFormTableCell.delegate = self
-    signUpFormTableCell.lblHeadingTopConst.constant = indexPath.row == 0 ? 60 : 20
+    signUpFormTableCell.lblHeadingTopConst.constant = 5 // indexPath.row == 0 ? 60 : 20
     return signUpFormTableCell
   }
   
@@ -316,12 +316,12 @@ extension EditProfileViewC: UITableViewDelegate, UITableViewDataSource{
           }
          }
     case AppConstants.Multiselect,AppConstants.Checkbox:
-      return 150.0
+      return 80.0
     case AppConstants.Text:
         return 230.0
     case AppConstants.Radio:
       //return 130.0
-        return 150.0
+        return 100.0
     default:
       return 0.0
     }
