@@ -104,16 +104,15 @@ extension SelectRoleViewC{
     switch type {
     case 0:
      let model = self.getRoleViewModel.arrRoles.filter({$0.isSelected == true})
-//      let controller = pushViewController(withName: MembersWalkthroughViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? MembersWalkthroughViewC
-//      controller?.getRoleDataModel = model
-//      controller?.getWalkThroughViewModel = GetWalkThroughViewModel(dicResponse)
+      let controller = pushViewController(withName: MembersWalkthroughViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? MembersWalkthroughViewC
+      controller?.getRoleDataModel = model
+      controller?.getWalkThroughViewModel = GetWalkThroughViewModel(dicResponse)
         
         //MARK:- TESTING Change
 
        // let roleId = String.getString(model.first?.roleId)
-        //let nextVC = CountryListVC()
-       // self.navigationController?.pushViewController(nextVC, animated: true)
-        let controller = pushViewController(withName: CountryListViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? CountryListViewC
+       // let nextVC = CountryListVC()
+        //self.navigationController?.pushViewController(nextVC, animated: true)
         //nextVC.roleId = roleId
     default:
       break
@@ -139,13 +138,13 @@ class RoleTableVieCell: UITableViewCell{
     }
     
     public func configureData(withGetRoleDataModel model: GetRoleDataModel,_ indexPath: Int) -> Void {
-        imgRole.image = UIImage(named: imageArray[indexPath])
+        //imgRole.image = UIImage(named: imageArray[indexPath])
         lblRoleName.text = model.name
-//        if let strUrl = "\(kImageBaseUrl1)\(model.image ?? "")".addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),
-//              let imgUrl = URL(string: strUrl) {
-//
-//            self.imgRole.loadImageWithUrl(imgUrl) // call this line for getting image to yourImageView
-//        }
+        if let strUrl = "\(kImageBaseUrl)\(model.image ?? "")".addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),
+              let imgUrl = URL(string: strUrl) {
+             print("ImageUrl-----------------------------------------\(imgUrl)")
+            self.imgRole.loadImageWithUrl(imgUrl) // call this line for getting image to yourImageView
+        }
         if model.isSelected == true{
             containerView.backgroundColor = UIColor.init(hexString: "#174E85")
             lblRoleName.textColor = UIColor.white

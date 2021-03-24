@@ -132,6 +132,7 @@ class SignUpFormViewC: AlysieBaseViewC{
           model.selectedValue = optionId
         }
         model.selectedOptionName = strVal
+        model.selectedValue = strVal
         self.tblViewSignUpForm.reloadData()
         print("selectedValue",strVal.uppercased())
       }})

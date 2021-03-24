@@ -80,6 +80,8 @@ class CountryHubs {
     var attachment_url:String?
     var type:HasCome? = .hubs
     var isSelected = false
+    var imageHub: String?
+    
     init(data:[String:Any]?) {
         self.id = String.getString(data?["id"])
         self.name = String.getString(data?["name"])
@@ -98,6 +100,10 @@ class CountryHubs {
         self.iso2 = String.getString(data?["subregion"])
         self.type = .hubs
         self.attachment_url = String.getString(data?["attachment_url"])
+        if let image = data?["image"] as? [String:Any] {
+            self.imageHub = String.getString(image["attachment_url"])
+            print("HubImage-----------------------------------------\(self.imageHub ?? "")")
+        }
     }
     init() { }
 }

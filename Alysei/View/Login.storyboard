@@ -3409,16 +3409,16 @@
                                                             <rect key="frame" x="230" y="13.5" width="110" height="110"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Producer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02f-Td-hV4">
-                                                            <rect key="frame" x="10" y="15" width="210" height="30"/>
+                                                            <rect key="frame" x="10" y="15" width="210" height="40"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="YVs-al-TJ7"/>
+                                                                <constraint firstAttribute="height" constant="40" id="YVs-al-TJ7"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="16"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lco-UQ-RPg">
-                                                            <rect key="frame" x="10" y="47" width="210" height="90"/>
+                                                            <rect key="frame" x="10" y="57" width="210" height="80"/>
                                                             <string key="text">Loreu loreum loruem loreun Loreu loreum loruem loreun Loreu loreum loruem loreun Loreu loreum loruem loreun Loreu loreum Loreu loreum loruem loreun Loreu loreum </string>
                                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                             <nil key="textColor"/>
@@ -3547,8 +3547,60 @@
             </objects>
             <point key="canvasLocation" x="5264.8000000000002" y="757.87106446776613"/>
         </scene>
+        <!--Demo Map View View Controller-->
+        <scene sceneID="CJ0-cO-VlJ">
+            <objects>
+                <viewController storyboardIdentifier="DemoMapViewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mIj-nC-cEm" customClass="DemoMapViewViewController" customModule="Alysei" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bTv-k4-HbN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gjl-RQ-F9F">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVD-qd-HMi" customClass="BackButton" customModule="Alysei" customModuleProvider="target">
+                                        <rect key="frame" x="15" y="17" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="jfE-yq-6Wc"/>
+                                            <constraint firstAttribute="height" constant="40" id="rgb-Q7-xLN"/>
+                                        </constraints>
+                                        <state key="normal" image="back_black"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="fVD-qd-HMi" firstAttribute="leading" secondItem="gjl-RQ-F9F" secondAttribute="leading" constant="15" id="9L6-Vd-BYL"/>
+                                    <constraint firstAttribute="height" constant="64" id="MPi-se-Zv1"/>
+                                    <constraint firstItem="fVD-qd-HMi" firstAttribute="centerY" secondItem="gjl-RQ-F9F" secondAttribute="centerY" constant="5" id="bGS-G1-pTd"/>
+                                </constraints>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MapCircle" translatesAutoresizingMaskIntoConstraints="NO" id="heC-f2-2XS">
+                                <rect key="frame" x="0.0" y="69" width="375" height="598"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wVK-MR-Tjn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="heC-f2-2XS" firstAttribute="leading" secondItem="wVK-MR-Tjn" secondAttribute="leading" id="908-t4-Ojc"/>
+                            <constraint firstItem="wVK-MR-Tjn" firstAttribute="bottom" secondItem="heC-f2-2XS" secondAttribute="bottom" id="QMT-vM-gqE"/>
+                            <constraint firstItem="heC-f2-2XS" firstAttribute="top" secondItem="gjl-RQ-F9F" secondAttribute="bottom" constant="5" id="eYH-MB-4NH"/>
+                            <constraint firstItem="gjl-RQ-F9F" firstAttribute="trailing" secondItem="wVK-MR-Tjn" secondAttribute="trailing" id="hq0-pc-mFH"/>
+                            <constraint firstItem="gjl-RQ-F9F" firstAttribute="leading" secondItem="wVK-MR-Tjn" secondAttribute="leading" id="njs-Ou-aYl"/>
+                            <constraint firstItem="gjl-RQ-F9F" firstAttribute="top" secondItem="wVK-MR-Tjn" secondAttribute="top" id="rYc-E1-tzg"/>
+                            <constraint firstItem="wVK-MR-Tjn" firstAttribute="trailing" secondItem="heC-f2-2XS" secondAttribute="trailing" id="w6q-n7-sad"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="viewHeader" destination="gjl-RQ-F9F" id="V1M-sg-2zL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mkv-iF-SOA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8645.6000000000004" y="769.56521739130437"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="MapCircle" width="376" height="812"/>
         <image name="activity_language_bg" width="376" height="812"/>
         <image name="activity_welcome_bg" width="376" height="812"/>
         <image name="back_black" width="24" height="18.5"/>

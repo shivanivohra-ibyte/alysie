@@ -63,7 +63,7 @@ class HubsListVC: UIViewController {
         let countryID = String.getString(country?.id)
         let cityID = kSharedInstance.getStringArray(self.city.map{$0.id})
         let param: [String:Any] = ["params": cityID]
-        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetHubCity, requestMethod: .GET, requestParameters: param, withProgressHUD: true) { (dictResponse, error, errortype, statusCode) in
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetHubCity, requestMethod: .POST, requestParameters: param, withProgressHUD: true) { (dictResponse, error, errortype, statusCode) in
             let response = kSharedInstance.getDictionary(dictResponse)
             guard  let data = response["data"] as? [String:Any] else {return}
             let hubs = kSharedInstance.getArray(withDictionary: data["cities"])
