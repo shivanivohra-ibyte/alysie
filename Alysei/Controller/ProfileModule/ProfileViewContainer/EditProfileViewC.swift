@@ -33,10 +33,10 @@ class EditProfileViewC: AlysieBaseViewC {
 
         super.viewDidLoad()
 
-        if let coverPhoto = LocalStorage.shared.fetchImage("coverPhoto.jpg") {
+        if let coverPhoto = LocalStorage.shared.fetchImage(UserDetailNBasedElements.coverPhoto) {
             self.imgViewCoverPhoto.image = coverPhoto
         }
-        if let profilePhoto = LocalStorage.shared.fetchImage("profilePhoto.jpg") {
+        if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailNBasedElements.profilePhoto) {
             self.imgViewProfile.image = profilePhoto
         }
 
@@ -272,8 +272,8 @@ class EditProfileViewC: AlysieBaseViewC {
         CommonUtil.sharedInstance.postToServerRequestMultiPart(APIUrl.kUpdateUserProfile, params: mergeDict, imageParams: imageParam, controller: self) { (dictReponse) in
 
 
-            LocalStorage.shared.saveImage(compressProfileData, fileName: "profilePhoto.jpg")
-            LocalStorage.shared.saveImage(compressCoverData, fileName: "coverPhoto.jpg")
+            LocalStorage.shared.saveImage(compressProfileData, fileName: UserDetailNBasedElements.profilePhoto)
+            LocalStorage.shared.saveImage(compressCoverData, fileName: UserDetailNBasedElements.coverPhoto)
             
             self.showAlert(withMessage: AlertMessage.kProfileUpdated){
                 self.navigationController?.popViewController(animated: true)

@@ -201,7 +201,6 @@
 		6B7F0F4A260499CC0060FBA9 /* CountryListViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7F0F49260499CC0060FBA9 /* CountryListViewC.swift */; };
 		6B7F0F4D26049A950060FBA9 /* ActiveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7F0F4C26049A950060FBA9 /* ActiveCollectionViewCell.swift */; };
 		6B7F0F5026049AB30060FBA9 /* InactiveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7F0F4F26049AB30060FBA9 /* InactiveCollectionViewCell.swift */; };
-		6B8A27C8260AF71000893DFF /* AlyseiBVC.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6B8A27C7260AF71000893DFF /* AlyseiBVC.mp4 */; };
 		6B8A27CC260AF75700893DFF /* DemoMapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8A27CB260AF75700893DFF /* DemoMapViewViewController.swift */; };
 		6BBA994A260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBA9948260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.swift */; };
 		6BBA994B260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BBA9949260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.xib */; };
@@ -428,7 +427,6 @@
 		6B7F0F49260499CC0060FBA9 /* CountryListViewC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListViewC.swift; sourceTree = "<group>"; };
 		6B7F0F4C26049A950060FBA9 /* ActiveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCollectionViewCell.swift; sourceTree = "<group>"; };
 		6B7F0F4F26049AB30060FBA9 /* InactiveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InactiveCollectionViewCell.swift; sourceTree = "<group>"; };
-		6B8A27C7260AF71000893DFF /* AlyseiBVC.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = AlyseiBVC.mp4; path = ../../../Downloads/AlyseiBVC.mp4; sourceTree = "<group>"; };
 		6B8A27CB260AF75700893DFF /* DemoMapViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoMapViewViewController.swift; sourceTree = "<group>"; };
 		6BBA9948260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCountriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		6BBA9949260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActiveCountriesCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -666,7 +664,7 @@
 		27A4431C25AE03720002BAAC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				6127F16C260B49B6005848B3 /* local_storage-cache */,
+				6127F16C260B49B6005848B3 /* local_storage-and-cache */,
 				27A4431D25AE03720002BAAC /* NetworkManager */,
 				27A4432A25AE03720002BAAC /* UIDesignables */,
 				27A4433725AE03720002BAAC /* RangeSlider.swift */,
@@ -1071,7 +1069,6 @@
 			children = (
 				27A443F725AE06F00002BAAC /* Info.plist */,
 				27BC688C25AC564200A01B6A /* Assets.xcassets */,
-				6B8A27C7260AF71000893DFF /* AlyseiBVC.mp4 */,
 				2770AA5525AE1BBC00A2F10B /* AlysieBaseViewC.swift */,
 				27BC689D25AC56C000A01B6A /* Delegate Methods */,
 				A808779325ADD4CB00AA4A69 /* Model */,
@@ -1153,12 +1150,12 @@
 			path = RegistrationController;
 			sourceTree = "<group>";
 		};
-		6127F16C260B49B6005848B3 /* local_storage-cache */ = {
+		6127F16C260B49B6005848B3 /* local_storage-and-cache */ = {
 			isa = PBXGroup;
 			children = (
 				6127F16D260B49DB005848B3 /* SaveResources.swift */,
 			);
-			path = "local_storage-cache";
+			path = "local_storage-and-cache";
 			sourceTree = "<group>";
 		};
 		6BC4C0CB26006A8000791DCD /* Animation */ = {
@@ -1307,7 +1304,6 @@
 				274635F025DC35AD0010C1C6 /* Splash.storyboard in Resources */,
 				27A443CC25AE03720002BAAC /* Montserrat-LightItalic.ttf in Resources */,
 				27A443D725AE03720002BAAC /* Montserrat-ExtraLightItalic.ttf in Resources */,
-				6B8A27C8260AF71000893DFF /* AlyseiBVC.mp4 in Resources */,
 				27A443D625AE03720002BAAC /* Montserrat-SemiBold.ttf in Resources */,
 				A84EED0725B1C2F700429B1D /* Home.storyboard in Resources */,
 				27A443D225AE03720002BAAC /* Montserrat-Thin.ttf in Resources */,
@@ -1692,8 +1688,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = 3V73836LRC;
 				INFOPLIST_FILE = Alysei/Info.plist;
@@ -1704,7 +1700,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Alysei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Alysei_Dev_Prov_23March2021;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1716,8 +1712,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = 3V73836LRC;
 				INFOPLIST_FILE = Alysei/Info.plist;
@@ -1728,7 +1724,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Alysei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Alysei_Dev_Prov_23March2021;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

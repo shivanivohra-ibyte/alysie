@@ -47,6 +47,16 @@ struct FunctionsConstants {
   static let kScreenHeight = UIScreen.main.bounds.height
 }
 
+struct UserDetailNBasedElements {
+    static var coverPhoto: String = {
+        return "coverPhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg"
+    }()
+
+    static var profilePhoto: String = {
+        return "profilePhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg"
+    }()
+}
+
 struct  AlertMessage{
   
   static let kEnterFirstName          = "Please enter first name."

@@ -140,10 +140,10 @@ class ProfileViewC: AlysieBaseViewC{
 
 
 
-    if let coverPhoto = LocalStorage.shared.fetchImage("coverPhoto.jpg") {
+    if let coverPhoto = LocalStorage.shared.fetchImage(UserDetailNBasedElements.coverPhoto) {
         self.imgViewCover.image = coverPhoto
     }
-    if let profilePhoto = LocalStorage.shared.fetchImage("profilePhoto.jpg") {
+    if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailNBasedElements.profilePhoto) {
         self.imgViewProfile.image = profilePhoto
     }
 
