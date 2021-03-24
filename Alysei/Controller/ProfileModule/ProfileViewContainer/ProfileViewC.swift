@@ -137,6 +137,15 @@ class ProfileViewC: AlysieBaseViewC{
     self.lblEmailNavigation.text = kSharedUserDefaults.loggedInUserModal.email
     self.lblDisplayName.text = kSharedUserDefaults.loggedInUserModal.displayName
     self.lblDisplayNameNavigation.text = kSharedUserDefaults.loggedInUserModal.displayName
+
+
+
+    if let coverPhoto = LocalStorage.shared.fetchImage("coverPhoto.jpg") {
+        self.imgViewCover.image = coverPhoto
+    }
+    if let profilePhoto = LocalStorage.shared.fetchImage("profilePhoto.jpg") {
+        self.imgViewProfile.image = profilePhoto
+    }
     
   }
     

@@ -262,6 +262,10 @@ class EditProfileViewC: AlysieBaseViewC {
         let mergeDict = dictStepOne.compactMap { $0 }.reduce([:]) { $0.merging($1) { (current, _) in current } }
         CommonUtil.sharedInstance.postToServerRequestMultiPart(APIUrl.kUpdateUserProfile, params: mergeDict, imageParams: imageParam, controller: self) { (dictReponse) in
 
+
+            LocalStorage.shared.saveImage(compressProfileData, fileName: "profilePhoto.jpg")
+            LocalStorage.shared.saveImage(compressCoverData, fileName: "coverPhoto.jpg")
+            
             self.showAlert(withMessage: AlertMessage.kProfileUpdated){
                 self.navigationController?.popViewController(animated: true)
             }

@@ -27,6 +27,8 @@ class UserModel: NSObject{
   var latitude : Double = 0.0
   var longitude : Double = 0.0
   var avatarId: String?
+    var coverPictureName: String?
+    var profilePictureName: String?
  // var cover_id: AllProductsDataModel?
     
   init(withDictionary dicResult: [String:Any]){

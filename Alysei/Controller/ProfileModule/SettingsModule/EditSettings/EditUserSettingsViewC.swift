@@ -155,8 +155,8 @@ class EditUserSettingsViewC: AlysieBaseViewC {
       default:
         return self.getEditUserSettingsTableCell(indexPath)
       }
-    case 1:
-      return self.getFeaturedProductTableCell(indexPath)
+//    case 1:
+//      return self.getFeaturedProductTableCell(indexPath)
     default:
       return UITableViewCell()
     }
