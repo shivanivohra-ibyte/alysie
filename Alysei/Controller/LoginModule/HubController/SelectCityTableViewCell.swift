@@ -14,8 +14,9 @@ class SelectCityTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonLeftCheckbox: UIButton!
     @IBOutlet weak var buttonRightCheckBox: UIButton!
     @IBOutlet weak var buttonLeftCheckWidth: NSLayoutConstraint!
+   // @IBOutlet weak var imageHub: ImageLoader!
     @IBOutlet weak var labelCityName: UILabel!
-    @IBOutlet weak var checkMarkView: Checkmark!
+   // @IBOutlet weak var checkMarkView: Checkmark!
     
     var leftBtnCallBack: ((String,String,Bool,Int) -> Void)? = nil
     var rightBtnCallBack: ((UIButton) -> Void)? = nil
@@ -24,6 +25,7 @@ class SelectCityTableViewCell: UITableViewCell {
     var selectState:String?
     var selectStateId: String?
     var checkCase: CountryCityHubSelection?
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,23 +50,10 @@ class SelectCityTableViewCell: UITableViewCell {
    
     func configCell(_ data: CountryHubs?, _ index: Int, _ checkCase:CountryCityHubSelection ){
         self.data = data
-      //  buttonLeftCheckbox.isHidden = false
-        buttonLeftCheckWidth.constant = 20
+        buttonLeftCheckbox.isHidden = false
+       // buttonLeftCheckWidth.constant = 20
        labelCityName.text = data?.name
-       
-        if data?.isSelected == true  {
-            checkMarkView.initialLayerColor = UIColor.clear
-            checkMarkView.animatedLayerColor = UIColor.init(hexString: "174E85")
-            checkMarkView.animated = true
-            checkMarkView.animate()
-        }
-        else{
-            checkMarkView.animated = false
-            checkMarkView.animatedLayerColor = UIColor.lightGray
-
-        }
-        
-       // self.buttonLeftCheckbox.setImage((data?.isSelected == true) ? UIImage(named: "icon_blueSelected") : UIImage(named: "icon_uncheckedBox"), for: .normal)
+        self.buttonLeftCheckbox.setImage((data?.isSelected == true) ? UIImage(named: "icon_blueSelected") : UIImage(named: "icon_uncheckedBox"), for: .normal)
     }
     
     @IBAction func btnLeftCheckBoxAction(_ sender: UIButton){
@@ -72,7 +61,10 @@ class SelectCityTableViewCell: UITableViewCell {
         //self.leftBtnCallBack?(selectState ?? "",data?.id ?? "",sender.isSelected,sender.tag)
     }
     @IBAction func btnRightCheckBoxAction(_ sender: UIButton){
-        self.rightBtnCallBack?(sender)
+        guard let nextVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "DemoMapViewViewController") as? DemoMapViewViewController else{return}
+        let parentController = self.parentViewController as? HubsListVC
+        parentController?.show(nextVC, sender: nil)
+        //self.rightBtnCallBack?(sender)
     }
     //MARK: Config Cell
 //    func configCell(_ data: SignUpOptionsDataModel){

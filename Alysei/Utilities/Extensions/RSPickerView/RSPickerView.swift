@@ -42,7 +42,8 @@ class RSPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource{
         let yValue = viewHt - CGFloat(cHt) - pickerTopMargin
         viewContainer = UIView(frame: CGRect(x: 0, y: viewHt, width: kScreenWidth, height: CGFloat(cHt)))
         viewContainer.backgroundColor = UIColor.darkGray
-      pickerView = UIPickerView(frame: CGRect(x: 2, y: 0, width: kScreenWidth, height: (kScreenHeight/2 - 100.0)))
+      //pickerView = UIPickerView(frame: CGRect(x: 2, y: 0, width: kScreenWidth, height: (kScreenHeight/2 - 100.0)))
+        pickerView = UIPickerView(frame: CGRect(x: 2, y: 0, width: kScreenWidth, height: 300))
         pickerView.delegate = self
         pickerView.dataSource = self
         viewContainer.addSubview(pickerView)
