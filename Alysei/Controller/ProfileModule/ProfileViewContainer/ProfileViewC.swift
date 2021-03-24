@@ -137,7 +137,7 @@ class ProfileViewC: AlysieBaseViewC{
     self.lblEmailNavigation.text = kSharedUserDefaults.loggedInUserModal.email
     self.lblDisplayName.text = kSharedUserDefaults.loggedInUserModal.displayName
     self.lblDisplayNameNavigation.text = kSharedUserDefaults.loggedInUserModal.displayName
-
+    
   }
     
   private func getFeaturedProductCollectionCell(_ indexPath: IndexPath) -> UICollectionViewCell{
@@ -178,7 +178,7 @@ class ProfileViewC: AlysieBaseViewC{
   
   private func postRequestToGetFields() -> Void{
     
-    CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kUserSubmittedFields, method: .GET, controller: self, type: 0, param: [:], btnTapped: UIButton()) 
+    CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kUserSubmittedFields, method: .GET, controller: self, type: 0, param: [:], btnTapped: UIButton())
   }
 }
 
