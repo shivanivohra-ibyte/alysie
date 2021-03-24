@@ -24,7 +24,6 @@ class HubsViaCityCell: UITableViewCell , SelectList{
         self.viewSearchHeight.constant = hasCome == .hubs ? 0 : 45
         self.viewSearch.isHidden = hasCome == .hubs ? true : false
         self.txtSearch.isHidden = hasCome == .hubs ? true : false
-        
         self.hasCome == .hubs ? (txtSearch.isHidden = true) : (txtSearch.isHidden = false)
         self.filterHubs.hubs_array = hubsViaCity.hubs_array
         self.lblNoHub.isHidden = filterHubs.hubs_array?.isEmpty == false

@@ -79,7 +79,8 @@ class SelectProductViewC: AlysieBaseViewC {
       
       for sectionIndex in 0..<sections.count {
         
-        if sections[sectionIndex].arrSelectedSubOptions.isEmpty == true{
+       // if sections[sectionIndex].arrSelectedSubOptions.isEmpty == true{
+            if sections[sectionIndex].arrSelectedSubOptions == [""] {
            showAlert(withMessage: "You have to select atleast one conservation method and properties for all the selected Products.")
         }
       }

@@ -54,6 +54,7 @@ class SelectCityTableViewCell: UITableViewCell {
        // buttonLeftCheckWidth.constant = 20
        labelCityName.text = data?.name
         self.buttonLeftCheckbox.setImage((data?.isSelected == true) ? UIImage(named: "icon_blueSelected") : UIImage(named: "icon_uncheckedBox"), for: .normal)
+        self.buttonRightCheckBox.isHidden = hideEyeIcon == true ? true : false
     }
     
     @IBAction func btnLeftCheckBoxAction(_ sender: UIButton){
