@@ -104,16 +104,15 @@ extension SelectRoleViewC{
     switch type {
     case 0:
      let model = self.getRoleViewModel.arrRoles.filter({$0.isSelected == true})
-      let controller = pushViewController(withName: MembersWalkthroughViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? MembersWalkthroughViewC
+     let controller = pushViewController(withName: MembersWalkthroughViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? MembersWalkthroughViewC
       controller?.getRoleDataModel = model
       controller?.getWalkThroughViewModel = GetWalkThroughViewModel(dicResponse)
         
         //MARK:- TESTING Change
 
-       // let roleId = String.getString(model.first?.roleId)
-       // let nextVC = CountryListVC()
+        //let nextVC = CountryListVC()
         //self.navigationController?.pushViewController(nextVC, animated: true)
-        //nextVC.roleId = roleId
+
     default:
       break
     }

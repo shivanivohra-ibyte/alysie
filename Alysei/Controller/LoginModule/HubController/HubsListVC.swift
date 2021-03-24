@@ -20,7 +20,8 @@ class HubsListVC: UIViewController {
     var selectedHubs = [SelectdHubs]()
     var hubsViaCity:[HubsViaCity]?
     var hasCome:HasCome? = .hubs
-  var roleId: String?
+    var roleId: String?
+    
   
     // MARK:- lifeCycle
     override func viewDidLoad() {
@@ -28,8 +29,9 @@ class HubsListVC: UIViewController {
         self.viewHeader.addShadow()
         self.tableView.hasCome = self.hasCome
         self.tableView.country = self.country
-      self.tableView.roleId = self.roleId
+        self.tableView.roleId = self.roleId
         self.lblHeading.text = self.hasCome == .hubs ? "Select Hubs" : "Find your City"
+         hideEyeIcon = self.hasCome == .hubs ? false : true
         self.bottomStack.isHidden = self.hasCome == .hubs ? false : true
         self.bottomStackHeight.constant = self.hasCome == .hubs ? 30 : 0
         self.hasCome == .hubs ? self.callHubViewApi() : self.postRequestToGetCity()

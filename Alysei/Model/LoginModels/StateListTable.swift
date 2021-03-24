@@ -15,6 +15,7 @@ class StateListTable: UITableView {
     var states:[CountryHubs]?{didSet{self.reloadData()}}
    var roleId: String?
     var hasCome: HasCome?
+
     // MARK:- life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()

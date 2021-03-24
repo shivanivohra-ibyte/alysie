@@ -6,6 +6,7 @@
 
 import UIKit
 var userType: String?
+var hideEyeIcon: Bool?
 
 class StateListVC: UIViewController , SelectList {
     
@@ -24,7 +25,8 @@ class StateListVC: UIViewController , SelectList {
         super.viewDidLoad()
         self.viewHeader.addShadow()
         self.tableVIew.selectDelegate = self
-      self.tableVIew.roleId = self.roleId
+        self.tableVIew.roleId = self.roleId
+        hideEyeIcon = true
         self.setText()
         self.postRequestToGetState(country?.id ?? "")
     }
