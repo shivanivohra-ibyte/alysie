@@ -146,6 +146,8 @@ class ProfileViewC: AlysieBaseViewC{
     if let profilePhoto = LocalStorage.shared.fetchImage("profilePhoto.jpg") {
         self.imgViewProfile.image = profilePhoto
     }
+
+    self.imgViewProfile.roundCorners(.allCorners, radius: (self.imgViewProfile.frame.width / 2.0))
     
   }
     

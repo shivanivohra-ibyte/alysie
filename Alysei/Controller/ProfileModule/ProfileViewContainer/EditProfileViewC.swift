@@ -32,6 +32,15 @@ class EditProfileViewC: AlysieBaseViewC {
     override func viewDidLoad() {
 
         super.viewDidLoad()
+
+        if let coverPhoto = LocalStorage.shared.fetchImage("coverPhoto.jpg") {
+            self.imgViewCoverPhoto.image = coverPhoto
+        }
+        if let profilePhoto = LocalStorage.shared.fetchImage("profilePhoto.jpg") {
+            self.imgViewProfile.image = profilePhoto
+        }
+
+        self.imgViewProfile.roundCorners(.allCorners, radius: (self.imgViewProfile.frame.width / 2.0))
     }
 
     //MARK: - IBAction -
