@@ -180,7 +180,7 @@ class EditProfileViewC: AlysieBaseViewC {
         if UIImagePickerController.isSourceTypeAvailable(type){
 
             self.picker.mediaTypes = mediaType.CameraMediaType
-            self.picker.allowsEditing = false
+            self.picker.allowsEditing = true
             self.picker.sourceType = type
             self.present(self.picker,animated: true,completion: {
                 self.picker.delegate = self
