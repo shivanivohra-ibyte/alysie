@@ -2755,41 +2755,42 @@ any other devices.</string>
                                     <constraint firstItem="hZS-1B-DyE" firstAttribute="centerY" secondItem="tAL-VL-hEH" secondAttribute="centerY" id="mxv-DR-pv3"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="t1z-tK-Jro">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="t1z-tK-Jro">
                                 <rect key="frame" x="0.0" y="74" width="375" height="593"/>
                                 <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CompanyFirstTableCell" rowHeight="85" id="TzV-jt-Geo" customClass="CompanyFirstTableCell" customModule="Alysei" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="85"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TzV-jt-Geo" id="fAm-Gz-x3a">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="mYE-BV-f29">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="189"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="del-Wq-pRI">
+                                            <rect key="frame" x="10" y="5" width="355" height="65"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VAT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9G-md-4EG">
-                                                    <rect key="frame" x="15" y="15" width="29" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VAT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlA-t3-IYm">
+                                                    <rect key="frame" x="20" y="0.0" width="29" height="23"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="3Ib-g9-m9N"/>
-                                                        <constraint firstAttribute="height" constant="18" id="hMh-Ro-Z6t"/>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="MRa-UI-Hzd"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Yk-TU-Pdk">
-                                                    <rect key="frame" x="49" y="18.5" width="11" height="11"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1tS-Gf-AEj">
+                                                    <rect key="frame" x="54" y="4" width="15" height="15"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="11" id="WyZ-vc-IB1"/>
-                                                        <constraint firstAttribute="height" constant="11" id="zXR-L3-P9E"/>
+                                                        <constraint firstAttribute="width" secondItem="1tS-Gf-AEj" secondAttribute="height" multiplier="1:1" id="Wc2-XY-EMM"/>
+                                                        <constraint firstAttribute="width" constant="15" id="wtV-Zw-Qqh"/>
                                                     </constraints>
                                                     <state key="normal">
                                                         <imageReference key="image" image="info.circle" catalog="system" renderingMode="original"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="btnVatDesc:" destination="HC5-c9-JcI" eventType="touchUpInside" id="RlK-7f-J5V"/>
+                                                    </connections>
                                                 </button>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter VAT" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dsr-TM-gVV" customClass="UITextFieldExtended" customModule="Alysei" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="40" width="345" height="30"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter VAT" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fbj-j8-lTx" customClass="UITextFieldExtended" customModule="Alysei" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="28" width="325" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="sFL-T7-1Wt"/>
+                                                        <constraint firstAttribute="height" constant="30" id="rgi-ix-Fe2"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -2804,18 +2805,157 @@ any other devices.</string>
                                                     </userDefinedRuntimeAttributes>
                                                 </textField>
                                             </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
-                                                <constraint firstItem="3Yk-TU-Pdk" firstAttribute="leading" secondItem="z9G-md-4EG" secondAttribute="trailing" constant="5" id="2qt-ek-npD"/>
-                                                <constraint firstItem="3Yk-TU-Pdk" firstAttribute="centerY" secondItem="z9G-md-4EG" secondAttribute="centerY" id="BNo-6a-Oxh"/>
-                                                <constraint firstItem="dsr-TM-gVV" firstAttribute="leading" secondItem="z9G-md-4EG" secondAttribute="leading" id="JIW-19-IMj"/>
-                                                <constraint firstItem="dsr-TM-gVV" firstAttribute="top" secondItem="z9G-md-4EG" secondAttribute="bottom" constant="7" id="Q3L-75-8XW"/>
-                                                <constraint firstAttribute="trailing" secondItem="dsr-TM-gVV" secondAttribute="trailing" constant="15" id="RSa-bz-T0X"/>
+                                                <constraint firstItem="fbj-j8-lTx" firstAttribute="top" secondItem="mlA-t3-IYm" secondAttribute="bottom" constant="5" id="FJE-FS-IMH"/>
+                                                <constraint firstAttribute="trailing" secondItem="fbj-j8-lTx" secondAttribute="trailing" constant="10" id="Hpk-ZK-HlL"/>
+                                                <constraint firstItem="1tS-Gf-AEj" firstAttribute="leading" secondItem="mlA-t3-IYm" secondAttribute="trailing" constant="5" id="Ja2-7y-FCj"/>
+                                                <constraint firstAttribute="height" constant="65" id="VH3-wC-Rft"/>
+                                                <constraint firstItem="fbj-j8-lTx" firstAttribute="leading" secondItem="mlA-t3-IYm" secondAttribute="leading" id="Wts-Da-Y4m"/>
+                                                <constraint firstAttribute="bottom" secondItem="fbj-j8-lTx" secondAttribute="bottom" constant="7" id="Zf3-IF-zOw"/>
+                                                <constraint firstItem="1tS-Gf-AEj" firstAttribute="centerY" secondItem="mlA-t3-IYm" secondAttribute="centerY" id="aJg-Rq-DjC"/>
+                                                <constraint firstItem="mlA-t3-IYm" firstAttribute="leading" secondItem="del-Wq-pRI" secondAttribute="leading" constant="20" id="btb-Sd-c2j"/>
+                                                <constraint firstItem="mlA-t3-IYm" firstAttribute="top" secondItem="del-Wq-pRI" secondAttribute="top" id="wm3-i6-eR3"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNe-zw-8be">
+                                            <rect key="frame" x="10" y="88" width="355" height="65"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VAT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkR-8Q-yfl">
+                                                    <rect key="frame" x="20" y="5" width="29" height="23"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="ACs-G7-C7P"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="14"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TVI-vF-C4Y">
+                                                    <rect key="frame" x="54" y="9" width="15" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="15" id="oR3-Ze-S1T"/>
+                                                        <constraint firstAttribute="width" secondItem="TVI-vF-C4Y" secondAttribute="height" multiplier="1:1" id="p5d-Yj-jxc"/>
+                                                    </constraints>
+                                                    <state key="normal">
+                                                        <imageReference key="image" image="info.circle" catalog="system" renderingMode="original"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="btnFdaDesc:" destination="HC5-c9-JcI" eventType="touchUpInside" id="gXH-XT-DlZ"/>
+                                                    </connections>
+                                                </button>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter VAT" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AAJ-PM-XF1" customClass="UITextFieldExtended" customModule="Alysei" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="35" width="325" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="5qL-Lu-FsQ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="sublayerBorderWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="sublayerBorderColor">
+                                                            <color key="value" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="bottomSublayer" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstItem="TVI-vF-C4Y" firstAttribute="leading" secondItem="ZkR-8Q-yfl" secondAttribute="trailing" constant="5" id="7A6-rm-qNg"/>
+                                                <constraint firstItem="AAJ-PM-XF1" firstAttribute="leading" secondItem="ZkR-8Q-yfl" secondAttribute="leading" id="IG5-Z2-fhI"/>
+                                                <constraint firstAttribute="trailing" secondItem="AAJ-PM-XF1" secondAttribute="trailing" constant="10" id="UuU-Sa-Pbb"/>
+                                                <constraint firstItem="ZkR-8Q-yfl" firstAttribute="top" secondItem="bNe-zw-8be" secondAttribute="top" constant="5" id="bs6-Op-MmP"/>
+                                                <constraint firstAttribute="bottom" secondItem="AAJ-PM-XF1" secondAttribute="bottom" id="m8h-x8-MLM"/>
+                                                <constraint firstItem="ZkR-8Q-yfl" firstAttribute="leading" secondItem="bNe-zw-8be" secondAttribute="leading" constant="20" id="rqP-Fj-Jbp"/>
+                                                <constraint firstItem="AAJ-PM-XF1" firstAttribute="top" secondItem="ZkR-8Q-yfl" secondAttribute="bottom" constant="7" id="vSs-hH-VTb"/>
+                                                <constraint firstItem="TVI-vF-C4Y" firstAttribute="centerY" secondItem="ZkR-8Q-yfl" secondAttribute="centerY" id="wiQ-Yf-wDE"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="bNe-zw-8be" firstAttribute="leading" secondItem="del-Wq-pRI" secondAttribute="leading" id="JXo-yz-Y4O"/>
+                                        <constraint firstItem="bNe-zw-8be" firstAttribute="top" secondItem="del-Wq-pRI" secondAttribute="bottom" constant="18" id="Ni6-kH-gyO"/>
+                                        <constraint firstAttribute="trailing" secondItem="del-Wq-pRI" secondAttribute="trailing" constant="10" id="Tyj-UJ-3si"/>
+                                        <constraint firstItem="bNe-zw-8be" firstAttribute="trailing" secondItem="del-Wq-pRI" secondAttribute="trailing" id="XNL-qb-eRJ"/>
+                                        <constraint firstItem="del-Wq-pRI" firstAttribute="leading" secondItem="mYE-BV-f29" secondAttribute="leading" constant="10" id="YcJ-aB-S1g"/>
+                                        <constraint firstItem="bNe-zw-8be" firstAttribute="height" secondItem="del-Wq-pRI" secondAttribute="height" id="j9g-DM-aCh"/>
+                                        <constraint firstItem="del-Wq-pRI" firstAttribute="top" secondItem="mYE-BV-f29" secondAttribute="top" constant="5" id="tgT-iR-FjF"/>
+                                    </constraints>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CompanyFirstTableCell" rowHeight="85" id="TzV-jt-Geo" customClass="CompanyFirstTableCell" customModule="Alysei" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="217" width="375" height="85"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TzV-jt-Geo" id="fAm-Gz-x3a">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hs-hY-aaA">
+                                                    <rect key="frame" x="10" y="10" width="355" height="65"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VAT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9G-md-4EG">
+                                                            <rect key="frame" x="0.0" y="0.0" width="29" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="3Ib-g9-m9N"/>
+                                                                <constraint firstAttribute="height" constant="18" id="hMh-Ro-Z6t"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="14"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Yk-TU-Pdk">
+                                                            <rect key="frame" x="34" y="1.5" width="15" height="15"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="3Yk-TU-Pdk" secondAttribute="height" multiplier="1:1" id="1oJ-S5-x2s"/>
+                                                                <constraint firstAttribute="width" constant="15" id="WyZ-vc-IB1"/>
+                                                            </constraints>
+                                                            <state key="normal">
+                                                                <imageReference key="image" image="info.circle" catalog="system" renderingMode="original"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="btnInfo:" destination="TzV-jt-Geo" eventType="touchUpInside" id="DTZ-XC-vgA"/>
+                                                            </connections>
+                                                        </button>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter VAT" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dsr-TM-gVV" customClass="UITextFieldExtended" customModule="Alysei" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="25" width="335" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="sFL-T7-1Wt"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="sublayerBorderWidth">
+                                                                    <real key="value" value="1"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="sublayerBorderColor">
+                                                                    <color key="value" red="0.81176470590000005" green="0.81176470590000005" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="bottomSublayer" value="YES"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </textField>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="dsr-TM-gVV" secondAttribute="trailing" constant="20" id="VDi-ee-ugB"/>
+                                                        <constraint firstItem="dsr-TM-gVV" firstAttribute="top" secondItem="z9G-md-4EG" secondAttribute="bottom" constant="7" id="X6a-Ru-5US"/>
+                                                        <constraint firstItem="dsr-TM-gVV" firstAttribute="leading" secondItem="z9G-md-4EG" secondAttribute="leading" id="ePx-J4-fc1"/>
+                                                        <constraint firstItem="3Yk-TU-Pdk" firstAttribute="centerY" secondItem="z9G-md-4EG" secondAttribute="centerY" id="pmB-QC-IXv"/>
+                                                        <constraint firstItem="z9G-md-4EG" firstAttribute="top" secondItem="3hs-hY-aaA" secondAttribute="top" id="rMt-8N-jcq"/>
+                                                        <constraint firstItem="z9G-md-4EG" firstAttribute="leading" secondItem="3hs-hY-aaA" secondAttribute="leading" id="uMm-A3-ahS"/>
+                                                        <constraint firstItem="3Yk-TU-Pdk" firstAttribute="leading" secondItem="z9G-md-4EG" secondAttribute="trailing" constant="5" id="wWc-4D-8OX"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="3hs-hY-aaA" secondAttribute="bottom" constant="10" id="Rit-4x-we7"/>
+                                                <constraint firstItem="3hs-hY-aaA" firstAttribute="leading" secondItem="fAm-Gz-x3a" secondAttribute="leading" constant="10" id="YLk-14-Vwz"/>
+                                                <constraint firstAttribute="trailing" secondItem="3hs-hY-aaA" secondAttribute="trailing" constant="10" id="sSJ-ew-bhW"/>
+                                                <constraint firstItem="3hs-hY-aaA" firstAttribute="top" secondItem="fAm-Gz-x3a" secondAttribute="top" constant="10" id="zFx-vM-bgp"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <constraints>
-                                            <constraint firstItem="z9G-md-4EG" firstAttribute="leading" secondItem="TzV-jt-Geo" secondAttribute="leading" constant="15" id="UYM-mT-hLE"/>
-                                            <constraint firstItem="z9G-md-4EG" firstAttribute="top" secondItem="TzV-jt-Geo" secondAttribute="top" constant="15" id="smU-q8-42P"/>
-                                        </constraints>
                                         <connections>
                                             <outlet property="btnCompanyFirst" destination="3Yk-TU-Pdk" id="XJ9-AV-ow4"/>
                                             <outlet property="lblCompanyFirst" destination="z9G-md-4EG" id="IG7-G3-2DR"/>
@@ -2823,7 +2963,7 @@ any other devices.</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CompanySecondTableCell" rowHeight="85" id="zwi-N5-fLp" customClass="CompanySecondTableCell" customModule="Alysei" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="113" width="375" height="85"/>
+                                        <rect key="frame" x="0.0" y="302" width="375" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zwi-N5-fLp" id="gTE-Pm-6zt">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
@@ -2836,7 +2976,7 @@ any other devices.</string>
                                                         <constraint firstAttribute="width" constant="19" id="WDF-Hh-h6C"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo Of Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHY-UM-AsQ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo Of Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHY-UM-AsQ">
                                                     <rect key="frame" x="44" y="15" width="194" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="U9w-IY-PDM"/>
@@ -2846,10 +2986,7 @@ any other devices.</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload an image of your products's label." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wqM-qM-xej">
-                                                    <rect key="frame" x="44" y="40" width="194" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="Q28-p3-2pD"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="44" y="40" width="194" height="43"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2868,11 +3005,15 @@ any other devices.</string>
                                                             <real key="value" value="16.5"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="btnUploadAction:" destination="zwi-N5-fLp" eventType="touchUpInside" id="BWE-hf-YKc"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="l4h-gT-1lL" firstAttribute="centerY" secondItem="gTE-Pm-6zt" secondAttribute="centerY" id="4s8-A8-RYa"/>
                                                 <constraint firstItem="jHY-UM-AsQ" firstAttribute="leading" secondItem="PAn-Z4-uvU" secondAttribute="trailing" constant="10" id="8V3-Mq-1hz"/>
+                                                <constraint firstAttribute="bottom" secondItem="wqM-qM-xej" secondAttribute="bottom" constant="2" id="Iti-tU-6Qu"/>
                                                 <constraint firstAttribute="trailing" secondItem="l4h-gT-1lL" secondAttribute="trailing" constant="15" id="Mmh-gZ-CvE"/>
                                                 <constraint firstItem="wqM-qM-xej" firstAttribute="top" secondItem="jHY-UM-AsQ" secondAttribute="bottom" constant="5" id="j97-rd-7EK"/>
                                                 <constraint firstItem="l4h-gT-1lL" firstAttribute="leading" secondItem="jHY-UM-AsQ" secondAttribute="trailing" constant="10" id="mpx-VP-cy5"/>
@@ -2888,6 +3029,7 @@ any other devices.</string>
                                         </constraints>
                                         <connections>
                                             <outlet property="btnUploadChange" destination="l4h-gT-1lL" id="cvz-xa-31C"/>
+                                            <outlet property="imgCheckMark" destination="PAn-Z4-uvU" id="1t9-7F-Vwx"/>
                                             <outlet property="lblDescription" destination="wqM-qM-xej" id="10g-WH-zPk"/>
                                             <outlet property="lblTitle" destination="jHY-UM-AsQ" id="ZYL-MX-hv7"/>
                                         </connections>
@@ -2918,13 +3060,17 @@ any other devices.</string>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="lblFDATitle" destination="ZkR-8Q-yfl" id="QDs-3y-LJB"/>
+                        <outlet property="lblVatTitle" destination="mlA-t3-IYm" id="XnG-4I-9ua"/>
                         <outlet property="tblViewCompany" destination="t1z-tK-Jro" id="g49-Ne-AZe"/>
+                        <outlet property="txtFDA" destination="AAJ-PM-XF1" id="kp7-f5-EUY"/>
+                        <outlet property="txtVat" destination="fbj-j8-lTx" id="Ryn-dK-Y16"/>
                         <outlet property="viewNavigation" destination="nZw-89-F4V" id="EBs-uA-SnG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nw5-v1-Kwa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1438" y="2368"/>
+            <point key="canvasLocation" x="1437.5999999999999" y="2367.1664167916042"/>
         </scene>
         <!--Profile-->
         <scene sceneID="TMM-cW-DIc">
