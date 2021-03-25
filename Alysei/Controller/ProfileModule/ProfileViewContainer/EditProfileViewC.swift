@@ -7,7 +7,11 @@
 
 import UIKit
 
-class EditProfileViewC: AlysieBaseViewC {
+class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
+    func tappedAddProduct(withProductCategoriesDataModel model: ProductCategoriesDataModel, featureListingId: String?) {
+
+    }
+
 
     //MARK:  - IBOutlet -
     
@@ -233,6 +237,15 @@ class EditProfileViewC: AlysieBaseViewC {
         return mergeArray.filter({ $0 != ""}).joined(separator: ", ")
     }
 
+    private func getFeaturedProductTableCell(_ indexPath: IndexPath) -> UITableViewCell{
+
+        let featuredProductTableCell = self.tableViewEditProfile.dequeueReusableCell(withIdentifier: FeaturedProductTableCell.identifier(), for: indexPath) as! FeaturedProductTableCell
+        featuredProductTableCell.delegate = self
+//        featuredProductTableCell.selectProductDelegate = self
+//        featuredProductTableCell.configureData(withProductCategoriesDataModel: self.settingEditViewModel.arrSections[indexPath.section].arrProductCategories[indexPath.row])
+        return featuredProductTableCell
+    }
+
     //MARK:  - WebService Methods -
 
     private func postRequestToUpdateUserProfile() -> Void{
@@ -291,13 +304,15 @@ extension EditProfileViewC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return self.signUpViewModel?.arrSignUpStepOne.count ?? 0
+        return (self.signUpViewModel?.arrSignUpStepOne.count ?? 0) + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        if indexPath.row >= (self.signUpViewModel?.arrSignUpStepOne.count ?? 0) {
+            return getFeaturedProductTableCell(indexPath)
+        }
         let model = self.signUpViewModel.arrSignUpStepOne[indexPath.row]
-
         switch model.type {
         case AppConstants.Checkbox,AppConstants.Multiselect,AppConstants.Select:
 
@@ -318,6 +333,9 @@ extension EditProfileViewC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
+        if indexPath.row >= (self.signUpViewModel?.arrSignUpStepOne.count ?? 0) {
+            return 180.0
+        }
         let model = self.signUpViewModel.arrSignUpStepOne[indexPath.row]
 
         switch model.type {
