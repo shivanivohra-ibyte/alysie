@@ -20,11 +20,11 @@ class ProfileViewC: AlysieBaseViewC{
   @IBOutlet weak var tblViewPosts: UITableView!
   @IBOutlet weak var imgViewCover: UIImageView!
   @IBOutlet weak var lblDisplayNameNavigation: UILabel!
-  @IBOutlet weak var lblEmailNavigation: UILabel!
+//  @IBOutlet weak var lblEmailNavigation: UILabel!
   @IBOutlet weak var imgViewProfileNavigation: UIImageViewExtended!
   @IBOutlet weak var imgViewProfile: UIImageViewExtended!
   @IBOutlet weak var lblDisplayName: UILabel!
-  @IBOutlet weak var lblEmail: UILabel!
+//  @IBOutlet weak var lblEmail: UILabel!
   @IBOutlet weak var btnEditProfile: UIButtonExtended!
   
   //MARK: - Properties -
@@ -133,9 +133,9 @@ class ProfileViewC: AlysieBaseViewC{
   
   private func initialSetUp() -> Void{
     
-    self.lblEmail.text = kSharedUserDefaults.loggedInUserModal.email
-    self.lblEmailNavigation.text = kSharedUserDefaults.loggedInUserModal.email
-    self.lblDisplayName.text = kSharedUserDefaults.loggedInUserModal.displayName
+//    self.lblEmail.text = kSharedUserDefaults.loggedInUserModal.email
+//    self.lblEmailNavigation.text = kSharedUserDefaults.loggedInUserModal.email 
+    self.lblDisplayName.text = kSharedUserDefaults.loggedInUserModal.displayName?.capitalized
     self.lblDisplayNameNavigation.text = kSharedUserDefaults.loggedInUserModal.displayName
 
 

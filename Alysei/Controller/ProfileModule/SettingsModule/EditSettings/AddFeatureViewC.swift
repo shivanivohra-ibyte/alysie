@@ -139,7 +139,7 @@ class AddFeatureViewC: AlysieBaseViewC {
     if UIImagePickerController.isSourceTypeAvailable(type){
       
       self.picker.mediaTypes = mediaType.CameraMediaType
-      self.picker.allowsEditing = false
+      self.picker.allowsEditing = true
       self.picker.sourceType = type
       self.present(self.picker,animated: true,completion: {
         self.picker.delegate = self
@@ -225,7 +225,7 @@ extension AddFeatureViewC: UIImagePickerControllerDelegate, UINavigationControll
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     
-    guard let selectedImage = info[.originalImage] as? UIImage else { return }
+    guard let selectedImage = info[.editedImage] as? UIImage else { return }
     self.dismiss(animated: true) {
       
       self.imgViewProduct.image = selectedImage
