@@ -134,7 +134,7 @@ class ProfileViewC: AlysieBaseViewC{
   private func initialSetUp() -> Void{
     
 //    self.lblEmail.text = kSharedUserDefaults.loggedInUserModal.email
-//    self.lblEmailNavigation.text = kSharedUserDefaults.loggedInUserModal.email
+//    self.lblEmailNavigation.text = kSharedUserDefaults.loggedInUserModal.email 
     self.lblDisplayName.text = kSharedUserDefaults.loggedInUserModal.displayName?.capitalized
     self.lblDisplayNameNavigation.text = kSharedUserDefaults.loggedInUserModal.displayName
 
