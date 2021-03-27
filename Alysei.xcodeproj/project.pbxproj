@@ -193,6 +193,7 @@
 		27E5694825BDC5E30028DEBF /* BusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E5694725BDC5E30028DEBF /* BusinessModel.swift */; };
 		27E5694B25BDDDCB0028DEBF /* SelectedHubsViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E5694A25BDDDCB0028DEBF /* SelectedHubsViewC.swift */; };
 		27E5694E25BDDE070028DEBF /* SelectedHubsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E5694D25BDDE070028DEBF /* SelectedHubsCollectionCell.swift */; };
+		61243C48260E16C50000217C /* AlyseiBVC.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 61243C47260E16C40000217C /* AlyseiBVC.mp4 */; };
 		6127F16E260B49DB005848B3 /* SaveResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6127F16D260B49DB005848B3 /* SaveResources.swift */; };
 		6B5A8280260C56AD00ED60B7 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A827F260C56AD00ED60B7 /* WebServices.swift */; };
 		6B5A8284260C5CD100ED60B7 /* CompanyCertificates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A8283260C5CD100ED60B7 /* CompanyCertificates.swift */; };
@@ -421,6 +422,7 @@
 		27E5694A25BDDDCB0028DEBF /* SelectedHubsViewC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedHubsViewC.swift; sourceTree = "<group>"; };
 		27E5694D25BDDE070028DEBF /* SelectedHubsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedHubsCollectionCell.swift; sourceTree = "<group>"; };
 		405FAC16BE45020951752C66 /* Pods-Alysie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alysie.release.xcconfig"; path = "Target Support Files/Pods-Alysie/Pods-Alysie.release.xcconfig"; sourceTree = "<group>"; };
+		61243C47260E16C40000217C /* AlyseiBVC.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = AlyseiBVC.mp4; path = ../../AlyseiBVC.mp4; sourceTree = "<group>"; };
 		6127F16D260B49DB005848B3 /* SaveResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveResources.swift; sourceTree = "<group>"; };
 		6B5A827F260C56AD00ED60B7 /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		6B5A8283260C5CD100ED60B7 /* CompanyCertificates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCertificates.swift; sourceTree = "<group>"; };
@@ -1072,6 +1074,7 @@
 		27BC688225AC564100A01B6A /* Alysei */ = {
 			isa = PBXGroup;
 			children = (
+				61243C47260E16C40000217C /* AlyseiBVC.mp4 */,
 				27A443F725AE06F00002BAAC /* Info.plist */,
 				27BC688C25AC564200A01B6A /* Assets.xcassets */,
 				2770AA5525AE1BBC00A2F10B /* AlysieBaseViewC.swift */,
@@ -1326,6 +1329,7 @@
 				27A443DB25AE03720002BAAC /* Montserrat-Italic.ttf in Resources */,
 				27A443CD25AE03720002BAAC /* Montserrat-Medium.ttf in Resources */,
 				279AB33B25FF42EC0061FCB3 /* HubSelectionTableViewCell.xib in Resources */,
+				61243C48260E16C50000217C /* AlyseiBVC.mp4 in Resources */,
 				27BC688D25AC564200A01B6A /* Assets.xcassets in Resources */,
 				6BBA994B260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.xib in Resources */,
 				27A443D125AE03720002BAAC /* Montserrat-ExtraLight.ttf in Resources */,

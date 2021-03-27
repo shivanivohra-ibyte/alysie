@@ -139,11 +139,10 @@ class ProfileViewC: AlysieBaseViewC{
     self.lblDisplayNameNavigation.text = kSharedUserDefaults.loggedInUserModal.displayName
 
 
-
-    if let coverPhoto = LocalStorage.shared.fetchImage(UserDetailNBasedElements.coverPhoto) {
+    if let coverPhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements.coverPhoto) {
         self.imgViewCover.image = coverPhoto
     }
-    if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailNBasedElements.profilePhoto) {
+    if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements.profilePhoto) {
         self.imgViewProfile.image = profilePhoto
     }
 

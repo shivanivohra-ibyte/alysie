@@ -74,6 +74,10 @@ class OverLayLoginViewController: UIViewController {
     
     //MARK: IBACTIONS
     @IBAction func btnLogin(_ sender: UIButton){
+
+//        self.txtFieldEmail.text = "sweety@gmail.com"
+//        self.txtFieldPassword.text = "deepanshu@123"
+
         validateFields(sender.tag)
     }
     @IBAction func btnForgetAction(_ sender: UIButton){

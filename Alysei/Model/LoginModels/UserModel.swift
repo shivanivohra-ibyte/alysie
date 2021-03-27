@@ -29,6 +29,9 @@ class UserModel: NSObject{
   var avatarId: String?
     var coverPictureName: String?
     var profilePictureName: String?
+
+    var avatar: avatar?
+    var cover: cover?
  // var cover_id: AllProductsDataModel?
     
   init(withDictionary dicResult: [String:Any]){
@@ -55,9 +58,38 @@ class UserModel: NSObject{
     self.accountEnabled = String.getString(dictData[APIConstants.kAccountEnabled])
     self.memberName = String.getString(dictRoles[APIConstants.kName])
     self.memberRoleId = String.getString(dictRoles[APIConstants.kRoleId])
-    self.avatarId = String.getString(dictRoles[APIConstants.kAvatarId])
+//    self.avatarId = String.getString(dictRoles[APIConstants.kAvatarId])
+
+    if let avatarDict = dictData[APIConstants.kAvatarId] as? [String: Any] {
+        self.avatar = imageAttachementModel(avatarDict, for: "coverPhoto-\(userId ?? "").jpg")
+    }
+
+    if let coverDict = dictData[APIConstants.kCoverId] as? [String: Any] {
+        self.avatar = imageAttachementModel(coverDict, for: "profilePhoto-\(userId ?? "").jpg")
+    }
+
+    print(self)
 
   }
+
+    typealias avatar = imageAttachementModel
+    typealias cover = imageAttachementModel
+
+    struct imageAttachementModel {
+        var id: Int
+        var imageURL: String
+
+        init(_ dict: [String: Any], for imageName: String) {
+            self.id = dict["id"] as? Int ?? 0
+            self.imageURL = "\(kImageBaseUrl)" + (dict["attachment_url"] as? String ?? "")
+
+            LocalStorage.shared.saveImage(self.imageURL, fileName: imageName)
+        }
+        
+
+        
+    }
+
 }
 
 //class UserImage: {

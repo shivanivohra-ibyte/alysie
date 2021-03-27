@@ -8,11 +8,38 @@
 import Foundation
 import UIKit
 
+
 // class for downloading and saving image
 class LocalStorage {
     static let shared = LocalStorage()
 
+
+    func saveImage(_ imageURLString: String, fileName: String) {
+        let imageURLEncodedString = imageURLString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        guard let imageURL = URL(string: imageURLEncodedString) else {  return }
+
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileURL = documentsDirectory.appendingPathComponent(fileName)
+
+        if FileManager.default.fileExists(atPath: fileURL.relativePath) {
+            print("file exists")
+            return
+        }
+
+        DispatchQueue.global(qos: .background).async {
+            guard let data = NSData(contentsOf: imageURL) else { return }
+            DispatchQueue.main.async {
+                self.writeImageToDisk(Data(referencing: data), fileName: fileName)
+            }
+        }
+    }
+
+
     func saveImage(_ imageData: Data?, fileName: String) {
+        self.writeImageToDisk(imageData, fileName: fileName)
+    }
+
+    private func writeImageToDisk(_ imageData: Data?, fileName: String) {
         guard let data = imageData else { return }
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let fileURL = documentsDirectory.appendingPathComponent(fileName)
@@ -23,7 +50,6 @@ class LocalStorage {
             print("error saving file:", error)
         }
     }
-
 
     func fetchImage(_ fileName: String) -> UIImage? {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!

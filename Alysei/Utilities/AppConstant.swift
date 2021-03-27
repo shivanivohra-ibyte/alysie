@@ -47,7 +47,7 @@ struct FunctionsConstants {
     static let kScreenHeight = UIScreen.main.bounds.height
 }
 
-struct UserDetailNBasedElements {
+struct UserDetailBasedElements {
     static var coverPhoto: String = {
         return "coverPhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg"
     }()
@@ -289,6 +289,7 @@ struct APIConstants {
     static let kName = "name"
     static let kRoleId = "role_id"
     static let kAvatarId = "avatar_id"
+    static let kCoverId = "cover_id"
     static let kAccountEnabled = "account_enabled"
     static let kAttachmentUrl = "attachment_url"
     static let kFields = "fields"

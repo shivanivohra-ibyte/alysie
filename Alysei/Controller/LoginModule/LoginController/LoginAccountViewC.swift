@@ -69,7 +69,9 @@ class LoginAccountViewC: AlysieBaseViewC{
   }
   
   @IBAction func tapTermsOfUse(_ sender: UIButton) {
-    
+
+    //TODO:- confirmation pending
+    // check if internal webview can be embeded instead of Safari.
     guard let url = URL(string: "https://social.alysei.com/terms") else {return}
     UIApplication.shared.open(url)
   }
@@ -138,9 +140,10 @@ extension LoginAccountViewC{
   override func didUserGetData(from result: Any, type: Int) {
     
     //let controller = pushViewController(withName: RoleViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? RoleViewC
-    let controller = pushViewController(withName: SelectRoleViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? SelectRoleViewC
     let dicResponse = kSharedInstance.getDictionary(result)
     let dicData = kSharedInstance.getDictionary(dicResponse[APIConstants.kData])
+
+    let controller = pushViewController(withName: SelectRoleViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? SelectRoleViewC
     controller?.getRoleViewModel = GetRoleViewModel(dicData)
     
   }

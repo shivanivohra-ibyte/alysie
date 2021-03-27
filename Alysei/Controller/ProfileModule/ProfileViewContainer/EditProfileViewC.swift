@@ -37,10 +37,10 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
 
         super.viewDidLoad()
 
-        if let coverPhoto = LocalStorage.shared.fetchImage(UserDetailNBasedElements.coverPhoto) {
+        if let coverPhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements.coverPhoto) {
             self.imgViewCoverPhoto.image = coverPhoto
         }
-        if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailNBasedElements.profilePhoto) {
+        if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements.profilePhoto) {
             self.imgViewProfile.image = profilePhoto
         }
 
@@ -285,8 +285,8 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
         CommonUtil.sharedInstance.postToServerRequestMultiPart(APIUrl.kUpdateUserProfile, params: mergeDict, imageParams: imageParam, controller: self) { (dictReponse) in
 
 
-            LocalStorage.shared.saveImage(compressProfileData, fileName: UserDetailNBasedElements.profilePhoto)
-            LocalStorage.shared.saveImage(compressCoverData, fileName: UserDetailNBasedElements.coverPhoto)
+            LocalStorage.shared.saveImage(compressProfileData, fileName: UserDetailBasedElements.profilePhoto)
+            LocalStorage.shared.saveImage(compressCoverData, fileName: UserDetailBasedElements.coverPhoto)
             
             self.showAlert(withMessage: AlertMessage.kProfileUpdated){
                 self.navigationController?.popViewController(animated: true)
