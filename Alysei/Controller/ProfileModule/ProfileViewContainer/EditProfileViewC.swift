@@ -181,7 +181,7 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
 
     private func showImagePicker(withSourceType type: UIImagePickerController.SourceType,mediaType: MediaType) -> Void {
 
-        if UIImagePickerController.isSourceTypeAvailable(type){
+        if UIImagePickerController.isSourceTypeAvailable(type) {
 
             self.picker.mediaTypes = mediaType.CameraMediaType
             self.picker.allowsEditing = true
@@ -414,7 +414,7 @@ extension EditProfileViewC: UIImagePickerControllerDelegate, UINavigationControl
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
 
-        guard let selectedImage = info[.originalImage] as? UIImage else { return }
+        guard let selectedImage = info[.editedImage] as? UIImage else { return }
         self.dismiss(animated: true) {
 
             if self.btnProfilePhoto.isSelected == true{
