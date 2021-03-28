@@ -30,8 +30,8 @@ class UserModel: NSObject{
     var coverPictureName: String?
     var profilePictureName: String?
 
-    var avatar: avatar?
-    var cover: cover?
+    var avatar: avatar?  // newly constructed struct for avater id
+    var cover: cover?  // newly constructed struct for cover id
  // var cover_id: AllProductsDataModel?
     
   init(withDictionary dicResult: [String:Any]){
