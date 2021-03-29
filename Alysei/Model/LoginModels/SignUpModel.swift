@@ -17,6 +17,8 @@
    
   var arrSignUpStepOne: [SignUpStepOneDataModel] = []
   var arrSignUpStepTwo: [SignUpStepTwoDataModel] = []
+    var arrProductCategories: [ProductCategoriesDataModel] = []
+
   var roleId: String?
  
   init(_ dictData: [String:Any], roleId: [GetRoleDataModel]? = nil) {
@@ -33,6 +35,11 @@
       
       self.arrSignUpStepTwo = stepTwo.map({SignUpStepTwoDataModel(withDictionary: $0)})
     }
+
+    if let arr = dictData[APIConstants.kProducts] as? ArrayOfDictionary{
+        self.arrProductCategories = arr.map({ProductCategoriesDataModel(withDictionary: $0)})
+    }
+
   }
   
   func validateFields() -> (Bool,String){

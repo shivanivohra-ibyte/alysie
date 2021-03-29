@@ -29,9 +29,17 @@ class ProfileViewC: AlysieBaseViewC{
   
   //MARK: - Properties -
   
-  var signUpViewModel: SignUpViewModel!
+    var signUpViewModel: SignUpViewModel!
+//    {
+//        didSet {
+//            print(oldValue)
+//            self.updateProductsInEditProfile()
+//        }
+//    }
   
   //MARK: - Properties -
+
+    private var editProfileViewCon: EditProfileViewC!
   
   private var currentChild: UIViewController {
       return self.children.last!
@@ -127,9 +135,15 @@ class ProfileViewC: AlysieBaseViewC{
     
     let controller = pushViewController(withName: EditProfileViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? EditProfileViewC
     controller?.signUpViewModel = self.signUpViewModel
+    self.editProfileViewCon = controller
+//    updateProductsInEditProfile()
   }
   
   //MARK: - Private Methods -
+
+//    func updateProductsInEditProfile() {
+//        editProfileViewCon?.tableViewEditProfile?.reloadData()
+//    }
   
   private func initialSetUp() -> Void{
     
@@ -150,8 +164,6 @@ class ProfileViewC: AlysieBaseViewC{
         self.imgViewProfile.layer.borderColor = UIColor.white.cgColor
         self.imgViewProfile.layer.masksToBounds = true
     }
-
-
     
   }
     
@@ -190,7 +202,11 @@ class ProfileViewC: AlysieBaseViewC{
   }
   
   //MARK:  - WebService Methods -
-  
+
+    func reloadFields() {
+        self.postRequestToGetFields()
+    }
+
   private func postRequestToGetFields() -> Void{
     
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kUserSubmittedFields, method: .GET, controller: self, type: 0, param: [:], btnTapped: UIButton())
@@ -229,6 +245,9 @@ extension ProfileViewC{
     let dicResult = kSharedInstance.getDictionary(result)
     let dicData = kSharedInstance.getDictionary(dicResult[APIConstants.kData])
     self.signUpViewModel = SignUpViewModel(dicData, roleId: nil)
+    editProfileViewCon?.signUpViewModel = self.signUpViewModel
+    editProfileViewCon?.tableViewEditProfile?.reloadData()
+    print("Some")
   }
   
 }

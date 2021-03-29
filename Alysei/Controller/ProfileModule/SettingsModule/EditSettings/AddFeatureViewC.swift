@@ -38,6 +38,13 @@ class AddFeatureViewC: AlysieBaseViewC {
     super.viewDidLoad()
     self.initialImageSetUp()
   }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        self.delegate?.productAdded()
+//        self.navigationController?.popViewController(animated: true)
+
+    }
   
   override func viewDidLayoutSubviews(){
     super.viewDidLayoutSubviews()
@@ -286,7 +293,7 @@ extension AddFeatureViewC: UITableViewDataSource, UITableViewDelegate{
 extension AddFeatureViewC{
   
   override func didUserGetData(from result: Any, type: Int) {
-    
     self.delegate?.productAdded()
+    self.navigationController?.popViewController(animated: true)
   }
 }

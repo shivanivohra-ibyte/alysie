@@ -81,7 +81,7 @@ class EditUserSettingsViewC: AlysieBaseViewC {
       
     let featuredProductTableCell = tblViewEditUserSettings.dequeueReusableCell(withIdentifier: FeaturedProductTableCell.identifier(), for: indexPath) as! FeaturedProductTableCell
     featuredProductTableCell.delegate = self
-    //featuredProductTableCell.selectProductDelegate = self
+//    featuredProductTableCell.selectProductDelegate = self
     featuredProductTableCell.configureData(withProductCategoriesDataModel: self.settingEditViewModel.arrSections[indexPath.section].arrProductCategories[indexPath.row])
     return featuredProductTableCell
   }
@@ -155,8 +155,8 @@ class EditUserSettingsViewC: AlysieBaseViewC {
       default:
         return self.getEditUserSettingsTableCell(indexPath)
       }
-//    case 1:
-//      return self.getFeaturedProductTableCell(indexPath)
+    case 1:
+      return self.getFeaturedProductTableCell(indexPath)
     default:
       return UITableViewCell()
     }

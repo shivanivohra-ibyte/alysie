@@ -7,10 +7,27 @@
 
 import UIKit
 
-class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
+class EditProfileViewC: AlysieBaseViewC, AddProductCallBack, AddFeaturedProductCallBack {
     func tappedAddProduct(withProductCategoriesDataModel model: ProductCategoriesDataModel, featureListingId: String?) {
 
+        if featureListingId == nil{
+            let controller = pushViewController(withName: AddFeatureViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? AddFeatureViewC
+            controller?.productCategoriesDataModel = model
+            controller?.delegate = self
+        }
+        else{
+//            self.postRequestToGetFeatureListing(String.getString(featureListingId), navigationTitle: String.getString(model.title))
+        }
     }
+
+    func productAdded() {
+        self.fetchProductsFromProfile()
+    }
+
+//    private func postRequestToGetFeatureListing(_ featureListingId: String,navigationTitle: String) -> Void{
+//
+//        CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetFeatureListing + featureListingId, method: .GET, controller: self, type: 2, param: [:], btnTapped: UIButton())
+//    }
 
 
     //MARK:  - IBOutlet -
@@ -45,6 +62,16 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
         }
 
         self.imgViewProfile.roundCorners(.allCorners, radius: (self.imgViewProfile.frame.width / 2.0))
+    }
+
+    func fetchProductsFromProfile() {
+        if let nav = self.parent as? UINavigationController, let profileCon = nav.viewControllers.first as? ProfileViewC {
+            profileCon.reloadFields()
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
     //MARK: - IBAction -
@@ -239,10 +266,13 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
 
     private func getFeaturedProductTableCell(_ indexPath: IndexPath) -> UITableViewCell{
 
+//        let tempDict = [String: Any]()
+
         let featuredProductTableCell = self.tableViewEditProfile.dequeueReusableCell(withIdentifier: FeaturedProductTableCell.identifier(), for: indexPath) as! FeaturedProductTableCell
-        featuredProductTableCell.delegate = self
+//        featuredProductTableCell.configureData(withProductCategoriesDataModel: ProductCategoriesDataModel(withDictionary: tempDict))
 //        featuredProductTableCell.selectProductDelegate = self
-//        featuredProductTableCell.configureData(withProductCategoriesDataModel: self.settingEditViewModel.arrSections[indexPath.section].arrProductCategories[indexPath.row])
+        featuredProductTableCell.configureData(withProductCategoriesDataModel: self.signUpViewModel.arrProductCategories[indexPath.section])
+        featuredProductTableCell.delegate = self
         return featuredProductTableCell
     }
 
