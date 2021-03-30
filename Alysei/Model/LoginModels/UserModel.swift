@@ -79,6 +79,9 @@ class UserModel: NSObject{
         var id: Int
         var imageURL: String
 
+//        init(_ id: Int, imageURL: String) {
+//
+//        }
         init(_ dict: [String: Any], for imageName: String) {
             self.id = dict["id"] as? Int ?? 0
             self.imageURL = "\(kImageBaseUrl)" + (dict["attachment_url"] as? String ?? "")

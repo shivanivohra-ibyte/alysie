@@ -22,9 +22,14 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
 
     var isProfilePhotoCaptured = false
     var isCoverPhotoCaptured = false
+    var profilePhotoAlreadyExists = false
+    var coverPhotoAlreadyExists = false
 
     var featureListingId: String?
     var currentProductTitle: String?
+
+    var profilePhoto: UIImage?
+    var coverPhoto :UIImage?
 
     var picker = UIImagePickerController()
     var signUpViewModel: SignUpViewModel!
@@ -36,10 +41,12 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
 
         super.viewDidLoad()
 
-        if let coverPhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().coverPhoto) {
+        if let coverPhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().coverPhoto), (kSharedUserDefaults.loggedInUserModal.cover != nil) {
+            self.coverPhotoAlreadyExists = true
             self.imgViewCoverPhoto.image = coverPhoto
         }
-        if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().profilePhoto) {
+        if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().profilePhoto), (kSharedUserDefaults.loggedInUserModal.avatar != nil) {
+            self.profilePhotoAlreadyExists = true
             self.imgViewProfile.image = profilePhoto
         }
 
@@ -171,28 +178,81 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
         alert.addAction(cameraAction)
         alert.addAction(galleryAction)
 
-        let removePhotoAction = UIAlertAction(title: AlertMessage.kDeletePhoto,
+        let deletePhotoAction = UIAlertAction(title: AlertMessage.kDeletePhoto,
                                               style: UIAlertAction.Style.default) { (action) in
             if self.isProfilePhotoCaptured {
                 self.isProfilePhotoCaptured = false
                 self.imgViewProfile.image = UIImage(named: "user_icon_normal")
+                self.profilePhoto = nil
             } else if self.isCoverPhotoCaptured {
                 self.isCoverPhotoCaptured = false
                 self.imgViewCoverPhoto.image = UIImage(named: "coverPhoto")
+                self.coverPhoto = nil
             }
         }
         // remove photo action will be shown in alert only when user has captured an image for either profile picture or cover photo
         if self.isProfilePhotoCaptured && self.btnProfilePhoto.isSelected {
-            alert.addAction(removePhotoAction)
+            alert.addAction(deletePhotoAction)
         } else if self.isCoverPhotoCaptured && self.btnCoverPhoto.isSelected {
+            alert.addAction(deletePhotoAction)
+        }
+
+
+        let removePhotoAction = UIAlertAction(title: AlertMessage.kRemovePhoto,
+                                                 style: UIAlertAction.Style.default) { (action) in
+            if self.profilePhotoAlreadyExists && self.btnProfilePhoto.isSelected {
+                self.profilePhotoAlreadyExists = false
+                self.imgViewProfile.image = UIImage(named: "user_icon_normal")
+                self.profilePhoto = nil
+                self.deletePicture(UserDetailBasedElements().profilePhoto, imageType: 1)
+            } else if self.coverPhotoAlreadyExists &&  self.btnCoverPhoto.isSelected {
+                self.coverPhotoAlreadyExists = false
+                self.imgViewCoverPhoto.image = UIImage(named: "coverPhoto")
+                self.coverPhoto = nil
+                self.deletePicture(UserDetailBasedElements().coverPhoto, imageType: 2)
+            }
+        }
+
+        // remove photo action will be shown in alert only when user has captured an image for either profile picture or cover photo
+        if self.profilePhotoAlreadyExists && self.btnProfilePhoto.isSelected {
+            alert.addAction(removePhotoAction)
+        } else if self.coverPhotoAlreadyExists && self.btnCoverPhoto.isSelected {
             alert.addAction(removePhotoAction)
         }
 
         alert.addAction(cancelAction)
-
-
         self.present(alert, animated: true, completion: nil)
     }
+
+    private func deletePicture(_ imageName: String, imageType: Int) {
+
+        switch imageType {
+        case 1:
+            print("delete profile photo")
+            guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Images.removeProfilePhoto)", method: .POST) else { return }
+            WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
+                guard let data = data else { return }
+                if (error != nil) { print(error.debugDescription) }
+                LocalStorage.shared.deleteImage(imageName)
+                kSharedUserDefaults.loggedInUserModal.avatar = nil
+            }
+        case 2:
+            print("delete cover photo")
+            guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Images.removeCoverPhoto)", method: .POST) else { return }
+            WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
+                guard let data = data else { return }
+                if (error != nil) { print(error.debugDescription) }
+                LocalStorage.shared.deleteImage(imageName)
+                kSharedUserDefaults.loggedInUserModal.cover = nil
+            }
+
+        default:
+            print("unidentified code")
+        }
+
+    }
+
+
 
     private func showImagePicker(withSourceType type: UIImagePickerController.SourceType,mediaType: MediaType) -> Void {
 
@@ -260,7 +320,9 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
 //        featuredProductTableCell.configureData(withProductCategoriesDataModel: ProductCategoriesDataModel(withDictionary: tempDict))
 //        featuredProductTableCell.selectProductDelegate = self
         featuredProductTableCell.featureProductDeletage = self
-        featuredProductTableCell.configureData(withProductCategoriesDataModel: self.signUpViewModel.arrProductCategories[indexPath.section])
+        if self.signUpViewModel != nil {
+            featuredProductTableCell.configureData(withProductCategoriesDataModel: self.signUpViewModel.arrProductCategories[indexPath.section])
+        }
         featuredProductTableCell.delegate = self
         return featuredProductTableCell
     }
@@ -294,16 +356,21 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
         //imageParam[APIConstants.kImageName:APIConstants.k] =
 
         let dictStepOne = self.signUpViewModel.toDictionaryStepOne()
-        let imageParamProfile:[String:Any] = [APIConstants.kImage: compressedProfileImage as Any,
-                                              APIConstants.kImageName: "avatar_id"
-        ]
-        let imageParamCover: [String:Any] = [
-            APIConstants.kImage : compressedCoverImage as Any,
-            APIConstants.kImageName: "cover_id"
-        ]
         var imageParam = [[String:Any]]()
-        imageParam.append(imageParamProfile)
-        imageParam.append(imageParamCover)
+
+        if self.profilePhoto != nil {
+            let imageParamProfile:[String:Any] = [APIConstants.kImage: compressedProfileImage as Any,
+                                                  APIConstants.kImageName: "avatar_id"
+            ]
+            imageParam.append(imageParamProfile)
+        }
+        if self.coverPhoto != nil {
+            let imageParamCover: [String:Any] = [
+                APIConstants.kImage : compressedCoverImage as Any,
+                APIConstants.kImageName: "cover_id"
+            ]
+            imageParam.append(imageParamCover)
+        }
         //    let dictUserImage : [String:Any] = [
         //        "avatar_id" : compressedProfileImage ?? UIImage(),
         //                         "cover_id" : compressedCoverImage ?? UIImage()
@@ -311,9 +378,36 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
         let mergeDict = dictStepOne.compactMap { $0 }.reduce([:]) { $0.merging($1) { (current, _) in current } }
         CommonUtil.sharedInstance.postToServerRequestMultiPart(APIUrl.kUpdateUserProfile, params: mergeDict, imageParams: imageParam, controller: self) { (dictReponse) in
 
+            guard let data = dictReponse["data"] as? [String: Any] else { return }
+            if let coverID = data["cover_id"] as? [String: Any] {
+                print(coverID)
+                if self.coverPhoto != nil {
+                    guard let id = coverID[""] as? Int, let attachmentURL = coverID["attachment_url"]  as? String else {
+                        return
+                    }
+                    LocalStorage.shared.saveImage(compressCoverData, fileName: UserDetailBasedElements().coverPhoto)
+                    let dict: [String: Any] = ["id": id, "attachment_url": attachmentURL]
+                    kSharedUserDefaults.loggedInUserModal.cover = UserModel.cover(dict, for: "coverPhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg")
 
-            LocalStorage.shared.saveImage(compressProfileData, fileName: UserDetailBasedElements().profilePhoto)
-            LocalStorage.shared.saveImage(compressCoverData, fileName: UserDetailBasedElements().coverPhoto)
+                }
+            }
+
+            if let avatarID = data["avatar_id"] as? [String: Any] {
+                if self.profilePhoto != nil {
+                    guard let id = avatarID[""] as? Int, let attachmentURL = avatarID["attachment_url"]  as? String else {
+                        return
+                    }
+//                    LocalStorage.shared.saveImage(compressProfileData, fileName: UserDetailBasedElements().profilePhoto)
+                    let dict: [String: Any] = ["id": id, "attachment_url": attachmentURL]
+                    kSharedUserDefaults.loggedInUserModal.avatar = UserModel.avatar(dict, for: "coverPhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg")
+                }
+            }
+//            if self.profilePhoto != nil {
+////                LocalStorage.shared.saveImage(compressProfileData, fileName: UserDetailBasedElements().profilePhoto)
+//                let dict: [String: Any] = ["id": 0, "attachment_url": ""]
+//                kSharedUserDefaults.loggedInUserModal.avatar = UserModel.imageAttachementModel(dict, for: "coverPhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg")
+//            }
+
             
             self.showAlert(withMessage: AlertMessage.kProfileUpdated){
                 self.navigationController?.popViewController(animated: true)
@@ -577,12 +671,26 @@ extension EditProfileViewC: FeaturedProductCollectionCellProtocol {
 
     func deleteProduct(_ productID: Int) {
 
-        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.FeaturedProduct.delete)\(productID)", method: .POST) else { return }
+        let alertController = UIAlertController(title: "", message: "Are you surely want to delete this product?", preferredStyle: .actionSheet)
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+            self.deleteProduct("\(APIUrl.FeaturedProduct.delete)\(productID)")
+        }
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        self.present(alertController, animated: true)
+
+    }
+
+    private func deleteProduct(_ urlStringWithProductID: String) {
+        guard let urlRequest = WebServices.shared.buildURLRequest("\(urlStringWithProductID)", method: .POST) else { return }
         WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
             guard let data = data else { return }
             if (error != nil) { print(error.debugDescription) }
             self.fetchProductsFromProfile()
-
         }
     }
 

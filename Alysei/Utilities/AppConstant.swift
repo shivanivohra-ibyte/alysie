@@ -93,7 +93,8 @@ struct  AlertMessage{
     static let kSourceType              = "Please choose a source type"
     static let kTakePhoto               = "Take Photo"
     static let kChooseLibrary           = "Choose From Library"
-    static let kDeletePhoto           = "Delete photo"
+    static let kDeletePhoto             = "Delete photo"
+    static let kRemovePhoto             = "Remove photo"
     static let kCancel                  = "Cancel"
     static let kEnter6DigitOTP          = "Enter 6-digit OTP."
     static let kFeatureNot              = "This feature is not available."
@@ -173,6 +174,11 @@ struct APIUrl{
 
     enum FeaturedProduct {
         static let delete = kBASEURL + "delete/featured/listing?featured_listing_id="
+    }
+
+    enum Images {
+        static let removeProfilePhoto = kBASEURL + "remove/cover/profile/image?image_type=1"
+        static let removeCoverPhoto = kBASEURL + "remove/cover/profile/image?image_type=2"
     }
 }
 

@@ -60,11 +60,17 @@ class LocalStorage {
                 return image
             }
         }
-//        if let image = UIImage(contentsOfFile: fileURL.absoluteString) {
-//            return image
-//        }
-
         return nil
+    }
+
+    func deleteImage(_ fileName: String) {
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let fileURL = documentsDirectory.appendingPathComponent(fileName)
+        do {
+            try FileManager.default.removeItem(at: fileURL)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
 }

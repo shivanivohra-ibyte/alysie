@@ -14,8 +14,7 @@ class WebServices {
     
     func request(_ urlRequest: URLRequest,completion: @escaping (Data? , URLResponse?, Int?, Error?) -> ()){
         var request = urlRequest
-        request.setValue("custom-header-field", forHTTPHeaderField: "User-Agent")
-        
+
         URLSession.shared.dataTask(with: request){ (data, response, error) in
             DispatchQueue.main.async {
                 if let httpResponse = response as? HTTPURLResponse {
