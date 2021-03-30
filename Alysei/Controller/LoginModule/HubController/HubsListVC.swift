@@ -14,6 +14,7 @@ class HubsListVC: UIViewController {
     @IBOutlet weak var bottomStack: UIStackView!
     @IBOutlet weak var bottomStackHeight: NSLayoutConstraint!
     @IBOutlet weak var viewHeader: UIView!
+    @IBOutlet weak var viewBottomStack: UIView!
     
     var city = [CountryHubs]()
     var country: CountryModel?
@@ -33,7 +34,9 @@ class HubsListVC: UIViewController {
         self.lblHeading.text = self.hasCome == .hubs ? "Select Hubs" : "Find your City"
          hideEyeIcon = self.hasCome == .hubs ? false : true
         self.bottomStack.isHidden = self.hasCome == .hubs ? false : true
+        self.viewBottomStack.isHidden = self.hasCome == .hubs ? false : true
         self.bottomStackHeight.constant = self.hasCome == .hubs ? 30 : 0
+        self.bottomStack.backgroundColor = UIColor.init(hexString: "#1D4873")
         self.hasCome == .hubs ? self.callHubViewApi() : self.postRequestToGetCity()
     }
     
@@ -112,5 +115,13 @@ class HubsListVC: UIViewController {
         nextvc.hasCome = .city
         nextvc.selectedHubs = self.selectedHubs
         self.navigationController?.pushViewController(nextvc, animated: true)
+    }
+}
+extension UIStackView {
+    func addBackground(color: UIColor) {
+        let subView = UIView(frame: bounds)
+        subView.backgroundColor = color
+        subView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        insertSubview(subView, at: 0)
     }
 }

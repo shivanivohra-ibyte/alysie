@@ -223,22 +223,23 @@ extension CompanyViewC: UIImagePickerControllerDelegate, UINavigationControllerD
         self.dismiss(animated: true) {
             // self.imgViewProfile.image = selectedImage
            // self.postImage = selectedImage
-           
+            let imageData = selectedImage.compressTo(1)
             if self.getUploadImageIndex == 0 {
-                self.photoOfLabelImage = selectedImage
+                self.photoOfLabelImage = imageData
             }else if self.getUploadImageIndex == 1{
-                self.fceSidImage = selectedImage
+                self.fceSidImage = imageData
             }else if self.getUploadImageIndex == 2{
-                self.phytoImage = selectedImage
+                self.phytoImage = imageData
             }
             else if self.getUploadImageIndex == 3{
-                self.packaginImage = selectedImage
+                self.packaginImage = imageData
             }
             else if self.getUploadImageIndex == 4{
-                self.foodSafetyImage = selectedImage
+                self.foodSafetyImage = imageData
             }
             else if self.getUploadImageIndex == 5{
-                self.animalImage = selectedImage
+                self.animalImage = imageData
+                
             }
             self.arrUploadImageIndex.append(self.getUploadImageIndex ?? -1)
             self.callSaveDocumentApi()
@@ -289,22 +290,30 @@ extension CompanyViewC: UIImagePickerControllerDelegate, UINavigationControllerD
 }
 
 
-//extension CompanyViewC {
-//    func callGetCertificatesApi(){
-//        let url = URL(string: APIUrl.kGetCertificates)!
-//        var urlRequest = URLRequest(url: url)
-//        urlRequest.httpMethod = "GET"
-//        WebServices.shared.request(urlRequest) { (data, response, error) in
-//            guard let data = data else {
-//                return
-//            }
-//            do {
-//                let responseModel = try JSONDecoder().decode(Dummy.JSON.Response.self, from: data)
-//                print(responseModel)
-//            } catch {
-//                print(error)
-//            }
-//            print("Success")
-//        }
-//    }
-//}
+extension UIImage {
+    // MARK: - UIImage+Resize
+    func compressTo(_ expectedSizeInMb:Int) -> UIImage? {
+        let sizeInBytes = expectedSizeInMb * 1024 * 1024
+        var needCompress:Bool = true
+        var imgData:Data?
+        var compressingValue:CGFloat = 1.0
+        while (needCompress && compressingValue > 0.0) {
+            if let data:Data = self.jpegData(compressionQuality: compressingValue) {
+            if data.count < sizeInBytes {
+                needCompress = false
+                imgData = data
+            } else {
+                compressingValue -= 0.1
+            }
+        }
+    }
+
+    if let data = imgData {
+        if (data.count < sizeInBytes) {
+            return UIImage(data: data)
+        }
+    }
+        return nil
+    }
+}
+
