@@ -48,11 +48,11 @@ struct FunctionsConstants {
 }
 
 struct UserDetailBasedElements {
-    static var coverPhoto: String = {
+    var coverPhoto: String = {
         return "coverPhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg"
     }()
     
-    static var profilePhoto: String = {
+    var profilePhoto: String = {
         return "profilePhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg"
     }()
 }

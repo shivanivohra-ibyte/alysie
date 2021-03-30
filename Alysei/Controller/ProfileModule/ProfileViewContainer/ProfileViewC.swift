@@ -152,12 +152,14 @@ class ProfileViewC: AlysieBaseViewC{
     self.lblDisplayName.text = kSharedUserDefaults.loggedInUserModal.displayName?.capitalized
     self.lblDisplayNameNavigation.text = kSharedUserDefaults.loggedInUserModal.displayName
 
+    self.imgViewCover.image = UIImage(named: "coverPhoto")
+    self.imgViewProfile.image = UIImage(named: "profile_icon")
 
-    if let coverPhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements.coverPhoto) {
+    if let coverPhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().coverPhoto) {
         self.imgViewCover.image = coverPhoto
     }
 
-    if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements.profilePhoto) {
+    if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().profilePhoto) {
         self.imgViewProfile.image = profilePhoto
         self.imgViewProfile.layer.cornerRadius = (self.imgViewProfile.frame.width / 2.0)
         self.imgViewProfile.layer.borderWidth = 2.0

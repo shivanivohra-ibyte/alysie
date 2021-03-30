@@ -16,7 +16,7 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack, AddFeaturedProductC
             controller?.delegate = self
         }
         else{
-//            self.postRequestToGetFeatureListing(String.getString(featureListingId), navigationTitle: String.getString(model.title))
+            self.postRequestToGetFeatureListing(String.getString(featureListingId), navigationTitle: String.getString(model.title))
         }
     }
 
@@ -24,10 +24,13 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack, AddFeaturedProductC
         self.fetchProductsFromProfile()
     }
 
-//    private func postRequestToGetFeatureListing(_ featureListingId: String,navigationTitle: String) -> Void{
-//
-//        CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetFeatureListing + featureListingId, method: .GET, controller: self, type: 2, param: [:], btnTapped: UIButton())
-//    }
+    private func postRequestToGetFeatureListing(_ featureListingId: String,navigationTitle: String) -> Void{
+
+        self.featureListingId = featureListingId
+        self.currentProductTitle = navigationTitle
+
+        CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetFeatureListing + featureListingId, method: .GET, controller: self, type: 2, param: [:], btnTapped: UIButton())
+    }
 
 
     //MARK:  - IBOutlet -
@@ -44,6 +47,9 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack, AddFeaturedProductC
     var isProfilePhotoCaptured = false
     var isCoverPhotoCaptured = false
 
+    var featureListingId: String?
+    var currentProductTitle: String?
+
     var picker = UIImagePickerController()
     var signUpViewModel: SignUpViewModel!
     var signUpStepOneDataModel: SignUpStepOneDataModel!
@@ -54,10 +60,10 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack, AddFeaturedProductC
 
         super.viewDidLoad()
 
-        if let coverPhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements.coverPhoto) {
+        if let coverPhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().coverPhoto) {
             self.imgViewCoverPhoto.image = coverPhoto
         }
-        if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements.profilePhoto) {
+        if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().profilePhoto) {
             self.imgViewProfile.image = profilePhoto
         }
 
@@ -315,8 +321,8 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack, AddFeaturedProductC
         CommonUtil.sharedInstance.postToServerRequestMultiPart(APIUrl.kUpdateUserProfile, params: mergeDict, imageParams: imageParam, controller: self) { (dictReponse) in
 
 
-            LocalStorage.shared.saveImage(compressProfileData, fileName: UserDetailBasedElements.profilePhoto)
-            LocalStorage.shared.saveImage(compressCoverData, fileName: UserDetailBasedElements.coverPhoto)
+            LocalStorage.shared.saveImage(compressProfileData, fileName: UserDetailBasedElements().profilePhoto)
+            LocalStorage.shared.saveImage(compressCoverData, fileName: UserDetailBasedElements().coverPhoto)
             
             self.showAlert(withMessage: AlertMessage.kProfileUpdated){
                 self.navigationController?.popViewController(animated: true)
@@ -464,9 +470,28 @@ extension EditProfileViewC{
 
     override func didUserGetData(from result: Any, type: Int) -> Void{
 
-        //kSharedUserDefaults.avatarId =
-        showAlert(withMessage: AlertMessage.kProfileUpdated){
-            self.navigationController?.popViewController(animated: true)
+        let dicResult = kSharedInstance.getDictionary(result)
+        let dicData = kSharedInstance.getDictionary(dicResult[APIConstants.kData])
+
+        switch type {
+        case 0:
+            showAlert(withMessage: AlertMessage.kProfileUpdated){
+                self.navigationController?.popViewController(animated: true)
+            }
+        case 1:
+            break
+        case 2:
+            var arrSelectedFields: [ProductFieldsDataModel] = []
+            if let fields = dicData[APIConstants.kFields] as? ArrayOfDictionary{
+                arrSelectedFields = fields.map({ProductFieldsDataModel(withDictionary: $0)})
+            }
+            let controller = pushViewController(withName: AddFeatureViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? AddFeatureViewC
+            controller?.arrSelectedFields = arrSelectedFields
+            controller?.featureListingId = self.featureListingId
+            controller?.currentNavigationTitle = self.currentProductTitle
+            controller?.delegate = self
+        default:
+            break
         }
     }
 }
