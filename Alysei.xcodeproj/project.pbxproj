@@ -193,7 +193,6 @@
 		27E5694825BDC5E30028DEBF /* BusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E5694725BDC5E30028DEBF /* BusinessModel.swift */; };
 		27E5694B25BDDDCB0028DEBF /* SelectedHubsViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E5694A25BDDDCB0028DEBF /* SelectedHubsViewC.swift */; };
 		27E5694E25BDDE070028DEBF /* SelectedHubsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E5694D25BDDE070028DEBF /* SelectedHubsCollectionCell.swift */; };
-		61243C48260E16C50000217C /* AlyseiBVC.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 61243C47260E16C40000217C /* AlyseiBVC.mp4 */; };
 		6127F16E260B49DB005848B3 /* SaveResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6127F16D260B49DB005848B3 /* SaveResources.swift */; };
 		6B5A8280260C56AD00ED60B7 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A827F260C56AD00ED60B7 /* WebServices.swift */; };
 		6B5A8284260C5CD100ED60B7 /* CompanyCertificates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A8283260C5CD100ED60B7 /* CompanyCertificates.swift */; };
@@ -221,6 +220,7 @@
 		A84EECFF25B19FC900429B1D /* EditProfieTextViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84EECFE25B19FC900429B1D /* EditProfieTextViewTableCell.swift */; };
 		A84EED0325B1A31300429B1D /* EditProfileSelectTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84EED0225B1A31300429B1D /* EditProfileSelectTableCell.swift */; };
 		A84EED0725B1C2F700429B1D /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A84EED0625B1C2F600429B1D /* Home.storyboard */; };
+		C56475402612E8CB0039EB1F /* AlyseiBVC.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C564753F2612E8CB0039EB1F /* AlyseiBVC.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -422,7 +422,6 @@
 		27E5694A25BDDDCB0028DEBF /* SelectedHubsViewC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedHubsViewC.swift; sourceTree = "<group>"; };
 		27E5694D25BDDE070028DEBF /* SelectedHubsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedHubsCollectionCell.swift; sourceTree = "<group>"; };
 		405FAC16BE45020951752C66 /* Pods-Alysie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alysie.release.xcconfig"; path = "Target Support Files/Pods-Alysie/Pods-Alysie.release.xcconfig"; sourceTree = "<group>"; };
-		61243C47260E16C40000217C /* AlyseiBVC.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = AlyseiBVC.mp4; path = ../../AlyseiBVC.mp4; sourceTree = "<group>"; };
 		6127F16D260B49DB005848B3 /* SaveResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveResources.swift; sourceTree = "<group>"; };
 		6B5A827F260C56AD00ED60B7 /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		6B5A8283260C5CD100ED60B7 /* CompanyCertificates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCertificates.swift; sourceTree = "<group>"; };
@@ -452,6 +451,7 @@
 		A84EED0625B1C2F600429B1D /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		AB35031FA1F063FDBED9BE48 /* Pods-Alysei.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alysei.debug.xcconfig"; path = "Target Support Files/Pods-Alysei/Pods-Alysei.debug.xcconfig"; sourceTree = "<group>"; };
 		B74F6E820CA6F6DF6E8AA5D5 /* Pods_Alysei.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alysei.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C564753F2612E8CB0039EB1F /* AlyseiBVC.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = AlyseiBVC.mp4; path = ../../../Downloads/AlyseiBVC.mp4; sourceTree = "<group>"; };
 		D636814607C16FDC212EC4D0 /* Pods-Alysei.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alysei.release.xcconfig"; path = "Target Support Files/Pods-Alysei/Pods-Alysei.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1074,7 +1074,7 @@
 		27BC688225AC564100A01B6A /* Alysei */ = {
 			isa = PBXGroup;
 			children = (
-				61243C47260E16C40000217C /* AlyseiBVC.mp4 */,
+				C564753F2612E8CB0039EB1F /* AlyseiBVC.mp4 */,
 				27A443F725AE06F00002BAAC /* Info.plist */,
 				27BC688C25AC564200A01B6A /* Assets.xcassets */,
 				2770AA5525AE1BBC00A2F10B /* AlysieBaseViewC.swift */,
@@ -1322,6 +1322,7 @@
 				27A443CC25AE03720002BAAC /* Montserrat-LightItalic.ttf in Resources */,
 				27A443D725AE03720002BAAC /* Montserrat-ExtraLightItalic.ttf in Resources */,
 				27A443D625AE03720002BAAC /* Montserrat-SemiBold.ttf in Resources */,
+				C56475402612E8CB0039EB1F /* AlyseiBVC.mp4 in Resources */,
 				A84EED0725B1C2F700429B1D /* Home.storyboard in Resources */,
 				27A443D225AE03720002BAAC /* Montserrat-Thin.ttf in Resources */,
 				279AB34025FF42EC0061FCB3 /* FooterCityHubTableViewCell.xib in Resources */,
@@ -1329,7 +1330,6 @@
 				27A443DB25AE03720002BAAC /* Montserrat-Italic.ttf in Resources */,
 				27A443CD25AE03720002BAAC /* Montserrat-Medium.ttf in Resources */,
 				279AB33B25FF42EC0061FCB3 /* HubSelectionTableViewCell.xib in Resources */,
-				61243C48260E16C50000217C /* AlyseiBVC.mp4 in Resources */,
 				27BC688D25AC564200A01B6A /* Assets.xcassets in Resources */,
 				6BBA994B260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.xib in Resources */,
 				27A443D125AE03720002BAAC /* Montserrat-ExtraLight.ttf in Resources */,
@@ -1708,8 +1708,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = 3V73836LRC;
 				INFOPLIST_FILE = Alysei/Info.plist;
@@ -1720,7 +1720,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Alysei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = Alysei_Dev_Prov_23March2021;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1732,8 +1732,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = 3V73836LRC;
 				INFOPLIST_FILE = Alysei/Info.plist;
@@ -1744,7 +1744,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Alysei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = Alysei_Dev_Prov_23March2021;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
