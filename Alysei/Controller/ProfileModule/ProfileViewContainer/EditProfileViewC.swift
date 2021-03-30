@@ -7,31 +7,7 @@
 
 import UIKit
 
-class EditProfileViewC: AlysieBaseViewC, AddProductCallBack, AddFeaturedProductCallBack {
-    func tappedAddProduct(withProductCategoriesDataModel model: ProductCategoriesDataModel, featureListingId: String?) {
-
-        if featureListingId == nil{
-            let controller = pushViewController(withName: AddFeatureViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? AddFeatureViewC
-            controller?.productCategoriesDataModel = model
-            controller?.delegate = self
-        }
-        else{
-            self.postRequestToGetFeatureListing(String.getString(featureListingId), navigationTitle: String.getString(model.title))
-        }
-    }
-
-    func productAdded() {
-        self.fetchProductsFromProfile()
-    }
-
-    private func postRequestToGetFeatureListing(_ featureListingId: String,navigationTitle: String) -> Void{
-
-        self.featureListingId = featureListingId
-        self.currentProductTitle = navigationTitle
-
-        CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetFeatureListing + featureListingId, method: .GET, controller: self, type: 2, param: [:], btnTapped: UIButton())
-    }
-
+class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
 
     //MARK:  - IBOutlet -
     
@@ -103,6 +79,12 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack, AddFeaturedProductC
         self.btnProfilePhoto.isSelected = true
         self.btnCoverPhoto.isSelected = false
         self.alertToAddImage()
+    }
+
+    //MARK: - Public Methods -
+
+    func productAdded() {
+        self.fetchProductsFromProfile()
     }
 
     //MARK:  - Private Methods -
@@ -277,9 +259,18 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack, AddFeaturedProductC
         let featuredProductTableCell = self.tableViewEditProfile.dequeueReusableCell(withIdentifier: FeaturedProductTableCell.identifier(), for: indexPath) as! FeaturedProductTableCell
 //        featuredProductTableCell.configureData(withProductCategoriesDataModel: ProductCategoriesDataModel(withDictionary: tempDict))
 //        featuredProductTableCell.selectProductDelegate = self
+        featuredProductTableCell.featureProductDeletage = self
         featuredProductTableCell.configureData(withProductCategoriesDataModel: self.signUpViewModel.arrProductCategories[indexPath.section])
         featuredProductTableCell.delegate = self
         return featuredProductTableCell
+    }
+
+    private func postRequestToGetFeatureListing(_ featureListingId: String,navigationTitle: String) -> Void{
+
+        self.featureListingId = featureListingId
+        self.currentProductTitle = navigationTitle
+
+        CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetFeatureListing + featureListingId, method: .GET, controller: self, type: 2, param: [:], btnTapped: UIButton())
     }
 
     //MARK:  - WebService Methods -
@@ -565,4 +556,34 @@ extension RangeReplaceableCollection where Element: Hashable {
         var set = Set<Element>()
         removeAll { !set.insert($0).inserted }
     }
+}
+
+
+extension EditProfileViewC: AddFeaturedProductCallBack {
+    func tappedAddProduct(withProductCategoriesDataModel model: ProductCategoriesDataModel, featureListingId: String?) {
+
+        if featureListingId == nil{
+            let controller = pushViewController(withName: AddFeatureViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? AddFeatureViewC
+            controller?.productCategoriesDataModel = model
+            controller?.delegate = self
+        }
+        else{
+            self.postRequestToGetFeatureListing(String.getString(featureListingId), navigationTitle: String.getString(model.title))
+        }
+    }
+}
+
+extension EditProfileViewC: FeaturedProductCollectionCellProtocol {
+
+    func deleteProduct(_ productID: Int) {
+
+        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.FeaturedProduct.delete)\(productID)", method: .POST) else { return }
+        WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
+            guard let data = data else { return }
+            if (error != nil) { print(error.debugDescription) }
+            self.fetchProductsFromProfile()
+
+        }
+    }
+
 }

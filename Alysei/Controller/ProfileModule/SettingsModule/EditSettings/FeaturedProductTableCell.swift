@@ -26,6 +26,7 @@ class FeaturedProductTableCell: UITableViewCell {
   
   var productCategoriesDataModel: ProductCategoriesDataModel!
   var delegate: AddProductCallBack?
+    var featureProductDeletage: FeaturedProductCollectionCellProtocol!
   
   override func awakeFromNib() {
     
@@ -47,6 +48,7 @@ class FeaturedProductTableCell: UITableViewCell {
   private func getFeaturedProductCollectionCell(_ indexPath: IndexPath) -> UICollectionViewCell{
   
       let featuredProductCollectionCell = collectionViewProducts.dequeueReusableCell(withReuseIdentifier: FeaturedProductCollectionCell.identifier(), for: indexPath) as! FeaturedProductCollectionCell
+    featuredProductCollectionCell.delegate = featureProductDeletage
       featuredProductCollectionCell.configure(withAllProductsDataModel: self.productCategoriesDataModel.arrAllProducts[indexPath.row])
       return featuredProductCollectionCell
   }

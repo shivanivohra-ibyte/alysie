@@ -169,6 +169,11 @@ struct APIUrl{
     static let kGetUpcomingCountries = "get/active/upcoming/countries"
     static let kGetCertificates = "get/user/certificates"
     static let kUploadCertificate = "update/user/certificates"
+
+
+    enum FeaturedProduct {
+        static let delete = kBASEURL + "delete/featured/listing?featured_listing_id="
+    }
 }
 
 struct AppConstants {
