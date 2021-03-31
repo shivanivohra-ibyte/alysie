@@ -41,11 +41,13 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
 
         super.viewDidLoad()
 
-        if let coverPhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().coverPhoto), (kSharedUserDefaults.loggedInUserModal.cover != nil) {
+        if let coverPhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().coverPhoto) {
+           //, (kSharedUserDefaults.loggedInUserModal.cover != nil) {
             self.coverPhotoAlreadyExists = true
             self.imgViewCoverPhoto.image = coverPhoto
         }
-        if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().profilePhoto), (kSharedUserDefaults.loggedInUserModal.avatar != nil) {
+        if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().profilePhoto) {
+           //, (kSharedUserDefaults.loggedInUserModal.avatar != nil) {
             self.profilePhotoAlreadyExists = true
             self.imgViewProfile.image = profilePhoto
         }
@@ -231,19 +233,19 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
             print("delete profile photo")
             guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Images.removeProfilePhoto)", method: .POST) else { return }
             WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
-                guard let data = data else { return }
+                guard data != nil else { return }
                 if (error != nil) { print(error.debugDescription) }
                 LocalStorage.shared.deleteImage(imageName)
-                kSharedUserDefaults.loggedInUserModal.avatar = nil
+                kSharedUserDefaults.loggedInUserModal.avatar?.clear()
             }
         case 2:
             print("delete cover photo")
             guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Images.removeCoverPhoto)", method: .POST) else { return }
             WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
-                guard let data = data else { return }
+                guard data != nil else { return }
                 if (error != nil) { print(error.debugDescription) }
                 LocalStorage.shared.deleteImage(imageName)
-                kSharedUserDefaults.loggedInUserModal.cover = nil
+                kSharedUserDefaults.loggedInUserModal.cover?.clear()
             }
 
         default:
@@ -382,25 +384,32 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
             if let coverID = data["cover_id"] as? [String: Any] {
                 print(coverID)
                 if self.coverPhoto != nil {
-                    guard let id = coverID[""] as? Int, let attachmentURL = coverID["attachment_url"]  as? String else {
+                    guard let id = coverID["id"] as? Int, let attachmentURL = coverID["attachment_url"]  as? String else {
                         return
                     }
+                    LocalStorage.shared.deleteImage(UserDetailBasedElements().profilePhoto)
                     LocalStorage.shared.saveImage(compressCoverData, fileName: UserDetailBasedElements().coverPhoto)
                     let dict: [String: Any] = ["id": id, "attachment_url": attachmentURL]
                     kSharedUserDefaults.loggedInUserModal.cover = UserModel.cover(dict, for: "coverPhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg")
-
                 }
+            } else {
+                self.coverPhoto = nil
+                LocalStorage.shared.deleteImage(UserDetailBasedElements().profilePhoto)
             }
 
             if let avatarID = data["avatar_id"] as? [String: Any] {
                 if self.profilePhoto != nil {
-                    guard let id = avatarID[""] as? Int, let attachmentURL = avatarID["attachment_url"]  as? String else {
+                    guard let id = avatarID["id"] as? Int, let attachmentURL = avatarID["attachment_url"]  as? String else {
                         return
                     }
-//                    LocalStorage.shared.saveImage(compressProfileData, fileName: UserDetailBasedElements().profilePhoto)
+                    LocalStorage.shared.deleteImage(UserDetailBasedElements().profilePhoto)
+                    LocalStorage.shared.saveImage(compressProfileData, fileName: UserDetailBasedElements().profilePhoto)
                     let dict: [String: Any] = ["id": id, "attachment_url": attachmentURL]
-                    kSharedUserDefaults.loggedInUserModal.avatar = UserModel.avatar(dict, for: "coverPhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg")
+                    kSharedUserDefaults.loggedInUserModal.avatar = UserModel.avatar(dict, for: "profilePhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg")
                 }
+            } else {
+                self.profilePhoto = nil
+                LocalStorage.shared.deleteImage(UserDetailBasedElements().profilePhoto)
             }
 //            if self.profilePhoto != nil {
 ////                LocalStorage.shared.saveImage(compressProfileData, fileName: UserDetailBasedElements().profilePhoto)
@@ -540,10 +549,12 @@ extension EditProfileViewC: UIImagePickerControllerDelegate, UINavigationControl
 
             if self.btnProfilePhoto.isSelected == true{
                 self.isProfilePhotoCaptured = true
+                self.profilePhoto = selectedImage
                 self.imgViewProfile.image = selectedImage
             }
             else{
                 self.isCoverPhotoCaptured = true
+                self.coverPhoto = selectedImage
                 self.imgViewCoverPhoto.image = selectedImage
             }
         }

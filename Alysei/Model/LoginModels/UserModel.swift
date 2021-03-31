@@ -29,6 +29,7 @@ class UserModel: NSObject{
   var avatarId: String?
     var coverPictureName: String?
     var profilePictureName: String?
+    var role: UserRoles?
 
     var avatar: avatar?  // newly constructed struct for avater id
     var cover: cover?  // newly constructed struct for cover id
@@ -58,6 +59,8 @@ class UserModel: NSObject{
     self.accountEnabled = String.getString(dictData[APIConstants.kAccountEnabled])
     self.memberName = String.getString(dictRoles[APIConstants.kName])
     self.memberRoleId = String.getString(dictRoles[APIConstants.kRoleId])
+
+    self.role = UserRoles(rawValue: Int(self.memberRoleId ?? "") ?? 0) ?? .voyagers
 //    self.avatarId = String.getString(dictRoles[APIConstants.kAvatarId])
 
     if let avatarDict = dictData[APIConstants.kAvatarId] as? [String: Any] {
@@ -76,22 +79,40 @@ class UserModel: NSObject{
     typealias cover = imageAttachementModel
 
     struct imageAttachementModel {
-        var id: Int
-        var imageURL: String
+        var id: Int?
+        var imageURL: String?
 
-//        init(_ id: Int, imageURL: String) {
-//
-//        }
         init(_ dict: [String: Any], for imageName: String) {
-            self.id = dict["id"] as? Int ?? 0
+            self.id = dict["id"] as? Int
             self.imageURL = "\(kImageBaseUrl)" + (dict["attachment_url"] as? String ?? "")
+            if let imageURL = self.imageURL {
+                LocalStorage.shared.saveImage(imageURL, fileName: imageName)
+            }
+        }
 
-            LocalStorage.shared.saveImage(self.imageURL, fileName: imageName)
+        init() {
+            self.id = nil
+            self.imageURL = nil
+        }
+
+        mutating func clear() {
+            self = imageAttachementModel()
         }
         
 
         
     }
+
+}
+
+
+enum UserRoles: Int {
+    case producer = 3
+    case distributer = 6
+    case voiceExperts = 7
+    case travelAgencies = 8
+    case restaurents =  9
+    case voyagers = 10
 
 }
 

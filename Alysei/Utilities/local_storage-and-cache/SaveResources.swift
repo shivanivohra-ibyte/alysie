@@ -43,7 +43,12 @@ class LocalStorage {
         guard let data = imageData else { return }
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let fileURL = documentsDirectory.appendingPathComponent(fileName)
+
         do {
+            if FileManager.default.fileExists(atPath: fileURL.relativePath) {
+                print("file exists")
+                try FileManager.default.removeItem(atPath: fileURL.relativePath)
+            }
             try data.write(to: fileURL)
             print("file saved")
         } catch {

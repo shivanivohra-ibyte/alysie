@@ -148,7 +148,16 @@ class ProfileViewC: AlysieBaseViewC{
   private func initialSetUp() -> Void{
     
 //    self.lblEmail.text = kSharedUserDefaults.loggedInUserModal.email
-//    self.lblEmailNavigation.text = kSharedUserDefaults.loggedInUserModal.email 
+//    self.lblEmailNavigation.text = kSharedUserDefaults.loggedInUserModal.email
+
+    switch kSharedUserDefaults.loggedInUserModal.role {
+    case .distributer, .producer, .travelAgencies, .restaurents:
+        print("Show company name")
+    case .voiceExperts, .voyagers:
+        print("Name")
+    default:
+        print("nothing")
+    }
     self.lblDisplayName.text = kSharedUserDefaults.loggedInUserModal.displayName?.capitalized
     self.lblDisplayNameNavigation.text = kSharedUserDefaults.loggedInUserModal.displayName
 
@@ -162,7 +171,7 @@ class ProfileViewC: AlysieBaseViewC{
     if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().profilePhoto) {
         self.imgViewProfile.image = profilePhoto
         self.imgViewProfile.layer.cornerRadius = (self.imgViewProfile.frame.width / 2.0)
-        self.imgViewProfile.layer.borderWidth = 3.0
+        self.imgViewProfile.layer.borderWidth = 5.0
         self.imgViewProfile.layer.borderColor = UIColor.white.cgColor
         self.imgViewProfile.layer.masksToBounds = true
     }
