@@ -41,6 +41,7 @@ class CompanyViewC: AlysieBaseViewC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        picker.delegate = self
         self.callGetCertificatesApi()
         
     }
@@ -219,7 +220,7 @@ extension CompanyViewC: UIImagePickerControllerDelegate, UINavigationControllerD
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
         
-        guard let selectedImage = info[.editedImage] as? UIImage else { return }
+        guard let selectedImage = info[.originalImage] as? UIImage else { return }
         self.dismiss(animated: true) {
             // self.imgViewProfile.image = selectedImage
            // self.postImage = selectedImage

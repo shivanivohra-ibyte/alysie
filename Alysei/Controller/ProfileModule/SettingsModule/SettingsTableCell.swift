@@ -24,8 +24,14 @@ class SettingsTableCell: UITableViewCell{
   
   public func configure(_ indexPath: IndexPath){
     
-    imgViewSettings.image = UIImage.init(named: StaticArrayData.kSettingScreenDict[indexPath.item].image)
-    lblSettings.text = StaticArrayData.kSettingScreenDict[indexPath.item].name
+    imgViewSettings.image = UIImage.init(named: StaticArrayData.kSettingPrdrTblScreenDict[indexPath.item].image)
+    lblSettings.text = StaticArrayData.kSettingPrdrTblScreenDict[indexPath.item].name
     
   }
+    public func configureCell(_ indexPath: IndexPath){
+      
+      imgViewSettings.image = UIImage.init(named: StaticArrayData.kSettingScreenDict[indexPath.item].image)
+      lblSettings.text = StaticArrayData.kSettingScreenDict[indexPath.item].name
+      
+    }
 }
