@@ -384,6 +384,56 @@ struct StaticArrayData {
                                      (image: "billing_icon", name: "Billing"),
                                      (image: "data_icon", name: "Your Data")]
     
+    static let kSettingPrducrColScreenDict = [(image: "home_normal", name: "MarketPlace"),
+                                              (image: "settings", name: "Settings"),
+                                     (image: "company_icon", name: "Company"),
+                                     (image: "privacy_icon", name: "Privacy"),
+                                     (image: "password_icon", name: "Password"),
+                                     (image: "membership_icon", name: "Membership")]
+                    
+    static let kSettingImprtrColScreenDict = [(image: "settings", name: "Settings"),
+                                     (image: "privacy_icon", name: "Privacy"),
+                                     (image: "password_icon", name: "Password"),
+                                     (image: "block_icon", name: "Blocking"),
+                                     (image: "membership_icon", name: "Membership"),
+                                     ]
+    
+    static let kSettingRestColScreenDict = [(image: "settings", name: "Settings"),
+                                            (image: "b2btab3_icon", name: "Receipe"),
+                                            (image: "billing_icon", name: "Events"),
+                                     (image: "privacy_icon", name: "Privacy"),
+                                     (image: "password_icon", name: "Password"),
+                                     (image: "block_icon", name: "Blocking"),
+                                     (image: "membership_icon", name: "Membership")]
+    
+    static let kSettingVoyaColScreenDict = [(image: "settings", name: "Settings"),
+
+                                     (image: "privacy_icon", name: "Privacy"),
+                                     (image: "password_icon", name: "Password"),
+                                     (image: "block_icon", name: "Blocking"),
+                                     (image: "membership_icon", name: "Membership"),
+                                     ]
+    static let kSettingTravlColScreenDict = [(image: "settings", name: "Settings"),
+                                     (image: "privacy_icon", name: "Privacy"),
+                                     (image: "password_icon", name: "Password"),
+                                     (image: "block_icon", name: "Blocking"),
+                                     (image: "membership_icon", name: "Membership"),
+                                    ]
+    
+    static let kSettingExpertColScreenDict = [(image: "settings", name: "Settings"),
+                                     (image: "company_icon", name: "Featured"),
+                                     (image: "privacy_icon", name: "Privacy"),
+                                     (image: "password_icon", name: "Password"),
+                                     (image: "membership_icon", name: "Membership")]
+    
+    
+    //MARK: SettingTableView
+    
+    static let kSettingPrdrTblScreenDict = [
+                                     (image: "billing_icon", name: "Billing"),
+                                     (image: "data_icon", name: "Your Data"),
+                                        (image: "block_icon", name: "Blocking")]
+    
     static let kMembershipData = [(image: "Ellipse 22", name: "Review", status: "Your account is being reviewed by our staff."),
                                   (image: "Ellipse 22", name: "Alysei Certification", status: "You have been officially certified by our staff."),
                                   (image: "Ellipse 22", name: "Recognition", status: "Your have been recognized by our app."),

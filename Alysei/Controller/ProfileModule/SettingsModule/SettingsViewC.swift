@@ -44,7 +44,7 @@ class SettingsViewC: AlysieBaseViewC {
   private func getSettingTableCell(_ indexPath: IndexPath) -> UITableViewCell{
       
     let settingsTableCell = tblViewSettings.dequeueReusableCell(withIdentifier: SettingsTableCell.identifier(), for: indexPath) as! SettingsTableCell
-        settingsTableCell.configure(indexPath)
+        settingsTableCell.configureCell(indexPath)
     return settingsTableCell
   }
 }
