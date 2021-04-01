@@ -39,7 +39,10 @@ class HubsListVC: UIViewController {
         self.bottomStack.backgroundColor = UIColor.init(hexString: "#1D4873")
         self.hasCome == .hubs ? self.callHubViewApi() : self.postRequestToGetCity()
     }
-    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        tableView.reloadData()
+//    }
     
     private func callHubViewApi(){
         let countryID = String.getString(country?.id)
@@ -115,6 +118,11 @@ class HubsListVC: UIViewController {
         nextvc.hasCome = .city
         nextvc.selectedHubs = self.selectedHubs
         self.navigationController?.pushViewController(nextvc, animated: true)
+    }
+    
+    @IBAction func btnBack(_ sender: UIButton){
+     hideEyeIcon = true
+        self.navigationController?.popViewController(animated: true)
     }
 }
 extension UIStackView {

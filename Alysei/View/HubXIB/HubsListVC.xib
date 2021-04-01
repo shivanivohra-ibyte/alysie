@@ -36,13 +36,16 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ro2-Db-Eba">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hmx-dX-HSX" customClass="BackButton" customModule="Alysei" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hmx-dX-HSX">
                             <rect key="frame" x="20" y="70" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="HlY-qb-oqL"/>
                                 <constraint firstAttribute="width" secondItem="Hmx-dX-HSX" secondAttribute="height" multiplier="1:1" id="znL-hV-ih3"/>
                             </constraints>
                             <state key="normal" title="Button" image="back_black"/>
+                            <connections>
+                                <action selector="btnBack:" destination="-1" eventType="touchUpInside" id="c0N-Bc-OAd"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Hubs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tof-SA-F88">
                             <rect key="frame" x="80" y="81.5" width="87.5" height="17.5"/>

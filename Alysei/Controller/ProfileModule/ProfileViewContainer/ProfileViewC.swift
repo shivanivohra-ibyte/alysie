@@ -90,7 +90,8 @@ class ProfileViewC: AlysieBaseViewC{
 
   @IBAction func tapSideMenu(_ sender: UIButton) {
         
-    _ = pushViewController(withName: SettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
+   // _ = pushViewController(withName: SettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
+    _ = pushViewController(withName: SettingsScreenVC.id(), fromStoryboard: StoryBoardConstants.kHome)
   }
   
   @IBAction func tapPosts(_ sender: UIButton) {

@@ -16,7 +16,7 @@ class SettingsScreenCollectionVC: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         viewContainer.layer.cornerRadius = 10
-        viewContainer.drawShadow()
+        viewContainer.addShadow()
         
     }
     
