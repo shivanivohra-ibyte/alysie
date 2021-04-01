@@ -47,7 +47,7 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
             self.imgViewCoverPhoto.image = coverPhoto
         }
         if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().profilePhoto) {
-           //, (kSharedUserDefaults.loggedInUserModal.avatar != nil) {
+           //, (kSharedUserDefaults.loggedInUserModal.avatar != nil)
             self.profilePhotoAlreadyExists = true
             self.imgViewProfile.image = profilePhoto
         }
