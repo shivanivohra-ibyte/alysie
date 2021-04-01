@@ -30,6 +30,11 @@ class StateListVC: UIViewController , SelectList {
         self.setText()
         self.postRequestToGetState(country?.id ?? "")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableVIew.reloadData()
+    }
     func setText(){
       
       if kSharedUserDefaults.loggedInUserModal.memberRoleId == "3"{
