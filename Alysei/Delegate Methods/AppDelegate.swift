@@ -11,6 +11,7 @@ import GoogleMaps
 import GooglePlaces
 //import CoreLocation
 import IQKeyboardManagerSwift
+import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.setDefaultProgressHud()
     GMSServices.provideAPIKey(googleAPIKey)
     GMSPlacesClient.provideAPIKey(googleAPIKey)
+    FirebaseApp.configure()
     return true
   }
 

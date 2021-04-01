@@ -13,5 +13,6 @@ target 'Alysei' do
   pod 'AlamofireImage'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'Firebase/Analytics'
 
 end

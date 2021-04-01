@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SVProgressHUD
+
 
 class ProfileViewC: AlysieBaseViewC{
   
@@ -23,7 +25,8 @@ class ProfileViewC: AlysieBaseViewC{
 //  @IBOutlet weak var lblEmailNavigation: UILabel!
   @IBOutlet weak var imgViewProfileNavigation: UIImageViewExtended!
   @IBOutlet weak var imgViewProfile: UIImageViewExtended!
-  @IBOutlet weak var lblDisplayName: UILabel!
+    @IBOutlet weak var lblDisplayName: UILabel!
+    @IBOutlet weak var lblDisplayUsername: UILabel!
 //  @IBOutlet weak var lblEmail: UILabel!
   @IBOutlet weak var btnEditProfile: UIButtonExtended!
   
@@ -77,6 +80,7 @@ class ProfileViewC: AlysieBaseViewC{
     
     super.viewWillAppear(animated)
     self.initialSetUp()
+    self.fetchProfileDetails()
     self.postRequestToGetFields()
   }
   
@@ -218,6 +222,26 @@ class ProfileViewC: AlysieBaseViewC{
         self.postRequestToGetFields()
     }
 
+    private func fetchProfileDetails() {
+        SVProgressHUD.show()
+        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Profile.memberProfile)", method: .GET) else { return }
+        WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
+            SVProgressHUD.dismiss()
+            guard let data = data else { return }
+            do {
+                let responseModel = try JSONDecoder().decode(UserProfile.profileTopSectionModel.self, from: data)
+                print(responseModel)
+
+                self.lblDisplayName.text = "\(responseModel.data?.userData?.companyName ?? "")"
+                self.lblDisplayNameNavigation.text = "\(responseModel.data?.userData?.companyName ?? "")"
+            } catch {
+                print(error.localizedDescription)
+            }
+            if (error != nil) { print(error.debugDescription) }
+        }
+    }
+    
+
   private func postRequestToGetFields() -> Void{
     
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kUserSubmittedFields, method: .GET, controller: self, type: 0, param: [:], btnTapped: UIButton())
@@ -257,6 +281,7 @@ extension ProfileViewC{
     let dicData = kSharedInstance.getDictionary(dicResult[APIConstants.kData])
     self.signUpViewModel = SignUpViewModel(dicData, roleId: nil)
     editProfileViewCon?.signUpViewModel = self.signUpViewModel
+//    let indexPath = IndexPath(row: 0, section: self.signUpViewModel.arrProductCategories.count - 1)
     editProfileViewCon?.tableViewEditProfile?.reloadData()
     print("Some")
   }

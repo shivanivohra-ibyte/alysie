@@ -180,6 +180,10 @@ struct APIUrl{
         static let removeProfilePhoto = kBASEURL + "remove/cover/profile/image?image_type=1"
         static let removeCoverPhoto = kBASEURL + "remove/cover/profile/image?image_type=2"
     }
+
+    enum Profile {
+        static let memberProfile = kBASEURL + "get/member/profile"
+    }
 }
 
 struct AppConstants {

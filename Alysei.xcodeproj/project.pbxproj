@@ -193,6 +193,8 @@
 		27E5694825BDC5E30028DEBF /* BusinessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E5694725BDC5E30028DEBF /* BusinessModel.swift */; };
 		27E5694B25BDDDCB0028DEBF /* SelectedHubsViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E5694A25BDDDCB0028DEBF /* SelectedHubsViewC.swift */; };
 		27E5694E25BDDE070028DEBF /* SelectedHubsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E5694D25BDDE070028DEBF /* SelectedHubsCollectionCell.swift */; };
+		6116531526163A7C00BB97CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6116531426163A7B00BB97CA /* GoogleService-Info.plist */; };
+		61165344261642AC00BB97CA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61165343261642AC00BB97CA /* UserProfile.swift */; };
 		6127F16E260B49DB005848B3 /* SaveResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6127F16D260B49DB005848B3 /* SaveResources.swift */; };
 		6B5A8280260C56AD00ED60B7 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A827F260C56AD00ED60B7 /* WebServices.swift */; };
 		6B5A8284260C5CD100ED60B7 /* CompanyCertificates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A8283260C5CD100ED60B7 /* CompanyCertificates.swift */; };
@@ -426,6 +428,8 @@
 		27E5694A25BDDDCB0028DEBF /* SelectedHubsViewC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedHubsViewC.swift; sourceTree = "<group>"; };
 		27E5694D25BDDE070028DEBF /* SelectedHubsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedHubsCollectionCell.swift; sourceTree = "<group>"; };
 		405FAC16BE45020951752C66 /* Pods-Alysie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alysie.release.xcconfig"; path = "Target Support Files/Pods-Alysie/Pods-Alysie.release.xcconfig"; sourceTree = "<group>"; };
+		6116531426163A7B00BB97CA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		61165343261642AC00BB97CA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		6127F16D260B49DB005848B3 /* SaveResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveResources.swift; sourceTree = "<group>"; };
 		6B5A827F260C56AD00ED60B7 /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		6B5A8283260C5CD100ED60B7 /* CompanyCertificates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCertificates.swift; sourceTree = "<group>"; };
@@ -1060,6 +1064,7 @@
 				27E5694725BDC5E30028DEBF /* BusinessModel.swift */,
 				6BBA994E260AF52300AA7A81 /* ActiveCollectionView.swift */,
 				6BBA9951260AF55900AA7A81 /* InactiveCollectionView.swift */,
+				61165343261642AC00BB97CA /* UserProfile.swift */,
 			);
 			path = LoginModels;
 			sourceTree = "<group>";
@@ -1085,6 +1090,7 @@
 		27BC688225AC564100A01B6A /* Alysei */ = {
 			isa = PBXGroup;
 			children = (
+				6116531426163A7B00BB97CA /* GoogleService-Info.plist */,
 				C564753F2612E8CB0039EB1F /* AlyseiBVC.mp4 */,
 				27A443F725AE06F00002BAAC /* Info.plist */,
 				27BC688C25AC564200A01B6A /* Assets.xcassets */,
@@ -1329,6 +1335,7 @@
 				27BC68A125AC56C000A01B6A /* LaunchScreen.storyboard in Resources */,
 				279AB33C25FF42EC0061FCB3 /* ShowHubSelectionTableViewCell.xib in Resources */,
 				6BC4C0D826006C5D00791DCD /* OverLayForgetVC.xib in Resources */,
+				6116531526163A7C00BB97CA /* GoogleService-Info.plist in Resources */,
 				27A4439525AE03720002BAAC /* README.md in Resources */,
 				279AB33025FF42C50061FCB3 /* CountryListVC.xib in Resources */,
 				279AB32E25FF42C50061FCB3 /* HubsListVC.xib in Resources */,
@@ -1474,6 +1481,7 @@
 				273737EF25B76BCE005984CF /* SettingsViewC.swift in Sources */,
 				279AB36025FF44710061FCB3 /* HubsViaCityCell.swift in Sources */,
 				27B24AC525B46C7D00694F27 /* TabBarViewC.swift in Sources */,
+				61165344261642AC00BB97CA /* UserProfile.swift in Sources */,
 				27D0FAAD25CEE9FF00463FE0 /* LanguageViewC.swift in Sources */,
 				27D0FAB525CEE9FF00463FE0 /* SignUpFormTableCell.swift in Sources */,
 				279AB35325FF44550061FCB3 /* StateListVC.swift in Sources */,
@@ -1732,8 +1740,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = 3V73836LRC;
 				INFOPLIST_FILE = Alysei/Info.plist;
@@ -1744,7 +1752,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Alysei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Alysei_Dev_Prov_23March2021;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1756,8 +1764,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_TEAM = 3V73836LRC;
 				INFOPLIST_FILE = Alysei/Info.plist;
@@ -1768,7 +1776,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Alysei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Alysei_Dev_Prov_23March2021;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
