@@ -195,6 +195,8 @@ extension UIView
         layer.rasterizationScale = UIScreen.main.scale
     }
     
+ 
+    
     func makeCornerRadius(radius: CGFloat)
     {
         self.layer.cornerRadius = radius

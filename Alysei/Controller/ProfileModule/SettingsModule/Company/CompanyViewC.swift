@@ -201,7 +201,7 @@ extension CompanyViewC {
 
         
         TANetworkManager.sharedInstance.requestMultiPart(withServiceName: APIUrl.kUploadCertificate, requestMethod: .post, requestImages: imageParam, requestVideos: [:], requestData: params) { (dictResponse, error, errorType, statusCode) in
-            self.showAlert(withMessage: "Document Uploaded Successfully")
+            self.showAlert(withMessage: "Data Uploaded Successfully")
             self.photoOfLabelImage = UIImage()
             self.fceSidImage = UIImage()
             self.phytoImage = UIImage()

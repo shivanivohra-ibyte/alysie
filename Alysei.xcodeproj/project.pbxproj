@@ -227,6 +227,7 @@
 		C513C1A526146C280025CF27 /* WaterfallCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C1A426146C280025CF27 /* WaterfallCollectionViewLayout.swift */; };
 		C513C1A9261477640025CF27 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C1A8261477640025CF27 /* PinterestLayout.swift */; };
 		C56475402612E8CB0039EB1F /* AlyseiBVC.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C564753F2612E8CB0039EB1F /* AlyseiBVC.mp4 */; };
+		C5AAB85826171896000557B6 /* LiquidCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAB85726171896000557B6 /* LiquidCollectionViewLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -464,6 +465,7 @@
 		C513C1A426146C280025CF27 /* WaterfallCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterfallCollectionViewLayout.swift; sourceTree = "<group>"; };
 		C513C1A8261477640025CF27 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
 		C564753F2612E8CB0039EB1F /* AlyseiBVC.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = AlyseiBVC.mp4; path = ../../../Downloads/AlyseiBVC.mp4; sourceTree = "<group>"; };
+		C5AAB85726171896000557B6 /* LiquidCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidCollectionViewLayout.swift; sourceTree = "<group>"; };
 		D636814607C16FDC212EC4D0 /* Pods-Alysei.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alysei.release.xcconfig"; path = "Target Support Files/Pods-Alysei/Pods-Alysei.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1260,6 +1262,7 @@
 			children = (
 				C513C1A426146C280025CF27 /* WaterfallCollectionViewLayout.swift */,
 				C513C1A8261477640025CF27 /* PinterestLayout.swift */,
+				C5AAB85726171896000557B6 /* LiquidCollectionViewLayout.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -1452,6 +1455,7 @@
 				277D18A625BF3CE7007CA5C7 /* BusinessFiltersCollectionCell.swift in Sources */,
 				277D18A225BF3935007CA5C7 /* BusinessFiltersTableCell.swift in Sources */,
 				277D189D25BEC8C3007CA5C7 /* NetworkCategoryCollectionCell.swift in Sources */,
+				C5AAB85826171896000557B6 /* LiquidCollectionViewLayout.swift in Sources */,
 				27B4E8FD25EF957D00623E45 /* SignUpModel.swift in Sources */,
 				279AB34625FF436C0061FCB3 /* CountryTable.swift in Sources */,
 				279AB34725FF436C0061FCB3 /* ConfirmSelectionTable.swift in Sources */,
