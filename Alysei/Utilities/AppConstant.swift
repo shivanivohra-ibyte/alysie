@@ -159,7 +159,7 @@ struct APIUrl{
     static let kAddFeaturedProducts  =  "post/featured/listing"
     static let kUserSubmittedFields  =  "get/user/submited/fields"
     static let kUpdateUserProfile  =  "update/user/profile"
-    
+    static let kChangePassword = "change/password"
     
     static let kgetHubs = "get/hubs"
     static let kGetCitiesByStateId = "get/cities?state_id="
@@ -358,6 +358,8 @@ struct APIConstants {
     static let photoOfLabel = "photo_of_label"
     static let vatNo = "vat_no"
     static let fdaNo = "fda_no"
+    static let koldPassword = "old_password"
+    static let knewPassword = "new_password"
     
 }
 
@@ -375,83 +377,93 @@ struct StaticArrayData {
                                 (image: "walkthrough_bg4", title: "Lorem Ipsum", description: "First B2B and B2C portal developed to sell high quality Italian products among targeted US customers effortlessly and faster."),
                                 (image: "walkthrough_bg5", title: "Lorem Ipsum", description: "First B2B and B2C portal developed to sell high quality Italian products among targeted US customers effortlessly and faster.")]
     
-    static let kSettingScreenDict = [(image: "settings", name: "Settings"),
-                                     (image: "company_icon", name: "Company"),
-                                     (image: "privacy_icon", name: "Privacy"),
-                                     (image: "password_icon", name: "Password"),
-                                     (image: "block_icon", name: "Blocking"),
+    static let kSettingScreenDict = [(image: "icons8_settings", name: "Settings"),
+                                     (image: "icons8_business", name: "Company"),
+                                     (image: "icons8_security_lock", name: "Privacy"),
+                                     (image: "icons8_privacy", name: "Password"),
+                                     (image: "icons8_unavailable", name: "Blocking"),
                                      (image: "membership_icon", name: "Membership"),
                                      (image: "billing_icon", name: "Billing"),
-                                     (image: "data_icon", name: "Your Data")]
+                                     (image: "icons8_secure_cloud", name: "Your Data")]
     
-    static let kSettingPrducrColScreenDict = [(image: "settings", name: "Settings"),
-                                              (image: "marketPlace", name: "MarketPlace"),
-                                              (image: "company_icon", name: "Company"),
-                                              (image: "privacy_icon", name: "Privacy"),
-                                              (image: "password_icon", name: "Password"),
-                                              (image: "block_icon", name: "Blocking"),
-                                              (image: "membership_icon", name: "Membership"),
-                                              (image: "billing_icon", name: "Billing"),
-                                              (image: "data_icon", name: "Your Data"),
+    static let kSettingPrducrColScreenDict = [(image: "icons8_settings", name: "Settings"),
+                                              (image: "icons8_shop", name: "MarketPlace"),
+                                              (image: "icons8_business", name: "Company"),
+                                              (image: "icons8_security_lock", name: "Privacy"),
+                                              (image: "icons8_privacy", name: "Password"),
+                                              (image: "icons8_unavailable", name: "Blocking"),
+                                              (image: "icons8_debit_card_1", name: "Membership"),
+                                              (image: "icons8_purchase_order", name: "Billing"),
+                                              (image: "icons8_exit", name: "Logout"),
+                                              (image: "icons8_secure_cloud", name: "Your Data")
                                               ]
     
     static let kSettingImprtrColScreenDict = [
-                                              (image: "settings", name: "Settings"),
-                                              (image: "marketPlace", name: "MarketPlace"),
-                                              (image: "privacy_icon", name: "Privacy"),
-                                              (image: "password_icon", name: "Password"),
-                                              (image: "block_icon", name: "Blocking"),
-                                              (image: "membership_icon", name: "Membership"),
-                                              (image: "billing_icon", name: "Billing"),
-                                              (image: "data_icon", name: "Your Data"),
+                                              (image: "icons8_settings", name: "Settings"),
+                                              (image: "icons8_shop", name: "MarketPlace"),
+                                              (image: "icons8_security_lock", name: "Privacy"),
+                                              (image: "icons8_privacy", name: "Password"),
+                                              (image: "icons8_unavailable", name: "Blocking"),
+                                              (image: "icons8_debit_card_1", name: "Membership"),
+                                              (image: "icons8_purchase_order", name: "Billing"),
+                                              (image: "icons8_exit", name: "Logout"),
+                                              (image: "icons8_secure_cloud", name: "Your Data")
+                                             
                                               ]
     
     static let kSettingRestColScreenDict = [
-                                            (image: "settings", name: "Settings"),
-                                            (image: "marketPlace", name: "MarketPlace"),
-                                            (image: "receipe", name: "Receipe"),
+                                            (image: "icons8_settings", name: "Settings"),
+                                            (image: "icons8_shop", name: "MarketPlace"),
                                             (image: "events", name: "Events"),
-                                            (image: "privacy_icon", name: "Privacy"),
-                                            (image: "password_icon", name: "Password"),
-                                            (image: "block_icon", name: "Blocking"),
-                                            (image: "membership_icon", name: "Membership"),
-                                            (image: "billing_icon", name: "Billing"),
-                                            (image: "data_icon", name: "Your Data"),
+                                            (image: "icons8_security_lock", name: "Privacy"),
+                                            (image: "icons8_privacy", name: "Password"),
+                                            (image: "icons8_unavailable", name: "Blocking"),
+                                            (image: "icons8_debit_card_1", name: "Membership"),
+                                            (image: "icons8_purchase_order", name: "Billing"),
+                                            (image: "icons8_exit", name: "Logout"),
+                                            (image: "icons8_secure_cloud", name: "Your Data")
+                                            
                                             ]
     
-    static let kSettingVoyaColScreenDict = [(image: "settings", name: "Settings"),
+    static let kSettingVoyaColScreenDict = [(image: "icons8_settings", name: "Settings"),
                                             
-                                            (image: "privacy_icon", name: "Privacy"),
-                                            (image: "password_icon", name: "Password"),
-                                            (image: "block_icon", name: "Blocking"),
-                                            (image: "membership_icon", name: "Membership"),
-                                            (image: "billing_icon", name: "Billing"),
-                                            (image: "data_icon", name: "Your Data"),
+                                            (image: "icons8_security_lock", name: "Privacy"),
+                                            (image: "icons8_privacy", name: "Password"),
+                                            (image: "icons8_unavailable", name: "Blocking"),
+                                            (image: "icons8_debit_card_1", name: "Membership"),
+                                            (image: "icons8_purchase_order", name: "Billing"),
+                                            (image: "icons8_exit", name: "Logout"),
+                                            (image: "icons8_secure_cloud", name: "Your Data")
+                                            
                                             
                                             ]
 
     static let kSettingTravlColScreenDict = [
-                                             (image: "settings", name: "Settings"),
-                                             (image: "marketPlace", name: "MarketPlace"),
-                                             (image: "privacy_icon", name: "Privacy"),
-                                             (image: "password_icon", name: "Password"),
-                                             (image: "block_icon", name: "Blocking"),
-                                             (image: "membership_icon", name: "Membership"),
-                                             (image: "billing_icon", name: "Billing"),
-                                             (image: "data_icon", name: "Your Data"),
+                                             (image: "icons8_settings", name: "Settings"),
+                                             (image: "icons8_shop", name: "MarketPlace"),
+                                             (image: "icons8_security_lock", name: "Privacy"),
+                                             (image: "icons8_privacy", name: "Password"),
+                                             (image: "icons8_unavailable", name: "Blocking"),
+                                             (image: "icons8_debit_card_1", name: "Membership"),
+                                             (image: "icons8_purchase_order", name: "Billing"),
+                                             (image: "icons8_exit", name: "Logout"),
+                                             (image: "icons8_secure_cloud", name: "Your Data")
+                                              
                                              
     ]
     
     static let kSettingExpertColScreenDict = [
-                                              (image: "settings", name: "Settings"),
-                                             (image: "marketPlace", name: "MarketPlace"),
+                                              (image: "icons8_settings", name: "Settings"),
+                                             (image: "icons8_shop", name: "MarketPlace"),
                                               (image: "company_icon", name: "Featured"),
                                               (image: "privacy_icon", name: "Privacy"),
                                               (image: "password_icon", name: "Password"),
-                                              (image: "block_icon", name: "Blocking"),
-                                              (image: "membership_icon", name: "Membership"),
-                                              (image: "billing_icon", name: "Billing"),
-                                              (image: "data_icon", name: "Your Data"),
+                                              (image: "icons8_unavailable", name: "Blocking"),
+                                              (image: "icons8_debit_card_1", name: "Membership"),
+                                              (image: "icons8_purchase_order", name: "Billing"),
+                                                (image: "icons8_exit", name: "Logout"),
+                                              (image: "icons8_secure_cloud", name: "Your Data")
+                                              
                                               ]
     
     

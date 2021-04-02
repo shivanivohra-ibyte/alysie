@@ -72,8 +72,10 @@ extension SettingsScreenVC: UICollectionViewDataSource, UICollectionViewDelegate
               _ = pushViewController(withName: BlockingViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
             case 6:
               _ = pushViewController(withName: MembershipViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
-            case 8:
+            case 9:
               _ = pushViewController(withName: YourDataViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
+            case 8:
+                kSharedUserDefaults.clearAllData()
             default:
               break
             }
@@ -85,10 +87,12 @@ extension SettingsScreenVC: UICollectionViewDataSource, UICollectionViewDelegate
           _ = pushViewController(withName: UpdatePasswordViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
         case 4:
           _ = pushViewController(withName: MembershipViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
-        case 6:
+        case 7:
           _ = pushViewController(withName: YourDataViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
         case 3:
           _ = pushViewController(withName: BlockingViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
+        case 6:
+            kSharedUserDefaults.clearAllData()
         default:
           break
         }
@@ -97,14 +101,16 @@ extension SettingsScreenVC: UICollectionViewDataSource, UICollectionViewDelegate
         switch indexPath.row {
         case 0:
           _ = pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditUserSettingsViewC
-        case 5:
+        case 4:
           _ = pushViewController(withName: UpdatePasswordViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
-        case 6:
+        case 5:
           _ = pushViewController(withName: BlockingViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
-        case 7:
+        case 6:
           _ = pushViewController(withName: MembershipViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
         case 9:
           _ = pushViewController(withName: YourDataViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
+        case 8:
+            kSharedUserDefaults.clearAllData()
         default:
           break
         }
@@ -118,8 +124,10 @@ extension SettingsScreenVC: UICollectionViewDataSource, UICollectionViewDelegate
           _ = pushViewController(withName: BlockingViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
         case 6:
           _ = pushViewController(withName: MembershipViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
-        case 8:
+        case 9:
           _ = pushViewController(withName: YourDataViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
+        case 8:
+            kSharedUserDefaults.clearAllData()
         default:
           break
         }
@@ -133,8 +141,10 @@ extension SettingsScreenVC: UICollectionViewDataSource, UICollectionViewDelegate
           _ = pushViewController(withName: BlockingViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
         case 5:
           _ = pushViewController(withName: MembershipViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
-        case 7:
+        case 8:
           _ = pushViewController(withName: YourDataViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
+        case 7:
+            kSharedUserDefaults.clearAllData()
         default:
           break
         }
@@ -148,25 +158,42 @@ extension SettingsScreenVC: UICollectionViewDataSource, UICollectionViewDelegate
           _ = pushViewController(withName: BlockingViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
         case 5:
           _ = pushViewController(withName: MembershipViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
-        case 7:
+        case 8:
           _ = pushViewController(withName: YourDataViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
+        case 7:
+            kSharedUserDefaults.clearAllData()
         default:
           break
         }
     }
     }
 }
-
+//extension SettingsScreenVC: CHTCollectionViewDelegateWaterfallLayout  {
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        //let itemWidth = itemsArray[indexPath.row].width
+//       // let itemHeight = itemsArray[indexPath.row].height
+//        let itemWidth = 80
+//        let itemHeight = 80
+//        return CGSize(width: itemWidth, height: itemHeight)
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, columnCountFor section: Int) -> Int {
+//        return 2
+//    }
+//    
+//}
 extension SettingsScreenVC: CHTCollectionViewDelegateWaterfallLayout {
-    
+
     func collectionView (_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         if indexPath.item == 1 {
             return CGSize(width: Int((view.bounds.width - 40)/3), height: 75)
         }else{
-            return CGSize(width: Int((view.bounds.width - 40)/3), height: 85)
+            return CGSize(width: Int((view.bounds.width - 40)/3), height: 76)
         }
-        
+
     }
 }
+
 

@@ -26,7 +26,7 @@ class SettingsViewC: AlysieBaseViewC {
     super.viewDidLayoutSubviews()
     self.viewShadow.drawBottomShadow()
   }
-  
+   
   //MARK: - IBAction -
   
   @IBAction func tapBack(_ sender: UIButton) {
