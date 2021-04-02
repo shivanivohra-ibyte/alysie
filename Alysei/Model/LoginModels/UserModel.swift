@@ -111,7 +111,7 @@ enum UserRoles: Int {
     case distributer = 6
     case voiceExperts = 7
     case travelAgencies = 8
-    case restaurents =  9
+    case restaurant =  9
     case voyagers = 10
 
 }

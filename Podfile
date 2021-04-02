@@ -14,5 +14,6 @@ target 'Alysei' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
 
 end

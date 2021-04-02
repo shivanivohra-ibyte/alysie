@@ -30,6 +30,7 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
 
     var profilePhoto: UIImage?
     var coverPhoto :UIImage?
+    var userType = UserRoles.voyagers
 
     var picker = UIImagePickerController()
     var signUpViewModel: SignUpViewModel!
@@ -433,8 +434,11 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
 extension EditProfileViewC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return (self.signUpViewModel?.arrSignUpStepOne.count ?? 0) + 1
+        var extraRows = 1
+        if self.userType == .voyagers {
+            extraRows = 0
+        }
+        return (self.signUpViewModel?.arrSignUpStepOne.count ?? 0) + extraRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

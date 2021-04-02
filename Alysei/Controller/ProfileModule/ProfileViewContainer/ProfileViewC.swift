@@ -26,13 +26,15 @@ class ProfileViewC: AlysieBaseViewC{
   @IBOutlet weak var imgViewProfileNavigation: UIImageViewExtended!
   @IBOutlet weak var imgViewProfile: UIImageViewExtended!
     @IBOutlet weak var lblDisplayName: UILabel!
-    @IBOutlet weak var lblDisplayUsername: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var aboutLabel: UILabel!
 //  @IBOutlet weak var lblEmail: UILabel!
   @IBOutlet weak var btnEditProfile: UIButtonExtended!
   
   //MARK: - Properties -
   
     var signUpViewModel: SignUpViewModel!
+    var userType: UserRoles!
 //    {
 //        didSet {
 //            print(oldValue)
@@ -140,6 +142,7 @@ class ProfileViewC: AlysieBaseViewC{
     
     let controller = pushViewController(withName: EditProfileViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? EditProfileViewC
     controller?.signUpViewModel = self.signUpViewModel
+    controller?.userType = self.userType
     self.editProfileViewCon = controller
 //    updateProductsInEditProfile()
   }
@@ -155,16 +158,8 @@ class ProfileViewC: AlysieBaseViewC{
 //    self.lblEmail.text = kSharedUserDefaults.loggedInUserModal.email
 //    self.lblEmailNavigation.text = kSharedUserDefaults.loggedInUserModal.email
 
-    switch kSharedUserDefaults.loggedInUserModal.role {
-    case .distributer, .producer, .travelAgencies, .restaurents:
-        print("Show company name")
-    case .voiceExperts, .voyagers:
-        print("Name")
-    default:
-        print("nothing")
-    }
-    self.lblDisplayName.text = kSharedUserDefaults.loggedInUserModal.displayName?.capitalized
-    self.lblDisplayNameNavigation.text = kSharedUserDefaults.loggedInUserModal.displayName
+//    self.lblDisplayName.text = kSharedUserDefaults.loggedInUserModal.displayName?.capitalized
+//    self.lblDisplayNameNavigation.text = kSharedUserDefaults.loggedInUserModal.displayName
 
     self.imgViewCover.image = UIImage(named: "coverPhoto")
     self.imgViewProfile.image = UIImage(named: "profile_icon")
@@ -233,8 +228,25 @@ class ProfileViewC: AlysieBaseViewC{
                 let responseModel = try JSONDecoder().decode(UserProfile.profileTopSectionModel.self, from: data)
                 print(responseModel)
 
-                self.lblDisplayName.text = "\(responseModel.data?.userData?.companyName ?? "")"
-                self.lblDisplayNameNavigation.text = "\(responseModel.data?.userData?.companyName ?? "")"
+                if let username = responseModel.data?.userData?.username {
+                    self.usernameLabel.text = "@\(username)".lowercased()
+                }
+                self.aboutLabel.text = "\(responseModel.data?.about ?? "")"
+
+                let roleID = UserRoles(rawValue: responseModel.data?.userData?.roleID ?? 0) ?? .voyagers
+                self.userType = roleID
+                self.editProfileViewCon?.userType = self.userType
+                var name = ""
+                switch roleID {
+                case .distributer, .producer, .travelAgencies, .restaurant:
+                    name = "\(responseModel.data?.userData?.companyName ?? "")"
+                case .voiceExperts, .voyagers:
+                    name = "\(responseModel.data?.userData?.firstName ?? "") \(responseModel.data?.userData?.lastName ?? "")"
+                }
+
+                self.lblDisplayName.text = "\(name)".capitalized
+                self.lblDisplayNameNavigation.text = "\(name)".capitalized
+
             } catch {
                 print(error.localizedDescription)
             }
@@ -283,6 +295,7 @@ extension ProfileViewC{
     self.signUpViewModel = SignUpViewModel(dicData, roleId: nil)
     editProfileViewCon?.signUpViewModel = self.signUpViewModel
 //    let indexPath = IndexPath(row: 0, section: self.signUpViewModel.arrProductCategories.count - 1)
+    editProfileViewCon?.userType = self.userType
     editProfileViewCon?.tableViewEditProfile?.reloadData()
     print("Some")
   }

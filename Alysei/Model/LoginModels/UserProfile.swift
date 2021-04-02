@@ -17,12 +17,14 @@ enum UserProfile {
     struct data: Codable {
         var about: String?
         var postCount: Int?
+        var followerCount: Int?
         var userData: userDataModel?
 
         private enum CodingKeys: String, CodingKey {
             case about
             case postCount = "post_count"
             case userData = "user_data"
+            case followerCount = "follower_count"
         }
     }
 
@@ -33,7 +35,9 @@ enum UserProfile {
         var userID: Int?
         var companyName: String?
         var username: String?
-        var followerCount: Int?
+        var roleID: Int?
+        var firstName: String?
+        var lastName: String?
 
          private enum CodingKeys: String, CodingKey {
             case avatar = "avatar_id"
@@ -41,7 +45,9 @@ enum UserProfile {
             case userID = "user_id"
             case companyName = "company_name"
             case username
-            case followerCount = "follower_count"
+            case roleID = "role_id"
+            case firstName = "first_name"
+            case lastName = "last_name"
          }
     }
 

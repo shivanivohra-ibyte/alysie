@@ -175,7 +175,8 @@ class AddFeatureViewC: AlysieBaseViewC {
   
     for item in currentArray{
       if item.type != AppConstants.File{
-        if (item.selectedValue?.isEmpty == true){
+//        if (item.selectedValue?.isEmpty == true){
+        if ((item.required ?? "").lowercased() == "yes")  && (item.selectedValue?.isEmpty == true) {
           return(false,"All Information is required")
         }
       }
