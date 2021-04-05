@@ -217,6 +217,8 @@ struct AppConstants {
     static let PlaceholderItalianRegion = "Select a answer"
     static let URL = "URL"
     static let Username = "Username"
+    static let kFirstName = "first_name"
+    static let kLastName = "last_name"
     //static let DisplayName = "Display Name"
     static let DisplayName = "Company Name"
     static let Language = "Language"

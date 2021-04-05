@@ -65,11 +65,26 @@ class SettingsEditSectionModel: NSObject {
     
     if sectionType == 0 {
 
-      self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.URL, settingsPlaceholder: AppConstants.EnterURL, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.website), settingsCellType: .info))
-      self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.Username, settingsPlaceholder: AppConstants.EnterUsername, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.userName)))
-      self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.DisplayName, settingsPlaceholder: AppConstants.EnterDisplayName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.displayName), settingsCellType: .info))
-      self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.Email.capitalized ,settingsPlaceholder: AppConstants.EnterEmail, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.email)))
-      self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.Language, settingsPlaceholder: AppConstants.SelectLanguage, settingsSelectedValue: "", settingsCellType: .language))
+        let userID = kSharedUserDefaults.loggedInUserModal.role ?? .voyagers
+
+        self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.URL, settingsPlaceholder: AppConstants.EnterURL, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.website), settingsCellType: .info))
+
+        self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.Username, settingsPlaceholder: AppConstants.EnterUsername, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.userName)))
+
+        switch userID {
+        case .voyagers, .voiceExperts:
+            self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.kFirstName, settingsPlaceholder: AppConstants.kFirstName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.firstName), settingsCellType: .info))
+
+            self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.kLastName, settingsPlaceholder: AppConstants.kLastName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.lastName), settingsCellType: .info))
+
+        default:
+            self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.DisplayName, settingsPlaceholder: AppConstants.EnterDisplayName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.displayName), settingsCellType: .info))
+        }
+
+
+        self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.Email.capitalized ,settingsPlaceholder: AppConstants.EnterEmail, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.email)))
+
+        self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.Language, settingsPlaceholder: AppConstants.SelectLanguage, settingsSelectedValue: "", settingsCellType: .language))
     }
     else{
       

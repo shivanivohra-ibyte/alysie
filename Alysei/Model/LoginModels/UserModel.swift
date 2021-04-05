@@ -17,7 +17,8 @@ class UserModel: NSObject{
   var locale : String?
   var website: String?
   var userName: String?
-  var firstName : String?
+    var firstName : String?
+    var lastName : String?
   var displayName : String?
   var address : String?
   //var avatarId : String?
@@ -108,12 +109,13 @@ class UserModel: NSObject{
 
 enum UserRoles: Int {
     case producer = 3
-    case distributer = 6
+    case distributer1 = 4
+    case distributer2 = 5
+    case distributer3 = 6
     case voiceExperts = 7
     case travelAgencies = 8
     case restaurant =  9
     case voyagers = 10
-
 }
 
 //class UserImage: {

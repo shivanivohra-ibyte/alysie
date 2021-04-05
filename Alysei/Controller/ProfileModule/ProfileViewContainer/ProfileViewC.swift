@@ -142,7 +142,7 @@ class ProfileViewC: AlysieBaseViewC{
     
     let controller = pushViewController(withName: EditProfileViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? EditProfileViewC
     controller?.signUpViewModel = self.signUpViewModel
-    controller?.userType = self.userType
+    controller?.userType = self.userType ?? .voyagers
     self.editProfileViewCon = controller
 //    updateProductsInEditProfile()
   }
@@ -255,10 +255,13 @@ class ProfileViewC: AlysieBaseViewC{
                 self.editProfileViewCon?.userType = self.userType
                 var name = ""
                 switch roleID {
-                case .distributer, .producer, .travelAgencies, .restaurant:
+                case .distributer1, .distributer2, .distributer3, .producer, .travelAgencies, .restaurant:
                     name = "\(responseModel.data?.userData?.companyName ?? "")"
-                case .voiceExperts, .voyagers:
+//                case .voiceExperts, .voyagers:
+                default:
                     name = "\(responseModel.data?.userData?.firstName ?? "") \(responseModel.data?.userData?.lastName ?? "")"
+
+
                 }
 
                 self.lblDisplayName.text = "\(name)".capitalized
