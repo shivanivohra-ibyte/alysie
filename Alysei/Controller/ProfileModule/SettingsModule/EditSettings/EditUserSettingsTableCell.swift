@@ -42,7 +42,7 @@ class EditUserSettingsTableCell: UITableViewCell {
     self.settingsEditDataModel = model
     self.txtFieldSettings.text = model.settingsSelectedValue
     self.lblHeading.text = model.settingsHeading
-    self.txtFieldSettings.isUserInteractionEnabled = (model.settingsHeading == AppConstants.Email.capitalized) ? false : true
+    self.txtFieldSettings.isUserInteractionEnabled = ((model.settingsHeading == AppConstants.Email.capitalized) || (model.settingsHeading == AppConstants.DisplayName.capitalized)) ? false : true
     self.txtFieldSettings.attributedPlaceholder = NSAttributedString(string: String.getString(model.settingsPlaceholder),
                                                                    attributes: [NSAttributedString.Key.foregroundColor: AppColors.liteGray.color])
   }

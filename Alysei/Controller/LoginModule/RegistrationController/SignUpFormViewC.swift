@@ -21,7 +21,7 @@ class SignUpFormViewC: AlysieBaseViewC{
   var signUpStepOneDataModel: SignUpStepOneDataModel!
   var getRoleDataModel: [GetRoleDataModel]!
   var locationManager: CLLocationManager!
-  
+    var cOptionId: String?
   //MARK:  - ViewLifeCycle Methods -
     
   override func viewDidLoad() {
@@ -129,10 +129,13 @@ class SignUpFormViewC: AlysieBaseViewC{
         }
         else{
           let optionId = model.arrOptions[selectedIndex].userFieldOptionId
+            self.cOptionId = optionId
           model.selectedValue = optionId
         }
         model.selectedOptionName = strVal
-        model.selectedValue = strVal
+       // model.selectedValue = strVal
+        model.selectedValue = self.cOptionId
+        
         self.tblViewSignUpForm.reloadData()
         print("selectedValue",strVal.uppercased())
       }})

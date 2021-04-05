@@ -28,6 +28,7 @@ class EditProfileSelectTableCell: UITableViewCell {
     self.lblHeading.text = model.title
     self.txtField.placeholder = model.placeholder
     self.txtField.text = model.selectedOptionName
+    
     switch model.type {
     case AppConstants.Checkbox,AppConstants.Multiselect,AppConstants.Select:
       self.txtField.isUserInteractionEnabled = false

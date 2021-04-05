@@ -27,7 +27,8 @@ class HubsViaCityCell: UITableViewCell , SelectList{
         self.hasCome == .hubs ? (txtSearch.isHidden = true) : (txtSearch.isHidden = false)
         self.filterHubs.hubs_array = hubsViaCity.hubs_array
         self.lblNoHub.isHidden = filterHubs.hubs_array?.isEmpty == false
-        self.noHubImage.isHidden = filterHubs.hubs_array?.isEmpty == false
+        //self.noHubImage.isHidden = filterHubs.hubs_array?.isEmpty == true
+        self.noHubImage.isHidden = true
         self.tableView.states = filterHubs.hubs_array
         self.tableView.selectDelegate = self
         self.tableView.hasCome = .hubs
@@ -46,7 +47,8 @@ class HubsViaCityCell: UITableViewCell , SelectList{
         self.filterHubs.hubs_array?.removeAll()
         self.txtSearch.text?.count != 0  ? self.searchData() : (self.filterHubs.hubs_array = self.hubsViaCity.hubs_array ?? [] )
         self.lblNoHub.isHidden = filterHubs.hubs_array?.isEmpty == false
-        self.noHubImage.isHidden = filterHubs.hubs_array?.isEmpty == false
+        //self.noHubImage.isHidden = filterHubs.hubs_array?.isEmpty == true
+        self.noHubImage.isHidden = true
         self.tableView.states = filterHubs.hubs_array
         
     }
@@ -57,7 +59,8 @@ class HubsViaCityCell: UITableViewCell , SelectList{
             let title = String.getString(tutorial.name).lowercased().range(of: self.txtSearch.text!.lowercased(), options: .anchored, range: nil,   locale: nil)
             title != nil ?  self.filterHubs.hubs_array?.append(tutorial) :  print("No Data found")
             self.lblNoHub.isHidden = filterHubs.hubs_array?.isEmpty == false
-            self.noHubImage.isHidden = filterHubs.hubs_array?.isEmpty == false
+           // self.noHubImage.isHidden = filterHubs.hubs_array?.isEmpty == true
+            self.noHubImage.isHidden = true
             self.tableView.states = filterHubs.hubs_array
         }
     }
