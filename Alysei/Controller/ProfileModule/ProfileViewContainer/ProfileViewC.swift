@@ -260,12 +260,16 @@ class ProfileViewC: AlysieBaseViewC{
 //                case .voiceExperts, .voyagers:
                 default:
                     name = "\(responseModel.data?.userData?.firstName ?? "") \(responseModel.data?.userData?.lastName ?? "")"
-
-
                 }
 
                 self.lblDisplayName.text = "\(name)".capitalized
                 self.lblDisplayNameNavigation.text = "\(name)".capitalized
+
+                kSharedUserDefaults.loggedInUserModal.firstName = responseModel.data?.userData?.firstName
+                kSharedUserDefaults.loggedInUserModal.lastName = responseModel.data?.userData?.lastName
+                kSharedUserDefaults.synchronize()
+
+                print(kSharedUserDefaults.loggedInUserModal.lastName)
 
             } catch {
                 print(error.localizedDescription)

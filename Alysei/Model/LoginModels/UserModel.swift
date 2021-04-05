@@ -57,6 +57,7 @@ class UserModel: NSObject{
     self.website = String.getString(dictData[APIConstants.kWebsite])
     self.userName = String.getString(dictData[APIConstants.kUsername])
     self.firstName = String.getString(dictData[APIConstants.kFirstName])
+    self.lastName = String.getString(dictData[APIConstants.kLastName])
     self.accountEnabled = String.getString(dictData[APIConstants.kAccountEnabled])
     self.memberName = String.getString(dictRoles[APIConstants.kName])
     self.memberRoleId = String.getString(dictRoles[APIConstants.kRoleId])
