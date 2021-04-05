@@ -72,10 +72,13 @@ class SettingsEditSectionModel: NSObject {
         self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.Username, settingsPlaceholder: AppConstants.EnterUsername, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.userName)))
 
         switch userID {
-        case .voyagers, .voiceExperts:
-            self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.kFirstName, settingsPlaceholder: AppConstants.kFirstName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.firstName), settingsCellType: .info))
+        case .restaurant:
+            self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.RestaurantName, settingsPlaceholder: AppConstants.EnterRestaurantName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.displayName), settingsCellType: .info))
 
-            self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.kLastName, settingsPlaceholder: AppConstants.kLastName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.lastName), settingsCellType: .info))
+        case .voyagers, .voiceExperts:
+            self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.FirstName, settingsPlaceholder: AppConstants.EnterFirstName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.firstName), settingsCellType: .info))
+
+            self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.LastName, settingsPlaceholder: AppConstants.EnterLastName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.lastName), settingsCellType: .info))
 
         default:
             self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.DisplayName, settingsPlaceholder: AppConstants.EnterDisplayName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.displayName), settingsCellType: .info))

@@ -217,11 +217,19 @@ struct AppConstants {
     static let PlaceholderItalianRegion = "Select a answer"
     static let URL = "URL"
     static let Username = "Username"
-    static let kFirstName = "first_name"
-    static let kLastName = "last_name"
+    static let FirstName = "First Name"
+    static let LastName = "Last Name"
     //static let DisplayName = "Display Name"
     static let DisplayName = "Company Name"
     static let Language = "Language"
+    static let EnterFirstName = "Enter First Name"
+    static let EnterLastName = "Enter Last Name"
+
+    static let RestaurantName = "Restaurant Name"
+    static let EnterRestaurantName = "Enter Restaurant Name"
+
+
+
     static let EnterURL = "Enter URL"
     static let EnterUsername = "Enter Username"
     //static let EnterDisplayName = "Enter Display Name"

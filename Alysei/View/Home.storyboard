@@ -1595,7 +1595,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qDw-rT-55Z">
                                                     <rect key="frame" x="15" y="15" width="32" height="18"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="130" id="gTw-MC-tvc"/>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="gTw-MC-tvc"/>
                                                         <constraint firstAttribute="height" constant="18" id="hfI-Uv-mJa"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="15"/>
@@ -1639,10 +1639,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiX-y9-0aJ">
-                                                    <rect key="frame" x="15" y="15" width="105" height="18"/>
+                                                    <rect key="frame" x="15" y="15" width="340" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="RV3-xx-SW5"/>
-                                                        <constraint firstAttribute="width" constant="105" id="qjk-2b-qe3"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="15"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1691,6 +1690,7 @@
                                                 <constraint firstItem="25x-A2-tL1" firstAttribute="leading" secondItem="0aN-Od-gap" secondAttribute="leading" constant="15" id="AaS-hI-dKy"/>
                                                 <constraint firstItem="25x-A2-tL1" firstAttribute="top" secondItem="MiX-y9-0aJ" secondAttribute="bottom" constant="10" id="DIR-st-Fs2"/>
                                                 <constraint firstAttribute="trailing" secondItem="25x-A2-tL1" secondAttribute="trailing" constant="15" id="Lwf-iP-CUX"/>
+                                                <constraint firstAttribute="trailing" secondItem="MiX-y9-0aJ" secondAttribute="trailing" constant="20" id="SJq-W0-jyd"/>
                                                 <constraint firstItem="MiX-y9-0aJ" firstAttribute="leading" secondItem="0aN-Od-gap" secondAttribute="leading" constant="15" id="zQ3-5V-9jW"/>
                                             </constraints>
                                         </tableViewCellContentView>
