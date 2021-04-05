@@ -103,7 +103,7 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
 
         let editProfileSelectTableCell = tableViewEditProfile.dequeueReusableCell(withIdentifier: EditProfileSelectTableCell.identifier(), for: indexPath) as! EditProfileSelectTableCell
         if self.signUpStepOneDataModel == nil{
-            let model = self.signUpViewModel.arrSignUpStepOne.filter({($0.name == "product_type")})// || $0.name == "expertise" || $0.name == "title")})
+            let model = self.signUpViewModel.arrSignUpStepOne.filter({($0.name == "product_type")})
             model.first?.selectedValue = self.createStringForProducts((model.first)!)
 
             let modelExp = self.signUpViewModel.arrSignUpStepOne.filter({($0.name == "expertise")})

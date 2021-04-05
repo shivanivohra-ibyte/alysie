@@ -108,7 +108,9 @@ class UserModel: NSObject{
 
 enum UserRoles: Int {
     case producer = 3
-    case distributer = 6
+    case distributer1 = 4
+    case distributer2 = 5
+    case distributer3 = 6
     case voiceExperts = 7
     case travelAgencies = 8
     case restaurant =  9

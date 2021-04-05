@@ -38,12 +38,14 @@ enum UserProfile {
         var roleID: Int?
         var firstName: String?
         var lastName: String?
+        var restaurantName: String?
 
          private enum CodingKeys: String, CodingKey {
             case avatar = "avatar_id"
             case cover = "cover_id"
             case userID = "user_id"
             case companyName = "company_name"
+            case restaurantName = "restaurant_name"
             case username
             case roleID = "role_id"
             case firstName = "first_name"

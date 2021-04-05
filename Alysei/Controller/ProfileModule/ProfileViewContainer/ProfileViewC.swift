@@ -255,7 +255,7 @@ class ProfileViewC: AlysieBaseViewC{
                 self.editProfileViewCon?.userType = self.userType
                 var name = ""
                 switch roleID {
-                case .distributer, .producer, .travelAgencies, .restaurant:
+                case .distributer1,. distributer2, .distributer3 , .producer, .travelAgencies, .restaurant:
                     name = "\(responseModel.data?.userData?.companyName ?? "")"
                 case .voiceExperts, .voyagers:
                     name = "\(responseModel.data?.userData?.firstName ?? "") \(responseModel.data?.userData?.lastName ?? "")"
