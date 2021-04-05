@@ -305,6 +305,7 @@ struct APIConstants {
     static let kConfirmPassword = "confirm_password"
     //static let kDisplayName = "display_name"
     static let kDisplayName = "company_name"
+    static let kRestaurantName = "restaurant_name"
     static let kWebsite = "website"
     static let kName = "name"
     static let kRoleId = "role_id"
