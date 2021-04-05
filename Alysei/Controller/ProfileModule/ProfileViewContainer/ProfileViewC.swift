@@ -172,8 +172,25 @@ class ProfileViewC: AlysieBaseViewC{
         self.imgViewProfile.image = profilePhoto
         self.imgViewProfile.layer.cornerRadius = (self.imgViewProfile.frame.width / 2.0)
         self.imgViewProfile.layer.borderWidth = 5.0
-        self.imgViewProfile.layer.borderColor = UIColor.white.cgColor
+        if kSharedUserDefaults.loggedInUserModal.memberRoleId == "3"{ //Producer
+            self.imgViewProfile.layer.borderColor = UIColor.init(hexString: "#40B000").cgColor
+        }else if kSharedUserDefaults.loggedInUserModal.memberRoleId == "10"{ //Voyager
+            self.imgViewProfile.layer.borderColor = UIColor.blue.cgColor
+        }else if kSharedUserDefaults.loggedInUserModal.memberRoleId == "9"{ //Restaurant
+            self.imgViewProfile.layer.borderColor = UIColor.yellow.cgColor
+        }else if kSharedUserDefaults.loggedInUserModal.memberRoleId == "7"{ //Voice of Expert
+            self.imgViewProfile.layer.borderColor = UIColor.init(hexString: "#c543ff").cgColor
+        }else if kSharedUserDefaults.loggedInUserModal.memberRoleId == "8"{ //Travel Agencies
+            self.imgViewProfile.layer.borderColor = UIColor.orange.cgColor
+        }else {                                                             //Importer
+            self.imgViewProfile.layer.borderColor = UIColor.red.cgColor
+        }
+        //self.imgViewProfile.layer.borderColor = UIColor.white.cgColor
         self.imgViewProfile.layer.masksToBounds = true
+    }else{
+        self.imgViewProfile.layer.cornerRadius = (self.imgViewProfile.frame.width / 2.0)
+        self.imgViewProfile.layer.borderWidth = 5.0
+        self.imgViewProfile.layer.borderColor = UIColor.white.cgColor
     }
     
   }

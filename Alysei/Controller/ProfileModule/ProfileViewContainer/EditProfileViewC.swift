@@ -103,10 +103,21 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
 
         let editProfileSelectTableCell = tableViewEditProfile.dequeueReusableCell(withIdentifier: EditProfileSelectTableCell.identifier(), for: indexPath) as! EditProfileSelectTableCell
         if self.signUpStepOneDataModel == nil{
-
-            let model = self.signUpViewModel.arrSignUpStepOne.filter({$0.name == "product_type"})
-
+            let model = self.signUpViewModel.arrSignUpStepOne.filter({($0.name == "product_type")})// || $0.name == "expertise" || $0.name == "title")})
             model.first?.selectedValue = self.createStringForProducts((model.first)!)
+
+            let modelExp = self.signUpViewModel.arrSignUpStepOne.filter({($0.name == "expertise")})
+            modelExp.first?.selectedValue = self.createStringForProducts((modelExp.first)!)
+        
+            let modelTitle =  self.signUpViewModel.arrSignUpStepOne.filter({($0.name == "title")})
+            modelTitle.first?.selectedValue = self.createStringForProducts((modelTitle.first)!)
+
+            let modelRes =  self.signUpViewModel.arrSignUpStepOne.filter({($0.name == "restaurant_type")})
+            modelRes.first?.selectedValue = self.createStringForProducts((modelRes.first)!)
+            
+            let modelSpec =  self.signUpViewModel.arrSignUpStepOne.filter({($0.name == "speciality")})
+            modelSpec.first?.selectedValue = self.createStringForProducts((modelSpec.first)!)
+            
         }
         editProfileSelectTableCell.configure(withSignUpStepOneDataModel: self.signUpViewModel.arrSignUpStepOne[indexPath.row])
         editProfileSelectTableCell.lblHeadingTopConst.constant = 5 // indexPath.row == 0 ? 60 : 20
