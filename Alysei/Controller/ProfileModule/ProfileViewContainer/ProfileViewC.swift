@@ -81,9 +81,10 @@ class ProfileViewC: AlysieBaseViewC{
   override func viewWillAppear(_ animated: Bool) {
     
     super.viewWillAppear(animated)
-    self.initialSetUp()
-    self.fetchProfileDetails()
+    
     self.postRequestToGetFields()
+    self.fetchProfileDetails()
+    
   }
   
   override func viewDidLayoutSubviews(){
@@ -172,20 +173,24 @@ class ProfileViewC: AlysieBaseViewC{
         self.imgViewProfile.image = profilePhoto
         self.imgViewProfile.layer.cornerRadius = (self.imgViewProfile.frame.width / 2.0)
         self.imgViewProfile.layer.borderWidth = 5.0
-        if kSharedUserDefaults.loggedInUserModal.memberRoleId == "3"{ //Producer
-            self.imgViewProfile.layer.borderColor = UIColor.init(hexString: "#40B000").cgColor
-        }else if kSharedUserDefaults.loggedInUserModal.memberRoleId == "10"{ //Voyager
-            self.imgViewProfile.layer.borderColor = UIColor.blue.cgColor
-        }else if kSharedUserDefaults.loggedInUserModal.memberRoleId == "9"{ //Restaurant
-            self.imgViewProfile.layer.borderColor = UIColor.yellow.cgColor
-        }else if kSharedUserDefaults.loggedInUserModal.memberRoleId == "7"{ //Voice of Expert
-            self.imgViewProfile.layer.borderColor = UIColor.init(hexString: "#c543ff").cgColor
-        }else if kSharedUserDefaults.loggedInUserModal.memberRoleId == "8"{ //Travel Agencies
-            self.imgViewProfile.layer.borderColor = UIColor.orange.cgColor
-        }else {                                                             //Importer
-            self.imgViewProfile.layer.borderColor = UIColor.red.cgColor
+        
+        switch self.userType {
+        case .distributer1, .distributer2, .distributer3:
+            self.imgViewProfile.layer.borderColor = UIColor.init(hexString: RolesBorderColor.distributer1.rawValue).cgColor
+        case .producer:
+            self.imgViewProfile.layer.borderColor = UIColor.init(hexString: RolesBorderColor.producer.rawValue).cgColor
+        case .travelAgencies:
+            self.imgViewProfile.layer.borderColor = UIColor.init(hexString: RolesBorderColor.travelAgencies.rawValue).cgColor
+        case .voiceExperts:
+            self.imgViewProfile.layer.borderColor = UIColor.init(hexString: RolesBorderColor.voiceExperts.rawValue).cgColor
+        case .voyagers:
+            self.imgViewProfile.layer.borderColor = UIColor.init(hexString: RolesBorderColor.voyagers.rawValue).cgColor
+        case .restaurant :
+            self.imgViewProfile.layer.borderColor = UIColor.init(hexString: RolesBorderColor.restaurant.rawValue).cgColor
+        default:
+            self.imgViewProfile.layer.borderColor = UIColor.white.cgColor
         }
-        //self.imgViewProfile.layer.borderColor = UIColor.white.cgColor
+       
         self.imgViewProfile.layer.masksToBounds = true
     }else{
         self.imgViewProfile.layer.cornerRadius = (self.imgViewProfile.frame.width / 2.0)
@@ -255,21 +260,23 @@ class ProfileViewC: AlysieBaseViewC{
                 self.editProfileViewCon?.userType = self.userType
                 var name = ""
                 switch roleID {
-                case .distributer1, .distributer2, .distributer3, .producer, .travelAgencies, .restaurant:
+                case .distributer1, .distributer2, .distributer3, .producer, .travelAgencies :
                     name = "\(responseModel.data?.userData?.companyName ?? "")"
 //                case .voiceExperts, .voyagers:
+                case .restaurant :
+                    name = "\(responseModel.data?.userData?.restaurantName ?? "")"
                 default:
                     name = "\(responseModel.data?.userData?.firstName ?? "") \(responseModel.data?.userData?.lastName ?? "")"
                 }
-
+                
                 self.lblDisplayName.text = "\(name)".capitalized
                 self.lblDisplayNameNavigation.text = "\(name)".capitalized
 
                 kSharedUserDefaults.loggedInUserModal.firstName = responseModel.data?.userData?.firstName
                 kSharedUserDefaults.loggedInUserModal.lastName = responseModel.data?.userData?.lastName
                 kSharedUserDefaults.synchronize()
-
-                print(kSharedUserDefaults.loggedInUserModal.lastName)
+                self.initialSetUp()
+                
 
             } catch {
                 print(error.localizedDescription)

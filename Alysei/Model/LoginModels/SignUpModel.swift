@@ -123,6 +123,7 @@ class SignUpStepOneDataModel: NSObject{
  var selectedOptionName: String?
  var parentId: String?
  var isHidden: Bool = false
+ var is_selected: String?
  var arrOptions: [SignUpOptionsDataModel] = []
   
  var arrRestaurantOptions: [SignUpStepTwoOptionsModel] = []
@@ -143,6 +144,7 @@ class SignUpStepOneDataModel: NSObject{
    self.parentId = String.getString(dictStepOne[APIConstants.kParentId])
    self.placeholder = String.getString(dictStepOne[APIConstants.kPlaceholder])
    self.userFieldId = String.getString(dictStepOne[APIConstants.kUserFieldId])
+    self.is_selected = String.getString(dictStepOne[APIConstants.kIsSelected])
   
   if  (String.getString(dictStepOne[APIConstants.kType]) == AppConstants.Radio) || (String.getString(dictStepOne[APIConstants.kType]) == AppConstants.Terms){
     

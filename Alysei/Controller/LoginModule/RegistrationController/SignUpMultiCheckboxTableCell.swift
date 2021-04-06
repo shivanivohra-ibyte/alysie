@@ -68,7 +68,8 @@ class SignUpMultiCheckboxTableCell: UITableViewCell{
     let signUpMultiSelectCollectionCell = collectionViewMultiSelect.dequeueReusableCell(withReuseIdentifier: SignUpMultiSelectCollectionCell.identifier(), for: indexPath) as! SignUpMultiSelectCollectionCell
   
     let model = (stepOneCurrentModel == nil) ? stepTwoCurrentModel.arrOptions[indexPath.item] : stepOneCurrentModel.arrRestaurantOptions[indexPath.item]
-    signUpMultiSelectCollectionCell.configureData(withSignUpStepTwoOptionsModel: model)
+        signUpMultiSelectCollectionCell.configureData(withSignUpStepTwoOptionsModel: model)
+    
 //    if (stepOneCurrentModel == nil){
 //
 //      let model = stepTwoCurrentModel.arrOptions[indexPath.item]
@@ -87,8 +88,8 @@ class SignUpMultiCheckboxTableCell: UITableViewCell{
 extension SignUpMultiCheckboxTableCell: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
     return (stepOneCurrentModel == nil) ? self.stepTwoCurrentModel?.arrOptions.count ?? 0 : self.stepOneCurrentModel?.arrRestaurantOptions.count ?? 0
+    
   }
     
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

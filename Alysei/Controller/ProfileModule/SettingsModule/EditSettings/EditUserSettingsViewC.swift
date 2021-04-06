@@ -96,7 +96,7 @@ class EditUserSettingsViewC: AlysieBaseViewC {
   private func postRequestToUpdateUserSettings() -> Void{
     
     let param: [String:Any] = [APIConstants.kName: self.settingEditViewModel.selectedUserName,
-                               APIConstants.kDisplayName: self.settingEditViewModel.selectedDisplayName,
+                               APIConstants.kCompanyName: self.settingEditViewModel.selectedCompanyName,
                                APIConstants.kLocale: "en",
                                APIConstants.kWebsite: self.settingEditViewModel.selectedUrl
                                ]

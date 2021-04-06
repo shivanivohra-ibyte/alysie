@@ -22,12 +22,22 @@ class SettingsEditViewModel: NSObject {
     return modal.first?.settingsSelectedValue ?? ""
   }
   
-  var selectedDisplayName: String {
+  var selectedCompanyName: String {
       
-    let modal = self.arrSections[0].arrSettingsData.filter { $0.settingsHeading == AppConstants.DisplayName }
+    let modal = self.arrSections[0].arrSettingsData.filter { $0.settingsHeading == AppConstants.CompanyName }
     return modal.first?.settingsSelectedValue ?? ""
   }
-  
+    var selectedRestaurantName: String {
+        
+      let modal = self.arrSections[0].arrSettingsData.filter { $0.settingsHeading == AppConstants.RestaurantName }
+      return modal.first?.settingsSelectedValue ?? ""
+    }
+    var selectedDisplayName: String {
+        
+      let modal = self.arrSections[0].arrSettingsData.filter { $0.settingsHeading == AppConstants.DisplayName }
+      return modal.first?.settingsSelectedValue ?? ""
+    }
+    
   var selectedUserName: String {
       
     let modal = self.arrSections[0].arrSettingsData.filter { $0.settingsHeading == AppConstants.Username }
@@ -73,7 +83,9 @@ class SettingsEditSectionModel: NSObject {
 
         switch userID {
         case .restaurant:
-            self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.RestaurantName, settingsPlaceholder: AppConstants.EnterRestaurantName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.displayName), settingsCellType: .info))
+            //self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.RestaurantName, settingsPlaceholder: AppConstants.EnterRestaurantName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.displayName), settingsCellType: .info))
+            
+            self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.RestaurantName, settingsPlaceholder: AppConstants.EnterRestaurantName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.restaurantName), settingsCellType: .info))
 
         case .voyagers, .voiceExperts:
             self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.FirstName, settingsPlaceholder: AppConstants.EnterFirstName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.firstName), settingsCellType: .info))
@@ -81,7 +93,9 @@ class SettingsEditSectionModel: NSObject {
             self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.LastName, settingsPlaceholder: AppConstants.EnterLastName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.lastName), settingsCellType: .info))
 
         default:
-            self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.DisplayName, settingsPlaceholder: AppConstants.EnterDisplayName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.displayName), settingsCellType: .info))
+           // self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.DisplayName, settingsPlaceholder: AppConstants.EnterDisplayName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.displayName), settingsCellType: .info))
+            
+            self.arrSettingsData.append(SettingsEditDataModel(settingsHeading: AppConstants.CompanyName, settingsPlaceholder: AppConstants.EnterCompanyName, settingsSelectedValue: String.getString(kSharedUserDefaults.loggedInUserModal.companyName), settingsCellType: .info))
         }
 
 

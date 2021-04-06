@@ -64,8 +64,14 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        scrollToTop()
+        fetchProductsFromProfile()
+        self.tableViewEditProfile.reloadData()
     }
-
+    func scrollToTop(){
+       // self.tableViewEditProfile.setContentOffset(CGPointMake(0,  UIApplication.shared.statusBarFrame.height ), animated: true)
+        self.tableViewEditProfile.setContentOffset(CGPoint(x: 0, y: UIApplication.shared.statusBarFrame.height ), animated: true)
+    }
     //MARK: - IBAction -
 
     @IBAction func tapBack(_ sender: UIButton) {
@@ -450,6 +456,7 @@ extension EditProfileViewC: UITableViewDelegate, UITableViewDataSource{
             extraRows = 0
         }
         return (self.signUpViewModel?.arrSignUpStepOne.count ?? 0) + extraRows
+    
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -485,11 +492,11 @@ extension EditProfileViewC: UITableViewDelegate, UITableViewDataSource{
 
         switch model.type {
         case AppConstants.Select:
+        
+            if kSharedInstance.signUpStepTwoOptionsModel == nil {
 
-            if kSharedInstance.signUpStepTwoOptionsModel == nil{
-
-                if (model.isHidden == false) || (model.parentId?.isEmpty == false){
-                    // return 110.0
+                if (((model.isHidden == false) || (model.parentId?.isEmpty == false)) && model.selectedValue != "") {
+                   // return 0.0
                     return 115.0
                 }
                 else{
@@ -497,10 +504,9 @@ extension EditProfileViewC: UITableViewDelegate, UITableViewDataSource{
                 }
             }
             else{
-
+            
                 let parentIdArray = self.signUpViewModel.arrSignUpStepOne.map({$0.parentId})
                 var selectedIndex: [Int?] = []
-
                 for i in 0..<kSharedInstance.signUpStepTwoOptionsModel.count{
 
                     let firstIndex = parentIdArray.firstIndex(where: {$0 == kSharedInstance.signUpStepTwoOptionsModel[i].userFieldOptionId})
@@ -510,7 +516,6 @@ extension EditProfileViewC: UITableViewDelegate, UITableViewDataSource{
 
                 if selectedIndex.contains(indexPath.row) || model.parentId?.isEmpty == true{
                     model.isHidden = false
-                    // return 110.0
                     return 115.0
                 }
                 else{
@@ -660,6 +665,7 @@ extension EditProfileViewC: SignUpMultiSelectDelegate{
                 selectedOptionId.append(String.getString(signUpStepOneDataModel?.arrRestaurantOptions[i].userFieldOptionId))
             }
             signUpStepOneDataModel?.selectedValue = selectedOptionId.joined(separator: ", ")
+
         }
         self.tableViewEditProfile.reloadData()
     }

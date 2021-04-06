@@ -31,7 +31,8 @@ class UserModel: NSObject{
     var coverPictureName: String?
     var profilePictureName: String?
     var role: UserRoles?
-
+    var companyName: String?
+    var restaurantName:String?
     var avatar: avatar?  // newly constructed struct for avater id
     var cover: cover?  // newly constructed struct for cover id
  // var cover_id: AllProductsDataModel?
@@ -52,6 +53,7 @@ class UserModel: NSObject{
     self.accessToken = String.getString(dicResult[APIConstants.kToken])
     self.userId = String.getString(dictData[APIConstants.kUserId])
     self.displayName = String.getString(dictData[APIConstants.kDisplayName])
+    self.companyName = String.getString(dictData[APIConstants.kCompanyName])
     self.email = String.getString(dictData[APIConstants.kEmail])
     self.locale = String.getString(dictData[APIConstants.kLocale])
     self.website = String.getString(dictData[APIConstants.kWebsite])
@@ -61,7 +63,8 @@ class UserModel: NSObject{
     self.accountEnabled = String.getString(dictData[APIConstants.kAccountEnabled])
     self.memberName = String.getString(dictRoles[APIConstants.kName])
     self.memberRoleId = String.getString(dictRoles[APIConstants.kRoleId])
-
+    self.restaurantName = String.getString(dictData[APIConstants.kRestaurantName])
+   
     self.role = UserRoles(rawValue: Int(self.memberRoleId ?? "") ?? 0) ?? .voyagers
 //    self.avatarId = String.getString(dictRoles[APIConstants.kAvatarId])
 
@@ -119,6 +122,14 @@ enum UserRoles: Int {
     case voyagers = 10
 }
 
+enum RolesBorderColor : String {
+    case producer = "8EC9BB"
+    case distributer1 = "#A02C2D"
+    case voiceExperts = "AB6393"
+    case travelAgencies = "CA7E8D"
+    case restaurant =  "FDCF76"
+    case voyagers = "9C8ADE"
+}
 //class UserImage: {
 //
 //}
