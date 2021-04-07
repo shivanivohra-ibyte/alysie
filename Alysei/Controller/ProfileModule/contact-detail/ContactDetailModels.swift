@@ -18,20 +18,36 @@ enum ContactDetail {
     enum Contact {
         struct Request {
         }
+
         struct Response: Codable {
+            var data: detailModel
+        }
+        struct ViewModel: Codable {
+            var response: Response
+            var email: String { response.data.email }
+            var phone: String? { response.data.phone }
+            var address: String? { response.data.address }
+            var websiteURL: String? { response.data.website }
+            var facebookURL: String? { response.data.fb_link }
+        }
+
+
+
+
+        struct detailModel: Codable {
             var email: String
             var phone: String?
             var address: String?
             var website: String?
             var fb_link: String?
         }
-        struct ViewModel: Codable {
-            var response: Response
-            var email: String
-            var phone: String? { response.phone }
-            var address: String? { response.address }
-            var websiteURL: String? { response.website }
-            var facebookURL: String? { response.fb_link }
+    }
+
+    enum view {
+        struct tableCellModel {
+            var imageName: String
+            var title: String
+            var value: String
         }
     }
 }

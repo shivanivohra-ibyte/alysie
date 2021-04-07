@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol ContactViewEditProtocol {
+    func editContactDetail()
+}
+
 class ContactViewC: AlysieBaseViewC {
+
+    var delegate: ContactViewEditProtocol!
+    var tableData = [ContactDetail.view.tableCellModel]()
   
   //MARK: - IBOutlet -
   
@@ -23,8 +30,8 @@ class ContactViewC: AlysieBaseViewC {
   //MARK: - IBAction -
   
   @IBAction func tapEdit(_ sender: UIButton) {
-    
-    
+
+    self.delegate?.editContactDetail()
     
   }
   
@@ -32,8 +39,10 @@ class ContactViewC: AlysieBaseViewC {
     
   private func getContactTableCell(_ indexPath: IndexPath) -> UITableViewCell{
       
-    let contactTableCell = tblViewContactUs.dequeueReusableCell(withIdentifier: ContactTableCell.identifier(), for: indexPath) as! ContactTableCell
-    //contactTableCell.configure(indexPath)
+    guard let contactTableCell = tblViewContactUs.dequeueReusableCell(withIdentifier: ContactTableCell.identifier(), for: indexPath) as? ContactTableCell else {
+        return UITableViewCell()
+    }
+    contactTableCell.updateDisplay(tableData[indexPath.row])
     return contactTableCell
   }
 }
@@ -43,7 +52,7 @@ class ContactViewC: AlysieBaseViewC {
 extension ContactViewC: UITableViewDataSource,UITableViewDelegate{
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
+    return self.tableData.count
   }
     
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

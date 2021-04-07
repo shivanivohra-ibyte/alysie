@@ -79,5 +79,11 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
     @IBOutlet var facebookTextField: UITextFieldExtended!
 
     // MARK:- protocol methods
+
+
+    // MARK:- @IBAction methods
+    @IBAction func saveButtonTapped(_ sender: UIButton) {
+        
+    }
     
 }

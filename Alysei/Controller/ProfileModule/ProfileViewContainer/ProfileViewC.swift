@@ -32,7 +32,9 @@ class ProfileViewC: AlysieBaseViewC{
   @IBOutlet weak var btnEditProfile: UIButtonExtended!
   
   //MARK: - Properties -
-  
+
+    var contactDetail = [ContactDetail.view.tableCellModel]()
+    var contactDetilViewModel: ContactDetail.Contact.Response!
     var signUpViewModel: SignUpViewModel!
     var userType: UserRoles!
 //    {
@@ -84,6 +86,8 @@ class ProfileViewC: AlysieBaseViewC{
     
     self.postRequestToGetFields()
     self.fetchProfileDetails()
+
+    self.fetchContactDetail()
     
   }
   
@@ -136,6 +140,8 @@ class ProfileViewC: AlysieBaseViewC{
     self.btnAbout.setTitleColor(AppColors.liteGray.color, for: .normal)
     self.btnContact.setTitleColor(UIColor.black, for: .normal)
     self.moveToNew(childViewController: contactViewC, fromController: self.currentChild)
+    self.contactViewC.delegate = self
+    self.contactViewC.tableData = self.contactDetail
     self.tblViewPosts.tableHeaderView?.setHeight(kScreenWidth + 200.0)
   }
   
@@ -284,6 +290,43 @@ class ProfileViewC: AlysieBaseViewC{
             if (error != nil) { print(error.debugDescription) }
         }
     }
+
+
+    func fetchContactDetail() {
+        SVProgressHUD.show()
+        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Profile.contactDetails)", method: .GET) else { return }
+        WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
+            SVProgressHUD.dismiss()
+            guard let data = data else { return }
+            do {
+                let responseModel = try JSONDecoder().decode(ContactDetail.Contact.Response.self, from: data)
+                print(responseModel)
+                self.contactDetilViewModel = responseModel
+                self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "about_icon_active",
+                                                                       title: "Email", value: responseModel.data.email))
+                if let phone = responseModel.data.phone {
+                    self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "",
+                                                                           title: "Phone", value: phone))
+                }
+                if let address = responseModel.data.address {
+                    self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "",
+                                                                           title: "Address", value: address))
+                }
+                if let website = responseModel.data.website {
+                    self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "",
+                                                                           title: "Website", value: website))
+                }
+                if let facebook = responseModel.data.fb_link {
+                    self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "",
+                                                                           title: "Facebook", value: facebook))
+                }
+                print(self.contactDetail.count)
+            } catch {
+                print(error.localizedDescription)
+            }
+            if (error != nil) { print(error.debugDescription) }
+        }
+    }
     
 
   private func postRequestToGetFields() -> Void{
@@ -318,6 +361,14 @@ extension ProfileViewC: UICollectionViewDelegate, UICollectionViewDataSource,UIC
 }
 
 extension ProfileViewC{
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueProfileTabToContactDetail" {
+            if let viewCon = segue.destination as? ContactDetailViewController {
+                viewCon.viewModel = ContactDetail.Contact.ViewModel(response: self.contactDetilViewModel)
+            }
+        }
+    }
   
   override func didUserGetData(from result: Any, type: Int) {
     
@@ -331,4 +382,10 @@ extension ProfileViewC{
     print("Some")
   }
   
+}
+
+extension ProfileViewC: ContactViewEditProtocol {
+    func editContactDetail() {
+        self.performSegue(withIdentifier: "segueProfileTabToContactDetail", sender: self)
+    }
 }
