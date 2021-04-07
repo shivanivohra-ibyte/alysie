@@ -83,7 +83,11 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
 
     // MARK:- @IBAction methods
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        
+        let requestModel = ContactDetail.Contact.Request(phone: self.phoneTextField.text,
+                                                         address: self.addressTextField.text,
+                                                         website: self.websiteTextField.text,
+                                                         facebookURL: self.facebookTextField.text)
+        self.interactor?.updateContactDetail(requestModel)
     }
     
 }

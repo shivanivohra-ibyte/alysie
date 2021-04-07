@@ -119,7 +119,9 @@ class ProfileViewC: AlysieBaseViewC{
   }
   
   @IBAction func tapAbout(_ sender: UIButton) {
-    
+
+    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height * 1.5)
+
     self.viewSeparator.center.x = self.btnAbout.center.x
     self.btnPosts.isSelected = false
     self.btnAbout.isSelected = true
@@ -131,7 +133,9 @@ class ProfileViewC: AlysieBaseViewC{
   }
   
   @IBAction func tapContact(_ sender: UIButton) {
-    
+
+    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height * 1.5)
+
     self.viewSeparator.center.x = self.btnContact.center.x
     self.btnPosts.isSelected = false
     self.btnAbout.isSelected = false
@@ -294,7 +298,7 @@ class ProfileViewC: AlysieBaseViewC{
 
     func fetchContactDetail() {
         SVProgressHUD.show()
-        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Profile.contactDetails)", method: .GET) else { return }
+        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Profile.fetchContactDetails)", method: .GET) else { return }
         WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
             SVProgressHUD.dismiss()
             guard let data = data else { return }
@@ -302,22 +306,23 @@ class ProfileViewC: AlysieBaseViewC{
                 let responseModel = try JSONDecoder().decode(ContactDetail.Contact.Response.self, from: data)
                 print(responseModel)
                 self.contactDetilViewModel = responseModel
-                self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "about_icon_active",
+                self.contactDetail.removeAll()
+                self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "contact_email",
                                                                        title: "Email", value: responseModel.data.email))
                 if let phone = responseModel.data.phone {
-                    self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "",
+                    self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "contact_call",
                                                                            title: "Phone", value: phone))
                 }
                 if let address = responseModel.data.address {
-                    self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "",
+                    self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "contact_pin",
                                                                            title: "Address", value: address))
                 }
                 if let website = responseModel.data.website {
-                    self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "",
+                    self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "contact_world-wide-web",
                                                                            title: "Website", value: website))
                 }
                 if let facebook = responseModel.data.fb_link {
-                    self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "",
+                    self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "contact_facebook",
                                                                            title: "Facebook", value: facebook))
                 }
                 print(self.contactDetail.count)

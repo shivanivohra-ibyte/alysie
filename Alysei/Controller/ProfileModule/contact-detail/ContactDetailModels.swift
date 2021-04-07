@@ -17,6 +17,31 @@ enum ContactDetail {
     
     enum Contact {
         struct Request {
+            var phone: String?
+            var address: String?
+            var website: String?
+            var facebookURL: String?
+
+            func data() -> Data? {
+
+                let postData = NSMutableData()
+
+                if let phone = self.phone {
+                    postData.append("phone=\(phone)&".data(using: .utf8)!)
+                }
+                if let address = self.address {
+                    postData.append("address=\(address)&".data(using: .utf8)!)
+                }
+                if let website = self.website {
+                    postData.append("website=\(website)&".data(using: .utf8)!)
+                }
+                if let facebookURL = self.facebookURL {
+                    postData.append("fb_link=\(facebookURL)&".data(using: .utf8)!)
+                }
+
+                return postData as Data
+
+            }
         }
 
         struct Response: Codable {

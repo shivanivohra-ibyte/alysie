@@ -13,6 +13,7 @@
 import UIKit
 
 protocol ContactDetailBusinessLogic {
+    func updateContactDetail(_ requestModel: ContactDetail.Contact.Request)
 }
 
 protocol ContactDetailDataStore {
@@ -25,4 +26,13 @@ class ContactDetailInteractor: ContactDetailBusinessLogic, ContactDetailDataStor
     //var name: String = ""
 
     // MARK:- protocol methods
+
+    func updateContactDetail(_ requestModel: ContactDetail.Contact.Request) {
+        guard var urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Profile.updateContactDetails)", method: .POST) else { return }
+        urlRequest.httpBody = requestModel.data()
+        WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
+            print(error)
+            print(statusCode)
+        }
+    }
 }

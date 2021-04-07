@@ -14,7 +14,11 @@ protocol ContactViewEditProtocol {
 class ContactViewC: AlysieBaseViewC {
 
     var delegate: ContactViewEditProtocol!
-    var tableData = [ContactDetail.view.tableCellModel]()
+    var tableData = [ContactDetail.view.tableCellModel]() {
+        didSet {
+            self.tblViewContactUs?.reloadData()
+        }
+    }
   
   //MARK: - IBOutlet -
   
@@ -25,6 +29,7 @@ class ContactViewC: AlysieBaseViewC {
   override func viewDidLoad() {
      
     super.viewDidLoad()
+
   }
   
   //MARK: - IBAction -
