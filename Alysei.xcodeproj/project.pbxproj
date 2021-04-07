@@ -196,6 +196,12 @@
 		6116531526163A7C00BB97CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6116531426163A7B00BB97CA /* GoogleService-Info.plist */; };
 		61165344261642AC00BB97CA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61165343261642AC00BB97CA /* UserProfile.swift */; };
 		6127F16E260B49DB005848B3 /* SaveResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6127F16D260B49DB005848B3 /* SaveResources.swift */; };
+		61A8CB47261D98CA00B99233 /* ContactDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB41261D98CA00B99233 /* ContactDetailPresenter.swift */; };
+		61A8CB48261D98CA00B99233 /* ContactDetailWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB42261D98CA00B99233 /* ContactDetailWorker.swift */; };
+		61A8CB49261D98CA00B99233 /* ContactDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB43261D98CA00B99233 /* ContactDetailRouter.swift */; };
+		61A8CB4A261D98CA00B99233 /* ContactDetailModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB44261D98CA00B99233 /* ContactDetailModels.swift */; };
+		61A8CB4B261D98CA00B99233 /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB45261D98CA00B99233 /* ContactDetailViewController.swift */; };
+		61A8CB4C261D98CA00B99233 /* ContactDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB46261D98CA00B99233 /* ContactDetailInteractor.swift */; };
 		6B5A8280260C56AD00ED60B7 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A827F260C56AD00ED60B7 /* WebServices.swift */; };
 		6B5A8284260C5CD100ED60B7 /* CompanyCertificates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A8283260C5CD100ED60B7 /* CompanyCertificates.swift */; };
 		6B65FFB326034900002832C8 /* SelectRoleViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B65FFB226034900002832C8 /* SelectRoleViewC.swift */; };
@@ -432,6 +438,12 @@
 		6116531426163A7B00BB97CA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		61165343261642AC00BB97CA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		6127F16D260B49DB005848B3 /* SaveResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveResources.swift; sourceTree = "<group>"; };
+		61A8CB41261D98CA00B99233 /* ContactDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailPresenter.swift; sourceTree = "<group>"; };
+		61A8CB42261D98CA00B99233 /* ContactDetailWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailWorker.swift; sourceTree = "<group>"; };
+		61A8CB43261D98CA00B99233 /* ContactDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailRouter.swift; sourceTree = "<group>"; };
+		61A8CB44261D98CA00B99233 /* ContactDetailModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailModels.swift; sourceTree = "<group>"; };
+		61A8CB45261D98CA00B99233 /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
+		61A8CB46261D98CA00B99233 /* ContactDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailInteractor.swift; sourceTree = "<group>"; };
 		6B5A827F260C56AD00ED60B7 /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		6B5A8283260C5CD100ED60B7 /* CompanyCertificates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCertificates.swift; sourceTree = "<group>"; };
 		6B65FFB226034900002832C8 /* SelectRoleViewC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRoleViewC.swift; sourceTree = "<group>"; };
@@ -503,6 +515,7 @@
 		271A2E4925B723FB00893D1C /* ProfileModule */ = {
 			isa = PBXGroup;
 			children = (
+				61A8CB40261D98B200B99233 /* contact-detail */,
 				273E5E7225BB37F4009AF5A4 /* ProfileViewContainer */,
 				273737E125B76BCE005984CF /* SettingsModule */,
 			);
@@ -1185,6 +1198,19 @@
 			path = "local_storage-and-cache";
 			sourceTree = "<group>";
 		};
+		61A8CB40261D98B200B99233 /* contact-detail */ = {
+			isa = PBXGroup;
+			children = (
+				61A8CB41261D98CA00B99233 /* ContactDetailPresenter.swift */,
+				61A8CB42261D98CA00B99233 /* ContactDetailWorker.swift */,
+				61A8CB43261D98CA00B99233 /* ContactDetailRouter.swift */,
+				61A8CB44261D98CA00B99233 /* ContactDetailModels.swift */,
+				61A8CB45261D98CA00B99233 /* ContactDetailViewController.swift */,
+				61A8CB46261D98CA00B99233 /* ContactDetailInteractor.swift */,
+			);
+			path = "contact-detail";
+			sourceTree = "<group>";
+		};
 		6B5A8282260C5CA800ED60B7 /* CompanyCerModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1437,6 +1463,7 @@
 				27A443A725AE03720002BAAC /* UIButtonCornerRadius.swift in Sources */,
 				279AB32725FF42010061FCB3 /* HubsModels.swift in Sources */,
 				272EA30F25C1B00B009E0259 /* BusinessSearchTableCell.swift in Sources */,
+				61A8CB49261D98CA00B99233 /* ContactDetailRouter.swift in Sources */,
 				27D0FAB125CEE9FF00463FE0 /* LoginAccountViewC.swift in Sources */,
 				277803BC25D1AD91008CC701 /* SignUpMultiCheckboxTableCell.swift in Sources */,
 				27BC68A425AC56C000A01B6A /* SceneDelegate.swift in Sources */,
@@ -1447,6 +1474,7 @@
 				279AB34825FF436C0061FCB3 /* HubsListTable.swift in Sources */,
 				279AB35D25FF44710061FCB3 /* HubSelectionTableViewCell.swift in Sources */,
 				2716627925BD4310000C0189 /* BusinessViewC.swift in Sources */,
+				61A8CB4C261D98CA00B99233 /* ContactDetailInteractor.swift in Sources */,
 				27A443B325AE03720002BAAC /* UITextViewBorderWidthAndColor.swift in Sources */,
 				27A4439B25AE03720002BAAC /* RSTextView.swift in Sources */,
 				6BC4C0CE26006AA600791DCD /* OverLayLoginViewController.swift in Sources */,
@@ -1463,6 +1491,7 @@
 				27A443C625AE03720002BAAC /* textEdit.swift in Sources */,
 				279AB36225FF44710061FCB3 /* ShowHubSelectionTableViewCell.swift in Sources */,
 				274D90AC25B85D5D00C82A75 /* CompanySecondTableCell.swift in Sources */,
+				61A8CB4B261D98CA00B99233 /* ContactDetailViewController.swift in Sources */,
 				27A4439625AE03720002BAAC /* NSData+CommonCrypto.m in Sources */,
 				27B4E8FB25EF957D00623E45 /* SettingsEditModel.swift in Sources */,
 				276E16AE25DD8C5E00B17ACF /* TutorialViewC.swift in Sources */,
@@ -1495,6 +1524,7 @@
 				271662B125BD7A45000C0189 /* BusinessButtonTableCell.swift in Sources */,
 				279AB35125FF44550061FCB3 /* CountryListVC.swift in Sources */,
 				274D90AD25B85D5D00C82A75 /* CompanyFirstTableCell.swift in Sources */,
+				61A8CB48261D98CA00B99233 /* ContactDetailWorker.swift in Sources */,
 				27B4E8FC25EF957D00623E45 /* AddFeaturedModel.swift in Sources */,
 				C513C1A9261477640025CF27 /* PinterestLayout.swift in Sources */,
 				2716627325BC84EB000C0189 /* NotificationTableCell.swift in Sources */,
@@ -1543,9 +1573,11 @@
 				27A443C225AE03720002BAAC /* String+StringExtended.swift in Sources */,
 				278ACAA225BB031D0054ACB6 /* BlockingViewC.swift in Sources */,
 				27A443AB25AE03720002BAAC /* UIViewBorderWidthAndColor.swift in Sources */,
+				61A8CB47261D98CA00B99233 /* ContactDetailPresenter.swift in Sources */,
 				274D90AA25B85D5D00C82A75 /* UpdatePasswordViewC.swift in Sources */,
 				27A443B125AE03720002BAAC /* DateExtended.swift in Sources */,
 				273E5E7E25BB3848009AF5A4 /* ContactViewC.swift in Sources */,
+				61A8CB4A261D98CA00B99233 /* ContactDetailModels.swift in Sources */,
 				27A4439925AE03720002BAAC /* RSButton.swift in Sources */,
 				273E5E7725BB381E009AF5A4 /* PostsViewC.swift in Sources */,
 				27A443BF25AE03720002BAAC /* RSDatePicker.swift in Sources */,
