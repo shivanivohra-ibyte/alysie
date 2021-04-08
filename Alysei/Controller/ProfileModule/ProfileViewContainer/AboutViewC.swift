@@ -7,23 +7,37 @@
 
 import UIKit
 
+enum AboutView {
+    struct Response: Codable {
+        var data: data
+    }
+
+    struct data: Codable {
+        var productType: [String]?
+        var about: [String]?
+        var products: [String]?
+
+        private enum CodingKeys: String, CodingKey {
+            case productType = "Product Type"
+            case about = "About"
+            case products = "Our Products"
+
+        }
+    }
+}
+
 class AboutViewC: UIViewController {
+
+
+//    @IBOutlet var productTypeCollectionView: UICollectionView!
+    @IBOutlet var aboutCollectionView: UICollectionView!
+//    @IBOutlet var ourProductsCollectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

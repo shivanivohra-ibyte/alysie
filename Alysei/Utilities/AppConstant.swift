@@ -187,7 +187,7 @@ struct APIUrl{
         static let fetchContactDetails = kBASEURL + "get/member/contact/tab"
         static let updateContactDetails = kBASEURL + "update/contact/details"
 
-        static let aboutDetails = kBASEURL + "get/member/about/tab"
+        static let fetchAboutDetails = kBASEURL + "get/member/about/tab"
 
     }
 }

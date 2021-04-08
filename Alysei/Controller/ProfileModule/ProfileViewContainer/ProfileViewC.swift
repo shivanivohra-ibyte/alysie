@@ -88,7 +88,8 @@ class ProfileViewC: AlysieBaseViewC{
     self.fetchProfileDetails()
 
     self.fetchContactDetail()
-    
+    self.fetchAboutDetail()
+
   }
   
   override func viewDidLayoutSubviews(){
@@ -326,6 +327,24 @@ class ProfileViewC: AlysieBaseViewC{
                                                                            title: "Facebook", value: facebook))
                 }
                 print(self.contactDetail.count)
+            } catch {
+                print(error.localizedDescription)
+            }
+            if (error != nil) { print(error.debugDescription) }
+        }
+    }
+
+
+    func fetchAboutDetail() {
+        SVProgressHUD.show()
+        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Profile.fetchAboutDetails)", method: .GET) else { return }
+        WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
+            SVProgressHUD.dismiss()
+            guard let data = data else { return }
+            do {
+                let responseModel = try JSONDecoder().decode(AboutView.Response.self, from: data)
+                print(responseModel)
+                self.contactDetail.removeAll()
             } catch {
                 print(error.localizedDescription)
             }
