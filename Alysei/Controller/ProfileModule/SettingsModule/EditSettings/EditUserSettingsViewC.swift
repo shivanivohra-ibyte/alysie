@@ -135,7 +135,7 @@ class EditUserSettingsViewC: AlysieBaseViewC {
   
   private func postRequestToGetUserSettings() -> Void{
    
-    //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kUserSettings, method: .GET, controller: self, type: 0, param: [:], btnTapped: UIButton(), superView: self.view)
+    disableWindowInteraction()
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kUserSettings, method: .GET, controller: self, type: 0, param: [:], btnTapped: UIButton())
   }
   
@@ -146,7 +146,7 @@ class EditUserSettingsViewC: AlysieBaseViewC {
                                APIConstants.kLocale: "en",
                                APIConstants.kWebsite: self.settingEditViewModel.selectedUrl
                                ]
-    //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kUpdateUserSettings, method: .POST, controller: self, type: 1, param: param, btnTapped: UIButton(), superView: self.view)
+    disableWindowInteraction()
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kUpdateUserSettings, method: .POST, controller: self, type: 1, param: param, btnTapped: UIButton())
   }
   
@@ -154,7 +154,7 @@ class EditUserSettingsViewC: AlysieBaseViewC {
   
     self.featureListingId = featureListingId
     self.currentProductTitle = navigationTitle
-   // CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetFeatureListing + featureListingId, method: .GET, controller: self, type: 2, param: [:], btnTapped: UIButton(), superView: self.view)
+    disableWindowInteraction()
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetFeatureListing + featureListingId, method: .GET, controller: self, type: 2, param: [:], btnTapped: UIButton())
   }
     

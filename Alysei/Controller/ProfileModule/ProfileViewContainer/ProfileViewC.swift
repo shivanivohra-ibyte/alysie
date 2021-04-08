@@ -349,7 +349,7 @@ class ProfileViewC: AlysieBaseViewC{
 
   private func postRequestToGetFields() -> Void{
     
-    //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kUserSubmittedFields, method: .GET, controller: self, type: 0, param: [:], btnTapped: UIButton(), superView: self.view)
+    disableWindowInteraction()
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kUserSubmittedFields, method: .GET, controller: self, type: 0, param: [:], btnTapped: UIButton())
   }
 }

@@ -143,7 +143,7 @@ class LoginAccountViewC: AlysieBaseViewC{
       self.btnLogin.isUserInteractionEnabled = true
       self.btnTermsOfUse.isUserInteractionEnabled = true
     }
-    //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetRoles, method: .GET, controller: self, type: 0, param: [:],btnTapped: self.btnSignUp, superView: self.view)
+    disableWindowInteraction()
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetRoles, method: .GET, controller: self, type: 0, param: [:],btnTapped: self.btnSignUp)
   }
 }

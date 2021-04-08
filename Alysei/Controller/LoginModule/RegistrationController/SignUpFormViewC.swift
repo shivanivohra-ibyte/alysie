@@ -179,7 +179,7 @@ class SignUpFormViewC: AlysieBaseViewC{
     let dictStepTwo = kSharedInstance.signUpViewModel.toDictionaryStepTwo()
 
     let mergeDict = dictStepOne + dictStepTwo
-    //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kRegister, method: .POST, controller: self, type: 0, param:  mergeDict.compactMap { $0 }.reduce([:]) { $0.merging($1) { (current, _) in current } },btnTapped: self.btnSubmit, superView: self.view)
+    disableWindowInteraction()
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kRegister, method: .POST, controller: self, type: 0, param:  mergeDict.compactMap { $0 }.reduce([:]) { $0.merging($1) { (current, _) in current } },btnTapped: self.btnSubmit)
   }
 }

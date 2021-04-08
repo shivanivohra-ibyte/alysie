@@ -126,7 +126,6 @@ class SignUpViewC: AlysieBaseViewC {
     }
     
     private func createStringForProducts() -> String {
-        
         let filteredSelectedProduct = self.signUpStepOneDataModel.arrOptions.map({$0}).filter({$0.isSelected == true})
         
         var selectedProductNames: [String] = []
@@ -154,6 +153,7 @@ class SignUpViewC: AlysieBaseViewC {
         switch filteredSelectedProduct.count {
         case 0:
             print("No Products found")
+            self.signUpStepOneDataModel.selectedOptionName = ""
         case 1:
             self.signUpStepOneDataModel.selectedOptionName = selectedProductNames[0]
         //     case 2:
@@ -174,14 +174,14 @@ class SignUpViewC: AlysieBaseViewC {
     private func postRequestToGetState(_ countryId: String) -> Void{
         
         let param: [String:Any] = [APIConstants.kCountryId: countryId]
-        //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetStates + String.getString(self.getRoleDataModel.first?.roleId), method: .GET, controller: self, type: 0, param: param,btnTapped: UIButton(), superView: self.view)
+        disableWindowInteraction()
         CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetStates + String.getString(self.getRoleDataModel.first?.roleId), method: .GET, controller: self, type: 0, param: param,btnTapped: UIButton())
     }
     
     private func postRequestToGetCity(_ stateId: String) -> Void{
         
         let param: [String:Any] = [APIConstants.kStateId: stateId]
-        //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetCities + String.getString(self.getRoleDataModel.first?.roleId), method: .GET, controller: self, type: 1, param: param,btnTapped: UIButton(), superView: self.view)
+        disableWindowInteraction()
         CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetCities + String.getString(self.getRoleDataModel.first?.roleId), method: .GET, controller: self, type: 1, param: param,btnTapped: UIButton())
     }
     
@@ -192,9 +192,11 @@ class SignUpViewC: AlysieBaseViewC {
         
         let mergeDict = dictStepOne.compactMap { $0 }.reduce([:]) { $0.merging($1) { (current, _) in current } }
         
-        //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kRegister, method: .POST, controller: self, type: 2, param:  mergeDict,btnTapped: self.btnProceedNext, superView: self.view)
+        disableWindowInteraction()
         CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kRegister, method: .POST, controller: self, type: 2, param:  mergeDict,btnTapped: self.btnProceedNext)
     }
+    
+  
 }
 
 //MARK:  - TableView Methods -

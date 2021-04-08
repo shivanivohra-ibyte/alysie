@@ -354,7 +354,7 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
         self.featureListingId = featureListingId
         self.currentProductTitle = navigationTitle
 
-       // CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetFeatureListing + featureListingId, method: .GET, controller: self, type: 2, param: [:], btnTapped: UIButton(), superView: self.view)
+        disableWindowInteraction()
         CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetFeatureListing + featureListingId, method: .GET, controller: self, type: 2, param: [:], btnTapped: UIButton())
     }
 
@@ -399,6 +399,7 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
         //                         "cover_id" : compressedCoverImage ?? UIImage()
         //    ]
         let mergeDict = dictStepOne.compactMap { $0 }.reduce([:]) { $0.merging($1) { (current, _) in current } }
+        disableWindowInteraction()
         CommonUtil.sharedInstance.postToServerRequestMultiPart(APIUrl.kUpdateUserProfile, params: mergeDict, imageParams: imageParam, controller: self) { (dictReponse) in
 
             guard let data = dictReponse["data"] as? [String: Any] else { return }
