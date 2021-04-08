@@ -52,7 +52,10 @@ class CommonUtil: NSObject {
     
   
     SVProgressHUD.show()
-    
+
+        if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
+            window.isUserInteractionEnabled = false
+        }
    
     TANetworkManager.sharedInstance.requestApi(withServiceName: url,
                                                    requestMethod: method,
@@ -67,7 +70,8 @@ class CommonUtil: NSObject {
         if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
              window.isUserInteractionEnabled = false
         
-        
+            window.isUserInteractionEnabled = true
+
             if errorType == .requestSuccess {
             
               let dictResult = kSharedInstance.getDictionary(result)
@@ -75,18 +79,15 @@ class CommonUtil: NSObject {
                 switch Int.getInt(statusCode){
                 case 200,201,204,205:
                   btnTapped.isUserInteractionEnabled = true
-                    window.isUserInteractionEnabled = true
                    // superView.isUserInteractionEnabled = true
                   controller.didUserGetData(from: dictResult, type: type)
                 case 400,401:
                   btnTapped.isUserInteractionEnabled = true
-                    window.isUserInteractionEnabled = true
 
                     //superView.isUserInteractionEnabled = true
                   controller.showAlert(withMessage: String.getString(dictResult[APIConstants.kError]))
                 case 409,422:
                   btnTapped.isUserInteractionEnabled = true
-                    window.isUserInteractionEnabled = true
 
                    // superView.isUserInteractionEnabled = true
                   controller.showAlert(withMessage: String.getString(dictResult[APIConstants.kErrors]))
@@ -96,13 +97,11 @@ class CommonUtil: NSObject {
                 
             } else if errorType == .noNetwork{
                  btnTapped.isUserInteractionEnabled = true
-                window.isUserInteractionEnabled = true
 
                // superView.isUserInteractionEnabled = true
                 controller.showAlert(withMessage: AlertMessage.kNoInternet)}
             else {
               btnTapped.isUserInteractionEnabled = true
-                window.isUserInteractionEnabled = true
 
                // superView.isUserInteractionEnabled = true
               controller.showAlert(withMessage: AlertMessage.kDefaultError) }
