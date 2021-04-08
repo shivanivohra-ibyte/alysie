@@ -50,7 +50,7 @@ class OverLayForgetVC: UIViewController {
                 self.dismiss(animated: true, completion: nil)
             } else {
                 // Set back to original position of the view controller
-                UIView.animate(withDuration: 0.3) {
+                UIView.animate(withDuration: 0.5) {
                     self.view.frame.origin = self.pointOrigin ?? CGPoint(x: 0, y: 400)
                 }
             }
@@ -88,6 +88,7 @@ extension OverLayForgetVC {
         
         let param: [String:Any] = [APIConstants.kEmail:String.getString(self.txtFieldEmail.text)]
         
+        //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kResendOtp, method: .POST, controller: self, type: 0, param: param,btnTapped: self.btnResetPassword, superView: self.view)
         CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kResendOtp, method: .POST, controller: self, type: 0, param: param,btnTapped: self.btnResetPassword)
     }
 }

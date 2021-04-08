@@ -93,11 +93,13 @@ class LoginViewC: AlysieBaseViewC {
   
   private func postRequestToLogin() -> Void{
     
+    //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kLogin, method: .POST, controller: self, userName: String.getString(self.txtFieldEmail.text), passsword: String.getString(self.txtFieldPassword.text), type: 0, param: [:], btnTapped: self.btnLogin, superView: self.view)
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kLogin, method: .POST, controller: self, userName: String.getString(self.txtFieldEmail.text), passsword: String.getString(self.txtFieldPassword.text), type: 0, param: [:], btnTapped: self.btnLogin)
   }
   
   private func postRequestToGetRoles() -> Void{
     
+   // CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetRoles, method: .GET, controller: self, type: 1, param: [:], btnTapped: self.btnSignUp, superView: self.view)
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetRoles, method: .GET, controller: self, type: 1, param: [:], btnTapped: self.btnSignUp)
   }
   

@@ -174,12 +174,14 @@ class SignUpViewC: AlysieBaseViewC {
     private func postRequestToGetState(_ countryId: String) -> Void{
         
         let param: [String:Any] = [APIConstants.kCountryId: countryId]
+        //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetStates + String.getString(self.getRoleDataModel.first?.roleId), method: .GET, controller: self, type: 0, param: param,btnTapped: UIButton(), superView: self.view)
         CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetStates + String.getString(self.getRoleDataModel.first?.roleId), method: .GET, controller: self, type: 0, param: param,btnTapped: UIButton())
     }
     
     private func postRequestToGetCity(_ stateId: String) -> Void{
         
         let param: [String:Any] = [APIConstants.kStateId: stateId]
+        //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetCities + String.getString(self.getRoleDataModel.first?.roleId), method: .GET, controller: self, type: 1, param: param,btnTapped: UIButton(), superView: self.view)
         CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetCities + String.getString(self.getRoleDataModel.first?.roleId), method: .GET, controller: self, type: 1, param: param,btnTapped: UIButton())
     }
     
@@ -190,6 +192,7 @@ class SignUpViewC: AlysieBaseViewC {
         
         let mergeDict = dictStepOne.compactMap { $0 }.reduce([:]) { $0.merging($1) { (current, _) in current } }
         
+        //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kRegister, method: .POST, controller: self, type: 2, param:  mergeDict,btnTapped: self.btnProceedNext, superView: self.view)
         CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kRegister, method: .POST, controller: self, type: 2, param:  mergeDict,btnTapped: self.btnProceedNext)
     }
 }

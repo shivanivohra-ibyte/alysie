@@ -54,6 +54,7 @@ class MapViewC: AlysieBaseViewC {
     let storyboard = UIStoryboard.init(name: StoryBoardConstants.kLogin, bundle: nil)
     let viewController = storyboard.instantiateViewController(withIdentifier: SaveAddressViewC.id()) as! SaveAddressViewC
     viewController.signUpStepTwoDataModel = self.signUpStepTwoDataModel
+    viewController.mapAddress = lblUpdateLocation.text
     viewController.delegate = self
     viewController.modalPresentationStyle = .overCurrentContext
     self.navigationController?.present(viewController, animated: true, completion: nil)
@@ -128,11 +129,15 @@ extension MapViewC: GMSAutocompleteViewControllerDelegate {
 }
 
 extension MapViewC: SaveAddressCallback{
-  
-  func addressSaved(_ model: SignUpStepTwoDataModel, addressLineOne: String, addressLineTwo: String) {
-    
-    self.dismiss(animated: true){
-      self.delegate?.addressSaved(model, addressLineOne: addressLineOne, addressLineTwo: addressLineTwo)
+    func addressSaved(_ model: SignUpStepTwoDataModel, addressLineOne: String, addressLineTwo: String, mapAddress: String?) {
+        self.dismiss(animated: true){
+            self.delegate?.addressSaved(model, addressLineOne: addressLineOne, addressLineTwo: addressLineTwo, mapAddress: mapAddress)
+        }
     }
-  }
+    
+  
+//    func addressSaved(_ model: SignUpStepTwoDataModel, addressLineOne: String, addressLineTwo: String, mapAddress:String) {
+//    
+//   
+//  }
 }

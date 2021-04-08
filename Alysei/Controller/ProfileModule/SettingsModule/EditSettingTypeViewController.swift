@@ -35,7 +35,9 @@ class EditSetingTypeViewController: AlysieBaseViewC {
 }
 extension EditSetingTypeViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       if kSharedUserDefaults.loggedInUserModal.memberRoleId == "10"{
+        //let roleID =  UserRoles(rawValue: "\(kSharedUserDefaults.loggedInUserModal.memberRoleId ?? "0")") ?? .voyagers
+        let roleID = UserRoles(rawValue: Int.getInt(kSharedUserDefaults.loggedInUserModal.memberRoleId ?? 0)) ?? .voyagers
+        if roleID == .voyagers {
         return StaticArrayData.kEditSettingVoyColScreenDict.count
         }else {
             return StaticArrayData.kEditSettingUserColScreenDict.count
@@ -47,16 +49,13 @@ extension EditSetingTypeViewController: UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if kSharedUserDefaults.loggedInUserModal.memberRoleId == "3" {
             switch indexPath.row {
             case 0:
                 _ = pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditUserSettingsViewC
             default:
                 print("HubSelection")
             }
-       }else if kSharedUserDefaults.loggedInUserModal.memberRoleId == "10"{
-    }
-  }
+       }
 }
 
 extension EditSetingTypeViewController: CHTCollectionViewDelegateWaterfallLayout {

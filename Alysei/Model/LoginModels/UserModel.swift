@@ -135,6 +135,11 @@ enum ProfilePercentage: Int {
     case percent100 = 100
     case percent75 = 75
 }
+
+enum isCameFrom {
+    case save
+    case addFeatureProduct
+}
 //class UserImage: {
 //
 //}
