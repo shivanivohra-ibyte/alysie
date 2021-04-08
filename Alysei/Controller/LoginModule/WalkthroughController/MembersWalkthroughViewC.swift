@@ -40,13 +40,13 @@ class MembersWalkthroughViewC: AlysieBaseViewC {
   
   private func postRequestToGetRegistrationFields(_ currentButton: UIButton) -> Void{
     
-    //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetRegistrationFields +  String.getString(self.getRoleDataModel?.first?.roleId), method: .GET, controller: self, type: 0, param: [:],btnTapped: currentButton, superView: self.view)
+    disableWindowInteraction()
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetRegistrationFields +  String.getString(self.getRoleDataModel?.first?.roleId), method: .GET, controller: self, type: 0, param: [:],btnTapped: currentButton)
   }
   
   private func postRequestToGetCountries() -> Void{
     
-    //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetCountries + String.getString(self.getRoleDataModel.first?.roleId), method: .GET, controller: self, type: 1, param: [:],btnTapped: UIButton(), superView: self.view)
+    disableWindowInteraction()
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetCountries + String.getString(self.getRoleDataModel.first?.roleId), method: .GET, controller: self, type: 1, param: [:],btnTapped: UIButton())
   }
 }

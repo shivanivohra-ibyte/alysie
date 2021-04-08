@@ -222,7 +222,7 @@ class AddFeatureViewC: AlysieBaseViewC {
                                    APIConstants.kImageName:String.getString(model.first?.featuredListingFieldId)]
 
     let mergeDict = dictProduct.compactMap { $0 }.reduce([:]) { $0.merging($1) { (current, _) in current } }
-
+    disableWindowInteraction()
     CommonUtil.sharedInstance.postRequestToImageUpload(withParameter: mergeDict, url: APIUrl.kAddFeaturedProducts, image: imageParam, controller: self, type: 0)
   }
 }

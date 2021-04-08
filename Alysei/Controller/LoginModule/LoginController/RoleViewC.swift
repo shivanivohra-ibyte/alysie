@@ -89,7 +89,7 @@ class RoleViewC: AlysieBaseViewC {
   
   private func postRequestToGetWalkthorughScreens(_ selectedRoleId: String) -> Void{
     
-    //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetWalkthroughScreens + selectedRoleId, method: .GET, controller: self, type: 0, param: [:],btnTapped: self.btnGetStarted, superView: self.view)
+    disableWindowInteraction()
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetWalkthroughScreens + selectedRoleId, method: .GET, controller: self, type: 0, param: [:],btnTapped: self.btnGetStarted)
   }
 }

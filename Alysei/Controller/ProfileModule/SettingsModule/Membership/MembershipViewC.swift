@@ -53,7 +53,7 @@ class MembershipViewC: AlysieBaseViewC {
   
   private func postRequestToGetProgress() -> Void{
     
-   // CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetProgress, method: .GET, controller: self, type: 0, param: [:], btnTapped: UIButton(), superView: self.view)
+    disableWindowInteraction()
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetProgress, method: .GET, controller: self, type: 0, param: [:], btnTapped: UIButton())
   }
 }

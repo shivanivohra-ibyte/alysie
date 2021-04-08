@@ -46,6 +46,7 @@ extension UIViewController: CommonUtilDelegate {
 class CommonUtil: NSObject {
     
   static let sharedInstance = CommonUtil()
+    //var window = UIWindow()
     
     func postRequestToServer(url: String, method: kHTTPMethod, controller: UIViewController,userName: String = "",passsword: String = "", type: Int, param: [String:Any],btnTapped: UIButton) -> Void {
     
@@ -63,7 +64,10 @@ class CommonUtil: NSObject {
            
   
            SVProgressHUD.dismiss()
-  
+        if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
+             window.isUserInteractionEnabled = false
+        
+        
             if errorType == .requestSuccess {
             
               let dictResult = kSharedInstance.getDictionary(result)
@@ -71,14 +75,19 @@ class CommonUtil: NSObject {
                 switch Int.getInt(statusCode){
                 case 200,201,204,205:
                   btnTapped.isUserInteractionEnabled = true
+                    window.isUserInteractionEnabled = true
                    // superView.isUserInteractionEnabled = true
                   controller.didUserGetData(from: dictResult, type: type)
                 case 400,401:
                   btnTapped.isUserInteractionEnabled = true
+                    window.isUserInteractionEnabled = true
+
                     //superView.isUserInteractionEnabled = true
                   controller.showAlert(withMessage: String.getString(dictResult[APIConstants.kError]))
                 case 409,422:
                   btnTapped.isUserInteractionEnabled = true
+                    window.isUserInteractionEnabled = true
+
                    // superView.isUserInteractionEnabled = true
                   controller.showAlert(withMessage: String.getString(dictResult[APIConstants.kErrors]))
                 default:
@@ -87,13 +96,18 @@ class CommonUtil: NSObject {
                 
             } else if errorType == .noNetwork{
                  btnTapped.isUserInteractionEnabled = true
+                window.isUserInteractionEnabled = true
+
                // superView.isUserInteractionEnabled = true
                 controller.showAlert(withMessage: AlertMessage.kNoInternet)}
             else {
               btnTapped.isUserInteractionEnabled = true
+                window.isUserInteractionEnabled = true
+
                // superView.isUserInteractionEnabled = true
               controller.showAlert(withMessage: AlertMessage.kDefaultError) }
         }
+    }
     }
     
   func postRequestToImageUpload(withParameter params:[String: Any], url:String, image:[String: Any], controller: UIViewController, type: Int) {

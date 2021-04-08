@@ -120,7 +120,7 @@ class CountryListVC: AlysieBaseViewC , SelectList {
     //MARK:  - WebService Methods -
     
     private func postRequestToPostHubs(_ params: [String:Any]) -> Void{
-       // CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kPostHub, method: .POST, controller: self, type: 0, param: params,btnTapped: UIButton(), superView: self.view)
+        disableWindowInteraction()
         CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kPostHub, method: .POST, controller: self, type: 0, param: params,btnTapped: UIButton())
     }
     

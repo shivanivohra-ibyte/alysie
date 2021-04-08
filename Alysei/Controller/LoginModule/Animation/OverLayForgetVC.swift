@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OverLayForgetVC: UIViewController {
+class OverLayForgetVC: AlysieBaseViewC {
     
     //MARK: @IBOutlets
     @IBOutlet weak var txtFieldEmail: UITextFieldExtended!
@@ -88,7 +88,7 @@ extension OverLayForgetVC {
         
         let param: [String:Any] = [APIConstants.kEmail:String.getString(self.txtFieldEmail.text)]
         
-        //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kResendOtp, method: .POST, controller: self, type: 0, param: param,btnTapped: self.btnResetPassword, superView: self.view)
+        disableWindowInteraction()
         CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kResendOtp, method: .POST, controller: self, type: 0, param: param,btnTapped: self.btnResetPassword)
     }
 }
