@@ -355,7 +355,7 @@ class ProfileViewC: AlysieBaseViewC{
             SVProgressHUD.dismiss()
             guard let data = data else { return }
             do {
-                let responseModel = try JSONDecoder().decode(AboutView.Response.self, from: data)
+                let responseModel = try JSONDecoder().decode(AboutView.Response<AboutView.producerDataModel>.self, from: data)
                 print(responseModel)
                 self.contactDetail.removeAll()
             } catch {

@@ -8,14 +8,18 @@
 import UIKit
 
 enum AboutView {
-    struct Response: Codable {
-        var data: data
+    struct Response<Element: Codable>: Codable {
+        var data:  Element?
+
+        private enum CodingKeys: String, CodingKey {
+            case data = "data"
+        }
     }
 
-    struct data: Codable {
+    struct producerDataModel: Codable {
         var productType: [String]?
-        var about: [String]?
-        var products: [String]?
+        var about: String?
+        var products: String?
 
         private enum CodingKeys: String, CodingKey {
             case productType = "Product Type"
@@ -24,6 +28,21 @@ enum AboutView {
 
         }
     }
+
+
+    struct restaurantDataModel: Codable {
+        var restaurantType: [String]?
+        var about: String?
+        var Menu: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case restaurantType = "Restaurant Type"
+            case about = "About"
+            case Menu = "Menu"
+
+        }
+    }
+
 }
 
 class AboutViewC: UIViewController {
