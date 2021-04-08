@@ -63,7 +63,8 @@ extension SettingsScreenVC: UICollectionViewDataSource, UICollectionViewDelegate
             case 1:
                 print("MarketPlace")
             case 0:
-              _ = pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditUserSettingsViewC
+             // _ = pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditUserSettingsViewC
+                _ = pushViewController(withName: EditSetingTypeViewController.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditSetingTypeViewController
             case 2:
               _ = pushViewController(withName: CompanyViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
             case 4:
@@ -82,7 +83,8 @@ extension SettingsScreenVC: UICollectionViewDataSource, UICollectionViewDelegate
     }else if kSharedUserDefaults.loggedInUserModal.memberRoleId == "10"{
         switch indexPath.row {
         case 0:
-          _ = pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditUserSettingsViewC
+          //_ = pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditUserSettingsViewC
+            _ = pushViewController(withName: EditSetingTypeViewController.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditSetingTypeViewController
         case 2:
           _ = pushViewController(withName: UpdatePasswordViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
         case 4:
@@ -100,7 +102,8 @@ extension SettingsScreenVC: UICollectionViewDataSource, UICollectionViewDelegate
     }else if kSharedUserDefaults.loggedInUserModal.memberRoleId == "9" {
         switch indexPath.row {
         case 0:
-          _ = pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditUserSettingsViewC
+         // _ = pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditUserSettingsViewC
+            _ = pushViewController(withName: EditSetingTypeViewController.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditSetingTypeViewController
         case 4:
           _ = pushViewController(withName: UpdatePasswordViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
         case 5:
@@ -117,7 +120,8 @@ extension SettingsScreenVC: UICollectionViewDataSource, UICollectionViewDelegate
     }else if kSharedUserDefaults.loggedInUserModal.memberRoleId == "7"{
         switch indexPath.row {
         case 0:
-          _ = pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditUserSettingsViewC
+          //_ = pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditUserSettingsViewC
+            _ = pushViewController(withName: EditSetingTypeViewController.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditSetingTypeViewController
         case 4:
           _ = pushViewController(withName: UpdatePasswordViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
         case 5:
@@ -134,7 +138,8 @@ extension SettingsScreenVC: UICollectionViewDataSource, UICollectionViewDelegate
     }else if kSharedUserDefaults.loggedInUserModal.memberRoleId == "8"{
         switch indexPath.row {
         case 0:
-          _ = pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditUserSettingsViewC
+         // _ = pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditUserSettingsViewC
+            _ = pushViewController(withName: EditSetingTypeViewController.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditSetingTypeViewController
         case 3:
           _ = pushViewController(withName: UpdatePasswordViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
         case 4:
@@ -151,7 +156,8 @@ extension SettingsScreenVC: UICollectionViewDataSource, UICollectionViewDelegate
     }else{
         switch indexPath.row {
         case 0:
-          _ = pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditUserSettingsViewC
+         // _ = pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditUserSettingsViewC
+            _ = pushViewController(withName: EditSetingTypeViewController.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditSetingTypeViewController
         case 3:
           _ = pushViewController(withName: UpdatePasswordViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
         case 4:

@@ -39,7 +39,8 @@ enum UserProfile {
         var firstName: String?
         var lastName: String?
         var restaurantName: String?
-
+        var profilePercentage: Int?
+        
          private enum CodingKeys: String, CodingKey {
             case avatar = "avatar_id"
             case cover = "cover_id"
@@ -50,6 +51,7 @@ enum UserProfile {
             case roleID = "role_id"
             case firstName = "first_name"
             case lastName = "last_name"
+            case profilePercentage = "profile_percentage"
          }
     }
 
