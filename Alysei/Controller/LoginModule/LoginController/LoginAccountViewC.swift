@@ -30,6 +30,7 @@ class LoginAccountViewC: AlysieBaseViewC{
             self?.player?.seek(to: CMTime.zero)
             self?.player?.play()
         }
+   
     //logoCenterConstraint.constant -= view.bounds.width
   }
   
@@ -41,6 +42,11 @@ class LoginAccountViewC: AlysieBaseViewC{
 //            self.view.layoutIfNeeded()
 //        }, completion: nil)
   }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.view.isUserInteractionEnabled = true
+        
+    }
   
   override func viewDidLayoutSubviews() {
     
@@ -60,8 +66,7 @@ class LoginAccountViewC: AlysieBaseViewC{
   }
   
   @IBAction func tapSignUp(_ sender: UIButton) {
-  
-    
+    self.view.isUserInteractionEnabled = false
     self.btnSignUp.isUserInteractionEnabled = false
     self.btnLogin.isUserInteractionEnabled = false
     self.btnTermsOfUse.isUserInteractionEnabled = false
@@ -111,6 +116,9 @@ class LoginAccountViewC: AlysieBaseViewC{
                     controller?.pushedFrom = .forgotPassword
                 }
                 self.present(slideVC, animated: true, completion: nil)
+//                self.present(slideVC, animated: true) {
+//                    self.view.isUserInteractionEnabled = true
+//                }
             case 3:
                // let controller = self.pushViewController(withName: RoleViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? RoleViewC
                 //controller?.getRoleViewModel = getRoleViewModel
@@ -122,6 +130,10 @@ class LoginAccountViewC: AlysieBaseViewC{
             
         }
         self.present(slideVC, animated: true, completion: nil)
+//        self.present(slideVC, animated: true) {
+//            self.view.isUserInteractionEnabled = true
+//        }
+       
     }
   //MARK:  - WebService Methods -
   
@@ -131,6 +143,7 @@ class LoginAccountViewC: AlysieBaseViewC{
       self.btnLogin.isUserInteractionEnabled = true
       self.btnTermsOfUse.isUserInteractionEnabled = true
     }
+    //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetRoles, method: .GET, controller: self, type: 0, param: [:],btnTapped: self.btnSignUp, superView: self.view)
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetRoles, method: .GET, controller: self, type: 0, param: [:],btnTapped: self.btnSignUp)
   }
 }

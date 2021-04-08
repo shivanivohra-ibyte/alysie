@@ -186,6 +186,7 @@ class ProfileViewC: AlysieBaseViewC{
 
     if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().profilePhoto) {
         self.imgViewProfile.image = profilePhoto
+        self.imgViewProfileNavigation.image = profilePhoto
         self.imgViewProfile.layer.cornerRadius = (self.imgViewProfile.frame.width / 2.0)
         self.imgViewProfile.layer.borderWidth = 5.0
         
@@ -367,6 +368,7 @@ class ProfileViewC: AlysieBaseViewC{
 
   private func postRequestToGetFields() -> Void{
     
+    //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kUserSubmittedFields, method: .GET, controller: self, type: 0, param: [:], btnTapped: UIButton(), superView: self.view)
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kUserSubmittedFields, method: .GET, controller: self, type: 0, param: [:], btnTapped: UIButton())
   }
 }

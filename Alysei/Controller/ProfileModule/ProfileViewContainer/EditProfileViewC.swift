@@ -35,6 +35,7 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
     var picker = UIImagePickerController()
     var signUpViewModel: SignUpViewModel!
     var signUpStepOneDataModel: SignUpStepOneDataModel!
+    var isCameProfileUpdate : isCameFrom?
 
     //MARK:  - ViewLifeCycle Methods -
 
@@ -80,6 +81,7 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
     }
 
     @IBAction func tapSave(_ sender: UIButton) {
+        isCameProfileUpdate = .save
         self.postRequestToUpdateUserProfile()
     }
 
@@ -352,6 +354,7 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
         self.featureListingId = featureListingId
         self.currentProductTitle = navigationTitle
 
+       // CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetFeatureListing + featureListingId, method: .GET, controller: self, type: 2, param: [:], btnTapped: UIButton(), superView: self.view)
         CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetFeatureListing + featureListingId, method: .GET, controller: self, type: 2, param: [:], btnTapped: UIButton())
     }
 
@@ -435,10 +438,14 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
 //                kSharedUserDefaults.loggedInUserModal.avatar = UserModel.imageAttachementModel(dict, for: "coverPhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg")
 //            }
 
-            
-            self.showAlert(withMessage: AlertMessage.kProfileUpdated){
-                self.navigationController?.popViewController(animated: true)
+            if self.isCameProfileUpdate == .save{
+                self.showAlert(withMessage: AlertMessage.kProfileUpdated){
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }else{
+                print("Profile Update Done")
             }
+            
 
             //print("Success")
         }
@@ -601,6 +608,8 @@ extension EditProfileViewC{
             if let fields = dicData[APIConstants.kFields] as? ArrayOfDictionary{
                 arrSelectedFields = fields.map({ProductFieldsDataModel(withDictionary: $0)})
             }
+           
+            //self.postRequestToUpdateUserProfile()
             let controller = pushViewController(withName: AddFeatureViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? AddFeatureViewC
             controller?.arrSelectedFields = arrSelectedFields
             controller?.featureListingId = self.featureListingId
@@ -689,6 +698,7 @@ extension EditProfileViewC: AddFeaturedProductCallBack {
     func tappedAddProduct(withProductCategoriesDataModel model: ProductCategoriesDataModel, featureListingId: String?) {
 
         if featureListingId == nil{
+            //self.postRequestToUpdateUserProfile()
             let controller = pushViewController(withName: AddFeatureViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? AddFeatureViewC
             controller?.productCategoriesDataModel = model
             controller?.delegate = self

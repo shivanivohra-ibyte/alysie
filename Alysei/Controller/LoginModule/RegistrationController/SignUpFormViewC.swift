@@ -179,6 +179,7 @@ class SignUpFormViewC: AlysieBaseViewC{
     let dictStepTwo = kSharedInstance.signUpViewModel.toDictionaryStepTwo()
 
     let mergeDict = dictStepOne + dictStepTwo
+    //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kRegister, method: .POST, controller: self, type: 0, param:  mergeDict.compactMap { $0 }.reduce([:]) { $0.merging($1) { (current, _) in current } },btnTapped: self.btnSubmit, superView: self.view)
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kRegister, method: .POST, controller: self, type: 0, param:  mergeDict.compactMap { $0 }.reduce([:]) { $0.merging($1) { (current, _) in current } },btnTapped: self.btnSubmit)
   }
 }
@@ -321,9 +322,12 @@ extension SignUpFormViewC: SignUpMultiSelectDelegate{
       
       var selectedOptionId:[String] = []
       for i in 0..<kSharedInstance.signUpStepTwoOptionsModel.count{
-        selectedOptionId.append(String.getString(signUpStepTwoDataModel?.arrOptions[i].userFieldOptionId))
+       // selectedOptionId.append(String.getString(signUpStepTwoDataModel?.arrOptions[i].userFieldOptionId))
+        selectedOptionId.append(String.getString(kSharedInstance.signUpStepTwoOptionsModel?[i].userFieldOptionId))
       }
       signUpStepTwoDataModel?.selectedValue = selectedOptionId.joined(separator: ", ")
+        print("SelectedOptionId------------------------------------------------------------------\(selectedOptionId)")
+        print("SelectedValue------------------------------------------------------------------\(signUpStepTwoDataModel?.selectedValue ?? "")")
     }
     self.tblViewSignUpForm.reloadData()
   }
@@ -396,10 +400,10 @@ extension SignUpFormViewC: CLLocationManagerDelegate{
 
 extension SignUpFormViewC: SaveAddressCallback{
   
-  func addressSaved(_ model: SignUpStepTwoDataModel, addressLineOne: String, addressLineTwo: String) {
+    func addressSaved(_ model: SignUpStepTwoDataModel, addressLineOne: String, addressLineTwo: String, mapAddress: String?) {
     
     self.navigationController?.popViewController(animated: true)
-    model.selectedValue = addressLineOne +  " " + addressLineTwo
+        model.selectedValue = addressLineOne +  " " + addressLineTwo + ", " + "\((mapAddress ?? ""))"
     model.selectedAddressLineOne = addressLineOne
     model.selectedAddressLineTwo = addressLineTwo
     

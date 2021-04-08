@@ -207,7 +207,6 @@
 		6B65FFB326034900002832C8 /* SelectRoleViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B65FFB226034900002832C8 /* SelectRoleViewC.swift */; };
 		6B65FFC92603561E002832C8 /* CustomCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B65FFC62603561D002832C8 /* CustomCellCollectionViewCell.swift */; };
 		6B65FFCA2603561E002832C8 /* CustomCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B65FFC72603561D002832C8 /* CustomCollectionViewLayout.swift */; };
-		6B6F0848261EBC4500BA2D2B /* AlyseiBVC.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6B6F0847261EBC4500BA2D2B /* AlyseiBVC.mp4 */; };
 		6B6F084C261EC41400BA2D2B /* EditSettingTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6F084B261EC41400BA2D2B /* EditSettingTypeViewController.swift */; };
 		6B6F084F261EC46200BA2D2B /* EditSettingTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6F084E261EC46200BA2D2B /* EditSettingTypeCollectionViewCell.swift */; };
 		6B7F0F47260471B60060FBA9 /* Checkmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7F0F46260471B60060FBA9 /* Checkmark.swift */; };
@@ -215,6 +214,7 @@
 		6B7F0F4D26049A950060FBA9 /* ActiveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7F0F4C26049A950060FBA9 /* ActiveCollectionViewCell.swift */; };
 		6B7F0F5026049AB30060FBA9 /* InactiveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7F0F4F26049AB30060FBA9 /* InactiveCollectionViewCell.swift */; };
 		6B8A27CC260AF75700893DFF /* DemoMapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8A27CB260AF75700893DFF /* DemoMapViewViewController.swift */; };
+		6B8B47D2261F1BE4004B2FB4 /* AlyseiBVC.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6B8B47D1261F1BE4004B2FB4 /* AlyseiBVC.mp4 */; };
 		6BBA994A260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBA9948260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.swift */; };
 		6BBA994B260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BBA9949260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.xib */; };
 		6BBA994F260AF52300AA7A81 /* ActiveCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBA994E260AF52300AA7A81 /* ActiveCollectionView.swift */; };
@@ -451,7 +451,6 @@
 		6B65FFB226034900002832C8 /* SelectRoleViewC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRoleViewC.swift; sourceTree = "<group>"; };
 		6B65FFC62603561D002832C8 /* CustomCellCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellCollectionViewCell.swift; sourceTree = "<group>"; };
 		6B65FFC72603561D002832C8 /* CustomCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewLayout.swift; sourceTree = "<group>"; };
-		6B6F0847261EBC4500BA2D2B /* AlyseiBVC.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = AlyseiBVC.mp4; path = ../../../../Downloads/AlyseiBVC.mp4; sourceTree = "<group>"; };
 		6B6F084B261EC41400BA2D2B /* EditSettingTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSettingTypeViewController.swift; sourceTree = "<group>"; };
 		6B6F084E261EC46200BA2D2B /* EditSettingTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSettingTypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		6B7F0F46260471B60060FBA9 /* Checkmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkmark.swift; sourceTree = "<group>"; };
@@ -459,6 +458,7 @@
 		6B7F0F4C26049A950060FBA9 /* ActiveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCollectionViewCell.swift; sourceTree = "<group>"; };
 		6B7F0F4F26049AB30060FBA9 /* InactiveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InactiveCollectionViewCell.swift; sourceTree = "<group>"; };
 		6B8A27CB260AF75700893DFF /* DemoMapViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoMapViewViewController.swift; sourceTree = "<group>"; };
+		6B8B47D1261F1BE4004B2FB4 /* AlyseiBVC.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = AlyseiBVC.mp4; path = ../../../../Downloads/AlyseiBVC.mp4; sourceTree = "<group>"; };
 		6BBA9948260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCountriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		6BBA9949260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActiveCountriesCollectionViewCell.xib; sourceTree = "<group>"; };
 		6BBA994E260AF52300AA7A81 /* ActiveCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCollectionView.swift; sourceTree = "<group>"; };
@@ -1112,8 +1112,8 @@
 			isa = PBXGroup;
 			children = (
 				6116531426163A7B00BB97CA /* GoogleService-Info.plist */,
-				6B6F0847261EBC4500BA2D2B /* AlyseiBVC.mp4 */,
 				27A443F725AE06F00002BAAC /* Info.plist */,
+				6B8B47D1261F1BE4004B2FB4 /* AlyseiBVC.mp4 */,
 				27BC688C25AC564200A01B6A /* Assets.xcassets */,
 				2770AA5525AE1BBC00A2F10B /* AlysieBaseViewC.swift */,
 				27BC689D25AC56C000A01B6A /* Delegate Methods */,
@@ -1359,7 +1359,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B6F0848261EBC4500BA2D2B /* AlyseiBVC.mp4 in Resources */,
 				279AB33D25FF42EC0061FCB3 /* HubNameCollectionViewCell.xib in Resources */,
 				279AB33A25FF42EC0061FCB3 /* SelectCityTableViewCell.xib in Resources */,
 				279AB33F25FF42EC0061FCB3 /* HubsViaCityCell.xib in Resources */,
@@ -1384,6 +1383,7 @@
 				274635F025DC35AD0010C1C6 /* Splash.storyboard in Resources */,
 				27A443CC25AE03720002BAAC /* Montserrat-LightItalic.ttf in Resources */,
 				27A443D725AE03720002BAAC /* Montserrat-ExtraLightItalic.ttf in Resources */,
+				6B8B47D2261F1BE4004B2FB4 /* AlyseiBVC.mp4 in Resources */,
 				27A443D625AE03720002BAAC /* Montserrat-SemiBold.ttf in Resources */,
 				A84EED0725B1C2F700429B1D /* Home.storyboard in Resources */,
 				27A443D225AE03720002BAAC /* Montserrat-Thin.ttf in Resources */,

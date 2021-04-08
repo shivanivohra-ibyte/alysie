@@ -102,12 +102,14 @@ class OTPVerificationViewC: AlysieBaseViewC {
     
     let param: [String:Any] = [APIConstants.kEmail:String.getString(self.email),
                                APIConstants.kOtp: self.txtFieldOTP.map {String.getString($0.text)}.joined()]
+   // CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kVerifyOtp, method: .POST, controller: self, type: 0, param: param, btnTapped: self.btnVerifyOTP, superView: self.view)
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kVerifyOtp, method: .POST, controller: self, type: 0, param: param, btnTapped: self.btnVerifyOTP)
   }
   
   private func postRequestToResendOTP() -> Void{
     
     let param: [String:Any] = [APIConstants.kEmail:String.getString(self.email)]
+   // CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kResendOtp, method: .POST, controller: self, type: 1, param: param, btnTapped: self.btnResendOTP, superView: self.view)
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kResendOtp, method: .POST, controller: self, type: 1, param: param, btnTapped: self.btnResendOTP)
   }
 }

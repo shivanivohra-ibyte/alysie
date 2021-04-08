@@ -47,7 +47,7 @@ class CommonUtil: NSObject {
     
   static let sharedInstance = CommonUtil()
     
-  func postRequestToServer(url: String, method: kHTTPMethod, controller: UIViewController,userName: String = "",passsword: String = "", type: Int, param: [String:Any],btnTapped: UIButton) -> Void {
+    func postRequestToServer(url: String, method: kHTTPMethod, controller: UIViewController,userName: String = "",passsword: String = "", type: Int, param: [String:Any],btnTapped: UIButton) -> Void {
     
   
     SVProgressHUD.show()
@@ -67,16 +67,19 @@ class CommonUtil: NSObject {
             if errorType == .requestSuccess {
             
               let dictResult = kSharedInstance.getDictionary(result)
-            
+                //superView.isUserInteractionEnabled = true
                 switch Int.getInt(statusCode){
                 case 200,201,204,205:
                   btnTapped.isUserInteractionEnabled = true
+                   // superView.isUserInteractionEnabled = true
                   controller.didUserGetData(from: dictResult, type: type)
                 case 400,401:
                   btnTapped.isUserInteractionEnabled = true
+                    //superView.isUserInteractionEnabled = true
                   controller.showAlert(withMessage: String.getString(dictResult[APIConstants.kError]))
                 case 409,422:
                   btnTapped.isUserInteractionEnabled = true
+                   // superView.isUserInteractionEnabled = true
                   controller.showAlert(withMessage: String.getString(dictResult[APIConstants.kErrors]))
                 default:
                  break
@@ -84,9 +87,11 @@ class CommonUtil: NSObject {
                 
             } else if errorType == .noNetwork{
                  btnTapped.isUserInteractionEnabled = true
+               // superView.isUserInteractionEnabled = true
                 controller.showAlert(withMessage: AlertMessage.kNoInternet)}
             else {
               btnTapped.isUserInteractionEnabled = true
+               // superView.isUserInteractionEnabled = true
               controller.showAlert(withMessage: AlertMessage.kDefaultError) }
         }
     }

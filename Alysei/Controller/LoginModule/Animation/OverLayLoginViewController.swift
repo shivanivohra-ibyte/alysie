@@ -126,13 +126,15 @@ class OverLayLoginViewController: UIViewController {
 extension OverLayLoginViewController{
     private func postRequestToLogin(_ tag: Int) -> Void{
       
-      CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kLogin, method: .POST, controller: self, userName: String.getString(self.txtFieldEmail.text), passsword: String.getString(self.txtFieldPassword.text), type: tag, param: [:], btnTapped: self.btnLogin)
+      //  CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kLogin, method: .POST, controller: self, userName: String.getString(self.txtFieldEmail.text), passsword: String.getString(self.txtFieldPassword.text), type: tag, param: [:], btnTapped: self.btnLogin, superView: self.view)
+        CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kLogin, method: .POST, controller: self, userName: String.getString(self.txtFieldEmail.text), passsword: String.getString(self.txtFieldPassword.text), type: tag, param: [:], btnTapped: self.btnLogin)
         
     }
     
     private func postRequestToGetRoles(_ tag: Int) -> Void{
-      
-      CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetRoles, method: .GET, controller: self, type: tag, param: [:], btnTapped: self.btnSignUp)
+        self.view.isUserInteractionEnabled = false
+        //CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetRoles, method: .GET, controller: self, type: tag, param: [:], btnTapped: self.btnSignUp, superView: self.view)
+        CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetRoles, method: .GET, controller: self, type: tag, param: [:], btnTapped: self.btnSignUp)
     }
 }
 extension OverLayLoginViewController{

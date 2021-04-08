@@ -83,6 +83,7 @@ class ResetPasswordViewC: AlysieBaseViewC {
                                APIConstants.kPassword: String.getString(self.txtFieldNewPassword.text),
                                APIConstants.kConfirmPassword: String.getString(self.txtFieldConfirmPassword.text)
     ]
+   // CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kResetPassword, method: .POST, controller: self, type: 0, param: param , btnTapped: self.btnSubmit, superView: self.view)
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kResetPassword, method: .POST, controller: self, type: 0, param: param , btnTapped: self.btnSubmit)
   }
 }

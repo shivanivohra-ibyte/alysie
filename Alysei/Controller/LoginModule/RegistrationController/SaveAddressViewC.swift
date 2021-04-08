@@ -10,7 +10,7 @@ import IQKeyboardManagerSwift
 
 protocol SaveAddressCallback {
   
-  func addressSaved(_ model: SignUpStepTwoDataModel,addressLineOne: String,addressLineTwo: String) -> Void
+    func addressSaved(_ model: SignUpStepTwoDataModel,addressLineOne: String,addressLineTwo: String, mapAddress: String?) -> Void
 }
 
 class SaveAddressViewC: AlysieBaseViewC {
@@ -22,7 +22,7 @@ class SaveAddressViewC: AlysieBaseViewC {
   @IBOutlet weak var viewBottom: UIView!
   @IBOutlet weak var viewTop: UIView!
   @IBOutlet weak var viewTopHeightConstraint: NSLayoutConstraint!
-  
+    var mapAddress: String?
   //MARK: - Properties -
   
   var signUpStepTwoDataModel: SignUpStepTwoDataModel!
@@ -65,7 +65,7 @@ class SaveAddressViewC: AlysieBaseViewC {
       showAlert(withMessage: AlertMessage.kAddress)
     }
     else{
-      self.delegate?.addressSaved(self.signUpStepTwoDataModel, addressLineOne: String.getString((self.txtFieldAddress1.text)), addressLineTwo: String.getString((self.txtFieldAddress2.text)))
+        self.delegate?.addressSaved(self.signUpStepTwoDataModel, addressLineOne: String.getString((self.txtFieldAddress1.text)), addressLineTwo: String.getString((self.txtFieldAddress2.text)), mapAddress: self.mapAddress)
     }
   }
 }
