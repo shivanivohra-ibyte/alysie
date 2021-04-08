@@ -207,6 +207,9 @@
 		6B65FFB326034900002832C8 /* SelectRoleViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B65FFB226034900002832C8 /* SelectRoleViewC.swift */; };
 		6B65FFC92603561E002832C8 /* CustomCellCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B65FFC62603561D002832C8 /* CustomCellCollectionViewCell.swift */; };
 		6B65FFCA2603561E002832C8 /* CustomCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B65FFC72603561D002832C8 /* CustomCollectionViewLayout.swift */; };
+		6B6F0848261EBC4500BA2D2B /* AlyseiBVC.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6B6F0847261EBC4500BA2D2B /* AlyseiBVC.mp4 */; };
+		6B6F084C261EC41400BA2D2B /* EditSettingTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6F084B261EC41400BA2D2B /* EditSettingTypeViewController.swift */; };
+		6B6F084F261EC46200BA2D2B /* EditSettingTypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6F084E261EC46200BA2D2B /* EditSettingTypeCollectionViewCell.swift */; };
 		6B7F0F47260471B60060FBA9 /* Checkmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7F0F46260471B60060FBA9 /* Checkmark.swift */; };
 		6B7F0F4A260499CC0060FBA9 /* CountryListViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7F0F49260499CC0060FBA9 /* CountryListViewC.swift */; };
 		6B7F0F4D26049A950060FBA9 /* ActiveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7F0F4C26049A950060FBA9 /* ActiveCollectionViewCell.swift */; };
@@ -232,7 +235,6 @@
 		C513C19F26144E9A0025CF27 /* SettingsScreenCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C19E26144E9A0025CF27 /* SettingsScreenCollectionVC.swift */; };
 		C513C1A526146C280025CF27 /* WaterfallCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C1A426146C280025CF27 /* WaterfallCollectionViewLayout.swift */; };
 		C513C1A9261477640025CF27 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C1A8261477640025CF27 /* PinterestLayout.swift */; };
-		C56475402612E8CB0039EB1F /* AlyseiBVC.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C564753F2612E8CB0039EB1F /* AlyseiBVC.mp4 */; };
 		C5AAB85826171896000557B6 /* LiquidCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAB85726171896000557B6 /* LiquidCollectionViewLayout.swift */; };
 /* End PBXBuildFile section */
 
@@ -449,6 +451,9 @@
 		6B65FFB226034900002832C8 /* SelectRoleViewC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRoleViewC.swift; sourceTree = "<group>"; };
 		6B65FFC62603561D002832C8 /* CustomCellCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellCollectionViewCell.swift; sourceTree = "<group>"; };
 		6B65FFC72603561D002832C8 /* CustomCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewLayout.swift; sourceTree = "<group>"; };
+		6B6F0847261EBC4500BA2D2B /* AlyseiBVC.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = AlyseiBVC.mp4; path = ../../../../Downloads/AlyseiBVC.mp4; sourceTree = "<group>"; };
+		6B6F084B261EC41400BA2D2B /* EditSettingTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSettingTypeViewController.swift; sourceTree = "<group>"; };
+		6B6F084E261EC46200BA2D2B /* EditSettingTypeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSettingTypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		6B7F0F46260471B60060FBA9 /* Checkmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkmark.swift; sourceTree = "<group>"; };
 		6B7F0F49260499CC0060FBA9 /* CountryListViewC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListViewC.swift; sourceTree = "<group>"; };
 		6B7F0F4C26049A950060FBA9 /* ActiveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -476,7 +481,6 @@
 		C513C19E26144E9A0025CF27 /* SettingsScreenCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenCollectionVC.swift; sourceTree = "<group>"; };
 		C513C1A426146C280025CF27 /* WaterfallCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterfallCollectionViewLayout.swift; sourceTree = "<group>"; };
 		C513C1A8261477640025CF27 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
-		C564753F2612E8CB0039EB1F /* AlyseiBVC.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = AlyseiBVC.mp4; path = ../../../Downloads/AlyseiBVC.mp4; sourceTree = "<group>"; };
 		C5AAB85726171896000557B6 /* LiquidCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidCollectionViewLayout.swift; sourceTree = "<group>"; };
 		D636814607C16FDC212EC4D0 /* Pods-Alysei.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alysei.release.xcconfig"; path = "Target Support Files/Pods-Alysei/Pods-Alysei.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -538,6 +542,8 @@
 				278ACA9425BB01830054ACB6 /* YourData */,
 				C513C19B26144DD20025CF27 /* SettingsScreenVC.swift */,
 				C513C19E26144E9A0025CF27 /* SettingsScreenCollectionVC.swift */,
+				6B6F084B261EC41400BA2D2B /* EditSettingTypeViewController.swift */,
+				6B6F084E261EC46200BA2D2B /* EditSettingTypeCollectionViewCell.swift */,
 			);
 			path = SettingsModule;
 			sourceTree = "<group>";
@@ -1106,7 +1112,7 @@
 			isa = PBXGroup;
 			children = (
 				6116531426163A7B00BB97CA /* GoogleService-Info.plist */,
-				C564753F2612E8CB0039EB1F /* AlyseiBVC.mp4 */,
+				6B6F0847261EBC4500BA2D2B /* AlyseiBVC.mp4 */,
 				27A443F725AE06F00002BAAC /* Info.plist */,
 				27BC688C25AC564200A01B6A /* Assets.xcassets */,
 				2770AA5525AE1BBC00A2F10B /* AlysieBaseViewC.swift */,
@@ -1353,6 +1359,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B6F0848261EBC4500BA2D2B /* AlyseiBVC.mp4 in Resources */,
 				279AB33D25FF42EC0061FCB3 /* HubNameCollectionViewCell.xib in Resources */,
 				279AB33A25FF42EC0061FCB3 /* SelectCityTableViewCell.xib in Resources */,
 				279AB33F25FF42EC0061FCB3 /* HubsViaCityCell.xib in Resources */,
@@ -1378,7 +1385,6 @@
 				27A443CC25AE03720002BAAC /* Montserrat-LightItalic.ttf in Resources */,
 				27A443D725AE03720002BAAC /* Montserrat-ExtraLightItalic.ttf in Resources */,
 				27A443D625AE03720002BAAC /* Montserrat-SemiBold.ttf in Resources */,
-				C56475402612E8CB0039EB1F /* AlyseiBVC.mp4 in Resources */,
 				A84EED0725B1C2F700429B1D /* Home.storyboard in Resources */,
 				27A443D225AE03720002BAAC /* Montserrat-Thin.ttf in Resources */,
 				279AB34025FF42EC0061FCB3 /* FooterCityHubTableViewCell.xib in Resources */,
@@ -1478,6 +1484,7 @@
 				27A443B325AE03720002BAAC /* UITextViewBorderWidthAndColor.swift in Sources */,
 				27A4439B25AE03720002BAAC /* RSTextView.swift in Sources */,
 				6BC4C0CE26006AA600791DCD /* OverLayLoginViewController.swift in Sources */,
+				6B6F084C261EC41400BA2D2B /* EditSettingTypeViewController.swift in Sources */,
 				6B5A8280260C56AD00ED60B7 /* WebServices.swift in Sources */,
 				2742855E25B82EEC003F3DE5 /* AddFeatureTableCell.swift in Sources */,
 				277D18A625BF3CE7007CA5C7 /* BusinessFiltersCollectionCell.swift in Sources */,
@@ -1512,6 +1519,7 @@
 				27A443BA25AE03720002BAAC /* IntExtended.swift in Sources */,
 				27A4439E25AE03720002BAAC /* RangeSlider.swift in Sources */,
 				273737EF25B76BCE005984CF /* SettingsViewC.swift in Sources */,
+				6B6F084F261EC46200BA2D2B /* EditSettingTypeCollectionViewCell.swift in Sources */,
 				279AB36025FF44710061FCB3 /* HubsViaCityCell.swift in Sources */,
 				27B24AC525B46C7D00694F27 /* TabBarViewC.swift in Sources */,
 				61165344261642AC00BB97CA /* UserProfile.swift in Sources */,
@@ -1776,8 +1784,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 26;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3V73836LRC;
@@ -1789,7 +1797,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Alysei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = Alysei_Dev_Prov_23March2021;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1801,8 +1809,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = 3V73836LRC;
 				INFOPLIST_FILE = Alysei/Info.plist;
@@ -1813,7 +1821,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Alysei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = Alysei_Dev_Prov_23March2021;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

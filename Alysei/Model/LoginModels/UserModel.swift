@@ -130,6 +130,11 @@ enum RolesBorderColor : String {
     case restaurant =  "FDCF76"
     case voyagers = "9C8ADE"
 }
+
+enum ProfilePercentage: Int {
+    case percent100 = 100
+    case percent75 = 75
+}
 //class UserImage: {
 //
 //}

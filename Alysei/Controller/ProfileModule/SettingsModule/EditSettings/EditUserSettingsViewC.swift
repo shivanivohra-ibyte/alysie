@@ -55,13 +55,58 @@ class EditUserSettingsViewC: AlysieBaseViewC {
   
   //MARK: - Private Methods -
   
-  private func setInitialData() -> Void{
-    self.lblUserName.text = kSharedUserDefaults.loggedInUserModal.displayName
-    self.lblUserEmail.text = kSharedUserDefaults.loggedInUserModal.email
-    btnSave.setImage(UIImage(named: "blue_checkmark"), for: .normal)
-    self.postRequestToGetUserSettings()
-    
-  }
+    private func setInitialData() -> Void{
+      //self.lblUserName.text = kSharedUserDefaults.loggedInUserModal.displayName
+      let roleID = UserRoles(rawValue:Int.getInt(kSharedUserDefaults.loggedInUserModal.memberRoleId)  ) ?? .voyagers
+      var name = ""
+      switch roleID {
+      case .distributer1, .distributer2, .distributer3, .producer, .travelAgencies :
+          name = "\(kSharedUserDefaults.loggedInUserModal.companyName ?? "")"
+  //                case .voiceExperts, .voyagers:
+      case .restaurant :
+          name = "\(kSharedUserDefaults.loggedInUserModal.restaurantName ?? "")"
+      default:
+          name = "\(kSharedUserDefaults.loggedInUserModal.firstName ?? "") \(kSharedUserDefaults.loggedInUserModal.lastName ?? "")"
+      }
+      self.lblUserName.text = name
+      if kSharedUserDefaults.loggedInUserModal.userName == "" {
+          self.lblUserEmail.isHidden = true
+      }else{
+          self.lblUserEmail.isHidden = false
+        self.lblUserEmail.text = "@" + "\(kSharedUserDefaults.loggedInUserModal.userName ?? "")"
+      }
+      if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().profilePhoto) {
+          self.imgViewUser.image = profilePhoto
+          self.imgViewUser.layer.cornerRadius = (self.imgViewUser.frame.width / 2.0)
+          self.imgViewUser.layer.borderWidth = 5.0
+          
+          switch roleID {
+          case .distributer1, .distributer2, .distributer3:
+              self.imgViewUser.layer.borderColor = UIColor.init(hexString: RolesBorderColor.distributer1.rawValue).cgColor
+          case .producer:
+              self.imgViewUser.layer.borderColor = UIColor.init(hexString: RolesBorderColor.producer.rawValue).cgColor
+          case .travelAgencies:
+              self.imgViewUser.layer.borderColor = UIColor.init(hexString: RolesBorderColor.travelAgencies.rawValue).cgColor
+          case .voiceExperts:
+              self.imgViewUser.layer.borderColor = UIColor.init(hexString: RolesBorderColor.voiceExperts.rawValue).cgColor
+          case .voyagers:
+              self.imgViewUser.layer.borderColor = UIColor.init(hexString: RolesBorderColor.voyagers.rawValue).cgColor
+          case .restaurant :
+              self.imgViewUser.layer.borderColor = UIColor.init(hexString: RolesBorderColor.restaurant.rawValue).cgColor
+          default:
+              self.imgViewUser.layer.borderColor = UIColor.white.cgColor
+          }
+         
+          self.imgViewUser.layer.masksToBounds = true
+      }else{
+          self.imgViewUser.layer.cornerRadius = (self.imgViewUser.frame.width / 2.0)
+          self.imgViewUser.layer.borderWidth = 5.0
+          self.imgViewUser.layer.borderColor = UIColor.white.cgColor
+      }
+      btnSave.setImage(UIImage(named: "blue_checkmark"), for: .normal)
+      self.postRequestToGetUserSettings()
+      
+    }
  
   private func getEditUserSettingsTableCell(_ indexPath: IndexPath) -> UITableViewCell{
       
@@ -202,8 +247,20 @@ extension EditUserSettingsViewC{
         self.btnSave.setImage(UIImage(named: "blue_checkmarked"), for: .normal)
         showAlert(withMessage: AlertMessage.kProfileUpdated){
         kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: dicResult)
-        self.lblUserName.text = kSharedUserDefaults.loggedInUserModal.displayName
-        self.lblUserEmail.text = kSharedUserDefaults.loggedInUserModal.email
+        //self.lblUserName.text = kSharedUserDefaults.loggedInUserModal.displayName
+            let roleID = UserRoles(rawValue:Int.getInt(kSharedUserDefaults.loggedInUserModal.memberRoleId)  ) ?? .voyagers
+            var name = ""
+            switch roleID {
+            case .distributer1, .distributer2, .distributer3, .producer, .travelAgencies :
+                name = "\(kSharedUserDefaults.loggedInUserModal.companyName ?? "")"
+        //                case .voiceExperts, .voyagers:
+            case .restaurant :
+                name = "\(kSharedUserDefaults.loggedInUserModal.restaurantName ?? "")"
+            default:
+                name = "\((kSharedUserDefaults.loggedInUserModal.firstName) ?? "") \((kSharedUserDefaults.loggedInUserModal.lastName) ?? "")"
+            }
+        self.lblUserName.text = name
+        self.lblUserEmail.text = "@" + "\(kSharedUserDefaults.loggedInUserModal.userName ?? "")"
       }
     case 2:
       var arrSelectedFields: [ProductFieldsDataModel] = []

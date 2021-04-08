@@ -30,7 +30,11 @@ class ProfileViewC: AlysieBaseViewC{
     @IBOutlet weak var aboutLabel: UILabel!
 //  @IBOutlet weak var lblEmail: UILabel!
   @IBOutlet weak var btnEditProfile: UIButtonExtended!
-  
+    @IBOutlet weak var viewProfileCompletion: UIView!
+    @IBOutlet weak var viewProfileHeight: NSLayoutConstraint!
+    @IBOutlet weak var profilePercentage: UILabel!
+    @IBOutlet weak var lblUserName: UILabel!
+    
   //MARK: - Properties -
 
     var contactDetail = [ContactDetail.view.tableCellModel]()
@@ -83,10 +87,10 @@ class ProfileViewC: AlysieBaseViewC{
   override func viewWillAppear(_ animated: Bool) {
     
     super.viewWillAppear(animated)
-    
+    self.viewProfileCompletion.isHidden = true
+    self.viewProfileHeight.constant = 0
     self.postRequestToGetFields()
     self.fetchProfileDetails()
-
     self.fetchContactDetail()
     self.fetchAboutDetail()
 
@@ -281,8 +285,16 @@ class ProfileViewC: AlysieBaseViewC{
                 }
                 
                 self.lblDisplayName.text = "\(name)".capitalized
+                self.lblUserName.text = "\(name)".capitalized
                 self.lblDisplayNameNavigation.text = "\(name)".capitalized
-
+                if responseModel.data?.userData?.profilePercentage == ProfilePercentage.percent100.rawValue {
+                    self.viewProfileCompletion.isHidden = true
+                    self.viewProfileHeight.constant = 0
+                }else{
+                    self.viewProfileCompletion.isHidden = false
+                    self.viewProfileHeight.constant = 75
+                    self.profilePercentage.text = "It's at \(responseModel.data?.userData?.profilePercentage ?? 0)%"
+                }
                 kSharedUserDefaults.loggedInUserModal.firstName = responseModel.data?.userData?.firstName
                 kSharedUserDefaults.loggedInUserModal.lastName = responseModel.data?.userData?.lastName
                 kSharedUserDefaults.synchronize()
