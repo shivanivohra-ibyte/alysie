@@ -48,6 +48,9 @@ extension ActiveCollectionView: UICollectionViewDataSource, UICollectionViewDele
 
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
+            window.isUserInteractionEnabled = false
+        }
         if self.hascome == .showCountry { _ = self.countries?.map{$0.isSelected = false}}
         self.countries?[indexPath.row].isSelected =  !(self.countries?[indexPath.row].isSelected ?? false)
         if hascome != .city {

@@ -170,6 +170,8 @@ struct APIUrl{
     static let kGetUpcomingCountries = "get/active/upcoming/countries"
     static let kGetCertificates = "get/user/certificates"
     static let kUploadCertificate = "update/user/certificates"
+    static let kGetSelectedHubCountry = "get/selected/hub/countries"
+    static let kGetSelectedHubStates = "get/selected/hub/states"
     
     
     enum FeaturedProduct {
@@ -412,7 +414,7 @@ struct StaticArrayData {
                                      (image: "icons8_secure_cloud", name: "Your Data")]
     
     static let kSettingPrducrColScreenDict = [(image: "icons8_settings", name: "Settings"),
-                                              (image: "icons8_shop", name: "MarketPlace"),
+                                              (image: "icons8_shop", name: "Marketplace"),
                                               (image: "icons8_business", name: "Company"),
                                               (image: "icons8_security_lock", name: "Privacy"),
                                               (image: "icons8_privacy", name: "Password"),
@@ -425,7 +427,7 @@ struct StaticArrayData {
     
     static let kSettingImprtrColScreenDict = [
                                               (image: "icons8_settings", name: "Settings"),
-                                              (image: "icons8_shop", name: "MarketPlace"),
+                                              (image: "icons8_shop", name: "Marketplace"),
                                               (image: "icons8_security_lock", name: "Privacy"),
                                               (image: "icons8_privacy", name: "Password"),
                                               (image: "icons8_unavailable", name: "Blocking"),
@@ -438,7 +440,7 @@ struct StaticArrayData {
     
     static let kSettingRestColScreenDict = [
                                             (image: "icons8_settings", name: "Settings"),
-                                            (image: "icons8_shop", name: "MarketPlace"),
+                                            (image: "icons8_shop", name: "Marketplace"),
                                             (image: "events", name: "Events"),
                                             (image: "icons8_security_lock", name: "Privacy"),
                                             (image: "icons8_privacy", name: "Password"),
@@ -465,7 +467,7 @@ struct StaticArrayData {
 
     static let kSettingTravlColScreenDict = [
                                              (image: "icons8_settings", name: "Settings"),
-                                             (image: "icons8_shop", name: "MarketPlace"),
+                                             (image: "icons8_shop", name: "Marketplace"),
                                              (image: "icons8_security_lock", name: "Privacy"),
                                              (image: "icons8_privacy", name: "Password"),
                                              (image: "icons8_unavailable", name: "Blocking"),
@@ -479,7 +481,7 @@ struct StaticArrayData {
     
     static let kSettingExpertColScreenDict = [
                                               (image: "icons8_settings", name: "Settings"),
-                                             (image: "icons8_shop", name: "MarketPlace"),
+                                             (image: "icons8_shop", name: "Marketplace"),
                                               (image: "company_icon", name: "Featured"),
                                               (image: "privacy_icon", name: "Privacy"),
                                               (image: "password_icon", name: "Password"),
@@ -636,6 +638,7 @@ enum NetworkStatusReport:Int {
     case successB = 202
     case badRequest = 400
     case badRequestA = 401
+    case badRequestB = 409
 }
 
 enum PushedFrom: Int {

@@ -375,8 +375,10 @@ extension SignUpFormViewC{
       kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: dicResult)
       let roleId = String.getString(dicRole[APIConstants.kRoleId])
       let nextVC = CountryListVC()
+        nextVC.roleId = roleId
+        nextVC.isEditHub = false
       self.navigationController?.pushViewController(nextVC, animated: true)
-      nextVC.roleId = roleId
+      
 //      kSharedAppDelegate.pushToTabBarViewC()
     }
   }

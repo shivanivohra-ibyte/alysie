@@ -109,6 +109,9 @@ func requestApi(withServiceName serviceName: String,requestMethod method: kHTTPM
                 Alamofire.Session.default.request(serviceUrl, method: .get, parameters: dictParams, encoding: URLEncoding.default, headers: headers).responseJSON(completionHandler:
                       { (DataResponse) in
                         SVProgressHUD.dismiss()
+                        if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
+                            window.isUserInteractionEnabled = true
+                        }
                         switch DataResponse.result
                         {
                           case .success(let JSON):
@@ -283,6 +286,9 @@ func requestApi(withServiceName serviceName: String,requestMethod method: kHTTPM
         {
         case .success:
           SVProgressHUD.dismiss()
+            if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
+                window.isUserInteractionEnabled = true
+            }
           let response = self.getResponseDataDictionaryFromData(data: dataResponse.data!)
           completionClosure(response.responseData, response.error, .requestSuccess, Int.getInt(dataResponse.response?.statusCode))
         case .failure(let error):
@@ -314,7 +320,9 @@ func requestApi(withServiceName serviceName: String,requestMethod method: kHTTPM
           print_debug(items: "Parameter - \(arrImages)")
             
           Alamofire.Session.default.upload(multipartFormData:{ (multipartFormData: MultipartFormData) in
-                
+            if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
+                window.isUserInteractionEnabled = true
+            }
                 for key in postData.keys {
                   
                   let name = String.getString(key)

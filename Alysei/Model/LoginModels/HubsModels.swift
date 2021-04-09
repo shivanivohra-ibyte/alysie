@@ -27,6 +27,7 @@ class CountryModel {
     var currency:String?
     var subregion:String?
     var isSelected = false
+   // var isSelected:Bool?
     var emoji: String?
     var phonecode: String?
     var flagId: FlagId?
@@ -38,7 +39,8 @@ class CountryModel {
         self.currency = String.getString(data?["currency"])
         self.subregion = String.getString(data?["subregion"])
         self.emoji = String.getString(data?["emoji"])
-        self.phonecode = String.getString(data?["phonecode"])
+        self.isSelected = Int.getInt(data?["is_selected"]) == 0 ? false: true
+        self.phonecode = String.getString(data?["is_selectedhonecode"])
         if let flagId = data?["flag_id"] as? [String:Any] {
             self.flagId = FlagId.init(data: flagId)
         }
@@ -88,6 +90,7 @@ class CountryHubs {
         self.country_code = String.getString(data?["country_code"])
         self.country_id = String.getString(data?["country_id"])
         self.iso2 = String.getString(data?["subregion"])
+        self.isSelected = Int.getInt(data?["is_selected"]) == 0 ? false: true
         self.state_id = String.getString(data?["state_id"])
         self.type = .city
     }

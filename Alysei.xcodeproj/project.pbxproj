@@ -202,6 +202,7 @@
 		61A8CB4A261D98CA00B99233 /* ContactDetailModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB44261D98CA00B99233 /* ContactDetailModels.swift */; };
 		61A8CB4B261D98CA00B99233 /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB45261D98CA00B99233 /* ContactDetailViewController.swift */; };
 		61A8CB4C261D98CA00B99233 /* ContactDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB46261D98CA00B99233 /* ContactDetailInteractor.swift */; };
+		6B2F94F626202F3A0030928E /* Timeline.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B2F94F526202F3A0030928E /* Timeline.storyboard */; };
 		6B5A8280260C56AD00ED60B7 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A827F260C56AD00ED60B7 /* WebServices.swift */; };
 		6B5A8284260C5CD100ED60B7 /* CompanyCertificates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A8283260C5CD100ED60B7 /* CompanyCertificates.swift */; };
 		6B65FFB326034900002832C8 /* SelectRoleViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B65FFB226034900002832C8 /* SelectRoleViewC.swift */; };
@@ -446,6 +447,7 @@
 		61A8CB44261D98CA00B99233 /* ContactDetailModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailModels.swift; sourceTree = "<group>"; };
 		61A8CB45261D98CA00B99233 /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
 		61A8CB46261D98CA00B99233 /* ContactDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailInteractor.swift; sourceTree = "<group>"; };
+		6B2F94F526202F3A0030928E /* Timeline.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Timeline.storyboard; sourceTree = "<group>"; };
 		6B5A827F260C56AD00ED60B7 /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		6B5A8283260C5CD100ED60B7 /* CompanyCertificates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCertificates.swift; sourceTree = "<group>"; };
 		6B65FFB226034900002832C8 /* SelectRoleViewC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRoleViewC.swift; sourceTree = "<group>"; };
@@ -1134,6 +1136,7 @@
 				A84EED0625B1C2F600429B1D /* Home.storyboard */,
 				27B2FDE525C8782000CFEDA0 /* ProductSection.xib */,
 				279AB32925FF42A50061FCB3 /* HubXIB */,
+				6B2F94F526202F3A0030928E /* Timeline.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1217,6 +1220,13 @@
 			path = "contact-detail";
 			sourceTree = "<group>";
 		};
+		6B2F94F826202F910030928E /* TimelineModule */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TimelineModule;
+			sourceTree = "<group>";
+		};
 		6B5A8282260C5CA800ED60B7 /* CompanyCerModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1258,6 +1268,7 @@
 		A808779425ADD4D900AA4A69 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6B2F94F826202F910030928E /* TimelineModule */,
 				2770AA6C25AE203800A2F10B /* LoginModule */,
 				A84EED0925B1D65E00429B1D /* HomeModule */,
 				2716627725BCB7EE000C0189 /* B2BModule */,
@@ -1396,6 +1407,7 @@
 				6BBA994B260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.xib in Resources */,
 				27A443D125AE03720002BAAC /* Montserrat-ExtraLight.ttf in Resources */,
 				27A443D925AE03720002BAAC /* Montserrat-Black.ttf in Resources */,
+				6B2F94F626202F3A0030928E /* Timeline.storyboard in Resources */,
 				27A443DD25AE03720002BAAC /* Montserrat-ExtraBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -91,6 +91,7 @@ class CommonUtil: NSObject {
 
                    // superView.isUserInteractionEnabled = true
                   controller.showAlert(withMessage: String.getString(dictResult[APIConstants.kErrors]))
+                    return
                 default:
                  break
                 }
@@ -137,7 +138,7 @@ class CommonUtil: NSObject {
 //          controller.showAlert(withMessage: AlertMessage.kSessionExpired) {
 //            //kSharedAppDelegate.logout()
 //          }
-        case 422:
+        case 422,409:
           controller.showAlert(withMessage: String.getString(dictResult["errors"]))
         default:
           controller.showAlert(withMessage: String.getString(dictResult["errors"]))
