@@ -8,7 +8,7 @@ import UIKit
 var userType: String?
 var hideEyeIcon: Bool?
 
-class StateListVC: UIViewController , SelectList {
+class StateListVC: AlysieBaseViewC , SelectList {
     
     // MARK:- objects
     @IBOutlet weak var tableVIew: StateListTable!
@@ -18,7 +18,7 @@ class StateListVC: UIViewController , SelectList {
     var states:[CountryHubs]?
     @IBOutlet weak var viewHeader: UIView!
     @IBOutlet weak var labelHeading: UILabel!
-  
+    var isEditHub: Bool?
     var roleId: String?
     
     override func viewDidLoad() {
@@ -28,7 +28,7 @@ class StateListVC: UIViewController , SelectList {
         self.tableVIew.roleId = self.roleId
         hideEyeIcon = true
         self.setText()
-        self.postRequestToGetState(country?.id ?? "")
+        self.isEditHub == true ? self.requestToGetSelectedState(country?.id ?? "") : self.postRequestToGetState(country?.id ?? "")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +76,7 @@ class StateListVC: UIViewController , SelectList {
     //selectedHub?.hubs = oldHubs +  selectedHubs
     
     private func postRequestToGetState(_ countryId: String) -> Void{
+        disableWindowInteraction()
         let param: [String:Any] = [APIConstants.kCountryId: countryId]
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetHubState, requestMethod: .GET, requestParameters: param, withProgressHUD: true) { (dictResponse, error, errortype, statusCode) in
             let response = kSharedInstance.getDictionary(dictResponse)
@@ -84,6 +85,24 @@ class StateListVC: UIViewController , SelectList {
             let hubs = kSharedInstance.getStringArray(selectedHub?.state.map{$0.id})
             self.states = data.map{CountryHubs(data: $0)}
             _ = self.states?.map{$0.isSelected = hubs.contains($0.id ?? "")}
+            self.tableVIew.states = self.states
+        }
+    }
+    
+    private func requestToGetSelectedState(_ countryId: String) -> Void{
+        disableWindowInteraction()
+        let param: [String:Any] = [APIConstants.kCountryId: countryId]
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetSelectedHubStates, requestMethod: .GET, requestParameters: param, withProgressHUD: true) { (dictResponse, error, errortype, statusCode) in
+            let response = kSharedInstance.getDictionary(dictResponse)
+            guard let data = response["data"] as? [[String:Any]] else {return}
+            let selectedHub = self.selectedHubs.first{$0.country.id == self.country?.id}
+            let hubs = kSharedInstance.getStringArray(selectedHub?.state.map{$0.id})
+            self.states = data.map{CountryHubs(data: $0)}
+            if self.isEditHub == false{
+            _ = self.states?.map{$0.isSelected = hubs.contains($0.id ?? "")}
+            }else{
+                print("Check Remaning")
+            }
             self.tableVIew.states = self.states
         }
     }

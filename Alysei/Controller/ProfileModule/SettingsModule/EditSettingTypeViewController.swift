@@ -54,6 +54,11 @@ extension EditSetingTypeViewController: UICollectionViewDataSource, UICollection
                 _ = pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as! EditUserSettingsViewC
             default:
                 print("HubSelection")
+                let nextVC = CountryListVC()
+                nextVC.hasCome = .showCountry
+                nextVC.isEditHub = true
+                nextVC.selectedHubs = []
+                self.navigationController?.pushViewController(nextVC, animated: true)
             }
        }
 }

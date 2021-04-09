@@ -98,4 +98,9 @@ class AlysieBaseViewC: UIViewController {
             window.isUserInteractionEnabled = false
         }
     }
+    func enableWindowInteraction(){
+        if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
+            window.isUserInteractionEnabled = true
+        }
+    }
 }

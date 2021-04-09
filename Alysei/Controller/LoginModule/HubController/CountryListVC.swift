@@ -23,6 +23,7 @@ class CountryListVC: AlysieBaseViewC , SelectList {
     @IBOutlet weak var btnBackWidth: NSLayoutConstraint!
     @IBOutlet weak var changeRole: UIButton!
     @IBOutlet weak var activeInactiveView: UIView!
+    var isEditHub : Bool?
     
     //MARK: - Properties -
     
@@ -68,12 +69,12 @@ class CountryListVC: AlysieBaseViewC , SelectList {
         self.tableVIew.selectDelegate = self
         self.activeCountryCV.selectDelegate = self
         self.inActiveCountryCV.selectDelegate = self
-        self.postRequestToGetCountries()
+        self.isEditHub == true ? self.requestToGetSelectedHubCountries() :  self.postRequestToGetCountries()
     }
     
     
     private func postRequestToGetCountries() -> Void{
-        
+        disableWindowInteraction()
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetUpcomingCountries, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errortype, statusCode) in
             
             let dicResult = kSharedInstance.getDictionary(dictResponse)
@@ -85,6 +86,24 @@ class CountryListVC: AlysieBaseViewC , SelectList {
             self.inActiveCountryCV.countries = self.arrActiveUpcoming?.arrUpcomingCountries
         }
     }
+        private func requestToGetSelectedHubCountries() -> Void{
+            disableWindowInteraction()
+            TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetSelectedHubCountry, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errortype, statusCode) in
+                
+                let dicResult = kSharedInstance.getDictionary(dictResponse)
+                guard let data = dicResult["data"] as? [String:Any] else {return}
+                self.arrActiveUpcoming = ActiveUpcomingCountry.init(data: data)
+                let selectedHubsC = kSharedInstance.getStringArray(self.selectedHubs.map{$0.country.id})
+                if self.isEditHub == false{
+                _ = self.arrActiveUpcoming?.arrActiveCountries.map{$0.isSelected = selectedHubsC.contains($0.id ?? "")}
+                }else{
+                    print("Check Remaining")
+                }
+                self.activeCountryCV.countries = self.arrActiveUpcoming?.arrActiveCountries
+                self.inActiveCountryCV.countries = self.arrActiveUpcoming?.arrUpcomingCountries
+            }
+        }
+    
     
     //MARK:  - IBAction -
     
@@ -109,8 +128,9 @@ class CountryListVC: AlysieBaseViewC , SelectList {
             let selectedCity = allHubs.filter{$0.type == .city}
             let selectedHubs = allHubs.filter{$0.type == .hubs}
             let hubsID = selectedHubs.map{Int.getInt($0.id)}
-            let params = ["params":["selectedHubs":hubsID,"selectedCity":self.createCityJson(hubs: selectedCity)]]
+            let params = ["params":["selectedhubs":hubsID,"selectedcity":self.createCityJson(hubs: selectedCity)]]
             print(params)
+            disableWindowInteraction()
             TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kPostHub, requestMethod: .POST, requestParameters: params, withProgressHUD: true) { (dictResposne, error, errorType, statuscode) in
                 kSharedAppDelegate.pushToTabBarViewC()
             }
@@ -138,7 +158,9 @@ class CountryListVC: AlysieBaseViewC , SelectList {
         let nextVC = StateListVC()
         nextVC.country = data
         nextVC.selectedHubs = self.selectedHubs
+        nextVC.isEditHub = self.isEditHub
         nextVC.roleId = kSharedUserDefaults.loggedInUserModal.memberRoleId
+        enableWindowInteraction()
         self.navigationController?.pushViewController(nextVC, animated: true)
         print(data)
     }
