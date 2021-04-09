@@ -493,7 +493,7 @@ struct StaticArrayData {
     
     //MARK: EditSettingCollectionView
     static let kEditSettingUserColScreenDict = [
-                                              (image: "editSettingprofile", name: "Edit Profile"),
+                                              (image: "editSettingprofile", name: "User Settings"),
                                                (image: "community", name: "Edit Hub")
                                               ]
     

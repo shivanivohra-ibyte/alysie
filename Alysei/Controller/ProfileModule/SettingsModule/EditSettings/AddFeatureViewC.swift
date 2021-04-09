@@ -61,16 +61,37 @@ class AddFeatureViewC: AlysieBaseViewC {
   @IBAction func tapUpload(_ sender: UIButton) {
     
     let currentArray = (arrSelectedFields.count == 0) ? self.productCategoriesDataModel.arrProductFields : self.arrSelectedFields
-    let tuple = self.validateFields(currentArray)
-    if tuple.0 == false{
-      showAlert(withMessage: tuple.1)
+    //currentArray[0].productTitle
+    
+         if imgViewProduct.image == nil{
+          showAlert(withMessage: AlertMessage.kUploadImage)
+            return
+        }
+    for i in 1..<(currentArray.count ){
+        if (currentArray[i].selectedValue == "" && currentArray[i].required == AppConstants.Yes){
+            showAlert(withMessage: "\(currentArray[i].productTitle ?? "") is required")
+            return
+        }
+        else if imgViewProduct.image == nil{
+          showAlert(withMessage: AlertMessage.kUploadImage)
+            return
+        }
+        else{
+          self.postRequestToAddProduct()
+        }
     }
-    else if imgViewProduct.image == nil{
-      showAlert(withMessage: AlertMessage.kUploadImage)
-    }
-    else{
-      self.postRequestToAddProduct()
-    }
+//    let tuple = self.validateFields(currentArray)
+//    if tuple.0 == false{
+//
+//     //showAlert(withMessage: tuple.1)
+//        showAlert(withMessage: "\(currentArray[Int.getInt(tuple.1)].productTitle ?? "") is required")
+//    }
+//    else if imgViewProduct.image == nil{
+//      showAlert(withMessage: AlertMessage.kUploadImage)
+//    }
+//    else{
+//      self.postRequestToAddProduct()
+//    }
   }
   
   @IBAction func tapUploadImage(_ sender: UIButton) {

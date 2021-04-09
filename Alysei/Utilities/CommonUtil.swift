@@ -53,9 +53,7 @@ class CommonUtil: NSObject {
   
     SVProgressHUD.show()
 
-        if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
-            window.isUserInteractionEnabled = false
-        }
+        
    
     TANetworkManager.sharedInstance.requestApi(withServiceName: url,
                                                    requestMethod: method,
@@ -68,10 +66,12 @@ class CommonUtil: NSObject {
   
            SVProgressHUD.dismiss()
         if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
-             window.isUserInteractionEnabled = false
-        
             window.isUserInteractionEnabled = true
+        }
+        if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
 
+            window.isUserInteractionEnabled = true
+        }
             if errorType == .requestSuccess {
             
               let dictResult = kSharedInstance.getDictionary(result)
@@ -106,7 +106,7 @@ class CommonUtil: NSObject {
                // superView.isUserInteractionEnabled = true
               controller.showAlert(withMessage: AlertMessage.kDefaultError) }
         }
-    }
+   // }
     }
     
   func postRequestToImageUpload(withParameter params:[String: Any], url:String, image:[String: Any], controller: UIViewController, type: Int) {
@@ -119,6 +119,10 @@ class CommonUtil: NSObject {
                                                      requestData: params)
     { (result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
       SVProgressHUD.dismiss()
+        if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
+
+            window.isUserInteractionEnabled = true
+        }
       
       let dictResult = kSharedInstance.getDictionary(result)
       
@@ -164,6 +168,10 @@ class CommonUtil: NSObject {
             
            // CommonUtils.showHudWithNoInteraction(show: false)
             SVProgressHUD.dismiss()
+            if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
+
+                window.isUserInteractionEnabled = true
+            }
             if errorType == .requestSuccess {
                 
                 let dictResult = kSharedInstance.getDictionary(result)
