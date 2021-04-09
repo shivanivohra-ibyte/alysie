@@ -11,8 +11,10 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 protocol ContactDetailDisplayLogic: class {
+    func showAlertWithMessage(_ message: String)
 }
 
 class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
@@ -80,9 +82,31 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
 
     // MARK:- protocol methods
 
+    func showAlertWithMessage(_ message: String) {
+        SVProgressHUD.dismiss()
+
+        let alert:UIAlertController = UIAlertController(title: AlertTitle.appName, message: message, preferredStyle: UIAlertController.Style.alert)
+
+
+        let okayAction = UIAlertAction(title: AlertMessage.kOkay,
+                                       style: UIAlertAction.Style.default) { (action) in
+            self.backButtonTapped()
+        }
+
+        alert.addAction(okayAction)
+        self.present(alert, animated: true, completion: nil)
+
+    }
 
     // MARK:- @IBAction methods
+
+    @IBAction func backButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
     @IBAction func saveButtonTapped(_ sender: UIButton) {
+        SVProgressHUD.show()
+
         let requestModel = ContactDetail.Contact.Request(phone: self.phoneTextField.text,
                                                          address: self.addressTextField.text,
                                                          website: self.websiteTextField.text,

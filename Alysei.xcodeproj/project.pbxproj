@@ -202,6 +202,7 @@
 		61A8CB4A261D98CA00B99233 /* ContactDetailModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB44261D98CA00B99233 /* ContactDetailModels.swift */; };
 		61A8CB4B261D98CA00B99233 /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB45261D98CA00B99233 /* ContactDetailViewController.swift */; };
 		61A8CB4C261D98CA00B99233 /* ContactDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB46261D98CA00B99233 /* ContactDetailInteractor.swift */; };
+		61A8CB6F26204CE500B99233 /* AboutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB6E26204CE400B99233 /* AboutViewModel.swift */; };
 		6B5A8280260C56AD00ED60B7 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A827F260C56AD00ED60B7 /* WebServices.swift */; };
 		6B5A8284260C5CD100ED60B7 /* CompanyCertificates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A8283260C5CD100ED60B7 /* CompanyCertificates.swift */; };
 		6B65FFB326034900002832C8 /* SelectRoleViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B65FFB226034900002832C8 /* SelectRoleViewC.swift */; };
@@ -446,6 +447,7 @@
 		61A8CB44261D98CA00B99233 /* ContactDetailModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailModels.swift; sourceTree = "<group>"; };
 		61A8CB45261D98CA00B99233 /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
 		61A8CB46261D98CA00B99233 /* ContactDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailInteractor.swift; sourceTree = "<group>"; };
+		61A8CB6E26204CE400B99233 /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
 		6B5A827F260C56AD00ED60B7 /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		6B5A8283260C5CD100ED60B7 /* CompanyCertificates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCertificates.swift; sourceTree = "<group>"; };
 		6B65FFB226034900002832C8 /* SelectRoleViewC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRoleViewC.swift; sourceTree = "<group>"; };
@@ -1251,6 +1253,7 @@
 				6B5A8282260C5CA800ED60B7 /* CompanyCerModel */,
 				27B4E8F625EF957D00623E45 /* LoginModels */,
 				27B4E8F325EF957D00623E45 /* ProfileTabModels */,
+				61A8CB6E26204CE400B99233 /* AboutViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1595,6 +1598,7 @@
 				27B4E8FE25EF957D00623E45 /* WalkThroughModel.swift in Sources */,
 				27A4439725AE03720002BAAC /* NSData+Base64.m in Sources */,
 				27D4A15A25BDE32700FB7039 /* BusinessListTableCell.swift in Sources */,
+				61A8CB6F26204CE500B99233 /* AboutViewModel.swift in Sources */,
 				27A4439325AE03720002BAAC /* NSString+Base64.m in Sources */,
 				27A443C725AE03720002BAAC /* UITextFieldBorderWidthAndColor.swift in Sources */,
 				A84EECFF25B19FC900429B1D /* EditProfieTextViewTableCell.swift in Sources */,
@@ -1784,8 +1788,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 26;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3V73836LRC;
@@ -1797,7 +1801,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Alysei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Alysei_Dev_Prov_23March2021;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1809,8 +1813,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = 3V73836LRC;
 				INFOPLIST_FILE = Alysei/Info.plist;
@@ -1821,7 +1825,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Alysei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Alysei_Dev_Prov_23March2021;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -13,11 +13,22 @@
 import UIKit
 
 protocol ContactDetailPresentationLogic {
+    func contactInfoUpdated(_ status: Bool)
 }
 
 class ContactDetailPresenter: ContactDetailPresentationLogic {
     weak var viewController: ContactDetailDisplayLogic?
     
     // MARK:- protocol methods
+
+    func contactInfoUpdated(_ status: Bool) {
+        var message = "Your info has been updated."
+        if !status {
+            message = "Error while updating contact info."
+        }
+        
+        self.viewController?.showAlertWithMessage(message)
+
+    }
     
 }

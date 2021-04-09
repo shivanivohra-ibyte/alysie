@@ -288,13 +288,13 @@ class ProfileViewC: AlysieBaseViewC{
                 self.lblDisplayName.text = "\(name)".capitalized
                 self.lblUserName.text = "\(name)".capitalized
                 self.lblDisplayNameNavigation.text = "\(name)".capitalized
-                if responseModel.data?.userData?.profilePercentage == ProfilePercentage.percent100.rawValue {
+                if responseModel.data?.userData?.profilePercentage == String(ProfilePercentage.percent100.rawValue) {
                     self.viewProfileCompletion.isHidden = true
                     self.viewProfileHeight.constant = 0
                 }else{
                     self.viewProfileCompletion.isHidden = false
                     self.viewProfileHeight.constant = 75
-                    self.profilePercentage.text = "It's at \(responseModel.data?.userData?.profilePercentage ?? 0)%"
+                    self.profilePercentage.text = "It's at \(responseModel.data?.userData?.profilePercentage ?? "0")%"
                 }
                 kSharedUserDefaults.loggedInUserModal.firstName = responseModel.data?.userData?.firstName
                 kSharedUserDefaults.loggedInUserModal.lastName = responseModel.data?.userData?.lastName
@@ -355,7 +355,7 @@ class ProfileViewC: AlysieBaseViewC{
             SVProgressHUD.dismiss()
             guard let data = data else { return }
             do {
-                let responseModel = try JSONDecoder().decode(AboutView.Response<AboutView.producerDataModel>.self, from: data)
+                let responseModel = try JSONDecoder().decode(AboutView.Response<AboutView.restaurantDataModel>.self, from: data)
                 print(responseModel)
                 self.contactDetail.removeAll()
             } catch {

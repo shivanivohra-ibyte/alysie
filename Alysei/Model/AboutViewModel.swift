@@ -8,8 +8,9 @@
 import Foundation
 
 enum AboutView {
-    struct Response<Element: Codable>: Codable {
-        var data:  Element?
+    
+    struct Response<T: Codable>: Codable {
+        var data:  T?
 
         private enum CodingKeys: String, CodingKey {
             case data = "data"

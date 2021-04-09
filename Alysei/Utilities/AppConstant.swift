@@ -96,6 +96,7 @@ struct  AlertMessage{
     static let kDeletePhoto             = "Delete photo"
     static let kRemovePhoto             = "Remove photo"
     static let kCancel                  = "Cancel"
+    static let kOkay                    = "Okay"
     static let kEnter6DigitOTP          = "Enter 6-digit OTP."
     static let kFeatureNot              = "This feature is not available."
     static let kSignUpFirst              = "To Start Shopping, you have to SignUp First."

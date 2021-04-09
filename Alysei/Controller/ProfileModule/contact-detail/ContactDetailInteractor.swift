@@ -31,8 +31,11 @@ class ContactDetailInteractor: ContactDetailBusinessLogic, ContactDetailDataStor
         guard var urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Profile.updateContactDetails)", method: .POST) else { return }
         urlRequest.httpBody = requestModel.data()
         WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
-            print(error)
-            print(statusCode)
+            if statusCode == 200 {
+                self.presenter?.contactInfoUpdated(true)
+            } else {
+                self.presenter?.contactInfoUpdated(false)
+            }
         }
     }
 }
