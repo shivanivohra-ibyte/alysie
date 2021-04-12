@@ -41,6 +41,7 @@ class ProfileViewC: AlysieBaseViewC{
     var contactDetilViewModel: ContactDetail.Contact.Response!
     var signUpViewModel: SignUpViewModel!
     var userType: UserRoles!
+    var aboutViewModel: AboutView.viewModel!
 //    {
 //        didSet {
 //            print(oldValue)
@@ -92,7 +93,6 @@ class ProfileViewC: AlysieBaseViewC{
     self.postRequestToGetFields()
     self.fetchProfileDetails()
     self.fetchContactDetail()
-    self.fetchAboutDetail()
 
   }
   
@@ -135,6 +135,8 @@ class ProfileViewC: AlysieBaseViewC{
     self.btnAbout.setTitleColor(UIColor.black, for: .normal)
     self.btnContact.setTitleColor(AppColors.liteGray.color, for: .normal)
     self.moveToNew(childViewController: aboutViewC, fromController: self.currentChild)
+
+    self.aboutViewC.viewModel = self.aboutViewModel
   }
   
   @IBAction func tapContact(_ sender: UIButton) {
@@ -266,6 +268,9 @@ class ProfileViewC: AlysieBaseViewC{
                 let responseModel = try JSONDecoder().decode(UserProfile.profileTopSectionModel.self, from: data)
                 print(responseModel)
 
+                self.fetchAboutDetail()
+
+
                 if let username = responseModel.data?.userData?.username {
                     self.usernameLabel.text = "@\(username)".lowercased()
                 }
@@ -288,13 +293,13 @@ class ProfileViewC: AlysieBaseViewC{
                 self.lblDisplayName.text = "\(name)".capitalized
                 self.lblUserName.text = "\(name)".capitalized
                 self.lblDisplayNameNavigation.text = "\(name)".capitalized
-                if responseModel.data?.userData?.profilePercentage == String(ProfilePercentage.percent100.rawValue) {
+                if responseModel.data?.userData?.profilePercentage == ProfilePercentage.percent100.rawValue {
                     self.viewProfileCompletion.isHidden = true
                     self.viewProfileHeight.constant = 0
                 }else{
                     self.viewProfileCompletion.isHidden = false
                     self.viewProfileHeight.constant = 75
-                    self.profilePercentage.text = "It's at \(responseModel.data?.userData?.profilePercentage ?? "0")%"
+                    self.profilePercentage.text = "It's at \(responseModel.data?.userData?.profilePercentage ?? 0)%"
                 }
                 kSharedUserDefaults.loggedInUserModal.firstName = responseModel.data?.userData?.firstName
                 kSharedUserDefaults.loggedInUserModal.lastName = responseModel.data?.userData?.lastName
@@ -348,20 +353,80 @@ class ProfileViewC: AlysieBaseViewC{
     }
 
 
+    private func convertDataToAboutModel(_ data: Data) {
+        self.editProfileViewCon?.userType = self.userType
+
+        do {
+            switch self.userType {
+            case .producer, .distributer1, .distributer2, .distributer3:
+                let modelType = AboutView.Response<AboutView.producerDataModel>.self
+                let responseModel = try JSONDecoder().decode(modelType, from: data)
+                let intermediatorModel = AboutView.intermediatorModel(responseModel, userRole: self.userType)
+                print(intermediatorModel)
+                self.aboutViewModel = AboutView.viewModel(userRole: self.userType,
+                                                          detail: intermediatorModel.detail,
+                                                          staticDetail: intermediatorModel.staticDetail,
+                                                          subDetail: intermediatorModel.subDetail,
+                                                          staticSubdetail: intermediatorModel.staticSubdetail,
+                                                          rows: intermediatorModel.rows,
+                                                          listTitle: intermediatorModel.listTitle)
+            case .voiceExperts:
+                let modelType = AboutView.Response<AboutView.voiceExpertDataModel>.self
+                let responseModel = try JSONDecoder().decode(modelType, from: data)
+                let intermediatorModel = AboutView.intermediatorModel(responseModel, userRole: self.userType)
+                print(intermediatorModel)
+                self.aboutViewModel = AboutView.viewModel(userRole: self.userType,
+                                                          detail: intermediatorModel.detail,
+                                                          staticDetail: intermediatorModel.staticDetail,
+                                                          subDetail: intermediatorModel.subDetail,
+                                                          staticSubdetail: intermediatorModel.staticSubdetail,
+                                                          rows: intermediatorModel.rows,
+                                                          listTitle: intermediatorModel.listTitle)
+            case .travelAgencies:
+                let modelType = AboutView.Response<AboutView.travelAgencyDataModel>.self
+                let responseModel = try JSONDecoder().decode(modelType, from: data)
+                let intermediatorModel = AboutView.intermediatorModel(responseModel, userRole: self.userType)
+                print(intermediatorModel)
+                self.aboutViewModel = AboutView.viewModel(userRole: self.userType,
+                                                          detail: intermediatorModel.detail,
+                                                          staticDetail: intermediatorModel.staticDetail,
+                                                          subDetail: intermediatorModel.subDetail,
+                                                          staticSubdetail: intermediatorModel.staticSubdetail,
+                                                          rows: intermediatorModel.rows,
+                                                          listTitle: intermediatorModel.listTitle)
+            case .restaurant:
+                let modelType = AboutView.Response<AboutView.restaurantDataModel>.self
+                let responseModel = try JSONDecoder().decode(modelType, from: data)
+                let intermediatorModel = AboutView.intermediatorModel(responseModel, userRole: self.userType)
+                print(intermediatorModel)
+                self.aboutViewModel = AboutView.viewModel(userRole: self.userType,
+                                                          detail: intermediatorModel.detail,
+                                                          staticDetail: intermediatorModel.staticDetail,
+                                                          subDetail: intermediatorModel.subDetail,
+                                                          staticSubdetail: intermediatorModel.staticSubdetail,
+                                                          rows: intermediatorModel.rows)
+            default:
+                print("some")
+            }
+
+
+
+        } catch {
+            print(error.localizedDescription)
+        }
+
+    }
+
     func fetchAboutDetail() {
         SVProgressHUD.show()
         guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Profile.fetchAboutDetails)", method: .GET) else { return }
         WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
             SVProgressHUD.dismiss()
             guard let data = data else { return }
-            do {
-                let responseModel = try JSONDecoder().decode(AboutView.Response<AboutView.restaurantDataModel>.self, from: data)
-                print(responseModel)
-                self.contactDetail.removeAll()
-            } catch {
-                print(error.localizedDescription)
+            self.convertDataToAboutModel(data)
+            if (error != nil) {
+                print(error.debugDescription)
             }
-            if (error != nil) { print(error.debugDescription) }
         }
     }
     

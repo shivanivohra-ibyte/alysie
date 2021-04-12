@@ -111,7 +111,7 @@ class UserModel: NSObject{
 }
 
 
-enum UserRoles: Int {
+enum UserRoles: Int, Codable {
     case producer = 3
     case distributer1 = 4
     case distributer2 = 5

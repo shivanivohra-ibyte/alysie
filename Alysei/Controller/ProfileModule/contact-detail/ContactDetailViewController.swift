@@ -101,7 +101,7 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
     // MARK:- @IBAction methods
 
     @IBAction func backButtonTapped() {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 
     @IBAction func saveButtonTapped(_ sender: UIButton) {

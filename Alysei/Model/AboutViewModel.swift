@@ -17,6 +17,75 @@ enum AboutView {
         }
     }
 
+    struct viewModel: Codable {
+        var userRole: UserRoles
+        var detail: String? // about
+        var staticDetail: String?
+        var subDetail: String?
+        var staticSubdetail: String?
+        var rows: [String]?
+        var listTitle: String?
+    }
+
+    struct intermediatorModel<T: Codable>: Codable {
+        private var response: Response<T>
+        var userRole: UserRoles
+        var detail: String? // about
+        var staticDetail: String?
+        var subDetail: String?
+        var staticSubdetail: String?
+        var listTitle: String?
+
+        var rows: [String]?
+
+
+        init(_ response: Response<T>, userRole: UserRoles) {
+            self.response = response
+            self.userRole = userRole
+
+            self.setup()
+        }
+
+        mutating func setup() {
+            switch userRole {
+            case .producer, .distributer1, .distributer2, .distributer3:
+                let data = response.data as? producerDataModel
+                self.rows = data?.productType
+                self.detail = data?.about
+                self.subDetail = data?.products
+                self.listTitle = "Product Type"
+                self.staticDetail = "About"
+                self.staticSubdetail = "Our Products"
+            case .restaurant:
+                let data = response.data as? restaurantDataModel
+                self.rows = data?.restaurantType
+                self.detail = data?.about
+                self.subDetail = data?.menu
+                self.listTitle = "Restaurant Type"
+                self.staticDetail = "About"
+                self.staticSubdetail = "Menu"
+            case .voiceExperts:
+                let data = response.data as? voiceExpertDataModel
+                self.rows = data?.title
+                self.detail = data?.about
+                self.subDetail = data?.country
+                self.listTitle = "Title"
+                self.staticDetail = "About"
+                self.staticSubdetail = "Country"
+            case .travelAgencies:
+                let data = response.data as? travelAgencyDataModel
+                self.rows = data?.speciality
+                self.detail = data?.about
+                self.subDetail = data?.ourTours
+                self.listTitle = "Speciality"
+                self.staticDetail = "About"
+                self.staticSubdetail = "Our tours"
+            default: break
+            }
+        }
+    }
+
+
     struct producerDataModel: Codable {
         var productType: [String]?
         var about: String?
@@ -31,58 +100,81 @@ enum AboutView {
     struct restaurantDataModel: Codable {
         var restaurantType: [String]?
         var about: String?
-        var Menu: String?
+        var menu: String?
         private enum CodingKeys: String, CodingKey {
             case restaurantType = "Restaurant Type"
             case about = "About"
-            case Menu = "Menu"
+            case menu = "Menu"
         }
     }
 
-    struct importorDataModel: Codable {
-        var restaurantType: [String]?
-        var about: String?
-        var Menu: String?
-        private enum CodingKeys: String, CodingKey {
-            case restaurantType = "Restaurant Type"
-            case about = "About"
-            case Menu = "Menu"
-        }
-    }
+//    struct importorDataModel: Codable {
+//        var restaurantType: [String]?
+//        var about: String?
+//        var Menu: String?
+//        private enum CodingKeys: String, CodingKey {
+//            case restaurantType = "Restaurant Type"
+//            case about = "About"
+//            case Menu = "Menu"
+//        }
+//    }
 
 
     struct voiceExpertDataModel: Codable {
-        var restaurantType: [String]?
+        var expertise: [String]?
+        var title: [String]?
         var about: String?
-        var Menu: String?
+        var country: String?
         private enum CodingKeys: String, CodingKey {
-            case restaurantType = "Restaurant Type"
+            case expertise = "Expertise"
+            case title = "Title"
             case about = "About"
-            case Menu = "Menu"
+            case country = "Country"
         }
     }
 
 
     struct travelAgencyDataModel: Codable {
-        var restaurantType: [String]?
+        var speciality: [String]?
         var about: String?
-        var Menu: String?
+        var ourTours: String?
         private enum CodingKeys: String, CodingKey {
-            case restaurantType = "Restaurant Type"
+            case speciality = "Speciality"
             case about = "About"
-            case Menu = "Menu"
+            case ourTours = "Our tours"
         }
     }
 
 
-    struct voyagersDataModel: Codable {
-        var restaurantType: [String]?
-        var about: String?
-        var Menu: String?
-        private enum CodingKeys: String, CodingKey {
-            case restaurantType = "Restaurant Type"
-            case about = "About"
-            case Menu = "Menu"
-        }
-    }
+//    struct voyagersDataModel: Codable {
+//        var restaurantType: [String]?
+//        var about: String?
+//        var Menu: String?
+//        private enum CodingKeys: String, CodingKey {
+//            case restaurantType = "Restaurant Type"
+//            case about = "About"
+//            case Menu = "Menu"
+//        }
+//    }
 }
+
+
+////
+//enum UserRoles: Int {
+//    case producer = 3
+//    case distributer1 = 4
+//    case distributer2 = 5
+//    case distributer3 = 6
+//    case voiceExperts = 7
+//    case travelAgencies = 8
+//    case restaurant =  9
+//    case voyagers = 10
+//}
+
+// Product Type", "About", "Our Products"
+
+//for user type 8
+//"Country", "Speciality", "About", "Our tours"
+//
+//for user type 9
+//"Restaurant Type", "About", "Menu"

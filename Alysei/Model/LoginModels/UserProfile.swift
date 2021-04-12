@@ -39,7 +39,7 @@ enum UserProfile {
         var firstName: String?
         var lastName: String?
         var restaurantName: String?
-        var profilePercentage: String?
+        var profilePercentage: Int?
         
          private enum CodingKeys: String, CodingKey {
             case avatar = "avatar_id"
