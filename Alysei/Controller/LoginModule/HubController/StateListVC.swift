@@ -19,6 +19,7 @@ class StateListVC: AlysieBaseViewC , SelectList {
     @IBOutlet weak var viewHeader: UIView!
     @IBOutlet weak var labelHeading: UILabel!
     var isEditHub: Bool?
+    var isChckfirstEditSlcted = true
     var roleId: String?
     
     override func viewDidLoad() {
@@ -68,6 +69,7 @@ class StateListVC: AlysieBaseViewC , SelectList {
           nextvc.roleId = self.roleId
         nextvc.city =  (self.states?.filter{$0.isSelected} ?? [])
         nextvc.selectedHubs = self.selectedHubs
+            nextvc.isEditHub = self.isEditHub
         self.navigationController?.pushViewController(nextvc, animated: true)
         print(selectedHub)
         }
@@ -100,8 +102,11 @@ class StateListVC: AlysieBaseViewC , SelectList {
             self.states = data.map{CountryHubs(data: $0)}
             if self.isEditHub == false{
             _ = self.states?.map{$0.isSelected = hubs.contains($0.id ?? "")}
-            }else{
-                print("Check Remaning")
+            }else if  (self.isEditHub == true) && (self.isChckfirstEditSlcted == false) {
+                _ = self.states?.map{$0.isSelected = hubs.contains($0.id ?? "")}
+            }
+            else{
+                self.isChckfirstEditSlcted = false
             }
             self.tableVIew.states = self.states
         }

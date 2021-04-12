@@ -22,6 +22,9 @@ class HubsListVC: UIViewController {
     var hubsViaCity:[HubsViaCity]?
     var hasCome:HasCome? = .hubs
     var roleId: String?
+    var isEditHub: Bool?
+    var isChckHubfirstEditSlcted = true
+    var isChckCityfirstEditSlcted = true
     
   
     // MARK:- lifeCycle
@@ -48,20 +51,33 @@ class HubsListVC: UIViewController {
         let countryID = String.getString(country?.id)
         let cityID = kSharedInstance.getStringArray(self.city.map{$0.id})
         let params: [String:Any] = [ "params": [ countryID: cityID]]
-        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kgetHubs, requestMethod: .GET, requestParameters: params, withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kgetHubs, requestMethod: .POST, requestParameters: params, withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             let response = kSharedInstance.getDictionary(dictResponse)
             guard  let data = response["data"] as? [String:Any] else {return}
             let hubs = kSharedInstance.getArray(withDictionary: data["hubs"])
+            
             let selectedHub = self.selectedHubs.first{$0.country.id == self.country?.id}
             let selectedCity = kSharedInstance.getStringArray(selectedHub?.hubs.map{$0.id})
             self.hubsViaCity = hubs.map{HubsViaCity(data: $0)}
+            if self.isEditHub == false{
             for hub in self.hubsViaCity ?? [] {
-               _ = hub.hubs_array?.map{ $0.isSelected = selectedCity.contains($0.id ?? "")}
+                   _ = hub.hubs_array?.map{ $0.isSelected = selectedCity.contains($0.id ?? "")}
+                }
+            }else if  (self.isEditHub == true) && (self.isChckHubfirstEditSlcted == false) {
+                for hub in self.hubsViaCity ?? [] {
+                       _ = hub.hubs_array?.map{ $0.isSelected = selectedCity.contains($0.id ?? "")}
+                    }
             }
+              else{
+                self.isChckHubfirstEditSlcted = false
+                // self.isEditHub = false
+                print("Check Remaining")
+            }
+            
             self.tableView.hubsViaCity = self.hubsViaCity
         }
     }
-    
+//   
 //    self.countries = data.map{CountryModel(data: $0)}
 //    let selectedHubsC = kSharedInstance.getStringArray(self.selectedHubs.map{$0.country.id})
 //    _ = self.countries?.map{$0.isSelected = selectedHubsC.contains($0.id ?? "")}
@@ -78,8 +94,21 @@ class HubsListVC: UIViewController {
             let selectedHub = self.selectedHubs.first{$0.country.id == self.country?.id}
             let selectedCity = kSharedInstance.getStringArray(selectedHub?.hubs.map{$0.id})
             self.hubsViaCity = hubs.map{HubsViaCity(city: $0)}
-            for hub in self.hubsViaCity ?? [] {
-                _ = hub.hubs_array?.map{ $0.isSelected = selectedCity.contains($0.id ?? "")}
+//            for hub in self.hubsViaCity ?? [] {
+//                _ = hub.hubs_array?.map{ $0.isSelected = selectedCity.contains($0.id ?? "")}
+//            }
+            if self.isEditHub == false{
+                for hub in self.hubsViaCity ?? [] {
+                    _ = hub.hubs_array?.map{ $0.isSelected = selectedCity.contains($0.id ?? "")}
+                }
+            }else if  (self.isEditHub == true) && (self.isChckCityfirstEditSlcted == false) {
+                for hub in self.hubsViaCity ?? [] {
+                    _ = hub.hubs_array?.map{ $0.isSelected = selectedCity.contains($0.id ?? "")}
+                }
+            }
+              else{
+                self.isChckCityfirstEditSlcted = false
+                print("Check Remaining")
             }
             self.tableView.hubsViaCity = self.hubsViaCity
         }

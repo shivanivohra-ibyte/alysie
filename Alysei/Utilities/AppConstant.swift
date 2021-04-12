@@ -441,7 +441,7 @@ struct StaticArrayData {
     static let kSettingRestColScreenDict = [
                                             (image: "icons8_settings", name: "Settings"),
                                             (image: "icons8_shop", name: "Marketplace"),
-                                            (image: "events", name: "Events"),
+                                            (image: "calendar (2)", name: "Events"),
                                             (image: "icons8_security_lock", name: "Privacy"),
                                             (image: "icons8_privacy", name: "Password"),
                                             (image: "icons8_unavailable", name: "Blocking"),
@@ -482,9 +482,9 @@ struct StaticArrayData {
     static let kSettingExpertColScreenDict = [
                                               (image: "icons8_settings", name: "Settings"),
                                              (image: "icons8_shop", name: "Marketplace"),
-                                              (image: "company_icon", name: "Featured"),
-                                              (image: "privacy_icon", name: "Privacy"),
-                                              (image: "password_icon", name: "Password"),
+                                              (image: "Featured", name: "Featured"),
+                                              (image: "icons8_security_lock", name: "Privacy"),
+                                              (image: "icons8_privacy", name: "Password"),
                                               (image: "icons8_unavailable", name: "Blocking"),
                                               (image: "icons8_debit_card_1", name: "Membership"),
                                               (image: "icons8_purchase_order", name: "Billing"),
