@@ -103,6 +103,7 @@ class CountryHubs {
         self.iso2 = String.getString(data?["subregion"])
         self.type = .hubs
         self.attachment_url = String.getString(data?["attachment_url"])
+        self.isSelected = Int.getInt(data?["is_selected"]) == 0 ? false: true
         if let image = data?["image"] as? [String:Any] {
             self.imageHub = String.getString(image["attachment_url"])
             print("HubImage-----------------------------------------\(self.imageHub ?? "")")

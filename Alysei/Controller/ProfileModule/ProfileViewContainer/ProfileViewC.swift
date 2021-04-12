@@ -34,6 +34,7 @@ class ProfileViewC: AlysieBaseViewC{
     @IBOutlet weak var viewProfileHeight: NSLayoutConstraint!
     @IBOutlet weak var profilePercentage: UILabel!
     @IBOutlet weak var lblUserName: UILabel!
+    @IBOutlet weak var lblHintText: UILabel!
     
   //MARK: - Properties -
 
@@ -83,6 +84,9 @@ class ProfileViewC: AlysieBaseViewC{
     self.tblViewPosts.tableHeaderView?.setHeight(600.0 + 861.0)
     //self.tblViewPosts.tableFooterView = UIView()
     self.btnPosts.isSelected = true
+    
+    let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+    self.viewProfileCompletion.addGestureRecognizer(tap)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -436,6 +440,15 @@ class ProfileViewC: AlysieBaseViewC{
     disableWindowInteraction()
     CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kUserSubmittedFields, method: .GET, controller: self, type: 0, param: [:], btnTapped: UIButton())
   }
+    //MARK:- HandleViewTap
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer){
+        if kSharedUserDefaults.loggedInUserModal.userName?.isEmpty ?? false{
+            _ =  pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
+        }else{
+            
+        }
+    }
 }
 
 //MARK: - CollectionView Methods -

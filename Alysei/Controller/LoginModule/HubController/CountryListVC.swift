@@ -32,6 +32,8 @@ class CountryListVC: AlysieBaseViewC , SelectList {
     var selectedHubs = [SelectdHubs]()
     var roleId: String?
     var arrActiveUpcoming: ActiveUpcomingCountry?
+    var isChckfirstEditSlcted = true
+    var addOrUpdate: Int?
     
     // MARK: - ViewLifeCycle Methods -
     
@@ -96,7 +98,11 @@ class CountryListVC: AlysieBaseViewC , SelectList {
                 let selectedHubsC = kSharedInstance.getStringArray(self.selectedHubs.map{$0.country.id})
                 if self.isEditHub == false{
                 _ = self.arrActiveUpcoming?.arrActiveCountries.map{$0.isSelected = selectedHubsC.contains($0.id ?? "")}
-                }else{
+                }else if  (self.isEditHub == true) && (self.isChckfirstEditSlcted == false) {
+                    _ = self.arrActiveUpcoming?.arrActiveCountries.map{$0.isSelected = selectedHubsC.contains($0.id ?? "")}
+                }
+                else{
+                    self.isChckfirstEditSlcted = false
                     print("Check Remaining")
                 }
                 self.activeCountryCV.countries = self.arrActiveUpcoming?.arrActiveCountries
@@ -128,7 +134,12 @@ class CountryListVC: AlysieBaseViewC , SelectList {
             let selectedCity = allHubs.filter{$0.type == .city}
             let selectedHubs = allHubs.filter{$0.type == .hubs}
             let hubsID = selectedHubs.map{Int.getInt($0.id)}
-            let params = ["params":["selectedhubs":hubsID,"selectedcity":self.createCityJson(hubs: selectedCity)]]
+            if self.isEditHub == true{
+                self.addOrUpdate = 2
+            }else{
+                self.addOrUpdate = 1
+            }
+            let params = ["params":["add_or_update": self.addOrUpdate ?? 1,"selectedhubs":hubsID,"selectedcity":self.createCityJson(hubs: selectedCity)]] //add_or_update - 1: Save,2:Update
             print(params)
             disableWindowInteraction()
             TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kPostHub, requestMethod: .POST, requestParameters: params, withProgressHUD: true) { (dictResposne, error, errorType, statuscode) in
