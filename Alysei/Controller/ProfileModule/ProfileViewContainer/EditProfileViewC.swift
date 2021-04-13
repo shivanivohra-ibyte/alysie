@@ -236,11 +236,11 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
         }
 
         // remove photo action will be shown in alert only when user has captured an image for either profile picture or cover photo
-        if self.profilePhotoAlreadyExists && self.btnProfilePhoto.isSelected {
-            alert.addAction(removePhotoAction)
-        } else if self.coverPhotoAlreadyExists && self.btnCoverPhoto.isSelected {
-            alert.addAction(removePhotoAction)
-        }
+//        if self.profilePhotoAlreadyExists && self.btnProfilePhoto.isSelected {
+//            alert.addAction(removePhotoAction)
+//        } else if self.coverPhotoAlreadyExists && self.btnCoverPhoto.isSelected {
+//            alert.addAction(removePhotoAction)
+//        }
 
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
