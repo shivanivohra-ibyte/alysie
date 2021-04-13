@@ -200,47 +200,47 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
         alert.addAction(cameraAction)
         alert.addAction(galleryAction)
 
-        let deletePhotoAction = UIAlertAction(title: AlertMessage.kDeletePhoto,
-                                              style: UIAlertAction.Style.default) { (action) in
-            if self.isProfilePhotoCaptured {
-                self.isProfilePhotoCaptured = false
-                self.imgViewProfile.image = UIImage(named: "user_icon_normal")
-                self.profilePhoto = nil
-            } else if self.isCoverPhotoCaptured {
-                self.isCoverPhotoCaptured = false
-                self.imgViewCoverPhoto.image = UIImage(named: "coverPhoto")
-                self.coverPhoto = nil
-            }
-        }
+//        let deletePhotoAction = UIAlertAction(title: AlertMessage.kDeletePhoto,
+//                                              style: UIAlertAction.Style.default) { (action) in
+//            if self.isProfilePhotoCaptured {
+//                self.isProfilePhotoCaptured = false
+//                self.imgViewProfile.image = UIImage(named: "user_icon_normal")
+//                self.profilePhoto = nil
+//            } else if self.isCoverPhotoCaptured {
+//                self.isCoverPhotoCaptured = false
+//                self.imgViewCoverPhoto.image = UIImage(named: "coverPhoto")
+//                self.coverPhoto = nil
+//            }
+//        }
+//        // remove photo action will be shown in alert only when user has captured an image for either profile picture or cover photo
+//        if self.isProfilePhotoCaptured && self.btnProfilePhoto.isSelected {
+//            alert.addAction(deletePhotoAction)
+//        } else if self.isCoverPhotoCaptured && self.btnCoverPhoto.isSelected {
+//            alert.addAction(deletePhotoAction)
+//        }
+
+
+//        let removePhotoAction = UIAlertAction(title: AlertMessage.kRemovePhoto,
+//                                                 style: UIAlertAction.Style.default) { (action) in
+//            if self.profilePhotoAlreadyExists && self.btnProfilePhoto.isSelected {
+//                self.profilePhotoAlreadyExists = false
+//                self.imgViewProfile.image = UIImage(named: "user_icon_normal")
+//                self.profilePhoto = nil
+//                self.deletePicture(UserDetailBasedElements().profilePhoto, imageType: 1)
+//            } else if self.coverPhotoAlreadyExists &&  self.btnCoverPhoto.isSelected {
+//                self.coverPhotoAlreadyExists = false
+//                self.imgViewCoverPhoto.image = UIImage(named: "coverPhoto")
+//                self.coverPhoto = nil
+//                self.deletePicture(UserDetailBasedElements().coverPhoto, imageType: 2)
+//            }
+//        }
+
         // remove photo action will be shown in alert only when user has captured an image for either profile picture or cover photo
-        if self.isProfilePhotoCaptured && self.btnProfilePhoto.isSelected {
-            alert.addAction(deletePhotoAction)
-        } else if self.isCoverPhotoCaptured && self.btnCoverPhoto.isSelected {
-            alert.addAction(deletePhotoAction)
-        }
-
-
-        let removePhotoAction = UIAlertAction(title: AlertMessage.kRemovePhoto,
-                                                 style: UIAlertAction.Style.default) { (action) in
-            if self.profilePhotoAlreadyExists && self.btnProfilePhoto.isSelected {
-                self.profilePhotoAlreadyExists = false
-                self.imgViewProfile.image = UIImage(named: "user_icon_normal")
-                self.profilePhoto = nil
-                self.deletePicture(UserDetailBasedElements().profilePhoto, imageType: 1)
-            } else if self.coverPhotoAlreadyExists &&  self.btnCoverPhoto.isSelected {
-                self.coverPhotoAlreadyExists = false
-                self.imgViewCoverPhoto.image = UIImage(named: "coverPhoto")
-                self.coverPhoto = nil
-                self.deletePicture(UserDetailBasedElements().coverPhoto, imageType: 2)
-            }
-        }
-
-        // remove photo action will be shown in alert only when user has captured an image for either profile picture or cover photo
-        if self.profilePhotoAlreadyExists && self.btnProfilePhoto.isSelected {
-            alert.addAction(removePhotoAction)
-        } else if self.coverPhotoAlreadyExists && self.btnCoverPhoto.isSelected {
-            alert.addAction(removePhotoAction)
-        }
+//        if self.profilePhotoAlreadyExists && self.btnProfilePhoto.isSelected {
+//            alert.addAction(removePhotoAction)
+//        } else if self.coverPhotoAlreadyExists && self.btnCoverPhoto.isSelected {
+//            alert.addAction(removePhotoAction)
+//        }
 
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)

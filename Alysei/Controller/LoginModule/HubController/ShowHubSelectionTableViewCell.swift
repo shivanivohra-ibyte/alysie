@@ -19,13 +19,17 @@ class ShowHubSelectionTableViewCell: UITableViewCell {
     @IBOutlet weak var btnRemoveHubIcon: UIButton!
     
     var selectedHub:SelectdHubs?{didSet{self.awakeFromNib()}}
+    var reviewSelectedHub: ReviewHubModel.reviewHubModel?
+    var reviewSelectedHubCityArray =  [String]()
     var addRemoveCallback : (((Int)->Void)?) = nil
     let columnLayout = CustomViewFlowLayout()
   var roleId: String?
+    var isEditHub: Bool?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        //MARK:- Call func
+//        //MARK:- Call func
+
         self.initialSetup()
         //MARK:- Register XIB
         collectionView.register(UINib(nibName: HubNameCollectionViewCell.identifier(), bundle: nil), forCellWithReuseIdentifier: "HubNameCollectionViewCell")
@@ -36,17 +40,6 @@ class ShowHubSelectionTableViewCell: UITableViewCell {
         }
         
        collectionView.collectionViewLayout = columnLayout
-    }
-   
-    //MARK: private func
-    
-    private func getHubNameCollectionCell(_ indexPath: IndexPath) -> UICollectionViewCell{
-        let hubNameTableCell = collectionView.dequeueReusableCell(withReuseIdentifier: HubNameCollectionViewCell.identifier(), for: indexPath) as! HubNameCollectionViewCell
-        let hub = self.selectedHub?.hubs[indexPath.row]
-        self.labeCountryName.text = self.selectedHub?.country.name
-        hubNameTableCell.lblNAme.text = hub?.name
-        hubNameTableCell.lblNAme.sizeToFit()
-       return hubNameTableCell
     }
     //MARK:- INTIIAL SETUP
     
@@ -61,8 +54,38 @@ class ShowHubSelectionTableViewCell: UITableViewCell {
             self.btnRemoveHub.isHidden = false
             self.btnRemoveHubIcon.isHidden = false
         }
+                if isEditHub == true{
+                    for i in 0..<(self.reviewSelectedHub?.data?.hubs?[0].selectedCity?.count ?? 0){
+                        let data = self.reviewSelectedHub?.data?.hubs?[0].selectedCity
+                        self.reviewSelectedHubCityArray.append(data?[i].city?.name ?? "" )
+                    }
+                    for i in 0..<(self.reviewSelectedHub?.data?.hubs?[0].selectedHubs?.count ?? 0){
+                        let data = self.reviewSelectedHub?.data?.hubs?[0].selectedHubs
+                        self.reviewSelectedHubCityArray.append(data?[i].title ?? "" )
+                    }
+                    print("ReviewSelectedHubCityArray--------------------------\(reviewSelectedHubCityArray)")
+                    self.collectionView.reloadData()
+                }
     }
 
+    //MARK: private func
+    
+    private func getHubNameCollectionCell(_ indexPath: IndexPath) -> UICollectionViewCell{
+        let hubNameTableCell = collectionView.dequeueReusableCell(withReuseIdentifier: HubNameCollectionViewCell.identifier(), for: indexPath) as! HubNameCollectionViewCell
+        if isEditHub == true{
+            let hub = self.reviewSelectedHub?.data?.hubs?[0].selectedCity?[indexPath.row]
+            self.labeCountryName.text = self.reviewSelectedHub?.data?.hubs?[0].countryName
+            hubNameTableCell.lblNAme.text = reviewSelectedHubCityArray[indexPath.row]
+            hubNameTableCell.lblNAme.sizeToFit()
+        }else{
+        let hub = self.selectedHub?.hubs[indexPath.row]
+        self.labeCountryName.text = self.selectedHub?.country.name
+        hubNameTableCell.lblNAme.text = hub?.name
+        hubNameTableCell.lblNAme.sizeToFit()
+        }
+       return hubNameTableCell
+    }
+   
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
@@ -84,7 +107,11 @@ extension ShowHubSelectionTableViewCell: UICollectionViewDataSource, UICollectio
    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if isEditHub == true{
+            return reviewSelectedHubCityArray.count
+        }else{
         return selectedHub?.hubs.count ?? 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
