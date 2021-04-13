@@ -5,26 +5,30 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ConfirmSelectionVC: UIViewController , SelectList{
     
     var selectedHubs = [SelectdHubs]()
+    var reviewSelectedHubs : ReviewHubModel.reviewHubModel?
+    
     @IBOutlet weak var tableView: ConfirmSelectionTable!
     @IBOutlet weak var viewHeader: UIView!
     var updatedHubs:(([SelectdHubs])->())?
      var roleId: String?
+    var isEditHub:Bool?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.viewHeader.addShadow()
         self.tableView.dataDelegate = self
         self.tableView.selectedHubs = selectedHubs
       self.tableView.roleId = self.roleId
+        self.tableView.isEditHub = self.isEditHub
+        if isEditHub == true{
+            self.callReviewHubApi()
+        }
     }
     
-    @IBAction func proceedNext(_ sender: UIButton) {
-        
-        
-    }
     func didSelectList(data: Any?, index: IndexPath) {
         guard let data = data as? SelectdHubs else {return}
         let nextVC = StateListVC()
@@ -73,4 +77,29 @@ extension Array {
         return arrayOrdered
     }
 }
+
+extension ConfirmSelectionVC {
+    func callReviewHubApi(){
+
+        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.ReviewHub.kReviewHub)", method: .GET) else { return }
+        print(urlRequest)
+        WebServices.shared.request(urlRequest) {(data, response, statuscode, error) in
+            SVProgressHUD.dismiss()
+            guard let data = data else {return}
+            do{
+                //let responsemodel = try JSONDecoder().decode(ReviewHubModel.reviewHubModel, from: data)
+                let responseModel = try JSONDecoder().decode(ReviewHubModel.reviewHubModel.self, from: data)
+                print(responseModel)
+                self.reviewSelectedHubs = responseModel
+                self.tableView.reviewSelectedHubs = self.reviewSelectedHubs
+                self.tableView.reloadData()
+            }catch {
+                print(error.localizedDescription)
+            }
+            if (error != nil) { print(error.debugDescription) }
+
+            
+        }
+       }
+    }
 

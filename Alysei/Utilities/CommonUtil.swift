@@ -99,13 +99,9 @@ class CommonUtil: NSObject {
                 
             } else if errorType == .noNetwork{
                  btnTapped.isUserInteractionEnabled = true
-
-               // superView.isUserInteractionEnabled = true
                 controller.showAlert(withMessage: AlertMessage.kNoInternet)}
             else {
               btnTapped.isUserInteractionEnabled = true
-
-               // superView.isUserInteractionEnabled = true
               controller.showAlert(withMessage: AlertMessage.kDefaultError) }
         }
    // }

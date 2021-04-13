@@ -205,6 +205,7 @@
 		61A8CB6F26204CE500B99233 /* AboutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB6E26204CE400B99233 /* AboutViewModel.swift */; };
 		6B09A87C26245AC800483365 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B09A87B26245AC800483365 /* AddPostViewController.swift */; };
 		6B2F94F626202F3A0030928E /* Timeline.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B2F94F526202F3A0030928E /* Timeline.storyboard */; };
+		6B58C9AF26256EE300D250CD /* ReviewHubModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B58C9AE26256EE300D250CD /* ReviewHubModel.swift */; };
 		6B5A8280260C56AD00ED60B7 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A827F260C56AD00ED60B7 /* WebServices.swift */; };
 		6B5A8284260C5CD100ED60B7 /* CompanyCertificates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5A8283260C5CD100ED60B7 /* CompanyCertificates.swift */; };
 		6B65FFB326034900002832C8 /* SelectRoleViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B65FFB226034900002832C8 /* SelectRoleViewC.swift */; };
@@ -452,6 +453,7 @@
 		61A8CB6E26204CE400B99233 /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
 		6B09A87B26245AC800483365 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		6B2F94F526202F3A0030928E /* Timeline.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Timeline.storyboard; sourceTree = "<group>"; };
+		6B58C9AE26256EE300D250CD /* ReviewHubModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHubModel.swift; sourceTree = "<group>"; };
 		6B5A827F260C56AD00ED60B7 /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		6B5A8283260C5CD100ED60B7 /* CompanyCertificates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCertificates.swift; sourceTree = "<group>"; };
 		6B65FFB226034900002832C8 /* SelectRoleViewC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRoleViewC.swift; sourceTree = "<group>"; };
@@ -1092,6 +1094,7 @@
 				6BBA994E260AF52300AA7A81 /* ActiveCollectionView.swift */,
 				6BBA9951260AF55900AA7A81 /* InactiveCollectionView.swift */,
 				61165343261642AC00BB97CA /* UserProfile.swift */,
+				6B58C9AE26256EE300D250CD /* ReviewHubModel.swift */,
 			);
 			path = LoginModels;
 			sourceTree = "<group>";
@@ -1645,6 +1648,7 @@
 				27A443B025AE03720002BAAC /* UIColor.swift in Sources */,
 				27A443BE25AE03720002BAAC /* DoubleExtended.swift in Sources */,
 				6B7F0F47260471B60060FBA9 /* Checkmark.swift in Sources */,
+				6B58C9AF26256EE300D250CD /* ReviewHubModel.swift in Sources */,
 				6B65FFB326034900002832C8 /* SelectRoleViewC.swift in Sources */,
 				27CC2D3025BEC40F00F4C005 /* NetworkViewC.swift in Sources */,
 				27CC2D3325BEC44B00F4C005 /* NetworkTableCell.swift in Sources */,
@@ -1849,7 +1853,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Alysei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = Alysei_Dev_Prov_23March2021;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

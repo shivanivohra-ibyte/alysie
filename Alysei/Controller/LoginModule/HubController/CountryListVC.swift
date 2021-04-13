@@ -118,6 +118,7 @@ class CountryListVC: AlysieBaseViewC , SelectList {
         nextvc.selectedHubs = self.selectedHubs
         nextvc.updatedHubs = { hubs in self.selectedHubs = hubs;self.postRequestToGetCountries()}
         nextvc.roleId = kSharedUserDefaults.loggedInUserModal.memberRoleId
+        nextvc.isEditHub = self.isEditHub
         nextvc.modalPresentationStyle = .overFullScreen
         self.navigationController?.pushViewController(nextvc, animated: true)
     }

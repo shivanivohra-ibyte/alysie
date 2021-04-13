@@ -10,7 +10,10 @@ import UIKit
 class ConfirmSelectionTable: UITableView {
   
     var selectedHubs = [SelectdHubs](){didSet{self.awakeFromNib()}}
+    var reviewSelectedHubs : ReviewHubModel.reviewHubModel?
     var dataDelegate:SelectList?
+    var isEditHub: Bool?
+    
      var roleId: String?
     // MARK:- life Cycle
     override func awakeFromNib() {
@@ -21,19 +24,29 @@ class ConfirmSelectionTable: UITableView {
         self.register(UINib(nibName: "ShowHubSelectionTableViewCell", bundle: nil), forCellReuseIdentifier: "ShowHubSelectionTableViewCell")
         self.delegate = self
         self.dataSource = self
+        
     }
     
 }
 // MARK:- cextension of main class for CollectionView
 extension ConfirmSelectionTable : UITableViewDelegate   , UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isEditHub == true{
+            return reviewSelectedHubs?.data?.hubs?.count ?? 0
+        }else{
         return selectedHubs.count
+        }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var hub = selectedHubs[indexPath.row]
+       
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShowHubSelectionTableViewCell", for: indexPath) as! ShowHubSelectionTableViewCell
         cell.selectionStyle = .none
-      cell.roleId = self.roleId
+        cell.isEditHub = self.isEditHub ?? false
+       cell.roleId = self.roleId
+        if isEditHub == true {
+            cell.reviewSelectedHub = self.reviewSelectedHubs
+        }else{
+        var hub = selectedHubs[indexPath.row]
         hub.hubs = hub.hubs.uniqueArray(map: {$0.id}) ?? []
         cell.selectedHub = hub
         cell.addRemoveCallback = { tag in
@@ -62,6 +75,9 @@ extension ConfirmSelectionTable : UITableViewDelegate   , UITableViewDataSource 
                 self.dataDelegate?.didSelectList(data: hub, index: indexPath)
             }
         }
+            
+        }
+        //tableView.reloadData()
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
