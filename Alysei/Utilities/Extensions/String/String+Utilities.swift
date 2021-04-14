@@ -528,10 +528,10 @@ extension String {
 
 
 
-
 extension String {
 
-    enum ContentType: Int {
+    enum ContentType {
+        case username
         case email
         case mobileNumber
         case password
@@ -550,6 +550,9 @@ extension String {
         var regex = "[A-Za-z]{1,75}"
 
         switch type {
+        case .username:
+            regex = "[A-Z0-9a-z@#$_]{1,10}" // @ # $ _
+            maxChar = 10
         case .email:
             regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
             maxChar = 75
