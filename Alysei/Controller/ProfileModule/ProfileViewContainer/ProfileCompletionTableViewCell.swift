@@ -33,8 +33,8 @@ class ProfileCompletionTableViewCell: UITableViewCell {
     public func configure(_ indexPath: IndexPath,currentIndex:Int){
       
       lbleTitle.text = StaticArrayData.ArrayProducerProfileCompletionDict[indexPath.row].name
-      //lblDescription.text = StaticArrayData.kMembershipData[indexPath.row].status
-        self.viewLine.isHidden = (indexPath.row == StaticArrayData.ArrayProducerProfileCompletionDict.count) ? true : false
+      //lblDescription.text = StaticArrayData.kMemb9ershipData[indexPath.row].status
+        self.viewLine.isHidden = (indexPath.row == (StaticArrayData.ArrayProducerProfileCompletionDict.count - 1)) ? true : false
     
       DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
 
