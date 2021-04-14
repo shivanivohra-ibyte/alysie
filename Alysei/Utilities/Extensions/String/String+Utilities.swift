@@ -526,3 +526,93 @@ extension String {
   }
 }
 
+
+
+extension String {
+
+    enum ContentType {
+        case username
+        case email
+        case mobileNumber
+        case password
+        case firstName
+        case lastName
+        case fullName
+        case vat
+        case facebook
+        case instagram
+        case twitter
+        case linkedin
+    }
+
+    func isValid(_ type: ContentType) -> Bool {
+        var maxChar = 0
+        var regex = "[A-Za-z]{1,75}"
+
+        switch type {
+        case .username:
+            regex = "[A-Z0-9a-z@#$_]{1,10}" // @ # $ _
+            maxChar = 10
+        case .email:
+            regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+            maxChar = 75
+        case .password:
+            regex = "^((?=[a-zA-Z0-9!@#$%^&*_]{8,16}$)(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*_])).{8,16}$"
+            maxChar = 16
+        case .mobileNumber:
+            regex = "[0-9]{4,13}"
+            maxChar = 13
+        case .firstName:
+            regex = "[A-Za-z\\s]{1,75}"
+            maxChar = 75
+        case .lastName:
+            regex = "[A-Za-z\\s]{1,75}"
+            maxChar = 75
+        case .fullName:
+            regex = "[A-Za-z\\s]{1,150}"
+            maxChar = 150
+        case .vat:
+            regex = "[A-Z]{5}[0-9]{4}[A-Z]{1}"
+            maxChar = 10
+        case .facebook:
+            regex = "^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$"
+            maxChar = 300
+            if (self.contains("facebook")) || (self.contains("fb")) {
+            } else {
+                return false
+            }
+        case .instagram:
+            regex = "^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$"
+            maxChar = 300
+            if (self.contains("instagram")){
+            } else {
+                return false
+            }
+        case .twitter:
+            regex = "^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$"
+            maxChar = 300
+            if (self.contains("twitter")){
+            } else {
+                return false
+            }
+        case .linkedin:
+            regex = "^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$"
+            maxChar = 300
+            if (self.contains("linkedin")){
+            } else {
+                return false
+            }
+        }
+        if self.count > maxChar {
+            return false
+        }
+        return validate(regex, matchWith: self)
+    }
+
+    private func validate(_ regex: String, matchWith userInput: String) -> Bool {
+        let validator = NSPredicate(format: "SELF MATCHES %@", regex)
+        let valid = validator.evaluate(with: userInput)
+        return valid
+    }
+}
+
