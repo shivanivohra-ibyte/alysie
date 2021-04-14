@@ -15,6 +15,7 @@ class ConfirmSelectionTable: UITableView {
     var isEditHub: Bool?
     
      var roleId: String?
+    //var hub:SelectdHubs?
     // MARK:- life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,6 +23,7 @@ class ConfirmSelectionTable: UITableView {
     }
     func setDelegate() {
         self.register(UINib(nibName: "ShowHubSelectionTableViewCell", bundle: nil), forCellReuseIdentifier: "ShowHubSelectionTableViewCell")
+       // cell.isEdithub = self.isEditHub
         self.delegate = self
         self.dataSource = self
         
@@ -41,14 +43,17 @@ extension ConfirmSelectionTable : UITableViewDelegate   , UITableViewDataSource 
        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ShowHubSelectionTableViewCell", for: indexPath) as! ShowHubSelectionTableViewCell
         cell.selectionStyle = .none
-        cell.isEditHub = self.isEditHub ?? false
+        cell.isEditHub = isEditHub
        cell.roleId = self.roleId
+        var hub: SelectdHubs?
         if isEditHub == true {
             cell.reviewSelectedHub = self.reviewSelectedHubs
+            //hub = self.reviewSelectedHubs?.data?.hubs?[0]
         }else{
-        var hub = selectedHubs[indexPath.row]
-        hub.hubs = hub.hubs.uniqueArray(map: {$0.id}) ?? []
+         hub = selectedHubs[indexPath.row]
+            hub?.hubs = hub?.hubs.uniqueArray(map: {$0.id}) ?? []
         cell.selectedHub = hub
+        }
         cell.addRemoveCallback = { tag in
             if tag == 0 {
                 
@@ -73,7 +78,6 @@ extension ConfirmSelectionTable : UITableViewDelegate   , UITableViewDataSource 
             }
             if tag == 1 {
                 self.dataDelegate?.didSelectList(data: hub, index: indexPath)
-            }
         }
             
         }

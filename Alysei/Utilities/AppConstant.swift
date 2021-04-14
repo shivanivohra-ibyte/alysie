@@ -544,6 +544,13 @@ struct StaticArrayData {
     static let kRestaurantFilter = ["PickUp","Delivery"]
     
     static let kEventArray = ["Adventure","Tech","Family","Wellness","Fitness","Photography","Food & Drink","Writing","Culture"]
+   
+    static let ArrayProducerProfileCompletionDict = [(name: "HubSelection", status: "Your account is being                                                         reviewed by our staff."),
+                                   (name: "Profile Picture", status: "You have been officially certified by our staff."),
+                                  (name: "Banner (Cover Picture)", status: "Your have been recognized by our app."),
+                                  (name: "About", status: "You will receive an official quality mark on your profile."),
+                                  (name: "Our Products", status: "You will receive an official quality mark on your profile."),
+                                  (name: "Featured Products", status: "You will receive an official quality mark on your profile.")]
 }
 
 struct StaticArrSelectOption {
