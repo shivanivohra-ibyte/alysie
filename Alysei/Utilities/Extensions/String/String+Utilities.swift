@@ -551,8 +551,8 @@ extension String {
 
         switch type {
         case .username:
-            regex = "[A-Z0-9a-z@#$_]{1,10}" // @ # $ _
-            maxChar = 10
+            regex = "[A-Z0-9a-z@#$_]{3,20}" // @ # $ _
+            maxChar = 20
         case .email:
             regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
             maxChar = 75
@@ -564,13 +564,13 @@ extension String {
             maxChar = 13
         case .firstName:
             regex = "[A-Za-z\\s]{1,75}"
-            maxChar = 75
+            maxChar = 30
         case .lastName:
             regex = "[A-Za-z\\s]{1,75}"
-            maxChar = 75
+            maxChar = 30
         case .fullName:
             regex = "[A-Za-z\\s]{1,150}"
-            maxChar = 150
+            maxChar = 50
         case .vat:
             regex = "[A-Z]{5}[0-9]{4}[A-Z]{1}"
             maxChar = 10
