@@ -31,6 +31,14 @@ class AboutViewC: UIViewController {
         self.aboutCollectionView.delegate = self
         self.aboutCollectionView.dataSource = self
 
+    }
+
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.resetAllAlpha()
+        
         if (self.viewModel?.rows?.count ?? 0) > 0 {
             self.aboutCollectionView.reloadData()
         } else {
@@ -53,7 +61,19 @@ class AboutViewC: UIViewController {
             self.subDetailStaticLabel.alpha = 0.0
             self.subDetailLabel.alpha = 0.0
         }
-        
+    }
+
+    func resetAllAlpha() {
+        self.aboutCollectionView.alpha = 1.0
+        self.listTitleLabel.alpha = 1.0
+
+        self.aboutStaticLabel.alpha = 1.0
+        self.aboutLabel.alpha = 1.0
+
+        self.subDetailStaticLabel.alpha = 1.0
+        self.subDetailLabel.alpha = 1.0
+
+
     }
 
 }

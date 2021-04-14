@@ -168,6 +168,16 @@ class ProfileViewC: AlysieBaseViewC{
     self.editProfileViewCon = controller
 //    updateProductsInEditProfile()
   }
+
+    @IBAction func addFeaturedProductButtonTapped(_ sender: UIButton) {
+
+        let productCategoriesDataModel = self.signUpViewModel?.arrProductCategories.first
+
+        let controller = pushViewController(withName: AddFeatureViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? AddFeatureViewC
+        controller?.productCategoriesDataModel = productCategoriesDataModel
+        controller?.delegate = self
+
+    }
   
   //MARK: - Private Methods -
 
@@ -223,9 +233,18 @@ class ProfileViewC: AlysieBaseViewC{
   }
     
   private func getFeaturedProductCollectionCell(_ indexPath: IndexPath) -> UICollectionViewCell{
-    
+
+//    guard let some = self.signUpViewModel.arrProductCategories.first else {
+//        return UICollectionViewCell()
+//    }
+
+    let productCategoryDataModel = self.signUpViewModel?.arrProductCategories.first
+    let product = productCategoryDataModel?.arrAllProducts[indexPath.row]
+
+//    self.productCategoriesDataModel.arrAllProducts[indexPath.row]
+
     let featuredProductCollectionCell = collectionViewAddProduct.dequeueReusableCell(withReuseIdentifier: FeaturedProductCollectionCell.identifier(), for: indexPath) as! FeaturedProductCollectionCell
-    featuredProductCollectionCell.configure(withAllProductsDataModel: nil,pushedFrom: 1)
+    featuredProductCollectionCell.configure(withAllProductsDataModel: product,pushedFrom: 1)
     return featuredProductCollectionCell
   }
   
@@ -454,8 +473,10 @@ class ProfileViewC: AlysieBaseViewC{
 extension ProfileViewC: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
-    return 2
+
+    let productCategoryDataModel = self.signUpViewModel?.arrProductCategories.first
+//    let product = productCategoryDataModel?.arrAllProducts.count
+    return productCategoryDataModel?.arrAllProducts.count ?? 0
   }
     
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -493,6 +514,8 @@ extension ProfileViewC{
 //    let indexPath = IndexPath(row: 0, section: self.signUpViewModel.arrProductCategories.count - 1)
     editProfileViewCon?.userType = self.userType
     editProfileViewCon?.tableViewEditProfile?.reloadData()
+
+    self.collectionViewAddProduct.reloadData()
     print("Some")
   }
   
@@ -502,4 +525,12 @@ extension ProfileViewC: ContactViewEditProtocol {
     func editContactDetail() {
         self.performSegue(withIdentifier: "segueProfileTabToContactDetail", sender: self)
     }
+}
+
+extension ProfileViewC: AddFeaturedProductCallBack {
+    func productAdded() {
+
+    }
+
+
 }
