@@ -239,6 +239,8 @@
 		C513C19F26144E9A0025CF27 /* SettingsScreenCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C19E26144E9A0025CF27 /* SettingsScreenCollectionVC.swift */; };
 		C513C1A526146C280025CF27 /* WaterfallCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C1A426146C280025CF27 /* WaterfallCollectionViewLayout.swift */; };
 		C513C1A9261477640025CF27 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C1A8261477640025CF27 /* PinterestLayout.swift */; };
+		C562C4B22626CACD009F9E3B /* ProfileCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C562C4B12626CACD009F9E3B /* ProfileCompletionViewController.swift */; };
+		C562C4C12626D582009F9E3B /* ProfileCompletionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C562C4C02626D582009F9E3B /* ProfileCompletionTableViewCell.swift */; };
 		C5AAB85826171896000557B6 /* LiquidCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAB85726171896000557B6 /* LiquidCollectionViewLayout.swift */; };
 /* End PBXBuildFile section */
 
@@ -489,6 +491,8 @@
 		C513C19E26144E9A0025CF27 /* SettingsScreenCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenCollectionVC.swift; sourceTree = "<group>"; };
 		C513C1A426146C280025CF27 /* WaterfallCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterfallCollectionViewLayout.swift; sourceTree = "<group>"; };
 		C513C1A8261477640025CF27 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
+		C562C4B12626CACD009F9E3B /* ProfileCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompletionViewController.swift; sourceTree = "<group>"; };
+		C562C4C02626D582009F9E3B /* ProfileCompletionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompletionTableViewCell.swift; sourceTree = "<group>"; };
 		C5AAB85726171896000557B6 /* LiquidCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidCollectionViewLayout.swift; sourceTree = "<group>"; };
 		D636814607C16FDC212EC4D0 /* Pods-Alysei.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alysei.release.xcconfig"; path = "Target Support Files/Pods-Alysei/Pods-Alysei.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -568,6 +572,8 @@
 				A84EECF825B19F6F00429B1D /* EditProfileViewC.swift */,
 				A84EED0225B1A31300429B1D /* EditProfileSelectTableCell.swift */,
 				A84EECFE25B19FC900429B1D /* EditProfieTextViewTableCell.swift */,
+				C562C4B12626CACD009F9E3B /* ProfileCompletionViewController.swift */,
+				C562C4C02626D582009F9E3B /* ProfileCompletionTableViewCell.swift */,
 			);
 			path = ProfileViewContainer;
 			sourceTree = "<group>";
@@ -1515,6 +1521,7 @@
 				6BC4C0CE26006AA600791DCD /* OverLayLoginViewController.swift in Sources */,
 				6B6F084C261EC41400BA2D2B /* EditSettingTypeViewController.swift in Sources */,
 				6B5A8280260C56AD00ED60B7 /* WebServices.swift in Sources */,
+				C562C4B22626CACD009F9E3B /* ProfileCompletionViewController.swift in Sources */,
 				2742855E25B82EEC003F3DE5 /* AddFeatureTableCell.swift in Sources */,
 				277D18A625BF3CE7007CA5C7 /* BusinessFiltersCollectionCell.swift in Sources */,
 				277D18A225BF3935007CA5C7 /* BusinessFiltersTableCell.swift in Sources */,
@@ -1530,6 +1537,7 @@
 				61A8CB4B261D98CA00B99233 /* ContactDetailViewController.swift in Sources */,
 				27A4439625AE03720002BAAC /* NSData+CommonCrypto.m in Sources */,
 				27B4E8FB25EF957D00623E45 /* SettingsEditModel.swift in Sources */,
+				C562C4C12626D582009F9E3B /* ProfileCompletionTableViewCell.swift in Sources */,
 				276E16AE25DD8C5E00B17ACF /* TutorialViewC.swift in Sources */,
 				279AB36525FF46850061FCB3 /* StateHubModel.swift in Sources */,
 				27A443C925AE03720002BAAC /* UITextFieldExtended.swift in Sources */,
@@ -1853,7 +1861,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.Alysei;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = Alysei_Dev_Prov_23March2021;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

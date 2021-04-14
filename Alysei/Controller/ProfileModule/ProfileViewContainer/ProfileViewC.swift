@@ -443,11 +443,9 @@ class ProfileViewC: AlysieBaseViewC{
     //MARK:- HandleViewTap
     
     @objc func handleTap(_ sender: UITapGestureRecognizer){
-        if kSharedUserDefaults.loggedInUserModal.userName?.isEmpty ?? false{
-            _ =  pushViewController(withName: EditUserSettingsViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
-        }else{
-            
-        }
+            _ =  pushViewController(withName: ProfileCompletionViewController.id(), fromStoryboard: StoryBoardConstants.kHome)
+        
+
     }
 }
 

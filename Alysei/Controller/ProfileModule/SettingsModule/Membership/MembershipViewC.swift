@@ -124,8 +124,6 @@ extension MembershipViewC{
   
   override func didUserGetData(from result: Any, type: Int) {
     
-    
-    
   }
   
 }

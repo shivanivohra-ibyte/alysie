@@ -32,7 +32,7 @@ class CountryListVC: AlysieBaseViewC , SelectList {
     var selectedHubs = [SelectdHubs]()
     var roleId: String?
     var arrActiveUpcoming: ActiveUpcomingCountry?
-    var isChckfirstEditSlcted = true
+   // var isChckfirstEditSlcted = true
     var addOrUpdate: Int?
     
     // MARK: - ViewLifeCycle Methods -
@@ -98,11 +98,12 @@ class CountryListVC: AlysieBaseViewC , SelectList {
                 let selectedHubsC = kSharedInstance.getStringArray(self.selectedHubs.map{$0.country.id})
                 if self.isEditHub == false{
                 _ = self.arrActiveUpcoming?.arrActiveCountries.map{$0.isSelected = selectedHubsC.contains($0.id ?? "")}
-                }else if  (self.isEditHub == true) && (self.isChckfirstEditSlcted == false) {
-                    _ = self.arrActiveUpcoming?.arrActiveCountries.map{$0.isSelected = selectedHubsC.contains($0.id ?? "")}
                 }
+//                else if  (self.isEditHub == true) { //&& (self.isChckfirstEditSlcted == false) {
+//                    _ = self.arrActiveUpcoming?.arrActiveCountries.map{$0.isSelected = selectedHubsC.contains($0.id ?? "")}
+//                }
                 else{
-                    self.isChckfirstEditSlcted = false
+                   // self.isChckfirstEditSlcted = false
                     print("Check Remaining")
                 }
                 self.activeCountryCV.countries = self.arrActiveUpcoming?.arrActiveCountries

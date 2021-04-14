@@ -20,11 +20,13 @@ class ShowHubSelectionTableViewCell: UITableViewCell {
     
     var selectedHub:SelectdHubs?{didSet{self.awakeFromNib()}}
     var reviewSelectedHub: ReviewHubModel.reviewHubModel?
+    //var reviewSendSelectedHub = [ReviewHubModel.reviewHubCityArray]()
     var reviewSelectedHubCityArray =  [String]()
     var addRemoveCallback : (((Int)->Void)?) = nil
     let columnLayout = CustomViewFlowLayout()
   var roleId: String?
-    var isEditHub: Bool?
+    var isEditHub:Bool?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -54,18 +56,7 @@ class ShowHubSelectionTableViewCell: UITableViewCell {
             self.btnRemoveHub.isHidden = false
             self.btnRemoveHubIcon.isHidden = false
         }
-                if isEditHub == true{
-                    for i in 0..<(self.reviewSelectedHub?.data?.hubs?[0].selectedCity?.count ?? 0){
-                        let data = self.reviewSelectedHub?.data?.hubs?[0].selectedCity
-                        self.reviewSelectedHubCityArray.append(data?[i].city?.name ?? "" )
-                    }
-                    for i in 0..<(self.reviewSelectedHub?.data?.hubs?[0].selectedHubs?.count ?? 0){
-                        let data = self.reviewSelectedHub?.data?.hubs?[0].selectedHubs
-                        self.reviewSelectedHubCityArray.append(data?[i].title ?? "" )
-                    }
-                    print("ReviewSelectedHubCityArray--------------------------\(reviewSelectedHubCityArray)")
-                    self.collectionView.reloadData()
-                }
+               
     }
 
     //MARK: private func
@@ -73,7 +64,6 @@ class ShowHubSelectionTableViewCell: UITableViewCell {
     private func getHubNameCollectionCell(_ indexPath: IndexPath) -> UICollectionViewCell{
         let hubNameTableCell = collectionView.dequeueReusableCell(withReuseIdentifier: HubNameCollectionViewCell.identifier(), for: indexPath) as! HubNameCollectionViewCell
         if isEditHub == true{
-            let hub = self.reviewSelectedHub?.data?.hubs?[0].selectedCity?[indexPath.row]
             self.labeCountryName.text = self.reviewSelectedHub?.data?.hubs?[0].countryName
             hubNameTableCell.lblNAme.text = reviewSelectedHubCityArray[indexPath.row]
             hubNameTableCell.lblNAme.sizeToFit()
@@ -108,7 +98,16 @@ extension ShowHubSelectionTableViewCell: UICollectionViewDataSource, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isEditHub == true{
-            return reviewSelectedHubCityArray.count
+                for i in 0..<(self.reviewSelectedHub?.data?.hubs?[0].selectedCity?.count ?? 0){
+                    let data = self.reviewSelectedHub?.data?.hubs?[0].selectedCity
+                    self.reviewSelectedHubCityArray.append(data?[i].city?.name ?? "" )
+                }
+                for i in 0..<(self.reviewSelectedHub?.data?.hubs?[0].selectedHubs?.count ?? 0){
+                    let data = self.reviewSelectedHub?.data?.hubs?[0].selectedHubs
+                    self.reviewSelectedHubCityArray.append(data?[i].title ?? "" )
+                }
+                print("ReviewSelectedHubCityArray--------------------------\(reviewSelectedHubCityArray)")
+            return self.reviewSelectedHubCityArray.count
         }else{
         return selectedHub?.hubs.count ?? 0
         }
@@ -119,7 +118,11 @@ extension ShowHubSelectionTableViewCell: UICollectionViewDataSource, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if isEditHub == true{
+            //let hub = self.reviewSelectedHub.
+        }else{
         self.selectedHub?.hubs.remove(at: indexPath.row)
+        }
         self.collectionView.reloadData()
     }
     
