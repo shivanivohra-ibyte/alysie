@@ -22,9 +22,10 @@ class SignUpTableCell: UITableViewCell {
   @IBOutlet weak var lblHint: UILabel!
   @IBOutlet weak var btnEye: UIButton!
   @IBOutlet weak var btnInfo: UIButton!
-  @IBOutlet weak var viewContainer: UIView!
-  @IBOutlet weak var btnEyeWidth: NSLayoutConstraint!
-    @IBOutlet weak var viewHint: UIView!
+//  @IBOutlet weak var viewContainer: UIView!
+//  @IBOutlet weak var btnEyeWidth: NSLayoutConstraint!
+//    @IBOutlet weak var viewHint: UIView!
+//    @IBOutlet weak var viewHintHeight: NSLayoutConstraint!
   
   //MARK: - Properties -
   
@@ -35,10 +36,7 @@ class SignUpTableCell: UITableViewCell {
     
     super.awakeFromNib()
     self.btnEye.isSelected = false
-    //txtFieldSignUp.makeCornerRadius(radius: 5.0)
-    viewContainer.makeCornerRadius(radius: 5.0)
-    viewContainer.layer.borderWidth = 0.5
-    viewContainer.layer.borderColor = UIColor.darkGray.cgColor
+    txtFieldSignUp.makeCornerRadius(radius: 5.0)
     self.txtFieldSignUp.addTarget(self, action: #selector(SignUpTableCell.textFieldEditingChanged(_:)),for: UIControl.Event.editingChanged)
   }
   
@@ -99,12 +97,14 @@ class SignUpTableCell: UITableViewCell {
       self.txtFieldSignUp.text = model.selectedValue
     }
     
-    switch model.hint {
-    case AppConstants.kEmpty:
-        viewHint.isHidden = true
-    default:
-        viewHint.isHidden = false
-    }
+//    switch model.hint {
+//    case AppConstants.kEmpty:
+//        viewHint.isHidden = true
+//        viewHintHeight.constant = 0
+//    default:
+//        viewHint.isHidden = false
+//        viewHintHeight.constant = 50
+//    }
   }
    
 }

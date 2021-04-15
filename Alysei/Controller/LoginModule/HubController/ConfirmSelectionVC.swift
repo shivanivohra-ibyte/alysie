@@ -10,7 +10,8 @@ import SVProgressHUD
 class ConfirmSelectionVC: UIViewController , SelectList{
     
     var selectedHubs = [SelectdHubs]()
-    var reviewSelectedHubs : ReviewHubModel.reviewHubModel?
+    //var reviewSelectedHubs : ReviewHubModel.reviewHubModel?
+   // var reviewSelectedHubs :
     
     @IBOutlet weak var tableView: ConfirmSelectionTable!
     @IBOutlet weak var viewHeader: UIView!
@@ -25,7 +26,7 @@ class ConfirmSelectionVC: UIViewController , SelectList{
       self.tableView.roleId = self.roleId
         self.tableView.isEditHub = self.isEditHub
         if isEditHub == true{
-            self.callReviewHubApi()
+            //self.callReviewHubApi()
         }
     }
     
@@ -78,28 +79,36 @@ extension Array {
     }
 }
 
-extension ConfirmSelectionVC {
-    func callReviewHubApi(){
+//extension ConfirmSelectionVC {
+//    func callReviewHubApi(){
+//
+//        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.ReviewHub.kReviewHub)", method: .GET) else { return }
+//        print(urlRequest)
+//        WebServices.shared.request(urlRequest) {(data, response, statuscode, error) in
+//            SVProgressHUD.dismiss()
+//            guard let data = data else {return}
+//            do{
+//                //let responsemodel = try JSONDecoder().decode(ReviewHubModel.reviewHubModel, from: data)
+//                let responseModel = try JSONDecoder().decode(SelectdHubs.self, from: data)
+//                print(responseModel)
+//                self.select = responseModel
+//               // self.tableView.reviewSelectedHubs = self.reviewSelectedHubs
+//                self.tableView.reloadData()
+//            }catch {
+//                print(error.localizedDescription)
+//            }
+//            if (error != nil) { print(error.debugDescription) }
+//
+//
+//        }
+//       }
+//    }
 
-        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.ReviewHub.kReviewHub)", method: .GET) else { return }
-        print(urlRequest)
-        WebServices.shared.request(urlRequest) {(data, response, statuscode, error) in
-            SVProgressHUD.dismiss()
-            guard let data = data else {return}
-            do{
-                //let responsemodel = try JSONDecoder().decode(ReviewHubModel.reviewHubModel, from: data)
-                let responseModel = try JSONDecoder().decode(ReviewHubModel.reviewHubModel.self, from: data)
-                print(responseModel)
-                self.reviewSelectedHubs = responseModel
-                self.tableView.reviewSelectedHubs = self.reviewSelectedHubs
-                self.tableView.reloadData()
-            }catch {
-                print(error.localizedDescription)
-            }
-            if (error != nil) { print(error.debugDescription) }
-
-            
-        }
-       }
-    }
+//extension ConfirmSelectionVC {
+//    func callReviewApi(){
+//        TANetworkManager.sharedInstance.requestApi(withServiceName: "\(APIUrl.ReviewHub.kReviewHub)", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (data, error, errortype, statuscode) in
+//            <#code#>
+//        }
+//    }
+//}
 
