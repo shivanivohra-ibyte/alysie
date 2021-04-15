@@ -98,6 +98,33 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
 
     }
 
+    //MARK:- custom methods
+
+    private func validateAllfields() -> Bool {
+
+       guard self.emailTextField.text?.isValid(.email) == true else {
+            showAlert(withMessage: "Please enter a valid email ID.")
+        return false
+        }
+
+        guard self.phoneTextField.text?.isValid(.mobileNumber) == true else {
+            showAlert(withMessage: "Please enter a valid phone number.")
+            return false
+        }
+
+        guard self.facebookTextField.text?.isValid(.facebook) == true else {
+            showAlert(withMessage: "Please enter a valid facebook url.")
+            return false
+        }
+
+        guard self.websiteTextField.text?.isValid(.url) == true else {
+            showAlert(withMessage: "Please enter a valid URL.")
+            return false
+        }
+
+        return true
+    }
+
     // MARK:- @IBAction methods
 
     @IBAction func backButtonTapped() {
@@ -105,13 +132,17 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
     }
 
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        SVProgressHUD.show()
 
-        let requestModel = ContactDetail.Contact.Request(phone: self.phoneTextField.text,
-                                                         address: self.addressTextField.text,
-                                                         website: self.websiteTextField.text,
-                                                         facebookURL: self.facebookTextField.text)
-        self.interactor?.updateContactDetail(requestModel)
+        if self.validateAllfields() {
+            SVProgressHUD.show()
+
+            let requestModel = ContactDetail.Contact.Request(phone: self.phoneTextField.text,
+                                                             address: self.addressTextField.text,
+                                                             website: self.websiteTextField.text,
+                                                             facebookURL: self.facebookTextField.text)
+            self.interactor?.updateContactDetail(requestModel)
+
+        }
     }
     
 }
