@@ -12,6 +12,7 @@
 
 import UIKit
 import SVProgressHUD
+import CoreLocation
 
 protocol ContactDetailDisplayLogic: class {
     func showAlertWithMessage(_ message: String)
@@ -22,6 +23,8 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
     var router: (NSObjectProtocol & ContactDetailRoutingLogic & ContactDetailDataPassing)?
 
     var viewModel: ContactDetail.Contact.ViewModel!
+    var locationManager: CLLocationManager!
+
     // MARK:- Object lifecycle
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -98,6 +101,43 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
 
     }
 
+
+
+    func addressTextFieldSelected(_ sender: UITextField) -> Void{
+
+        if CLLocationManager.locationServicesEnabled() {
+
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined, .restricted, .denied:
+
+                showTwoButtonsAlert(message: AlertMessage.kLocationPopUp, buttonTitle: AppConstants.Settings){
+                    if let bundleId = Bundle.main.bundleIdentifier,
+                       let url = URL(string: "\(UIApplication.openSettingsURLString)&path=LOCATION/\(bundleId)"){
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                }
+            case .authorizedAlways, .authorizedWhenInUse:
+                let controller = pushViewController(withName: MapViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? MapViewC
+//                controller?.signUpStepTwoDataModel = model
+
+                
+                controller?.delegate = self
+            default:
+                break
+            }
+        }
+    }
+
+
+    public func pushViewController(withName name: String, fromStoryboard storyboard: String) -> UIViewController {
+
+        let storyboard = UIStoryboard.init(name: storyboard, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: name)
+
+        self.navigationController?.pushViewController(viewController, animated: true)
+        return viewController
+    }
+
     //MARK:- custom methods
 
     private func validateAllfields() -> Bool {
@@ -145,4 +185,36 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
         }
     }
     
+}
+
+
+extension ContactDetailViewController: UITextFieldDelegate {
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == self.addressTextField {
+            self.addressTextFieldSelected(textField)
+            return false
+        }
+        return true
+    }
+}
+
+extension ContactDetailViewController: SaveAddressCallback {
+
+    func addressSaved(_ model: SignUpStepTwoDataModel, addressLineOne: String, addressLineTwo: String, mapAddress: String?) {
+
+        self.navigationController?.popViewController(animated: true)
+//        model.selectedValue = addressLineOne +  " " + addressLineTwo + ", " + "\((mapAddress ?? ""))"
+//        model.selectedAddressLineOne = addressLineOne
+//        model.selectedAddressLineTwo = addressLineTwo
+//
+//        let latModel = kSharedInstance.signUpViewModel.arrSignUpStepTwo.filter({$0.name == AppConstants.KeyLatitude})
+//        latModel.first?.selectedValue = String(kSharedUserDefaults.latitude)
+//        let longModel = kSharedInstance.signUpViewModel.arrSignUpStepTwo.filter({$0.name == AppConstants.KeyLongitude})
+//        longModel.first?.selectedValue = String(kSharedUserDefaults.longitude)
+
+        self.addressTextField.text = "\(addressLineOne) \(addressLineTwo) \(mapAddress)"
+
+
+    }
 }

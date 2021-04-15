@@ -512,7 +512,7 @@ extension ProfileViewC{
     self.signUpViewModel = SignUpViewModel(dicData, roleId: nil)
     editProfileViewCon?.signUpViewModel = self.signUpViewModel
 //    let indexPath = IndexPath(row: 0, section: self.signUpViewModel.arrProductCategories.count - 1)
-    editProfileViewCon?.userType = self.userType
+    editProfileViewCon?.userType = self.userType ?? .voyagers
     editProfileViewCon?.tableViewEditProfile?.reloadData()
 
     self.collectionViewAddProduct.reloadData()

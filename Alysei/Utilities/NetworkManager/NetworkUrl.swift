@@ -39,7 +39,7 @@ let kImageBaseUrl1              = "\(domain)"
 let kAuthentication             = "Authentication"      //Header key of request  encrypt data
 let kEncryptionKey              = ""                    //Encryption key replace this with your projectname
 
-
+//
 //#if DEBUG
 //    static int ddLogLevel = LOG_LEVEL_VERBOSE;
 //    #elif TEST
