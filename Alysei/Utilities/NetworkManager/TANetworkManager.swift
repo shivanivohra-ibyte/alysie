@@ -101,7 +101,9 @@ func requestApi(withServiceName serviceName: String,requestMethod method: kHTTPM
             
               //NSAssert Statements
               assert(method != .GET || method != .POST, "kHTTPMethod should be one of kHTTPMethodGET|kHTTPMethodPOST|kHTTPMethodPOSTMultiPart.");
-            
+            if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
+                window.isUserInteractionEnabled = true
+            }
               switch method
               {
               case .GET:
@@ -248,6 +250,9 @@ func requestApi(withServiceName serviceName: String,requestMethod method: kHTTPM
       let headers = getHeaderWithAPIName(serviceName: serviceName)
       
       print_debug(items: "Connecting to Host with URL \(kBASEURL)\(serviceName) with parameters: \(params)")
+        if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
+            window.isUserInteractionEnabled = true
+        }
       
       Alamofire.Session.default.upload(multipartFormData:{ (multipartFormData: MultipartFormData) in
         
@@ -318,6 +323,9 @@ func requestApi(withServiceName serviceName: String,requestMethod method: kHTTPM
           print_debug(items: "Connecting to Host with URL \(kBASEURL)\(serviceName) with parameters: \(params)")
           print_debug(items: "Parameter - \(postData)")
           print_debug(items: "Parameter - \(arrImages)")
+            if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
+                window.isUserInteractionEnabled = true
+            }
             
           Alamofire.Session.default.upload(multipartFormData:{ (multipartFormData: MultipartFormData) in
             if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
@@ -381,6 +389,9 @@ func requestApi(withServiceName serviceName: String,requestMethod method: kHTTPM
       
         print(apiHeader)
         print(serviceUrl)
+        if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
+            window.isUserInteractionEnabled = true
+        }
         
       Alamofire.Session.default.download(
             serviceUrl,
@@ -496,6 +507,9 @@ func requestApi(withServiceName serviceName: String,requestMethod method: kHTTPM
   private func getHeaderWithAPIName(serviceName: String, username: String = "", password: String = "") -> HTTPHeaders{
 
     var headers: HTTPHeaders = ["accept": "application/json"]
+    if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
+        window.isUserInteractionEnabled = true
+    }
 
     if serviceName == APIUrl.kLogin {
       let credentialData = "\(username):\(password)".data(using: String.Encoding.utf8)!

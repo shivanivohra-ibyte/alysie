@@ -12,7 +12,7 @@ class SignUpViewC: AlysieBaseViewC {
     @IBOutlet weak var tblViewSignUp: UITableView!
     @IBOutlet weak var lblMemberName: UILabel!
     @IBOutlet weak var btnProceedNext: UIButtonExtended!
-    
+   
     //MARK:  - Properties -
     
     var signUpStepOneDataModel: SignUpStepOneDataModel!

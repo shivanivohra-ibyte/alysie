@@ -52,11 +52,6 @@ class CommonUtil: NSObject {
     
   
     SVProgressHUD.show()
-
-
-        if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {
-            window.isUserInteractionEnabled = false
-        }
    
     TANetworkManager.sharedInstance.requestApi(withServiceName: url,
                                                    requestMethod: method,

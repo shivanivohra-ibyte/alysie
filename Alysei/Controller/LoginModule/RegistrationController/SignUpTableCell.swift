@@ -22,6 +22,9 @@ class SignUpTableCell: UITableViewCell {
   @IBOutlet weak var lblHint: UILabel!
   @IBOutlet weak var btnEye: UIButton!
   @IBOutlet weak var btnInfo: UIButton!
+  @IBOutlet weak var viewContainer: UIView!
+  @IBOutlet weak var btnEyeWidth: NSLayoutConstraint!
+    @IBOutlet weak var viewHint: UIView!
   
   //MARK: - Properties -
   
@@ -32,7 +35,10 @@ class SignUpTableCell: UITableViewCell {
     
     super.awakeFromNib()
     self.btnEye.isSelected = false
-    txtFieldSignUp.makeCornerRadius(radius: 5.0)
+    //txtFieldSignUp.makeCornerRadius(radius: 5.0)
+    viewContainer.makeCornerRadius(radius: 5.0)
+    viewContainer.layer.borderWidth = 0.5
+    viewContainer.layer.borderColor = UIColor.darkGray.cgColor
     self.txtFieldSignUp.addTarget(self, action: #selector(SignUpTableCell.textFieldEditingChanged(_:)),for: UIControl.Event.editingChanged)
   }
   
@@ -91,6 +97,13 @@ class SignUpTableCell: UITableViewCell {
       self.txtFieldSignUp.isSecureTextEntry = false
       self.txtFieldSignUp.isUserInteractionEnabled = true
       self.txtFieldSignUp.text = model.selectedValue
+    }
+    
+    switch model.hint {
+    case AppConstants.kEmpty:
+        viewHint.isHidden = true
+    default:
+        viewHint.isHidden = false
     }
   }
    

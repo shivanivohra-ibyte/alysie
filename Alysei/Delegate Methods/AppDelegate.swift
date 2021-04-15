@@ -90,4 +90,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      kSharedAppDelegate.window = self.window
      self.window?.makeKeyAndVisible()
   }
+    
+    public func pushToProfileViewC() {
+       let storyboard = UIStoryboard(name: StoryBoardConstants.kHome, bundle: nil)
+       let navigationC = storyboard.instantiateViewController(withIdentifier: ProfileViewC.id())
+       self.window?.rootViewController = navigationC
+       kSharedAppDelegate.window = self.window
+       self.window?.makeKeyAndVisible()
+    }
 }
