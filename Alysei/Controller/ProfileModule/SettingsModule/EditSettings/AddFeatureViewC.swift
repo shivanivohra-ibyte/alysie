@@ -76,10 +76,9 @@ class AddFeatureViewC: AlysieBaseViewC {
           showAlert(withMessage: AlertMessage.kUploadImage)
             return
         }
-        else{
-          self.postRequestToAddProduct()
-        }
     }
+    self.postRequestToAddProduct()
+
 //    let tuple = self.validateFields(currentArray)
 //    if tuple.0 == false{
 //
