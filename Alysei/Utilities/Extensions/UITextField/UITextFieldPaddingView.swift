@@ -18,6 +18,14 @@ class UITextFieldPaddingView: UITextField
       self.leftViewMode = .always
     }
   }
+    @IBInspectable var rightPaddingWidth: CGFloat = 0.0 {
+      didSet
+      {
+        let rightLeft = UIView(frame: CGRect.init(x: 0, y: 0, width: rightPaddingWidth, height: self.frame.size.height))
+        self.rightView = rightLeft
+        self.rightViewMode = .always
+      }
+    }
 
   @IBInspectable var leftPaddingViewImage: UIImage? {
     didSet
@@ -72,4 +80,22 @@ class UITextFieldPaddingView: UITextField
       }
     }
   }
+    
+    @IBInspectable var rightPaddingText: String? {
+      didSet
+      {
+        if rightPaddingText != nil
+        {
+          let viewRight = UIView(frame: CGRect.init(x: 0, y: 0, width: 32.0, height: 32.0))
+          
+          let lblRightText = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: viewRight.frame.size.height, height: viewRight.frame.size.height))
+            lblRightText.text = rightPaddingText
+            lblRightText.font = UIFont.init(name: "Montserrat-Regular", size: 17.0)
+          viewRight.addSubview(lblRightText)
+          
+          self.rightView = viewRight
+          self.rightViewMode = .always
+        }
+      }
+    }
 }

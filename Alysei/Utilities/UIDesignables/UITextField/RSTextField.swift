@@ -135,4 +135,12 @@ class RSTextFieldCustomisation: UITextField {
       self.leftViewMode = .always
     }
   }
+    @IBInspectable var rightPaddingWidth: CGFloat = 0.0 {
+      didSet
+      {
+        let viewLeft = UIView(frame: CGRect.init(x: 0, y: 0, width: rightPaddingWidth, height: self.frame.size.height))
+        self.rightView = viewLeft
+        self.leftViewMode = .always
+      }
+    }
 }
