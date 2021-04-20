@@ -406,7 +406,9 @@ class ProfileViewC: AlysieBaseViewC{
                                                           subDetail: intermediatorModel.subDetail,
                                                           staticSubdetail: intermediatorModel.staticSubdetail,
                                                           rows: intermediatorModel.rows,
-                                                          listTitle: intermediatorModel.listTitle)
+                                                          listTitle: intermediatorModel.listTitle,
+                                                          secondList: intermediatorModel.secondList,
+                                                          secondListTitle: intermediatorModel.secondListTitle)
             case .travelAgencies:
                 let modelType = AboutView.Response<AboutView.travelAgencyDataModel>.self
                 let responseModel = try JSONDecoder().decode(modelType, from: data)

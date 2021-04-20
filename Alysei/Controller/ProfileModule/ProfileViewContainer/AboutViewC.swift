@@ -20,6 +20,10 @@ class AboutViewC: UIViewController {
     @IBOutlet var aboutStaticLabel: UILabel!
     @IBOutlet var subDetailStaticLabel: UILabel!
 
+
+    @IBOutlet var secondaryCollectionView: UICollectionView!
+    @IBOutlet var secondaryListTitle: UILabel!
+
     var viewModel: AboutView.viewModel!
 
     override func viewDidLoad() {
@@ -42,6 +46,8 @@ class AboutViewC: UIViewController {
         if (self.viewModel?.rows?.count ?? 0) > 0 {
             self.listTitleLabel.text = "\(viewModel.listTitle ?? "")"
             self.aboutCollectionView.reloadData()
+            self.aboutCollectionView.alpha = 1.0
+            self.listTitleLabel.alpha = 1.0
         } else {
             self.aboutCollectionView.alpha = 0.0
             self.listTitleLabel.alpha = 0.0
@@ -50,6 +56,8 @@ class AboutViewC: UIViewController {
         if let detail = self.viewModel?.detail {
             self.aboutStaticLabel.text = "\(viewModel?.staticDetail ?? "")"
             self.aboutLabel.text = "\(detail)"
+            self.aboutStaticLabel.alpha = 1.0
+            self.aboutLabel.alpha = 1.0
         } else {
             self.aboutStaticLabel.alpha = 0.0
             self.aboutLabel.alpha = 0.0
@@ -58,10 +66,26 @@ class AboutViewC: UIViewController {
         if let subDetail = self.viewModel?.subDetail {
             self.subDetailStaticLabel.text = "\(viewModel?.staticSubdetail ?? "")"
             self.subDetailLabel.text = "\(subDetail)"
+            self.subDetailStaticLabel.alpha = 1.0
+            self.subDetailLabel.alpha = 1.0
         } else {
             self.subDetailStaticLabel.alpha = 0.0
             self.subDetailLabel.alpha = 0.0
         }
+
+
+        self.secondaryListTitle.text = "\(viewModel.secondListTitle ?? "")"
+
+        if (self.viewModel?.secondList?.count ?? 0) > 0 {
+            self.secondaryCollectionView.reloadData()
+            self.secondaryCollectionView.alpha = 1.0
+            self.secondaryListTitle.alpha = 1.0
+        } else {
+            self.secondaryCollectionView.alpha = 0.0
+            self.secondaryListTitle.alpha = 0.0
+        }
+
+
     }
 
     func resetAllAlpha() {
@@ -82,7 +106,11 @@ class AboutViewC: UIViewController {
 
 extension AboutViewC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 0 {
         return self.viewModel?.rows?.count ?? 0
+        } else {
+            return self.viewModel.secondList?.count ?? 0
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -90,7 +118,7 @@ extension AboutViewC: UICollectionViewDelegate, UICollectionViewDataSource {
             return UICollectionViewCell()
         }
 
-        let title = self.viewModel?.rows?[indexPath.row] ?? ""
+        let title = (indexPath.section == 0) ? (self.viewModel?.rows?[indexPath.row] ?? "") : (self.viewModel?.secondList?[indexPath.row] ?? "")
         cell.titleLabel.text = "\(title)"
         cell.contentView.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.4)
         cell.layer.cornerRadius = 5.0

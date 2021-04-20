@@ -25,6 +25,9 @@ enum AboutView {
         var staticSubdetail: String?
         var rows: [String]?
         var listTitle: String?
+
+        var secondList: [String]?
+        var secondListTitle: String?
     }
 
     struct intermediatorModel<T: Codable>: Codable {
@@ -37,6 +40,10 @@ enum AboutView {
         var listTitle: String?
 
         var rows: [String]?
+
+        var secondList: [String]?
+        var secondListTitle: String?
+
 
 
         init(_ response: Response<T>, userRole: UserRoles) {
@@ -69,14 +76,17 @@ enum AboutView {
                 self.rows = data?.title
                 self.detail = data?.about
                 self.subDetail = data?.country
+                self.secondList = data?.expertise
                 self.listTitle = "Title"
                 self.staticDetail = "About"
                 self.staticSubdetail = "Country"
+                self.secondListTitle = "Expertise"
             case .travelAgencies:
                 let data = response.data as? travelAgencyDataModel
                 self.rows = data?.speciality
                 self.detail = data?.about
                 self.subDetail = data?.ourTours
+                self.secondListTitle = data?.country
                 self.listTitle = "Speciality"
                 self.staticDetail = "About"
                 self.staticSubdetail = "Our tours"
@@ -138,9 +148,11 @@ enum AboutView {
         var speciality: [String]?
         var about: String?
         var ourTours: String?
+        var country: String?
         private enum CodingKeys: String, CodingKey {
             case speciality = "Speciality"
             case about = "About"
+            case country = "Country"
             case ourTours = "Our tours"
         }
     }
