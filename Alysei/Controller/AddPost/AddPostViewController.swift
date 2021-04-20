@@ -93,13 +93,10 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
         self.showImagePicker(withSourceType: .photoLibrary, mediaType: .image)
     }
     @IBAction func postAction(_ sender: UIButton){
-        txtPost.text = ""
-        collectionViewImage.isHidden = true
-        collectionViewHeight.constant = 0
-        uploadImageArray = [UIImage]()
-        btnPostPrivacy.setTitle("Public", for: .normal)
-        imgPrivacy.image = UIImage(named: "Public")
-        showAlert(withMessage: "Post Successfully")
+        addPostApi()
+        
+        
+       // showAlert(withMessage: "Post Successfully")
     }
     
     @IBAction func changePrivacyAction(_ sender: UIButton){
@@ -191,7 +188,29 @@ extension AddPostViewController : UITableViewDataSource, UITableViewDelegate{
         imgPrivacy.image = UIImage(named: privacyImageArray[indexPath.row])
     }
 }
-
+extension AddPostViewController {
+    func addPostApi(){
+        let params: [String:Any] = [
+            "action_type": "post",
+            "body": txtPost.text ?? "",
+            "privacy": btnPostPrivacy.title(for: .normal)
+            
+        ]
+        let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray as Any,
+        APIConstants.kImageName: "attachments"
+]
+        TANetworkManager.sharedInstance.requestMultiPart(withServiceName: APIUrl.kPost, requestMethod: .post, requestImages: [imageParam], requestVideos: [:], requestData: params) { (dictResponse, error, errorType, statusCode) in
+            //self.showAlert(withMessage: "Data Uploaded Successfully")
+            self.showAlert(withMessage: "Post Successfully")
+            self.txtPost.text = ""
+            self.collectionViewImage.isHidden = true
+            self.collectionViewHeight.constant = 0
+            self.uploadImageArray = [UIImage]()
+            self.btnPostPrivacy.setTitle("Public", for: .normal)
+            self.imgPrivacy.image = UIImage(named: "Public")
+        }
+    }
+}
 class ImageCollectionViewCell:UICollectionViewCell{
     @IBOutlet weak var image: UIImageView!
 }
@@ -200,3 +219,5 @@ class PostPrivacyTableViewCell: UITableViewCell{
     @IBOutlet weak var labelPrivacy: UILabel!
     @IBOutlet weak var imgPrivacy: UIImageView!
 }
+
+

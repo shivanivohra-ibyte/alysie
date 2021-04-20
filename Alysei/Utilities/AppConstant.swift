@@ -175,6 +175,7 @@ struct APIUrl{
     static let kGetSelectedHubStates = "get/selected/hub/states"
     static let kReviewHub = "review/hubs"
     static let kProfileProgress = "get/profile/progress"
+    static let kPost = "add/post"
     
     
     enum FeaturedProduct {

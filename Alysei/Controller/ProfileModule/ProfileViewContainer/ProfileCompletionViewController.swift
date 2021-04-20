@@ -22,10 +22,10 @@ class ProfileCompletionViewController: AlysieBaseViewC {
     var signUpViewModel: SignUpViewModel!
     var userType: UserRoles!
     var percentage: String?
-
+    
     //MARK:  - ViewLifeCycle Methods -
     //MARK: - Properties -
-     private var editProfileViewCon: EditProfileViewC!
+    private var editProfileViewCon: EditProfileViewC!
     
     override func viewDidLoad() {
         
@@ -57,22 +57,146 @@ class ProfileCompletionViewController: AlysieBaseViewC {
     
     private func getProfileCompletionTableCell(_ indexPath: IndexPath) -> UITableViewCell{
         
-        let profileTableCell = tblViewProfileCompletion.dequeueReusableCell(withIdentifier: ProfileCompletionTableViewCell.identifier()) as! ProfileCompletionTableViewCell
-        profileTableCell.delegate = self
-        profileTableCell.configure(indexPath, currentIndex: self.currentIndex)
-        profileTableCell.lbleTitle.text = profileCompletionModel?[indexPath.row].title
-        profileTableCell.imgViewCircle.image  = profileCompletionModel?[indexPath.row].status == true ? UIImage.init(named: "ProfileCompletion5") : UIImage.init(named: "grey_checked_icon")
-        if profileCompletionModel?[indexPath.row].status == true  {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-                        profileTableCell.viewLine.layer.backgroundColor = AppColors.blue.color.cgColor
-                    }
-        }else{
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-                        profileTableCell.viewLine.layer.backgroundColor = AppColors.lightGray.color.cgColor
-                    }
-        }
-        profileTableCell.viewLine.isHidden = (indexPath.row == ((profileCompletionModel?.count ?? 0) - 1)) ? true : false
-        return profileTableCell
+        let cell = tblViewProfileCompletion.dequeueReusableCell(withIdentifier: ProfileCompletionTableViewCell.identifier()) as! ProfileCompletionTableViewCell
+        cell.delegate = self
+        cell.configure(indexPath, currentIndex: self.currentIndex)
+        cell.lbleTitle.text = profileCompletionModel?[indexPath.row].title
+        //cell.imgViewCircle.image  = profileCompletionModel?[indexPath.row].status == true ? UIImage.init(named: "ProfileCompletion5") : UIImage.init(named: "grey_checked_icon")
+        //        if profileCompletionModel?[indexPath.row].status == true  {
+        //                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+        //                        cell.viewLine.layer.backgroundColor = AppColors.blue.color.cgColor
+        //                    }
+        //        }else{
+        //                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+        //                        cell.viewLine.layer.backgroundColor = AppColors.lightGray.color.cgColor
+        //                    }
+        //        }
+        cell.viewLine.isHidden = (indexPath.row == ((profileCompletionModel?.count ?? 0) - 1)) ? true : false
+        
+        //        switch indexPath.row {
+        //                case 0:
+        //                    self.currentIndex = 1
+        //                   if  profileCompletionModel?[indexPath.row].status == true {
+        //                    UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+        //                        cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion1")
+        //                        //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
+        //                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+        //                            cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#ccccff").cgColor
+        //                        }
+        //                    })
+        //                    }else {
+        //                        UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+        //                            cell.imgViewCircle.image = UIImage.init(named: "grey_checked_icon")
+        //                            //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
+        //                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+        //                                cell.viewLine.layer.backgroundColor = UIColor.lightGray.cgColor
+        //                            }
+        //                        })
+        //                    }
+        //                    self.tblViewProfileCompletion.reloadData()
+        //                case 1:
+        //                    self.currentIndex = 2
+        //                    if  profileCompletionModel?[indexPath.row].status == true {
+        //                    UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+        //                        cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion2")
+        //                        //cell.viewLine.backgroundColor = UIColor.init(hexString: "#9999ff")
+        //                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+        //                            cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#9999ff").cgColor
+        //                        }
+        //                    })
+        //                    }else {
+        //                        UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+        //                            cell.imgViewCircle.image = UIImage.init(named: "grey_checked_icon")
+        //                            //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
+        //                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+        //                                cell.viewLine.layer.backgroundColor = UIColor.lightGray.cgColor
+        //                            }
+        //                        })
+        //                    }
+        //                    self.tblViewProfileCompletion.reloadData()
+        //                case 2:
+        //                    self.currentIndex = 3
+        //                    if profileCompletionModel?[indexPath.row].status == true {
+        //                    UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+        //                        cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion3")
+        //                        //cell.viewLine.backgroundColor = UIColor.init(hexString: "#7f7fff")
+        //                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+        //                            cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#7f7fff").cgColor
+        //                        }
+        //                    })
+        //                    }else {
+        //                        UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+        //                            cell.imgViewCircle.image = UIImage.init(named: "grey_checked_icon")
+        //                            //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
+        //                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+        //                                cell.viewLine.layer.backgroundColor = UIColor.lightGray.cgColor
+        //                            }
+        //                        })
+        //                    }
+        //                    self.tblViewProfileCompletion.reloadData()
+        //                case 3:
+        //                    self.currentIndex = 4
+        //                       if profileCompletionModel?[indexPath.row].status == true {
+        //                    UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+        //                        cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion4")
+        //                        //cell.viewLine.backgroundColor = UIColor.init(hexString: "00cc00")
+        //                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+        //                            cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00cc00").cgColor
+        //                        }
+        //                    })
+        //                       }else{
+        //                        UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+        //                            cell.imgViewCircle.image = UIImage.init(named: "grey_checked_icon")
+        //                            //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
+        //                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+        //                                cell.viewLine.layer.backgroundColor = UIColor.lightGray.cgColor
+        //                            }
+        //                        })
+        //                       }
+        //                    self.tblViewProfileCompletion.reloadData()
+        //                case 4:
+        //                    self.currentIndex = 5
+        //                    if profileCompletionModel?[indexPath.row].status == true {
+        //                    UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+        //                        cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion5")
+        //                        //cell.viewLine.backgroundColor = UIColor.init(hexString: "#00b300")
+        //                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+        //                            cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00b300").cgColor
+        //                        }
+        //                    })
+        //                }else{
+        //                        UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+        //                            cell.imgViewCircle.image = UIImage.init(named: "grey_checked_icon")
+        //                            //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
+        //                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+        //                                cell.viewLine.layer.backgroundColor = UIColor.lightGray.cgColor
+        //                            }
+        //                        })
+        //                       }
+        //                    self.tblViewProfileCompletion.reloadData()
+        //                case 5:
+        //                    self.currentIndex = -1
+        //                    if profileCompletionModel?[indexPath.row].status == true {
+        //                    UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+        //                        cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion6")
+        //                        //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+        //                        //                cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00b300").cgColor
+        //                        //            }
+        //                    })
+        //                    }else{
+        //                        UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+        //                            cell.imgViewCircle.image = UIImage.init(named: "grey_checked_icon")
+        //                            //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
+        //                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+        //                                cell.viewLine.layer.backgroundColor = UIColor.lightGray.cgColor
+        //                            }
+        //                        })
+        //                       }
+        //                    self.tblViewProfileCompletion.reloadData()
+        //                default:
+        //                    print("")
+        //                }
+        return cell
     }
     
     //MARK:  - WebService Methods -
@@ -124,69 +248,129 @@ extension ProfileCompletionViewController: AnimationProfileCallBack{
         //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
         //          cell.viewLine.layer.backgroundColor = AppColors.blue.color.cgColor
         //        }
-//        switch indexPath {
-//        case 0:
-//            self.currentIndex = 1
-//            UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-//                cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion1")
-//                //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-//                    cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#ccccff").cgColor
-//                }
-//            })
-//            self.tblViewProfileCompletion.reloadData()
-//        case 1:
-//            self.currentIndex = 2
-//            UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-//                cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion2")
-//                //cell.viewLine.backgroundColor = UIColor.init(hexString: "#9999ff")
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-//                    cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#9999ff").cgColor
-//                }
-//            })
-//            self.tblViewProfileCompletion.reloadData()
-//        case 2:
-//            self.currentIndex = 3
-//            UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-//                cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion3")
-//                //cell.viewLine.backgroundColor = UIColor.init(hexString: "#7f7fff")
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-//                    cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#7f7fff").cgColor
-//                }
-//            })
-//            self.tblViewProfileCompletion.reloadData()
-//        case 3:
-//            self.currentIndex = 4
-//            UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-//                cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion4")
-//                //cell.viewLine.backgroundColor = UIColor.init(hexString: "00cc00")
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-//                    cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00cc00").cgColor
-//                }
-//            })
-//            self.tblViewProfileCompletion.reloadData()
-//        case 4:
-//            self.currentIndex = 5
-//            UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-//                cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion5")
-//                //cell.viewLine.backgroundColor = UIColor.init(hexString: "#00b300")
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-//                    cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00b300").cgColor
-//                }
-//            })
-//            self.tblViewProfileCompletion.reloadData()
-//        case 5:
-//            self.currentIndex = -1
-//            UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-//                cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion6")
-//                //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-//                //                cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00b300").cgColor
-//                //            }
-//            })
-//            self.tblViewProfileCompletion.reloadData()
-//        default:
-//            print("")
-//        }
+        switch indexPath {
+        case 0:
+            self.currentIndex = 1
+            if  profileCompletionModel?[indexPath].status == true {
+                UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+                    cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion1")
+                    //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#ccccff").cgColor
+                    }
+                })
+            }else {
+                UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+                    cell.imgViewCircle.image = UIImage.init(named: "grey_checked_icon")
+                    //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        cell.viewLine.layer.backgroundColor = UIColor.lightGray.cgColor
+                    }
+                })
+            }
+            self.tblViewProfileCompletion.reloadData()
+        case 1:
+            self.currentIndex = 2
+            if  profileCompletionModel?[indexPath].status == true {
+                UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+                    cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion2")
+                    //cell.viewLine.backgroundColor = UIColor.init(hexString: "#9999ff")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#9999ff").cgColor
+                    }
+                })
+            }else {
+                UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+                    cell.imgViewCircle.image = UIImage.init(named: "grey_checked_icon")
+                    //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        cell.viewLine.layer.backgroundColor = UIColor.lightGray.cgColor
+                    }
+                })
+            }
+            self.tblViewProfileCompletion.reloadData()
+        case 2:
+            self.currentIndex = 3
+            if  profileCompletionModel?[indexPath].status == true {
+                UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+                    cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion3")
+                    //cell.viewLine.backgroundColor = UIColor.init(hexString: "#7f7fff")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#7f7fff").cgColor
+                    }
+                })
+            }else {
+                UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+                    cell.imgViewCircle.image = UIImage.init(named: "grey_checked_icon")
+                    //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        cell.viewLine.layer.backgroundColor = UIColor.lightGray.cgColor
+                    }
+                })
+            }
+            self.tblViewProfileCompletion.reloadData()
+        case 3:
+            self.currentIndex = 4
+            if  profileCompletionModel?[indexPath].status == true {
+                UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+                    cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion4")
+                    //cell.viewLine.backgroundColor = UIColor.init(hexString: "00cc00")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00cc00").cgColor
+                    }
+                })
+            }else {
+                UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+                    cell.imgViewCircle.image = UIImage.init(named: "grey_checked_icon")
+                    //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        cell.viewLine.layer.backgroundColor = UIColor.lightGray.cgColor
+                    }
+                })
+            }
+            self.tblViewProfileCompletion.reloadData()
+        case 4:
+            self.currentIndex = 5
+            if  profileCompletionModel?[indexPath].status == true {
+                UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+                    cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion5")
+                    //cell.viewLine.backgroundColor = UIColor.init(hexString: "#00b300")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00b300").cgColor
+                    }
+                })
+            }else {
+                UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+                    cell.imgViewCircle.image = UIImage.init(named: "grey_checked_icon")
+                    //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        cell.viewLine.layer.backgroundColor = UIColor.lightGray.cgColor
+                    }
+                })
+            }
+            self.tblViewProfileCompletion.reloadData()
+        case 5:
+            self.currentIndex = -1
+            if  profileCompletionModel?[indexPath].status == true {
+                UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+                    cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion6")
+                    //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                    //                cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00b300").cgColor
+                    //            }
+                })
+            }else {
+                UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+                    cell.imgViewCircle.image = UIImage.init(named: "grey_checked_icon")
+                    //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        cell.viewLine.layer.backgroundColor = UIColor.lightGray.cgColor
+                    }
+                })
+            }
+            self.tblViewProfileCompletion.reloadData()
+        default:
+            print("")
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -196,18 +380,18 @@ extension ProfileCompletionViewController: AnimationProfileCallBack{
             nextVC.isEditHub = true
             self.navigationController?.pushViewController(nextVC, animated: true)
         default:
-           // let controller = pushViewController(withName: EditProfileViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? EditProfileViewC
-           // controller?.signUpViewModel = self.signUpViewModel
+            // let controller = pushViewController(withName: EditProfileViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? EditProfileViewC
+            // controller?.signUpViewModel = self.signUpViewModel
             //controller?.userType = self.userType ?? .voyagers
-           // self.editProfileViewCon = controller
+            // self.editProfileViewCon = controller
             guard let controller = self.storyboard?.instantiateViewController(identifier: "EditProfileViewC") as? EditProfileViewC else {return}
             controller.signUpViewModel = self.signUpViewModel
             controller.userType = self.userType ?? .voyagers
             //self.editProfileViewCon = controller
             self.navigationController?.pushViewController(controller, animated: true)
-
+            
+        }
     }
-}
 }
 
 
