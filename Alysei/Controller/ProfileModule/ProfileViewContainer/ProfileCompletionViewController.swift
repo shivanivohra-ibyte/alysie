@@ -85,44 +85,67 @@ class ProfileCompletionViewController: AlysieBaseViewC {
     //      cell.imgViewCircle.layer.borderColor = AppColors.blue.color.cgColor
     //    })
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-          cell.viewLine.layer.backgroundColor = AppColors.blue.color.cgColor
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+//          cell.viewLine.layer.backgroundColor = AppColors.blue.color.cgColor
+//        }
         switch indexPath {
         case 0:
           self.currentIndex = 1
           UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-          cell.imgViewCircle.image = UIImage.init(named: "icon_bubble4")
+          cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion1")
+            //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#ccccff").cgColor
+            }
           })
           self.tblViewProfileCompletion.reloadData()
         case 1:
           self.currentIndex = 2
           UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-          cell.imgViewCircle.image = UIImage.init(named: "icon_bubble4")
+          cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion2")
+            //cell.viewLine.backgroundColor = UIColor.init(hexString: "#9999ff")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#9999ff").cgColor
+            }
           })
           self.tblViewProfileCompletion.reloadData()
         case 2:
           self.currentIndex = 3
           UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-          cell.imgViewCircle.image = UIImage.init(named: "icon_bubble4")
+          cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion3")
+            //cell.viewLine.backgroundColor = UIColor.init(hexString: "#7f7fff")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#7f7fff").cgColor
+            }
           })
           self.tblViewProfileCompletion.reloadData()
         case 3:
           self.currentIndex = 4
           UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-          cell.imgViewCircle.image = UIImage.init(named: "icon_bubble4")
+          cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion4")
+            //cell.viewLine.backgroundColor = UIColor.init(hexString: "00cc00")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00cc00").cgColor
+            }
           })
           self.tblViewProfileCompletion.reloadData()
         case 4:
           self.currentIndex = 5
           UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-          cell.imgViewCircle.image = UIImage.init(named: "icon_bubble4")
+          cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion5")
+            //cell.viewLine.backgroundColor = UIColor.init(hexString: "#00b300")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00b300").cgColor
+            }
           })
           self.tblViewProfileCompletion.reloadData()
         case 5:
             self.currentIndex = -1
           UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-          cell.imgViewCircle.image = UIImage.init(named: "icon_bubble4")
+          cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion6")
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+//                cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00b300").cgColor
+//            }
           })
           self.tblViewProfileCompletion.reloadData()
         default:

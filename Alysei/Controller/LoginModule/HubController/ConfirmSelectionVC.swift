@@ -23,10 +23,10 @@ class ConfirmSelectionVC: UIViewController , SelectList{
         self.viewHeader.addShadow()
         self.tableView.dataDelegate = self
         self.tableView.selectedHubs = selectedHubs
-      self.tableView.roleId = self.roleId
+        self.tableView.roleId = self.roleId
         self.tableView.isEditHub = self.isEditHub
         if isEditHub == true{
-            //self.callReviewHubApi()
+            self.callReviewApi()
         }
     }
     
@@ -104,11 +104,14 @@ extension Array {
 //       }
 //    }
 
-//extension ConfirmSelectionVC {
-//    func callReviewApi(){
-//        TANetworkManager.sharedInstance.requestApi(withServiceName: "\(APIUrl.ReviewHub.kReviewHub)", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (data, error, errortype, statuscode) in
-//            <#code#>
-//        }
-//    }
-//}
+extension ConfirmSelectionVC {
+    func callReviewApi(){
+        TANetworkManager.sharedInstance.requestApi(withServiceName: "\(APIUrl.kReviewHub)", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errortype, statuscode) in
+            print("success")
+            //if let data = dictResponse["data"] as? [String:Any]{
+                
+           // }
+        }
+    }
+}
 

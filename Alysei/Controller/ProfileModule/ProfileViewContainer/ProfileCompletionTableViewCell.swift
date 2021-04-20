@@ -16,6 +16,7 @@ class ProfileCompletionTableViewCell: UITableViewCell {
     //MARK: - IBOutlet -
     
     @IBOutlet weak var imgViewCircle: UIImageView!
+   
     @IBOutlet weak var lbleTitle: UILabel!
     @IBOutlet weak var lblDescription: UILabel!
     @IBOutlet weak var viewLine: UIView!

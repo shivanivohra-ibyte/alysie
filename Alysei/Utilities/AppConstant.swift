@@ -173,7 +173,7 @@ struct APIUrl{
     static let kUploadCertificate = "update/user/certificates"
     static let kGetSelectedHubCountry = "get/selected/hub/countries"
     static let kGetSelectedHubStates = "get/selected/hub/states"
-    static let kReviewHub = "api/review/hubs"
+    static let kReviewHub = "review/hubs"
     
     
     enum FeaturedProduct {

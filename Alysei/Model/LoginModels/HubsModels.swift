@@ -57,6 +57,7 @@ class FlagId{
     }
     init() { }
 }
+
 class SelectdHubs {
     var country:CountryModel = CountryModel()
     var hubs:[CountryHubs] = [CountryHubs]()
