@@ -10,7 +10,7 @@ import UIKit
 class ConfirmSelectionTable: UITableView {
   
     var selectedHubs = [SelectdHubs](){didSet{self.awakeFromNib()}}
-    var reviewSelectedHubs : ReviewHubModel.reviewHubModel?
+    var reviewSelectedHubs : [ReviewSelectedHub]?
     var dataDelegate:SelectList?
     var isEditHub: Bool?
     
@@ -34,7 +34,7 @@ class ConfirmSelectionTable: UITableView {
 extension ConfirmSelectionTable : UITableViewDelegate   , UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isEditHub == true{
-            return reviewSelectedHubs?.data?.hubs?.count ?? 0
+            return reviewSelectedHubs?.count ?? 0
         }else{
         return selectedHubs.count
         }
@@ -47,7 +47,7 @@ extension ConfirmSelectionTable : UITableViewDelegate   , UITableViewDataSource 
        cell.roleId = self.roleId
         var hub: SelectdHubs?
         if isEditHub == true {
-            cell.reviewSelectedHub = self.reviewSelectedHubs
+            cell.reviewSelectedHub = self.reviewSelectedHubs?[indexPath.row]
             //hub = self.reviewSelectedHubs?.data?.hubs?[0]
         }else{
          hub = selectedHubs[indexPath.row]

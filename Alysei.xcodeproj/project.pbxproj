@@ -247,6 +247,7 @@
 		C513C1A9261477640025CF27 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C1A8261477640025CF27 /* PinterestLayout.swift */; };
 		C562C4B22626CACD009F9E3B /* ProfileCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C562C4B12626CACD009F9E3B /* ProfileCompletionViewController.swift */; };
 		C562C4C12626D582009F9E3B /* ProfileCompletionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C562C4C02626D582009F9E3B /* ProfileCompletionTableViewCell.swift */; };
+		C5989065262EAC1400507E84 /* ProfileCompletionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5989064262EAC1400507E84 /* ProfileCompletionModel.swift */; };
 		C5AAB85826171896000557B6 /* LiquidCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAB85726171896000557B6 /* LiquidCollectionViewLayout.swift */; };
 /* End PBXBuildFile section */
 
@@ -505,6 +506,7 @@
 		C513C1A8261477640025CF27 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
 		C562C4B12626CACD009F9E3B /* ProfileCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompletionViewController.swift; sourceTree = "<group>"; };
 		C562C4C02626D582009F9E3B /* ProfileCompletionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompletionTableViewCell.swift; sourceTree = "<group>"; };
+		C5989064262EAC1400507E84 /* ProfileCompletionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompletionModel.swift; sourceTree = "<group>"; };
 		C5AAB85726171896000557B6 /* LiquidCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidCollectionViewLayout.swift; sourceTree = "<group>"; };
 		D636814607C16FDC212EC4D0 /* Pods-Alysei.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alysei.release.xcconfig"; path = "Target Support Files/Pods-Alysei/Pods-Alysei.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1114,6 +1116,7 @@
 				6BBA9951260AF55900AA7A81 /* InactiveCollectionView.swift */,
 				61165343261642AC00BB97CA /* UserProfile.swift */,
 				6B58C9AE26256EE300D250CD /* ReviewHubModel.swift */,
+				C5989064262EAC1400507E84 /* ProfileCompletionModel.swift */,
 			);
 			path = LoginModels;
 			sourceTree = "<group>";
@@ -1582,6 +1585,7 @@
 				2716627D25BD45BF000C0189 /* BusinessCategoryCollectionCell.swift in Sources */,
 				610D718F2628B24E000FA104 /* EventsModels.swift in Sources */,
 				27D0FAB925CEE9FF00463FE0 /* SelectProductViewC.swift in Sources */,
+				C5989065262EAC1400507E84 /* ProfileCompletionModel.swift in Sources */,
 				27A443BA25AE03720002BAAC /* IntExtended.swift in Sources */,
 				27A4439E25AE03720002BAAC /* RangeSlider.swift in Sources */,
 				273737EF25B76BCE005984CF /* SettingsViewC.swift in Sources */,

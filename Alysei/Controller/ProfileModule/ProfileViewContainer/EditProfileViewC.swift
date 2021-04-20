@@ -600,7 +600,13 @@ extension EditProfileViewC{
         switch type {
         case 0:
             showAlert(withMessage: AlertMessage.kProfileUpdated){
-                self.navigationController?.popViewController(animated: true)
+                //self.navigationController?.popViewController(animated: true)
+                for controller in self.navigationController!.viewControllers as Array {
+                    if controller.isKind(of: ProfileViewC.self) {
+                        self.navigationController!.popToViewController(controller, animated: true)
+                        break
+                    }
+                }
             }
         case 1:
             break

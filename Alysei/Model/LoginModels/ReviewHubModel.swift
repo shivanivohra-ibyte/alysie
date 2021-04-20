@@ -9,7 +9,7 @@ import Foundation
 
 enum ReviewHubModel {
     struct reviewHubModel: Codable{
-        var data: data?
+        var data: [reviewHubsDataModel]?
         var success: Int?
         
         private enum CodingKeys: String, CodingKey {
@@ -18,13 +18,13 @@ enum ReviewHubModel {
         }
         
     }
-    struct data: Codable {
-        var hubs: [reviewHubsDataModel]?
-        
-        private enum CodingKeys: String, CodingKey {
-            case hubs = "hubs"
-        }
-    }
+//    struct data: Codable {
+//        var hubs: [reviewHubsDataModel]?
+//
+//        private enum CodingKeys: String, CodingKey {
+//            case hubs = "hubs"
+//        }
+//    }
     
     struct reviewHubsDataModel: Codable {
         var countryId: Int?
@@ -38,8 +38,8 @@ enum ReviewHubModel {
             case countryId = "country_id"
             case countryName = "country_name"
             
-            case selectedHubs = "selected_hubs"
-            case selectedCity = "selected_city"
+            case selectedHubs = "hubs"
+            case selectedCity = "cities"
         }
         
     }
@@ -73,4 +73,48 @@ enum ReviewHubModel {
             case name = "name"
         }
     }
+}
+
+
+class ReviewSelectedHub {
+    var country_id: Int?
+    var country_name: String?
+    var hubs: [HubCityArray]?
+    var cities: [HubCityArray]?
+    
+    init(with data: [String:Any]?) {
+        self.country_id = Int.getInt(data?["country_id"])
+        self.country_name = String.getString(data?["country_name"])
+        let hubsArray = kSharedInstance.getArray(withDictionary: data?["hubs"])
+        self.hubs = hubsArray.map{HubCityArray(with: $0)}
+    }
+}
+
+class HubCityArray {
+    var id: Int?
+    var countryId: Int?
+    var stateId: Int?
+    var title: String?
+    var city: ReviewCityData?
+   
+    init(with data: [String:Any]?) {
+        self.id = Int.getInt(data?["id"])
+        self.countryId = Int.getInt(data?["country_id"])
+        self.stateId = Int.getInt(data?["state_id"])
+        self.title = String.getString(data?["title"])
+        if let city = data?["city"] as? [String:Any] {
+            self.city = ReviewCityData.init(with: city)
+        }
+    }
+
+}
+
+class ReviewCityData{
+    var id: Int?
+    var name: String?
+    init(with data: [String:Any]?) {
+        self.id = Int.getInt(data?["id"])
+        self.name = String.getString(data?["name"])
+    }
+    
 }

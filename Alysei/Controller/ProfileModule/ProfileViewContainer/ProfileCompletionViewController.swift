@@ -8,158 +8,207 @@
 import UIKit
 
 class ProfileCompletionViewController: AlysieBaseViewC {
+    
+    
+    //MARK: - IBOutlet -
+    
+    @IBOutlet weak var tblViewProfileCompletion: UITableView!
+    @IBOutlet weak var progressbar: UIProgressView!
+    @IBOutlet weak var percentageLabel: UILabel!
+    //MARK: - Properties -
+    
+    var currentIndex: Int = 0
+    var profileCompletionModel: [ProfileCompletionModel]?
+    var signUpViewModel: SignUpViewModel!
+    var userType: UserRoles!
+    var percentage: String?
 
-        
-      //MARK: - IBOutlet -
-        
-      @IBOutlet weak var tblViewProfileCompletion: UITableView!
-      //MARK: - Properties -
-      
-      var currentIndex: Int = 0
-
-      //MARK:  - ViewLifeCycle Methods -
-        
-      override func viewDidLoad() {
+    //MARK:  - ViewLifeCycle Methods -
+    //MARK: - Properties -
+     private var editProfileViewCon: EditProfileViewC!
+    
+    override func viewDidLoad() {
         
         super.viewDidLoad()
+        percentageLabel.text = "\(percentage ?? "0")% completed"
+        let floatPercentage = Float(percentage ?? "0") ?? 0
+        progressbar.setProgress((floatPercentage/100), animated: false)
         self.postRequestToGetProgress()
-      }
-      
-      override func viewDidLayoutSubviews(){
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.postRequestToGetProgress()
+    }
+    override func viewDidLayoutSubviews(){
         
         super.viewDidLayoutSubviews()
         
-      }
-
-      //MARK:  - IBAction -
-      
-      @IBAction func tapBack(_ sender: UIButton) {
-       
+    }
+    
+    //MARK:  - IBAction -
+    
+    @IBAction func tapBack(_ sender: UIButton) {
+        
         self.navigationController?.popViewController(animated: true)
-      }
-      
-      //MARK:  - Private Methods -
-      
-      private func getProfileCompletionTableCell(_ indexPath: IndexPath) -> UITableViewCell{
+    }
+    
+    //MARK:  - Private Methods -
+    
+    private func getProfileCompletionTableCell(_ indexPath: IndexPath) -> UITableViewCell{
         
         let profileTableCell = tblViewProfileCompletion.dequeueReusableCell(withIdentifier: ProfileCompletionTableViewCell.identifier()) as! ProfileCompletionTableViewCell
         profileTableCell.delegate = self
         profileTableCell.configure(indexPath, currentIndex: self.currentIndex)
+        profileTableCell.lbleTitle.text = profileCompletionModel?[indexPath.row].title
+        profileTableCell.imgViewCircle.image  = profileCompletionModel?[indexPath.row].status == true ? UIImage.init(named: "ProfileCompletion5") : UIImage.init(named: "grey_checked_icon")
+        if profileCompletionModel?[indexPath.row].status == true  {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        profileTableCell.viewLine.layer.backgroundColor = AppColors.blue.color.cgColor
+                    }
+        }else{
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+                        profileTableCell.viewLine.layer.backgroundColor = AppColors.lightGray.color.cgColor
+                    }
+        }
+        profileTableCell.viewLine.isHidden = (indexPath.row == ((profileCompletionModel?.count ?? 0) - 1)) ? true : false
         return profileTableCell
-      }
-      
-      //MARK:  - WebService Methods -
-      
-      private func postRequestToGetProgress() -> Void{
+    }
+    
+    //MARK:  - WebService Methods -
+    
+    private func postRequestToGetProgress() -> Void{
         
         disableWindowInteraction()
-        CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kGetProgress, method: .GET, controller: self, type: 0, param: [:], btnTapped: UIButton())
-      }
-    }
-
-    //MARK:  - TableViewMethods -
-
-    extension ProfileCompletionViewController: UITableViewDataSource, UITableViewDelegate{
-        
-      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        StaticArrayData.ArrayProducerProfileCompletionDict.count
-      }
-        
-      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return self.getProfileCompletionTableCell(indexPath)
-      }
-        
-      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
-      }
-    }
-
-    extension ProfileCompletionViewController: AnimationProfileCallBack{
-      
-      func animateViews(_ indexPath: Int, cell: ProfileCompletionTableViewCell) {
-      
-    //    UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-    //      cell.imgViewCircle.layer.backgroundColor = UIColor.white.cgColor
-    //      cell.imgViewCircle.layer.borderWidth = 1.0
-    //      cell.imgViewCircle.makeCornerRadius(radius: 15.0)
-    //      cell.imgViewCircle.layer.borderColor = AppColors.blue.color.cgColor
-    //    })
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-//          cell.viewLine.layer.backgroundColor = AppColors.blue.color.cgColor
-//        }
-        switch indexPath {
-        case 0:
-          self.currentIndex = 1
-          UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-          cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion1")
-            //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-                cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#ccccff").cgColor
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kProfileProgress, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictRespnose, error, errorType, statusCode) in
+            let response = dictRespnose as? [String:Any]
+            if let data = response?["data_progress"] as? [[String:Any]]{
+                let profileArray = kSharedInstance.getArray(withDictionary: data)
+                self.profileCompletionModel = profileArray.map{ProfileCompletionModel(with: $0)}
+                
             }
-          })
-          self.tblViewProfileCompletion.reloadData()
-        case 1:
-          self.currentIndex = 2
-          UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-          cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion2")
-            //cell.viewLine.backgroundColor = UIColor.init(hexString: "#9999ff")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-                cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#9999ff").cgColor
-            }
-          })
-          self.tblViewProfileCompletion.reloadData()
-        case 2:
-          self.currentIndex = 3
-          UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-          cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion3")
-            //cell.viewLine.backgroundColor = UIColor.init(hexString: "#7f7fff")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-                cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#7f7fff").cgColor
-            }
-          })
-          self.tblViewProfileCompletion.reloadData()
-        case 3:
-          self.currentIndex = 4
-          UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-          cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion4")
-            //cell.viewLine.backgroundColor = UIColor.init(hexString: "00cc00")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-                cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00cc00").cgColor
-            }
-          })
-          self.tblViewProfileCompletion.reloadData()
-        case 4:
-          self.currentIndex = 5
-          UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-          cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion5")
-            //cell.viewLine.backgroundColor = UIColor.init(hexString: "#00b300")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-                cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00b300").cgColor
-            }
-          })
-          self.tblViewProfileCompletion.reloadData()
-        case 5:
-            self.currentIndex = -1
-          UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-          cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion6")
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-//                cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00b300").cgColor
-//            }
-          })
-          self.tblViewProfileCompletion.reloadData()
-        default:
-          print("")
+            self.tblViewProfileCompletion.reloadData()
         }
-      }
     }
+}
 
-    extension ProfileCompletionViewController{
-      
-      override func didUserGetData(from result: Any, type: Int) {
-        
-      }
-      
+//MARK:  - TableViewMethods -
+
+extension ProfileCompletionViewController: UITableViewDataSource, UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // StaticArrayData.ArrayProducerProfileCompletionDict.count
+        return profileCompletionModel?.count ?? 0
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return self.getProfileCompletionTableCell(indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0
+    }
+}
+
+extension ProfileCompletionViewController: AnimationProfileCallBack{
+    
+    func animateViews(_ indexPath: Int, cell: ProfileCompletionTableViewCell) {
+        
+        //    UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+        //      cell.imgViewCircle.layer.backgroundColor = UIColor.white.cgColor
+        //      cell.imgViewCircle.layer.borderWidth = 1.0
+        //      cell.imgViewCircle.makeCornerRadius(radius: 15.0)
+        //      cell.imgViewCircle.layer.borderColor = AppColors.blue.color.cgColor
+        //    })
+        
+        //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+        //          cell.viewLine.layer.backgroundColor = AppColors.blue.color.cgColor
+        //        }
+//        switch indexPath {
+//        case 0:
+//            self.currentIndex = 1
+//            UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+//                cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion1")
+//                //cell.viewLine.backgroundColor = UIColor.init(hexString: "#ccccff")
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+//                    cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#ccccff").cgColor
+//                }
+//            })
+//            self.tblViewProfileCompletion.reloadData()
+//        case 1:
+//            self.currentIndex = 2
+//            UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+//                cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion2")
+//                //cell.viewLine.backgroundColor = UIColor.init(hexString: "#9999ff")
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+//                    cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#9999ff").cgColor
+//                }
+//            })
+//            self.tblViewProfileCompletion.reloadData()
+//        case 2:
+//            self.currentIndex = 3
+//            UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+//                cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion3")
+//                //cell.viewLine.backgroundColor = UIColor.init(hexString: "#7f7fff")
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+//                    cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#7f7fff").cgColor
+//                }
+//            })
+//            self.tblViewProfileCompletion.reloadData()
+//        case 3:
+//            self.currentIndex = 4
+//            UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+//                cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion4")
+//                //cell.viewLine.backgroundColor = UIColor.init(hexString: "00cc00")
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+//                    cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00cc00").cgColor
+//                }
+//            })
+//            self.tblViewProfileCompletion.reloadData()
+//        case 4:
+//            self.currentIndex = 5
+//            UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+//                cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion5")
+//                //cell.viewLine.backgroundColor = UIColor.init(hexString: "#00b300")
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+//                    cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00b300").cgColor
+//                }
+//            })
+//            self.tblViewProfileCompletion.reloadData()
+//        case 5:
+//            self.currentIndex = -1
+//            UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
+//                cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion6")
+//                //            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+//                //                cell.viewLine.layer.backgroundColor = UIColor.init(hexString: "#00b300").cgColor
+//                //            }
+//            })
+//            self.tblViewProfileCompletion.reloadData()
+//        default:
+//            print("")
+//        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch profileCompletionModel?[indexPath.row].title {
+        case ProfileCompletion.HubSelection :
+            let nextVC = CountryListVC()
+            nextVC.isEditHub = true
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        default:
+           // let controller = pushViewController(withName: EditProfileViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? EditProfileViewC
+           // controller?.signUpViewModel = self.signUpViewModel
+            //controller?.userType = self.userType ?? .voyagers
+           // self.editProfileViewCon = controller
+            guard let controller = self.storyboard?.instantiateViewController(identifier: "EditProfileViewC") as? EditProfileViewC else {return}
+            controller.signUpViewModel = self.signUpViewModel
+            controller.userType = self.userType ?? .voyagers
+            //self.editProfileViewCon = controller
+            self.navigationController?.pushViewController(controller, animated: true)
+
+    }
+}
+}
+
 
 

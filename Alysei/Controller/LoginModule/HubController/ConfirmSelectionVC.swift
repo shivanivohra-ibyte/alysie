@@ -11,6 +11,7 @@ class ConfirmSelectionVC: UIViewController , SelectList{
     
     var selectedHubs = [SelectdHubs]()
     //var reviewSelectedHubs : ReviewHubModel.reviewHubModel?
+    var reviewSelectedHubs : [ReviewSelectedHub]?
    // var reviewSelectedHubs :
     
     @IBOutlet weak var tableView: ConfirmSelectionTable!
@@ -26,7 +27,7 @@ class ConfirmSelectionVC: UIViewController , SelectList{
         self.tableView.roleId = self.roleId
         self.tableView.isEditHub = self.isEditHub
         if isEditHub == true{
-            self.callReviewApi()
+            self.callReviewHubApi()
         }
     }
     
@@ -88,11 +89,11 @@ extension Array {
 //            SVProgressHUD.dismiss()
 //            guard let data = data else {return}
 //            do{
-//                //let responsemodel = try JSONDecoder().decode(ReviewHubModel.reviewHubModel, from: data)
-//                let responseModel = try JSONDecoder().decode(SelectdHubs.self, from: data)
-//                print(responseModel)
-//                self.select = responseModel
-//               // self.tableView.reviewSelectedHubs = self.reviewSelectedHubs
+//                let responsemodel = try JSONDecoder().decode(ReviewHubModel.self, from: data)
+//               // let responseModel = try JSONDecoder().decode(SelectdHubs.self, from: data)
+//               // print(responsemodel)
+//                //self.select = responseModel
+//                self.tableView.reviewSelectedHubs = self.reviewSelectedHubs
 //                self.tableView.reloadData()
 //            }catch {
 //                print(error.localizedDescription)
@@ -105,13 +106,20 @@ extension Array {
 //    }
 
 extension ConfirmSelectionVC {
-    func callReviewApi(){
+    func callReviewHubApi(){
         TANetworkManager.sharedInstance.requestApi(withServiceName: "\(APIUrl.kReviewHub)", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errortype, statuscode) in
             print("success")
-            //if let data = dictResponse["data"] as? [String:Any]{
+            let response = dictResponse as? [String:Any]
+            if let data = response?["data"] as? [[String:Any]]{
                 
-           // }
+                let hubsArray = kSharedInstance.getArray(withDictionary: data)
+                self.reviewSelectedHubs = hubsArray.map{ReviewSelectedHub(with: $0)}
+                
         }
+            print("wertyuihgfdszxcvbnm,nbcvxvbnm,---------\(self.reviewSelectedHubs ?? [ReviewSelectedHub]())")
+            self.tableView.reviewSelectedHubs = self.reviewSelectedHubs
+            self.tableView.reloadData()
     }
+}
 }
 
