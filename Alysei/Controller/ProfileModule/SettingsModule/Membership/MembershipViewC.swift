@@ -99,19 +99,19 @@ extension MembershipViewC: AnimationCallBack{
     case 1:
       self.currentIndex = 2
       UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-      cell.imgViewCircle.image = UIImage.init(named: "icon_bubble2")
+      cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion3")
       })
       self.tblViewMembership.reloadData()
     case 2:
       self.currentIndex = 3
       UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-      cell.imgViewCircle.image = UIImage.init(named: "icon_bubble3")
+      cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion4")
       })
       self.tblViewMembership.reloadData()
     case 3:
       self.currentIndex = -1
       UIView.animate(withDuration: 1.0, delay: 0.0,options: .curveEaseInOut,animations:{
-      cell.imgViewCircle.image = UIImage.init(named: "icon_bubble4")
+      cell.imgViewCircle.image = UIImage.init(named: "ProfileCompletion5")
       })
       self.tblViewMembership.reloadData()
     default:

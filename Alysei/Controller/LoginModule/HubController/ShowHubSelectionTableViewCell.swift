@@ -19,7 +19,7 @@ class ShowHubSelectionTableViewCell: UITableViewCell {
     @IBOutlet weak var btnRemoveHubIcon: UIButton!
     
     var selectedHub:SelectdHubs?{didSet{self.awakeFromNib()}}
-    var reviewSelectedHub: ReviewHubModel.reviewHubModel?
+    var reviewSelectedHub: ReviewSelectedHub?
     //var reviewSendSelectedHub = [ReviewHubModel.reviewHubCityArray]()
     var reviewSelectedHubCityArray =  [String]()
     var addRemoveCallback : (((Int)->Void)?) = nil
@@ -64,9 +64,9 @@ class ShowHubSelectionTableViewCell: UITableViewCell {
     private func getHubNameCollectionCell(_ indexPath: IndexPath) -> UICollectionViewCell{
         let hubNameTableCell = collectionView.dequeueReusableCell(withReuseIdentifier: HubNameCollectionViewCell.identifier(), for: indexPath) as! HubNameCollectionViewCell
         if isEditHub == true{
-            self.labeCountryName.text = self.reviewSelectedHub?.data?.hubs?[0].countryName
-            hubNameTableCell.lblNAme.text = reviewSelectedHubCityArray[indexPath.row]
-            hubNameTableCell.lblNAme.sizeToFit()
+           // self.labeCountryName.text = self.reviewSelectedHub?.country_name
+            //hubNameTableCell.lblNAme.text = reviewSelectedHub.
+            //hubNameTableCell.lblNAme.sizeToFit()
         }else{
         let hub = self.selectedHub?.hubs[indexPath.row]
         self.labeCountryName.text = self.selectedHub?.country.name
@@ -98,12 +98,12 @@ extension ShowHubSelectionTableViewCell: UICollectionViewDataSource, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isEditHub == true{
-                for i in 0..<(self.reviewSelectedHub?.data?.hubs?[0].selectedCity?.count ?? 0){
-                    let data = self.reviewSelectedHub?.data?.hubs?[0].selectedCity
+            for i in 0..<(self.reviewSelectedHub?.hubs?.count ?? 0){
+                    let data = self.reviewSelectedHub?.hubs
                     self.reviewSelectedHubCityArray.append(data?[i].city?.name ?? "" )
                 }
-                for i in 0..<(self.reviewSelectedHub?.data?.hubs?[0].selectedHubs?.count ?? 0){
-                    let data = self.reviewSelectedHub?.data?.hubs?[0].selectedHubs
+            for i in 0..<(self.reviewSelectedHub?.cities?.count ?? 0){
+                    let data = self.reviewSelectedHub?.cities
                     self.reviewSelectedHubCityArray.append(data?[i].title ?? "" )
                 }
                 print("ReviewSelectedHubCityArray--------------------------\(reviewSelectedHubCityArray)")

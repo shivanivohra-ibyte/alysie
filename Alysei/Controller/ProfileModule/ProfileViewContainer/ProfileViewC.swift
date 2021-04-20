@@ -35,6 +35,7 @@ class ProfileViewC: AlysieBaseViewC{
     @IBOutlet weak var profilePercentage: UILabel!
     @IBOutlet weak var lblUserName: UILabel!
     @IBOutlet weak var lblHintText: UILabel!
+    var percentage: String?
     
   //MARK: - Properties -
 
@@ -323,6 +324,7 @@ class ProfileViewC: AlysieBaseViewC{
                     self.viewProfileCompletion.isHidden = false
                     self.viewProfileHeight.constant = 75
                     self.profilePercentage.text = "It's at \(responseModel.data?.userData?.profilePercentage ?? 0)%"
+                    self.percentage = "\(responseModel.data?.userData?.profilePercentage ?? 0)"
                 }
                 kSharedUserDefaults.loggedInUserModal.firstName = responseModel.data?.userData?.firstName
                 kSharedUserDefaults.loggedInUserModal.lastName = responseModel.data?.userData?.lastName
@@ -462,7 +464,14 @@ class ProfileViewC: AlysieBaseViewC{
     //MARK:- HandleViewTap
     
     @objc func handleTap(_ sender: UITapGestureRecognizer){
-            _ =  pushViewController(withName: ProfileCompletionViewController.id(), fromStoryboard: StoryBoardConstants.kHome)
+           // let controller  =  pushViewController(withName: ProfileCompletionViewController.id(), fromStoryboard: StoryBoardConstants.kHome)
+        guard let controller = self.storyboard?.instantiateViewController(identifier: "ProfileCompletionViewController") as? ProfileCompletionViewController else {return}
+        controller.percentage = percentage
+        controller.signUpViewModel = self.signUpViewModel
+        controller.userType = self.userType ?? .voyagers
+        //self.editProfileViewCon = controller
+        self.navigationController?.pushViewController(controller, animated: true)
+        
         
 
     }

@@ -173,7 +173,9 @@ struct APIUrl{
     static let kUploadCertificate = "update/user/certificates"
     static let kGetSelectedHubCountry = "get/selected/hub/countries"
     static let kGetSelectedHubStates = "get/selected/hub/states"
-    static let kReviewHub = "api/review/hubs"
+    static let kReviewHub = "review/hubs"
+    static let kProfileProgress = "get/profile/progress"
+    static let kPost = "add/post"
     
     
     enum FeaturedProduct {
@@ -283,6 +285,18 @@ struct AppConstants {
     static let KeyLongitude = "longitude"
     static let kEmpty = ""
     
+}
+
+struct ProfileCompletion {
+    static let HubSelection = "Hub Selection"
+    static let ProfilePicture = "Profile Picture"
+    static let CoverImage = "Cover Image"
+    static let About = "About"
+    static let Featuredlisting = "Featured listing"
+    static let OurProducts = "Our Products"
+    static let FeaturedRecipe = "Featured Recipe"
+    static let FeaturedBlog = "Featured Blog"
+    static let Ourtrips  = "Our trips"
 }
 
 struct PlaceholderImages {

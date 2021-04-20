@@ -28,17 +28,17 @@ class CompanySecondTableCell: UITableViewCell {
         let userId = data.userFieldOptionId
         
         if  index == 0 {
-        self.imgCheckMark.image  = data.photoOfLabel?.isEmpty == true ? UIImage(named: "grey_checked_icon") : UIImage(named: "icon_bubble4")
+        self.imgCheckMark.image  = data.photoOfLabel?.isEmpty == true ? UIImage(named: "grey_checked_icon") : UIImage(named: "ProfileCompletion5")
         }else if index == 1 {
-        self.imgCheckMark.image  = data.fceSidCertification?.isEmpty == true ? UIImage(named: "grey_checked_icon") : UIImage(named: "icon_bubble4")
+        self.imgCheckMark.image  = data.fceSidCertification?.isEmpty == true ? UIImage(named: "grey_checked_icon") : UIImage(named: "ProfileCompletion5")
         }else if index == 2{
-            self.imgCheckMark.image  = data.phytosanitaryCertificate?.isEmpty == true ? UIImage(named: "grey_checked_icon") : UIImage(named: "icon_bubble4")
+            self.imgCheckMark.image  = data.phytosanitaryCertificate?.isEmpty == true ? UIImage(named: "grey_checked_icon") : UIImage(named: "ProfileCompletion5")
         }else if index == 3{
-            self.imgCheckMark.image  = data.packaginForUsa?.isEmpty == true ? UIImage(named: "grey_checked_icon") : UIImage(named: "icon_bubble4")
+            self.imgCheckMark.image  = data.packaginForUsa?.isEmpty == true ? UIImage(named: "grey_checked_icon") : UIImage(named: "ProfileCompletion5")
        }else if index == 4 {
-            self.imgCheckMark.image  = data.foodSafetyPlan?.isEmpty == true ? UIImage(named: "grey_checked_icon") : UIImage(named: "icon_bubble4")
+            self.imgCheckMark.image  = data.foodSafetyPlan?.isEmpty == true ? UIImage(named: "grey_checked_icon") : UIImage(named: "ProfileCompletion5")
         }else{
-            self.imgCheckMark.image  = data.animalHelathAslCertificate?.isEmpty == true ? UIImage(named: "grey_checked_icon") : UIImage(named: "icon_bubble4")
+            self.imgCheckMark.image  = data.animalHelathAslCertificate?.isEmpty == true ? UIImage(named: "grey_checked_icon") : UIImage(named: "ProfileCompletion5")
         }
     }
     
