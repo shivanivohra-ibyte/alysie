@@ -40,6 +40,7 @@ class AboutViewC: UIViewController {
         self.resetAllAlpha()
         
         if (self.viewModel?.rows?.count ?? 0) > 0 {
+            self.listTitleLabel.text = "\(viewModel.listTitle ?? "")"
             self.aboutCollectionView.reloadData()
         } else {
             self.aboutCollectionView.alpha = 0.0

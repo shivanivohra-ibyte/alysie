@@ -24,6 +24,7 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
 
     var viewModel: ContactDetail.Contact.ViewModel!
     var locationManager: CLLocationManager!
+    var userType: UserRoles = .voyagers
 
     // MARK:- Object lifecycle
 
@@ -152,14 +153,24 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
             return false
         }
 
-        guard self.facebookTextField.text?.isValid(.facebook) == true else {
-            showAlert(withMessage: "Please enter a valid facebook url.")
-            return false
+        if !(self.facebookTextField.text?.isEmpty ?? true) {
+            guard self.facebookTextField.text?.isValid(.facebook) == true else {
+                showAlert(withMessage: "Please enter a valid facebook url.")
+                return false
+            }
         }
 
-        guard self.websiteTextField.text?.isValid(.url) == true else {
-            showAlert(withMessage: "Please enter a valid URL.")
-            return false
+
+        if (self.userType == .voyagers || self.userType == .voiceExperts) && (self.websiteTextField.text?.count ?? 0 > 0)  {
+            guard self.websiteTextField.text?.isValid(.url) == true else {
+                showAlert(withMessage: "Please enter a valid URL.")
+                return false
+            }
+        } else {
+            guard self.websiteTextField.text?.isValid(.url) == true else {
+                showAlert(withMessage: "Please enter a valid URL.")
+                return false
+            }
         }
 
         return true

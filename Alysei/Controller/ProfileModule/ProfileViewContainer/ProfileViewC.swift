@@ -81,7 +81,7 @@ class ProfileViewC: AlysieBaseViewC{
   override func viewDidLoad() {
     super.viewDidLoad()
     _ = postsViewC
-    self.tblViewPosts.tableHeaderView?.setHeight(600.0 + 861.0)
+    self.tblViewPosts.tableHeaderView?.setHeight(600.0 + 261.0)
     //self.tblViewPosts.tableFooterView = UIView()
     self.btnPosts.isSelected = true
     
@@ -500,6 +500,7 @@ extension ProfileViewC{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueProfileTabToContactDetail" {
             if let viewCon = segue.destination as? ContactDetailViewController {
+                viewCon.userType = self.userType
                 viewCon.viewModel = ContactDetail.Contact.ViewModel(response: self.contactDetilViewModel)
             }
         }
