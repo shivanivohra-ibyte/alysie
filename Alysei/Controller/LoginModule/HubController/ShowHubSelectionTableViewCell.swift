@@ -56,7 +56,7 @@ class ShowHubSelectionTableViewCell: UITableViewCell {
             self.btnRemoveHub.isHidden = false
             self.btnRemoveHubIcon.isHidden = false
         }
-               
+       
     }
 
     //MARK: private func
@@ -64,9 +64,9 @@ class ShowHubSelectionTableViewCell: UITableViewCell {
     private func getHubNameCollectionCell(_ indexPath: IndexPath) -> UICollectionViewCell{
         let hubNameTableCell = collectionView.dequeueReusableCell(withReuseIdentifier: HubNameCollectionViewCell.identifier(), for: indexPath) as! HubNameCollectionViewCell
         if isEditHub == true{
-           // self.labeCountryName.text = self.reviewSelectedHub?.country_name
-            //hubNameTableCell.lblNAme.text = reviewSelectedHub.
-            //hubNameTableCell.lblNAme.sizeToFit()
+            self.labeCountryName.text = self.reviewSelectedHub?.country_name
+            hubNameTableCell.lblNAme.text = reviewSelectedHubCityArray[indexPath.row]
+            hubNameTableCell.lblNAme.sizeToFit()
         }else{
         let hub = self.selectedHub?.hubs[indexPath.row]
         self.labeCountryName.text = self.selectedHub?.country.name
@@ -97,16 +97,8 @@ extension ShowHubSelectionTableViewCell: UICollectionViewDataSource, UICollectio
    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if isEditHub == true{
-            for i in 0..<(self.reviewSelectedHub?.hubs?.count ?? 0){
-                    let data = self.reviewSelectedHub?.hubs
-                    self.reviewSelectedHubCityArray.append(data?[i].city?.name ?? "" )
-                }
-            for i in 0..<(self.reviewSelectedHub?.cities?.count ?? 0){
-                    let data = self.reviewSelectedHub?.cities
-                    self.reviewSelectedHubCityArray.append(data?[i].title ?? "" )
-                }
-                print("ReviewSelectedHubCityArray--------------------------\(reviewSelectedHubCityArray)")
+        if isEditHub == true {
+           
             return self.reviewSelectedHubCityArray.count
         }else{
         return selectedHub?.hubs.count ?? 0
@@ -120,6 +112,7 @@ extension ShowHubSelectionTableViewCell: UICollectionViewDataSource, UICollectio
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if isEditHub == true{
             //let hub = self.reviewSelectedHub.
+            self.reviewSelectedHubCityArray.remove(at: indexPath.row)
         }else{
         self.selectedHub?.hubs.remove(at: indexPath.row)
         }

@@ -87,6 +87,8 @@ class ReviewSelectedHub {
         self.country_name = String.getString(data?["country_name"])
         let hubsArray = kSharedInstance.getArray(withDictionary: data?["hubs"])
         self.hubs = hubsArray.map{HubCityArray(with: $0)}
+        let citiesArray = kSharedInstance.getArray(withDictionary: data?["cities"])
+        self.cities = citiesArray.map{HubCityArray(with: $0)}
     }
 }
 

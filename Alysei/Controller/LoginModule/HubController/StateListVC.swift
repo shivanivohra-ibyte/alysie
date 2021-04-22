@@ -21,6 +21,7 @@ class StateListVC: AlysieBaseViewC , SelectList {
     var isEditHub: Bool?
     var isChckfirstEditSlcted = true
     var roleId: String?
+    var countryId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,10 @@ class StateListVC: AlysieBaseViewC , SelectList {
         self.tableVIew.roleId = self.roleId
         hideEyeIcon = true
         self.setText()
-        self.isEditHub == true ? self.requestToGetSelectedState(country?.id ?? "") : self.postRequestToGetState(country?.id ?? "")
+        if country != nil{
+        self.countryId = country?.id
+        }
+        self.isEditHub == true ? self.requestToGetSelectedState(countryId ?? "") : self.postRequestToGetState(countryId ?? "")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,6 +116,10 @@ class StateListVC: AlysieBaseViewC , SelectList {
         }
     }
     func didSelectList(data: Any?, index: IndexPath) {
+        print(data,index)
+    }
+    func didSelectReviewList(data: Any?, index: IndexPath, isEdithub: Bool){
+        //self.isEditHub = isEdithub
         print(data,index)
     }
 }

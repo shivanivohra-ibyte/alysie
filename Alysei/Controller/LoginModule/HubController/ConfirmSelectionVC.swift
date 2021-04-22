@@ -39,8 +39,20 @@ class ConfirmSelectionVC: UIViewController , SelectList{
         nextVC.modalPresentationStyle = .overFullScreen
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
-    
+    func didSelectReviewList(data: Any?, index: IndexPath, isEdithub:Bool) {
+        self.isEditHub = isEdithub
+        guard let data = data as? ReviewSelectedHub else {return}
+        let nextVC = StateListVC()
+        nextVC.countryId = "\(data.country_id ?? 0)"
+        nextVC.isEditHub = self.isEditHub
+        //nextVC.selectedHubs = self.selectedHubs
+        nextVC.modalPresentationStyle = .overFullScreen
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
     @IBAction func nextVC(_ sender: UIButton) {
+        if isEditHub == true{
+            
+        }else{
         if self.selectedHubs.isEmpty {
             showAlert(withMessage: "Please select at least 1 hub to continue"){
                 self.updatedHubs?(self.selectedHubs)
@@ -49,6 +61,7 @@ class ConfirmSelectionVC: UIViewController , SelectList{
             return
         }
         self.updatedHubs?(self.selectedHubs)
+        }
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -79,31 +92,6 @@ extension Array {
         return arrayOrdered
     }
 }
-
-//extension ConfirmSelectionVC {
-//    func callReviewHubApi(){
-//
-//        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.ReviewHub.kReviewHub)", method: .GET) else { return }
-//        print(urlRequest)
-//        WebServices.shared.request(urlRequest) {(data, response, statuscode, error) in
-//            SVProgressHUD.dismiss()
-//            guard let data = data else {return}
-//            do{
-//                let responsemodel = try JSONDecoder().decode(ReviewHubModel.self, from: data)
-//               // let responseModel = try JSONDecoder().decode(SelectdHubs.self, from: data)
-//               // print(responsemodel)
-//                //self.select = responseModel
-//                self.tableView.reviewSelectedHubs = self.reviewSelectedHubs
-//                self.tableView.reloadData()
-//            }catch {
-//                print(error.localizedDescription)
-//            }
-//            if (error != nil) { print(error.debugDescription) }
-//
-//
-//        }
-//       }
-//    }
 
 extension ConfirmSelectionVC {
     func callReviewHubApi(){

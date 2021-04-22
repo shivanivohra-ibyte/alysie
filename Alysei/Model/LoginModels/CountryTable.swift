@@ -11,6 +11,7 @@ import SwiftUI
 
 protocol SelectList {
     func didSelectList(data:Any?, index:IndexPath)
+    func didSelectReviewList(data:Any? , index: IndexPath, isEdithub:Bool)
 }
 
 class CountryTableView: UITableView {

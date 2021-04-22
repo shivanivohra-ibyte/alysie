@@ -143,8 +143,9 @@ extension AddPostViewController: UIImagePickerControllerDelegate, UINavigationCo
             self.collectionViewHeight.constant = 200
             self.collectionViewImage.isHidden = false
             self.collectionViewImage.reloadData()
-            print("UploadImage------------------------------------\(self.uploadImageArray)")
+            //print("UploadImage------------------------------------\(self.uploadImageArray)")
         }
+        
     }
 }
 
@@ -158,6 +159,15 @@ extension AddPostViewController: UICollectionViewDelegate,UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as? ImageCollectionViewCell else {return UICollectionViewCell()}
        cell.image.image = uploadImageArray[indexPath.row]
+        cell.btnDelete.tag = indexPath.row
+        cell.btnDeleteCallback = { tag in
+            self.uploadImageArray.remove(at: tag)
+//            if self.uploadImageArray.count == 0 {
+//                self.collectionViewHeight.constant = 0
+//                self.collectionViewImage.isHidden = true
+//            }
+            self.collectionViewImage.reloadData()
+        }
         return cell
     }
     
@@ -213,6 +223,17 @@ extension AddPostViewController {
 }
 class ImageCollectionViewCell:UICollectionViewCell{
     @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var btnDelete: UIButton!
+    var btnDeleteCallback:((Int) -> Void)? = nil
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+    }
+    
+    @IBAction func btnDeleteAction(_ sender: UIButton){
+        btnDeleteCallback?(sender.tag)
+    }
 }
 
 class PostPrivacyTableViewCell: UITableViewCell{

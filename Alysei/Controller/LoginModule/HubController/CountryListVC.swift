@@ -42,7 +42,7 @@ class CountryListVC: AlysieBaseViewC , SelectList {
         super.viewDidLoad()
         self.viewHeader.addShadow()
         self.activeInactiveView.isHidden = false
-        self.inActiveCountryCV.isHidden = false
+        self.inActiveCountryCV.isHidden = true
         self.inActiveCountryCV.isUserInteractionEnabled = false
         self.tableVIew.isHidden = true
         self.tableVIew.hascome = .showCountry
@@ -130,7 +130,7 @@ class CountryListVC: AlysieBaseViewC , SelectList {
         for hub in self.selectedHubs {
             allHubs = allHubs + (hub.hubs )
         }
-        if allHubs.isEmpty {
+        if allHubs.isEmpty  && isEditHub != true {
             showAlert(withMessage: "Please select at least 1 hub to continue")
         }else{
             let selectedCity = allHubs.filter{$0.type == .city}
@@ -177,7 +177,9 @@ class CountryListVC: AlysieBaseViewC , SelectList {
         self.navigationController?.pushViewController(nextVC, animated: true)
         print(data)
     }
-    
+    func didSelectReviewList(data: Any?, index: IndexPath, isEdithub: Bool){
+        print(data,index)
+    }
     func checkDataIsFillOrNot(commmingHub:SelectdHubs)->Bool {
         return  self.selectedHubs.first{$0.country.id == commmingHub.country.id} != nil && self.selectedHubs.first{$0.state.count != 0} != nil
     }

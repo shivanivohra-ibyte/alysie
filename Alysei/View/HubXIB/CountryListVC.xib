@@ -93,7 +93,7 @@
                             </collectionViewFlowLayout>
                             <cells/>
                         </collectionView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other Countries (coming soon)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKh-AV-5Rl">
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other Countries (coming soon)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKh-AV-5Rl">
                             <rect key="frame" x="10" y="195" width="404" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="iCh-hK-DXj"/>
@@ -102,7 +102,7 @@
                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tCM-fS-0Te" customClass="InactiveCollectionView" customModule="Alysei" customModuleProvider="target">
+                        <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tCM-fS-0Te" customClass="InactiveCollectionView" customModule="Alysei" customModuleProvider="target">
                             <rect key="frame" x="10" y="270" width="394" height="327"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ymK-Im-a3P">

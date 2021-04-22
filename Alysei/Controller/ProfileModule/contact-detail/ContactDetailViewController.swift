@@ -120,8 +120,6 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
             case .authorizedAlways, .authorizedWhenInUse:
                 let controller = pushViewController(withName: MapViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? MapViewC
 //                controller?.signUpStepTwoDataModel = model
-
-                
                 controller?.delegate = self
             default:
                 break
