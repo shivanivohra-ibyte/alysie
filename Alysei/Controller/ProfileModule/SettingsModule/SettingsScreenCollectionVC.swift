@@ -20,17 +20,17 @@ class SettingsScreenCollectionVC: UICollectionViewCell {
         
     }
     
-    override func layoutSubviews()
-    {
-        super.layoutSubviews()
-
-        let shadowPath = UIBezierPath(rect: bounds)
-        layer.masksToBounds = false
-        layer.shadowColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
-        layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        layer.shadowOpacity = 0.5
-        layer.shadowPath = shadowPath.cgPath
-    }
+//    override func layoutSubviews()
+//    {
+//        super.layoutSubviews()
+//
+//        let shadowPath = UIBezierPath(rect: bounds)
+//        layer.masksToBounds = false
+//        layer.shadowColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
+//        layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+//        layer.shadowOpacity = 0.5
+//        layer.shadowPath = shadowPath.cgPath
+//    }
     public func configure(_ indexPath: IndexPath){
 //        if kSharedUserDefaults.loggedInUserModal.memberRoleId == "3"{
 //            imgViewSettings.image = UIImage.init(named: StaticArrayData.kSettingPrducrColScreenDict[indexPath.item].image)
