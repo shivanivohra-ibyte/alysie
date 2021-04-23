@@ -565,8 +565,8 @@ extension String {
             regex = "[A-Z0-9a-z@#$_+-\\s]{5,100}"
             maxChar = 100
         case .mobileNumber:
-            regex = "[0-9+-]{4,13}"
-            maxChar = 13
+            regex = "[0-9+-]{4,15}"
+            maxChar = 15
         case .firstName:
             regex = "[A-Za-z\\s]{1,75}"
             maxChar = 30
@@ -580,7 +580,8 @@ extension String {
             regex = "[A-Z]{5}[0-9]{4}[A-Z]{1}"
             maxChar = 10
         case .url:
-            regex = "(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+"
+//            regex = "(http|https)?://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+"
+            regex = "^(https?://)?(www\\.)?([-a-z0-9]{1,63}\\.)*?[a-z0-9][-a-z0-9]{0,61}[a-z0-9]\\.[a-z]{2,6}(/[-\\w@\\+\\.~#\\?&/=%]*)?$"
             maxChar = 300
 
         case .facebook:

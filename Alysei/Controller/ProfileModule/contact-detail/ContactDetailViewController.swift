@@ -68,6 +68,12 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
         if viewModel != nil {
             self.emailTextField.text = "\(viewModel.email)"
             self.phoneTextField.text = "\(viewModel.phone ?? "")"

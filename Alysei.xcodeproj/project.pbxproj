@@ -199,6 +199,8 @@
 		610D718F2628B24E000FA104 /* EventsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610D71892628B24D000FA104 /* EventsModels.swift */; };
 		610D71902628B24E000FA104 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610D718A2628B24D000FA104 /* EventsViewController.swift */; };
 		610D71912628B24E000FA104 /* EventsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610D718B2628B24D000FA104 /* EventsInteractor.swift */; };
+		61137769263210F500EEBFDA /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61137768263210F500EEBFDA /* Colors.swift */; };
+		6113776D263212B600EEBFDA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6113776C263212B600EEBFDA /* Colors.xcassets */; };
 		6116531526163A7C00BB97CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6116531426163A7B00BB97CA /* GoogleService-Info.plist */; };
 		61165344261642AC00BB97CA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61165343261642AC00BB97CA /* UserProfile.swift */; };
 		6127F16E260B49DB005848B3 /* SaveResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6127F16D260B49DB005848B3 /* SaveResources.swift */; };
@@ -456,6 +458,8 @@
 		610D71892628B24D000FA104 /* EventsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsModels.swift; sourceTree = "<group>"; };
 		610D718A2628B24D000FA104 /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		610D718B2628B24D000FA104 /* EventsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsInteractor.swift; sourceTree = "<group>"; };
+		61137768263210F500EEBFDA /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		6113776C263212B600EEBFDA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		6116531426163A7B00BB97CA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		61165343261642AC00BB97CA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		6127F16D260B49DB005848B3 /* SaveResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveResources.swift; sourceTree = "<group>"; };
@@ -743,6 +747,8 @@
 				27A4433925AE03720002BAAC /* Extensions */,
 				27A4437C25AE03720002BAAC /* SharedClass.swift */,
 				27A4437D25AE03720002BAAC /* CommonUtil.swift */,
+				61137768263210F500EEBFDA /* Colors.swift */,
+				6113776C263212B600EEBFDA /* Colors.xcassets */,
 				27A4437E25AE03720002BAAC /* Fonts */,
 			);
 			path = Utilities;
@@ -1427,6 +1433,7 @@
 				279AB33F25FF42EC0061FCB3 /* HubsViaCityCell.xib in Resources */,
 				A808778725ADB4F500AA4A69 /* Login.storyboard in Resources */,
 				279AB32F25FF42C50061FCB3 /* ConfirmSelectionVC.xib in Resources */,
+				6113776D263212B600EEBFDA /* Colors.xcassets in Resources */,
 				27B2FDE625C8782000CFEDA0 /* ProductSection.xib in Resources */,
 				27A443D425AE03720002BAAC /* Montserrat-MediumItalic.ttf in Resources */,
 				27A443CE25AE03720002BAAC /* Montserrat-BoldItalic.ttf in Resources */,
@@ -1666,6 +1673,7 @@
 				6B5A8284260C5CD100ED60B7 /* CompanyCertificates.swift in Sources */,
 				27B4E8FE25EF957D00623E45 /* WalkThroughModel.swift in Sources */,
 				27A4439725AE03720002BAAC /* NSData+Base64.m in Sources */,
+				61137769263210F500EEBFDA /* Colors.swift in Sources */,
 				27D4A15A25BDE32700FB7039 /* BusinessListTableCell.swift in Sources */,
 				61A8CB6F26204CE500B99233 /* AboutViewModel.swift in Sources */,
 				27A4439325AE03720002BAAC /* NSString+Base64.m in Sources */,
@@ -1862,7 +1870,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3V73836LRC;
 				INFOPLIST_FILE = Alysei/Info.plist;
@@ -1887,7 +1895,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = 3V73836LRC;
 				INFOPLIST_FILE = Alysei/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

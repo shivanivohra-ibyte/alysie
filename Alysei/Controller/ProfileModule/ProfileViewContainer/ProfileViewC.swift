@@ -21,7 +21,9 @@ class ProfileViewC: AlysieBaseViewC{
   @IBOutlet weak var viewSeparator: UIView!
   @IBOutlet weak var tblViewPosts: UITableView!
   @IBOutlet weak var imgViewCover: UIImageView!
-  @IBOutlet weak var lblDisplayNameNavigation: UILabel!
+    @IBOutlet weak var lblDisplayNameNavigation: UILabel!
+
+    @IBOutlet weak var featuredListingTitleLabel: UILabel!
 //  @IBOutlet weak var lblEmailNavigation: UILabel!
   @IBOutlet weak var imgViewProfileNavigation: UIImageViewExtended!
   @IBOutlet weak var imgViewProfile: UIImageViewExtended!
@@ -275,6 +277,25 @@ class ProfileViewC: AlysieBaseViewC{
           }
       }
   }
+//
+//    Featured Product (Producer & Importer)
+//    Featured Recipe (Restaurant)
+//    Featured Trips (Travel Agencies)
+//    Featured Blogs (Voice of experts)
+    private func updateListingTitle() {
+        switch self.userType {
+        case .distributer1, .distributer2, .distributer3, .producer:
+            self.featuredListingTitleLabel.text = "Featured Product"
+        case .restaurant:
+            self.featuredListingTitleLabel.text = "Featured Recipe"
+        case .travelAgencies:
+            self.featuredListingTitleLabel.text = "Featured Trips"
+        case .voiceExperts:
+            self.featuredListingTitleLabel.text = "Featured Blogs"
+        default:
+            print("no user role found")
+        }
+    }
   
   //MARK:  - WebService Methods -
 
@@ -302,6 +323,9 @@ class ProfileViewC: AlysieBaseViewC{
 
                 let roleID = UserRoles(rawValue: responseModel.data?.userData?.roleID ?? 0) ?? .voyagers
                 self.userType = roleID
+
+                self.updateListingTitle()
+
                 self.editProfileViewCon?.userType = self.userType
                 var name = ""
                 switch roleID {
