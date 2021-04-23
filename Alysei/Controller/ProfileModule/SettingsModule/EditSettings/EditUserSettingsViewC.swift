@@ -253,7 +253,7 @@ extension EditUserSettingsViewC{
       self.tblViewEditUserSettings.reloadData()
     case 1:
         self.btnSave.setImage(UIImage(named: "blue_checkmarked"), for: .normal)
-        showAlert(withMessage: AlertMessage.kProfileUpdated){
+        //showAlert(withMessage: AlertMessage.kProfileUpdated){
         kSharedUserDefaults.setLoggedInUserDetails(loggedInUserDetails: dicResult)
         //self.lblUserName.text = kSharedUserDefaults.loggedInUserModal.displayName
             let roleID = UserRoles(rawValue:Int.getInt(kSharedUserDefaults.loggedInUserModal.memberRoleId)  ) ?? .voyagers
@@ -266,7 +266,7 @@ extension EditUserSettingsViewC{
                 name = "\(kSharedUserDefaults.loggedInUserModal.restaurantName ?? "")"
             default:
                 name = "\((kSharedUserDefaults.loggedInUserModal.firstName) ?? "") \((kSharedUserDefaults.loggedInUserModal.lastName) ?? "")"
-            }
+           // }
         self.lblUserName.text = name
         self.lblUserEmail.text = "@" + "\(kSharedUserDefaults.loggedInUserModal.userName ?? "")"
       }

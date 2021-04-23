@@ -74,4 +74,7 @@ class HubsViaCityCell: UITableViewCell , SelectList{
     func didSelectList(data: Any?, index: IndexPath) {
         print(data,index)
     }
+    func didSelectReviewList(data: Any?, index: IndexPath, isEdithub: Bool){
+        print(data,index)
+    }
 }

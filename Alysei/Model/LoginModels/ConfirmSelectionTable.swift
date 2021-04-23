@@ -15,6 +15,7 @@ class ConfirmSelectionTable: UITableView {
     var isEditHub: Bool?
     
      var roleId: String?
+    var reviewSelectedHubCityArray = [String]()
     //var hub:SelectdHubs?
     // MARK:- life Cycle
     override func awakeFromNib() {
@@ -47,7 +48,17 @@ extension ConfirmSelectionTable : UITableViewDelegate   , UITableViewDataSource 
        cell.roleId = self.roleId
         var hub: SelectdHubs?
         if isEditHub == true {
+            for i in 0..<(self.reviewSelectedHubs?[indexPath.row].hubs?.count ?? 0){
+                let data = self.reviewSelectedHubs?[indexPath.row].hubs?[i]
+                self.reviewSelectedHubCityArray.append(data?.title ?? "" )
+                }
+            for i in 0..<(self.reviewSelectedHubs?[indexPath.row].cities?.count ?? 0){
+                let data = self.reviewSelectedHubs?[indexPath.row].cities?[i]
+                self.reviewSelectedHubCityArray.append(data?.city?.name ?? "" )
+                }
+                print("ReviewSelectedHubCityArray--------------------------\(reviewSelectedHubCityArray)")
             cell.reviewSelectedHub = self.reviewSelectedHubs?[indexPath.row]
+            cell.reviewSelectedHubCityArray = self.reviewSelectedHubCityArray
             //hub = self.reviewSelectedHubs?.data?.hubs?[0]
         }else{
          hub = selectedHubs[indexPath.row]
@@ -65,6 +76,7 @@ extension ConfirmSelectionTable : UITableViewDelegate   , UITableViewDataSource 
                     parent?.selectedHubs.remove(at: indexPath.row)
                     self.selectedHubs.remove(at: indexPath.row)
                     self.reloadData()
+                   // self.reloadSections(indexPath.section, with: .automatic)
                 }))
                 refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
                       print("Handle Cancel Logic here")
@@ -77,7 +89,12 @@ extension ConfirmSelectionTable : UITableViewDelegate   , UITableViewDataSource 
 //                self.reloadData()
             }
             if tag == 1 {
+                if self.isEditHub == true{
+                    let hub = self.reviewSelectedHubs?[indexPath.row]
+                    self.dataDelegate?.didSelectReviewList(data: hub, index: indexPath, isEdithub: self.isEditHub ?? false)
+                }else{
                 self.dataDelegate?.didSelectList(data: hub, index: indexPath)
+                }
         }
             
         }

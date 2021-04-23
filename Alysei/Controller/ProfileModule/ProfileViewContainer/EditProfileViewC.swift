@@ -440,9 +440,9 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
 //            }
 
             if self.isCameProfileUpdate == .save{
-                self.showAlert(withMessage: AlertMessage.kProfileUpdated){
+               // self.showAlert(withMessage: AlertMessage.kProfileUpdated){
                     self.navigationController?.popViewController(animated: true)
-                }
+                //}
             }else{
                 print("Profile Update Done")
             }
@@ -599,7 +599,7 @@ extension EditProfileViewC{
 
         switch type {
         case 0:
-            showAlert(withMessage: AlertMessage.kProfileUpdated){
+            //showAlert(withMessage: AlertMessage.kProfileUpdated){
                 //self.navigationController?.popViewController(animated: true)
                 for controller in self.navigationController!.viewControllers as Array {
                     if controller.isKind(of: ProfileViewC.self) {
@@ -607,7 +607,7 @@ extension EditProfileViewC{
                         break
                     }
                 }
-            }
+            //}
         case 1:
             break
         case 2:
