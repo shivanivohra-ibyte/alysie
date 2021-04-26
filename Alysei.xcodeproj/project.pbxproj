@@ -247,6 +247,10 @@
 		C513C19F26144E9A0025CF27 /* SettingsScreenCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C19E26144E9A0025CF27 /* SettingsScreenCollectionVC.swift */; };
 		C513C1A526146C280025CF27 /* WaterfallCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C1A426146C280025CF27 /* WaterfallCollectionViewLayout.swift */; };
 		C513C1A9261477640025CF27 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C1A8261477640025CF27 /* PinterestLayout.swift */; };
+		C51D47762636A6FE00CD3863 /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51D47752636A6FE00CD3863 /* PostsViewController.swift */; };
+		C51D477A2636AD4C00CD3863 /* DiscoverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51D47792636AD4C00CD3863 /* DiscoverTableViewCell.swift */; };
+		C51D477D2636B67900CD3863 /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51D477C2636B67900CD3863 /* DiscoverCollectionViewCell.swift */; };
+		C51D47852636C72500CD3863 /* PostDescTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51D47842636C72500CD3863 /* PostDescTableViewCell.swift */; };
 		C562C4B22626CACD009F9E3B /* ProfileCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C562C4B12626CACD009F9E3B /* ProfileCompletionViewController.swift */; };
 		C562C4C12626D582009F9E3B /* ProfileCompletionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C562C4C02626D582009F9E3B /* ProfileCompletionTableViewCell.swift */; };
 		C5989065262EAC1400507E84 /* ProfileCompletionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5989064262EAC1400507E84 /* ProfileCompletionModel.swift */; };
@@ -508,6 +512,10 @@
 		C513C19E26144E9A0025CF27 /* SettingsScreenCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenCollectionVC.swift; sourceTree = "<group>"; };
 		C513C1A426146C280025CF27 /* WaterfallCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterfallCollectionViewLayout.swift; sourceTree = "<group>"; };
 		C513C1A8261477640025CF27 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
+		C51D47752636A6FE00CD3863 /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsViewController.swift; sourceTree = "<group>"; };
+		C51D47792636AD4C00CD3863 /* DiscoverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewCell.swift; sourceTree = "<group>"; };
+		C51D477C2636B67900CD3863 /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
+		C51D47842636C72500CD3863 /* PostDescTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDescTableViewCell.swift; sourceTree = "<group>"; };
 		C562C4B12626CACD009F9E3B /* ProfileCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompletionViewController.swift; sourceTree = "<group>"; };
 		C562C4C02626D582009F9E3B /* ProfileCompletionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompletionTableViewCell.swift; sourceTree = "<group>"; };
 		C5989064262EAC1400507E84 /* ProfileCompletionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompletionModel.swift; sourceTree = "<group>"; };
@@ -1276,13 +1284,6 @@
 			path = AddPost;
 			sourceTree = "<group>";
 		};
-		6B2F94F826202F910030928E /* TimelineModule */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TimelineModule;
-			sourceTree = "<group>";
-		};
 		6B5A8282260C5CA800ED60B7 /* CompanyCerModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1325,8 +1326,8 @@
 		A808779425ADD4D900AA4A69 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C51D47742636A6E600CD3863 /* TimelineModule */,
 				6B09A87A26245A9F00483365 /* AddPost */,
-				6B2F94F826202F910030928E /* TimelineModule */,
 				2770AA6C25AE203800A2F10B /* LoginModule */,
 				A84EED0925B1D65E00429B1D /* HomeModule */,
 				2716627725BCB7EE000C0189 /* B2BModule */,
@@ -1366,6 +1367,17 @@
 				C5AAB85726171896000557B6 /* LiquidCollectionViewLayout.swift */,
 			);
 			path = Layout;
+			sourceTree = "<group>";
+		};
+		C51D47742636A6E600CD3863 /* TimelineModule */ = {
+			isa = PBXGroup;
+			children = (
+				C51D47752636A6FE00CD3863 /* PostsViewController.swift */,
+				C51D47842636C72500CD3863 /* PostDescTableViewCell.swift */,
+				C51D47792636AD4C00CD3863 /* DiscoverTableViewCell.swift */,
+				C51D477C2636B67900CD3863 /* DiscoverCollectionViewCell.swift */,
+			);
+			path = TimelineModule;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1573,6 +1585,7 @@
 				274D90AC25B85D5D00C82A75 /* CompanySecondTableCell.swift in Sources */,
 				61A8CB4B261D98CA00B99233 /* ContactDetailViewController.swift in Sources */,
 				27A4439625AE03720002BAAC /* NSData+CommonCrypto.m in Sources */,
+				C51D47762636A6FE00CD3863 /* PostsViewController.swift in Sources */,
 				27B4E8FB25EF957D00623E45 /* SettingsEditModel.swift in Sources */,
 				C562C4C12626D582009F9E3B /* ProfileCompletionTableViewCell.swift in Sources */,
 				276E16AE25DD8C5E00B17ACF /* TutorialViewC.swift in Sources */,
@@ -1677,7 +1690,9 @@
 				27D4A15A25BDE32700FB7039 /* BusinessListTableCell.swift in Sources */,
 				61A8CB6F26204CE500B99233 /* AboutViewModel.swift in Sources */,
 				27A4439325AE03720002BAAC /* NSString+Base64.m in Sources */,
+				C51D47852636C72500CD3863 /* PostDescTableViewCell.swift in Sources */,
 				27A443C725AE03720002BAAC /* UITextFieldBorderWidthAndColor.swift in Sources */,
+				C51D477D2636B67900CD3863 /* DiscoverCollectionViewCell.swift in Sources */,
 				A84EECFF25B19FC900429B1D /* EditProfieTextViewTableCell.swift in Sources */,
 				276E16AF25DD8C5E00B17ACF /* MemberWalkthroughCollectionCell.swift in Sources */,
 				27A443B625AE03720002BAAC /* UICollectionViewCellExtended.swift in Sources */,
@@ -1687,6 +1702,7 @@
 				277803BF25D1ADCB008CC701 /* SignUpMultiSelectCollectionCell.swift in Sources */,
 				6127F16E260B49DB005848B3 /* SaveResources.swift in Sources */,
 				270BB80125BB3FE2002B264C /* PostsCollectionCell.swift in Sources */,
+				C51D477A2636AD4C00CD3863 /* DiscoverTableViewCell.swift in Sources */,
 				C513C1A526146C280025CF27 /* WaterfallCollectionViewLayout.swift in Sources */,
 				6BC4C0D326006AED00791DCD /* PresentationController.swift in Sources */,
 				27A443A825AE03720002BAAC /* UIButtonExtended.swift in Sources */,

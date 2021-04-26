@@ -12,6 +12,8 @@ class HomeViewC: AlysieBaseViewC {
   //MARK: - IBOutlet -
   
   @IBOutlet weak var containerView: UIView!
+  @IBOutlet weak var headerView: UIView!
+  @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
   
   //MARK: - Properties -
   
@@ -20,12 +22,21 @@ class HomeViewC: AlysieBaseViewC {
     let membershipViewC = UIStoryboard.init(name: StoryBoardConstants.kHome, bundle: nil).instantiateViewController(withIdentifier: MembershipViewC.id()) as! MembershipViewC
     return membershipViewC
   }()
+    private lazy var postViewC: PostsViewController = {
+
+      let postViewC = UIStoryboard.init(name: StoryBoardConstants.kHome, bundle: nil).instantiateViewController(withIdentifier: PostsViewController.id()) as! PostsViewController
+      return postViewC
+    }()
+    
   
   //MARK: -  ViewLifeCycle Methods -
   
   override func viewDidLoad() {
     super.viewDidLoad()   
-    _ = membershipViewC
+   // _ = membershipViewC
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        _ = self.postViewC
+    }
   }
   
   //MARK:  - IBAction -
@@ -40,8 +51,6 @@ extension HomeViewC{
   
   override func didUserGetData(from result: Any, type: Int) {
     
-    
-    
-    
+
   }
 }
