@@ -6,11 +6,12 @@ class TutorialViewC: AlysieBaseViewC{
   //MARK: - IBOutlet -
     
   @IBOutlet weak var collectionViewTutorial: UICollectionView!
-    
+    var walkthroughModel = [GetWalkThroughDataModel]()
   //MARK: - ViewLifeCycle Methods -
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.callTutorialApi()
   }
   
   //MARK: - Private Methods -
@@ -18,7 +19,7 @@ class TutorialViewC: AlysieBaseViewC{
   private func getTutorialCollectionCell(_ indexPath: IndexPath) -> UICollectionViewCell{
     
     let tutorialCollectionCell = collectionViewTutorial.dequeueReusableCell(withReuseIdentifier: TutorialCollectionCell.identifier(), for: indexPath) as! TutorialCollectionCell
-    tutorialCollectionCell.configure(indexPath)
+    tutorialCollectionCell.configure(indexPath,self.walkthroughModel[indexPath.row])
     tutorialCollectionCell.delegate = self
     return tutorialCollectionCell
   }
@@ -29,7 +30,8 @@ class TutorialViewC: AlysieBaseViewC{
 extension TutorialViewC: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return StaticArrayData.kTutorialDict.count
+    //return StaticArrayData.kTutorialDict.count
+    return walkthroughModel.count
   }
     
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,4 +69,18 @@ extension TutorialViewC: GetStartedDelegate{
     }
   }
 
+}
+
+extension TutorialViewC {
+    func callTutorialApi(){
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kWalkthroughScreenStart, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statuscode) in
+            let dictResponse = dictResponse as? [String:Any]
+            if let data = dictResponse?["data"] as? [[String:Any]]{
+                self.walkthroughModel = data.map({GetWalkThroughDataModel.init(withDictionary: $0)})
+            }
+            self.collectionViewTutorial.reloadData()
+        }
+        
+    }
+    
 }

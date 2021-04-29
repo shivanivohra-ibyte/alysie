@@ -10,7 +10,7 @@ class TutorialCollectionCell: UICollectionViewCell {
   
   @IBOutlet weak var lblWelcome: UILabel!
   @IBOutlet weak var lblDescription: UILabel!
-  @IBOutlet weak var imgViewTutorial: UIImageView!
+  @IBOutlet weak var imgViewTutorial: ImageLoader!
   @IBOutlet weak var pageControl: UIPageControl!
   @IBOutlet weak var btnGetStarted: UIButton!
   @IBOutlet weak var btnSkip: UIButton!
@@ -43,7 +43,7 @@ class TutorialCollectionCell: UICollectionViewCell {
   
   //MARK: - Public Methods -
   
-  public func configure(_ indexPath: IndexPath){
+    public func configure(_ indexPath: IndexPath, _ data: GetWalkThroughDataModel ){
     
     switch indexPath.item {
     case 0:
@@ -60,9 +60,18 @@ class TutorialCollectionCell: UICollectionViewCell {
       }
     }
     
-    imgViewTutorial.image = UIImage.init(named: StaticArrayData.kTutorialDict[indexPath.item].image)
-    lblWelcome.text = StaticArrayData.kTutorialDict[indexPath.item].title
-    lblDescription.text = StaticArrayData.kTutorialDict[indexPath.item].description
+    //imgViewTutorial.image = UIImage.init(named: StaticArrayData.kTutorialDict[indexPath.item].image)
+   // lblWelcome.text = StaticArrayData.kTutorialDict[indexPath.item].title
+    //lblDescription.text = StaticArrayData.kTutorialDict[indexPath.item].description
+       // imgViewTutorial.image = UIImage.init(named: StaticArrayData.kTutorialDict[indexPath.item].image)
+        if let strUrl = "\(kImageBaseUrl)\(data.imageId ?? "")".addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),
+              let imgUrl = URL(string: strUrl) {
+             print("ImageUrl-----------------------------------------\(imgUrl)")
+            self.imgViewTutorial.loadImageWithUrl(imgUrl) // call this line for getting image to yourImageView
+        }
+        lblWelcome.text = data.title
+        lblDescription.text = data.walkthroughDescription
+
     pageControl.currentPage = indexPath.item
   }
   

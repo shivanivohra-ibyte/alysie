@@ -8,5 +8,6 @@
 import UIKit
 
 class DiscoverCollectionViewCell: UICollectionViewCell {
-    
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var imgStory: UIImageView!
 }

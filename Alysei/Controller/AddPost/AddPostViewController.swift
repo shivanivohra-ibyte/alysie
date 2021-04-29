@@ -24,6 +24,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
     var privacyArray = ["Public","Followers","Just Me"]
     var privacyImageArray = ["Public","Friends","OnlyMe"]
     
+    
     var picker = UIImagePickerController()
     var uploadImageArray = [UIImage]()
     override func viewDidLoad() {
@@ -172,7 +173,7 @@ extension AddPostViewController: UICollectionViewDelegate,UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 200)
+        return CGSize(width: collectionView.bounds.width / 3, height: 200)
     }
 }
 //MARK: UITableView

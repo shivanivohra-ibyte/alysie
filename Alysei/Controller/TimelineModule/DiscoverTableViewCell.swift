@@ -10,7 +10,9 @@ import UIKit
 class DiscoverTableViewCell: UITableViewCell {
     
     @IBOutlet weak var discoverCollectionView: UICollectionView!
-
+    
+    var storyUser = ["Add Post","Elans","Patrik","Musky","Peter","Tesla"]
+    var storyImage  = ["icon_addProduct","user_icon_active","select_role2","select_role3","select_role1","select_role4"]
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -31,11 +33,13 @@ extension DiscoverTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = discoverCollectionView.dequeueReusableCell(withReuseIdentifier: "DiscoverCollectionViewCell", for: indexPath) as? DiscoverCollectionViewCell else{return UICollectionViewCell()}
+        cell.imgStory.image = UIImage(named: storyImage[indexPath.row])
+        cell.userName.text = storyUser[indexPath.row]
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: discoverCollectionView.width / 6, height: 100)
+        return CGSize(width: discoverCollectionView.width / 5, height: 140)
     }
     
 }
