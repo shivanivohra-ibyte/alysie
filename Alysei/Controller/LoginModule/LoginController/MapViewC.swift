@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import CoreLocation
 
 class MapViewC: AlysieBaseViewC {
   
@@ -23,7 +24,8 @@ class MapViewC: AlysieBaseViewC {
   @IBOutlet weak var viewSearchLocation: UIViewExtended!
   
   //MARK: - Properties -
-  
+
+    var locationManager = CLLocationManager()
   var centerMapCoordinate:CLLocationCoordinate2D!
   var marker = GMSMarker()
   var signUpStepTwoDataModel: SignUpStepTwoDataModel!
@@ -36,6 +38,13 @@ class MapViewC: AlysieBaseViewC {
     super.viewDidLoad()
     self.mapView.addSubview(self.imgViewMarker)
     self.mapView.addSubview(self.viewSearchLocation)
+
+
+    locationManager.delegate = self
+    locationManager.startUpdatingLocation()
+
+    self.mapView.isMyLocationEnabled = true
+    
     self.intialGoogleSetup(withLatitude: kSharedUserDefaults.latitude, withLongitude: kSharedUserDefaults.longitude)
   }
   
@@ -83,6 +92,29 @@ class MapViewC: AlysieBaseViewC {
       self.mapView.delegate = self
     })
   }
+}
+
+
+//MARK: - Core Location
+
+extension MapViewC: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+
+        guard let userLocation = locations.last else {
+            return
+        }
+
+        kSharedUserDefaults.latitude = userLocation.coordinate.latitude
+        kSharedUserDefaults.longitude = userLocation.coordinate.longitude
+
+        self.intialGoogleSetup(withLatitude: kSharedUserDefaults.latitude, withLongitude: kSharedUserDefaults.longitude)
+
+//        let camera = GMSCameraPosition.camera(withLatitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.latitude, zoom: 10.0)
+//        self.mapView.camera = camera
+
+        locationManager.stopUpdatingLocation()
+    }
+
 }
 
 //MARK: - GMSMapView Methods -
