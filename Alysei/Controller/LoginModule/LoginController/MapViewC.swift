@@ -31,6 +31,8 @@ class MapViewC: AlysieBaseViewC {
   var signUpStepTwoDataModel: SignUpStepTwoDataModel!
   var delegate: SaveAddressCallback?
 
+    var didDismiss: ((_ address: String) -> Void)?
+
   //MARK: - ViewLifeCycle Methods -
   
   override func viewDidLoad() {
@@ -143,12 +145,14 @@ extension MapViewC: GMSMapViewDelegate{
 
 extension MapViewC: GMSAutocompleteViewControllerDelegate {
 
+
   func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
     
     kSharedUserDefaults.latitude = place.coordinate.latitude
     kSharedUserDefaults.longitude = place.coordinate.longitude
     self.intialGoogleSetup(withLatitude: kSharedUserDefaults.latitude, withLongitude: kSharedUserDefaults.longitude)
     dismiss(animated: true, completion: nil)
+
   }
 
   func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
