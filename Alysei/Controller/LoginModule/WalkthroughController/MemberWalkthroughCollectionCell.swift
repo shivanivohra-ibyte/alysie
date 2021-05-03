@@ -16,7 +16,7 @@ class MemberWalkthroughCollectionCell: UICollectionViewCell {
   
   //MARK: - IBOutlet -
   
-  @IBOutlet weak var imgViewBackground: UIImageView!
+  @IBOutlet weak var imgViewBackground: ImageLoader!
   @IBOutlet weak var lblDescription: UILabel!
   @IBOutlet weak var btnNext: UIButtonExtended!
   @IBOutlet weak var paging: UIPageControl!
@@ -64,6 +64,11 @@ class MemberWalkthroughCollectionCell: UICollectionViewCell {
       }
     }
     self.getWalkThroughDataModel = model
+    if let strUrl = "\(kImageBaseUrl)\(model.imageId ?? "")".addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),
+          let imgUrl = URL(string: strUrl) {
+         print("ImageUrl-----------------------------------------\(imgUrl)")
+        self.imgViewBackground.loadImageWithUrl(imgUrl) // call this line for getting image to yourImageView
+    }
     self.lblTitle.text = model.title
     self.lblDescription.text = model.walkthroughDescription
     self.paging.currentPage = indexPath.item

@@ -24,6 +24,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
     var privacyArray = ["Public","Followers","Just Me"]
     var privacyImageArray = ["Public","Friends","OnlyMe"]
     
+    
     var picker = UIImagePickerController()
     var uploadImageArray = [UIImage]()
     override func viewDidLoad() {
@@ -86,11 +87,80 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
         }
     }
     @IBAction func btnCamera(_ sender: UIButton){
-        self.showImagePicker(withSourceType: .camera, mediaType: .image)
+        //self.showImagePicker(withSourceType: .camera, mediaType: .image)
+       
 
     }
     @IBAction func btnGallery(_ sender: UIButton){
-        self.showImagePicker(withSourceType: .photoLibrary, mediaType: .image)
+        //self.showImagePicker(withSourceType: .photoLibrary, mediaType: .image)
+        alertToAddImage()
+    }
+    
+    private func alertToAddImage() -> Void {
+
+        let alert:UIAlertController = UIAlertController(title: AlertMessage.kSourceType, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+
+        let cameraAction = UIAlertAction(title: AlertMessage.kTakePhoto,
+                                         style: UIAlertAction.Style.default) { (action) in
+            self.showImagePicker(withSourceType: .camera, mediaType: .image)
+        }
+
+        let galleryAction = UIAlertAction(title: AlertMessage.kChooseLibrary,
+                                          style: UIAlertAction.Style.default) { (action) in
+            self.showImagePicker(withSourceType: .photoLibrary, mediaType: .image)
+        }
+
+        let cancelAction = UIAlertAction(title: AlertMessage.kCancel,
+                                         style: UIAlertAction.Style.cancel) { (action) in
+            print("\(AlertMessage.kCancel) tapped")
+        }
+        alert.addAction(cameraAction)
+        alert.addAction(galleryAction)
+
+//        let deletePhotoAction = UIAlertAction(title: AlertMessage.kDeletePhoto,
+//                                              style: UIAlertAction.Style.default) { (action) in
+//            if self.isProfilePhotoCaptured {
+//                self.isProfilePhotoCaptured = false
+//                self.imgViewProfile.image = UIImage(named: "user_icon_normal")
+//                self.profilePhoto = nil
+//            } else if self.isCoverPhotoCaptured {
+//                self.isCoverPhotoCaptured = false
+//                self.imgViewCoverPhoto.image = UIImage(named: "coverPhoto")
+//                self.coverPhoto = nil
+//            }
+//        }
+//        // remove photo action will be shown in alert only when user has captured an image for either profile picture or cover photo
+//        if self.isProfilePhotoCaptured && self.btnProfilePhoto.isSelected {
+//            alert.addAction(deletePhotoAction)
+//        } else if self.isCoverPhotoCaptured && self.btnCoverPhoto.isSelected {
+//            alert.addAction(deletePhotoAction)
+//        }
+
+
+//        let removePhotoAction = UIAlertAction(title: AlertMessage.kRemovePhoto,
+//                                                 style: UIAlertAction.Style.default) { (action) in
+//            if self.profilePhotoAlreadyExists && self.btnProfilePhoto.isSelected {
+//                self.profilePhotoAlreadyExists = false
+//                self.imgViewProfile.image = UIImage(named: "user_icon_normal")
+//                self.profilePhoto = nil
+//                self.deletePicture(UserDetailBasedElements().profilePhoto, imageType: 1)
+//            } else if self.coverPhotoAlreadyExists &&  self.btnCoverPhoto.isSelected {
+//                self.coverPhotoAlreadyExists = false
+//                self.imgViewCoverPhoto.image = UIImage(named: "coverPhoto")
+//                self.coverPhoto = nil
+//                self.deletePicture(UserDetailBasedElements().coverPhoto, imageType: 2)
+//            }
+//        }
+
+        // remove photo action will be shown in alert only when user has captured an image for either profile picture or cover photo
+//        if self.profilePhotoAlreadyExists && self.btnProfilePhoto.isSelected {
+//            alert.addAction(removePhotoAction)
+//        } else if self.coverPhotoAlreadyExists && self.btnCoverPhoto.isSelected {
+//            alert.addAction(removePhotoAction)
+//        }
+
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
     }
     @IBAction func postAction(_ sender: UIButton){
         addPostApi()
@@ -172,7 +242,7 @@ extension AddPostViewController: UICollectionViewDelegate,UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 200)
+        return CGSize(width: collectionView.bounds.width / 3, height: 200)
     }
 }
 //MARK: UITableView

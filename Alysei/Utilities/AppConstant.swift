@@ -176,6 +176,7 @@ struct APIUrl{
     static let kReviewHub = "review/hubs"
     static let kProfileProgress = "get/profile/progress"
     static let kPost = "add/post"
+    static let kWalkthroughScreenStart = "get/walkthroughscreens"
     
     
     enum FeaturedProduct {
@@ -356,6 +357,7 @@ struct APIConstants {
     static let kProducts = "products"
     static let kImporterRoles = "importer_roles"
     static let kTitle = "title"
+    static let kImageId = "image_id"
     static let kDescription = "description"
     static let kSubtitle = "subtitle"
     static let kHint = "hint"
@@ -418,11 +420,11 @@ struct OtherConstant {
 
 struct StaticArrayData {
     
-    static let kTutorialDict = [(image: "activity_language_bg", title: "Welcome to Alysei", description: "Connect to social platform Alysei and follow your interests in restaurants,events,wine,food,cooking classes,recipes,blogs and more."),
-                                (image: "walkthrough_bg2", title: "Lorem Ipsum", description: "First B2B and B2C portal developed to sell high quality Italian products among targeted US customers effortlessly and faster."),
-                                (image: "walkthrough_bg3", title: "Lorem Ipsum", description: "Promote your brand on a collaborative network of certified US-based Producers, Importers, and Distributors."),
-                                (image: "walkthrough_bg4", title: "Lorem Ipsum", description: "First B2B and B2C portal developed to sell high quality Italian products among targeted US customers effortlessly and faster."),
-                                (image: "walkthrough_bg5", title: "Lorem Ipsum", description: "First B2B and B2C portal developed to sell high quality Italian products among targeted US customers effortlessly and faster.")]
+    static let kTutorialDict = [(image: "Alysei Splash Screen 1", title: "Welcome to Alysei", description: "Connect to social platform Alysei and follow your interests in restaurants,events,wine,food,cooking classes,recipes,blogs and more."),
+                                (image: "Alysei Splash Screen 2", title: "Lorem Ipsum", description: "First B2B and B2C portal developed to sell high quality Italian products among targeted US customers effortlessly and faster."),
+                                (image: "Alysei Splash Screen 3", title: "Lorem Ipsum", description: "Promote your brand on a collaborative network of certified US-based Producers, Importers, and Distributors."),
+                                (image: "Alysei Splash Screen 4", title: "Lorem Ipsum", description: "First B2B and B2C portal developed to sell high quality Italian products among targeted US customers effortlessly and faster."),
+                                (image: "Alysei Splash Screen 5", title: "Lorem Ipsum", description: "First B2B and B2C portal developed to sell high quality Italian products among targeted US customers effortlessly and faster.")]
     
     static let kSettingScreenDict = [(image: "icons8_settings", name: "Settings"),
                                      (image: "icons8_business", name: "Company"),

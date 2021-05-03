@@ -13,6 +13,6 @@ class ProfileCompletionModel {
     
     init(with data: [String:Any]) {
         self.title = String.getString(data["title"])
-        self.status = Bool.getBool(data["status"])
+        self.status = Int.getInt(data["status"]) == 0 ? false: true
     }
 }
