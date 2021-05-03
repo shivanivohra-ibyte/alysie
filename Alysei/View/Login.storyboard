@@ -2382,7 +2382,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="663"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Walkthrough1x" translatesAutoresizingMaskIntoConstraints="NO" id="1XO-pa-Bbc">
+                                                <imageView autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Walkthrough1x" translatesAutoresizingMaskIntoConstraints="NO" id="1XO-pa-Bbc" customClass="ImageLoader" customModule="Alysei" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="663"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mfd-dg-OnR">
@@ -2480,7 +2480,7 @@
                                         <connections>
                                             <outlet property="btnNext" destination="ace-vn-rOo" id="uTM-A6-y7a"/>
                                             <outlet property="btnSkip" destination="kP2-Ey-CBk" id="IOq-HY-5Vl"/>
-                                            <outlet property="imgViewBackground" destination="1XO-pa-Bbc" id="KYr-qu-Dom"/>
+                                            <outlet property="imgViewBackground" destination="1XO-pa-Bbc" id="t5i-c6-WGa"/>
                                             <outlet property="lblDescription" destination="jUb-Oa-YOK" id="Cjd-Dh-eNS"/>
                                             <outlet property="lblTitle" destination="PSR-zG-GZ5" id="mDt-14-bHs"/>
                                             <outlet property="paging" destination="ahj-aP-el6" id="Pds-bY-sNh"/>
