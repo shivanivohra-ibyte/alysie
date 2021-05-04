@@ -27,7 +27,9 @@ class SaveAddressViewC: AlysieBaseViewC {
   
   var signUpStepTwoDataModel: SignUpStepTwoDataModel!
   var delegate: SaveAddressCallback?
-  
+
+    var dismiss: ((_ mapAddress: MapAddressModel) -> Void)?
+
   //MARK: - ViewLifeCycle Methods -
   
   override func viewDidLoad() {
@@ -65,7 +67,16 @@ class SaveAddressViewC: AlysieBaseViewC {
       showAlert(withMessage: AlertMessage.kAddress)
     }
     else{
-        self.delegate?.addressSaved(self.signUpStepTwoDataModel, addressLineOne: String.getString((self.txtFieldAddress1.text)), addressLineTwo: String.getString((self.txtFieldAddress2.text)), mapAddress: self.mapAddress)
+        if self.signUpStepTwoDataModel != nil {
+            self.delegate?.addressSaved(self.signUpStepTwoDataModel, addressLineOne: String.getString((self.txtFieldAddress1.text)), addressLineTwo: String.getString((self.txtFieldAddress2.text)), mapAddress: self.mapAddress)
+        } else {
+            let mapAddressModel = MapAddressModel(address1: String.getString((self.txtFieldAddress1.text)),
+                                                  address2: String.getString((self.txtFieldAddress2.text)),
+                                                  mapAddress: self.mapAddress ?? "")
+            self.dismiss?(mapAddressModel)
+            self.dismiss(animated: false, completion: nil)
+        }
+
     }
   }
 }

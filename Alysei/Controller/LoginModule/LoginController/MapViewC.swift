@@ -11,6 +11,13 @@ import GoogleMaps
 import GooglePlaces
 import CoreLocation
 
+
+struct MapAddressModel {
+    let address1: String
+    let address2: String
+    let mapAddress: String
+}
+
 class MapViewC: AlysieBaseViewC {
   
   //MARK: - IBOutlet -
@@ -31,7 +38,7 @@ class MapViewC: AlysieBaseViewC {
   var signUpStepTwoDataModel: SignUpStepTwoDataModel!
   var delegate: SaveAddressCallback?
 
-    var didDismiss: ((_ address: String) -> Void)?
+    var dismiss: ((_ mapAddress: MapAddressModel) -> Void)?
 
   //MARK: - ViewLifeCycle Methods -
   
@@ -68,6 +75,12 @@ class MapViewC: AlysieBaseViewC {
     viewController.mapAddress = lblUpdateLocation.text
     viewController.delegate = self
     viewController.modalPresentationStyle = .overCurrentContext
+
+    viewController.dismiss = { [weak self] (mapAddressModel) in
+        self?.dismiss?(mapAddressModel)
+        self?.navigationController?.popViewController(animated: true)
+    }
+
     self.navigationController?.present(viewController, animated: true, completion: nil)
   }
   
