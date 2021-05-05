@@ -8,4 +8,8 @@
 import UIKit
 import Foundation
 
-let darkGreyColor = UIColor(named: "darkGreyColor") ?? .darkGray
+enum CustomColors {
+    static let darkGreyColor = UIColor(named: "darkGreyColor") ?? .darkGray
+    static let almostBlack = UIColor(named: "almostBlack") ?? .black
+}
+

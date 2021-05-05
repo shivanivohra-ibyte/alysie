@@ -68,12 +68,6 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
         if viewModel != nil {
             self.emailTextField.text = "\(viewModel.email)"
             self.phoneTextField.text = "\(viewModel.phone ?? "")"
@@ -81,6 +75,10 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
             self.websiteTextField.text = "\(viewModel.websiteURL ?? "")"
             self.facebookTextField.text = "\(viewModel.facebookURL ?? "")"
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 
 //     MARK:- IBOutlets
@@ -125,8 +123,10 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
                 }
             case .authorizedAlways, .authorizedWhenInUse:
                 let controller = pushViewController(withName: MapViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? MapViewC
-//                controller?.signUpStepTwoDataModel = model
-                controller?.delegate = self
+                controller?.dismiss = { [weak self] (mapAddressModel) in
+                    self?.addressTextField.text = "\(mapAddressModel.address1), \(mapAddressModel.address2), \(mapAddressModel.mapAddress)".capitalized
+                }
+//                controller?.delegate = self
             default:
                 break
             }
