@@ -11,13 +11,20 @@ class PostsViewController: UIViewController {
     
     @IBOutlet weak var postTableView: UITableView!
     var scrollCallBack: (() -> Void)? = nil
+    var newFeedModel: NewFeedModel?
+    var selectedPostId: Int?
+    var likeUnlike: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        callNewFeedApi()
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        callNewFeedApi()
+    }
     func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
         print("Top Reached")
     }
@@ -38,7 +45,7 @@ extension PostsViewController: UITableViewDelegate,UITableViewDataSource{
         if section == 0{
         return 1
         }else{
-            return 10
+            return newFeedModel?.data?.count ?? 0
         }
     }
     
@@ -50,6 +57,12 @@ extension PostsViewController: UITableViewDelegate,UITableViewDataSource{
         }else{
             guard let cell = postTableView.dequeueReusableCell(withIdentifier: "PostDescTableViewCell") as? PostDescTableViewCell else{return UITableViewCell()}
             cell.selectionStyle = .none
+            cell.configCell(newFeedModel?.data?[indexPath.row] ?? NewFeedDataModel(with: [:]), indexPath.row)
+            cell.likeCallback = { index in
+               // let indexPath = IndexPath(item: index, section: 1)
+                //tableView.reloadRows(at: [indexPath], with: .fade)
+                self.callNewFeedApi()
+            }
             return cell
         }
     }
@@ -58,9 +71,23 @@ extension PostsViewController: UITableViewDelegate,UITableViewDataSource{
         if indexPath.section == 0{
         return 150
         }else{
-            return 410
+            return UITableView.automaticDimension
         }
     }
     
 }
 
+
+extension PostsViewController {
+    func callNewFeedApi(){
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetFeed, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            let dictResponse = dictResponse as? [String:Any]
+            
+            if let data = dictResponse?["data"] as? [String:Any]{
+                self.newFeedModel = NewFeedModel.init(with: data)
+            }
+            self.postTableView.reloadData()
+        }
+    }
+   
+}

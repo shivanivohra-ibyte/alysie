@@ -27,6 +27,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
     
     var picker = UIImagePickerController()
     var uploadImageArray = [UIImage]()
+    var uploadImageArray64 = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -117,48 +118,6 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
         alert.addAction(cameraAction)
         alert.addAction(galleryAction)
 
-//        let deletePhotoAction = UIAlertAction(title: AlertMessage.kDeletePhoto,
-//                                              style: UIAlertAction.Style.default) { (action) in
-//            if self.isProfilePhotoCaptured {
-//                self.isProfilePhotoCaptured = false
-//                self.imgViewProfile.image = UIImage(named: "user_icon_normal")
-//                self.profilePhoto = nil
-//            } else if self.isCoverPhotoCaptured {
-//                self.isCoverPhotoCaptured = false
-//                self.imgViewCoverPhoto.image = UIImage(named: "coverPhoto")
-//                self.coverPhoto = nil
-//            }
-//        }
-//        // remove photo action will be shown in alert only when user has captured an image for either profile picture or cover photo
-//        if self.isProfilePhotoCaptured && self.btnProfilePhoto.isSelected {
-//            alert.addAction(deletePhotoAction)
-//        } else if self.isCoverPhotoCaptured && self.btnCoverPhoto.isSelected {
-//            alert.addAction(deletePhotoAction)
-//        }
-
-
-//        let removePhotoAction = UIAlertAction(title: AlertMessage.kRemovePhoto,
-//                                                 style: UIAlertAction.Style.default) { (action) in
-//            if self.profilePhotoAlreadyExists && self.btnProfilePhoto.isSelected {
-//                self.profilePhotoAlreadyExists = false
-//                self.imgViewProfile.image = UIImage(named: "user_icon_normal")
-//                self.profilePhoto = nil
-//                self.deletePicture(UserDetailBasedElements().profilePhoto, imageType: 1)
-//            } else if self.coverPhotoAlreadyExists &&  self.btnCoverPhoto.isSelected {
-//                self.coverPhotoAlreadyExists = false
-//                self.imgViewCoverPhoto.image = UIImage(named: "coverPhoto")
-//                self.coverPhoto = nil
-//                self.deletePicture(UserDetailBasedElements().coverPhoto, imageType: 2)
-//            }
-//        }
-
-        // remove photo action will be shown in alert only when user has captured an image for either profile picture or cover photo
-//        if self.profilePhotoAlreadyExists && self.btnProfilePhoto.isSelected {
-//            alert.addAction(removePhotoAction)
-//        } else if self.coverPhotoAlreadyExists && self.btnCoverPhoto.isSelected {
-//            alert.addAction(removePhotoAction)
-//        }
-
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
     }
@@ -210,6 +169,13 @@ extension AddPostViewController: UIImagePickerControllerDelegate, UINavigationCo
         guard let selectedImage = info[.editedImage] as? UIImage else { return }
         self.dismiss(animated: true) {
             self.uploadImageArray.append(selectedImage)
+            let compressImageData = selectedImage.jpegData(compressionQuality: 0.5)
+            let image = UIImage(data: compressImageData!)
+            //let image : UIImage = selectedImage
+            let imageData = image?.pngData()
+            //let base64String = imageData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+            let base64String = imageData?.base64EncodedString(options: .lineLength64Characters)
+            self.uploadImageArray64.append(base64String ?? "")
             self.collectionViewHeight.constant = 200
             self.collectionViewImage.isHidden = false
             self.collectionViewImage.reloadData()
@@ -270,17 +236,29 @@ extension AddPostViewController : UITableViewDataSource, UITableViewDelegate{
 }
 extension AddPostViewController {
     func addPostApi(){
-        let params: [String:Any] = [
-            "action_type": "post",
-            "body": txtPost.text ?? "",
-            "privacy": btnPostPrivacy.title(for: .normal)
-            
-        ]
-        let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray as Any,
-        APIConstants.kImageName: "attachments"
-]
-        TANetworkManager.sharedInstance.requestMultiPart(withServiceName: APIUrl.kPost, requestMethod: .post, requestImages: [imageParam], requestVideos: [:], requestData: params) { (dictResponse, error, errorType, statusCode) in
-            //self.showAlert(withMessage: "Data Uploaded Successfully")
+//        let params: [String:Any] = [
+//            "action_type": "post",
+//            "body": txtPost.text ?? "",
+//            "privacy": btnPostPrivacy.title(for: .normal)
+//
+//        ]
+        let params = ["params":["action_type": "post","body":txtPost.text ?? "","privacy": btnPostPrivacy.title(for: .normal) ?? "",
+                                "attachments": []]]
+       // let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray as Any,
+      //  APIConstants.kImageName: "attachments"]
+
+//        TANetworkManager.sharedInstance.requestMultiPart(withServiceName: APIUrl.kPost, requestMethod: .post, requestImages: [imageParam], requestVideos: [:], requestData: params) { (dictResponse, error, errorType, statusCode) in
+//            //self.showAlert(withMessage: "Data Uploaded Successfully")
+//            self.showAlert(withMessage: "Post Successfully")
+//            self.txtPost.text = ""
+//            self.collectionViewImage.isHidden = true
+//            self.collectionViewHeight.constant = 0
+//            self.uploadImageArray = [UIImage]()
+//            self.btnPostPrivacy.setTitle("Public", for: .normal)
+//            self.imgPrivacy.image = UIImage(named: "Public")
+//        }
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kPost, requestMethod: .POST, requestParameters: params, withProgressHUD: true) { (dictResponse, error, errortype, statuscode) in
             self.showAlert(withMessage: "Post Successfully")
             self.txtPost.text = ""
             self.collectionViewImage.isHidden = true
@@ -310,5 +288,4 @@ class PostPrivacyTableViewCell: UITableViewCell{
     @IBOutlet weak var labelPrivacy: UILabel!
     @IBOutlet weak var imgPrivacy: UIImageView!
 }
-
 

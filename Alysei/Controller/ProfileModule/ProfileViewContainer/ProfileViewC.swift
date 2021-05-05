@@ -77,12 +77,16 @@ class ProfileViewC: AlysieBaseViewC{
       return self.children.last!
   }
   
-  private lazy var postsViewC: PostsViewC = {
+//  private lazy var postsViewC: PostsViewC = {
+//
+//    let postsViewC = UIStoryboard.init(name: StoryBoardConstants.kHome, bundle: nil).instantiateViewController(withIdentifier: PostsViewC.id()) as! PostsViewC
+//    return postsViewC
+//  }()
+    private lazy var postsViewC: UserPostsViewController = {
 
-    let postsViewC = UIStoryboard.init(name: StoryBoardConstants.kHome, bundle: nil).instantiateViewController(withIdentifier: PostsViewC.id()) as! PostsViewC
-    return postsViewC
-  }()
-
+      let postsViewC = UIStoryboard.init(name: StoryBoardConstants.kHome, bundle: nil).instantiateViewController(withIdentifier: UserPostsViewController.id()) as! UserPostsViewController
+      return postsViewC
+    }()
   private lazy var aboutViewC: AboutViewC = {
 
     let aboutViewC = UIStoryboard.init(name: StoryBoardConstants.kHome, bundle: nil).instantiateViewController(withIdentifier: AboutViewC.id()) as! AboutViewC
