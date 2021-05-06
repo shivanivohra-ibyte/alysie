@@ -246,6 +246,8 @@ extension AddPostViewController {
         ]
         //        let params = ["params":["action_type": "post","body":txtPost.text ?? "","privacy": btnPostPrivacy.title(for: .normal) ?? "",
         //                                "attachments": []]]
+
+        var compressedImages = [UIImage]()
         let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
                                          APIConstants.kImageName: "attachments"]
         

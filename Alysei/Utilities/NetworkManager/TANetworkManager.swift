@@ -349,6 +349,19 @@ func requestApi(withServiceName serviceName: String,requestMethod method: kHTTPM
                     multipartFormData.append(imageData, withName: TANetworkManager.toString(arrImages["imageName"]), fileName: imgFileName, mimeType: TANetworkManager.IMG_MIMETYPE)
                 }
             }
+
+            if let images = arrImages["image"] as? [UIImage]{
+                for image in images {
+                    if let imageData:Data = image.jpegData(compressionQuality: 0.7){
+                        var imgFileName = TANetworkManager.toString(arrImages["fileName"])
+
+                        if imgFileName.isEmpty { imgFileName = self.createImageFileName() }
+
+                        multipartFormData.append(imageData, withName: TANetworkManager.toString(arrImages["imageName"]), fileName: imgFileName, mimeType: TANetworkManager.IMG_MIMETYPE)
+                    }
+                }
+
+            }
                 //self.addBodyParameters(inFormData: multipartFormData, params: postData)
                 //self.addImages(inFormData: multipartFormData, imageList: [arrImages], keyImage: "image", keyFileName: "fileName", keyImageName: "imageName")
                 //self.addVideos(inFormData: multipartFormData, videoList: arrVideos, keyVideo: "video", keyFileName: "fileName", keyVideoName: "videoName")
