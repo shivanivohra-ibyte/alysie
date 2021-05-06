@@ -53,7 +53,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
         switch roleID {
         case .distributer1, .distributer2, .distributer3, .producer, .travelAgencies :
             name = "\(kSharedUserDefaults.loggedInUserModal.companyName ?? "")"
-    //                case .voiceExperts, .voyagers:
+        //                case .voiceExperts, .voyagers:
         case .restaurant :
             name = "\(kSharedUserDefaults.loggedInUserModal.restaurantName ?? "")"
         default:
@@ -89,8 +89,8 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
     }
     @IBAction func btnCamera(_ sender: UIButton){
         //self.showImagePicker(withSourceType: .camera, mediaType: .image)
-       
-
+        
+        
     }
     @IBAction func btnGallery(_ sender: UIButton){
         //self.showImagePicker(withSourceType: .photoLibrary, mediaType: .image)
@@ -98,26 +98,26 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
     }
     
     private func alertToAddImage() -> Void {
-
+        
         let alert:UIAlertController = UIAlertController(title: AlertMessage.kSourceType, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
-
+        
         let cameraAction = UIAlertAction(title: AlertMessage.kTakePhoto,
                                          style: UIAlertAction.Style.default) { (action) in
             self.showImagePicker(withSourceType: .camera, mediaType: .image)
         }
-
+        
         let galleryAction = UIAlertAction(title: AlertMessage.kChooseLibrary,
                                           style: UIAlertAction.Style.default) { (action) in
             self.showImagePicker(withSourceType: .photoLibrary, mediaType: .image)
         }
-
+        
         let cancelAction = UIAlertAction(title: AlertMessage.kCancel,
                                          style: UIAlertAction.Style.cancel) { (action) in
             print("\(AlertMessage.kCancel) tapped")
         }
         alert.addAction(cameraAction)
         alert.addAction(galleryAction)
-
+        
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
     }
@@ -125,16 +125,16 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
         addPostApi()
         
         
-       // showAlert(withMessage: "Post Successfully")
+        // showAlert(withMessage: "Post Successfully")
     }
     
     @IBAction func changePrivacyAction(_ sender: UIButton){
         postPrivacyTableView.isHidden = false
     }
     private func showImagePicker(withSourceType type: UIImagePickerController.SourceType,mediaType: MediaType) -> Void {
-
+        
         if UIImagePickerController.isSourceTypeAvailable(type) {
-
+            
             self.picker.mediaTypes = mediaType.CameraMediaType
             self.picker.allowsEditing = true
             self.picker.sourceType = type
@@ -163,19 +163,19 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
 //MARK: - ImagePickerViewDelegate Methods -
 
 extension AddPostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
-
+        
         guard let selectedImage = info[.editedImage] as? UIImage else { return }
         self.dismiss(animated: true) {
             self.uploadImageArray.append(selectedImage)
-            let compressImageData = selectedImage.jpegData(compressionQuality: 0.5)
-            let image = UIImage(data: compressImageData!)
-            //let image : UIImage = selectedImage
-            let imageData = image?.pngData()
-            //let base64String = imageData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
-            let base64String = imageData?.base64EncodedString(options: .lineLength64Characters)
-            self.uploadImageArray64.append(base64String ?? "")
+            //            let compressImageData = selectedImage.jpegData(compressionQuality: 0.5)
+            //            let image = UIImage(data: compressImageData!)
+            //            //let image : UIImage = selectedImage
+            //            let imageData = image?.pngData()
+            //            //let base64String = imageData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+            //            let base64String = imageData?.base64EncodedString(options: .lineLength64Characters)
+            // self.uploadImageArray64.append(base64String ?? "")
             self.collectionViewHeight.constant = 200
             self.collectionViewImage.isHidden = false
             self.collectionViewImage.reloadData()
@@ -193,15 +193,15 @@ extension AddPostViewController: UICollectionViewDelegate,UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-       guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as? ImageCollectionViewCell else {return UICollectionViewCell()}
-       cell.image.image = uploadImageArray[indexPath.row]
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as? ImageCollectionViewCell else {return UICollectionViewCell()}
+        cell.image.image = uploadImageArray[indexPath.row]
         cell.btnDelete.tag = indexPath.row
         cell.btnDeleteCallback = { tag in
             self.uploadImageArray.remove(at: tag)
-//            if self.uploadImageArray.count == 0 {
-//                self.collectionViewHeight.constant = 0
-//                self.collectionViewImage.isHidden = true
-//            }
+            //            if self.uploadImageArray.count == 0 {
+            //                self.collectionViewHeight.constant = 0
+            //                self.collectionViewImage.isHidden = true
+            //            }
             self.collectionViewImage.reloadData()
         }
         return cell
@@ -233,40 +233,71 @@ extension AddPostViewController : UITableViewDataSource, UITableViewDelegate{
         btnPostPrivacy.setTitle(privacyArray[indexPath.row], for: .normal)
         imgPrivacy.image = UIImage(named: privacyImageArray[indexPath.row])
     }
+    
+    
 }
 extension AddPostViewController {
     func addPostApi(){
-//        let params: [String:Any] = [
-//            "action_type": "post",
-//            "body": txtPost.text ?? "",
-//            "privacy": btnPostPrivacy.title(for: .normal)
-//
-//        ]
-        let params = ["params":["action_type": "post","body":txtPost.text ?? "","privacy": btnPostPrivacy.title(for: .normal) ?? "",
-                                "attachments": []]]
-       // let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray as Any,
-      //  APIConstants.kImageName: "attachments"]
-
-//        TANetworkManager.sharedInstance.requestMultiPart(withServiceName: APIUrl.kPost, requestMethod: .post, requestImages: [imageParam], requestVideos: [:], requestData: params) { (dictResponse, error, errorType, statusCode) in
-//            //self.showAlert(withMessage: "Data Uploaded Successfully")
-//            self.showAlert(withMessage: "Post Successfully")
-//            self.txtPost.text = ""
-//            self.collectionViewImage.isHidden = true
-//            self.collectionViewHeight.constant = 0
-//            self.uploadImageArray = [UIImage]()
-//            self.btnPostPrivacy.setTitle("Public", for: .normal)
-//            self.imgPrivacy.image = UIImage(named: "Public")
-//        }
+        let params: [String:Any] = [
+            "action_type": "post",
+            "body": txtPost.text ?? "",
+            "privacy": btnPostPrivacy.title(for: .normal)?.lowercased() ?? ""
+            
+        ]
+        //        let params = ["params":["action_type": "post","body":txtPost.text ?? "","privacy": btnPostPrivacy.title(for: .normal) ?? "",
+        //                                "attachments": []]]
+        let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
+                                         APIConstants.kImageName: "attachments"]
         
-        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kPost, requestMethod: .POST, requestParameters: params, withProgressHUD: true) { (dictResponse, error, errortype, statuscode) in
-            self.showAlert(withMessage: "Post Successfully")
-            self.txtPost.text = ""
-            self.collectionViewImage.isHidden = true
-            self.collectionViewHeight.constant = 0
-            self.uploadImageArray = [UIImage]()
-            self.btnPostPrivacy.setTitle("Public", for: .normal)
-            self.imgPrivacy.image = UIImage(named: "Public")
-        }
+        //var imageParams = [[String:Any]]()
+        //imageParams.append(imageParam)
+        
+        print("ImageParam------------------------------\(imageParam)")
+        CommonUtil.sharedInstance.postRequestToImageUpload(withParameter: params, url: APIUrl.kPost, image: imageParam, controller: self, type: 0)
+        //
+        //        TANetworkManager.sharedInstance.requestMultiPart(withServiceName: APIUrl.kPost, requestMethod: .post, requestImages: imageParam, requestVideos: [:], requestData: params) { (dictResponse, error, errorType, statusCode) in
+        //            self.showAlert(withMessage: "Post Successfully")
+        //            self.txtPost.text = ""
+        //            self.collectionViewImage.isHidden = true
+        //            self.collectionViewHeight.constant = 0
+        //            self.uploadImageArray = [UIImage]()
+        //            self.btnPostPrivacy.setTitle("Public", for: .normal)
+        //            self.imgPrivacy.image = UIImage(named: "Public")
+        //        }
+        //
+        //      }
+        
+        
+        //        TANetworkManager.sharedInstance.requestMultiPart(withServiceName: APIUrl.kPost, requestMethod: .post, requestImages: imageParam, requestVideos: [:], requestData: params) { (dictResponse, error, errorType, statusCode) in
+        //            self.showAlert(withMessage: "Post Successfully")
+        //            self.txtPost.text = ""
+        //            self.collectionViewImage.isHidden = true
+        //            self.collectionViewHeight.constant = 0
+        //            self.uploadImageArray = [UIImage]()
+        //            self.btnPostPrivacy.setTitle("Public", for: .normal)
+        //            self.imgPrivacy.image = UIImage(named: "Public")
+        //        }
+        
+        //        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kPost, requestMethod: .POST, requestParameters: params, withProgressHUD: true) { (dictResponse, error, errortype, statuscode) in
+        //            self.showAlert(withMessage: "Post Successfully")
+        //            self.txtPost.text = ""
+        //            self.collectionViewImage.isHidden = true
+        //            self.collectionViewHeight.constant = 0
+        //            self.uploadImageArray = [UIImage]()
+        //            self.btnPostPrivacy.setTitle("Public", for: .normal)
+        //            self.imgPrivacy.image = UIImage(named: "Public")
+        //        }
+        //    }
+    }
+    
+    override func didUserGetData(from result: Any, type: Int) {
+        self.showAlert(withMessage: "Post Successfully")
+        self.txtPost.text = ""
+        self.collectionViewImage.isHidden = true
+        self.collectionViewHeight.constant = 0
+        self.uploadImageArray = [UIImage]()
+        self.btnPostPrivacy.setTitle("Public", for: .normal)
+        self.imgPrivacy.image = UIImage(named: "Public")
     }
 }
 class ImageCollectionViewCell:UICollectionViewCell{

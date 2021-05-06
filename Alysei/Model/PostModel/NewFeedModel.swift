@@ -29,6 +29,9 @@ class NewFeedDataModel{
     var likeCount: Int?
     var privacy: String?
     var likeFlag: Int?
+    var posted_at: String?
+    var attachments: [Attachments]?
+    
     
     init(with dictResponse: [String:Any]){
         self.activityActionId = Int.getInt(dictResponse["activity_action_id"])
@@ -41,7 +44,10 @@ class NewFeedDataModel{
         self.likeCount = Int.getInt(dictResponse["like_count"])
         self.privacy = String.getString(dictResponse["privacy"])
         self.likeFlag = Int.getInt(dictResponse["like_flag"])
-         
+        self.posted_at = String.getString(dictResponse["posted_at"])
+        if let attachments = dictResponse["attachments"] as? [[String:Any]]{
+            self.attachments = attachments.map({Attachments.init(with: $0)})
+        }
     }
 }
 
@@ -74,6 +80,24 @@ class Avatar {
     
     init(with dictResponse: [String:Any]){
         self.id = Int.getInt(dictResponse["id"])
+        self.attachmentUrl = String.getString(dictResponse["attachment_url"])
+    }
+}
+class Attachments{
+    var activityAttachmentId: Int?
+    var attachmentLink: AttachmentLink?
+    init(with dictResponse: [String:Any]){
+        self.activityAttachmentId = Int.getInt(dictResponse["activity_attachment_id"])
+        if let attachment_link = dictResponse["attachment_link"] as? [String:Any]{
+            self.attachmentLink = AttachmentLink.init(with: attachment_link)
+        }
+    }
+}
+
+class AttachmentLink {
+    var attachmentUrl: String?
+    
+    init(with dictResponse: [String:Any]){
         self.attachmentUrl = String.getString(dictResponse["attachment_url"])
     }
 }

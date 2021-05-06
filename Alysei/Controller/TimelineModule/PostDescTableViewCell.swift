@@ -19,14 +19,17 @@ class PostDescTableViewCell: UITableViewCell {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var viewLike: UIView!
     @IBOutlet weak var likeImage: UIImageView!
-    
+    @IBOutlet weak var lblPostTime: UILabel!
     var data: NewFeedDataModel?
     var likeCallback:((Int) -> Void)? = nil
     var islike: Int?
     var index: Int?
-
+    var imageArray = [String]()
     override func awakeFromNib() {
         super.awakeFromNib()
+        imagePostCollectionView.delegate = self
+        imagePostCollectionView.dataSource = self
+        imagePostCollectionView.isHidden = false
         userImage.layer.cornerRadius = userImage.frame.height / 2
         userImage.layer.masksToBounds = true
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(likeAction))
@@ -50,6 +53,7 @@ class PostDescTableViewCell: UITableViewCell {
         lblPostDesc.text = data.body
         lblPostLikeCount.text = "\(data.likeCount ?? 0)"
         lblPostCommentCount.text = "\(data.commentCount ?? 0)"
+        lblPostTime.text = data.posted_at
         //islike = data.likeFlag
         if data.attachmentCount == 0 {
             imageHeightCVConstant.constant = 0
@@ -72,17 +76,33 @@ class PostDescTableViewCell: UITableViewCell {
 
 
 }
-extension PostDescTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource{
+extension PostDescTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data?.attachmentCount ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = imagePostCollectionView.dequeueReusableCell(withReuseIdentifier: "PostImageCollectionViewCell", for: indexPath) as? PostImageCollectionViewCell else{return UICollectionViewCell()}
+        self.imageArray.removeAll()
+        for i in  0..<(data?.attachmentCount ?? 0) {
+            self.imageArray.append(data?.attachments?[i].attachmentLink?.attachmentUrl ?? "")
+        }
+        print("ImageArray---------------------------------\(self.imageArray)")
+        for i in 0..<imageArray.count{
+        cell.imagePost.setImage(withString: kImageBaseUrl + String.getString(imageArray[i]))
+        }
+        //cell.imagePost.setImage(withString: kImageBaseUrl + String.getString(data?.attachments?.attachmentLink?.attachmentUrl))
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        //return CGSize(width: self.imagePostCollectionView.frame.width - 20, height: 220)
+        return CGSize(width: (self.imagePostCollectionView.frame.width), height: 220);
+    }
+//
+//     func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        imagePostCollectionView?.collectionViewLayout.invalidateLayout();
+//   }
 }
 
 extension PostDescTableViewCell {
@@ -93,7 +113,14 @@ extension PostDescTableViewCell {
             "like_or_unlike": isLike ?? 0
         ]
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kLikeApi, requestMethod: .POST, requestParameters: params, withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
-            self.likeCallback?(indexPath ?? 0)
+            self.data?.likeFlag = isLike
+            if isLike == 0{
+            self.data?.likeCount = ((self.data?.likeCount ?? 1) - 1)
+            }else{
+                self.data?.likeCount = ((self.data?.likeCount ?? 1) + 1)
+            }
+             self.likeCallback?(indexPath ?? 0)
+            
         }
     }
 }

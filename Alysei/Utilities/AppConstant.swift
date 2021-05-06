@@ -177,7 +177,7 @@ struct APIUrl{
     static let kProfileProgress = "get/profile/progress"
     static let kPost = "add/post"
     static let kWalkthroughScreenStart = "get/walkthroughscreens"
-    static let kGetFeed = "get/activity/feed?page=1"
+    static let kGetFeed = "get/activity/feed?page="
     static let kLikeApi = "post/like"
     
     
