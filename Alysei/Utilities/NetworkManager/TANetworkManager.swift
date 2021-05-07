@@ -350,22 +350,26 @@ func requestApi(withServiceName serviceName: String,requestMethod method: kHTTPM
                 }
             }
 
-            if let images = arrImages["image"] as? [UIImage]{
-                for image in images {
-                    if let imageData:Data = image.jpegData(compressionQuality: 0.7){
+            if let images = arrImages["image"] as? [UIImage] {
+                for (index, image) in images.enumerated() {
+                    if let imageData:Data = image.jpegData(compressionQuality: 0.3){
                         var imgFileName = TANetworkManager.toString(arrImages["fileName"])
-
+//
                         if imgFileName.isEmpty { imgFileName = self.createImageFileName() }
 
+//                        let imgFileName = "image\(index).jpg"
                         multipartFormData.append(imageData, withName: TANetworkManager.toString(arrImages["imageName"]), fileName: imgFileName, mimeType: TANetworkManager.IMG_MIMETYPE)
+//                        multipartFormData.append(imageData.base64EncodedData(), withName: TANetworkManager.toString(arrImages["imageName"]))
                     }
                 }
 
+//                multipartFormData.append(Data(images), withName: "attachments")
             }
                 //self.addBodyParameters(inFormData: multipartFormData, params: postData)
                 //self.addImages(inFormData: multipartFormData, imageList: [arrImages], keyImage: "image", keyFileName: "fileName", keyImageName: "imageName")
                 //self.addVideos(inFormData: multipartFormData, videoList: arrVideos, keyVideo: "video", keyFileName: "fileName", keyVideoName: "videoName")
-                
+
+            print(multipartFormData.contentLength)
           }, to: serviceUrl, method: method, headers:headers).responseJSON { (dataResponse: AFDataResponse<Any>) in
                 
             switch dataResponse.result{
