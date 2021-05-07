@@ -104,6 +104,8 @@ class ProfileViewC: AlysieBaseViewC{
   override func viewDidLoad() {
     super.viewDidLoad()
     _ = postsViewC
+
+    self.btnEditProfile.layer.cornerRadius = 0.0
     self.tblViewPosts.tableHeaderView?.setHeight(600.0 + 261.0)
     //self.tblViewPosts.tableFooterView = UIView()
     self.btnPosts.isSelected = true
@@ -191,6 +193,8 @@ class ProfileViewC: AlysieBaseViewC{
     self.contactViewC.delegate = self
     self.contactViewC.tableData = self.contactDetail
     self.tblViewPosts.tableHeaderView?.setHeight(kScreenWidth + 200.0)
+
+    self.contactViewC.view.bringSubviewToFront(self.contactViewC.editContactDetailButton)
   }
   
   @IBAction func tapEditProfile(_ sender: UIButton) {

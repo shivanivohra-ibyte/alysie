@@ -72,12 +72,16 @@ extension PostsViewController: UITableViewDelegate,UITableViewDataSource{
         }else{
             guard let cell = postTableView.dequeueReusableCell(withIdentifier: "PostDescTableViewCell") as? PostDescTableViewCell else{return UITableViewCell()}
             cell.selectionStyle = .none
-            cell.configCell(arrNewFeedDataModel[indexPath.row] , indexPath.row)
-            let data = arrNewFeedDataModel[indexPath.row]
-            cell.likeCallback = { index in
-                //self.postTableView.reloadRows(at: [IndexPath(row: index, section: 1)], with: .automatic)
-                cell.lblPostLikeCount.text = "\(data.likeCount ?? 0)"
-                cell.likeImage.image = data.likeFlag == 0 ? UIImage(named: "like_icon") : UIImage(named: "liked_icon")
+            //TODO: this needs to be discussed with Shalini.
+            if arrNewFeedDataModel.count > indexPath.row {
+                cell.configCell(arrNewFeedDataModel[indexPath.row] , indexPath.row)
+                let data = arrNewFeedDataModel[indexPath.row]
+                cell.likeCallback = { index in
+                    //self.postTableView.reloadRows(at: [IndexPath(row: index, section: 1)], with: .automatic)
+                    cell.lblPostLikeCount.text = "\(data.likeCount ?? 0)"
+                    cell.likeImage.image = data.likeFlag == 0 ? UIImage(named: "like_icon") : UIImage(named: "liked_icon")
+
+                }
 
             }
             return cell

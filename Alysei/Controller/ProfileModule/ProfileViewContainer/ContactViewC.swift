@@ -22,24 +22,35 @@ class ContactViewC: AlysieBaseViewC {
   
   //MARK: - IBOutlet -
   
-  @IBOutlet weak var tblViewContactUs: UITableView!
-  
+    @IBOutlet weak var tblViewContactUs: UITableView!
+    @IBOutlet var editContactDetailButton: UIButtonExtended!
+
   //MARK: - ViewLifeCycle Methods -
   
   override func viewDidLoad() {
      
     super.viewDidLoad()
+    self.view.isUserInteractionEnabled = true
+    self.editContactDetailButton.isUserInteractionEnabled = true
 
   }
   
   //MARK: - IBAction -
   
-  @IBAction func tapEdit(_ sender: UIButton) {
+  @IBAction func tapEdit(_ sender: UIButtonExtended) {
 
     self.delegate?.editContactDetail()
     
   }
-  
+
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let view = touches.first?.view {
+            print(view.debugDescription)
+        }
+    }
+
+
   //MARK: - Private Methods -
     
   private func getContactTableCell(_ indexPath: IndexPath) -> UITableViewCell{
