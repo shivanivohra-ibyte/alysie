@@ -24,18 +24,22 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
     var privacyArray = ["Public","Followers","Just Me"]
     var privacyImageArray = ["Public","Friends","OnlyMe"]
     
-    
+    var postDesc: String?
     var picker = UIImagePickerController()
     var uploadImageArray = [UIImage]()
     var uploadImageArray64 = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        
-        self.viewHeaderShadow.addShadow()
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.setUI()
+    }
     func setUI(){
+        txtPost.delegate = self
+        self.viewHeaderShadow.addShadow()
         btnCamera.layer.borderWidth = 0.5
         btnCamera.layer.borderColor = UIColor.lightGray.cgColor
         btnGallery.layer.borderWidth = 0.5
@@ -44,7 +48,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
         collectionViewImage.isHidden = true
         postPrivacyTableView.isHidden = true
         txtPost.delegate = self
-        txtPost.text = "Enter your text here......"
+        txtPost.text = AppConstants.kEnterText
         txtPost.layer.borderWidth = 0.5
         txtPost.layer.borderColor = UIColor.lightGray.cgColor
         txtPost.textColor = UIColor.lightGray
@@ -87,6 +91,15 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
             self.userImage.layer.borderColor = UIColor.white.cgColor
         }
     }
+    
+//    func setInitialUI(){
+//        self.txtPost.text = ""
+//        self.collectionViewImage.isHidden = true
+//        self.collectionViewHeight.constant = 0
+//        self.uploadImageArray = [UIImage]()
+//        self.btnPostPrivacy.setTitle("Public", for: .normal)
+//        self.imgPrivacy.image = UIImage(named: "Public")
+//    }
     @IBAction func btnCamera(_ sender: UIButton){
         //self.showImagePicker(withSourceType: .camera, mediaType: .image)
         
@@ -154,10 +167,21 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
     }
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
-            textView.text = "Enter your text here......"
+            textView.text = AppConstants.kEnterText
             textView.textColor = UIColor.lightGray
         }
     }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+
+        let spaceCount = textView.text.filter{$0 == " "}.count
+        if spaceCount <= 199{
+            return true
+        }else{
+            return false
+        }
+    }
+    
 }
 
 //MARK: - ImagePickerViewDelegate Methods -
@@ -236,19 +260,26 @@ extension AddPostViewController : UITableViewDataSource, UITableViewDelegate{
     
     
 }
+
 extension AddPostViewController {
     func addPostApi(){
+        if txtPost.text == AppConstants.kEnterText{
+            postDesc = ""
+        }
         let params: [String:Any] = [
+        
             "action_type": "post",
-            "body": txtPost.text ?? "",
+            "body": postDesc ?? "",
             "privacy": btnPostPrivacy.title(for: .normal)?.lowercased() ?? ""
             
         ]
         //        let params = ["params":["action_type": "post","body":txtPost.text ?? "","privacy": btnPostPrivacy.title(for: .normal) ?? "",
         //                                "attachments": []]]
 
-        var compressedImages = [UIImage]()
-        let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
+        //var compressedImages = [UIImage]()
+        //let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
+                                        // APIConstants.kImageName: "attachments"]
+        let imageParam : [String:Any] = [APIConstants.kImage: [],
                                          APIConstants.kImageName: "attachments"]
         
         //var imageParams = [[String:Any]]()

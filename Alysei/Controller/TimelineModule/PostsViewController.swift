@@ -34,7 +34,9 @@ class PostsViewController: UIViewController {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         if offsetY > contentHeight - scrollView.frame.size.height - (self.view.frame.height * 2) {
-
+            if indexOfPageToRequest < newFeedModel?.lastPage ?? 0{
+                print("No Data")
+            }else{
             // increments the number of the page to request
             indexOfPageToRequest += 1
 
@@ -43,6 +45,7 @@ class PostsViewController: UIViewController {
 
             // tell the table view to reload with the new data
             self.postTableView.reloadData()
+            }
         }
     }
 }

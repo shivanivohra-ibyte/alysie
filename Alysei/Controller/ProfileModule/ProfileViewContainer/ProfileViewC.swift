@@ -119,6 +119,7 @@ class ProfileViewC: AlysieBaseViewC{
   override func viewWillAppear(_ animated: Bool) {
     
     super.viewWillAppear(animated)
+    setNeedsStatusBarAppearanceUpdate()
     self.viewProfileCompletion.isHidden = true
     self.viewProfileHeight.constant = 0
     self.postRequestToGetFields()
@@ -135,7 +136,9 @@ class ProfileViewC: AlysieBaseViewC{
     super.viewDidLayoutSubviews()
     self.viewSeparator.translatesAutoresizingMaskIntoConstraints = false
   }
-  
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
   //MARK: - IBAction -
 
   @IBAction func tapSideMenu(_ sender: UIButton) {
