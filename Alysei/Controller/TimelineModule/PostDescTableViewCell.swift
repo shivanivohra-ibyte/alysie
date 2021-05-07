@@ -34,6 +34,12 @@ class PostDescTableViewCell: UITableViewCell {
         userImage.layer.masksToBounds = true
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(likeAction))
         self.viewLike.addGestureRecognizer(tap)
+
+
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(likeAction))
+        tap2.numberOfTapsRequired = 2
+
+        self.imagePostCollectionView.addGestureRecognizer(tap2)
         // Initialization code
     }
     
@@ -57,13 +63,18 @@ class PostDescTableViewCell: UITableViewCell {
         //islike = data.likeFlag
         if data.attachmentCount == 0 {
             imageHeightCVConstant.constant = 0
-            imagePostCollectionView.isHidden = true
+//            imagePostCollectionView.alpha = 0.0
         }else{
             imageHeightCVConstant.constant = 220
-            imagePostCollectionView.isHidden = false
+//            imagePostCollectionView.alpha = 1.0
         }
         self.userImage.setImage(withString: kImageBaseUrl + String.getString(data.subjectId?.avatarId?.attachmentUrl))
         likeImage.image = data.likeFlag == 0 ? UIImage(named: "like_icon") : UIImage(named: "liked_icon")
+
+        self.imagePostCollectionView.isPagingEnabled = true
+
+        self.imagePostCollectionView.showsHorizontalScrollIndicator = false
+        self.imagePostCollectionView.reloadData()
     }
     @objc func likeAction(_ tap: UITapGestureRecognizer){
         if self.data?.likeFlag == 0 {
@@ -82,15 +93,20 @@ extension PostDescTableViewCell: UICollectionViewDelegate,UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = imagePostCollectionView.dequeueReusableCell(withReuseIdentifier: "PostImageCollectionViewCell", for: indexPath) as? PostImageCollectionViewCell else{return UICollectionViewCell()}
+        guard let cell = imagePostCollectionView.dequeueReusableCell(withReuseIdentifier: "PostImageCollectionViewCell", for: indexPath) as? PostImageCollectionViewCell else{
+            return UICollectionViewCell()
+        }
         self.imageArray.removeAll()
         for i in  0..<(data?.attachmentCount ?? 0) {
             self.imageArray.append(data?.attachments?[i].attachmentLink?.attachmentUrl ?? "")
         }
         print("ImageArray---------------------------------\(self.imageArray)")
-        for i in 0..<imageArray.count{
-        cell.imagePost.setImage(withString: kImageBaseUrl + String.getString(imageArray[i]))
-        }
+//        for i in 0..<imageArray.count {
+//            cell.imagePost.setImage(withString: kImageBaseUrl + String.getString(imageArray[i]))
+//            cell.imagePost.backgroundColor = .yellow
+//        }
+
+        cell.imagePost.setImage(withString: kImageBaseUrl + String.getString(imageArray[indexPath.row]))
         //cell.imagePost.setImage(withString: kImageBaseUrl + String.getString(data?.attachments?.attachmentLink?.attachmentUrl))
         return cell
     }
