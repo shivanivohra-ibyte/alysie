@@ -358,7 +358,7 @@ func requestApi(withServiceName serviceName: String,requestMethod method: kHTTPM
                         if imgFileName.isEmpty { imgFileName = self.createImageFileName() }
 
 //                        let imgFileName = "image\(index).jpg"
-                        multipartFormData.append(imageData, withName: TANetworkManager.toString(arrImages["imageName"]), fileName: imgFileName, mimeType: TANetworkManager.IMG_MIMETYPE)
+                        multipartFormData.append(imageData, withName: "attachments[]", fileName: imgFileName, mimeType: TANetworkManager.IMG_MIMETYPE)
 //                        multipartFormData.append(imageData.base64EncodedData(), withName: TANetworkManager.toString(arrImages["imageName"]))
                     }
                 }

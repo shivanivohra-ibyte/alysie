@@ -263,7 +263,8 @@ extension AddPostViewController : UITableViewDataSource, UITableViewDelegate{
 
 extension AddPostViewController {
     func addPostApi(){
-        if txtPost.text == AppConstants.kEnterText{
+        postDesc = txtPost.text
+        if txtPost.text == AppConstants.kEnterText {
             postDesc = ""
         }
         let params: [String:Any] = [
@@ -277,9 +278,9 @@ extension AddPostViewController {
         //                                "attachments": []]]
 
         //var compressedImages = [UIImage]()
-        //let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
+        let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
                                         // APIConstants.kImageName: "attachments"]
-        let imageParam : [String:Any] = [APIConstants.kImage: [],
+//        let imageParam : [String:Any] = [APIConstants.kImage: [],
                                          APIConstants.kImageName: "attachments"]
         
         //var imageParams = [[String:Any]]()
