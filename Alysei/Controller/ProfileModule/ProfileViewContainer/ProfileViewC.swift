@@ -196,7 +196,7 @@ class ProfileViewC: AlysieBaseViewC{
 
     self.contactViewC.view.bringSubviewToFront(self.contactViewC.editContactDetailButton)
   }
-  
+
   @IBAction func tapEditProfile(_ sender: UIButton) {
     
     let controller = pushViewController(withName: EditProfileViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? EditProfileViewC
@@ -294,7 +294,7 @@ class ProfileViewC: AlysieBaseViewC{
       }
       DispatchQueue.main.async {
           
-          self.view.isUserInteractionEnabled = false
+//          self.view.isUserInteractionEnabled = false
           self.addChild(newVC)
           newVC.view.frame = self.containerView.bounds
           
