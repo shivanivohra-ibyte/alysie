@@ -85,7 +85,7 @@ class LoginAccountViewC: AlysieBaseViewC{
   
   func playBackgroundVideo(){
     
-    guard let path = Bundle.main.path(forResource: "AlyseiBVC", ofType: "mp4") else{return}
+    guard let path = Bundle.main.path(forResource: "AlyseiBGV", ofType: "mp4") else{return}
            player = AVPlayer(url: URL(fileURLWithPath: path))
     let playerLayer = AVPlayerLayer(player: player)
     playerLayer.frame = self.view.bounds

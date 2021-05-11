@@ -21,6 +21,9 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var postPrivacyTableView: UITableView!
     @IBOutlet weak var imgPrivacy: UIImageView!
+    
+    
+    
     var privacyArray = ["Public","Followers","Just Me"]
     var privacyImageArray = ["Public","Friends","OnlyMe"]
     
@@ -44,8 +47,8 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
         btnCamera.layer.borderColor = UIColor.lightGray.cgColor
         btnGallery.layer.borderWidth = 0.5
         btnGallery.layer.borderColor = UIColor.lightGray.cgColor
-        collectionViewHeight.constant = 0
-        collectionViewImage.isHidden = true
+        // collectionViewHeight.constant = 0
+        //collectionViewImage.isHidden = true
         postPrivacyTableView.isHidden = true
         txtPost.delegate = self
         txtPost.text = AppConstants.kEnterText
@@ -92,14 +95,14 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-//    func setInitialUI(){
-//        self.txtPost.text = ""
-//        self.collectionViewImage.isHidden = true
-//        self.collectionViewHeight.constant = 0
-//        self.uploadImageArray = [UIImage]()
-//        self.btnPostPrivacy.setTitle("Public", for: .normal)
-//        self.imgPrivacy.image = UIImage(named: "Public")
-//    }
+    //    func setInitialUI(){
+    //        self.txtPost.text = ""
+    //        self.collectionViewImage.isHidden = true
+    //        self.collectionViewHeight.constant = 0
+    //        self.uploadImageArray = [UIImage]()
+    //        self.btnPostPrivacy.setTitle("Public", for: .normal)
+    //        self.imgPrivacy.image = UIImage(named: "Public")
+    //    }
     @IBAction func btnCamera(_ sender: UIButton){
         //self.showImagePicker(withSourceType: .camera, mediaType: .image)
         
@@ -173,7 +176,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-
+        
         let spaceCount = textView.text.filter{$0 == " "}.count
         if spaceCount <= 199{
             return true
@@ -200,8 +203,8 @@ extension AddPostViewController: UIImagePickerControllerDelegate, UINavigationCo
             //            //let base64String = imageData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
             //            let base64String = imageData?.base64EncodedString(options: .lineLength64Characters)
             // self.uploadImageArray64.append(base64String ?? "")
-            self.collectionViewHeight.constant = 200
-            self.collectionViewImage.isHidden = false
+            // self.collectionViewHeight.constant = 200
+            // self.collectionViewImage.isHidden = false
             self.collectionViewImage.reloadData()
             //print("UploadImage------------------------------------\(self.uploadImageArray)")
         }
@@ -213,26 +216,57 @@ extension AddPostViewController: UIImagePickerControllerDelegate, UINavigationCo
 
 extension AddPostViewController: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return uploadImageArray.count
+        if uploadImageArray.count == 0{
+            return 1
+        }else{
+            return uploadImageArray.count + 1
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as? ImageCollectionViewCell else {return UICollectionViewCell()}
-        cell.image.image = uploadImageArray[indexPath.row]
-        cell.btnDelete.tag = indexPath.row
-        cell.btnDeleteCallback = { tag in
-            self.uploadImageArray.remove(at: tag)
-            //            if self.uploadImageArray.count == 0 {
-            //                self.collectionViewHeight.constant = 0
-            //                self.collectionViewImage.isHidden = true
-            //            }
-            self.collectionViewImage.reloadData()
+        
+        if uploadImageArray.count == 0{
+            cell.viewAddImage.isHidden = false
+            cell.btnDelete.isHidden = true
+        }else {
+                if indexPath.row < uploadImageArray.count{
+                    cell.viewAddImage.isHidden = true
+                    cell.btnDelete.isHidden = false
+                    cell.image.image = uploadImageArray[indexPath.row]
+                }else{
+                cell.viewAddImage.isHidden = false
+                cell.btnDelete.isHidden = true
+
         }
+            cell.btnDelete.tag = indexPath.row
+            cell.btnDeleteCallback = { tag in
+                self.uploadImageArray.remove(at: tag)
+                //            if self.uploadImageArray.count == 0 {
+                //                self.collectionViewHeight.constant = 0
+                //                self.collectionViewImage.isHidden = true
+                //            }
+                self.collectionViewImage.reloadData()
+            }
+            return cell
+        }
+       
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width / 3, height: 200)
+        if uploadImageArray.count == 0{
+            return CGSize(width: collectionView.bounds.width , height: 200)
+        }else{
+            return CGSize(width: collectionView.bounds.width / 3, height: 200)
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if uploadImageArray.count ==  0 {
+            alertToAddImage()
+        }else if indexPath.row >= uploadImageArray.count{
+            alertToAddImage()
+        }
     }
 }
 //MARK: UITableView
@@ -268,7 +302,7 @@ extension AddPostViewController {
             postDesc = ""
         }
         let params: [String:Any] = [
-        
+            
             "action_type": "post",
             "body": postDesc ?? "",
             "privacy": btnPostPrivacy.title(for: .normal)?.lowercased() ?? ""
@@ -276,11 +310,11 @@ extension AddPostViewController {
         ]
         //        let params = ["params":["action_type": "post","body":txtPost.text ?? "","privacy": btnPostPrivacy.title(for: .normal) ?? "",
         //                                "attachments": []]]
-
+        
         //var compressedImages = [UIImage]()
         let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
-                                        // APIConstants.kImageName: "attachments"]
-//        let imageParam : [String:Any] = [APIConstants.kImage: [],
+                                         // APIConstants.kImageName: "attachments"]
+                                         //        let imageParam : [String:Any] = [APIConstants.kImage: [],
                                          APIConstants.kImageName: "attachments"]
         
         //var imageParams = [[String:Any]]()
@@ -337,11 +371,14 @@ extension AddPostViewController {
 class ImageCollectionViewCell:UICollectionViewCell{
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var btnDelete: UIButton!
+    @IBOutlet weak var viewAddImage: UIView!
+    
     var btnDeleteCallback:((Int) -> Void)? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        viewAddImage.layer.borderWidth = 0.5
+        viewAddImage.layer.borderColor = UIColor.lightGray.cgColor
     }
     
     @IBAction func btnDeleteAction(_ sender: UIButton){
