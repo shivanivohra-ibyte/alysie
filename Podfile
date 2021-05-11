@@ -15,5 +15,5 @@ target 'Alysei' do
   pod 'GooglePlaces'
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
-
+  pod 'TLPhotoPicker'
 end
