@@ -226,7 +226,6 @@
 		6B7F0F4D26049A950060FBA9 /* ActiveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7F0F4C26049A950060FBA9 /* ActiveCollectionViewCell.swift */; };
 		6B7F0F5026049AB30060FBA9 /* InactiveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7F0F4F26049AB30060FBA9 /* InactiveCollectionViewCell.swift */; };
 		6B8A27CC260AF75700893DFF /* DemoMapViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8A27CB260AF75700893DFF /* DemoMapViewViewController.swift */; };
-		6B8B47D2261F1BE4004B2FB4 /* AlyseiBVC.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6B8B47D1261F1BE4004B2FB4 /* AlyseiBVC.mp4 */; };
 		6BBA994A260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBA9948260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.swift */; };
 		6BBA994B260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BBA9949260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.xib */; };
 		6BBA994F260AF52300AA7A81 /* ActiveCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BBA994E260AF52300AA7A81 /* ActiveCollectionView.swift */; };
@@ -256,6 +255,7 @@
 		C587D14D26413BE6002D72DF /* NewFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C587D14C26413BE6002D72DF /* NewFeedModel.swift */; };
 		C5989065262EAC1400507E84 /* ProfileCompletionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5989064262EAC1400507E84 /* ProfileCompletionModel.swift */; };
 		C5AAB85826171896000557B6 /* LiquidCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5AAB85726171896000557B6 /* LiquidCollectionViewLayout.swift */; };
+		C5B87764264A6A20009048E6 /* CustomPhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B87763264A6A20009048E6 /* CustomPhotoPickerViewController.swift */; };
 		C5B98113263FE55B002BFA23 /* UserPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B98112263FE55B002BFA23 /* UserPostsViewController.swift */; };
 		C5B98116263FE65D002BFA23 /* UserPostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B98115263FE65D002BFA23 /* UserPostsTableViewCell.swift */; };
 		C5BA01F52648FA8900E1E542 /* AlyseiBGV.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C5BA01F42648FA8900E1E542 /* AlyseiBGV.mp4 */; };
@@ -493,7 +493,6 @@
 		6B7F0F4C26049A950060FBA9 /* ActiveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCollectionViewCell.swift; sourceTree = "<group>"; };
 		6B7F0F4F26049AB30060FBA9 /* InactiveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InactiveCollectionViewCell.swift; sourceTree = "<group>"; };
 		6B8A27CB260AF75700893DFF /* DemoMapViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoMapViewViewController.swift; sourceTree = "<group>"; };
-		6B8B47D1261F1BE4004B2FB4 /* AlyseiBVC.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = AlyseiBVC.mp4; sourceTree = "<group>"; };
 		6BBA9948260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCountriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		6BBA9949260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActiveCountriesCollectionViewCell.xib; sourceTree = "<group>"; };
 		6BBA994E260AF52300AA7A81 /* ActiveCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveCollectionView.swift; sourceTree = "<group>"; };
@@ -525,6 +524,7 @@
 		C587D14C26413BE6002D72DF /* NewFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedModel.swift; sourceTree = "<group>"; };
 		C5989064262EAC1400507E84 /* ProfileCompletionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompletionModel.swift; sourceTree = "<group>"; };
 		C5AAB85726171896000557B6 /* LiquidCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidCollectionViewLayout.swift; sourceTree = "<group>"; };
+		C5B87763264A6A20009048E6 /* CustomPhotoPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPhotoPickerViewController.swift; sourceTree = "<group>"; };
 		C5B98112263FE55B002BFA23 /* UserPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostsViewController.swift; sourceTree = "<group>"; };
 		C5B98115263FE65D002BFA23 /* UserPostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostsTableViewCell.swift; sourceTree = "<group>"; };
 		C5BA01F42648FA8900E1E542 /* AlyseiBGV.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = AlyseiBGV.mp4; sourceTree = "<group>"; };
@@ -1169,7 +1169,6 @@
 				6116531426163A7B00BB97CA /* GoogleService-Info.plist */,
 				27A443F725AE06F00002BAAC /* Info.plist */,
 				C5BA01F42648FA8900E1E542 /* AlyseiBGV.mp4 */,
-				6B8B47D1261F1BE4004B2FB4 /* AlyseiBVC.mp4 */,
 				27BC688C25AC564200A01B6A /* Assets.xcassets */,
 				2770AA5525AE1BBC00A2F10B /* AlysieBaseViewC.swift */,
 				27BC689D25AC56C000A01B6A /* Delegate Methods */,
@@ -1291,6 +1290,7 @@
 			isa = PBXGroup;
 			children = (
 				6B09A87B26245AC800483365 /* AddPostViewController.swift */,
+				C5B87763264A6A20009048E6 /* CustomPhotoPickerViewController.swift */,
 			);
 			path = AddPost;
 			sourceTree = "<group>";
@@ -1485,7 +1485,6 @@
 				274635F025DC35AD0010C1C6 /* Splash.storyboard in Resources */,
 				27A443CC25AE03720002BAAC /* Montserrat-LightItalic.ttf in Resources */,
 				27A443D725AE03720002BAAC /* Montserrat-ExtraLightItalic.ttf in Resources */,
-				6B8B47D2261F1BE4004B2FB4 /* AlyseiBVC.mp4 in Resources */,
 				C5BA01F52648FA8900E1E542 /* AlyseiBGV.mp4 in Resources */,
 				27A443D625AE03720002BAAC /* Montserrat-SemiBold.ttf in Resources */,
 				A84EED0725B1C2F700429B1D /* Home.storyboard in Resources */,
@@ -1599,6 +1598,7 @@
 				C5AAB85826171896000557B6 /* LiquidCollectionViewLayout.swift in Sources */,
 				27B4E8FD25EF957D00623E45 /* SignUpModel.swift in Sources */,
 				279AB34625FF436C0061FCB3 /* CountryTable.swift in Sources */,
+				C5B87764264A6A20009048E6 /* CustomPhotoPickerViewController.swift in Sources */,
 				279AB34725FF436C0061FCB3 /* ConfirmSelectionTable.swift in Sources */,
 				27D0FAB625CEE9FF00463FE0 /* SelectProductTableCell.swift in Sources */,
 				27A443C625AE03720002BAAC /* textEdit.swift in Sources */,
