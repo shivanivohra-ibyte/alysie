@@ -68,7 +68,14 @@ class PostDescTableViewCell: UITableViewCell {
             imageHeightCVConstant.constant = 220
 //            imagePostCollectionView.alpha = 1.0
         }
+        self.userImage.layer.borderWidth = 0.5
+        self.userImage.layer.borderColor = UIColor.lightGray.cgColor
+        print("ImageUrl--------------------------------\(String.getString(data.subjectId?.avatarId?.attachmentUrl) )")
+        if String.getString(data.subjectId?.avatarId?.attachmentUrl) == ""{
+            self.userImage.image = UIImage(named: "profile_icon")
+        }else{
         self.userImage.setImage(withString: kImageBaseUrl + String.getString(data.subjectId?.avatarId?.attachmentUrl))
+        }
         likeImage.image = data.likeFlag == 0 ? UIImage(named: "like_icon") : UIImage(named: "liked_icon")
 
         self.imagePostCollectionView.isPagingEnabled = true

@@ -195,7 +195,11 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
     }
     
     @IBAction func postAction(_ sender: UIButton){
+        if (txtPost.text == AppConstants.kEnterText && self.selectedAssets.count == 0) {
+            showAlert(withMessage: "Please enter some post")
+        }else{
         addPostApi()
+        }
         
         
         // showAlert(withMessage: "Post Successfully")

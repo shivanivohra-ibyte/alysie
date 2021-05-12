@@ -89,6 +89,7 @@ class LoginAccountViewC: AlysieBaseViewC{
            player = AVPlayer(url: URL(fileURLWithPath: path))
     let playerLayer = AVPlayerLayer(player: player)
     playerLayer.frame = self.view.bounds
+   // playerLayer.videoGravity = .resizeAspectFill
     playerLayer.videoGravity = .resizeAspectFill
     self.viewVideo.layer.addSublayer(playerLayer)
     player?.isMuted = true
