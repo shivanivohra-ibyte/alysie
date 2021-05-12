@@ -481,7 +481,10 @@ extension AddPostViewController {
     }
     
     override func didUserGetData(from result: Any, type: Int) {
-        self.showAlert(withMessage: "Post Successfully")
+        self.showAlert(withMessage: "Post Successfully") {
+            self.tabBarController?.selectedIndex = Tabbar.home.rawValue
+        }
+        
         self.txtPost.text = ""
         self.uploadImageArray = [UIImage]()
         self.btnPostPrivacy.setTitle("Public", for: .normal)
@@ -489,7 +492,6 @@ extension AddPostViewController {
         self.selectedAssets.removeAll()
         self.uploadImageArray.removeAll()
         self.collectionViewImage.reloadData()
-        
     }
 }
 class ImageCollectionViewCell:UICollectionViewCell{

@@ -40,6 +40,7 @@ class PostDescTableViewCell: UITableViewCell {
         tap2.numberOfTapsRequired = 2
 
         self.imagePostCollectionView.addGestureRecognizer(tap2)
+        
         // Initialization code
     }
     
@@ -114,7 +115,7 @@ extension PostDescTableViewCell: UICollectionViewDelegate,UICollectionViewDataSo
 //        }
 
         cell.imagePost.setImage(withString: kImageBaseUrl + String.getString(imageArray[indexPath.row]))
-//        cell.imagePost.contentMode = .scaleAspectFit
+        cell.imagePost.contentMode = .scaleAspectFit
         //cell.imagePost.setImage(withString: kImageBaseUrl + String.getString(data?.attachments?.attachmentLink?.attachmentUrl))
         return cell
     }
@@ -149,8 +150,90 @@ extension PostDescTableViewCell {
     }
 }
 
-class PostImageCollectionViewCell: UICollectionViewCell{
+class PostImageCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate{
     @IBOutlet weak var imagePost: UIImageView!
+
+    var originalFrame = CGRect()
+
+    var overlay: UIView = {
+        let view = UIView(frame: UIScreen.main.bounds);
+
+        view.alpha = 0
+        view.backgroundColor = .black
+
+        return view
+    }()
+
+    var isZooming = false
+    var originalImageCenter:CGPoint?
+
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        self.originalImageCenter = imagePost.center
+        self.originalFrame = imagePost.frame
+
+        self.imagePost.isUserInteractionEnabled = true
+        let pinch = UIPinchGestureRecognizer(target: self, action: #selector(self.pinch(sender:)))
+        self.imagePost.addGestureRecognizer(pinch)
+
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(self.pan(sender:)))
+        pan.delegate = self
+        self.imagePost.addGestureRecognizer(pan)
+    }
+
+    @objc func pinch(sender:UIPinchGestureRecognizer) {
+        if sender.state == .began {
+//            self.imagePost.frame = UIScreen.main.bounds
+            let currentScale = self.imagePost.frame.size.width / self.imagePost.bounds.size.width
+            let newScale = currentScale*sender.scale
+            if newScale > 1 {
+                self.isZooming = true
+            }
+        } else if sender.state == .changed {
+            guard let view = sender.view else {return}
+            let pinchCenter = CGPoint(x: sender.location(in: view).x - view.bounds.midX,
+                                      y: sender.location(in: view).y - view.bounds.midY)
+            let transform = view.transform.translatedBy(x: pinchCenter.x, y: pinchCenter.y)
+                .scaledBy(x: sender.scale, y: sender.scale)
+                .translatedBy(x: -pinchCenter.x, y: -pinchCenter.y)
+            let currentScale = self.imagePost.frame.size.width / self.imagePost.bounds.size.width
+            var newScale = currentScale*sender.scale
+            if newScale < 1 {
+                newScale = 1
+                let transform = CGAffineTransform(scaleX: newScale, y: newScale)
+                self.imagePost.transform = transform
+                sender.scale = 1
+            }else {
+                view.transform = transform
+                sender.scale = 1
+            }
+        } else if sender.state == .ended || sender.state == .failed || sender.state == .cancelled {
+            guard let center = self.originalImageCenter else {return}
+
+//            self.imagePost.frame = self.originalFrame
+            UIView.animate(withDuration: 0.3, animations: {
+                self.imagePost.transform = CGAffineTransform.identity
+                self.imagePost.center = center
+            }, completion: { _ in
+                self.isZooming = false
+            })
+        }
+    }
+
+    @objc func pan(sender: UIPanGestureRecognizer) {
+        if self.isZooming && sender.state == .began {
+            self.originalImageCenter = sender.view?.center
+        } else if self.isZooming && sender.state == .changed {
+            let translation = sender.translation(in: self)
+            if let view = sender.view {
+                view.center = CGPoint(x:view.center.x + translation.x,
+                                      y:view.center.y + translation.y)
+            }
+            sender.setTranslation(CGPoint.zero, in: self.imagePost.superview)
+        }
+    }
 }
 
 
