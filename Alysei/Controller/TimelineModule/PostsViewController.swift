@@ -26,6 +26,8 @@ class PostsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         arrNewFeedDataModel.removeAll()
+
+        self.postTableView.separatorStyle = .singleLine
         callNewFeedApi(1)
     }
    

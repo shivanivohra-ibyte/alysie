@@ -107,6 +107,7 @@ extension PostDescTableViewCell: UICollectionViewDelegate,UICollectionViewDataSo
 //        }
 
         cell.imagePost.setImage(withString: kImageBaseUrl + String.getString(imageArray[indexPath.row]))
+//        cell.imagePost.contentMode = .scaleAspectFit
         //cell.imagePost.setImage(withString: kImageBaseUrl + String.getString(data?.attachments?.attachmentLink?.attachmentUrl))
         return cell
     }
