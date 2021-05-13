@@ -55,8 +55,8 @@ class PostDescTableViewCell: UITableViewCell {
     func configCell(_ data: NewFeedDataModel, _ index: Int){
         self.data = data
         self.index = index
-        userName.text = data.subjectId?.name
-        userNickName.text = data.subjectId?.companyName
+        userName.text = data.subjectId?.companyName?.capitalized
+        userNickName.text = data.subjectId?.name?.capitalized
         lblPostDesc.text = data.body
         lblPostLikeCount.text = "\(data.likeCount ?? 0)"
         lblPostCommentCount.text = "\(data.commentCount ?? 0)"
