@@ -152,6 +152,8 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
             self?.showExceededMaximumAlert(vc: picker)
         }
         var configure = TLPhotosPickerConfigure()
+        configure.allowedPhotograph = true
+        configure.mediaType = .image
         configure.numberOfColumn = 3
         viewController.configure = configure
         viewController.selectedAssets = self.selectedAssets
@@ -484,7 +486,6 @@ extension AddPostViewController {
         self.showAlert(withMessage: "Post Successfully") {
             self.tabBarController?.selectedIndex = Tabbar.home.rawValue
         }
-        
         self.txtPost.text = ""
         self.uploadImageArray = [UIImage]()
         self.btnPostPrivacy.setTitle("Public", for: .normal)

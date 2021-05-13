@@ -39,6 +39,8 @@
 	<string>Alysei would like to access your location.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Alysei would like to access your gallery.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Alysei would like to access your gallery.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Montserrat-Bold.ttf</string>

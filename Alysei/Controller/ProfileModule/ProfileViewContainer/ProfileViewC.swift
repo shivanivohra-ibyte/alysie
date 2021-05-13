@@ -116,6 +116,9 @@ class ProfileViewC: AlysieBaseViewC{
     self.viewProfileCompletion.addGestureRecognizer(tap)
     self.currentIndex = 0
     self.postRequestToGetProgress()
+
+    self.tblViewPosts.contentInsetAdjustmentBehavior = .never
+
   }
 
   override func viewWillAppear(_ animated: Bool) {
