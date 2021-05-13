@@ -32,12 +32,24 @@ class ContactViewC: AlysieBaseViewC {
     super.viewDidLoad()
     self.view.isUserInteractionEnabled = true
     self.editContactDetailButton.isUserInteractionEnabled = true
+    self.tblViewContactUs.isUserInteractionEnabled = true
+
+    self.tblViewContactUs.allowsSelection = false
+
+    let tap = UITapGestureRecognizer(target: self, action: #selector(tapGestureMethod(_:)))
+    self.view.addGestureRecognizer(tap)
+    self.tblViewContactUs.addGestureRecognizer(tap)
+    
 
   }
-  
+
+    @objc func tapGestureMethod(_ sender: UITapGestureRecognizer) {
+        self.delegate?.editContactDetail()
+    }
+
   //MARK: - IBAction -
   
-  @IBAction func tapEdit(_ sender: UIButtonExtended) {
+  @IBAction func tapEdit(_ sender: UIButton) {
 
     self.delegate?.editContactDetail()
     
