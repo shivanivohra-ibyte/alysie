@@ -37,10 +37,14 @@
 	<string>Alysei would like to access your location.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Alysei would like to access your location.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Alysei would like to access your gallery.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>You need Usage Microphone Description</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Alysei would like to access your gallery.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Alysei would like to access your gallery.</string>
+	<key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>
+	<true/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Montserrat-Bold.ttf</string>

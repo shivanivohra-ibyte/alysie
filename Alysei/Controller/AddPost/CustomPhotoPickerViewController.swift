@@ -36,7 +36,7 @@ extension TLPhotosPickerViewController {
         let picker = CustomPhotoPickerViewController(withTLPHAssets: withTLPHAssets, didCancel:didCancel)
         return picker
     }
-    
+
     func wrapNavigationControllerWithoutBar() -> UINavigationController {
         let navController = UINavigationController(rootViewController: self)
         navController.navigationBar.isHidden = true
