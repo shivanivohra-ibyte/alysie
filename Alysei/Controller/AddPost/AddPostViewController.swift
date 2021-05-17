@@ -30,7 +30,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
     var privacyImageArray = ["Public","Friends","OnlyMe"]
     
     var postDesc: String?
-    var picker = UIImagePickerController()
+//    var picker = UIImagePickerController()
     var uploadImageArray = [UIImage]()
     var uploadImageArray64 = [String]()
     var selectedAssets = [TLPHAsset]()
@@ -118,57 +118,64 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
     }
     @IBAction func btnGallery(_ sender: UIButton){
         //self.showImagePicker(withSourceType: .photoLibrary, mediaType: .image)
-        alertToAddImage()
+//        alertToAddImage()
     }
     
     private func alertToAddImage() -> Void {
         
-        let alert:UIAlertController = UIAlertController(title: AlertMessage.kSourceType, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
-        
-        let cameraAction = UIAlertAction(title: AlertMessage.kTakePhoto,
-                                         style: UIAlertAction.Style.default) { (action) in
-            self.showImagePicker(withSourceType: .camera, mediaType: .image)
-        }
-        
-        let galleryAction = UIAlertAction(title: AlertMessage.kChooseLibrary,
-                                          style: UIAlertAction.Style.default) { (action) in
-            self.showImagePicker(withSourceType: .photoLibrary, mediaType: .image)
-        }
-        
-        let cancelAction = UIAlertAction(title: AlertMessage.kCancel,
-                                         style: UIAlertAction.Style.cancel) { (action) in
-            print("\(AlertMessage.kCancel) tapped")
-        }
-        alert.addAction(cameraAction)
-        alert.addAction(galleryAction)
-        
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
+//        let alert:UIAlertController = UIAlertController(title: AlertMessage.kSourceType, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+//
+//        let cameraAction = UIAlertAction(title: AlertMessage.kTakePhoto,
+//                                         style: UIAlertAction.Style.default) { (action) in
+//            self.showImagePicker(withSourceType: .camera, mediaType: .image)
+//        }
+//
+//        let galleryAction = UIAlertAction(title: AlertMessage.kChooseLibrary,
+//                                          style: UIAlertAction.Style.default) { (action) in
+//            self.showImagePicker(withSourceType: .photoLibrary, mediaType: .image)
+//        }
+//
+//        let cancelAction = UIAlertAction(title: AlertMessage.kCancel,
+//                                         style: UIAlertAction.Style.cancel) { (action) in
+//            print("\(AlertMessage.kCancel) tapped")
+//        }
+//        alert.addAction(cameraAction)
+//        alert.addAction(galleryAction)
+//
+//        alert.addAction(cancelAction)
+//        self.present(alert, animated: true, completion: nil)
     }
-    private func alertToAddCustomPicker() -> Void{
-        let viewController = CustomPhotoPickerViewController()
-        viewController.delegate = self
-        viewController.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
+    private func alertToAddCustomPicker() -> Void {
+        let viewCon = CustomPhotoPickerViewController()
+        viewCon.delegate = self
+        viewCon.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
             self?.showExceededMaximumAlert(vc: picker)
         }
         var configure = TLPhotosPickerConfigure()
-        configure.numberOfColumn = 3
-        viewController.configure = configure
-        viewController.selectedAssets = self.selectedAssets
-        viewController.logDelegate = self
+        configure.allowedVideoRecording = false
 
-        self.present(viewController, animated: true, completion: nil)
+        configure.mediaType = .image
+        configure.numberOfColumn = 3
+
+        viewCon.configure = configure
+        viewCon.selectedAssets = self.selectedAssets
+        viewCon.logDelegate = self
+
+        self.present(viewCon, animated: true, completion: nil)
     }
+
 //    func dismissPhotoPicker(withPHAssets: [PHAsset]) {
 //        // if you want to used phasset.
 //        print("dismiss")
 //        print("selectedAssets-----------\(self.selectedAssets)")
 //        self.collectionViewImage.reloadData()
 //    }
+
     func dismissPhotoPicker(withTLPHAssets: [TLPHAsset]) {
         // use selected order, fullresolution image
         print("dismiss")
         self.selectedAssets = withTLPHAssets
+
         print("selectedAssest-----------------\(self.selectedAssets)")
         
         self.collectionViewImage.reloadData()
@@ -196,7 +203,9 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
     
     @IBAction func postAction(_ sender: UIButton){
         if (txtPost.text == AppConstants.kEnterText && self.selectedAssets.count == 0) {
-            showAlert(withMessage: "Please enter some post")
+//            showAlert(withMessage: "Please enter some post")
+            showAlert(withMessage: "Post can't be empty")
+
         }else{
         addPostApi()
         }
@@ -208,21 +217,21 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
     @IBAction func changePrivacyAction(_ sender: UIButton){
         postPrivacyTableView.isHidden = false
     }
-    private func showImagePicker(withSourceType type: UIImagePickerController.SourceType,mediaType: MediaType) -> Void {
+//    private func showImagePicker(withSourceType type: UIImagePickerController.SourceType,mediaType: MediaType) -> Void {
         
-        if UIImagePickerController.isSourceTypeAvailable(type) {
-            
-            self.picker.mediaTypes = mediaType.CameraMediaType
-            self.picker.allowsEditing = true
-            self.picker.sourceType = type
-            self.present(self.picker,animated: true,completion: {
-                self.picker.delegate = self
-            })
-            self.picker.delegate = self }
-        else{
-            self.showAlert(withMessage: "This feature is not available.")
-        }
-    }
+//        if UIImagePickerController.isSourceTypeAvailable(type) {
+//
+//            self.picker.mediaTypes = mediaType.CameraMediaType
+//            self.picker.allowsEditing = true
+//            self.picker.sourceType = type
+//            self.present(self.picker,animated: true,completion: {
+//                self.picker.delegate = self
+//            })
+//            self.picker.delegate = self }
+//        else{
+//            self.showAlert(withMessage: "This feature is not available.")
+//        }
+//    }
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
             textView.text = nil
@@ -253,13 +262,13 @@ extension AddPostViewController: TLPhotosPickerLogDelegate {
     func selectedCameraCell(picker: TLPhotosPickerViewController) {
         print("selectedCameraCell")
     }
-    
+
     func selectedPhoto(picker: TLPhotosPickerViewController, at: Int) {
         print("selectedPhoto")
         print(picker.selectedAssets.count)
         //self.collectionViewImage.reloadData()
-       // let image = picker.selectedAssets[at]
-      //  print(image)
+        // let image = picker.selectedAssets[at]
+        //  print(image)
     }
     
     func deselectedPhoto(picker: TLPhotosPickerViewController, at: Int) {
@@ -296,28 +305,28 @@ extension AddPostViewController: TLPhotosPickerLogDelegate {
 }
 //MARK: - ImagePickerViewDelegate Methods -
 
-extension AddPostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
-        
-        guard let selectedImage = info[.editedImage] as? UIImage else { return }
-        self.dismiss(animated: true) {
-            self.uploadImageArray.append(selectedImage)
-            // let compressImageData = selectedImage.jpegData(compressionQuality: 0.5)
-            // let image = UIImage(data: compressImageData!)
-            // let image : UIImage = selectedImage
-            // let imageData = image?.pngData()
-            // let base64String = imageData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
-            // let base64String = imageData?.base64EncodedString(options: .lineLength64Characters)
-            // self.uploadImageArray64.append(base64String ?? "")
-            // self.collectionViewHeight.constant = 200
-            // self.collectionViewImage.isHidden = false
-            self.collectionViewImage.reloadData()
-            //print("UploadImage------------------------------------\(self.uploadImageArray)")
-        }
-        
-    }
-}
+//extension AddPostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+//
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+//
+//        guard let selectedImage = info[.editedImage] as? UIImage else { return }
+//        self.dismiss(animated: true) {
+//            self.uploadImageArray.append(selectedImage)
+//            // let compressImageData = selectedImage.jpegData(compressionQuality: 0.5)
+//            // let image = UIImage(data: compressImageData!)
+//            // let image : UIImage = selectedImage
+//            // let imageData = image?.pngData()
+//            // let base64String = imageData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+//            // let base64String = imageData?.base64EncodedString(options: .lineLength64Characters)
+//            // self.uploadImageArray64.append(base64String ?? "")
+//            // self.collectionViewHeight.constant = 200
+//            // self.collectionViewImage.isHidden = false
+//            self.collectionViewImage.reloadData()
+//            //print("UploadImage------------------------------------\(self.uploadImageArray)")
+//        }
+//
+//    }
+//}
 
 //MARK: UICollectionViewDataSource,UICollectionViewDelegate
 
@@ -419,10 +428,12 @@ extension AddPostViewController : UITableViewDataSource, UITableViewDelegate{
 
 extension AddPostViewController {
     func addPostApi(){
+
         postDesc = txtPost.text
         if txtPost.text == AppConstants.kEnterText {
             postDesc = ""
         }
+
         let params: [String:Any] = [
             
             "action_type": "post",
@@ -481,10 +492,8 @@ extension AddPostViewController {
     }
     
     override func didUserGetData(from result: Any, type: Int) {
-        self.showAlert(withMessage: "Post Successfully") {
-            self.tabBarController?.selectedIndex = Tabbar.home.rawValue
-        }
-        
+//        self.showAlert(withMessage: "Post Successfully") {
+//        }
         self.txtPost.text = ""
         self.uploadImageArray = [UIImage]()
         self.btnPostPrivacy.setTitle("Public", for: .normal)
@@ -492,6 +501,9 @@ extension AddPostViewController {
         self.selectedAssets.removeAll()
         self.uploadImageArray.removeAll()
         self.collectionViewImage.reloadData()
+
+        self.tabBarController?.selectedIndex = Tabbar.home.rawValue
+
     }
 }
 class ImageCollectionViewCell:UICollectionViewCell{

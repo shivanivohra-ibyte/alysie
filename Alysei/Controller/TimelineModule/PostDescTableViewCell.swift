@@ -55,8 +55,8 @@ class PostDescTableViewCell: UITableViewCell {
     func configCell(_ data: NewFeedDataModel, _ index: Int){
         self.data = data
         self.index = index
-        userName.text = data.subjectId?.name
-        userNickName.text = data.subjectId?.companyName
+        userName.text = data.subjectId?.companyName?.capitalized
+        userNickName.text = data.subjectId?.name?.capitalized
         lblPostDesc.text = data.body
         lblPostLikeCount.text = "\(data.likeCount ?? 0)"
         lblPostCommentCount.text = "\(data.commentCount ?? 0)"
@@ -97,17 +97,18 @@ class PostDescTableViewCell: UITableViewCell {
 }
 extension PostDescTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data?.attachmentCount ?? 0
+        self.imageArray.removeAll()
+        for i in  0..<(data?.attachmentCount ?? 0) {
+            self.imageArray.append(data?.attachments?[i].attachmentLink?.attachmentUrl ?? "")
+        }
+        return imageArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = imagePostCollectionView.dequeueReusableCell(withReuseIdentifier: "PostImageCollectionViewCell", for: indexPath) as? PostImageCollectionViewCell else{
             return UICollectionViewCell()
         }
-        self.imageArray.removeAll()
-        for i in  0..<(data?.attachmentCount ?? 0) {
-            self.imageArray.append(data?.attachments?[i].attachmentLink?.attachmentUrl ?? "")
-        }
+
         print("ImageArray---------------------------------\(self.imageArray)")
 //        for i in 0..<imageArray.count {
 //            cell.imagePost.setImage(withString: kImageBaseUrl + String.getString(imageArray[i]))
@@ -175,10 +176,15 @@ class PostImageCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDele
         self.originalFrame = imagePost.frame
 
         self.imagePost.isUserInteractionEnabled = true
+
         let pinch = UIPinchGestureRecognizer(target: self, action: #selector(self.pinch(sender:)))
+//        pinch.minimumNumberOfTouches = 2
+//        pinch.maximumNumberOfTouches = 2
         self.imagePost.addGestureRecognizer(pinch)
 
         let pan = UIPanGestureRecognizer(target: self, action: #selector(self.pan(sender:)))
+        pan.minimumNumberOfTouches = 2
+        pan.maximumNumberOfTouches = 2
         pan.delegate = self
         self.imagePost.addGestureRecognizer(pan)
     }
