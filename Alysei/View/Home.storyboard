@@ -7285,7 +7285,6 @@ any other devices.</string>
         <!--Add Post-->
         <scene sceneID="B5t-fa-mic">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="V0H-Cy-3es" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mjG-Uq-3fm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Add Post" image="add_icon" selectedImage="add_icon" id="kP5-UJ-JS7">
                         <inset key="imageInsets" minX="0.0" minY="-25" maxX="0.0" maxY="0.0"/>
@@ -7301,6 +7300,7 @@ any other devices.</string>
                         <segue destination="ZAO-jL-8v5" kind="relationship" relationship="rootViewController" id="6gs-MD-wtx"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V0H-Cy-3es" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1965.5999999999999" y="169.56521739130437"/>
         </scene>
