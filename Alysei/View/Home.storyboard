@@ -4045,7 +4045,6 @@ any other devices.</string>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="qNH-sh-Agk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="nZw-89-F4V" firstAttribute="top" secondItem="DWn-At-zmQ" secondAttribute="bottom" id="5XW-Vp-06A"/>
@@ -5040,10 +5039,9 @@ any other devices.</string>
                                 </userDefinedRuntimeAttributes>
                             </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="ZrA-wd-f27"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ZrA-wd-f27" firstAttribute="trailing" secondItem="oLU-zF-r7h" secondAttribute="trailing" constant="15" id="1Tt-Yl-J8c"/>
+                            <constraint firstAttribute="trailing" secondItem="oLU-zF-r7h" secondAttribute="trailing" constant="15" id="1Tt-Yl-J8c"/>
                             <constraint firstItem="Oih-LH-FC4" firstAttribute="top" secondItem="FCq-qw-AP6" secondAttribute="bottom" constant="15" id="5Cb-8h-gZU"/>
                             <constraint firstItem="xRa-Sj-7Ps" firstAttribute="leading" secondItem="nrZ-JH-G5g" secondAttribute="leading" id="C60-l1-GsM"/>
                             <constraint firstItem="FCq-qw-AP6" firstAttribute="top" secondItem="Syi-an-QT6" secondAttribute="bottom" id="F2L-2M-f6l"/>
@@ -7268,7 +7266,6 @@ any other devices.</string>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="kTB-2J-Sqc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="CFK-sI-x3I" firstAttribute="leading" secondItem="o2n-Cj-8iV" secondAttribute="leading" id="T37-QX-ZgW"/>
