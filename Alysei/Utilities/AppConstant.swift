@@ -202,6 +202,9 @@ struct APIUrl{
     enum ReviewHub{
         static let kReviewHub = kBASEURL + "review/hubs"
     }
+    enum B2BModule {
+        static let kKeywordSearch = "search?search_type=1&keyword="
+    }
 }
 
 struct AppConstants {
