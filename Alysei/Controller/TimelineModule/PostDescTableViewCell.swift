@@ -20,6 +20,9 @@ class PostDescTableViewCell: UITableViewCell {
     @IBOutlet weak var viewLike: UIView!
     @IBOutlet weak var likeImage: UIImageView!
     @IBOutlet weak var lblPostTime: UILabel!
+    @IBOutlet weak var pageControl: UIPageControl!
+
+
     var data: NewFeedDataModel?
     var likeCallback:((Int) -> Void)? = nil
     var islike: Int?
@@ -82,6 +85,20 @@ class PostDescTableViewCell: UITableViewCell {
         self.imagePostCollectionView.isPagingEnabled = true
 
         self.imagePostCollectionView.showsHorizontalScrollIndicator = false
+
+        self.imageArray.removeAll()
+        for i in  0..<(data.attachmentCount ?? 0) {
+            self.imageArray.append(data.attachments?[i].attachmentLink?.attachmentUrl ?? "")
+        }
+
+
+        if imageArray.count <= 0 {
+            self.pageControl.alpha = 0
+        } else {
+            self.pageControl.alpha = 1
+            self.pageControl.numberOfPages = imageArray.count
+        }
+
         self.imagePostCollectionView.reloadData()
     }
     @objc func likeAction(_ tap: UITapGestureRecognizer){
@@ -97,10 +114,7 @@ class PostDescTableViewCell: UITableViewCell {
 }
 extension PostDescTableViewCell: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.imageArray.removeAll()
-        for i in  0..<(data?.attachmentCount ?? 0) {
-            self.imageArray.append(data?.attachments?[i].attachmentLink?.attachmentUrl ?? "")
-        }
+
         return imageArray.count
     }
     
@@ -119,6 +133,14 @@ extension PostDescTableViewCell: UICollectionViewDelegate,UICollectionViewDataSo
         cell.imagePost.contentMode = .scaleAspectFit
         //cell.imagePost.setImage(withString: kImageBaseUrl + String.getString(data?.attachments?.attachmentLink?.attachmentUrl))
         return cell
+    }
+
+//    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        self.pageControl.currentPage = indexPath.row
+//    }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        self.pageControl.currentPage = indexPath.row
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -191,7 +213,7 @@ class PostImageCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDele
 
     @objc func pinch(sender:UIPinchGestureRecognizer) {
         if sender.state == .began {
-//            self.imagePost.frame = UIScreen.main.bounds
+            self.imagePost.frame = UIScreen.main.bounds
             let currentScale = self.imagePost.frame.size.width / self.imagePost.bounds.size.width
             let newScale = currentScale*sender.scale
             if newScale > 1 {
@@ -218,10 +240,11 @@ class PostImageCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDele
         } else if sender.state == .ended || sender.state == .failed || sender.state == .cancelled {
             guard let center = self.originalImageCenter else {return}
 
-//            self.imagePost.frame = self.originalFrame
+            self.imagePost.frame = self.bounds
             UIView.animate(withDuration: 0.3, animations: {
                 self.imagePost.transform = CGAffineTransform.identity
                 self.imagePost.center = center
+                sender.scale = 1
             }, completion: { _ in
                 self.isZooming = false
             })

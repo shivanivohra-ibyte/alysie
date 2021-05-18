@@ -10,6 +10,7 @@ import UIKit
 class PostsViewController: UIViewController {
     
     @IBOutlet weak var postTableView: UITableView!
+
     var scrollCallBack: (() -> Void)? = nil
     var newFeedModel: NewFeedModel?
     var arrNewFeedDataModel = [NewFeedDataModel]()
