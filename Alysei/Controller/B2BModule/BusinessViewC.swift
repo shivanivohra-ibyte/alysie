@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DropDown
 
 class BusinessViewC: AlysieBaseViewC {
   
@@ -13,6 +14,13 @@ class BusinessViewC: AlysieBaseViewC {
   
   var currentIndex: Int = 0
   var businessViewModel = BusinessViewModel(currentIndex: 0)
+    var txtkeywordSearch : String?
+    var searchType:Int?
+    var passId: Int?
+    var newSearchModel: NewFeedSearchModel?
+    var arrDataModel = [NewFeedSearchDataModel]()
+    var indexOfPageToRequest = 1
+     
   
   private var currentChild: UIViewController {
       return self.children.last!
@@ -92,13 +100,19 @@ class BusinessViewC: AlysieBaseViewC {
   private func getBusinessTextFieldTableCell(_ indexPath: IndexPath) -> UITableViewCell{
     
     let businessTextFieldTableCell = tblViewSearchOptions.dequeueReusableCell(withIdentifier: BusinessTextFieldTableCell.identifier()) as! BusinessTextFieldTableCell
+    businessTextFieldTableCell.passTextCallBack = { text in
+        self.txtkeywordSearch = text
+    }
     return businessTextFieldTableCell
   }
   
   private func getBusinessButtonTableCell(_ indexPath: IndexPath) -> UITableViewCell{
     
     let businessButtonTableCell = tblViewSearchOptions.dequeueReusableCell(withIdentifier: BusinessButtonTableCell.identifier()) as! BusinessButtonTableCell
-    businessButtonTableCell.configureData(withBusinessDataModel: self.businessViewModel.arrBusinessData[indexPath.row])
+    businessButtonTableCell.configureData(withBusinessDataModel: self.businessViewModel.arrBusinessData[indexPath.row], currentIndex: self.currentIndex)
+    businessButtonTableCell.passIdCallBack = { id in
+        self.passId = id
+    }
     return businessButtonTableCell
   }
   
@@ -112,6 +126,9 @@ class BusinessViewC: AlysieBaseViewC {
   private func getBusinessSearchTableCell(_ indexPath: IndexPath) -> UITableViewCell{
     
     let businessSearchTableCell = tblViewSearchOptions.dequeueReusableCell(withIdentifier: BusinessSearchTableCell.identifier()) as! BusinessSearchTableCell
+    businessSearchTableCell.searchTappedCallback = {
+        self.callSearchApi()
+    }
     return businessSearchTableCell
   }
   
@@ -119,6 +136,8 @@ class BusinessViewC: AlysieBaseViewC {
     
     let selectedHubsTableCell = tblViewSearchOptions.dequeueReusableCell(withIdentifier: SelectedHubsTableCell.identifier()) as! SelectedHubsTableCell
     selectedHubsTableCell.delegate = self
+    selectedHubsTableCell.configData(arrDataModel)
+    selectedHubsTableCell.collectionViewSelectedHubs.reloadData()
     return selectedHubsTableCell
   }
   
@@ -127,6 +146,7 @@ class BusinessViewC: AlysieBaseViewC {
     let businessListTableCell = tblViewSearchOptions.dequeueReusableCell(withIdentifier: BusinessListTableCell.identifier()) as! BusinessListTableCell
     return businessListTableCell
   }
+    
   
 }
 
@@ -140,7 +160,11 @@ extension BusinessViewC: UICollectionViewDelegate, UICollectionViewDataSource,UI
   }
     
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+    if self.currentIndex == 0 {
+        self.searchType = 3
+    }else{
+        self.searchType = 1
+    }
     return self.getBusinessCategoryCollectionCell(indexPath)
   }
   
@@ -226,3 +250,23 @@ extension BusinessViewC: TappedHubs{
   }
 }
 
+extension BusinessViewC {
+    func callSearchApi(){
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kKeywordSearch + "\(searchType ?? 1)" + "&keyword=" + "\(txtkeywordSearch ?? "")" + "&state=" + "\(self.passId ?? 0)", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            let dictResponse = dictResponse as? [String:Any]
+            
+            if let data = dictResponse?["data"] as? [String:Any]{
+                self.newSearchModel = NewFeedSearchModel.init(with: data)
+                if self.indexOfPageToRequest == 1 { self.arrDataModel.removeAll() }
+                self.arrDataModel.append(contentsOf: self.newSearchModel?.data ?? [NewFeedSearchDataModel(with: [:])])
+            }
+            //self.collectionViewBusinessCategory.reloadData()
+            self.tblViewSearchOptions.reloadData()
+           
+            
+        }
+    }
+    
+   
+}

@@ -379,6 +379,10 @@ extension ProfileCompletionViewController: AnimationProfileCallBack{
             let nextVC = CountryListVC()
             nextVC.isEditHub = true
             self.navigationController?.pushViewController(nextVC, animated: true)
+        case ProfileCompletion.ContactInfo :
+            
+            guard let controller = self.storyboard?.instantiateViewController(identifier: "ContactDetailViewController") as? ContactDetailViewController else {return}
+            self.navigationController?.pushViewController(controller, animated: true)
         default:
             // let controller = pushViewController(withName: EditProfileViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? EditProfileViewC
             // controller?.signUpViewModel = self.signUpViewModel

@@ -17,7 +17,7 @@ class SelectedHubsTableCell: UITableViewCell {
   @IBOutlet weak var collectionViewSelectedHubs: UICollectionView!
   
   var delegate: TappedHubs?
-  
+    var arrSearchData : [NewFeedSearchDataModel]?
   override func awakeFromNib() {
     
     super.awakeFromNib()
@@ -28,8 +28,14 @@ class SelectedHubsTableCell: UITableViewCell {
   public func getSelectedHubsCollectionCell(_ indexPath: IndexPath) -> UICollectionViewCell{
     
     let selectedHubsCollectionCell = collectionViewSelectedHubs.dequeueReusableCell(withReuseIdentifier: SelectedHubsCollectionCell.identifier(), for: indexPath) as! SelectedHubsCollectionCell
+    selectedHubsCollectionCell.configData(arrSearchData?[indexPath.row] ?? NewFeedSearchDataModel(with: [:]))
     return selectedHubsCollectionCell
   }
+    
+     func configData(_ arrData: [NewFeedSearchDataModel]){
+        self.arrSearchData = arrData
+        
+    }
 }
 
 
@@ -39,7 +45,7 @@ extension SelectedHubsTableCell: UICollectionViewDelegate, UICollectionViewDataS
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     
-    return 3
+    return arrSearchData?.count ?? 0
   }
     
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -9,6 +9,7 @@ import UIKit
 
 class BusinessSearchTableCell: UITableViewCell {
 
+    var searchTappedCallback:(() -> Void)? = nil
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -18,5 +19,10 @@ class BusinessSearchTableCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
     }
+    
+    @IBAction func btnSearchAction(_ sender: UIButton){
+        searchTappedCallback?()
+    }
 
 }
+

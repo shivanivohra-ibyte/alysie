@@ -179,6 +179,7 @@ struct APIUrl{
     static let kWalkthroughScreenStart = "get/walkthroughscreens"
     static let kGetFeed = "get/activity/feed?page="
     static let kLikeApi = "post/like"
+    static let kGetCountryStates = "get/mycountry/states"
     
     
     enum FeaturedProduct {
@@ -203,7 +204,8 @@ struct APIUrl{
         static let kReviewHub = kBASEURL + "review/hubs"
     }
     enum B2BModule {
-        static let kKeywordSearch = "search?search_type=1&keyword="
+        //static let kKeywordSearch = "search?search_type=3&keyword="
+        static let kKeywordSearch = "search?search_type="
     }
 }
 
@@ -304,6 +306,7 @@ struct ProfileCompletion {
     static let FeaturedRecipe = "Featured Recipe"
     static let FeaturedBlog = "Featured Blog"
     static let Ourtrips  = "Our trips"
+    static let ContactInfo = "Contact Info"
 }
 
 struct PlaceholderImages {

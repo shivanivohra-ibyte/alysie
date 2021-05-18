@@ -12,8 +12,8 @@ class PostsViewController: UIViewController {
     @IBOutlet weak var postTableView: UITableView!
 
     var scrollCallBack: (() -> Void)? = nil
-    var newFeedModel: NewFeedModel?
-    var arrNewFeedDataModel = [NewFeedDataModel]()
+    var newFeedModel: NewFeedSearchModel?
+    var arrNewFeedDataModel = [NewFeedSearchDataModel]()
     var selectedPostId: Int?
     var likeUnlike: Int?
     var indexOfPageToRequest = 1
@@ -125,9 +125,9 @@ extension PostsViewController {
             let dictResponse = dictResponse as? [String:Any]
             
             if let data = dictResponse?["data"] as? [String:Any]{
-                self.newFeedModel = NewFeedModel.init(with: data)
+                self.newFeedModel = NewFeedSearchModel.init(with: data)
                 if self.indexOfPageToRequest == 1 { self.arrNewFeedDataModel.removeAll() }
-                self.arrNewFeedDataModel.append(contentsOf: self.newFeedModel?.data ?? [NewFeedDataModel(with: [:])])
+                self.arrNewFeedDataModel.append(contentsOf: self.newFeedModel?.data ?? [NewFeedSearchDataModel(with: [:])])
             }
            
             print("Count -------------------\(self.arrNewFeedDataModel.count)")

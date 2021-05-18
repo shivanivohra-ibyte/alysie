@@ -14,9 +14,8 @@ class SelectedHubsCollectionCell: UICollectionViewCell {
   @IBOutlet weak var imgViewHubs: UIImageViewExtended!
   @IBOutlet weak var lblHubHeading: UILabel!
   @IBOutlet weak var lblHubSubHeading: UILabel!
-  
-  override func layoutSubviews() {
     
+  override func layoutSubviews() {
     super.layoutSubviews()
     self.layoutIfNeeded()
   }
@@ -24,8 +23,14 @@ class SelectedHubsCollectionCell: UICollectionViewCell {
   override func layoutIfNeeded() {
     
     super.layoutIfNeeded()
+    imgViewHubs.layer.cornerRadius = self.imgViewHubs.frame.height / 2
+    imgViewHubs.layer.masksToBounds = true
     
   }
   
-  
+     func configData(_ data: NewFeedSearchDataModel){
+        lblHubHeading.text = data.title
+        print("ImageUrl-------------------------------------\(data.subjectId?.avatarId?.attachmentUrl ?? "")")
+        self.imgViewHubs.setImage(withString: kImageBaseUrl + String.getString(data.image?.attachmentUrl))
+    }
 }

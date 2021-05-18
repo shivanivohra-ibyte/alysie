@@ -23,7 +23,7 @@ class PostDescTableViewCell: UITableViewCell {
     @IBOutlet weak var pageControl: UIPageControl!
 
 
-    var data: NewFeedDataModel?
+    var data: NewFeedSearchDataModel?
     var likeCallback:((Int) -> Void)? = nil
     var islike: Int?
     var index: Int?
@@ -55,7 +55,7 @@ class PostDescTableViewCell: UITableViewCell {
     }
     
     
-    func configCell(_ data: NewFeedDataModel, _ index: Int){
+    func configCell(_ data: NewFeedSearchDataModel, _ index: Int){
         self.data = data
         self.index = index
         userName.text = data.subjectId?.companyName?.capitalized

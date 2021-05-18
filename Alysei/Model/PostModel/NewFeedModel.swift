@@ -7,9 +7,9 @@
 
 import Foundation
 
-class NewFeedModel{
+class NewFeedSearchModel{
     var currentPage: Int?
-    var data: [NewFeedDataModel]?
+    var data: [NewFeedSearchDataModel]?
     var firstPageUrl: String?
     var lastPageUrl: String?
     var lastPage: Int?
@@ -17,7 +17,7 @@ class NewFeedModel{
     init(with dictResponse: [String:Any]){
         self.currentPage = Int.getInt(dictResponse["current_page"])
         if let data = dictResponse["data"] as? [[String:Any]]{
-            self.data = data.map({NewFeedDataModel.init(with: $0)})
+            self.data = data.map({NewFeedSearchDataModel.init(with: $0)})
         }
         self.firstPageUrl = String.getString(dictResponse["first_page_url"])
         self.lastPageUrl = String.getString(dictResponse["last_page_url"])
@@ -25,7 +25,7 @@ class NewFeedModel{
     }
 }
 
-class NewFeedDataModel{
+class NewFeedSearchDataModel{
     var activityActionId: Int?
     var subjectId: SubjectData?
     var body: String?
@@ -37,6 +37,8 @@ class NewFeedDataModel{
     var likeFlag: Int?
     var posted_at: String?
     var attachments: [Attachments]?
+    var title: String?
+    var image: AttachmentLink?
     
     
     init(with dictResponse: [String:Any]){
@@ -53,6 +55,10 @@ class NewFeedDataModel{
         self.posted_at = String.getString(dictResponse["posted_at"])
         if let attachments = dictResponse["attachments"] as? [[String:Any]]{
             self.attachments = attachments.map({Attachments.init(with: $0)})
+        }
+        self.title = String.getString(dictResponse["title"])
+        if let image = dictResponse["image"] as? [String:Any]{
+            self.image = AttachmentLink.init(with: image)
         }
     }
 }

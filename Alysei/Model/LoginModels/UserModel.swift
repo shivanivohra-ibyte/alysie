@@ -143,3 +143,10 @@ enum isCameFrom {
 //class UserImage: {
 //
 //}
+enum B2BSearch : Int{
+    case Hub = 0
+    case Importer = 1
+    case Reastaurant = 2
+    case Expert = 3
+    case TravelAgencies = 4
+}

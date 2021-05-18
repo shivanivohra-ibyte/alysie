@@ -121,7 +121,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
 //        alertToAddImage()
     }
     
-    private func alertToAddImage() -> Void {
+   // private func alertToAddImage() -> Void {
         
 //        let alert:UIAlertController = UIAlertController(title: AlertMessage.kSourceType, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
 //
@@ -144,7 +144,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
 //
 //        alert.addAction(cancelAction)
 //        self.present(alert, animated: true, completion: nil)
-    }
+    //}
     private func alertToAddCustomPicker() -> Void {
         let viewCon = CustomPhotoPickerViewController()
         viewCon.delegate = self
