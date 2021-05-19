@@ -16,11 +16,18 @@ class BusinessViewC: AlysieBaseViewC {
   var businessViewModel = BusinessViewModel(currentIndex: 0)
     var txtkeywordSearch : String?
     var searchType:Int?
-    var passId: Int?
+    
     var newSearchModel: NewFeedSearchModel?
     var arrDataModel = [NewFeedSearchDataModel]()
     var indexOfPageToRequest = 1
-     
+    var signUpViewModel: SignUpViewModel!
+    var signUpStepOneDataModel: SignUpStepOneDataModel!
+    
+    var selectStateId:Int?
+    var selectImpHubId: Int?
+    var selectImpProductId: String?
+    var selectImpRegionTypeId:String?
+    var selectImpOptionId:String?
   
   private var currentChild: UIViewController {
       return self.children.last!
@@ -110,9 +117,19 @@ class BusinessViewC: AlysieBaseViewC {
     
     let businessButtonTableCell = tblViewSearchOptions.dequeueReusableCell(withIdentifier: BusinessButtonTableCell.identifier()) as! BusinessButtonTableCell
     businessButtonTableCell.configureData(withBusinessDataModel: self.businessViewModel.arrBusinessData[indexPath.row], currentIndex: self.currentIndex)
-    businessButtonTableCell.passIdCallBack = { id in
-        self.passId = id
+//    businessButtonTableCell.pushVCCallback = {
+//        let model = self.signUpViewModel.arrSignUpStepOne[indexPath.row]
+//        let controller = self.pushViewController(withName: SelectProductViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? SelectProductViewC
+//        controller?.signUpStepOneDataModel = model
+//        controller?.stepOneDelegate = self
+//    }
+    businessButtonTableCell.passIdCallBack = { stateId,imphubId,impproductId, impregionId in
+        self.selectStateId = stateId
+        self.selectImpHubId = imphubId
+        self.selectImpProductId = impproductId
+        self.selectImpRegionTypeId = impregionId
     }
+    
     return businessButtonTableCell
   }
   
@@ -127,7 +144,11 @@ class BusinessViewC: AlysieBaseViewC {
     
     let businessSearchTableCell = tblViewSearchOptions.dequeueReusableCell(withIdentifier: BusinessSearchTableCell.identifier()) as! BusinessSearchTableCell
     businessSearchTableCell.searchTappedCallback = {
-        self.callSearchApi()
+        if self.currentIndex == B2BSearch.Hub.rawValue{
+         self.callSearchHubApi()
+        }else if self.currentIndex == B2BSearch.Importer.rawValue{
+         self.callSearchImporterApi()
+        }
     }
     return businessSearchTableCell
   }
@@ -163,7 +184,7 @@ extension BusinessViewC: UICollectionViewDelegate, UICollectionViewDataSource,UI
     if self.currentIndex == 0 {
         self.searchType = 3
     }else{
-        self.searchType = 1
+        self.searchType = 2
     }
     return self.getBusinessCategoryCollectionCell(indexPath)
   }
@@ -251,9 +272,9 @@ extension BusinessViewC: TappedHubs{
 }
 
 extension BusinessViewC {
-    func callSearchApi(){
+    func callSearchHubApi(){
         
-        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kKeywordSearch + "\(searchType ?? 1)" + "&keyword=" + "\(txtkeywordSearch ?? "")" + "&state=" + "\(self.passId ?? 0)", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&keyword=" + "\(txtkeywordSearch ?? "")" + "&state=" + "\(self.selectStateId ?? 0)", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             let dictResponse = dictResponse as? [String:Any]
             
             if let data = dictResponse?["data"] as? [String:Any]{
@@ -267,6 +288,21 @@ extension BusinessViewC {
             
         }
     }
-    
+    func callSearchImporterApi(){
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.distributer3.rawValue)" + "&hubs=" + "\(selectImpHubId ?? 0)" + "&product_type=" + "\(self.selectImpProductId ?? "0")" + "&region=" + "\(self.selectImpRegionTypeId ?? "0")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            let dictResponse = dictResponse as? [String:Any]
+            
+            if let data = dictResponse?["data"] as? [String:Any]{
+                self.newSearchModel = NewFeedSearchModel.init(with: data)
+                if self.indexOfPageToRequest == 1 { self.arrDataModel.removeAll() }
+                self.arrDataModel.append(contentsOf: self.newSearchModel?.data ?? [NewFeedSearchDataModel(with: [:])])
+            }
+            //self.collectionViewBusinessCategory.reloadData()
+            self.tblViewSearchOptions.reloadData()
+           
+            
+        }
+    }
    
 }

@@ -16,3 +16,14 @@ class StateModel{
     }
     
 }
+
+class ProductType{
+    var options: [SignUpOptionsDataModel]?
+    init(with data: [String:Any]?) {
+        
+        if let option = data?[APIConstants.kOptions] as? ArrayOfDictionary{
+          
+          self.options = option.map({SignUpOptionsDataModel(withDictionary: $0)})
+        }
+    }
+}

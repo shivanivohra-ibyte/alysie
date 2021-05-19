@@ -180,6 +180,8 @@ struct APIUrl{
     static let kGetFeed = "get/activity/feed?page="
     static let kLikeApi = "post/like"
     static let kGetCountryStates = "get/mycountry/states"
+    static let kGetAllHubs = "get/all/hubs"
+    static let kGetFieldValue = "get/field/value/"
     
     
     enum FeaturedProduct {
@@ -205,7 +207,8 @@ struct APIUrl{
     }
     enum B2BModule {
         //static let kKeywordSearch = "search?search_type=3&keyword="
-        static let kKeywordSearch = "search?search_type="
+        static let kSearchApi = "search?search_type="
+        
     }
 }
 
@@ -273,7 +276,7 @@ struct AppConstants {
     static let PrivateLabel = "Private Label"
     static let AlyseiBrand = "Alysei Brand Label"
     static let KeywordSearch = "Keyword Search"
-    static let TopHubs = "Top 10 City Hubs"
+    //static let TopHubs = "Top 10 City Hubs"
     static let SelectState = "Select State"
     static let Hubs = "Hubs"
     static let SelectRegion = "Select Region"

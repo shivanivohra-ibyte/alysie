@@ -63,7 +63,7 @@ class BusinessViewModel: NSObject {
     switch currentIndex {
     case 0:
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.KeywordSearch,businessCellType: .textFieldCell))
-      self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.TopHubs))
+      //self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.TopHubs))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectState))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .collectionHubs,cellCount: 3))

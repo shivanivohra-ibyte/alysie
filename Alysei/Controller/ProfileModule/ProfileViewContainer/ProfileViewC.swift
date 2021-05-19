@@ -786,10 +786,7 @@ extension ProfileViewC: AnimationProfileCallBack{
             
         case ProfileCompletion.ContactInfo:
             print("Contact")
-//            guard let viewCon = self.storyboard?.instantiateViewController(identifier: "ContactDetailViewController") as? ContactDetailViewController else {return}
-//            viewCon.userType = self.userType
-//            viewCon.viewModel = ContactDetail.Contact.ViewModel(response: self.contactDetilViewModel)
-//            self.navigationController?.pushViewController(viewCon, animated: true)
+            self.performSegue(withIdentifier: "segueProfileTabToContactDetail", sender: self)
         default:
             // let controller = pushViewController(withName: EditProfileViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? EditProfileViewC
             // controller?.signUpViewModel = self.signUpViewModel

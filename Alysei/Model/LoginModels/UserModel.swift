@@ -146,7 +146,17 @@ enum isCameFrom {
 enum B2BSearch : Int{
     case Hub = 0
     case Importer = 1
-    case Reastaurant = 2
+    case Restaurant = 2
     case Expert = 3
     case TravelAgencies = 4
+}
+
+enum B2BFieldId: Int {
+    case productType = 2
+    case restaurantType = 10
+    case expertise = 11
+    case title = 12
+    case region = 29
+    case country = 13
+    case speciality = 14
 }
