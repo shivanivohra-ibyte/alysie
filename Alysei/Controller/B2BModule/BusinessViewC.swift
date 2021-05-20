@@ -19,6 +19,7 @@ class BusinessViewC: AlysieBaseViewC {
     
     var newSearchModel: NewFeedSearchModel?
     var arrDataModel = [NewFeedSearchDataModel]()
+    //var arrImpSearchList:  NewFeedSearchModel?
     var indexOfPageToRequest = 1
     var signUpViewModel: SignUpViewModel!
     var signUpStepOneDataModel: SignUpStepOneDataModel!
@@ -27,8 +28,26 @@ class BusinessViewC: AlysieBaseViewC {
     var selectImpHubId: Int?
     var selectImpProductId: String?
     var selectImpRegionTypeId:String?
-    var selectImpOptionId:String?
-  
+    var resHubId: String?
+    var resTypeId: String?
+    var selectExpertHubId: String?
+    var selectExpertExpertiseId: String?
+    var selectExpertTitleId: String?
+    var selectExpertCountryId: String?
+    var selectExpertRegionId: String?
+    var selectTravelHubId: String?
+    var selectTravelSpecialityId: String?
+    var selectTravelCountryId: String?
+    var selectTravelRegionId: String?
+    var selectProducerHubId: String?
+    var selectProducerRegionId: String?
+    
+    var selectedImpOptionId = [Int]()
+    var horecaValue: String?
+    var privateValue: String?
+    var alyseiBrandValue: String?
+    
+    
   private var currentChild: UIViewController {
       return self.children.last!
   }
@@ -123,11 +142,25 @@ class BusinessViewC: AlysieBaseViewC {
 //        controller?.signUpStepOneDataModel = model
 //        controller?.stepOneDelegate = self
 //    }
-    businessButtonTableCell.passIdCallBack = { stateId,imphubId,impproductId, impregionId in
+    businessButtonTableCell.passIdCallBack = { stateId,imphubId,impproductId, impregionId, restHubId, restTypeId, exprtHubId, exprtExprtseId, exprtTitleId, exprtCuntryId, exprtRgnId, travlHubId, trvlSpeclityid, trvlCuntryId, trvlRegionId, producerHubId, producerRegionId in
         self.selectStateId = stateId
         self.selectImpHubId = imphubId
         self.selectImpProductId = impproductId
         self.selectImpRegionTypeId = impregionId
+        self.resHubId = restHubId
+        self.resTypeId = restTypeId
+        self.selectExpertHubId = exprtHubId
+        self.selectExpertTitleId = exprtTitleId
+        self.selectExpertExpertiseId = exprtExprtseId
+        self.selectExpertCountryId = exprtCuntryId
+        self.selectExpertRegionId = exprtRgnId
+        self.selectTravelHubId = travlHubId
+        self.selectTravelSpecialityId = trvlSpeclityid
+        self.selectTravelCountryId = trvlCuntryId
+        self.selectTravelRegionId = trvlRegionId
+        self.selectProducerHubId = producerHubId
+        self.selectProducerRegionId = producerRegionId
+        
     }
     
     return businessButtonTableCell
@@ -137,6 +170,19 @@ class BusinessViewC: AlysieBaseViewC {
     
     let businessFiltersTableCell = tblViewSearchOptions.dequeueReusableCell(withIdentifier: BusinessFiltersTableCell.identifier()) as! BusinessFiltersTableCell
     businessFiltersTableCell.configureData(withBusinessDataModel: self.businessViewModel.arrBusinessData[indexPath.row])
+    businessFiltersTableCell.passIdCallback = { arrSelectedIndex in
+        self.selectedImpOptionId = arrSelectedIndex
+        if self.selectedImpOptionId.contains(0){
+            self.horecaValue = AppConstants.HorecaValue
+        }
+        if self.selectedImpOptionId.contains(1){
+            self.privateValue = AppConstants.PrivateLabelValue
+        }
+        if self.selectedImpOptionId.contains(2){
+            self.alyseiBrandValue = AppConstants.AlyseiBrandValue
+        }
+        
+    }
     return businessFiltersTableCell
   }
   
@@ -148,6 +194,14 @@ class BusinessViewC: AlysieBaseViewC {
          self.callSearchHubApi()
         }else if self.currentIndex == B2BSearch.Importer.rawValue{
          self.callSearchImporterApi()
+        }else if self.currentIndex == B2BSearch.Restaurant.rawValue {
+            self.callSearchResturntApi()
+        }else if self.currentIndex == B2BSearch.Expert.rawValue {
+            self.callSearchExpertApi()
+        }else if self.currentIndex == B2BSearch.TravelAgencies.rawValue{
+            self.callSearchTravelApi()
+        }else if self.currentIndex == B2BSearch.Producer.rawValue {
+            self.callSearchProducerApi()
         }
     }
     return businessSearchTableCell
@@ -165,6 +219,7 @@ class BusinessViewC: AlysieBaseViewC {
   private func getBusinessListTableCell(_ indexPath: IndexPath) -> UITableViewCell{
     
     let businessListTableCell = tblViewSearchOptions.dequeueReusableCell(withIdentifier: BusinessListTableCell.identifier()) as! BusinessListTableCell
+   // businessListTableCell.configData(arrDataModel[indexPath.row].subjectId ?? SubjectData(with: [:]))
     return businessListTableCell
   }
     
@@ -215,10 +270,11 @@ extension BusinessViewC: UITableViewDataSource, UITableViewDelegate{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
     let model = self.businessViewModel.arrBusinessData[section]
-    
+
     switch model.businessCellType {
     case .tableListCell:
-      return model.cellCount
+     // return model.cellCount
+        return self.arrDataModel.count
     default:
       return self.businessViewModel.arrBusinessData.count
     }
@@ -250,8 +306,8 @@ extension BusinessViewC: UITableViewDataSource, UITableViewDelegate{
     case .searchCell:
       return 100.0
     case .collectionHubs:
-      let cellSize = CGFloat(model.cellCount) / 3.0
-      return 180.0 * cellSize
+     // let cellSize = CGFloat(model.cellCount) / 3.0
+      return 180.0  //* cellSize
     case .tableListCell:
       return 66.0
     default:
@@ -273,7 +329,6 @@ extension BusinessViewC: TappedHubs{
 
 extension BusinessViewC {
     func callSearchHubApi(){
-        
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&keyword=" + "\(txtkeywordSearch ?? "")" + "&state=" + "\(self.selectStateId ?? 0)", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             let dictResponse = dictResponse as? [String:Any]
             
@@ -289,8 +344,8 @@ extension BusinessViewC {
         }
     }
     func callSearchImporterApi(){
-        
-        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.distributer3.rawValue)" + "&hubs=" + "\(selectImpHubId ?? 0)" + "&product_type=" + "\(self.selectImpProductId ?? "0")" + "&region=" + "\(self.selectImpRegionTypeId ?? "0")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+        self.arrDataModel.removeAll()
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.distributer3.rawValue)" + "&hubs=" + "\(self.selectImpHubId ?? 0)" + "&product_type=" + "\(self.selectImpProductId ?? "0")" + "&region=" + "\(self.selectImpRegionTypeId ?? "0")" + "&horeca=" + "\(self.horecaValue ?? "")" + "&private_label=" + "\(self.privateValue ?? "")" + "&alysei_brand_label=" + "\(self.alyseiBrandValue ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             let dictResponse = dictResponse as? [String:Any]
             
             if let data = dictResponse?["data"] as? [String:Any]{
@@ -299,10 +354,80 @@ extension BusinessViewC {
                 self.arrDataModel.append(contentsOf: self.newSearchModel?.data ?? [NewFeedSearchDataModel(with: [:])])
             }
             //self.collectionViewBusinessCategory.reloadData()
+            print("CountImpSearch------------------------\(self.arrDataModel.count)")
             self.tblViewSearchOptions.reloadData()
            
             
         }
     }
-   
+    func callSearchProducerApi(){
+        self.arrDataModel.removeAll()
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.producer.rawValue)" + "&hubs=" + "\(self.selectProducerHubId ?? "0")" + "&region=" + "\(self.selectProducerRegionId ?? "0")" + "&horeca=" + "\(self.horecaValue ?? "")" + "&private_label=" + "\(self.privateValue ?? "")" + "&alysei_brand_label=" + "\(self.alyseiBrandValue ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            let dictResponse = dictResponse as? [String:Any]
+            
+            if let data = dictResponse?["data"] as? [String:Any]{
+                self.newSearchModel = NewFeedSearchModel.init(with: data)
+                if self.indexOfPageToRequest == 1 { self.arrDataModel.removeAll() }
+                self.arrDataModel.append(contentsOf: self.newSearchModel?.data ?? [NewFeedSearchDataModel(with: [:])])
+            }
+            //self.collectionViewBusinessCategory.reloadData()
+            print("CountImpSearch------------------------\(self.arrDataModel.count)")
+            self.tblViewSearchOptions.reloadData()
+           
+            
+        }
+    }
+    func callSearchResturntApi(){
+        self.arrDataModel.removeAll()
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.restaurant.rawValue)" + "&hubs=" + "\(self.resHubId  ?? "0")" + "&restaurant_type=" + "\(self.resTypeId ?? "0")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            let dictResponse = dictResponse as? [String:Any]
+            
+            if let data = dictResponse?["data"] as? [String:Any]{
+                self.newSearchModel = NewFeedSearchModel.init(with: data)
+                if self.indexOfPageToRequest == 1 { self.arrDataModel.removeAll() }
+                self.arrDataModel.append(contentsOf: self.newSearchModel?.data ?? [NewFeedSearchDataModel(with: [:])])
+            }
+            //self.collectionViewBusinessCategory.reloadData()
+            print("CountImpSearch------------------------\(self.arrDataModel.count)")
+            self.tblViewSearchOptions.reloadData()
+           
+            
+        }
+    }
+    
+    func callSearchExpertApi(){
+        self.arrDataModel.removeAll()
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.voiceExperts.rawValue)" + "&hubs=" + "\(self.selectExpertHubId  ?? "0")" + "&expertise=" + "\(self.selectExpertExpertiseId ?? "0")" + "&title=" + "\(self.selectExpertTitleId ?? "0")" + "&country=" + "\(self.selectExpertCountryId ?? "0")" + "&region=" + "\(self.selectExpertRegionId ?? "0")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            let dictResponse = dictResponse as? [String:Any]
+            
+            if let data = dictResponse?["data"] as? [String:Any]{
+                self.newSearchModel = NewFeedSearchModel.init(with: data)
+                if self.indexOfPageToRequest == 1 { self.arrDataModel.removeAll() }
+                self.arrDataModel.append(contentsOf: self.newSearchModel?.data ?? [NewFeedSearchDataModel(with: [:])])
+            }
+            //self.collectionViewBusinessCategory.reloadData()
+            print("CountImpSearch------------------------\(self.arrDataModel.count)")
+            self.tblViewSearchOptions.reloadData()
+           
+            
+        }
+    }
+    
+    func callSearchTravelApi(){
+        self.arrDataModel.removeAll()
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.travelAgencies.rawValue)" + "&hubs=" + "\(self.selectTravelHubId  ?? "0")" + "&speciality=" + "\(self.selectTravelSpecialityId ?? "0")" + "&country=" + "\(self.selectTravelCountryId ?? "0")" + "&region=" + "\(self.selectTravelRegionId ?? "0")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            let dictResponse = dictResponse as? [String:Any]
+            
+            if let data = dictResponse?["data"] as? [String:Any]{
+                self.newSearchModel = NewFeedSearchModel.init(with: data)
+                if self.indexOfPageToRequest == 1 { self.arrDataModel.removeAll() }
+                self.arrDataModel.append(contentsOf: self.newSearchModel?.data ?? [NewFeedSearchDataModel(with: [:])])
+            }
+            //self.collectionViewBusinessCategory.reloadData()
+            print("CountImpSearch------------------------\(self.arrDataModel.count)")
+            self.tblViewSearchOptions.reloadData()
+           
+            
+        }
+    }
 }

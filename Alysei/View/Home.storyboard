@@ -576,6 +576,11 @@
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="Yrb-mg-7Cm" secondAttribute="bottom" id="C5b-SG-wKt"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="userImage" destination="rxJ-Cn-okX" id="DUl-zY-xnW"/>
+                                            <outlet property="userLocation" destination="PRB-IM-5kg" id="a9H-fT-PAl"/>
+                                            <outlet property="userName" destination="wpg-H6-1eW" id="OYB-s4-Ldx"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -3769,7 +3774,7 @@ any other devices.</string>
                                             <rect key="frame" x="10" y="5" width="355" height="65"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VAT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlA-t3-IYm">
-                                                    <rect key="frame" x="20" y="0.0" width="29" height="23"/>
+                                                    <rect key="frame" x="20" y="0.0" width="24" height="23"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="MRa-UI-Hzd"/>
                                                     </constraints>
@@ -3778,7 +3783,7 @@ any other devices.</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1tS-Gf-AEj">
-                                                    <rect key="frame" x="54" y="4" width="15" height="15"/>
+                                                    <rect key="frame" x="49" y="4" width="15" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="1tS-Gf-AEj" secondAttribute="height" multiplier="1:1" id="Wc2-XY-EMM"/>
                                                         <constraint firstAttribute="width" constant="15" id="wtV-Zw-Qqh"/>
@@ -3796,7 +3801,7 @@ any other devices.</string>
                                                         <constraint firstAttribute="height" constant="30" id="rgi-ix-Fe2"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="sublayerBorderWidth">
                                                             <real key="value" value="1"/>
@@ -3825,7 +3830,7 @@ any other devices.</string>
                                             <rect key="frame" x="10" y="88" width="355" height="65"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VAT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkR-8Q-yfl">
-                                                    <rect key="frame" x="20" y="5" width="29" height="23"/>
+                                                    <rect key="frame" x="20" y="5" width="24" height="23"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="ACs-G7-C7P"/>
                                                     </constraints>
@@ -3834,7 +3839,7 @@ any other devices.</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TVI-vF-C4Y">
-                                                    <rect key="frame" x="54" y="9" width="15" height="15"/>
+                                                    <rect key="frame" x="49" y="9" width="15" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="15" id="oR3-Ze-S1T"/>
                                                         <constraint firstAttribute="width" secondItem="TVI-vF-C4Y" secondAttribute="height" multiplier="1:1" id="p5d-Yj-jxc"/>
@@ -3852,7 +3857,7 @@ any other devices.</string>
                                                         <constraint firstAttribute="height" constant="30" id="5qL-Lu-FsQ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="sublayerBorderWidth">
                                                             <real key="value" value="1"/>
@@ -3900,7 +3905,7 @@ any other devices.</string>
                                                     <rect key="frame" x="10" y="10" width="355" height="65"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VAT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9G-md-4EG">
-                                                            <rect key="frame" x="0.0" y="0.0" width="29" height="18"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="24" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="3Ib-g9-m9N"/>
                                                                 <constraint firstAttribute="height" constant="18" id="hMh-Ro-Z6t"/>
@@ -3910,7 +3915,7 @@ any other devices.</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Yk-TU-Pdk">
-                                                            <rect key="frame" x="34" y="1.5" width="15" height="15"/>
+                                                            <rect key="frame" x="29" y="1.5" width="15" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="3Yk-TU-Pdk" secondAttribute="height" multiplier="1:1" id="1oJ-S5-x2s"/>
                                                                 <constraint firstAttribute="width" constant="15" id="WyZ-vc-IB1"/>
@@ -3928,7 +3933,7 @@ any other devices.</string>
                                                                 <constraint firstAttribute="height" constant="30" id="sFL-T7-1Wt"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                                            <textInputTraits key="textInputTraits"/>
+                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="sublayerBorderWidth">
                                                                     <real key="value" value="1"/>

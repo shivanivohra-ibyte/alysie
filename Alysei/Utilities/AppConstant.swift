@@ -275,6 +275,9 @@ struct AppConstants {
     static let Horeca = "Horeca"
     static let PrivateLabel = "Private Label"
     static let AlyseiBrand = "Alysei Brand Label"
+    static let HorecaValue = "horeca"
+    static let PrivateLabelValue = "privateLabel"
+    static let AlyseiBrandValue = "alyseiBrandLabel"
     static let KeywordSearch = "Keyword Search"
     //static let TopHubs = "Top 10 City Hubs"
     static let SelectState = "Select State"
@@ -296,6 +299,7 @@ struct AppConstants {
     static let KeyLongitude = "longitude"
     static let kEmpty = ""
     static let kEnterText = "Enter your text here......"
+    
     
 }
 
@@ -555,7 +559,9 @@ struct StaticArrayData {
                                         (image: "b2btab2_icon", name: "Importers & Distributors"),
                                         (image: "b2btab3_icon", name: "Italian Restaurants in US"),
                                         (image: "b2btab4_icon", name: "Voice of Experts"),
-                                        (image: "b2btab5_icon", name: "Travel Agencies")]
+                                        (image: "b2btab5_icon", name: "Travel Agencies"),
+                                        (image: "b2btab6_icon", name: "Producer"),
+    ]
     
     static let kNetworkCategoryDict = [(image: "icons_invitations", name: "Invitations"),
                                        (image: "icons8_people", name: "Connections"),

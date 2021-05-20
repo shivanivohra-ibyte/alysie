@@ -18,6 +18,8 @@ class BusinessFiltersTableCell: UITableViewCell {
   
   var businessDataModel: BusinessDataModel!
   var selectedIndex: [Int] = []
+    var passIdCallback:(([Int]) -> Void)? = nil
+
   
   override func awakeFromNib() {
     
@@ -62,7 +64,14 @@ extension BusinessFiltersTableCell: UICollectionViewDelegate, UICollectionViewDa
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) -> Void {
         
+    if selectedIndex.contains(indexPath.item){
+        let index = selectedIndex.firstIndex(of: indexPath.item)
+        self.selectedIndex.remove(at: index ?? 0)
+    }else{
     self.selectedIndex.append(indexPath.item)
+    }
+    print("SelectedIndex ---------------------------\(selectedIndex)")
+    passIdCallback?(selectedIndex)
     self.collectionViewFilters.reloadData()
   }
   

@@ -149,6 +149,7 @@ enum B2BSearch : Int{
     case Restaurant = 2
     case Expert = 3
     case TravelAgencies = 4
+    case Producer = 5
 }
 
 enum B2BFieldId: Int {

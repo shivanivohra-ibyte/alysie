@@ -10,6 +10,7 @@ import Foundation
 class NewFeedSearchModel{
     var currentPage: Int?
     var data: [NewFeedSearchDataModel]?
+    var importerSeacrhData : [SubjectData]?
     var firstPageUrl: String?
     var lastPageUrl: String?
     var lastPage: Int?
@@ -18,6 +19,9 @@ class NewFeedSearchModel{
         self.currentPage = Int.getInt(dictResponse["current_page"])
         if let data = dictResponse["data"] as? [[String:Any]]{
             self.data = data.map({NewFeedSearchDataModel.init(with: $0)})
+        }
+        if let data = dictResponse["data"] as? [[String:Any]]{
+            self.importerSeacrhData = data.map({SubjectData.init(with: $0)})
         }
         self.firstPageUrl = String.getString(dictResponse["first_page_url"])
         self.lastPageUrl = String.getString(dictResponse["last_page_url"])
@@ -39,7 +43,8 @@ class NewFeedSearchDataModel{
     var attachments: [Attachments]?
     var title: String?
     var image: AttachmentLink?
-    
+    var country: CountryModel?
+    var state: CountryModel?
     
     init(with dictResponse: [String:Any]){
         self.activityActionId = Int.getInt(dictResponse["activity_action_id"])
@@ -59,6 +64,13 @@ class NewFeedSearchDataModel{
         self.title = String.getString(dictResponse["title"])
         if let image = dictResponse["image"] as? [String:Any]{
             self.image = AttachmentLink.init(with: image)
+        }
+        if let country = dictResponse["country"] as? [String:Any]{
+            self.country = CountryModel.init(data: country)
+        }
+        
+        if let state = dictResponse["state"] as? [String:Any]{
+            self.state = CountryModel.init(data: state)
         }
     }
 }

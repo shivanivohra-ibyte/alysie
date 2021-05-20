@@ -66,7 +66,8 @@ class BusinessViewModel: NSObject {
       //self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.TopHubs))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectState))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
-      self.arrBusinessData.append(BusinessDataModel(businessCellType: .collectionHubs,cellCount: 3))
+        self.arrBusinessData.append(BusinessDataModel(businessCellType: .collectionHubs))
+      //self.arrBusinessData.append(BusinessDataModel(businessCellType: .collectionHubs,cellCount: 3))
   
     case 1:
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Hubs))
@@ -74,20 +75,21 @@ class BusinessViewModel: NSObject {
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectRegion))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .collectionFilters, arrFilters: StaticArrayData.kImporterFilter))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
+        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell))
 
-      for _ in 0..<12 {
-        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 12))
-        
-      }
+//      for _ in 0..<12 {
+//        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 12))
+//
+//      }
     case 2:
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Hubs))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.RestaurantType))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .collectionFilters, arrFilters: StaticArrayData.kRestaurantFilter))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
-      for _ in 0..<12 {
-        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 12))
-        
-      }
+//      for _ in 0..<12 {
+//        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 12))
+//
+//      }
     case 3:
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Hubs))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Expertise))
@@ -95,20 +97,31 @@ class BusinessViewModel: NSObject {
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectCountry))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectRegion))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
-      for _ in 0..<12 {
-        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 12))
-        
-      }
+//      for _ in 0..<12 {
+//        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 12))
+//
+//      }
     case 4:
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Hubs))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Speciality))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectCountry))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectRegion))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
-      for _ in 0..<12 {
-        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 12))
-        
-      }
+//      for _ in 0..<12 {
+//        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 12))
+//
+//      }
+    case 5:
+        self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Hubs))
+        self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectRegion))
+        self.arrBusinessData.append(BusinessDataModel(businessCellType: .collectionFilters, arrFilters: StaticArrayData.kImporterFilter))
+        self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
+          self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell))
+  
+//        for _ in 0..<12 {
+//          self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 12))
+//  
+//        }
     default:
       break
     }
@@ -125,6 +138,8 @@ class BusinessViewModel: NSObject {
   var cellCount: Int = 1
 
   init(businessHeading heading: String = "",signUpSelectedValue value: String = "", businessCellType cellType: BusinessCellType = .defaultCell,businessValidationMessage message: String = "",arrFilters arr: [String] = [],cellCount count: Int = 1 ){
+    
+   // init(businessHeading heading: String = "",signUpSelectedValue value: String = "", businessCellType cellType: BusinessCellType = .defaultCell,businessValidationMessage message: String = "",arrFilters arr: [String] = []){
     
     super.init()
     self.businessHeading = heading
