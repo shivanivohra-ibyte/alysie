@@ -21,7 +21,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
-	<true/>
+	<false/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -38,13 +38,11 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Alysei would like to access your location.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>You need Usage Microphone Description</string>
+	<string>Alysei would like to access your microphone.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Alysei would like to access your gallery.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Alysei would like to access your gallery.</string>
-	<key>PHPhotoLibraryPreventAutomaticLimitedAccessAlert</key>
-	<true/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Montserrat-Bold.ttf</string>
@@ -73,7 +71,7 @@
 		</dict>
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
+	<false/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

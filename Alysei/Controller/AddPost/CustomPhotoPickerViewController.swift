@@ -8,7 +8,7 @@
 import Foundation
 import TLPhotoPicker
 
-class CustomPhotoPickerViewController: TLPhotosPickerViewController {
+class PhotoPickerViewController: TLPhotosPickerViewController {
     override func makeUI() {
         super.makeUI()
         self.customNavItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: nil, action: #selector(customAction))
@@ -21,19 +21,19 @@ class CustomPhotoPickerViewController: TLPhotosPickerViewController {
         }
     }
     /*
-    override func maxCheck() -> Bool {
-        let imageCount = self.selectedAssets.filter{ $0.phAsset?.mediaType == .image }.count
-        let videoCount = self.selectedAssets.filter{ $0.phAsset?.mediaType == .video }.count
-        if imageCount > 3 || videoCount > 1 {
-            return true
-        }
-        return false
-    }*/
+     override func maxCheck() -> Bool {
+     let imageCount = self.selectedAssets.filter{ $0.phAsset?.mediaType == .image }.count
+     let videoCount = self.selectedAssets.filter{ $0.phAsset?.mediaType == .video }.count
+     if imageCount > 3 || videoCount > 1 {
+     return true
+     }
+     return false
+     }*/
 }
 
 extension TLPhotosPickerViewController {
-    class func custom(withTLPHAssets: (([TLPHAsset]) -> Void)? = nil, didCancel: (() -> Void)? = nil) -> CustomPhotoPickerViewController {
-        let picker = CustomPhotoPickerViewController(withTLPHAssets: withTLPHAssets, didCancel:didCancel)
+    class func custom(withTLPHAssets: (([TLPHAsset]) -> Void)? = nil, didCancel: (() -> Void)? = nil) -> PhotoPickerViewController {
+        let picker = PhotoPickerViewController(withTLPHAssets: withTLPHAssets, didCancel:didCancel)
         return picker
     }
 
