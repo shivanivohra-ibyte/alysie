@@ -75,21 +75,21 @@ class BusinessViewModel: NSObject {
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectRegion))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .collectionFilters, arrFilters: StaticArrayData.kImporterFilter))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
-        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell))
+       // self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell))
+        for _ in 0..<(cellCount ?? 0) {
+        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 9))
 
-//      for _ in 0..<12 {
-//        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 12))
-//
-//      }
+      }
     case 2:
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Hubs))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.RestaurantType))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .collectionFilters, arrFilters: StaticArrayData.kRestaurantFilter))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
-//      for _ in 0..<12 {
-//        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 12))
-//
-//      }
+        //self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell))
+        for _ in 0..<(cellCount ?? 0) {
+        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 9))
+
+      }
     case 3:
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Hubs))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Expertise))
@@ -97,31 +97,32 @@ class BusinessViewModel: NSObject {
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectCountry))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectRegion))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
-//      for _ in 0..<12 {
-//        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 12))
-//
-//      }
+   //     self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell))
+        for _ in 0..<(cellCount ?? 0) {
+        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 9))
+
+      }
     case 4:
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Hubs))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Speciality))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectCountry))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectRegion))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
-//      for _ in 0..<12 {
-//        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 12))
-//
-//      }
+     //   self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell))
+        for _ in 0..<(cellCount ?? 0) {
+        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 9))
+
+      }
     case 5:
         self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Hubs))
         self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectRegion))
         self.arrBusinessData.append(BusinessDataModel(businessCellType: .collectionFilters, arrFilters: StaticArrayData.kImporterFilter))
         self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
-          self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell))
   
-//        for _ in 0..<12 {
-//          self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 12))
-//  
-//        }
+        for _ in 0..<(cellCount ?? 0) {
+        self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell,cellCount: 9))
+
+      }
     default:
       break
     }

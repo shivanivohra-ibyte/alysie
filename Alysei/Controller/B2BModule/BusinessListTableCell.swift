@@ -30,6 +30,7 @@ class BusinessListTableCell: UITableViewCell {
             name = data.companyName ?? ""
         }
         userName.text = name
+        userLocation.text = data.email
         userImage.setImage(withString: kImageBaseUrl + String.getString(data.avatarId?.attachmentUrl))
        
    }
