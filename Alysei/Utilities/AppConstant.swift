@@ -299,6 +299,8 @@ struct AppConstants {
     static let KeyLongitude = "longitude"
     static let kEmpty = ""
     static let kEnterText = "Enter your text here......"
+    static let kVATNo = "VAT No."
+    static let kZipCode = "Zip/Postal Code"
     
     
 }

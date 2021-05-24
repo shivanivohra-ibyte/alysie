@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompanyViewC: AlysieBaseViewC {
+class CompanyViewC: AlysieBaseViewC  , UITextFieldDelegate{
     
     //MARK: - IBOutlet -
     
@@ -17,7 +17,7 @@ class CompanyViewC: AlysieBaseViewC {
     @IBOutlet weak var txtVat: UITextField!
     @IBOutlet weak var lblFDATitle: UILabel!
     @IBOutlet weak var txtFDA: UITextField!
-
+    
     
     var titleArray = ["VAT","FDA Number"]
     var cetificateTitle = ["Photo of Label","FCE-SID Certification","Phytosanitary Certificate","Packaging od USA","Food Safety Plan","Animal Health or ASL Certificate"]
@@ -41,6 +41,8 @@ class CompanyViewC: AlysieBaseViewC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        txtFDA.delegate = self
+        txtVat.delegate = self
         picker.delegate = self
         self.callGetCertificatesApi()
         
@@ -60,9 +62,9 @@ class CompanyViewC: AlysieBaseViewC {
     @IBAction func tapSave(_ sender: UIButton) {
         selectedUserOptionId = ""
         self.callSaveDocumentApi()
-//        DispatchQueue.main.asyncAfter(deadline: . now() + 0.5) {
-//            self.navigationController?.popViewController(animated: true)
-//        }
+        //        DispatchQueue.main.asyncAfter(deadline: . now() + 0.5) {
+        //            self.navigationController?.popViewController(animated: true)
+        //        }
     }
     @IBAction func btnVatDesc(_ sender: UIButton){
         self.showAlert(withMessage: "Provide your value-added tax ID")
@@ -77,21 +79,21 @@ class CompanyViewC: AlysieBaseViewC {
         self.lblFDATitle.text = titleArray[1]
         self.txtFDA.text = getCompanyFields?.userData?.fdaNo
     }
-
-//    private func getCompanyFirstTableCell(_ indexPath: IndexPath) -> UITableViewCell{
-//
-//        let companyFirstTableCell = tblViewCompany.dequeueReusableCell(withIdentifier: CompanyFirstTableCell.identifier(), for: indexPath) as! CompanyFirstTableCell
-//        let obj = getCompanyFields?.userData
-//        companyFirstTableCell.configCell(titleArray[indexPath.row], obj, indexPath.row)
-//        companyFirstTableCell.btnCallback = {
-//            if indexPath.row == 0{
-//                self.showAlert(withMessage: "Provide your value-added tax ID")
-//            }else{
-//                self.showAlert(withMessage: "Provide your Food and Drug Administration identification")
-//            }
-//        }
-//        return companyFirstTableCell
-//    }
+    
+    //    private func getCompanyFirstTableCell(_ indexPath: IndexPath) -> UITableViewCell{
+    //
+    //        let companyFirstTableCell = tblViewCompany.dequeueReusableCell(withIdentifier: CompanyFirstTableCell.identifier(), for: indexPath) as! CompanyFirstTableCell
+    //        let obj = getCompanyFields?.userData
+    //        companyFirstTableCell.configCell(titleArray[indexPath.row], obj, indexPath.row)
+    //        companyFirstTableCell.btnCallback = {
+    //            if indexPath.row == 0{
+    //                self.showAlert(withMessage: "Provide your value-added tax ID")
+    //            }else{
+    //                self.showAlert(withMessage: "Provide your Food and Drug Administration identification")
+    //            }
+    //        }
+    //        return companyFirstTableCell
+    //    }
     
     private func getCompanySecondTableCell(_ indexPath: IndexPath) -> UITableViewCell{
         
@@ -107,6 +109,36 @@ class CompanyViewC: AlysieBaseViewC {
         
         return companySecondTableCell
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == txtFDA{
+            if txtFDA.text?.count ?? 0 >= 11{
+                if let char = string.cString(using: String.Encoding.utf8) {
+                    let isBackSpace = strcmp(char, "\\b")
+                    if (isBackSpace == -92) {
+                        print("Backspace was pressed")
+                        return true
+                    }else{
+                        return false
+                    }
+                }
+            }
+        }
+        if textField == txtVat{
+            if txtVat.text?.count ?? 0 >= 11{
+                if let char = string.cString(using: String.Encoding.utf8) {
+                    let isBackSpace = strcmp(char, "\\b")
+                    if (isBackSpace == -92) {
+                        print("Backspace was pressed")
+                        return true
+                    }else{
+                        return false
+                    }
+                }
+            }
+        }
+        return true
+    }
 }
 
 //MARK: - TableView Methods -
@@ -119,20 +151,20 @@ extension CompanyViewC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //switch section {
-       // case 0:
-       //     return 2
+        // case 0:
+        //     return 2
         //default:
-            return cetificateTitle.count
-       // }
+        return cetificateTitle.count
+        // }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-       // switch indexPath.section {
+        // switch indexPath.section {
         //case 0:
-          //  return self.getCompanyFirstTableCell(indexPath)
+        //  return self.getCompanyFirstTableCell(indexPath)
         //default:
-            return self.getCompanySecondTableCell(indexPath)
+        return self.getCompanySecondTableCell(indexPath)
         //}
     }
     
@@ -147,7 +179,7 @@ extension CompanyViewC: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return 50
+        return 50
     }
 }
 extension CompanyViewC {
@@ -167,9 +199,9 @@ extension CompanyViewC {
                                      APIConstants.vatNo : txtVat.text ?? "",
                                      APIConstants.fdaNo: txtFDA.text ?? "",
         ]
-       
+        
         let imageParamSid:[String:Any] = [APIConstants.kImage: fceSidImage ,
-                                              APIConstants.kImageName: APIConstants.fceSidCertification
+                                          APIConstants.kImageName: APIConstants.fceSidCertification
         ]
         let imageParamPhyto: [String:Any] = [
             APIConstants.kImage : phytoImage,
@@ -198,7 +230,7 @@ extension CompanyViewC {
         imageParam.append(imageParamfoodSafetyPlan)
         imageParam.append(imageParamanimalHelath)
         imageParam.append(imageParamPhotoOfLabel)
-
+        
         
         TANetworkManager.sharedInstance.requestMultiPart(withServiceName: APIUrl.kUploadCertificate, requestMethod: .post, requestImages: imageParam, requestVideos: [:], requestData: params) { (dictResponse, error, errorType, statusCode) in
             self.showAlert(withMessage: "Data Uploaded Successfully")
@@ -223,7 +255,7 @@ extension CompanyViewC: UIImagePickerControllerDelegate, UINavigationControllerD
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
         self.dismiss(animated: true) {
             // self.imgViewProfile.image = selectedImage
-           // self.postImage = selectedImage
+            // self.postImage = selectedImage
             let imageData = selectedImage.compressTo(1)
             if self.getUploadImageIndex == 0 {
                 self.photoOfLabelImage = imageData
@@ -244,7 +276,7 @@ extension CompanyViewC: UIImagePickerControllerDelegate, UINavigationControllerD
             }
             self.arrUploadImageIndex.append(self.getUploadImageIndex ?? -1)
             self.callSaveDocumentApi()
-           
+            
             
         }
     }
@@ -300,20 +332,20 @@ extension UIImage {
         var compressingValue:CGFloat = 1.0
         while (needCompress && compressingValue > 0.0) {
             if let data:Data = self.jpegData(compressionQuality: compressingValue) {
-            if data.count < sizeInBytes {
-                needCompress = false
-                imgData = data
-            } else {
-                compressingValue -= 0.1
+                if data.count < sizeInBytes {
+                    needCompress = false
+                    imgData = data
+                } else {
+                    compressingValue -= 0.1
+                }
             }
         }
-    }
-
-    if let data = imgData {
-        if (data.count < sizeInBytes) {
-            return UIImage(data: data)
+        
+        if let data = imgData {
+            if (data.count < sizeInBytes) {
+                return UIImage(data: data)
+            }
         }
-    }
         return nil
     }
 }

@@ -215,6 +215,7 @@ extension SignUpViewC: UITableViewDataSource,UITableViewDelegate{
         case AppConstants.Terms:
             return self.getSignUpTermsTableCell(indexPath)
         default:
+            
             return self.getSignUpTableCell(indexPath)
         }
     }
