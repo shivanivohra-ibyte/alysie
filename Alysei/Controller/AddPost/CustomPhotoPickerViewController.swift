@@ -32,10 +32,10 @@ class PhotoPickerViewController: TLPhotosPickerViewController {
 }
 
 extension TLPhotosPickerViewController {
-    class func custom(withTLPHAssets: (([TLPHAsset]) -> Void)? = nil, didCancel: (() -> Void)? = nil) -> PhotoPickerViewController {
-        let picker = PhotoPickerViewController(withTLPHAssets: withTLPHAssets, didCancel:didCancel)
-        return picker
-    }
+//    class func custom(withTLPHAssets: (([TLPHAsset]) -> Void)? = nil, didCancel: (() -> Void)? = nil) -> PhotoPickerViewController {
+//        let picker = PhotoPickerViewController(withTLPHAssets: withTLPHAssets, didCancel:didCancel)
+//        return picker
+//    }
 
     func wrapNavigationControllerWithoutBar() -> UINavigationController {
         let navController = UINavigationController(rootViewController: self)

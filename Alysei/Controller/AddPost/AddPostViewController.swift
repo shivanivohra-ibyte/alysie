@@ -148,20 +148,21 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
     private func alertToAddCustomPicker() -> Void {
         let viewCon = PhotoPickerViewController()
         viewCon.delegate = self
-//        viewCon.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
-//            self?.showExceededMaximumAlert(vc: picker)
-//        }
+        viewCon.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
+            self?.showExceededMaximumAlert(vc: picker)
+        }
         var configure = TLPhotosPickerConfigure()
         configure.allowedVideoRecording = false
 
         configure.mediaType = .image
         configure.numberOfColumn = 3
+        configure.groupByFetch = .day
 
         viewCon.configure = configure
         viewCon.selectedAssets = self.selectedAssets
         viewCon.logDelegate = self
 
-        self.present(viewCon, animated: true, completion: nil)
+        self.present(viewCon, animated: false, completion: nil)
     }
 
     func dismissPhotoPicker(withPHAssets: [PHAsset]) {
