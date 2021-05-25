@@ -26,12 +26,18 @@ class BusinessListTableCell: UITableViewCell {
             name = data.companyName ?? ""
         case .restaurant :
             name =  data.restaurantName ?? ""
+        case .voiceExperts:
+            name = data.name ?? ""
         default:
             name = data.companyName ?? ""
         }
         userName.text = name
         userLocation.text = data.email
+        if String.getString(data.avatarId?.attachmentUrl) == "" {
+            userImage.image = UIImage(named: "profile_icon")
+        }else{
         userImage.setImage(withString: kImageBaseUrl + String.getString(data.avatarId?.attachmentUrl))
+        }
        
    }
 }

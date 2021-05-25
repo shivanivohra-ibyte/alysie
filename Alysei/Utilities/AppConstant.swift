@@ -182,6 +182,7 @@ struct APIUrl{
     static let kGetCountryStates = "get/mycountry/states"
     static let kGetAllHubs = "get/all/hubs"
     static let kGetFieldValue = "get/field/value/"
+    static let kGetRolesUserCount = "get/roles/by/hubid/"
     
     
     enum FeaturedProduct {
@@ -385,7 +386,7 @@ struct APIConstants {
     static let kStepOne = "step_1"
     static let kStepTwo = "step_2"
     static let kHead = "head"
-    static let kOption = "option"
+    static let kOption = "ç"
     static let kOptions = "options"
     static let kUserFieldId = "user_field_id"
     static let kUserFieldOptionId = "user_field_option_id"
