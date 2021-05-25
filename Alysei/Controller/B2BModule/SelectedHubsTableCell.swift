@@ -9,7 +9,7 @@ import UIKit
 
 protocol TappedHubs {
   
-  func tapOnHub() -> Void
+    func tapOnHub(_ hubId:String?,_ hubName: String?,_ hubLocation: String?) -> Void
 }
 
 class SelectedHubsTableCell: UITableViewCell {
@@ -54,8 +54,8 @@ extension SelectedHubsTableCell: UICollectionViewDelegate, UICollectionViewDataS
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) -> Void {
-        
-    self.delegate?.tapOnHub()
+
+    self.delegate?.tapOnHub("\(arrSearchData?[indexPath.row].id ?? 0)",arrSearchData?[indexPath.row].title, ((arrSearchData?[indexPath.row].state?.name ?? "") + "," + (arrSearchData?[indexPath.row].country?.name ?? "")))
     //_ = pushViewController(withName: HubsViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
   }
   

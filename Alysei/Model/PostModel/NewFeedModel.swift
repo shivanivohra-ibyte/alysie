@@ -45,6 +45,7 @@ class NewFeedSearchDataModel{
     var image: AttachmentLink?
     var country: CountryModel?
     var state: CountryModel?
+    var id: Int?
     
     init(with dictResponse: [String:Any]){
         self.activityActionId = Int.getInt(dictResponse["activity_action_id"])
@@ -56,6 +57,7 @@ class NewFeedSearchDataModel{
         self.commentCount = Int.getInt(dictResponse["comment_count"])
         self.likeCount = Int.getInt(dictResponse["like_count"])
         self.privacy = String.getString(dictResponse["privacy"])
+        self.id = Int.getInt(dictResponse["id"])
         self.likeFlag = Int.getInt(dictResponse["like_flag"])
         self.posted_at = String.getString(dictResponse["posted_at"])
         if let attachments = dictResponse["attachments"] as? [[String:Any]]{
@@ -72,6 +74,8 @@ class NewFeedSearchDataModel{
         if let state = dictResponse["state"] as? [String:Any]{
             self.state = CountryModel.init(data: state)
         }
+        
+        
     }
 }
 

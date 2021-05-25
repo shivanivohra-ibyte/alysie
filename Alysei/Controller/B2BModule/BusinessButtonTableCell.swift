@@ -111,7 +111,8 @@ class BusinessButtonTableCell: UITableViewCell {
                 case AppConstants.ProductTypeBusiness:
                     selectImpProductId = self.productType?.options?[index].userFieldOptionId
                 case AppConstants.SelectRegion:
-                   selectImpRegionTypeId = self.productType?.options?[index].userFieldOptionId
+                  // selectImpRegionTypeId = self.productType?.options?[index].userFieldOptionId
+                    selectImpRegionTypeId = self.productType?.options?[index].userFieldId
                     default:
                     print("Invalid")
                 }
@@ -135,7 +136,8 @@ class BusinessButtonTableCell: UITableViewCell {
                 case AppConstants.SelectCountry:
                     expertCountryId = self.productType?.options?[index].userFieldOptionId
                 case AppConstants.SelectRegion:
-                    expertRegionId = self.productType?.options?[index].userFieldOptionId
+                   // expertRegionId = self.productType?.options?[index].userFieldOptionId
+                    expertRegionId = self.productType?.options?[index].userFieldId
                 default:
                     print("Invalid")
                 }
@@ -148,7 +150,8 @@ class BusinessButtonTableCell: UITableViewCell {
                 case AppConstants.SelectCountry:
                     travelCountryId = self.productType?.options?[index].userFieldOptionId
                 case AppConstants.SelectRegion:
-                    travelRegionId = self.productType?.options?[index].userFieldOptionId
+                    //travelRegionId = self.productType?.options?[index].userFieldOptionId|
+                    travelRegionId = self.productType?.options?[index].userFieldId
                 default:
                     print("Invalid")
                 }
@@ -157,7 +160,8 @@ class BusinessButtonTableCell: UITableViewCell {
                     case AppConstants.Hubs:
                         producerHubId = "\(self.userhubs?[index].id ?? 0)"
                     case AppConstants.SelectRegion:
-                        producerRegionId = self.productType?.options?[index].userFieldOptionId
+                        //producerRegionId = self.productType?.options?[index].userFieldOptionId
+                        producerRegionId = self.productType?.options?[index].userFieldId
                     default:
                         print("Invalid")
                     }
