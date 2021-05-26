@@ -71,6 +71,7 @@ extension BusinessFiltersTableCell: UICollectionViewDelegate, UICollectionViewDa
     self.selectedIndex.append(indexPath.item)
     }
     print("SelectedIndex ---------------------------\(selectedIndex)")
+    //if
     passIdCallback?(selectedIndex)
     self.collectionViewFilters.reloadData()
   }

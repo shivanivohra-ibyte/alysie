@@ -17,6 +17,7 @@ class HubsViewC: UIViewController {
     var passHubId: String?
     var passHubName: String?
     var passHubLocation: String?
+    var getRoleViewModel: GetRoleViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()

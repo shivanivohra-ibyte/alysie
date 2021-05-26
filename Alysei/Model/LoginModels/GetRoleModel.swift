@@ -13,6 +13,7 @@ class GetRoleViewModel: NSObject {
   var subTitle: String?
   var roleDescription: String?
   var arrRoles: [GetRoleDataModel] = []
+var arrImporter: [GetRoleDataModel] = []
   
   init(_ dictData: [String:Any]) {
     
@@ -24,6 +25,12 @@ class GetRoleViewModel: NSObject {
       
       self.arrRoles = role.map({GetRoleDataModel(withDictionary: $0)})
     }
+    
+    if let role = dictData[APIConstants.kImporterRoles] as? ArrayOfDictionary{
+      
+      self.arrImporter = role.map({GetRoleDataModel(withDictionary: $0)})
+    }
+
   }
 }
 

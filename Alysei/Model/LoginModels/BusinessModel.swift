@@ -71,8 +71,9 @@ class BusinessViewModel: NSObject {
   
     case 1:
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Hubs))
+        self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectUserType))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.ProductTypeBusiness))
-      self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectRegion))
+      self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectState))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .collectionFilters, arrFilters: StaticArrayData.kImporterFilter))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
        // self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell))
@@ -95,7 +96,7 @@ class BusinessViewModel: NSObject {
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Expertise))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Title))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectCountry))
-      self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectRegion))
+      self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectState))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
    //     self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell))
         for _ in 0..<(cellCount ?? 0) {
@@ -106,7 +107,7 @@ class BusinessViewModel: NSObject {
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Hubs))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Speciality))
       self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectCountry))
-      self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectRegion))
+      self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectState))
       self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
      //   self.arrBusinessData.append(BusinessDataModel(businessCellType: .tableListCell))
         for _ in 0..<(cellCount ?? 0) {
@@ -115,7 +116,8 @@ class BusinessViewModel: NSObject {
       }
     case 5:
         self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Hubs))
-        self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectRegion))
+        self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.ProductTypeBusiness))
+        self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectState))
         self.arrBusinessData.append(BusinessDataModel(businessCellType: .collectionFilters, arrFilters: StaticArrayData.kImporterFilter))
         self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
   

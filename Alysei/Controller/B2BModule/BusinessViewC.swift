@@ -31,6 +31,7 @@ class BusinessViewC: AlysieBaseViewC {
     var selectImpHubId: String?
     var selectImpProductId: String?
     var selectImpRegionTypeId:String?
+    var selectImpRoleId: String?
     var resHubId: String?
     var resTypeId: String?
     var selectExpertHubId: String?
@@ -44,12 +45,14 @@ class BusinessViewC: AlysieBaseViewC {
     var selectTravelRegionId: String?
     var selectProducerHubId: String?
     var selectProducerRegionId: String?
-    
+    var selectProducerProductType: String?
     var selectedImpOptionId = [Int]()
     var horecaValue: String?
     var privateValue: String?
     var alyseiBrandValue: String?
     var extraCell: Int?
+    var restPickUp: String?
+    var restDelivery:String?
     
     private var currentChild: UIViewController {
         return self.children.last!
@@ -152,11 +155,12 @@ class BusinessViewC: AlysieBaseViewC {
         //        controller?.signUpStepOneDataModel = model
         //        controller?.stepOneDelegate = self
         //    }
-        businessButtonTableCell.passIdCallBack = { stateId,imphubId,impproductId, impregionId, restHubId, restTypeId, exprtHubId, exprtExprtseId, exprtTitleId, exprtCuntryId, exprtRgnId, travlHubId, trvlSpeclityid, trvlCuntryId, trvlRegionId, producerHubId, producerRegionId in
+        businessButtonTableCell.passIdCallBack = { stateId,imphubId,impproductId, impregionId,impUserRoleId, restHubId, restTypeId, exprtHubId, exprtExprtseId, exprtTitleId, exprtCuntryId, exprtRgnId, travlHubId, trvlSpeclityid, trvlCuntryId, trvlRegionId, producerHubId, producerRegionId, producerProductId in
             self.selectStateId = "\(stateId)"
             self.selectImpHubId = "\(imphubId)"
             self.selectImpProductId = impproductId
             self.selectImpRegionTypeId = impregionId
+            self.selectImpRoleId = impUserRoleId
             self.resHubId = restHubId
             self.resTypeId = restTypeId
             self.selectExpertHubId = exprtHubId
@@ -170,6 +174,7 @@ class BusinessViewC: AlysieBaseViewC {
             self.selectTravelRegionId = trvlRegionId
             self.selectProducerHubId = producerHubId
             self.selectProducerRegionId = producerRegionId
+            self.selectProducerProductType = producerProductId
             
         }
         
@@ -181,6 +186,7 @@ class BusinessViewC: AlysieBaseViewC {
         let businessFiltersTableCell = tblViewSearchOptions.dequeueReusableCell(withIdentifier: BusinessFiltersTableCell.identifier()) as! BusinessFiltersTableCell
         businessFiltersTableCell.configureData(withBusinessDataModel: self.businessViewModel.arrBusinessData[indexPath.row])
         businessFiltersTableCell.passIdCallback = { arrSelectedIndex in
+            if self.currentIndex == B2BSearch.Importer.rawValue || self.currentIndex == B2BSearch.Producer.rawValue{
             self.selectedImpOptionId = arrSelectedIndex
             if self.selectedImpOptionId.contains(0){
                 self.horecaValue = AppConstants.HorecaValue
@@ -190,6 +196,15 @@ class BusinessViewC: AlysieBaseViewC {
             }
             if self.selectedImpOptionId.contains(2){
                 self.alyseiBrandValue = AppConstants.AlyseiBrandValue
+            }
+            }else{
+                self.selectedImpOptionId = arrSelectedIndex
+                if self.selectedImpOptionId.contains(0){
+                    self.restPickUp = "\(RestValue.pickUp.rawValue)"
+                }
+                if self.selectedImpOptionId.contains(1){
+                    self.restDelivery = "\(RestValue.delivery.rawValue)"
+                }
             }
             
         }
@@ -379,7 +394,7 @@ extension BusinessViewC {
     func callSearchImporterApi(){
         arrSearchimpotrDataModel.removeAll()
         cellCount = 0
-        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.distributer3.rawValue)" + "&hubs=" + "\(self.selectImpHubId ?? "")" + "&product_type=" + "\(self.selectImpProductId ?? "")" + "&region=" + "\(self.selectImpRegionTypeId ?? "")" + "&horeca=" + "\(self.horecaValue ?? "")" + "&private_label=" + "\(self.privateValue ?? "")" + "&alysei_brand_label=" + "\(self.alyseiBrandValue ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.distributer3.rawValue)" + "&hubs=" + "\(self.selectImpHubId ?? "")" + "&user_type=" + "\(selectImpRoleId ?? "")" + "&product_type=" + "\(self.selectImpProductId ?? "")" + "&region=" + "\(self.selectImpRegionTypeId ?? "")" + "&horeca=" + "\(self.horecaValue ?? "")" + "&private_label=" + "\(self.privateValue ?? "")" + "&alysei_brand_label=" + "\(self.alyseiBrandValue ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             let dictResponse = dictResponse as? [String:Any]
             
             if let data = dictResponse?["data"] as? [String:Any]{
@@ -396,7 +411,7 @@ extension BusinessViewC {
             }
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
             cellCount = self.arrSearchimpotrDataModel.count
-            self.extraCell = 5
+            self.extraCell = 6
             //self.tblViewSearchOptions.reloadRows(at: [IndexPath(row: 4, section: 0)], with: .automatic)
             print("CellCount--------------------------------------------\(cellCount ?? 0)")
             self.businessViewModel = BusinessViewModel(currentIndex: self.currentIndex)
@@ -408,7 +423,7 @@ extension BusinessViewC {
     func callSearchProducerApi(){
         arrSearchimpotrDataModel.removeAll()
         cellCount = 0
-        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.producer.rawValue)" + "&hubs=" + "\(self.selectProducerHubId ?? "")" + "&region=" + "\(self.selectProducerRegionId ?? "")" + "&horeca=" + "\(self.horecaValue ?? "")" + "&private_label=" + "\(self.privateValue ?? "")" + "&alysei_brand_label=" + "\(self.alyseiBrandValue ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.producer.rawValue)" + "&hubs=" + "\(self.selectProducerHubId ?? "")" + "&product_type=" + "\(selectProducerProductType ?? "")" + "&region=" + "\(self.selectProducerRegionId ?? "")" + "&horeca=" + "\(self.horecaValue ?? "")" + "&private_label=" + "\(self.privateValue ?? "")" + "&alysei_brand_label=" + "\(self.alyseiBrandValue ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             let dictResponse = dictResponse as? [String:Any]
             
             if let data = dictResponse?["data"] as? [String:Any]{
@@ -419,7 +434,7 @@ extension BusinessViewC {
             //self.collectionViewBusinessCategory.reloadData()
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
             cellCount = self.arrSearchimpotrDataModel.count
-            self.extraCell = 4
+            self.extraCell = 5
             self.selectProducerHubId = ""
             self.selectProducerRegionId = ""
             self.horecaValue = ""
@@ -436,8 +451,8 @@ extension BusinessViewC {
     func callSearchResturntApi(){
         arrSearchimpotrDataModel.removeAll()
         cellCount = 0
-        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.restaurant.rawValue)" + "&hubs=" + "\(self.resHubId  ?? "")" + "&restaurant_type=" + "\(self.resTypeId ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
-            let dictResponse = dictResponse as? [String:Any]
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.restaurant.rawValue)" + "&hubs=" + "\(self.resHubId  ?? "")" + "&restaurant_type=" + "\(self.resTypeId ?? "")" + "&pickup=" + "\(restPickUp ?? "")" + "&delivery=" + "\(restDelivery ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dicResponse, error, errorType, statusCode) in
+            let dictResponse = dicResponse as? [String:Any]
             
             if let data = dictResponse?["data"] as? [String:Any]{
                 self.newSearchModel = NewFeedSearchModel.init(with: data)
