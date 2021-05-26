@@ -161,3 +161,8 @@ enum B2BFieldId: Int {
     case country = 13
     case speciality = 14
 }
+
+enum RestValue: Int {
+    case pickUp = 628
+    case delivery = 629
+}

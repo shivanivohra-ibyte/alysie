@@ -5361,7 +5361,7 @@ any other devices.</string>
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="132"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="select_role3" translatesAutoresizingMaskIntoConstraints="NO" id="Nc9-bw-Kfc" customClass="UIImageViewExtended" customModule="Alysei" customModuleProvider="target">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="select_role3" translatesAutoresizingMaskIntoConstraints="NO" id="Nc9-bw-Kfc" customClass="ImageLoader" customModule="Alysei" customModuleProvider="target">
                                                     <rect key="frame" x="5.5" y="0.0" width="89" height="89"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -5375,6 +5375,16 @@ any other devices.</string>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YlD-mA-Usc">
+                                                    <rect key="frame" x="5.5" y="0.0" width="89" height="89"/>
+                                                    <color key="backgroundColor" white="0.31934931506849318" alpha="0.39522688356164382" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="makeCircle" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="44.5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chicago" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Foe-Be-dXo">
                                                     <rect key="frame" x="0.0" y="94" width="100" height="38"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="12"/>
@@ -5382,7 +5392,7 @@ any other devices.</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AyX-yp-y21">
-                                                    <rect key="frame" x="15.5" y="29" width="69" height="31.5"/>
+                                                    <rect key="frame" x="15.5" y="28" width="69" height="33"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="27"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -5394,7 +5404,11 @@ any other devices.</string>
                                                 <constraint firstItem="Foe-Be-dXo" firstAttribute="leading" secondItem="dgE-3u-F0k" secondAttribute="leading" id="HOG-rN-TTe"/>
                                                 <constraint firstItem="AyX-yp-y21" firstAttribute="centerX" secondItem="Nc9-bw-Kfc" secondAttribute="centerX" id="Ltg-19-4be"/>
                                                 <constraint firstAttribute="trailing" secondItem="Foe-Be-dXo" secondAttribute="trailing" id="MZf-cO-lBU"/>
+                                                <constraint firstItem="YlD-mA-Usc" firstAttribute="bottom" secondItem="Nc9-bw-Kfc" secondAttribute="bottom" id="Obg-aG-v6Z"/>
                                                 <constraint firstItem="Foe-Be-dXo" firstAttribute="top" secondItem="Nc9-bw-Kfc" secondAttribute="bottom" constant="5" id="T0E-U5-WUO"/>
+                                                <constraint firstItem="YlD-mA-Usc" firstAttribute="leading" secondItem="Nc9-bw-Kfc" secondAttribute="leading" id="Zip-zs-TDp"/>
+                                                <constraint firstItem="YlD-mA-Usc" firstAttribute="trailing" secondItem="Nc9-bw-Kfc" secondAttribute="trailing" id="bcQ-B6-lEl"/>
+                                                <constraint firstItem="YlD-mA-Usc" firstAttribute="top" secondItem="Nc9-bw-Kfc" secondAttribute="top" id="cuK-PQ-Ekc"/>
                                                 <constraint firstItem="Nc9-bw-Kfc" firstAttribute="top" secondItem="dgE-3u-F0k" secondAttribute="top" id="czz-ho-3SE"/>
                                                 <constraint firstItem="AyX-yp-y21" firstAttribute="trailing" secondItem="Nc9-bw-Kfc" secondAttribute="trailing" constant="-10" id="gtz-Ze-jcY"/>
                                                 <constraint firstItem="AyX-yp-y21" firstAttribute="centerY" secondItem="Nc9-bw-Kfc" secondAttribute="centerY" id="i9L-oi-FWQ"/>
@@ -5403,7 +5417,7 @@ any other devices.</string>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="100" height="132"/>
                                         <connections>
-                                            <outlet property="coverImage" destination="Nc9-bw-Kfc" id="Z1q-1h-Xx9"/>
+                                            <outlet property="coverImage" destination="Nc9-bw-Kfc" id="wFw-c8-HOC"/>
                                             <outlet property="lblUserCount" destination="AyX-yp-y21" id="ofL-El-p2c"/>
                                             <outlet property="title" destination="Foe-Be-dXo" id="JuU-L1-wjq"/>
                                         </connections>

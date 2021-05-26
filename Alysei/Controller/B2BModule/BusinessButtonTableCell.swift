@@ -25,25 +25,32 @@ var travelCountryId:String?
 var travelRegionId:String?
 var producerHubId:String?
 var producerRegionId:String?
+var selectImpRoleId: String?
+var producerProductType: String?
 
 
 class BusinessButtonTableCell: UITableViewCell {
 
   //MARK: - IBOutlet -
-  
   @IBOutlet weak var btnBusiness: UIButtonExtended!
+    
     let dataDropDown = DropDown()
-    var passIdCallBack:((_ stateId: Int,_ ImphubId: Int,_ ImpproductId:String,_ ImpRegionId:String, _ ResHubId: String,_ ResTypeId: String,_ ExpertHubId: String, _ ExpertExpertiseId: String,_ ExpertTitleId: String,_ ExpertCountryId: String, _ ExpertRegionId: String, _ travelHubId: String, _ travelSpecialityId: String, _ travelCountryId: String, _ travelRegionId: String, _ producerHubId: String, _ producerRegionId: String) -> Void)? = nil
+    var passIdCallBack:((_ stateId: Int,_ ImphubId: Int,_ ImpproductId:String,_ ImpRegionId:String, _ ImpUserTypeId: String?, _ ResHubId: String,_ ResTypeId: String,_ ExpertHubId: String, _ ExpertExpertiseId: String,_ ExpertTitleId: String,_ ExpertCountryId: String, _ ExpertRegionId: String, _ travelHubId: String, _ travelSpecialityId: String, _ travelCountryId: String, _ travelRegionId: String, _ producerHubId: String, _ producerRegionId: String, _ producerProductType: String) -> Void)? = nil
     var stateModel: [StateModel]?
     //var stateName = [String]()
     var userhubs : [HubCityArray]?
     var arrStateName = [String]()
     var arrHubName = [String]()
     var arrProductType = [String]()
+    var arrImporterRole = [String]()
+    var arrCountryStateName = [String]()
     var productType: ProductType?
     var currentIndex: Int?
     var businessModel: BusinessDataModel?
     var fieldValueId:Int?
+    var getRoleViewModel: GetRoleViewModel!
+    var arrOptions: [SignUpOptionsDataModel] = []
+    var userRoleId: String?
     
   override func awakeFromNib() {
     self.callStateApi()
@@ -57,13 +64,17 @@ class BusinessButtonTableCell: UITableViewCell {
   //MARK: - IBAction -
   
   @IBAction func tapBusiness(_ sender: UIButton) {
-    if (currentIndex ==  B2BSearch.Hub.rawValue && businessModel?.businessHeading == AppConstants.SelectState){
+    if (currentIndex ==  B2BSearch.Hub.rawValue && businessModel?.businessHeading == AppConstants.SelectState) || (currentIndex ==  B2BSearch.Importer.rawValue && businessModel?.businessHeading == AppConstants.SelectState) || (currentIndex ==  B2BSearch.Producer.rawValue && businessModel?.businessHeading == AppConstants.SelectState){
         self.dataDropDown.dataSource = self.arrStateName
         self.opendropDown()
-    }else if (currentIndex ==  B2BSearch.Importer.rawValue && businessModel?.businessHeading == AppConstants.Hubs) || (currentIndex ==  B2BSearch.Restaurant.rawValue && businessModel?.businessHeading == AppConstants.Hubs) || (currentIndex ==  B2BSearch.Expert.rawValue && businessModel?.businessHeading == AppConstants.Hubs) || (currentIndex ==  B2BSearch.TravelAgencies.rawValue && businessModel?.businessHeading == AppConstants.Hubs) ||  (currentIndex ==  B2BSearch.Producer.rawValue && businessModel?.businessHeading == AppConstants.Hubs){
+    }else if (currentIndex == B2BSearch.Importer.rawValue && businessModel?.businessHeading == AppConstants.SelectUserType){
+        callImporterRoleApi()
+       // self.opendropDown()
+    }
+    else if (currentIndex ==  B2BSearch.Importer.rawValue && businessModel?.businessHeading == AppConstants.Hubs) || (currentIndex ==  B2BSearch.Restaurant.rawValue && businessModel?.businessHeading == AppConstants.Hubs) || (currentIndex ==  B2BSearch.Expert.rawValue && businessModel?.businessHeading == AppConstants.Hubs) || (currentIndex ==  B2BSearch.TravelAgencies.rawValue && businessModel?.businessHeading == AppConstants.Hubs) ||  (currentIndex ==  B2BSearch.Producer.rawValue && businessModel?.businessHeading == AppConstants.Hubs){
         self.dataDropDown.dataSource = self.arrHubName
         self.opendropDown()
-    }else if (currentIndex ==  B2BSearch.Importer.rawValue && businessModel?.businessHeading == AppConstants.ProductTypeBusiness){
+    }else if (currentIndex ==  B2BSearch.Importer.rawValue && businessModel?.businessHeading == AppConstants.ProductTypeBusiness) || (currentIndex ==  B2BSearch.Producer.rawValue && businessModel?.businessHeading == AppConstants.ProductTypeBusiness){
         fieldValueId = B2BFieldId.productType.rawValue
         self.callGetValueOfFieldApi()
         
@@ -79,21 +90,26 @@ class BusinessButtonTableCell: UITableViewCell {
         fieldValueId = B2BFieldId.title.rawValue
         self.callGetValueOfFieldApi()
         
-    }else if (currentIndex ==  B2BSearch.Expert.rawValue && businessModel?.businessHeading == AppConstants.SelectCountry) || (currentIndex ==  B2BSearch.TravelAgencies.rawValue && businessModel?.businessHeading == AppConstants.SelectCountry) || (currentIndex ==  B2BSearch.Importer.rawValue && businessModel?.businessHeading == AppConstants.SelectRegion) || (currentIndex ==  B2BSearch.Producer.rawValue && businessModel?.businessHeading == AppConstants.SelectRegion) {
-        fieldValueId = B2BFieldId.country.rawValue
-        self.callGetValueOfFieldApi()
+    }else if (currentIndex ==  B2BSearch.Expert.rawValue && businessModel?.businessHeading == AppConstants.SelectCountry) {
+        //fieldValueId = B2BFieldId.country.rawValue
+       // self.callGetValueOfFieldApi()
+        self.callGetCountryApi("\(UserRoles.voiceExperts.rawValue)")
         
-    }else if (currentIndex ==  B2BSearch.Expert.rawValue && businessModel?.businessHeading == AppConstants.SelectRegion) || (currentIndex ==  B2BSearch.TravelAgencies.rawValue && businessModel?.businessHeading == AppConstants.SelectRegion){
-        fieldValueId = B2BFieldId.region.rawValue
-        self.callGetValueOfFieldApi()
+    }else if (currentIndex ==  B2BSearch.TravelAgencies.rawValue && businessModel?.businessHeading == AppConstants.SelectCountry){
+        self.callGetCountryApi("\( UserRoles.travelAgencies.rawValue)")
+    }else if (currentIndex ==  B2BSearch.Expert.rawValue && businessModel?.businessHeading == AppConstants.SelectState) {
+        //fieldValueId = B2BFieldId.region.rawValue
+        //self.callGetValueOfFieldApi()
+        self.callGetStatesWithCountryIdApi(expertCountryId ?? "")
         
+    }else if (currentIndex ==  B2BSearch.TravelAgencies.rawValue && businessModel?.businessHeading == AppConstants.SelectState){
+        self.callGetStatesWithCountryIdApi(travelCountryId ?? "")
     }else if (currentIndex ==  B2BSearch.TravelAgencies.rawValue && businessModel?.businessHeading == AppConstants.Speciality){
         fieldValueId = B2BFieldId.speciality.rawValue
         self.callGetValueOfFieldApi()
         
     }
         
-       
   }
   
     func opendropDown(){
@@ -108,11 +124,13 @@ class BusinessButtonTableCell: UITableViewCell {
                 switch businessModel?.businessHeading {
                     case AppConstants.Hubs:
                         selectImpHubId = self.userhubs?[index].id
+                case AppConstants.SelectUserType:
+                    selectImpRoleId = self.getRoleViewModel.arrImporter[index].roleId
                 case AppConstants.ProductTypeBusiness:
                     selectImpProductId = self.productType?.options?[index].userFieldOptionId
-                case AppConstants.SelectRegion:
+                case AppConstants.SelectState:
                   // selectImpRegionTypeId = self.productType?.options?[index].userFieldOptionId
-                    selectImpRegionTypeId = self.productType?.options?[index].userFieldId
+                    selectImpRegionTypeId =  "\(self.stateModel?[index].id ?? 0)"
                     default:
                     print("Invalid")
                 }
@@ -134,10 +152,10 @@ class BusinessButtonTableCell: UITableViewCell {
                 case AppConstants.Title:
                     expertTitleId = self.productType?.options?[index].userFieldOptionId
                 case AppConstants.SelectCountry:
-                    expertCountryId = self.productType?.options?[index].userFieldOptionId
-                case AppConstants.SelectRegion:
+                    expertCountryId = self.arrOptions[index].id
+                case AppConstants.SelectState:
                    // expertRegionId = self.productType?.options?[index].userFieldOptionId
-                    expertRegionId = self.productType?.options?[index].userFieldId
+                    expertRegionId = self.arrOptions[index].id
                 default:
                     print("Invalid")
                 }
@@ -148,10 +166,10 @@ class BusinessButtonTableCell: UITableViewCell {
                 case AppConstants.Speciality:
                     travelSpecialityId = self.productType?.options?[index].userFieldOptionId
                 case AppConstants.SelectCountry:
-                    travelCountryId = self.productType?.options?[index].userFieldOptionId
-                case AppConstants.SelectRegion:
+                    travelCountryId = self.arrOptions[index].id
+                case AppConstants.SelectState:
                     //travelRegionId = self.productType?.options?[index].userFieldOptionId|
-                    travelRegionId = self.productType?.options?[index].userFieldId
+                    travelRegionId = self.arrOptions[index].id
                 default:
                     print("Invalid")
                 }
@@ -159,16 +177,18 @@ class BusinessButtonTableCell: UITableViewCell {
                     switch businessModel?.businessHeading {
                     case AppConstants.Hubs:
                         producerHubId = "\(self.userhubs?[index].id ?? 0)"
-                    case AppConstants.SelectRegion:
+                    case AppConstants.SelectState:
                         //producerRegionId = self.productType?.options?[index].userFieldOptionId
-                        producerRegionId = self.productType?.options?[index].userFieldId
+                        producerRegionId = "\(self.stateModel?[index].id ?? 0)"
+                    case AppConstants.ProductTypeBusiness:
+                        producerProductType = "\(self.productType?.options?[index].userFieldOptionId ?? "")"
                     default:
                         print("Invalid")
                     }
                 }
 
         
-            passIdCallBack?((selectStateId ?? 0),selectImpHubId ?? 0,selectImpProductId ?? "0",selectImpRegionTypeId ?? "0", resHubId ?? "0",resTypeId ?? "0",expertHubId ?? "0", expertExpertiseId ?? "0",expertTitleId ?? "0",expertCountryId ?? "0",expertRegionId ?? "0", travelHubId ?? "0", travelSpecialityId ?? "0", travelCountryId ?? "0", travelRegionId ?? "0", producerHubId ?? "0", producerRegionId ?? "0")
+            passIdCallBack?((selectStateId ?? 0),selectImpHubId ?? 0,selectImpProductId ?? "0",selectImpRegionTypeId ?? "0",selectImpRoleId ?? "0",resHubId ?? "0",resTypeId ?? "0",expertHubId ?? "0", expertExpertiseId ?? "0",expertTitleId ?? "0",expertCountryId ?? "0",expertRegionId ?? "0", travelHubId ?? "0", travelSpecialityId ?? "0", travelCountryId ?? "0", travelRegionId ?? "0", producerHubId ?? "0", producerRegionId ?? "0", producerProductType ?? "0")
         }
         dataDropDown.cellHeight = 50
         dataDropDown.backgroundColor = UIColor.white
@@ -226,6 +246,54 @@ func callStateApi() {
                 self.dataDropDown.dataSource = self.arrProductType
                 self.opendropDown()
             }
+        }
+    }
+    
+    func callImporterRoleApi(){
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetRoles, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errortype, statusCode) in
+            
+         let dicResponse = kSharedInstance.getDictionary(dictResponse)
+        let dicData = kSharedInstance.getDictionary(dicResponse[APIConstants.kData])
+        self.getRoleViewModel = GetRoleViewModel(dicData)
+            for i in 0..<self.getRoleViewModel.arrImporter.count {
+                self.arrImporterRole.append(self.getRoleViewModel.arrImporter[i].name ?? "")
+            }
+            self.dataDropDown.dataSource = self.arrImporterRole
+            self.opendropDown()
+        }
+    }
+    
+    func callGetCountryApi(_ roleId: String?){
+        arrOptions.removeAll()
+        arrCountryStateName.removeAll()
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetCountries + "\(roleId ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dicResponse, error, errorType, statusCode) in
+            let response = dicResponse as? [String:Any]
+            //let filterCountry = kSharedInstance.signUpViewModel.arrSignUpStepOne.filter({$0.name == APIConstants.kCountry})
+            if let array = response?[APIConstants.kData] as? ArrayOfDictionary{
+              self.arrOptions = array.map({SignUpOptionsDataModel(withDictionary: $0)})
+           }
+            for i in 0..<self.arrOptions.count {
+                self.arrCountryStateName.append(self.arrOptions[i].name ?? "")
+            }
+            self.dataDropDown.dataSource = self.arrCountryStateName
+            self.opendropDown()
+        }
+    }
+    
+    func callGetStatesWithCountryIdApi(_ expertCountryId: String){
+        arrOptions.removeAll()
+        arrCountryStateName.removeAll()
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetStatesByCountryId + "\(expertCountryId)", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dicResponse, error, errorType, statusCode) in
+            let response = dicResponse as? [String:Any]
+            //let filterCountry = kSharedInstance.signUpViewModel.arrSignUpStepOne.filter({$0.name == APIConstants.kCountry})
+            if let array = response?[APIConstants.kData] as? ArrayOfDictionary{
+              self.arrOptions = array.map({SignUpOptionsDataModel(withDictionary: $0)})
+           }
+            for i in 0..<self.arrOptions.count {
+                self.arrCountryStateName.append(self.arrOptions[i].name ?? "")
+            }
+            self.dataDropDown.dataSource = self.arrCountryStateName
+            self.opendropDown()
         }
     }
 }
