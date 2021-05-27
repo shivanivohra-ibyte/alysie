@@ -185,6 +185,8 @@ struct APIUrl{
     static let kGetFieldValue = "get/field/value/"
     static let kGetRolesUserCount = "get/roles/by/hubid/"
     
+    static let kGetRoleListFromHubSlctn = "get/usersin/role?hub_id="
+    
     
     enum FeaturedProduct {
         static let delete = kBASEURL + "delete/featured/listing?featured_listing_id="

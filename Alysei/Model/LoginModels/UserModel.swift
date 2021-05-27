@@ -166,3 +166,8 @@ enum RestValue: Int {
     case pickUp = 628
     case delivery = 629
 }
+
+enum FromB2B{
+    case fromHubSelection
+    case fromTabSelection
+}
