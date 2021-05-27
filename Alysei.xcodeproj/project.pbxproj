@@ -255,6 +255,7 @@
 		C562C4C12626D582009F9E3B /* ProfileCompletionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C562C4C02626D582009F9E3B /* ProfileCompletionTableViewCell.swift */; };
 		C5753EB32653B6B90024E5C7 /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5753EB22653B6B80024E5C7 /* StateModel.swift */; };
 		C587D14D26413BE6002D72DF /* NewFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C587D14C26413BE6002D72DF /* NewFeedModel.swift */; };
+		C5923F7A265FAE7B003A3465 /* HubUserListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5923F79265FAE7B003A3465 /* HubUserListVC.swift */; };
 		C5957A32265CEB33004952D8 /* HubsViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5957A31265CEB33004952D8 /* HubsViewC.swift */; };
 		C5957A35265CEFF2004952D8 /* HubCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5957A34265CEFF2004952D8 /* HubCollectionViewCell.swift */; };
 		C5957A38265CF7E5004952D8 /* UserRoleCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5957A37265CF7E5004952D8 /* UserRoleCount.swift */; };
@@ -529,6 +530,7 @@
 		C562C4C02626D582009F9E3B /* ProfileCompletionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompletionTableViewCell.swift; sourceTree = "<group>"; };
 		C5753EB22653B6B80024E5C7 /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
 		C587D14C26413BE6002D72DF /* NewFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedModel.swift; sourceTree = "<group>"; };
+		C5923F79265FAE7B003A3465 /* HubUserListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubUserListVC.swift; sourceTree = "<group>"; };
 		C5957A31265CEB33004952D8 /* HubsViewC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubsViewC.swift; sourceTree = "<group>"; };
 		C5957A34265CEFF2004952D8 /* HubCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubCollectionViewCell.swift; sourceTree = "<group>"; };
 		C5957A37265CF7E5004952D8 /* UserRoleCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRoleCount.swift; sourceTree = "<group>"; };
@@ -570,6 +572,7 @@
 				27D4A15625BDE31400FB7039 /* BusinessListViewC.swift */,
 				C5957A31265CEB33004952D8 /* HubsViewC.swift */,
 				C5957A34265CEFF2004952D8 /* HubCollectionViewCell.swift */,
+				C5923F79265FAE7B003A3465 /* HubUserListVC.swift */,
 			);
 			path = B2BModule;
 			sourceTree = "<group>";
@@ -1661,6 +1664,7 @@
 				27D0FAB925CEE9FF00463FE0 /* SelectProductViewC.swift in Sources */,
 				C5989065262EAC1400507E84 /* ProfileCompletionModel.swift in Sources */,
 				C5B98116263FE65D002BFA23 /* UserPostsTableViewCell.swift in Sources */,
+				C5923F7A265FAE7B003A3465 /* HubUserListVC.swift in Sources */,
 				27A443BA25AE03720002BAAC /* IntExtended.swift in Sources */,
 				27A4439E25AE03720002BAAC /* RangeSlider.swift in Sources */,
 				273737EF25B76BCE005984CF /* SettingsViewC.swift in Sources */,
