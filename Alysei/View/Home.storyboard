@@ -1542,7 +1542,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2gl-dy-ckj" customClass="UIButtonExtended" customModule="Alysei" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="35" width="64" height="64"/>
+                                                    <rect key="frame" x="15" y="25" width="64" height="64"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="64" id="YN2-42-5KW"/>
                                                         <constraint firstAttribute="height" constant="64" id="yqQ-Sw-G1X"/>
@@ -1564,14 +1564,14 @@
                                                     </connections>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_addProduct" translatesAutoresizingMaskIntoConstraints="NO" id="mpQ-qb-FVr">
-                                                    <rect key="frame" x="31.666666666666671" y="51.666666666666686" width="31" height="31"/>
+                                                    <rect key="frame" x="31.666666666666671" y="41.666666666666686" width="31" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="e8r-V5-Rdo"/>
                                                         <constraint firstAttribute="width" constant="31" id="eyV-fF-FLA"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Product" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfP-mk-klY">
-                                                    <rect key="frame" x="17" y="105" width="60" height="27"/>
+                                                    <rect key="frame" x="17" y="95" width="60" height="27"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="27" id="U9G-RT-Iva"/>
                                                         <constraint firstAttribute="width" constant="60" id="xn3-YP-1r0"/>
@@ -1581,7 +1581,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gyo-g9-I6b">
-                                                    <rect key="frame" x="99" y="35" width="261" height="100"/>
+                                                    <rect key="frame" x="99" y="25" width="261" height="100"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="100" id="Za3-gH-uuL"/>
@@ -1665,7 +1665,7 @@
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstItem="7cj-Ud-CTr" firstAttribute="top" secondItem="abZ-xo-HVg" secondAttribute="top" id="5fF-y3-Kes"/>
-                                                <constraint firstItem="2gl-dy-ckj" firstAttribute="top" secondItem="7cj-Ud-CTr" secondAttribute="bottom" constant="15" id="CTe-Lb-51t"/>
+                                                <constraint firstItem="2gl-dy-ckj" firstAttribute="top" secondItem="7cj-Ud-CTr" secondAttribute="bottom" constant="5" id="CTe-Lb-51t"/>
                                                 <constraint firstItem="zfP-mk-klY" firstAttribute="top" secondItem="2gl-dy-ckj" secondAttribute="bottom" constant="6" id="HFG-Hm-cDH"/>
                                                 <constraint firstItem="mpQ-qb-FVr" firstAttribute="centerY" secondItem="2gl-dy-ckj" secondAttribute="centerY" id="Lau-Do-qHO"/>
                                                 <constraint firstItem="2gl-dy-ckj" firstAttribute="leading" secondItem="7cj-Ud-CTr" secondAttribute="leading" id="Lrc-NJ-fVo"/>
@@ -1722,7 +1722,7 @@
                                                     </connections>
                                                 </button>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cva-aB-nBq">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                    <rect key="frame" x="10" y="0.0" width="355" height="50"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="20" minimumInteritemSpacing="5" sectionInsetReference="safeArea" id="YmH-Bs-Ntb">
                                                         <size key="itemSize" width="150" height="40"/>
@@ -1789,14 +1789,13 @@
                                                 <constraint firstItem="Gb2-jI-5aH" firstAttribute="top" secondItem="rao-J3-paC" secondAttribute="top" id="I1R-Ki-3cr"/>
                                                 <constraint firstAttribute="bottom" secondItem="Gb2-jI-5aH" secondAttribute="bottom" id="KjA-CX-qwo"/>
                                                 <constraint firstAttribute="bottom" secondItem="cva-aB-nBq" secondAttribute="bottom" id="Nk5-Ql-cMd"/>
-                                                <constraint firstAttribute="trailing" secondItem="cva-aB-nBq" secondAttribute="trailing" id="PAp-da-voS"/>
                                                 <constraint firstItem="zKl-Im-NgQ" firstAttribute="height" secondItem="iy5-FO-A9G" secondAttribute="height" id="RFA-fy-fnC"/>
                                                 <constraint firstAttribute="bottom" secondItem="pRC-Oq-FgN" secondAttribute="bottom" id="UT0-zH-NBT"/>
                                                 <constraint firstItem="zKl-Im-NgQ" firstAttribute="centerY" secondItem="iy5-FO-A9G" secondAttribute="centerY" id="Ue7-hg-1AM"/>
                                                 <constraint firstAttribute="trailing" secondItem="F4S-Ei-n7u" secondAttribute="trailing" id="Vxh-Ty-Sjr"/>
                                                 <constraint firstItem="pRC-Oq-FgN" firstAttribute="trailing" secondItem="Gb2-jI-5aH" secondAttribute="trailing" id="WOO-5j-gcE"/>
                                                 <constraint firstItem="zKl-Im-NgQ" firstAttribute="leading" secondItem="iy5-FO-A9G" secondAttribute="trailing" id="a8m-MG-Jqx"/>
-                                                <constraint firstItem="cva-aB-nBq" firstAttribute="leading" secondItem="rao-J3-paC" secondAttribute="leading" id="eNF-xy-b3r"/>
+                                                <constraint firstItem="cva-aB-nBq" firstAttribute="leading" secondItem="rao-J3-paC" secondAttribute="leading" constant="10" id="eNF-xy-b3r"/>
                                                 <constraint firstAttribute="bottom" secondItem="iy5-FO-A9G" secondAttribute="bottom" id="gSG-On-ufq"/>
                                                 <constraint firstItem="Gb2-jI-5aH" firstAttribute="leading" secondItem="rao-J3-paC" secondAttribute="leading" id="ouS-Tc-1bv"/>
                                                 <constraint firstItem="F4S-Ei-n7u" firstAttribute="leading" secondItem="rao-J3-paC" secondAttribute="leading" id="qB9-0a-eCs"/>
@@ -1847,9 +1846,11 @@
                                         <constraint firstAttribute="trailing" secondItem="rao-J3-paC" secondAttribute="trailing" id="RLP-Ve-MVc"/>
                                         <constraint firstItem="ER5-yY-idc" firstAttribute="leading" secondItem="iIF-Ev-jCZ" secondAttribute="leading" id="SfN-FE-SOF"/>
                                         <constraint firstAttribute="trailing" secondItem="ER5-yY-idc" secondAttribute="trailing" id="TAl-fV-1Pk"/>
+                                        <constraint firstAttribute="trailing" secondItem="cva-aB-nBq" secondAttribute="trailing" constant="10" id="Tnz-qw-adI"/>
                                         <constraint firstItem="uUz-OT-5d2" firstAttribute="top" secondItem="TOI-Vv-U4Y" secondAttribute="bottom" constant="5" id="Uyt-tm-LVA"/>
                                         <constraint firstItem="uUz-OT-5d2" firstAttribute="leading" secondItem="iIF-Ev-jCZ" secondAttribute="leading" constant="15" id="VYW-Qg-Lqo"/>
                                         <constraint firstAttribute="trailing" secondItem="7y3-jK-Gog" secondAttribute="trailing" id="VsK-w3-U0U"/>
+                                        <constraint firstItem="rao-J3-paC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iIF-Ev-jCZ" secondAttribute="top" id="W09-TA-iZD"/>
                                         <constraint firstItem="TOI-Vv-U4Y" firstAttribute="leading" secondItem="ER5-yY-idc" secondAttribute="leading" id="Xep-XX-3VJ"/>
                                         <constraint firstItem="7y3-jK-Gog" firstAttribute="top" secondItem="rao-J3-paC" secondAttribute="bottom" constant="20" id="dNu-MD-dij"/>
                                         <constraint firstItem="M9M-SI-IoL" firstAttribute="top" secondItem="iIF-Ev-jCZ" secondAttribute="top" constant="30" id="fQQ-ka-TYt"/>
@@ -4304,7 +4305,7 @@ any other devices.</string>
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="160"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alysei Membership Progress" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GNj-4l-wdu">
-                                                    <rect key="frame" x="15" y="20" width="178.66666666666666" height="18"/>
+                                                    <rect key="frame" x="15" y="20" width="208.66666666666666" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="rAf-ga-kwK"/>
                                                     </constraints>

@@ -108,7 +108,7 @@ class ProfileViewC: AlysieBaseViewC{
 
     self.btnEditProfile.layer.cornerRadius = 0.0
 
-    let multiplier: CGFloat = self.view.safeAreaInsets.top > 20.0 ? 0.95 : 0.85
+    let multiplier: CGFloat = (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0) > 0.0 ? 0.55 : 0.40
     let space = self.view.frame.height * multiplier
 //    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + 660)
     self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + space)
