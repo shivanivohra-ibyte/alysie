@@ -148,32 +148,100 @@ class BusinessViewC: AlysieBaseViewC {
         
         let businessButtonTableCell = tblViewSearchOptions.dequeueReusableCell(withIdentifier: BusinessButtonTableCell.identifier()) as! BusinessButtonTableCell
         businessButtonTableCell.configureData(withBusinessDataModel: self.businessViewModel.arrBusinessData[indexPath.row], currentIndex: self.currentIndex)
+        
+        businessButtonTableCell.pushVCCallback = { arruserHubs,getRoleViewModel,productType,stateModel,arrStateRegionById,selectFieldType in
+            let controller = self.pushViewController(withName: BusinessMultiOptionsVC.id(), fromStoryboard: StoryBoardConstants.kHome) as? BusinessMultiOptionsVC
+            controller?.arrUserHubs = arruserHubs ?? [HubCityArray]()
+            controller?.selectFieldType = selectFieldType
+            controller?.getRoleViewModel = getRoleViewModel
+            controller?.stateModel = stateModel
+            controller?.productType = productType
+            controller?.arrStateRegion = arrStateRegionById
+            controller?.currentIndex = self.currentIndex
+            controller?.doneCallBack = { arrSelectOptionName , arrSelectOptionId in
+                let optionName = arrSelectOptionName?.joined(separator: ",")
+                let  optionId = arrSelectOptionId?.joined(separator: ",")
+                if self.currentIndex == B2BSearch.Hub.rawValue{
+                    if selectFieldType == AppConstants.SelectState{
+                    businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                    self.selectStateId = optionId
+                    }
+                }
+                if self.currentIndex == B2BSearch.Importer.rawValue{
+                if selectFieldType == AppConstants.Hubs{
+                businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                self.selectImpHubId = optionId
+                }else if selectFieldType == AppConstants.SelectUserType{
+                    businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                    self.selectImpRoleId = optionId
+                }else if selectFieldType == AppConstants.ProductTypeBusiness{
+                    businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                    self.selectImpProductId = optionId
+                }else if selectFieldType == AppConstants.SelectState{
+                    businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                    self.selectImpRegionTypeId = optionId
+                }
+                }else if self.currentIndex == B2BSearch.Restaurant.rawValue{
+                    if selectFieldType == AppConstants.Hubs{
+                    businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                    self.resHubId = optionId
+                    }else if selectFieldType == AppConstants.RestaurantType{
+                        businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                        self.resTypeId = optionId
+                        }
+                }else if self.currentIndex == B2BSearch.Expert.rawValue{
+                    if selectFieldType == AppConstants.Hubs{
+                    businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                    self.selectExpertHubId = optionId
+                    }else if selectFieldType == AppConstants.Expertise{
+                        businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                        self.selectExpertExpertiseId = optionId
+                    }else if selectFieldType == AppConstants.Title{
+                        businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                        self.selectExpertTitleId = optionId
+                    }else if selectFieldType == AppConstants.SelectState{
+                        businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                        self.selectExpertRegionId = optionId
+                        }
+                }else if self.currentIndex == B2BSearch.TravelAgencies.rawValue{
+                    if selectFieldType == AppConstants.Hubs{
+                    businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                    self.selectTravelHubId = optionId
+                    }else if selectFieldType == AppConstants.Speciality{
+                        businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                        self.selectTravelSpecialityId = optionId
+                    }else if selectFieldType == AppConstants.SelectState{
+                        businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                        self.selectTravelRegionId = optionId
+                    }
+                
+                }else if self.currentIndex == B2BSearch.Producer.rawValue{
+                    if selectFieldType == AppConstants.Hubs{
+                    businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                    self.selectProducerHubId = optionId
+                    }else if selectFieldType == AppConstants.ProductTypeBusiness{
+                        businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                        self.selectProducerProductType = optionId
+                    }else if selectFieldType == AppConstants.SelectState{
+                        businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                        self.selectProducerRegionId = optionId
+                    }
+                
+                }
+                print("stringRepresentation--------------------------\(optionId ?? "")")
+                
+            }
+        }
         //    businessButtonTableCell.pushVCCallback = {
         //        let model = self.signUpViewModel.arrSignUpStepOne[indexPath.row]
         //        let controller = self.pushViewController(withName: SelectProductViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? SelectProductViewC
         //        controller?.signUpStepOneDataModel = model
         //        controller?.stepOneDelegate = self
         //    }
-        businessButtonTableCell.passIdCallBack = { stateId,imphubId,impproductId, impregionId,impUserRoleId, restHubId, restTypeId, exprtHubId, exprtExprtseId, exprtTitleId, exprtCuntryId, exprtRgnId, travlHubId, trvlSpeclityid, trvlCuntryId, trvlRegionId, producerHubId, producerRegionId, producerProductId in
-            self.selectStateId = "\(stateId)"
-            self.selectImpHubId = "\(imphubId)"
-            self.selectImpProductId = impproductId
-            self.selectImpRegionTypeId = impregionId
-            self.selectImpRoleId = impUserRoleId
-            self.resHubId = restHubId
-            self.resTypeId = restTypeId
-            self.selectExpertHubId = exprtHubId
-            self.selectExpertTitleId = exprtTitleId
-            self.selectExpertExpertiseId = exprtExprtseId
+        businessButtonTableCell.passIdCallBack = {  exprtCuntryId, trvlCuntryId in
+            
             self.selectExpertCountryId = exprtCuntryId
-            self.selectExpertRegionId = exprtRgnId
-            self.selectTravelHubId = travlHubId
-            self.selectTravelSpecialityId = trvlSpeclityid
             self.selectTravelCountryId = trvlCuntryId
-            self.selectTravelRegionId = trvlRegionId
-            self.selectProducerHubId = producerHubId
-            self.selectProducerRegionId = producerRegionId
-            self.selectProducerProductType = producerProductId
             
         }
         
@@ -401,14 +469,15 @@ extension BusinessViewC {
                 self.newSearchModel = NewFeedSearchModel.init(with: data)
                 if self.indexOfPageToRequest == 1 { self.arrSearchDataModel.removeAll() }
                 //self.arrSearchDataModel.append(contentsOf: self.newSearchModel?.data ?? [NewFeedSearchDataModel(with: [:])])
-                self.selectImpHubId = ""
-                self.selectImpProductId = ""
-                self.selectImpRegionTypeId = ""
-                self.horecaValue = ""
-                self.privateValue = ""
-                self.alyseiBrandValue = ""
+                
                 self.arrSearchimpotrDataModel.append(contentsOf: self.newSearchModel?.importerSeacrhData ?? [SubjectData(with: [:])])
             }
+            self.selectImpHubId = ""
+            self.selectImpProductId = ""
+            self.selectImpRegionTypeId = ""
+            self.horecaValue = ""
+            self.privateValue = ""
+            self.alyseiBrandValue = ""
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
             cellCount = self.arrSearchimpotrDataModel.count
             self.extraCell = 6

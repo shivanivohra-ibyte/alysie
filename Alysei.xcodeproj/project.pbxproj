@@ -265,6 +265,7 @@
 		C5B98113263FE55B002BFA23 /* UserPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B98112263FE55B002BFA23 /* UserPostsViewController.swift */; };
 		C5B98116263FE65D002BFA23 /* UserPostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B98115263FE65D002BFA23 /* UserPostsTableViewCell.swift */; };
 		C5BA01F52648FA8900E1E542 /* AlyseiBGV.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C5BA01F42648FA8900E1E542 /* AlyseiBGV.mp4 */; };
+		C5D68D542660CBF700B759F8 /* BusinessMultiOptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D68D532660CBF700B759F8 /* BusinessMultiOptionsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -540,6 +541,7 @@
 		C5B98112263FE55B002BFA23 /* UserPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostsViewController.swift; sourceTree = "<group>"; };
 		C5B98115263FE65D002BFA23 /* UserPostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostsTableViewCell.swift; sourceTree = "<group>"; };
 		C5BA01F42648FA8900E1E542 /* AlyseiBGV.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = AlyseiBGV.mp4; sourceTree = "<group>"; };
+		C5D68D532660CBF700B759F8 /* BusinessMultiOptionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessMultiOptionsVC.swift; sourceTree = "<group>"; };
 		D636814607C16FDC212EC4D0 /* Pods-Alysei.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alysei.release.xcconfig"; path = "Target Support Files/Pods-Alysei/Pods-Alysei.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -573,6 +575,7 @@
 				C5957A31265CEB33004952D8 /* HubsViewC.swift */,
 				C5957A34265CEFF2004952D8 /* HubCollectionViewCell.swift */,
 				C5923F79265FAE7B003A3465 /* HubUserListVC.swift */,
+				C5D68D532660CBF700B759F8 /* BusinessMultiOptionsVC.swift */,
 			);
 			path = B2BModule;
 			sourceTree = "<group>";
@@ -1806,6 +1809,7 @@
 				C5B98113263FE55B002BFA23 /* UserPostsViewController.swift in Sources */,
 				27D0FAC225CEEB5F00463FE0 /* SignUpFormSelectTableCell.swift in Sources */,
 				276E16B025DD8C5E00B17ACF /* SplashViewC.swift in Sources */,
+				C5D68D542660CBF700B759F8 /* BusinessMultiOptionsVC.swift in Sources */,
 				27A443BB25AE03720002BAAC /* UINavigationControllerExtended.swift in Sources */,
 				272EA31225C1B1AB009E0259 /* SelectedHubsTableCell.swift in Sources */,
 				274D50E525E4254100EDE55C /* ResetPasswordViewC.swift in Sources */,

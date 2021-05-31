@@ -10,6 +10,7 @@ import Foundation
 class StateModel{
     var id: Int?
     var name: String?
+    var isSelected = false
     init(with data: [String:Any]?) {
         self.id = Int.getInt(data?["id"])
         self.name = String.getString(data?["name"])

@@ -121,26 +121,12 @@ class HubUserListVC: AlysieBaseViewC {
         //        controller?.signUpStepOneDataModel = model
         //        controller?.stepOneDelegate = self
         //    }
-        businessButtonTableCell.passIdCallBack = { stateId,imphubId,impproductId, impregionId,impUserRoleId, restHubId, restTypeId, exprtHubId, exprtExprtseId, exprtTitleId, exprtCuntryId, exprtRgnId, travlHubId, trvlSpeclityid, trvlCuntryId, trvlRegionId, producerHubId, producerRegionId, producerProductId in
-            self.selectStateId = "\(stateId)"
-            self.selectImpHubId = "\(imphubId)"
-            self.selectImpProductId = impproductId
-            self.selectImpRegionTypeId = impregionId
-            self.selectImpRoleId = impUserRoleId
-            self.resHubId = restHubId
-            self.resTypeId = restTypeId
-            self.selectExpertHubId = exprtHubId
-            self.selectExpertTitleId = exprtTitleId
-            self.selectExpertExpertiseId = exprtExprtseId
+        businessButtonTableCell.passIdCallBack = {  exprtCuntryId, trvlCuntryId in
+            
             self.selectExpertCountryId = exprtCuntryId
-            self.selectExpertRegionId = exprtRgnId
-            self.selectTravelHubId = travlHubId
-            self.selectTravelSpecialityId = trvlSpeclityid
+           
             self.selectTravelCountryId = trvlCuntryId
-            self.selectTravelRegionId = trvlRegionId
-            self.selectProducerHubId = producerHubId
-            self.selectProducerRegionId = producerRegionId
-            self.selectProducerProductType = producerProductId
+            
             
         }
         
