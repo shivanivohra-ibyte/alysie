@@ -121,6 +121,89 @@ class HubUserListVC: AlysieBaseViewC {
         //        controller?.signUpStepOneDataModel = model
         //        controller?.stepOneDelegate = self
         //    }
+        businessButtonTableCell.pushVCCallback = { arruserHubs,getRoleViewModel,productType,stateModel,arrStateRegionById,selectFieldType in
+            let controller = self.pushViewController(withName: BusinessMultiOptionsVC.id(), fromStoryboard: StoryBoardConstants.kHome) as? BusinessMultiOptionsVC
+            controller?.arrUserHubs = arruserHubs ?? [HubCityArray]()
+            controller?.selectFieldType = selectFieldType
+            controller?.getRoleViewModel = getRoleViewModel
+            controller?.stateModel = stateModel
+            controller?.productType = productType
+            controller?.arrStateRegion = arrStateRegionById
+            controller?.currentIndex = self.currentIndex
+            controller?.doneCallBack = { arrSelectOptionName , arrSelectOptionId in
+                let optionName = arrSelectOptionName?.joined(separator: ",")
+                let  optionId = arrSelectOptionId?.joined(separator: ",")
+                if self.currentIndex == B2BSearch.Hub.rawValue{
+                    if selectFieldType == AppConstants.SelectState{
+                    businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                    self.selectStateId = optionId
+                    }
+                }
+                if self.currentIndex == B2BSearch.Importer.rawValue{
+                if selectFieldType == AppConstants.Hubs{
+                businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                self.selectImpHubId = optionId
+                }else if selectFieldType == AppConstants.SelectUserType{
+                    businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                    self.selectImpRoleId = optionId
+                }else if selectFieldType == AppConstants.ProductTypeBusiness{
+                    businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                    self.selectImpProductId = optionId
+                }else if selectFieldType == AppConstants.SelectState{
+                    businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                    self.selectImpRegionTypeId = optionId
+                }
+                }else if self.currentIndex == B2BSearch.Restaurant.rawValue{
+                    if selectFieldType == AppConstants.Hubs{
+                    businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                    self.resHubId = optionId
+                    }else if selectFieldType == AppConstants.RestaurantType{
+                        businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                        self.resTypeId = optionId
+                        }
+                }else if self.currentIndex == B2BSearch.Expert.rawValue{
+                    if selectFieldType == AppConstants.Hubs{
+                    businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                    self.selectExpertHubId = optionId
+                    }else if selectFieldType == AppConstants.Expertise{
+                        businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                        self.selectExpertExpertiseId = optionId
+                    }else if selectFieldType == AppConstants.Title{
+                        businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                        self.selectExpertTitleId = optionId
+                    }else if selectFieldType == AppConstants.SelectState{
+                        businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                        self.selectExpertRegionId = optionId
+                        }
+                }else if self.currentIndex == B2BSearch.TravelAgencies.rawValue{
+                    if selectFieldType == AppConstants.Hubs{
+                    businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                    self.selectTravelHubId = optionId
+                    }else if selectFieldType == AppConstants.Speciality{
+                        businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                        self.selectTravelSpecialityId = optionId
+                    }else if selectFieldType == AppConstants.SelectState{
+                        businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                        self.selectTravelRegionId = optionId
+                    }
+                
+                }else if self.currentIndex == B2BSearch.Producer.rawValue{
+                    if selectFieldType == AppConstants.Hubs{
+                    businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                    self.selectProducerHubId = optionId
+                    }else if selectFieldType == AppConstants.ProductTypeBusiness{
+                        businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                        self.selectProducerProductType = optionId
+                    }else if selectFieldType == AppConstants.SelectState{
+                        businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
+                        self.selectProducerRegionId = optionId
+                    }
+                
+                }
+                print("stringRepresentation--------------------------\(optionId ?? "")")
+                
+            }
+        }
         businessButtonTableCell.passIdCallBack = {  exprtCuntryId, trvlCuntryId in
             
             self.selectExpertCountryId = exprtCuntryId
@@ -270,23 +353,24 @@ extension HubUserListVC {
     func callSearchImporterApi(){
         arrSearchimpotrDataModel.removeAll()
         cellCount = 0
-        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(passRoleId ?? "")" + "&hubs=" + "\(self.passHubId ?? "")" + "&user_type=" + "\(selectImpRoleId ?? "")" + "&product_type=" + "\(self.selectImpProductId ?? "")" + "&region=" + "\(self.selectImpRegionTypeId ?? "")" + "&horeca=" + "\(self.horecaValue ?? "")" + "&private_label=" + "\(self.privateValue ?? "")" + "&alysei_brand_label=" + "\(self.alyseiBrandValue ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(passRoleId ?? "")" + "&hubs=" + "\(self.passHubId ?? "")" + "&user_type=" + "\(selectImpRoleId ?? "")" + "&product_type=" + "\(self.selectImpProductId ?? "")" + "&horeca=" + "\(self.horecaValue ?? "")" + "&private_label=" + "\(self.privateValue ?? "")" + "&alysei_brand_label=" + "\(self.alyseiBrandValue ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             let dictResponse = dictResponse as? [String:Any]
             
             if let data = dictResponse?["data"] as? [String:Any]{
                 self.newSearchModel = NewFeedSearchModel.init(with: data)
                 if self.indexOfPageToRequest == 1 { self.arrSearchDataModel.removeAll() }
                 //self.arrSearchDataModel.append(contentsOf: self.newSearchModel?.data ?? [NewFeedSearchDataModel(with: [:])])
-                self.selectImpProductId = ""
-                self.selectImpRegionTypeId = ""
-                self.horecaValue = ""
-                self.privateValue = ""
-                self.alyseiBrandValue = ""
+               
                 self.arrSearchimpotrDataModel.append(contentsOf: self.newSearchModel?.importerSeacrhData ?? [SubjectData(with: [:])])
             }
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
+            self.selectImpProductId = ""
+            self.selectImpRegionTypeId = ""
+            self.horecaValue = ""
+            self.privateValue = ""
+            self.alyseiBrandValue = ""
             cellCount = self.arrSearchimpotrDataModel.count
-            self.extraCell = 5
+            self.extraCell = 4
             //self.tblViewSearchOptions.reloadRows(at: [IndexPath(row: 4, section: 0)], with: .automatic)
             print("CellCount--------------------------------------------\(cellCount ?? 0)")
             self.businessViewModel = BusinessSingleHubViewModel(currentIndex: self.currentIndex ?? 0)
@@ -398,10 +482,11 @@ extension HubUserListVC {
             
         }
     }
+    //"&role_id="
         func getUserListFromHubSelctionApi(){
             arrSearchimpotrDataModel.removeAll()
             cellCount = 0
-            TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetRoleListFromHubSlctn + "\(passHubId ?? "")" + "&role_id=" + "\(passRoleId ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errtype, statusCode) in
+            TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetRoleListFromHubSlctn + "&role_id=" + "\(passRoleId ?? "")" + "&hub_id=" + "\(passHubId ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errtype, statusCode) in
                 let response = dictResponse as? [String:Any]
     
                 if let data = response?["data"] as? [[String:Any]]{
@@ -416,7 +501,7 @@ extension HubUserListVC {
                 if self.currentIndex == B2BSearch.Producer.rawValue{
                     self.extraCell = 4
                 }else if self.currentIndex == B2BSearch.Importer.rawValue{
-                    self.extraCell = 5
+                    self.extraCell = 4
                 }else if self.currentIndex == B2BSearch.Restaurant.rawValue{
                     self.extraCell = 3
                 }else if self.currentIndex == B2BSearch.TravelAgencies.rawValue{

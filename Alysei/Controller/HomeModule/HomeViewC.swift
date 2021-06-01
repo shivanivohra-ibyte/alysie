@@ -15,6 +15,7 @@ class HomeViewC: AlysieBaseViewC {
   @IBOutlet weak var headerView: UIView!
   @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
   
+  
   //MARK: - Properties -
   
   private lazy var membershipViewC: MembershipViewC = {
@@ -37,6 +38,8 @@ class HomeViewC: AlysieBaseViewC {
     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
         _ = self.postViewC
     }
+    
+
   }
   
   //MARK:  - IBAction -
@@ -45,6 +48,9 @@ class HomeViewC: AlysieBaseViewC {
     
     _ = pushViewController(withName: NotificationViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
   }
+    
+   
+    
 }
 
 extension HomeViewC{
