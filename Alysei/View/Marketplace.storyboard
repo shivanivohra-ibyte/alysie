@@ -49,7 +49,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Posts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qM2-9u-snv">
-                                                        <rect key="frame" x="25" y="40" width="33.5" height="15.5"/>
+                                                        <rect key="frame" x="26.5" y="40" width="30.5" height="15.5"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -85,7 +85,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MarketPlace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBk-V3-4ZK">
-                                                        <rect key="frame" x="3.5" y="40.5" width="76.5" height="15"/>
+                                                        <rect key="frame" x="8" y="41" width="67.5" height="14"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -118,7 +118,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjw-Gh-Lxc">
-                                                        <rect key="frame" x="21" y="40.5" width="42" height="15"/>
+                                                        <rect key="frame" x="23" y="41" width="37.5" height="14"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -151,7 +151,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hg-M3-ehX">
-                                                        <rect key="frame" x="2.5" y="40.5" width="78.5" height="15"/>
+                                                        <rect key="frame" x="8" y="41" width="67.5" height="14"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -268,26 +268,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVC-uC-smE">
-                                <rect key="frame" x="143.5" y="94" width="127.5" height="26"/>
+                                <rect key="frame" x="151.5" y="94" width="111.5" height="24.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alysei Marketplace" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XnA-un-KNA">
-                                <rect key="frame" x="50" y="140" width="314" height="80.5"/>
+                                <rect key="frame" x="50" y="138.5" width="314" height="38.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="33"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MarketPlaceBg" translatesAutoresizingMaskIntoConstraints="NO" id="OSl-Hb-fyI">
-                                <rect key="frame" x="57" y="290.5" width="300" height="300"/>
+                                <rect key="frame" x="57" y="247" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="ZRO-pJ-bnf"/>
                                     <constraint firstAttribute="width" secondItem="OSl-Hb-fyI" secondAttribute="height" multiplier="1:1" id="bUo-Zm-0aL"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFx-1d-Sx4">
-                                <rect key="frame" x="177" y="260.5" width="60" height="60"/>
+                                <rect key="frame" x="177" y="217" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="2Vp-WI-LcE"/>
                                     <constraint firstAttribute="width" secondItem="hFx-1d-Sx4" secondAttribute="height" multiplier="1:1" id="Aw0-ex-Uu2"/>
@@ -298,7 +298,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ma-ap-fwZ">
-                                <rect key="frame" x="77" y="525.5" width="60" height="60"/>
+                                <rect key="frame" x="77" y="482" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="7Ma-ap-fwZ" secondAttribute="height" multiplier="1:1" id="61h-GF-Pqe"/>
                                     <constraint firstAttribute="height" constant="60" id="VF0-lV-Ov8"/>
@@ -309,7 +309,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jW3-uz-iPc">
-                                <rect key="frame" x="322" y="410.5" width="60" height="60"/>
+                                <rect key="frame" x="322" y="367" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="jW3-uz-iPc" secondAttribute="height" multiplier="1:1" id="Up5-fc-IpT"/>
                                     <constraint firstAttribute="height" constant="60" id="c6n-u3-gBi"/>
@@ -424,9 +424,6 @@
                                                                     <real key="value" value="6"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
-                                                            <connections>
-                                                                <action selector="tapNext:" destination="Y6q-Yj-ZCs" eventType="touchUpInside" id="r3X-ik-BpS"/>
-                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NQV-MX-6RO">
                                                             <rect key="frame" x="367" y="10" width="55" height="30"/>
@@ -436,9 +433,6 @@
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="14"/>
                                                             <state key="normal" title="Skip"/>
-                                                            <connections>
-                                                                <action selector="tapSkip:" destination="Y6q-Yj-ZCs" eventType="touchUpInside" id="AhJ-uo-RZ2"/>
-                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.70052975169999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

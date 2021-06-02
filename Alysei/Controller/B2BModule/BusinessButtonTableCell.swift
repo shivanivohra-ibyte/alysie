@@ -21,6 +21,8 @@ class BusinessButtonTableCell: UITableViewCell {
     
     let dataDropDown = DropDown()
     var passIdCallBack:((_ ExpertCountryId: String, _ travelCountryId: String) -> Void)? = nil
+    var passCellCallback: ((String) -> Void)? = nil
+    var passStateCellCallback:(() -> Void)? = nil
     var stateModel: [StateModel]?
     //var stateName = [String]()
     var userhubs : [HubCityArray]?
@@ -52,7 +54,7 @@ class BusinessButtonTableCell: UITableViewCell {
   //MARK: - IBAction -
   
   @IBAction func tapBusiness(_ sender: UIButton) {
-    if (currentIndex ==  B2BSearch.Hub.rawValue && businessModel?.businessHeading == AppConstants.SelectState) || (currentIndex ==  B2BSearch.Importer.rawValue && businessModel?.businessHeading == AppConstants.SelectState) || (currentIndex ==  B2BSearch.Producer.rawValue && businessModel?.businessHeading == AppConstants.SelectState){
+    if (currentIndex ==  B2BSearch.Hub.rawValue && businessModel?.businessHeading == AppConstants.SelectState) || (currentIndex ==  B2BSearch.Importer.rawValue && businessModel?.businessHeading == AppConstants.SelectState) || (currentIndex ==  B2BSearch.Producer.rawValue && businessModel?.businessHeading == AppConstants.SelectRegion){
         callStateApi()
     }else if (currentIndex == B2BSearch.Importer.rawValue && businessModel?.businessHeading == AppConstants.SelectUserType){
         callImporterRoleApi()
@@ -81,12 +83,12 @@ class BusinessButtonTableCell: UITableViewCell {
         
     }else if (currentIndex ==  B2BSearch.TravelAgencies.rawValue && businessModel?.businessHeading == AppConstants.SelectCountry){
         self.callGetCountryApi("\( UserRoles.travelAgencies.rawValue)")
-    }else if (currentIndex ==  B2BSearch.Expert.rawValue && businessModel?.businessHeading == AppConstants.SelectState) {
+    }else if (currentIndex ==  B2BSearch.Expert.rawValue && businessModel?.businessHeading == AppConstants.SelectState) || businessModel?.businessHeading == AppConstants.SelectRegion{
         //fieldValueId = B2BFieldId.region.rawValue
         //self.callGetValueOfFieldApi()
         self.callGetStatesWithCountryIdApi(expertCountryId ?? "")
         
-    }else if (currentIndex ==  B2BSearch.TravelAgencies.rawValue && businessModel?.businessHeading == AppConstants.SelectState){
+    }else if (currentIndex ==  B2BSearch.TravelAgencies.rawValue && businessModel?.businessHeading == AppConstants.SelectState) || businessModel?.businessHeading == AppConstants.SelectRegion{
         self.callGetStatesWithCountryIdApi(travelCountryId ?? "")
     }else if (currentIndex ==  B2BSearch.TravelAgencies.rawValue && businessModel?.businessHeading == AppConstants.Speciality){
         fieldValueId = B2BFieldId.speciality.rawValue
@@ -102,6 +104,7 @@ class BusinessButtonTableCell: UITableViewCell {
         dataDropDown.bottomOffset = CGPoint(x: 0, y: (dataDropDown.anchorView?.plainView.bounds.height)!)
         dataDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.btnBusiness.setTitle(item, for: .normal)
+           
              if self.currentIndex == B2BSearch.Expert.rawValue{
                 switch businessModel?.businessHeading {
                 case AppConstants.SelectCountry:
@@ -117,7 +120,10 @@ class BusinessButtonTableCell: UITableViewCell {
                     print("Invalid")
                 }
             }
-        
+            if businessModel?.businessHeading == AppConstants.SelectCountry {
+           // if item == "Italy" || item == "italy"{
+               passCellCallback?(item)
+            }
             passIdCallBack?(expertCountryId ?? "0", travelCountryId ?? "0")
         }
         dataDropDown.cellHeight = 50
@@ -147,7 +153,11 @@ func callStateApi() {
                 self.arrStateName.append(self.stateModel?[state].name ?? "")
             }
         }
+        if self.currentIndex == B2BSearch.Importer.rawValue{
         self.pushVCCallback?([HubCityArray](),GetRoleViewModel([:]),ProductType(with: [:]),self.stateModel ?? [StateModel](),[SignUpOptionsDataModel](),AppConstants.SelectState)
+        }else{
+            self.pushVCCallback?([HubCityArray](),GetRoleViewModel([:]),ProductType(with: [:]),self.stateModel ?? [StateModel](),[SignUpOptionsDataModel](),AppConstants.SelectRegion)
+        }
     }
 }
     

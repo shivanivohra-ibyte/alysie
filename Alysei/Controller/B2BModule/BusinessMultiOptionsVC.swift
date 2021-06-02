@@ -22,13 +22,18 @@ class BusinessMultiOptionsVC: UIViewController {
     var arrSelectedOption = [String]()
     var arrSelectedId = [String]()
     var doneCallBack: (([String]?, [String]?) -> Void)? = nil
-    
+    var passSelectOptionId = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         headerTitle.text = selectFieldType
         if selectFieldType == AppConstants.Hubs{
         for i in 0..<(arrUserHubs?.count ?? 0){
+            if passSelectOptionId.contains("\(self.arrUserHubs?[i].id ?? 0)"){
+                self.arrUserHubs?[i].isSelected = true
+            }else{
+                print("check")
+            }
             if self.arrUserHubs?[i].isSelected == true{
                 arrSelectedOption.append(arrUserHubs?[i].title ?? "")
                 arrSelectedId.append("\(arrUserHubs?[i].id ?? 0)")
@@ -37,14 +42,24 @@ class BusinessMultiOptionsVC: UIViewController {
         }
         }else if selectFieldType == AppConstants.SelectUserType{
             for i in 0..<(getRoleViewModel.arrImporter.count ){
+                if passSelectOptionId.contains(self.getRoleViewModel.arrImporter[i].roleId ?? ""){
+                    self.getRoleViewModel.arrImporter[i].isSelected = true
+                }else{
+                    print("check")
+                }
                 if self.getRoleViewModel.arrImporter[i].isSelected == true{
-                    arrSelectedOption.append(arrUserHubs?[i].title ?? "")
-                    arrSelectedId.append("\(arrUserHubs?[i].id ?? 0)")
+                    arrSelectedOption.append(getRoleViewModel.arrImporter[i].name ?? "")
+                    arrSelectedId.append("\(getRoleViewModel.arrImporter[i].roleId ?? "")")
                     
                 }
             }
         }else if selectFieldType == AppConstants.ProductTypeBusiness || selectFieldType == AppConstants.RestaurantType || selectFieldType == AppConstants.Expertise || selectFieldType == AppConstants.Title  || selectFieldType == AppConstants.Speciality {
             for i in 0..<(self.productType?.options?.count ?? 0 ){
+                    if passSelectOptionId.contains(productType?.options?[i].userFieldOptionId ?? ""){
+                        self.productType?.options?[i].isSelected = true
+                    }else{
+                        print("check")
+                    }
                 if self.productType?.options?[i].isSelected == true{
                     arrSelectedOption.append(productType?.options?[i].optionName ?? "")
                     arrSelectedId.append("\(productType?.options?[i].userFieldOptionId ?? "")")
@@ -52,9 +67,15 @@ class BusinessMultiOptionsVC: UIViewController {
                 }
             }
         }
-        else if selectFieldType == AppConstants.SelectState && (currentIndex == B2BSearch.Importer.rawValue || currentIndex == B2BSearch.Producer.rawValue || currentIndex == B2BSearch.Hub.rawValue){
+        else if (selectFieldType == AppConstants.SelectState || selectFieldType == AppConstants.SelectRegion)  && (currentIndex == B2BSearch.Importer.rawValue || currentIndex == B2BSearch.Producer.rawValue || currentIndex == B2BSearch.Hub.rawValue){
             for i in 0..<(self.stateModel?.count ?? 0 ){
+                if passSelectOptionId.contains("\(stateModel?[i].id ?? 0)"){
+                    self.stateModel?[i].isSelected = true
+                }else{
+                    print("check")
+                }
                 if self.stateModel?[i].isSelected == true{
+                            
                     arrSelectedOption.append(stateModel?[i].name ?? "")
                     arrSelectedId.append("\(stateModel?[i].id ?? 0)")
                     
@@ -62,6 +83,11 @@ class BusinessMultiOptionsVC: UIViewController {
             }
         }else if selectFieldType == AppConstants.SelectState || selectFieldType == AppConstants.SelectRegion{
             for i in 0..<(self.arrStateRegion?.count ?? 0 ){
+                if passSelectOptionId.contains(arrStateRegion?[i].id ?? ""){
+                    self.arrStateRegion?[i].isSelected = true
+                }else{
+                    print("check")
+                }
                 if self.arrStateRegion?[i].isSelected == true{
                     arrSelectedOption.append(arrStateRegion?[i].name ?? "")
                     arrSelectedId.append("\(arrStateRegion?[i].id ?? "")")
@@ -93,7 +119,7 @@ extension BusinessMultiOptionsVC: UITableViewDelegate, UITableViewDataSource{
         }else if selectFieldType == AppConstants.ProductTypeBusiness || selectFieldType == AppConstants.RestaurantType || selectFieldType == AppConstants.Expertise || selectFieldType == AppConstants.Title  || selectFieldType == AppConstants.Speciality{
             return productType?.options?.count ?? 0
         }
-        else if selectFieldType == AppConstants.SelectState && (currentIndex == B2BSearch.Importer.rawValue || currentIndex == B2BSearch.Producer.rawValue || currentIndex == B2BSearch.Hub.rawValue) {
+        else if (selectFieldType == AppConstants.SelectState ||  selectFieldType == AppConstants.SelectRegion)  && (currentIndex == B2BSearch.Importer.rawValue || currentIndex == B2BSearch.Producer.rawValue || currentIndex == B2BSearch.Hub.rawValue) {
             return stateModel?.count ?? 0
         }
         else if selectFieldType == AppConstants.SelectState || selectFieldType == AppConstants.SelectRegion{
@@ -121,7 +147,7 @@ extension BusinessMultiOptionsVC: UITableViewDelegate, UITableViewDataSource{
             cell.lblOption.text = productType?.options?[indexPath.row].optionName
             cell.btnCheckBox.setImage((data?.isSelected == true) ? UIImage(named: "icon_blueSelected") : UIImage(named: "icon_uncheckedBox"), for: .normal)
 
-        }else if selectFieldType == AppConstants.SelectState && (currentIndex == B2BSearch.Importer.rawValue || currentIndex == B2BSearch.Producer.rawValue || currentIndex == B2BSearch.Hub.rawValue){
+        }else if (selectFieldType == AppConstants.SelectState || selectFieldType == AppConstants.SelectRegion)  && (currentIndex == B2BSearch.Importer.rawValue || currentIndex == B2BSearch.Producer.rawValue || currentIndex == B2BSearch.Hub.rawValue){
             let data = stateModel?[indexPath.row]
             cell.lblOption.text = data?.name
             cell.btnCheckBox.setImage((data?.isSelected == true) ? UIImage(named: "icon_blueSelected") : UIImage(named: "icon_uncheckedBox"), for: .normal)
@@ -174,7 +200,7 @@ extension BusinessMultiOptionsVC: UITableViewDelegate, UITableViewDataSource{
                     self.arrSelectedId.remove(at: index)
                 }
             }
-            }else if selectFieldType == AppConstants.SelectState && (currentIndex == B2BSearch.Importer.rawValue || currentIndex == B2BSearch.Producer.rawValue || currentIndex == B2BSearch.Hub.rawValue){
+            }else if (selectFieldType == AppConstants.SelectState || selectFieldType == AppConstants.SelectRegion) && (currentIndex == B2BSearch.Importer.rawValue || currentIndex == B2BSearch.Producer.rawValue || currentIndex == B2BSearch.Hub.rawValue){
                 stateModel?[indexPath.row].isSelected = !( stateModel?[indexPath.row].isSelected ?? false)
                 if self.stateModel?[indexPath.row].isSelected == true {
                     self.arrSelectedOption.append(stateModel?[indexPath.row].name ?? "")

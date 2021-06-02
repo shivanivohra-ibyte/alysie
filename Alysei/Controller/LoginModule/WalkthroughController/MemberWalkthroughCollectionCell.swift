@@ -37,12 +37,12 @@ class MemberWalkthroughCollectionCell: UICollectionViewCell {
   
   @IBAction func tapNext(_ sender: UIButton) {
     
-   // self.delegate?.tapNext(self, currentModel: self.getWalkThroughDataModel, btn: self.btnNext)
+    self.delegate?.tapNext(self, currentModel: self.getWalkThroughDataModel, btn: self.btnNext)
   }
   
   @IBAction func tapSkip(_ sender: UIButton) {
     
-    //self.delegate?.tapNext(self, currentModel: self.getWalkThroughDataModel, btn: self.btnSkip)
+    self.delegate?.tapNext(self, currentModel: self.getWalkThroughDataModel, btn: self.btnSkip)
   }
   
   //MARK: - Public Methods -

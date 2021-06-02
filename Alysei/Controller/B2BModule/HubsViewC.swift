@@ -64,6 +64,8 @@ extension HubsViewC: UICollectionViewDelegate, UICollectionViewDataSource, UICol
             controller?.currentIndex = B2BSearch.Importer.rawValue
         }else if arruserCount?[indexPath.row].role_id == UserRoles.voiceExperts.rawValue{
             controller?.currentIndex =  B2BSearch.Expert.rawValue
+        }else if arruserCount?[indexPath.row].role_id == UserRoles.travelAgencies.rawValue{
+            controller?.currentIndex =  B2BSearch.TravelAgencies.rawValue
         }
        
         

@@ -117,7 +117,8 @@ class BusinessViewModel: NSObject {
     case 5:
         self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Hubs))
         self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.ProductTypeBusiness))
-        self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectState))
+        //self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectState))
+        self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectRegion))
         self.arrBusinessData.append(BusinessDataModel(businessCellType: .collectionFilters, arrFilters: StaticArrayData.kImporterFilter))
         self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
   
@@ -241,7 +242,8 @@ class BusinessSingleHubViewModel: NSObject {
     case 5:
        // self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.Hubs))
         self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.ProductTypeBusiness))
-        self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectState))
+       // self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectState))
+        self.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.SelectRegion))
         self.arrBusinessData.append(BusinessDataModel(businessCellType: .collectionFilters, arrFilters: StaticArrayData.kImporterFilter))
         self.arrBusinessData.append(BusinessDataModel(businessCellType: .searchCell))
   

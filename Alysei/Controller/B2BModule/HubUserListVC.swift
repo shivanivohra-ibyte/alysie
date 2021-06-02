@@ -49,6 +49,9 @@ class HubUserListVC: AlysieBaseViewC {
     var passHubId:String?
     var passRoleId:String?
     var passUserTitle: String?
+    
+    var searchImpDone = false
+    
     private var currentChild: UIViewController {
         return self.children.last!
     }
@@ -114,7 +117,12 @@ class HubUserListVC: AlysieBaseViewC {
     private func getBusinessButtonTableCell(_ indexPath: IndexPath) -> UITableViewCell{
         
         let businessButtonTableCell = tblViewSearchOptions.dequeueReusableCell(withIdentifier: BusinessButtonTableCell.identifier()) as! BusinessButtonTableCell
-        businessButtonTableCell.configureData(withBusinessDataModel: self.businessViewModel?.arrBusinessData[indexPath.row] ?? BusinessDataModel(), currentIndex: self.currentIndex ?? 0)
+        //businessButtonTableCell.configureData(withBusinessDataModel: self.businessViewModel?.arrBusinessData[indexPath.row] ?? BusinessDataModel(), currentIndex: self.currentIndex ?? 0)
+        if self.searchImpDone == false{
+            businessButtonTableCell.configureData(withBusinessDataModel: self.businessViewModel?.arrBusinessData[indexPath.row] ?? BusinessDataModel(), currentIndex: self.currentIndex ?? 0)
+        }else{
+            print("No update")
+        }
         //    businessButtonTableCell.pushVCCallback = {
         //        let model = self.signUpViewModel.arrSignUpStepOne[indexPath.row]
         //        let controller = self.pushViewController(withName: SelectProductViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? SelectProductViewC
@@ -130,6 +138,79 @@ class HubUserListVC: AlysieBaseViewC {
             controller?.productType = productType
             controller?.arrStateRegion = arrStateRegionById
             controller?.currentIndex = self.currentIndex
+            if self.currentIndex == B2BSearch.Hub.rawValue{
+                if selectFieldType == AppConstants.SelectState{
+                    let Arr =  self.selectStateId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }
+            }
+            if self.currentIndex == B2BSearch.Importer.rawValue{
+                if selectFieldType == AppConstants.Hubs{
+                    let Arr =  self.selectImpHubId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }else if selectFieldType == AppConstants.SelectUserType{
+                    let Arr =  self.selectImpRoleId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }else if selectFieldType == AppConstants.ProductTypeBusiness{
+                    let Arr =  self.selectImpProductId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }else if selectFieldType == AppConstants.SelectState{
+                    let Arr =  self.selectImpRegionTypeId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }
+            }else if self.currentIndex == B2BSearch.Restaurant.rawValue{
+                if selectFieldType == AppConstants.Hubs{
+                    let Arr =  self.resHubId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }else if selectFieldType == AppConstants.RestaurantType{
+                    let Arr =  self.resTypeId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }
+            }else if self.currentIndex == B2BSearch.Expert.rawValue{
+                if selectFieldType == AppConstants.Hubs{
+                    let Arr =  self.selectExpertHubId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }else if selectFieldType == AppConstants.Expertise{
+                    let Arr =  self.selectExpertExpertiseId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }else if selectFieldType == AppConstants.Title{
+                    let Arr =  self.selectExpertTitleId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }else if selectFieldType == AppConstants.SelectState {
+                    let Arr =  self.selectExpertRegionId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }else if selectFieldType == AppConstants.SelectRegion{
+                    let Arr =  self.selectExpertRegionId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }
+            }else if self.currentIndex == B2BSearch.TravelAgencies.rawValue{
+                if selectFieldType == AppConstants.Hubs{
+                    let Arr =  self.selectTravelHubId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }else if selectFieldType == AppConstants.Speciality{
+                    let Arr =  self.selectTravelSpecialityId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }else if selectFieldType == AppConstants.SelectState {
+                    let Arr =  self.selectTravelRegionId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }else if selectFieldType == AppConstants.SelectRegion{
+                    let Arr =  self.selectTravelRegionId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }
+                
+            }else if self.currentIndex == B2BSearch.Producer.rawValue{
+                if selectFieldType == AppConstants.Hubs{
+                    let Arr =  self.selectProducerHubId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }else if selectFieldType == AppConstants.ProductTypeBusiness{
+                    let Arr =  self.selectProducerProductType?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }else if selectFieldType == AppConstants.SelectRegion{
+                    let Arr =  self.selectProducerRegionId?.components(separatedBy: ",")
+                    controller?.passSelectOptionId = Arr ?? [""]
+                }
+                
+            }
             controller?.doneCallBack = { arrSelectOptionName , arrSelectOptionId in
                 let optionName = arrSelectOptionName?.joined(separator: ",")
                 let  optionId = arrSelectOptionId?.joined(separator: ",")
@@ -194,7 +275,7 @@ class HubUserListVC: AlysieBaseViewC {
                     }else if selectFieldType == AppConstants.ProductTypeBusiness{
                         businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
                         self.selectProducerProductType = optionId
-                    }else if selectFieldType == AppConstants.SelectState{
+                    }else if selectFieldType == AppConstants.SelectRegion{
                         businessButtonTableCell.btnBusiness.setTitle(optionName ?? "", for: .normal)
                         self.selectProducerRegionId = optionId
                     }
@@ -212,36 +293,66 @@ class HubUserListVC: AlysieBaseViewC {
             
             
         }
-        
+        businessButtonTableCell.passCellCallback = { country in
+            if self.businessViewModel?.arrBusinessData[indexPath.row + 1].businessHeading == AppConstants.SelectState || self.businessViewModel?.arrBusinessData[indexPath.row + 1].businessHeading == AppConstants.SelectRegion {
+                if country == "Italy" || country == "italy"{
+                    self.businessViewModel?.arrBusinessData[indexPath.row + 1].businessHeading = AppConstants.SelectRegion
+                }else if country == "United States" || country == "USA"{
+                    self.businessViewModel?.arrBusinessData[indexPath.row + 1].businessHeading = AppConstants.SelectState
+                }else{
+                    self.businessViewModel?.arrBusinessData[indexPath.row + 1].businessHeading = AppConstants.SelectState
+                }
+                self.selectTravelRegionId = ""
+                self.selectExpertRegionId = ""
+              //  self.businessViewModel.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.ProductTypeBusiness))
+                self.tblViewSearchOptions.reloadRows(at: [IndexPath(row: indexPath.row + 1, section: 0)], with: .automatic)
+            }
+            
+        }
+
         return businessButtonTableCell
     }
     
     private func getBusinessFiltersTableCell(_ indexPath: IndexPath) -> UITableViewCell{
         
         let businessFiltersTableCell = tblViewSearchOptions.dequeueReusableCell(withIdentifier: BusinessFiltersTableCell.identifier()) as! BusinessFiltersTableCell
-        businessFiltersTableCell.configureData(withBusinessDataModel: self.businessViewModel?.arrBusinessData[indexPath.row] ??  BusinessDataModel())
+        //businessFiltersTableCell.configureData(withBusinessDataModel: self.businessViewModel?.arrBusinessData[indexPath.row] ??  BusinessDataModel())
+        if self.searchImpDone == false{
+            businessFiltersTableCell.configureData(withBusinessDataModel: self.businessViewModel?.arrBusinessData[indexPath.row] ?? BusinessDataModel())
+        }else{
+            print("No update")
+        }
         businessFiltersTableCell.passIdCallback = { arrSelectedIndex in
             if self.currentIndex == B2BSearch.Importer.rawValue || self.currentIndex == B2BSearch.Producer.rawValue{
                 self.selectedImpOptionId = arrSelectedIndex
                 if self.selectedImpOptionId.contains(0){
                     self.horecaValue = AppConstants.HorecaValue
+                }else{
+                    self.horecaValue = ""
                 }
                 if self.selectedImpOptionId.contains(1){
                     self.privateValue = AppConstants.PrivateLabelValue
+                }else{
+                    self.privateValue = ""
                 }
                 if self.selectedImpOptionId.contains(2){
                     self.alyseiBrandValue = AppConstants.AlyseiBrandValue
+                }else{
+                    self.alyseiBrandValue = ""
                 }
             }else{
                 self.selectedImpOptionId = arrSelectedIndex
                 if self.selectedImpOptionId.contains(0){
                     self.restPickUp = "\(RestValue.pickUp.rawValue)"
+                }else{
+                    self.restPickUp = ""
                 }
                 if self.selectedImpOptionId.contains(1){
                     self.restDelivery = "\(RestValue.delivery.rawValue)"
+                }else{
+                    self.restDelivery = ""
                 }
             }
-            
         }
         return businessFiltersTableCell
     }
@@ -253,6 +364,7 @@ class HubUserListVC: AlysieBaseViewC {
 //            if self.currentIndex == B2BSearch.Hub.rawValue{
 //                self.callSearchHubApi()
 //            }else
+            self.searchImpDone = true
             if self.currentIndex == B2BSearch.Importer.rawValue{
                 self.callSearchImporterApi()
             }else if self.currentIndex == B2BSearch.Restaurant.rawValue {
@@ -364,11 +476,11 @@ extension HubUserListVC {
                 self.arrSearchimpotrDataModel.append(contentsOf: self.newSearchModel?.importerSeacrhData ?? [SubjectData(with: [:])])
             }
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
-            self.selectImpProductId = ""
-            self.selectImpRegionTypeId = ""
-            self.horecaValue = ""
-            self.privateValue = ""
-            self.alyseiBrandValue = ""
+//            self.selectImpProductId = ""
+//            self.selectImpRegionTypeId = ""
+//            self.horecaValue = ""
+//            self.privateValue = ""
+//            self.alyseiBrandValue = ""
             cellCount = self.arrSearchimpotrDataModel.count
             self.extraCell = 4
             //self.tblViewSearchOptions.reloadRows(at: [IndexPath(row: 4, section: 0)], with: .automatic)
@@ -394,11 +506,11 @@ extension HubUserListVC {
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
             cellCount = self.arrSearchimpotrDataModel.count
             self.extraCell = 4
-            self.selectProducerProductType = ""
-            self.selectProducerRegionId = ""
-            self.horecaValue = ""
-            self.privateValue = ""
-            self.alyseiBrandValue = ""
+//            self.selectProducerProductType = ""
+//            self.selectProducerRegionId = ""
+//            self.horecaValue = ""
+//            self.privateValue = ""
+//            self.alyseiBrandValue = ""
             //self.tblViewSearchOptions.reloadRows(at: [IndexPath(row: 4, section: 0)], with: .automatic)
             self.businessViewModel = BusinessSingleHubViewModel(currentIndex: self.currentIndex ?? 0)
             
@@ -422,9 +534,9 @@ extension HubUserListVC {
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
             cellCount = self.arrSearchimpotrDataModel.count
             self.extraCell = 3
-            self.resTypeId = ""
-            self.restPickUp = ""
-            self.restDelivery = ""
+//            self.resTypeId = ""
+//            self.restPickUp = ""
+//            self.restDelivery = ""
             self.businessViewModel = BusinessSingleHubViewModel(currentIndex: self.currentIndex ?? 0)
             self.tblViewSearchOptions.reloadData()
             
@@ -447,10 +559,10 @@ extension HubUserListVC {
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
             cellCount = self.arrSearchimpotrDataModel.count
             self.extraCell = 5
-            self.selectExpertExpertiseId = ""
-            self.selectExpertTitleId = ""
-            self.selectExpertCountryId = ""
-            self.selectExpertRegionId = ""
+//            self.selectExpertExpertiseId = ""
+//            self.selectExpertTitleId = ""
+//            self.selectExpertCountryId = ""
+//            self.selectExpertRegionId = ""
             self.businessViewModel = BusinessSingleHubViewModel(currentIndex: self.currentIndex ?? 0)
             self.tblViewSearchOptions.reloadData()
             
@@ -473,9 +585,9 @@ extension HubUserListVC {
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
             cellCount = self.arrSearchimpotrDataModel.count
             self.extraCell = 4
-            self.selectTravelSpecialityId = ""
-            self.selectTravelCountryId = ""
-            self.selectTravelRegionId = ""
+//            self.selectTravelSpecialityId = ""
+//            self.selectTravelCountryId = ""
+//            self.selectTravelRegionId = ""
             self.businessViewModel = BusinessSingleHubViewModel(currentIndex: self.currentIndex ?? 0)
             self.tblViewSearchOptions.reloadData()
             
