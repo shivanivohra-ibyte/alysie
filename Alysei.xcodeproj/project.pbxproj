@@ -245,6 +245,8 @@
 		A84EECFF25B19FC900429B1D /* EditProfieTextViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84EECFE25B19FC900429B1D /* EditProfieTextViewTableCell.swift */; };
 		A84EED0325B1A31300429B1D /* EditProfileSelectTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84EED0225B1A31300429B1D /* EditProfileSelectTableCell.swift */; };
 		A84EED0725B1C2F700429B1D /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A84EED0625B1C2F600429B1D /* Home.storyboard */; };
+		C507B8502668B9EE0014344A /* SelectMemberShipVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C507B84F2668B9EE0014344A /* SelectMemberShipVC.swift */; };
+		C507B8532668E5F60014344A /* MarketPlaceCreateStoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C507B8522668E5F60014344A /* MarketPlaceCreateStoreVC.swift */; };
 		C513C19C26144DD20025CF27 /* SettingsScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C19B26144DD20025CF27 /* SettingsScreenVC.swift */; };
 		C513C19F26144E9A0025CF27 /* SettingsScreenCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C19E26144E9A0025CF27 /* SettingsScreenCollectionVC.swift */; };
 		C513C1A526146C280025CF27 /* WaterfallCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C1A426146C280025CF27 /* WaterfallCollectionViewLayout.swift */; };
@@ -527,6 +529,8 @@
 		A84EED0625B1C2F600429B1D /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		AB35031FA1F063FDBED9BE48 /* Pods-Alysei.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alysei.debug.xcconfig"; path = "Target Support Files/Pods-Alysei/Pods-Alysei.debug.xcconfig"; sourceTree = "<group>"; };
 		B74F6E820CA6F6DF6E8AA5D5 /* Pods_Alysei.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Alysei.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C507B84F2668B9EE0014344A /* SelectMemberShipVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMemberShipVC.swift; sourceTree = "<group>"; };
+		C507B8522668E5F60014344A /* MarketPlaceCreateStoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceCreateStoreVC.swift; sourceTree = "<group>"; };
 		C513C19B26144DD20025CF27 /* SettingsScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenVC.swift; sourceTree = "<group>"; };
 		C513C19E26144E9A0025CF27 /* SettingsScreenCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenCollectionVC.swift; sourceTree = "<group>"; };
 		C513C1A426146C280025CF27 /* WaterfallCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterfallCollectionViewLayout.swift; sourceTree = "<group>"; };
@@ -1431,6 +1435,8 @@
 				C51C337E2664F5CA002EC412 /* MarketPlaceHomeVC.swift */,
 				C51C33822664FB52002EC412 /* MarketPlaceWalkthroughVC.swift */,
 				C53A040426663ED800D07797 /* MarketPlaceWalkThroughDescVC.swift */,
+				C507B84F2668B9EE0014344A /* SelectMemberShipVC.swift */,
+				C507B8522668E5F60014344A /* MarketPlaceCreateStoreVC.swift */,
 			);
 			path = MarketPlace;
 			sourceTree = "<group>";
@@ -1663,6 +1669,7 @@
 				C5AAB85826171896000557B6 /* LiquidCollectionViewLayout.swift in Sources */,
 				27B4E8FD25EF957D00623E45 /* SignUpModel.swift in Sources */,
 				279AB34625FF436C0061FCB3 /* CountryTable.swift in Sources */,
+				C507B8532668E5F60014344A /* MarketPlaceCreateStoreVC.swift in Sources */,
 				C5B87764264A6A20009048E6 /* CustomPhotoPickerViewController.swift in Sources */,
 				279AB34725FF436C0061FCB3 /* ConfirmSelectionTable.swift in Sources */,
 				27D0FAB625CEE9FF00463FE0 /* SelectProductTableCell.swift in Sources */,
@@ -1751,6 +1758,7 @@
 				A84EED0325B1A31300429B1D /* EditProfileSelectTableCell.swift in Sources */,
 				27D0FAB325CEE9FF00463FE0 /* ProductSection.swift in Sources */,
 				C5957A32265CEB33004952D8 /* HubsViewC.swift in Sources */,
+				C507B8502668B9EE0014344A /* SelectMemberShipVC.swift in Sources */,
 				27A443AF25AE03720002BAAC /* MKMapViewExtended.swift in Sources */,
 				27A443B725AE03720002BAAC /* UIImageViewBorderWidthAndColor.swift in Sources */,
 				27A443A525AE03720002BAAC /* UILabelCornerRadius.swift in Sources */,

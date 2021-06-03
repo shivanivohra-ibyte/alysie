@@ -27,4 +27,8 @@ class MarketPlaceWalkthroughVC: AlysieBaseViewC {
     @IBAction func btnBottomAction(_ sender: UIButton){
         _ = pushViewController(withName: MarketPlaceWalkThroughDescVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
     }
+    
+    @IBAction func btnGetStartedAction(_ sender: UIButton){
+        _ = pushViewController(withName: SelectMemberShipVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
+    }
 }
