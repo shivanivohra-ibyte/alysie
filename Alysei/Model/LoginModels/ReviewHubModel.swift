@@ -97,6 +97,8 @@ class HubCityArray {
     var countryId: Int?
     var stateId: Int?
     var title: String?
+    var isSelected = false
+    
     var city: ReviewCityData?
    
     init(with data: [String:Any]?) {
@@ -107,6 +109,7 @@ class HubCityArray {
         if let city = data?["city"] as? [String:Any] {
             self.city = ReviewCityData.init(with: city)
         }
+        //self.isSelected = Bool.getBool(data?["isSelected"])
     }
 
 }

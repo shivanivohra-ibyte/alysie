@@ -122,6 +122,7 @@ struct StoryBoardConstants {
     static let kMain = "Main"
     static let kSplash = "Splash"
     static let kHubs = "Hubs"
+    static let kMarketplace = "Marketplace"
 }
 
 struct ButtonTitle {
@@ -185,7 +186,7 @@ struct APIUrl{
     static let kGetFieldValue = "get/field/value/"
     static let kGetRolesUserCount = "get/roles/by/hubid/"
     
-    static let kGetRoleListFromHubSlctn = "get/usersin/role?hub_id="
+    static let kGetRoleListFromHubSlctn = "get/usersin/role?"
     
     
     enum FeaturedProduct {

@@ -7,10 +7,12 @@
 
 import UIKit
 
-class PostsViewController: UIViewController {
+class PostsViewController: AlysieBaseViewC {
     
     @IBOutlet weak var postTableView: UITableView!
-
+    @IBOutlet weak var marketplaceView: UIView!
+    //@IBOutlet weak var postView: UIView!
+    
     var scrollCallBack: (() -> Void)? = nil
     var newFeedModel: NewFeedSearchModel?
     var arrNewFeedDataModel = [NewFeedSearchDataModel]()
@@ -21,6 +23,10 @@ class PostsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        // callNewFeedApi(pageNo)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(openMarketPlace))
+        self.marketplaceView.addGestureRecognizer(tap)
+        
+        
         // Do any additional setup after loading the view.
     }
     
@@ -31,6 +37,15 @@ class PostsViewController: UIViewController {
         self.postTableView.separatorStyle = .singleLine
         callNewFeedApi(1)
     }
+    
+    @objc func openMarketPlace(){
+       // let vc = pushViewController(withName: MarketPlaceHomeVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
+        guard let vc = UIStoryboard(name: StoryBoardConstants.kMarketplace, bundle: nil).instantiateViewController(identifier: "MarketPlaceHomeVC") as? MarketPlaceHomeVC else {return}
+        self.navigationController?.pushViewController(vc, animated: true)
+        self.hidesBottomBarWhenPushed = true
+        //self.tabBarController?.tabBar.bounds.height = 0
+    }
+   
    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // calculates where the user is in the y-axis
