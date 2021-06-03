@@ -88,6 +88,7 @@ class ProfileViewC: AlysieBaseViewC{
       let postsViewC = UIStoryboard.init(name: StoryBoardConstants.kHome, bundle: nil).instantiateViewController(withIdentifier: UserPostsViewController.id()) as! UserPostsViewController
       return postsViewC
     }()
+    
   private lazy var aboutViewC: AboutViewC = {
 
     let aboutViewC = UIStoryboard.init(name: StoryBoardConstants.kHome, bundle: nil).instantiateViewController(withIdentifier: AboutViewC.id()) as! AboutViewC
@@ -108,7 +109,7 @@ class ProfileViewC: AlysieBaseViewC{
 
     self.btnEditProfile.layer.cornerRadius = 0.0
 
-    let multiplier: CGFloat = (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0) > 0.0 ? 0.5 : 0.40
+    let multiplier: CGFloat = (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0) > 0.0 ? 0.9 : 0.7
     let space = self.view.frame.height * multiplier
 //    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + 660)
     self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + space)
