@@ -1,15 +1,14 @@
 //
-//  MarketPlaceCreateStoreVC.swift
+//  AddProductMarketplaceVC.swift
 //  Alysei
 //
-//  Created by SHALINI YADAV on 6/3/21.
+//  Created by SHALINI YADAV on 6/4/21.
 //
 
 import UIKit
 import TLPhotoPicker
-import Photos
 
-class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDelegate{
+class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var view1: UIView!
@@ -20,9 +19,11 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     @IBOutlet weak var view6: UIView!
     @IBOutlet weak var view7: UIView!
     @IBOutlet weak var view8: UIView!
-    @IBOutlet weak var imgCover: UIImageView!
-    @IBOutlet weak var btnCoverCameraImage: UIView!
-    @IBOutlet weak var btnProfileCameraImage: UIView!
+    @IBOutlet weak var view9: UIView!
+    @IBOutlet weak var view10: UIView!
+    @IBOutlet weak var view11: UIView!
+    @IBOutlet weak var view12: UIView!
+    @IBOutlet weak var imgStore: UIImageView!
     @IBOutlet weak var collectionViewImage: UICollectionView!
     @IBOutlet weak var headerView: UIView!
 
@@ -39,9 +40,11 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
         view6.addBorder()
         view7.addBorder()
         view8.addBorder()
-        btnCoverCameraImage.layer.cornerRadius = self.btnCoverCameraImage.frame.height / 2
-        btnProfileCameraImage.layer.cornerRadius = self.btnProfileCameraImage.frame.height / 2
-        imgCover.layer.cornerRadius = 15
+        view9.addBorder()
+        view10.addBorder()
+        view11.addBorder()
+        view12.addBorder()
+        
         headerView.drawBottomShadow()
         // Do any additional setup after loading the view.
     }
@@ -90,14 +93,16 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     //MARK:- IBAction
     
     @IBAction func btnNextAction(_ sender: UIButton){
-        _ = pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
+        _ = pushViewController(withName: MarketPlaceConfirmationVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
     }
+    
     @IBAction func btnBackAction(_ sender: UIButton){
         self.navigationController?.popViewController(animated: true)
     }
+
 }
 //MARK:- Custom Picker
-extension MarketPlaceCreateStoreVC: TLPhotosPickerLogDelegate {
+extension AddProductMarketplaceVC: TLPhotosPickerLogDelegate {
     //For Log User Interaction
     func selectedCameraCell(picker: TLPhotosPickerViewController) {
         print("selectedCameraCell")
@@ -143,8 +148,7 @@ extension MarketPlaceCreateStoreVC: TLPhotosPickerLogDelegate {
         vc.present(alert, animated: true, completion: nil)
     }
 }
-
-extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension AddProductMarketplaceVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if self.selectedAssets.count == 0{
             return 1
@@ -212,30 +216,5 @@ extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDat
             //alertToAddImage()
             alertToAddCustomPicker()
         }
-    }
-}
-extension UIView{
-    func addBorder(){
-        self.layer.borderColor = UIColor.lightGray.cgColor
-        self.layer.borderWidth = 0.5
-        self.layer.cornerRadius = 5
-    }
-}
-
-class ImageMaketPlaceCollectionViewCell:UICollectionViewCell{
-    @IBOutlet weak var image: UIImageView!
-    @IBOutlet weak var btnDelete: UIButton!
-    @IBOutlet weak var viewAddImage: UIView!
-    
-    var btnDeleteCallback:((Int) -> Void)? = nil
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        viewAddImage.layer.borderWidth = 0.5
-        viewAddImage.layer.borderColor = UIColor.lightGray.cgColor
-    }
-    
-    @IBAction func btnDeleteAction(_ sender: UIButton){
-        btnDeleteCallback?(sender.tag)
     }
 }
