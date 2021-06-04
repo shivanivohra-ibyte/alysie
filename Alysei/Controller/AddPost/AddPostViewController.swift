@@ -146,7 +146,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
 //        self.present(alert, animated: true, completion: nil)
     //}
     private func alertToAddCustomPicker() -> Void {
-        let viewCon = CustomPhotoPickerViewController()
+        let viewCon = PhotoPickerViewController()
         viewCon.delegate = self
         viewCon.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
             self?.showExceededMaximumAlert(vc: picker)
@@ -156,20 +156,21 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
 
         configure.mediaType = .image
         configure.numberOfColumn = 3
+        configure.groupByFetch = .day
 
         viewCon.configure = configure
         viewCon.selectedAssets = self.selectedAssets
         viewCon.logDelegate = self
 
-        self.present(viewCon, animated: true, completion: nil)
+        self.present(viewCon, animated: false, completion: nil)
     }
 
-//    func dismissPhotoPicker(withPHAssets: [PHAsset]) {
+    func dismissPhotoPicker(withPHAssets: [PHAsset]) {
 //        // if you want to used phasset.
-//        print("dismiss")
+        print("dismiss")
 //        print("selectedAssets-----------\(self.selectedAssets)")
 //        self.collectionViewImage.reloadData()
-//    }
+    }
 
     func dismissPhotoPicker(withTLPHAssets: [TLPHAsset]) {
         // use selected order, fullresolution image
@@ -270,6 +271,10 @@ extension AddPostViewController: TLPhotosPickerLogDelegate {
         // let image = picker.selectedAssets[at]
         //  print(image)
     }
+
+    func shouldDismissPhotoPicker(withTLPHAssets: [TLPHAsset]) -> Bool {
+        return true
+    }
     
     func deselectedPhoto(picker: TLPhotosPickerViewController, at: Int) {
         print("deselectedPhoto")
@@ -277,7 +282,7 @@ extension AddPostViewController: TLPhotosPickerLogDelegate {
     }
     
     func selectedAlbum(picker: TLPhotosPickerViewController, title: String, at: Int) {
-        print("selectedAlbum")
+         print("selectedAlbum")
     }
     func didExceedMaximumNumberOfSelection(picker: TLPhotosPickerViewController) {
         self.showExceededMaximumAlert(vc: picker)
@@ -310,6 +315,7 @@ extension AddPostViewController: TLPhotosPickerLogDelegate {
 //    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
 //
 //        guard let selectedImage = info[.editedImage] as? UIImage else { return }
+//        print(selectedImage.description)
 //        self.dismiss(animated: true) {
 //            self.uploadImageArray.append(selectedImage)
 //            // let compressImageData = selectedImage.jpegData(compressionQuality: 0.5)

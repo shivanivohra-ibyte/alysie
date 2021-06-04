@@ -13,7 +13,8 @@ class ProfileViewC: AlysieBaseViewC{
   
   //MARK: - IBOutlet -
   
-  @IBOutlet weak var collectionViewAddProduct: UICollectionView!
+    @IBOutlet weak var collectionViewAddProduct: UICollectionView!
+    @IBOutlet weak var tabsCollectionView: UICollectionView!
   @IBOutlet weak var containerView: UIView!
   @IBOutlet weak var btnPosts: UIButton!
   @IBOutlet weak var btnAbout: UIButton!
@@ -87,6 +88,7 @@ class ProfileViewC: AlysieBaseViewC{
       let postsViewC = UIStoryboard.init(name: StoryBoardConstants.kHome, bundle: nil).instantiateViewController(withIdentifier: UserPostsViewController.id()) as! UserPostsViewController
       return postsViewC
     }()
+    
   private lazy var aboutViewC: AboutViewC = {
 
     let aboutViewC = UIStoryboard.init(name: StoryBoardConstants.kHome, bundle: nil).instantiateViewController(withIdentifier: AboutViewC.id()) as! AboutViewC
@@ -106,7 +108,11 @@ class ProfileViewC: AlysieBaseViewC{
     _ = postsViewC
 
     self.btnEditProfile.layer.cornerRadius = 0.0
-    self.tblViewPosts.tableHeaderView?.setHeight(600.0 + 261.0)
+
+    let multiplier: CGFloat = (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0) > 0.0 ? 0.9 : 0.7
+    let space = self.view.frame.height * multiplier
+//    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + 660)
+    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + space)
     //self.tblViewPosts.tableFooterView = UIView()
     self.btnPosts.isSelected = true
     self.tblViewProfileCompletion.isHidden = true
@@ -118,6 +124,9 @@ class ProfileViewC: AlysieBaseViewC{
     self.postRequestToGetProgress()
 
     self.tblViewPosts.contentInsetAdjustmentBehavior = .never
+
+    self.tabsCollectionView.dataSource = self
+    self.tabsCollectionView.delegate = self
 
   }
 
@@ -154,7 +163,7 @@ class ProfileViewC: AlysieBaseViewC{
   
   @IBAction func tapPosts(_ sender: UIButton) {
     
-    self.tblViewPosts.tableHeaderView?.setHeight(600.0 + 861.0)
+//    self.tblViewPosts.tableHeaderView?.setHeight(600.0 + 861.0)
     self.viewSeparator.center.x = self.btnPosts.center.x
     self.btnPosts.isSelected = true
     self.btnAbout.isSelected = false
@@ -167,7 +176,7 @@ class ProfileViewC: AlysieBaseViewC{
   
   @IBAction func tapAbout(_ sender: UIButton) {
 
-    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height * 1.5)
+//    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height * 1.5)
 
     self.viewSeparator.center.x = self.btnAbout.center.x
     self.btnPosts.isSelected = false
@@ -183,7 +192,7 @@ class ProfileViewC: AlysieBaseViewC{
   
   @IBAction func tapContact(_ sender: UIButton) {
 
-    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height * 1.5)
+//    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height * 1.5)
 
     self.viewSeparator.center.x = self.btnContact.center.x
     self.btnPosts.isSelected = false
@@ -195,7 +204,7 @@ class ProfileViewC: AlysieBaseViewC{
     self.moveToNew(childViewController: contactViewC, fromController: self.currentChild)
     self.contactViewC.delegate = self
     self.contactViewC.tableData = self.contactDetail
-    self.tblViewPosts.tableHeaderView?.setHeight(kScreenWidth + 200.0)
+//    self.tblViewPosts.tableHeaderView?.setHeight(kScreenWidth + 200.0)
 
     self.contactViewC.view.bringSubviewToFront(self.contactViewC.editContactDetailButton)
   }
@@ -288,6 +297,20 @@ class ProfileViewC: AlysieBaseViewC{
     featuredProductCollectionCell.configure(withAllProductsDataModel: product,pushedFrom: 1)
     return featuredProductCollectionCell
   }
+
+    private func getTabCollectionViewCell(_ indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = self.tabsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? TabCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+
+        let imageName = ProfileTabRows().imageName(self.userType)[indexPath.row]
+
+        let title = ProfileTabRows().rowsTitle(self.userType)[indexPath.row]
+        cell.imageView.image = UIImage(named: imageName)//?.withRenderingMode(.alwaysTemplate)
+        cell.titleLabel.text = title
+        return cell
+
+    }
   
   private func moveToNew(childViewController newVC: UIViewController,fromController oldVC: UIViewController, completion:((() ->Void)? ) = nil){
     
@@ -363,6 +386,8 @@ class ProfileViewC: AlysieBaseViewC{
                 self.userType = roleID
 
                 self.updateListingTitle()
+
+                self.tabsCollectionView.reloadData()
 
                 self.editProfileViewCon?.userType = self.userType
                 var name = ""
@@ -599,17 +624,38 @@ extension ProfileViewC: UICollectionViewDelegate, UICollectionViewDataSource,UIC
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
+    if collectionView == self.tabsCollectionView {
+        if self.userType == nil {
+            return 0
+        }
+        return ProfileTabRows().noOfRows(self.userType)
+    }
+
     let productCategoryDataModel = self.signUpViewModel?.arrProductCategories.first
 //    let product = productCategoryDataModel?.arrAllProducts.count
     return productCategoryDataModel?.arrAllProducts.count ?? 0
   }
     
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+    if collectionView == self.tabsCollectionView {
+        return self.getTabCollectionViewCell(indexPath)
+    }
+
         
       return self.getFeaturedProductCollectionCell(indexPath)
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) -> Void {
+    if collectionView == self.tabsCollectionView {
+        if indexPath.row ==  0 {
+            self.tapPosts(UIButton())
+        } else if indexPath.row == 2 {
+            self.tapAbout(UIButton())
+        } else if indexPath.row == 3 {
+            self.tapContact(UIButton())
+        }
+    }
         
   }
   
