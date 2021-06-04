@@ -14,6 +14,7 @@ class SelectMemberShipVC: AlysieBaseViewC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        btnNext.isUserInteractionEnabled = false
         btnFreeMemberShip.setImage(UIImage(named: "Ellipse 22"), for: .normal)
         btnNext.layer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         btnNext.setTitleColor(UIColor.white, for: .normal)
@@ -29,8 +30,10 @@ class SelectMemberShipVC: AlysieBaseViewC {
         self.btnFreeMemberShip.setImage((sender.isSelected == true) ? UIImage(named: "icons8_checkmark_2") : UIImage(named: "Ellipse 22"), for: .normal)
         if sender.isSelected == true{
             btnNext.layer.backgroundColor = UIColor.init(hexString: "#004577").cgColor
+            btnNext.isUserInteractionEnabled = true
         }else{
             btnNext.layer.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
+            btnNext.isUserInteractionEnabled = false
         }
     }
     @IBAction func btnNextAction(_ sender: UIButton){
