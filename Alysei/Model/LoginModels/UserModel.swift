@@ -122,6 +122,19 @@ enum UserRoles: Int, Codable {
     case voyagers = 10
 }
 
+
+enum UserLevel {
+    case own
+    case third
+//    case distributer1 = 4
+//    case distributer2 = 5
+//    case distributer3 = 6
+//    case voiceExperts = 7
+//    case travelAgencies = 8
+//    case restaurant =  9
+//    case voyagers = 10
+}
+
 enum RolesBorderColor : String {
     case producer = "8EC9BB"
     case distributer1 = "#A02C2D"

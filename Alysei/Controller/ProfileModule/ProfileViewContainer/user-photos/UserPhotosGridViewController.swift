@@ -57,7 +57,7 @@ extension UserPhotosGridViewController : UICollectionViewDelegate, UICollectionV
 extension UserPhotosGridViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let collectionViewWitdh = collectionView.frame.width - 9
+        let collectionViewWitdh = collectionView.frame.width - 6
         let cellWidth = collectionViewWitdh / 3
 
         return CGSize(width: cellWidth, height: cellWidth)
@@ -95,6 +95,22 @@ extension UserPhotosGridViewController {
                 if photosURLList.count > 0 {
                     self.pageNumber += 1
                     self.photos.append(contentsOf: photosURLList)
+//                    self.photos.append(contentsOf: photosURLList)
+//                    self.photos.append(contentsOf: photosURLList)
+//                    self.photos.append(contentsOf: photosURLList)
+//                    self.photos.append(contentsOf: photosURLList)
+//                    self.photos.append(contentsOf: photosURLList)
+//                    self.photos.append(contentsOf: photosURLList)
+//                    self.photos.append(contentsOf: photosURLList)
+//                    self.photos.append(contentsOf: photosURLList)
+//                    self.photos.append(contentsOf: photosURLList)
+//                    self.photos.append(contentsOf: photosURLList)
+//                    self.photos.append(contentsOf: photosURLList)
+//                    self.photos.append(contentsOf: photosURLList)
+//                    self.photos.append(contentsOf: photosURLList)
+//                    self.photos.append(contentsOf: photosURLList)
+//                    self.photos.append(contentsOf: photosURLList)
+//                    self.photos.append(contentsOf: photosURLList)
                     self.updatePhotosList()
                 }
             } catch {
