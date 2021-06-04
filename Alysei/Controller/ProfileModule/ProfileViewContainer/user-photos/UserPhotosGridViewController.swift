@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import Foundation
 
 class UserPhotosGridViewController: AlysieBaseViewC {
 
     @IBOutlet weak var userPhotosCollectionView: UICollectionView!
 
     var photos = [String]()
+    var pageNumber = 1
+
+    //TODO: pagination is pending
+    var count = 100
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +24,13 @@ class UserPhotosGridViewController: AlysieBaseViewC {
 
         self.userPhotosCollectionView.delegate = self
         self.userPhotosCollectionView.dataSource = self
+
+        self.fetchPostWithPhotsFromServer(pageNumber)
+        
+    }
+
+    func updatePhotosList() {
+        self.userPhotosCollectionView.reloadData()
     }
 
 
@@ -34,11 +46,95 @@ extension UserPhotosGridViewController : UICollectionViewDelegate, UICollectionV
             return UICollectionViewCell()
         }
 
-        
+        cell.imageView.setImage(withString: "\(kImageBaseUrl)\(self.photos[indexPath.row])")
 
         return cell
     }
 
+}
 
+
+extension UserPhotosGridViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let collectionViewWitdh = collectionView.frame.width - 9
+        let cellWidth = collectionViewWitdh / 3
+
+        return CGSize(width: cellWidth, height: cellWidth)
+    }
+}
+
+
+extension UserPhotosGridViewController {
+    func fetchPostWithPhotsFromServer(_ page: Int, count: Int = 30) {
+        let urlString = APIUrl.Profile.photoList + "?page=\(page)&per_page=\(count)"
+
+        guard let request = WebServices.shared.buildURLRequest(urlString, method: .GET) else {
+            return
+        }
+        WebServices.shared.request(request) { data, URLResponse, statusCode, error in
+            print("some")
+
+            guard statusCode == 200 else { return }
+
+            guard let data = data else { return }
+
+            do {
+                let response = try JSONDecoder().decode(PhotosList.request.self, from: data)
+                print(response)
+
+                let photosURLList = response.data.data.reduce( [String]() ) { res, innerData in
+                  let result =  innerData.attachments.reduce([String]()) { resultInner, attachments in
+                        var innerResult = resultInner
+                        innerResult.append(attachments.attachment_link.attachment_url)
+                        return innerResult
+                    }
+                    return result
+                }
+
+                if photosURLList.count > 0 {
+                    self.pageNumber += 1
+                    self.photos.append(contentsOf: photosURLList)
+                    self.updatePhotosList()
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+
+        }
+    }
+}
+
+
+extension UserPhotosGridViewController {
+//    struct viewModel {
+//        var response: Photos.request
+//        var attachments: [Photos.attachments] { response.data.data. }
+//    }
+
+
+
+    enum PhotosList {
+        struct request: Codable {
+            var data: outerData
+            var success: Int
+        }
+
+        struct outerData: Codable {
+            var data: [innerData]
+        }
+
+        struct innerData: Codable {
+            var attachments: [attachments]
+        }
+
+        struct attachments: Codable {
+            var attachment_link: attachment_link
+        }
+
+        struct attachment_link: Codable {
+            var attachment_url: String
+        }
+    }
 }
 

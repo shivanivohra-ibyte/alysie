@@ -8,5 +8,5 @@
 import UIKit
 
 class UserPhotosGridCollectionViewCell: UICollectionViewCell {
-    
+    @IBOutlet var imageView: UIImageView!
 }

@@ -88,6 +88,15 @@ class ProfileViewC: AlysieBaseViewC{
       let postsViewC = UIStoryboard.init(name: StoryBoardConstants.kHome, bundle: nil).instantiateViewController(withIdentifier: UserPostsViewController.id()) as! UserPostsViewController
       return postsViewC
     }()
+
+    private lazy var photosViewcontroller: UserPhotosGridViewController = {
+
+//        if let vc = self.storyboard?.instantiateViewController(identifier: "UserPhotosGridViewController") as? UserPhotosGridViewController {
+//        }
+        let view = UIStoryboard.init(name: StoryBoardConstants.kHome, bundle: nil).instantiateViewController(withIdentifier: "UserPhotosGridViewController") as! UserPhotosGridViewController
+        return view
+    }()
+
     
   private lazy var aboutViewC: AboutViewC = {
 
@@ -173,6 +182,16 @@ class ProfileViewC: AlysieBaseViewC{
     self.btnContact.setTitleColor(AppColors.liteGray.color, for: .normal)
     self.moveToNew(childViewController: postsViewC, fromController: self.currentChild)
   }
+
+    func tapPhotos(_ sender: UIButton) {
+
+//        if let vc = self.storyboard?.instantiateViewController(identifier: "UserPhotosGridViewController") as? UserPhotosGridViewController {
+        self.moveToNew(childViewController: self.photosViewcontroller, fromController: self.currentChild)
+//            self.present(vc, animated: true, completion: nil)
+//        }
+    }
+
+
   
   @IBAction func tapAbout(_ sender: UIButton) {
 
@@ -650,6 +669,8 @@ extension ProfileViewC: UICollectionViewDelegate, UICollectionViewDataSource,UIC
     if collectionView == self.tabsCollectionView {
         if indexPath.row ==  0 {
             self.tapPosts(UIButton())
+        } else if indexPath.row == 1 {
+            self.tapPhotos(UIButton())
         } else if indexPath.row == 2 {
             self.tapAbout(UIButton())
         } else if indexPath.row == 3 {

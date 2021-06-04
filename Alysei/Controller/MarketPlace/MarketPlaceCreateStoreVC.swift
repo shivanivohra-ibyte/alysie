@@ -46,7 +46,8 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
         // Do any additional setup after loading the view.
     }
     private func alertToAddCustomPicker() -> Void {
-        let viewCon = CustomPhotoPickerViewController()
+//        let viewCon = CustomPhotoPickerViewController()
+        let viewCon = TLPhotosPickerViewController()
         viewCon.delegate = self
         viewCon.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
             self?.showExceededMaximumAlert(vc: picker)

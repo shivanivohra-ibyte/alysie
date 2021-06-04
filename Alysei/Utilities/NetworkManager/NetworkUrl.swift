@@ -35,13 +35,14 @@ let kDeviceModel                = UIDevice.current.model
 //let domain                      = "http://alysei.ibyteinfomatics.com"
 
 
-//let domain                      = "https://https-alyseiapi-ibyteworkshop-com-3.moesif.net/eyJhcHAiOiIxOTg6MTE5MCIsInZlciI6IjIuMCIsIm9yZyI6Ijg4OjE2OTkiLCJpYXQiOjE2MTQ1NTY4MDB9.Xp9RY5TPnnE3Aczw11vAT_hR--ve9i8aQrNNFDKTYrA"
+let domain                      = "https://https-alyseiapi-ibyteworkshop-com-3.moesif.net/eyJhcHAiOiIxOTg6MTE5MCIsInZlciI6IjIuMCIsIm9yZyI6Ijg4OjE2OTkiLCJpYXQiOjE2MjI1MDU2MDB9._oA92M6D_41n-jjhUT2cI5ciiqQ6oYkanoaBKSrZYho"
 
 
-let domain                      = "https://alyseiapi.ibyteworkshop.com"
+//let domain                      = "https://alyseiapi.ibyteworkshop.com"
+let imageDomain                 = "https://alyseiapi.ibyteworkshop.com"
 let kBASEURL                    = "\(domain)/public/api/"
-let kImageBaseUrl               = "\(domain)/"
-let kImageBaseUrl1              = "\(domain)"
+let kImageBaseUrl               = "\(imageDomain)/"
+let kImageBaseUrl1              = "\(imageDomain)"
 let kAuthentication             = "Authentication"      //Header key of request  encrypt data
 let kEncryptionKey              = ""                    //Encryption key replace this with your projectname
 
