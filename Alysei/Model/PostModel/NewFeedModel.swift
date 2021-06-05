@@ -74,8 +74,12 @@ class NewFeedSearchDataModel{
         if let state = dictResponse["state"] as? [String:Any]{
             self.state = CountryModel.init(data: state)
         }
-        
-        
+    }
+
+
+
+    init(_ data: PostList.innerData) {
+        self.body = data.body
     }
 }
 

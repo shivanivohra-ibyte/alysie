@@ -640,6 +640,7 @@
 		273E5E7225BB37F4009AF5A4 /* ProfileViewContainer */ = {
 			isa = PBXGroup;
 			children = (
+				6140882C266B99A500A98B0E /* user-posts */,
 				6140882526697A1600A98B0E /* user-photos */,
 				273E5E7325BB37F4009AF5A4 /* ProfileViewC.swift */,
 				273E5E7625BB381E009AF5A4 /* PostsViewC.swift */,
@@ -652,8 +653,6 @@
 				A84EECFE25B19FC900429B1D /* EditProfieTextViewTableCell.swift */,
 				C562C4B12626CACD009F9E3B /* ProfileCompletionViewController.swift */,
 				C562C4C02626D582009F9E3B /* ProfileCompletionTableViewCell.swift */,
-				C5B98112263FE55B002BFA23 /* UserPostsViewController.swift */,
-				C5B98115263FE65D002BFA23 /* UserPostsTableViewCell.swift */,
 				61971C3F265A8DF3002DD260 /* TabCollectionViewCell.swift */,
 			);
 			path = ProfileViewContainer;
@@ -1326,6 +1325,15 @@
 				6140882A26697BB100A98B0E /* UserPhotosGridCollectionViewCell.swift */,
 			);
 			path = "user-photos";
+			sourceTree = "<group>";
+		};
+		6140882C266B99A500A98B0E /* user-posts */ = {
+			isa = PBXGroup;
+			children = (
+				C5B98112263FE55B002BFA23 /* UserPostsViewController.swift */,
+				C5B98115263FE65D002BFA23 /* UserPostsTableViewCell.swift */,
+			);
+			path = "user-posts";
 			sourceTree = "<group>";
 		};
 		61A7A3C6264C6132000F83E0 /* tab */ = {

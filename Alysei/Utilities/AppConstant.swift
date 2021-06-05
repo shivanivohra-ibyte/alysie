@@ -207,6 +207,7 @@ struct APIUrl{
         static let fetchAboutDetails = kBASEURL + "get/member/about/tab"
 
         static let photoList = kBASEURL + "get/all/user/post/1"
+        static let postList = kBASEURL + "get/all/user/post/0"
 
     }
     enum ReviewHub{
