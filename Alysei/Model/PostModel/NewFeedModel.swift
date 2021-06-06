@@ -80,10 +80,12 @@ class NewFeedSearchDataModel{
 
     init(_ data: PostList.innerData) {
         self.body = data.body
+        self.subjectId = data.subject_id
     }
 }
 
-class SubjectData {
+class SubjectData: Codable {
+
     var userId: Int?
     var name: String?
     var email: String?
@@ -91,6 +93,7 @@ class SubjectData {
     var companyName: String?
     var restaurantName: String?
     var avatarId: Avatar?
+
     init(with dictResponse: [String:Any]){
         self.userId = Int.getInt(dictResponse["user_id"])
         self.name = String.getString(dictResponse["name"])
@@ -101,18 +104,34 @@ class SubjectData {
         if let avatar = dictResponse["avatar_id"] as? [String:Any]{
             self.avatarId = Avatar.init(with: avatar)
         }
-         
     }
+
+
+    private enum CodingKeys: String, CodingKey {
+        case userId = "user_id"
+        case name
+        case email
+        case roleId = "role_id"
+        case companyName = "company_name"
+        case restaurantName = "restaurant_name"
+        case avatarId = "avatar_id"
+    }
+
     
 }
 
-class Avatar {
+class Avatar: Codable {
     var id: Int?
     var attachmentUrl: String?
     
     init(with dictResponse: [String:Any]){
         self.id = Int.getInt(dictResponse["id"])
         self.attachmentUrl = String.getString(dictResponse["attachment_url"])
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case attachmentUrl = "attachment_url"
     }
 }
 class Attachments{

@@ -119,10 +119,12 @@ class ProfileViewC: AlysieBaseViewC{
 
     self.btnEditProfile.layer.cornerRadius = 0.0
 
-    let multiplier: CGFloat = (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0) > 0.0 ? 0.65 : 0.42
-    let space = self.view.frame.height * multiplier
+//    let multiplier: CGFloat = (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0) > 0.0 ? 0.65 : 0.42
+//    let space = self.view.frame.height * multiplier
 //    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + 660)
-    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + space)
+//    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + space)
+
+    self.tblViewPosts.tableHeaderView?.setHeight(610.0 + self.view.frame.height - 250)
     //self.tblViewPosts.tableFooterView = UIView()
     self.btnPosts.isSelected = true
     self.tblViewProfileCompletion.isHidden = true

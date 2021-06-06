@@ -108,7 +108,16 @@ enum PostList {
 
     struct innerData: Codable {
         var attachments: [attachments]
+        var subject_id: SubjectData
         var body: String?
+    }
+
+    struct subject_id: Codable {
+        var user_id: Int
+        var role_id: Int
+        var company_name: String
+        var name: String
+        var email: String
     }
     
     struct attachments: Codable {
