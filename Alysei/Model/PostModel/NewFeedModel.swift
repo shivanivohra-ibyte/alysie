@@ -80,7 +80,8 @@ class NewFeedSearchDataModel{
 
     init(_ data: PostList.innerData) {
         self.body = data.body
-        self.subjectId = data.subject_id
+        self.subjectId = data.subjectData
+        self.attachmentCount = data.attachmentCount
     }
 }
 
@@ -134,7 +135,7 @@ class Avatar: Codable {
         case attachmentUrl = "attachment_url"
     }
 }
-class Attachments{
+class Attachments: Codable{
     var activityAttachmentId: Int?
     var attachmentLink: AttachmentLink?
     init(with dictResponse: [String:Any]){
@@ -143,12 +144,21 @@ class Attachments{
             self.attachmentLink = AttachmentLink.init(with: attachment_link)
         }
     }
+
+    private enum CodingKeys: String, CodingKey {
+        case activityAttachmentId = "activity_attachment_id"
+        case attachmentLink = "attachment_link"
+    }
 }
 
-class AttachmentLink {
+class AttachmentLink: Codable {
     var attachmentUrl: String?
     
     init(with dictResponse: [String:Any]){
         self.attachmentUrl = String.getString(dictResponse["attachment_url"])
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case attachmentUrl = "attachment_url"
     }
 }

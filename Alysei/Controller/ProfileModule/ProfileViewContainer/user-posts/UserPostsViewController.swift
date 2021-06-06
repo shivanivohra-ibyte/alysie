@@ -25,6 +25,7 @@ class UserPostsViewController: AlysieBaseViewC {
 
         self.fetchPostWithPhotsFromServer(pageNumber)
 
+        self.userPost.rowHeight = UITableView.automaticDimension
         self.userPost.tableFooterView = UIView()
     }
 
@@ -85,11 +86,17 @@ extension UserPostsViewController : UITableViewDelegate,UITableViewDataSource{
         let data = self.postData[indexPath.row]
 //        cell.lblPostDesc?.text = data.body
         cell.configCell(NewFeedSearchDataModel(data), indexPath.row)
+        cell.sizeToFit()
         return cell
     }
-    
+
+
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 400
+//    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 410
+        return UITableView.automaticDimension
     }
 }
 
@@ -107,9 +114,19 @@ enum PostList {
     }
 
     struct innerData: Codable {
-        var attachments: [attachments]
-        var subject_id: SubjectData
+//        var attachments: [attachments]
+        var subjectData: SubjectData
         var body: String?
+        var attachmentCount: Int
+        var attachments: [Attachments]?
+
+        private enum CodingKeys: String, CodingKey {
+//            case attachments
+            case subjectData = "subject_id"
+            case body
+            case attachmentCount = "attachment_count"
+            case attachments
+        }
     }
 
     struct subject_id: Codable {
