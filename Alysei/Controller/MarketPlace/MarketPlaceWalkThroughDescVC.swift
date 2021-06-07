@@ -13,9 +13,12 @@ class MarketPlaceWalkThroughDescVC: UIViewController {
     
     @IBOutlet weak var collectionViewWalkthrough: UICollectionView!
     
+    var walkthroughModel = [GetWalkThroughDataModel]()
+    //var getWalkThroughViewModel: GetWalkThroughViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        callWalkthroughApi()
         // Do any additional setup after loading the view.
     }
     
@@ -24,7 +27,8 @@ class MarketPlaceWalkThroughDescVC: UIViewController {
         
         let walkthroughCollectionCell = collectionViewWalkthrough.dequeueReusableCell(withReuseIdentifier: MemberWalkthroughCollectionCell.identifier(), for: indexPath) as! MemberWalkthroughCollectionCell
        walkthroughCollectionCell.paging.currentPage = indexPath.row
-       // walkthroughCollectionCell.configureData(withGetWalkThroughDataModel: self.getWalkThroughViewModel.arrWalkThroughs[indexPath.item], indexPath: indexPath, viewModel: self.getWalkThroughViewModel)
+       
+        walkthroughCollectionCell.configureData(withGetWalkThroughDataModel: self.walkthroughModel[indexPath.item], indexPath: indexPath, viewModel: GetWalkThroughViewModel([:]))
         walkthroughCollectionCell.delegate = self
         return walkthroughCollectionCell
       }
@@ -39,7 +43,7 @@ class MarketPlaceWalkThroughDescVC: UIViewController {
 extension MarketPlaceWalkThroughDescVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 3
+    return walkthroughModel.count
   }
     
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -60,7 +64,7 @@ extension MarketPlaceWalkThroughDescVC: NextButtonDelegate{
     
     if btn == cell.btnNext{
       
-      let walkthroughArray =  3 //self.getWalkThroughViewModel.arrWalkThroughs.count
+      let walkthroughArray =  self.walkthroughModel.count
       let currentIndexPath = collectionViewWalkthrough.indexPath(for: cell)!
    
       if currentIndexPath.item < walkthroughArray - 1{
@@ -79,12 +83,26 @@ extension MarketPlaceWalkThroughDescVC: NextButtonDelegate{
       }
       else{
         cell.btnNext.isUserInteractionEnabled = false
-        //self.postRequestToGetRegistrationFields(cell.btnNext)
       }
     }
     else if btn == cell.btnSkip{
       cell.btnSkip.isUserInteractionEnabled = false
-      //self.postRequestToGetRegistrationFields(cell.btnSkip)
     }
   }
+}
+
+extension MarketPlaceWalkThroughDescVC {
+    func callWalkthroughApi(){
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetMarketPlaceWalkthrough, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errortype, statusCode) in
+            
+            let response = dictResponse as? [String:Any]
+            
+            if let data = response?["data"] as? [[String:Any]]{
+                self.walkthroughModel = data.map({GetWalkThroughDataModel.init(withDictionary: $0)})
+                
+            }
+            self.collectionViewWalkthrough.reloadData()
+        }
+       
+    }
 }

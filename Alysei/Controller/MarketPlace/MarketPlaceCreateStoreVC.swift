@@ -21,6 +21,7 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     @IBOutlet weak var view7: UIView!
     @IBOutlet weak var view8: UIView!
     @IBOutlet weak var imgCover: UIImageView!
+    @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var btnCoverCameraImage: UIView!
     @IBOutlet weak var btnProfileCameraImage: UIView!
     @IBOutlet weak var collectionViewImage: UICollectionView!
@@ -28,6 +29,8 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
 
     var uploadImageArray = [UIImage]()
     var selectedAssets = [TLPHAsset]()
+    var picker = UIImagePickerController()
+    var uploadProfilePic = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +42,7 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
         view6.addBorder()
         view7.addBorder()
         view8.addBorder()
+        imgProfile.layer.cornerRadius = self.imgProfile.frame.height / 2
         btnCoverCameraImage.layer.cornerRadius = self.btnCoverCameraImage.frame.height / 2
         btnProfileCameraImage.layer.cornerRadius = self.btnProfileCameraImage.frame.height / 2
         imgCover.layer.cornerRadius = 15
@@ -96,12 +100,79 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     @IBAction func btnBackAction(_ sender: UIButton){
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func btnUploadProfilePic(_ sender: UIButton){
+        uploadProfilePic = true
+        alertToAddImage()
+    }
+    
+    @IBAction func btnUploadCoverPic(_ sender: UIButton){
+        uploadProfilePic = false
+        alertToAddImage()
+    }
+     private func alertToAddImage() -> Void {
+         
+         let alert:UIAlertController = UIAlertController(title: AlertMessage.kSourceType, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+ 
+         let cameraAction = UIAlertAction(title: AlertMessage.kTakePhoto,
+                                          style: UIAlertAction.Style.default) { (action) in
+             self.showImagePicker(withSourceType: .camera, mediaType: .image)
+           
+         }
+ 
+         let galleryAction = UIAlertAction(title: AlertMessage.kChooseLibrary,
+                                           style: UIAlertAction.Style.default) { (action) in
+             self.showImagePicker(withSourceType: .photoLibrary, mediaType: .image)
+         }
+ 
+         let cancelAction = UIAlertAction(title: AlertMessage.kCancel,
+                                          style: UIAlertAction.Style.cancel) { (action) in
+             print("\(AlertMessage.kCancel) tapped")
+         }
+         alert.addAction(cameraAction)
+         alert.addAction(galleryAction)
+ 
+         alert.addAction(cancelAction)
+         self.present(alert, animated: true, completion: nil)
+     }
+        private func showImagePicker(withSourceType type: UIImagePickerController.SourceType,mediaType: MediaType) -> Void {
+
+            if UIImagePickerController.isSourceTypeAvailable(type) {
+
+                self.picker.mediaTypes = mediaType.CameraMediaType
+                self.picker.allowsEditing = true
+                self.picker.sourceType = type
+                self.present(self.picker,animated: true,completion: {
+                    self.picker.delegate = self
+                })
+                self.picker.delegate = self }
+            else{
+                self.showAlert(withMessage: "This feature is not available.")
+            }
+        }
 }
+    extension MarketPlaceCreateStoreVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+    
+            guard let selectedImage = info[.editedImage] as? UIImage else { return }
+            print(selectedImage.description)
+            self.dismiss(animated: true) {
+                if self.uploadProfilePic == true{
+                    self.imgProfile.image = selectedImage
+                }else{
+                self.imgCover.image = selectedImage
+                }
+            }
+    
+        }
+    }
 //MARK:- Custom Picker
 extension MarketPlaceCreateStoreVC: TLPhotosPickerLogDelegate {
     //For Log User Interaction
-    func selectedCameraCell(picker: TLPhotosPickerViewController) {
-        print("selectedCameraCell")
+    func selectedCameraCell(picker
+                                : TLPhotosPickerViewController) {
+        print("selectedCameraCe ll")
     }
 
     func selectedPhoto(picker: TLPhotosPickerViewController, at: Int) {

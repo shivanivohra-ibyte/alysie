@@ -49,7 +49,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Posts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qM2-9u-snv">
-                                                        <rect key="frame" x="26.5" y="40" width="30.5" height="15.5"/>
+                                                        <rect key="frame" x="25" y="40" width="33.5" height="15.5"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -85,7 +85,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MarketPlace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBk-V3-4ZK">
-                                                        <rect key="frame" x="8" y="41" width="67.5" height="14"/>
+                                                        <rect key="frame" x="3.5" y="40.5" width="76.5" height="15"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -118,7 +118,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjw-Gh-Lxc">
-                                                        <rect key="frame" x="23" y="41" width="37.5" height="14"/>
+                                                        <rect key="frame" x="21" y="40.5" width="42" height="15"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -151,7 +151,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hg-M3-ehX">
-                                                        <rect key="frame" x="8" y="41" width="67.5" height="14"/>
+                                                        <rect key="frame" x="2.5" y="40.5" width="78.5" height="15"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -398,7 +398,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <imageView autoresizesSubviews="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="activity_welcome_bg" translatesAutoresizingMaskIntoConstraints="NO" id="kUQ-6J-mQe" customClass="ImageLoader" customModule="Alysei" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="-70" width="417" height="883"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="417" height="813"/>
                                                 </imageView>
                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xu1-a9-ojC">
                                                     <rect key="frame" x="0.0" y="0.0" width="417" height="813"/>
@@ -485,7 +485,7 @@
                                                 <constraint firstItem="xu1-a9-ojC" firstAttribute="bottom" secondItem="kUQ-6J-mQe" secondAttribute="bottom" id="0WT-xO-gDD"/>
                                                 <constraint firstItem="kUQ-6J-mQe" firstAttribute="leading" secondItem="ESr-FT-RFW" secondAttribute="leading" id="3FE-Th-zdS"/>
                                                 <constraint firstAttribute="trailing" secondItem="kUQ-6J-mQe" secondAttribute="trailing" id="A3f-m4-qcV"/>
-                                                <constraint firstItem="kUQ-6J-mQe" firstAttribute="top" secondItem="ESr-FT-RFW" secondAttribute="top" constant="-70" id="GgC-5q-ypy"/>
+                                                <constraint firstItem="kUQ-6J-mQe" firstAttribute="top" secondItem="ESr-FT-RFW" secondAttribute="top" id="GgC-5q-ypy"/>
                                                 <constraint firstItem="xu1-a9-ojC" firstAttribute="leading" secondItem="kUQ-6J-mQe" secondAttribute="leading" id="VFj-e0-9uP"/>
                                                 <constraint firstItem="lH5-bf-Ho3" firstAttribute="leading" secondItem="ESr-FT-RFW" secondAttribute="leading" id="aIc-JM-b9N"/>
                                                 <constraint firstAttribute="bottom" secondItem="kUQ-6J-mQe" secondAttribute="bottom" id="iJ9-Fs-dBY"/>
@@ -591,13 +591,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Free Membership" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="99q-6O-NWl">
-                                <rect key="frame" x="75" y="146.5" width="149" height="22.5"/>
+                                <rect key="frame" x="75" y="146" width="171" height="23.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pP-IB-o4X">
-                                <rect key="frame" x="30" y="239" width="354" height="50"/>
+                                <rect key="frame" x="30" y="239.5" width="354" height="50"/>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="pfd-Tp-eGC"/>
@@ -693,7 +693,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="1165"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="producer_signup_bg" translatesAutoresizingMaskIntoConstraints="NO" id="2Qe-93-b91">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="2Qe-93-b91">
                                             <rect key="frame" x="10" y="5" width="394" height="180"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="180" id="OLV-wo-hAc"/>
@@ -709,6 +709,9 @@
                                                         <constraint firstAttribute="height" constant="30" id="a5s-bk-ucR"/>
                                                     </constraints>
                                                     <state key="normal" image="camera_icon_white-1"/>
+                                                    <connections>
+                                                        <action selector="btnUploadCoverPic:" destination="pNP-sg-GWd" eventType="touchUpInside" id="IIu-6q-MAm"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -719,7 +722,7 @@
                                                 <constraint firstAttribute="height" constant="40" id="fM6-ka-zXs"/>
                                             </constraints>
                                         </view>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="select_role4" translatesAutoresizingMaskIntoConstraints="NO" id="iQt-VQ-X9S">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_icon_normal" translatesAutoresizingMaskIntoConstraints="NO" id="iQt-VQ-X9S">
                                             <rect key="frame" x="40" y="135" width="100" height="100"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="100" id="OJf-pv-wnL"/>
@@ -736,6 +739,9 @@
                                                         <constraint firstAttribute="height" constant="30" id="wcn-qY-AN8"/>
                                                     </constraints>
                                                     <state key="normal" image="camera_icon_white-1"/>
+                                                    <connections>
+                                                        <action selector="btnUploadProfilePic:" destination="pNP-sg-GWd" eventType="touchUpInside" id="bfr-wb-8SJ"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1132,6 +1138,7 @@
                         <outlet property="collectionViewImage" destination="2y7-V5-JGR" id="3qq-kY-IWy"/>
                         <outlet property="headerView" destination="3AI-rG-kPs" id="jqh-zq-GFb"/>
                         <outlet property="imgCover" destination="2Qe-93-b91" id="nKM-p7-xg7"/>
+                        <outlet property="imgProfile" destination="iQt-VQ-X9S" id="vnx-0Z-rWz"/>
                         <outlet property="tableView" destination="CGe-TB-e4W" id="tgs-iG-II2"/>
                         <outlet property="view1" destination="twW-MV-zrT" id="rEM-zv-eCI"/>
                         <outlet property="view2" destination="r04-Ey-KXA" id="omp-KM-lqd"/>
@@ -1827,13 +1834,13 @@
         <image name="back_black" width="24" height="18.5"/>
         <image name="back_white" width="24" height="18.5"/>
         <image name="button_compass.png" width="40" height="40"/>
-        <image name="camera_icon_white-1" width="20" height="16"/>
+        <image name="camera_icon_white-1" width="19.5" height="15.5"/>
         <image name="dropdown_selector" width="13" height="8.5"/>
         <image name="icons8_happy" width="76" height="76"/>
         <image name="icons8_shop_3-1" width="16" height="16"/>
         <image name="image_placeholder" width="41" height="33"/>
-        <image name="producer_signup_bg" width="376" height="160"/>
         <image name="select_role4" width="78" height="78"/>
+        <image name="user_icon_normal" width="128" height="128"/>
         <image name="walkthrough_bg2" width="376" height="812"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

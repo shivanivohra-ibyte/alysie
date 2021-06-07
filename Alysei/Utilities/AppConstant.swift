@@ -187,6 +187,7 @@ struct APIUrl{
     static let kGetRolesUserCount = "get/roles/by/hubid/"
     
     static let kGetRoleListFromHubSlctn = "get/usersin/role?"
+    static let kGetMarketPlaceWalkthrough = "get/marketplace/walkthrough"
     
     
     enum FeaturedProduct {
