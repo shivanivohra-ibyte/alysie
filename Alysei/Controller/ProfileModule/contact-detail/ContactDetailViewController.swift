@@ -123,7 +123,7 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
                 }
             case .authorizedAlways, .authorizedWhenInUse:
                 let controller = pushViewController(withName: MapViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? MapViewC
-                controller?.dismiss = { [weak self] (mapAddressModel) in
+                controller?.dismiss = { [weak self] (mapAddressModel , latitude, longitude) in
                     self?.addressTextField.text = "\(mapAddressModel.address1), \(mapAddressModel.address2), \(mapAddressModel.mapAddress)".capitalized
                 }
 //                controller?.delegate = self

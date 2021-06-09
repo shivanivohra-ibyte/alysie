@@ -37,8 +37,10 @@ class MapViewC: AlysieBaseViewC {
   var marker = GMSMarker()
   var signUpStepTwoDataModel: SignUpStepTwoDataModel!
   var delegate: SaveAddressCallback?
+    var latitude: Double?
+    var longitude: Double?
 
-    var dismiss: ((_ mapAddress: MapAddressModel) -> Void)?
+    var dismiss: ((_ mapAddress: MapAddressModel, _ latitude: Double?, _ longitude: Double?) -> Void)?
 
   //MARK: - ViewLifeCycle Methods -
   
@@ -77,7 +79,9 @@ class MapViewC: AlysieBaseViewC {
     viewController.modalPresentationStyle = .overCurrentContext
 
     viewController.dismiss = { [weak self] (mapAddressModel) in
-        self?.dismiss?(mapAddressModel)
+        self?.latitude = Double.getDouble(self?.centerMapCoordinate.latitude)
+        self?.longitude = Double.getDouble(self?.centerMapCoordinate.longitude)
+        self?.dismiss?(mapAddressModel , self?.latitude , self?.longitude)
         self?.navigationController?.popViewController(animated: true)
     }
 

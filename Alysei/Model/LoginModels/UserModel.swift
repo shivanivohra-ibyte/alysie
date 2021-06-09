@@ -34,7 +34,8 @@ class UserModel: NSObject{
     var companyName: String?
     var restaurantName:String?
     var avatar: avatar?  // newly constructed struct for avater id
-    var cover: cover?  // newly constructed struct for cover id
+    var cover: cover?
+    var phone: String?// newly constructed struct for cover id
  // var cover_id: AllProductsDataModel?
     
   init(withDictionary dicResult: [String:Any]){
@@ -64,7 +65,7 @@ class UserModel: NSObject{
     self.memberName = String.getString(dictRoles[APIConstants.kName])
     self.memberRoleId = String.getString(dictRoles[APIConstants.kRoleId])
     self.restaurantName = String.getString(dictData[APIConstants.kRestaurantName])
-   
+    self.phone = String.getString(dictData[APIConstants.kPhone])
     self.role = UserRoles(rawValue: Int(self.memberRoleId ?? "") ?? 0) ?? .voyagers
 //    self.avatarId = String.getString(dictRoles[APIConstants.kAvatarId])
 
@@ -183,4 +184,11 @@ enum RestValue: Int {
 enum FromB2B{
     case fromHubSelection
     case fromTabSelection
+}
+
+enum DropDownCheck {
+    case productType
+    case productCategoryType
+    case brandLabel
+    case availableForSample
 }

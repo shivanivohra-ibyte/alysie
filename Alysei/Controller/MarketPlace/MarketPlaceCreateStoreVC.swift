@@ -8,6 +8,7 @@
 import UIKit
 import TLPhotoPicker
 import Photos
+import DropDown
 
 class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDelegate{
     
@@ -26,14 +27,48 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     @IBOutlet weak var btnProfileCameraImage: UIView!
     @IBOutlet weak var collectionViewImage: UICollectionView!
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var txtStoreName: UITextField!
+    @IBOutlet weak var txtDescription: UITextView!
+    @IBOutlet weak var txtWebsite: UITextField!
+    @IBOutlet weak var txtStoreRegion: UITextField!
+    @IBOutlet weak var txtLocation: UITextField!
+    @IBOutlet weak var txtProducerName: UITextField!
+    @IBOutlet weak var txtProducerMobileNumber: UITextField!
+    @IBOutlet weak var txtProducerEmail: UITextField!
+    @IBOutlet weak var imageLabel: UILabel!
 
     var uploadImageArray = [UIImage]()
     var selectedAssets = [TLPHAsset]()
     var picker = UIImagePickerController()
     var uploadProfilePic = false
+    var latitude: Double?
+    var longitude:Double?
+    var storeImageParams = [[String:Any]]()
+    var stateModel: [StateModel]?
+    var arrStateName = [String]()
+    var dataDropDown = DropDown()
+    var marketPlaceId: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDataUI()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(gotomapView))
+        self.view8.addGestureRecognizer(tap)
+        
+        let regionTap = UITapGestureRecognizer(target: self, action: #selector(openRegionDropDown))
+        self.view7.addGestureRecognizer(regionTap)
+        // Do any additional setup after loading the view.
+    }
+    
+    func setDataUI(){
+       
+        if let userEmail =  kSharedUserDefaults.loggedInUserModal.email{
+            self.txtProducerEmail.text = userEmail
+        }
+        if let userPhone = kSharedUserDefaults.loggedInUserModal.phone{
+            self.txtProducerMobileNumber.text = userPhone
+        }
         view1.addBorder()
         view2.addBorder()
         view3.addBorder()
@@ -47,7 +82,6 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
         btnProfileCameraImage.layer.cornerRadius = self.btnProfileCameraImage.frame.height / 2
         imgCover.layer.cornerRadius = 15
         headerView.drawBottomShadow()
-        // Do any additional setup after loading the view.
     }
     private func alertToAddCustomPicker() -> Void {
 //        let viewCon = CustomPhotoPickerViewController()
@@ -92,10 +126,39 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         vc.present(alert, animated: true, completion: nil)
     }
+    
+    
+    @objc func gotomapView(){
+        let controller = pushViewController(withName: MapViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? MapViewC
+        controller?.dismiss = { [weak self] (mapAddressModel , lat ,long) in
+            self?.txtLocation.text = "\(mapAddressModel.address1), \(mapAddressModel.address2), \(mapAddressModel.mapAddress)".capitalized
+            self?.longitude = long
+            self?.latitude = lat
+        }
+    }
+    
+    @objc func openRegionDropDown(){
+        self.callStateApi()
+    }
+    
+    func opendropDown(){
+        dataDropDown.show()
+        dataDropDown.anchorView = txtStoreRegion
+        dataDropDown.bottomOffset = CGPoint(x: 0, y: (dataDropDown.anchorView?.plainView.bounds.height)!)
+        dataDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            self.txtStoreRegion.text = item
+           
+        }
+        dataDropDown.cellHeight = 50
+        dataDropDown.backgroundColor = UIColor.white
+        dataDropDown.selectionBackgroundColor = UIColor.clear
+        dataDropDown.direction = .bottom
+    }
     //MARK:- IBAction
     
     @IBAction func btnNextAction(_ sender: UIButton){
-        _ = pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
+        callCreateStoreApi()
+        //let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
     }
     @IBAction func btnBackAction(_ sender: UIButton){
         self.navigationController?.popViewController(animated: true)
@@ -242,6 +305,7 @@ extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDat
                            
                              let asset = self.selectedAssets[image]
                             let image = asset.fullResolutionImage ?? UIImage()
+                            //self.imageLabel.text = "Photos 0/10 Choose your stores main photo first. Add more photos of your store max 10 allowed."
                             self.uploadImageArray.append(image)
                             
                         }
@@ -310,4 +374,61 @@ class ImageMaketPlaceCollectionViewCell:UICollectionViewCell{
     @IBAction func btnDeleteAction(_ sender: UIButton){
         btnDeleteCallback?(sender.tag)
     }
+}
+
+extension MarketPlaceCreateStoreVC {
+    func callCreateStoreApi(){
+        let params: [String:Any] = [ APIConstants.kName: self.txtStoreName.text ?? "",
+                                     APIConstants.kDescription: self.txtDescription.text ?? "",
+                                     APIConstants.kProducerName: self.txtProducerName.text ?? "",
+                                     APIConstants.kWebsite: self.txtWebsite.text ?? "",
+                                     APIConstants.kStoreRegion: self.txtStoreRegion.text ?? "",
+                                     APIConstants.kLocation: self.txtLocation.text ?? "",
+                                     "lattitude": "\(self.latitude ?? 0.0)",
+                                     APIConstants.kLongitude : "\(self.longitude ?? 0.0)",
+                                     
+        ]
+        
+        let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
+                                         APIConstants.kImageName: "gallery_images"]
+        
+        let coverPic: [String:Any] = [APIConstants.kImage : self.imgCover.image ?? UIImage(),
+                                      APIConstants.kImageName: "banner_id" ]
+        let profilePic: [String:Any] = [APIConstants.kImage : self.imgProfile.image ?? UIImage(),
+                                      APIConstants.kImageName: "logo_id" ]
+        
+        storeImageParams.append(imageParam)
+        storeImageParams.append(coverPic)
+        storeImageParams.append(profilePic)
+        
+        CommonUtil.sharedInstance.postToServerRequestMultiPart(APIUrl.kCreateStore, params: params, imageParams: storeImageParams, controller: self) { (dictResponse) in
+            
+            if let response = dictResponse["data"] as? [String:Any]{
+                self.marketPlaceId = (response["marketplace_store_id"] as? Int? ?? 0) ?? 0
+            }
+
+            let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
+            controller?.storeImage = self.imgProfile.image ?? UIImage()
+            controller?.storeName = self.txtStoreName.text
+            controller?.marketPlaceStoreId = self.marketPlaceId
+        }
+        
+    }
+    func callStateApi() {
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetCountryStates, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            
+            let response = dictResponse as? [String:Any]
+            if let data = response?["data"] as? [[String:Any]]{
+                self.stateModel = data.map({StateModel.init(with: $0)})
+                for state in 0..<(self.stateModel?.count ?? 0) {
+                    self.arrStateName.append(self.stateModel?[state].name ?? "")
+                }
+            }
+            self.dataDropDown.dataSource = self.arrStateName
+            self.opendropDown()
+            
+        }
+    }
+
+
 }

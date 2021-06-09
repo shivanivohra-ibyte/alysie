@@ -188,6 +188,12 @@ struct APIUrl{
     
     static let kGetRoleListFromHubSlctn = "get/usersin/role?"
     static let kGetMarketPlaceWalkthrough = "get/marketplace/walkthrough"
+    static let kGetMemberShip = "get/marketplace/packages"
+    static let kCreateStore = "save/store"
+    static let kProducttCategory = "get/marketplace/product/categories"
+    static let kSubProductCategoryId = "get/marketplace/product/subcategories?product_category_id="
+    static let kBrandLabel = "get/marketplace/brand/label"
+    static let kSaveProduct = "save/product"
     
     
     enum FeaturedProduct {
@@ -438,6 +444,19 @@ struct APIConstants {
     static let fdaNo = "fda_no"
     static let koldPassword = "old_password"
     static let knewPassword = "new_password"
+    static let kStoreRegion = "store_region"
+    static let kProducerName = "producer_name"
+    static let kmarketplaceStoreId = "marketplace_store_id"
+    static let kKeywords = "keywords"
+    static let kQuantityAvailable = "quantity_available"
+    static let kMinOrderQuantity = "min_order_quantity"
+    static let kHandlingInstruction = "handling_instruction"
+    static let kDispatchInstruction = "dispatch_instruction"
+    static let kAvailableForSample = "available_for_sample"
+    static let kProductPrice = "product_price"
+    static let kProductCategoryId = "product_category_id"
+    static let kProductSubCategoryId = "product_subcategory_id"
+    static let kbrandLabelId = "brand_label_id"
     
 }
 

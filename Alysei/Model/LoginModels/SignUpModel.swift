@@ -207,6 +207,10 @@ class SignUpStepOneDataModel: NSObject{
   var userFieldOptionId: String?
   var isSelected: Bool = false
   var arrSubSections: [SignUpSubSectionModel] = []
+    var marketplaceProductCategoryId : Int?
+    var marketplaceBrandLabelId: Int?
+    var marketplaceProductSubcategoryId: Int?
+    
   
   var id: String?
   var name: String?
@@ -227,7 +231,9 @@ class SignUpStepOneDataModel: NSObject{
     self.phoneCode = String.getString(dictOptions[APIConstants.kPhonecode])
     self.countryId = String.getString(dictOptions[APIConstants.kCountryId])
     self.stateId = String.getString(dictOptions[APIConstants.kStateId])
-
+    self.marketplaceProductCategoryId = Int.getInt(dictOptions["marketplace_product_category_id"])
+    self.marketplaceBrandLabelId = Int.getInt(dictOptions["marketplace_brand_label_id"])
+    self.marketplaceProductSubcategoryId = Int.getInt(dictOptions["marketplace_product_subcategory_id"])
     if let option = dictOptions[APIConstants.kOptions] as? ArrayOfDictionary{
       
       self.arrSubSections = option.map({SignUpSubSectionModel(withDictionary: $0)})

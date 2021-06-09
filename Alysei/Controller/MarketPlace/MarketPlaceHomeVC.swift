@@ -17,13 +17,17 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(openPost))
         self.postView.addGestureRecognizer(tap)
-        
-//        let vc = UIStoryboard(name: StoryBoardConstants.kMarketplace, bundle: nil).instantiateViewController(withIdentifier: "MarketPlaceWalkthroughVC") as! MarketPlaceWalkthroughVC
-//        vc.view.frame = self.containerView.bounds
-//        self.containerView.willRemoveSubview(vc.view)
          
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        let vc = UIStoryboard(name: StoryBoardConstants.kMarketplace, bundle: nil).instantiateViewController(withIdentifier: "MarketPlaceHomeVC") as! MarketPlaceHomeVC
+//
+//        vc.view.frame = self.containerView.bounds
+//        self.addChild(vc)
+//        self.containerView.addSubview(vc.view)
+//        vc.didMove(toParent: self)
+//    }
     @objc func openPost(){
         self.navigationController?.popViewController(animated: true)
     }
