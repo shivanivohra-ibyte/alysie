@@ -396,6 +396,31 @@ extension AddProductMarketplaceVC{
         CommonUtil.sharedInstance.postRequestToImageUpload(withParameter: params, url: APIUrl.kSaveProduct, image: imageParam, controller: self, type: 0)
     }
     
+//    func addProductApi(){
+//        let params: [String:Any] = [
+//            APIConstants.kmarketplaceStoreId: "\(self.marketPlaceStoreId ?? 0)",
+//            APIConstants.kTitle: self.txtProductTitle.text ?? "",
+//            APIConstants.kDescription: self.txtProductDesc.text ?? "",
+//            APIConstants.kKeywords: self.txtProductKeyWord.text ?? "",
+//            APIConstants.kProductCategoryId : "\(self.productId ?? 0)",
+//            APIConstants.kProductSubCategoryId: "\(self.subProductId ?? 0)",
+//            APIConstants.kQuantityAvailable: self.txtProductQuantityAvaliable.text ?? "",
+//            APIConstants.kbrandLabelId: "\(self.brandLabelId ?? 0)",
+//            APIConstants.kMinOrderQuantity: self.txtProductMinOrderQuantity.text ?? "",
+//            APIConstants.kHandlingInstruction: self.txtProductHandleIns.text ?? "",
+//            APIConstants.kDispatchInstruction: self.txtProductDispatchIns.text ?? "",
+//            APIConstants.kAvailableForSample: self.txtProductSample.text ?? "",
+//            APIConstants.kProductPrice: self.txtProductPrice.text ?? ""
+//        ]
+//
+//        let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
+//                                         APIConstants.kImageName: "gallery_images"]
+//
+//
+//        print("ImageParam------------------------------\(imageParam)")
+//        CommonUtil.sharedInstance.postRequestToImageUpload(withParameter: params, url: APIUrl.kSaveProduct, image: imageParam, controller: self, type: 0)
+//    }
+    
     override func didUserGetData(from result: Any, type: Int) {
 //        self.showAlert(withMessage: "Post Successfully") {
 //        }
