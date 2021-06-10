@@ -45,7 +45,10 @@ class ProfileViewC: AlysieBaseViewC{
     @IBOutlet weak var tblViewProfileCompletion: UITableView!
     @IBOutlet weak var progressbar: UIProgressView!
     @IBOutlet weak var percentageLabel: UILabel!
-    
+
+
+    @IBOutlet weak var respondeButton: UIButtonExtended!
+    @IBOutlet weak var messageButton: UIButtonExtended!
     
     var percentage: String?
     
@@ -140,13 +143,22 @@ class ProfileViewC: AlysieBaseViewC{
     self.tabsCollectionView.dataSource = self
     self.tabsCollectionView.delegate = self
 
+    self.btnEditProfile.isHidden = true
+    self.messageButton.isHidden = true
+    self.respondeButton.isHidden = true
+
 
     switch self.userLevel {
     case .own:
         print("own")
+        self.btnEditProfile.isHidden = false
+        self.btnEditProfile.isUserInteractionEnabled = true
     case .other:
         print("other")
-        self.btnEditProfile.isHidden = true
+        self.messageButton.isHidden = false
+        self.respondeButton.isHidden = false
+        self.messageButton.isUserInteractionEnabled = true
+        self.respondeButton.isUserInteractionEnabled = true
     }
 
   }
@@ -256,6 +268,32 @@ class ProfileViewC: AlysieBaseViewC{
         let controller = pushViewController(withName: AddFeatureViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? AddFeatureViewC
         controller?.productCategoriesDataModel = productCategoriesDataModel
         controller?.delegate = self
+
+    }
+
+    @IBAction func respondButtonTapped(_ sender: UIButton) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let acceptButton = UIAlertAction(title: "Accept Request", style: .default) { action in
+            print("Action button")
+        }
+
+        let deleteButton = UIAlertAction(title: "Delete Request", style: .default) { action in
+            print("delete button")
+        }
+
+        let blockButton = UIAlertAction(title: "Block", style: .default) { action in
+            print("block button")
+        }
+
+        alert.addAction(acceptButton)
+        alert.addAction(deleteButton)
+        alert.addAction(blockButton)
+
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    @IBAction func messageButtonTapped(_ sender: UIButton) {
 
     }
   

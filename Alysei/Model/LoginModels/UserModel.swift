@@ -126,7 +126,7 @@ enum UserRoles: Int, Codable {
 
 enum UserLevel {
     case own
-    case third
+    case other
 //    case distributer1 = 4
 //    case distributer2 = 5
 //    case distributer3 = 6
