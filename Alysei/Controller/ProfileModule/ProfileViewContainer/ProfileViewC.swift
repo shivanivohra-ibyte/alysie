@@ -54,7 +54,7 @@ class ProfileViewC: AlysieBaseViewC{
     var contactDetail = [ContactDetail.view.tableCellModel]()
     var contactDetilViewModel: ContactDetail.Contact.Response!
     var signUpViewModel: SignUpViewModel!
-    var userLevel: UserLevel = .own
+    var userLevel: UserLevel = .other
     var userType: UserRoles!
     var aboutViewModel: AboutView.viewModel!
     
@@ -124,7 +124,7 @@ class ProfileViewC: AlysieBaseViewC{
 //    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + 660)
 //    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + space)
 
-    self.tblViewPosts.tableHeaderView?.setHeight(550.0 + (self.view.frame.height * 0.75) + ((UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0) * 3.0))
+    self.tblViewPosts.tableHeaderView?.setHeight(520.0 + (self.view.frame.height * 0.75) + ((UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0) * 4.0))
     //self.tblViewPosts.tableFooterView = UIView()
     self.btnPosts.isSelected = true
     self.tblViewProfileCompletion.isHidden = true
@@ -144,8 +144,8 @@ class ProfileViewC: AlysieBaseViewC{
     switch self.userLevel {
     case .own:
         print("own")
-    case .third:
-        print("third")
+    case .other:
+        print("other")
         self.btnEditProfile.isHidden = true
     }
 
