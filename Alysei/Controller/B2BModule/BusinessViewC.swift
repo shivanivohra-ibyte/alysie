@@ -51,7 +51,7 @@ class BusinessViewC: AlysieBaseViewC {
     var extraCell: Int?
     var restPickUp: String?
     var restDelivery:String?
-   
+   var paginationData = false
     var searchImpDone = false
     
    
@@ -100,6 +100,43 @@ class BusinessViewC: AlysieBaseViewC {
         _ = pushViewController(withName: NotificationViewC.id(), fromStoryboard: StoryBoardConstants.kHome)
     }
     
+    //MARK:- Pagination
+     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+         // calculates where the user is in the y-axis
+         let offsetY = scrollView.contentOffset.y
+         let contentHeight = scrollView.contentSize.height
+         if offsetY > contentHeight - scrollView.frame.size.height - (self.view.frame.height * 2) {
+             if indexOfPageToRequest >= newSearchModel?.lastPage ?? 0{
+                 print("No Data")
+             }else{
+             // increments the number of the page to request
+             indexOfPageToRequest += 1
+                self.searchImpDone = true
+                paginationData = true
+             // call your API for more data
+                switch  self.currentIndex {
+                case 1:
+                    callSearchProducerApi()
+                case B2BSearch.Importer.rawValue:
+                    callSearchImporterApi()
+                case B2BSearch.Restaurant.rawValue:
+                    callSearchResturntApi()
+                case B2BSearch.TravelAgencies.rawValue:
+                    callSearchTravelApi()
+                case B2BSearch.Expert.rawValue:
+                    callSearchExpertApi()
+                
+                default:
+                    break
+                }
+                
+
+             // tell the table view to reload with the new data
+    
+               
+             }
+         }
+     }
     
     //MARK: - Private Methods -
     
@@ -594,7 +631,10 @@ extension BusinessViewC {
         }
     }
     func callSearchImporterApi(){
-        arrSearchimpotrDataModel.removeAll()
+        if paginationData == false{
+            arrSearchimpotrDataModel.removeAll()
+        }
+       
         cellCount = 0
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.distributer3.rawValue)" + "&hubs=" + "\(self.selectImpHubId ?? "")" + "&user_type=" + "\(selectImpRoleId ?? "")" + "&product_type=" + "\(self.selectImpProductId ?? "")" + "&horeca=" + "\(self.horecaValue ?? "")" + "&private_label=" + "\(self.privateValue ?? "")" + "&alysei_brand_label=" + "\(self.alyseiBrandValue ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             let dictResponse = dictResponse as? [String:Any]
@@ -619,6 +659,7 @@ extension BusinessViewC {
             
             //self.tblViewSearchOptions.reloadRows(at: [IndexPath(row: 4, section: 0)], with: .automatic)
             print("CellCount--------------------------------------------\(cellCount ?? 0)")
+            self.paginationData = false
             self.businessViewModel = BusinessViewModel(currentIndex: self.currentIndex)
             self.tblViewSearchOptions.reloadData()
             //self.tblViewSearchOptions.reloadDataSavingSelections()
@@ -627,7 +668,9 @@ extension BusinessViewC {
         }
     }
     func callSearchProducerApi(){
-        arrSearchimpotrDataModel.removeAll()
+        if paginationData == false{
+            arrSearchimpotrDataModel.removeAll()
+        }
         cellCount = 0
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.producer.rawValue)" + "&hubs=" + "\(self.selectProducerHubId ?? "")" + "&product_type=" + "\(selectProducerProductType ?? "")" + "&region=" + "\(self.selectProducerRegionId ?? "")" + "&horeca=" + "\(self.horecaValue ?? "")" + "&private_label=" + "\(self.privateValue ?? "")" + "&alysei_brand_label=" + "\(self.alyseiBrandValue ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             let dictResponse = dictResponse as? [String:Any]
@@ -636,7 +679,7 @@ extension BusinessViewC {
                 self.newSearchModel = NewFeedSearchModel.init(with: data)
                 if self.indexOfPageToRequest == 1 { self.arrSearchimpotrDataModel.removeAll() }
                 self.arrSearchimpotrDataModel.append(contentsOf: self.newSearchModel?.importerSeacrhData ?? [SubjectData(with: [:])])
-                self.searchImpDone = false
+               // self.searchImpDone = false
             }
             //self.collectionViewBusinessCategory.reloadData()
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
@@ -649,6 +692,7 @@ extension BusinessViewC {
 //            self.privateValue = ""
 //            self.alyseiBrandValue = ""
             //self.tblViewSearchOptions.reloadRows(at: [IndexPath(row: 4, section: 0)], with: .automatic)
+            self.paginationData = false
             self.businessViewModel = BusinessViewModel(currentIndex: self.currentIndex)
             
             self.tblViewSearchOptions.reloadData()
@@ -657,7 +701,9 @@ extension BusinessViewC {
         }
     }
     func callSearchResturntApi(){
-        arrSearchimpotrDataModel.removeAll()
+        if paginationData == false{
+            arrSearchimpotrDataModel.removeAll()
+        }
         cellCount = 0
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.restaurant.rawValue)" + "&hubs=" + "\(self.resHubId  ?? "")" + "&restaurant_type=" + "\(self.resTypeId ?? "")" + "&pickup=" + "\(restPickUp ?? "")" + "&delivery=" + "\(restDelivery ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dicResponse, error, errorType, statusCode) in
             let dictResponse = dicResponse as? [String:Any]
@@ -676,6 +722,7 @@ extension BusinessViewC {
 //            self.resTypeId = ""
 //            self.restPickUp = ""
 //            self.restDelivery = ""
+            self.paginationData = false
             self.businessViewModel = BusinessViewModel(currentIndex: self.currentIndex)
             self.tblViewSearchOptions.reloadData()
             
@@ -684,7 +731,9 @@ extension BusinessViewC {
     }
     
     func callSearchExpertApi(){
-        arrSearchimpotrDataModel.removeAll()
+        if paginationData == false{
+            arrSearchimpotrDataModel.removeAll()
+        }
         cellCount = 0
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.voiceExperts.rawValue)" + "&hubs=" + "\(self.selectExpertHubId  ?? "")" + "&expertise=" + "\(self.selectExpertExpertiseId ?? "")" + "&title=" + "\(self.selectExpertTitleId ?? "")" + "&country=" + "\(self.selectExpertCountryId ?? "")" + "&region=" + "\(self.selectExpertRegionId ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             let dictResponse = dictResponse as? [String:Any]
@@ -705,6 +754,7 @@ extension BusinessViewC {
 //            self.selectExpertTitleId = ""
 //            self.selectExpertCountryId = ""
 //            self.selectExpertRegionId = ""
+            self.paginationData = false
             self.businessViewModel = BusinessViewModel(currentIndex: self.currentIndex)
             self.tblViewSearchOptions.reloadData()
             
@@ -713,7 +763,9 @@ extension BusinessViewC {
     }
     
     func callSearchTravelApi(){
-        arrSearchimpotrDataModel.removeAll()
+        if paginationData == false{
+            arrSearchimpotrDataModel.removeAll()
+        }
         cellCount = 0
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.travelAgencies.rawValue)" + "&hubs=" + "\(self.selectTravelHubId  ?? "")" + "&speciality=" + "\(self.selectTravelSpecialityId ?? "")" + "&country=" + "\(self.selectTravelCountryId ?? "")" + "&region=" + "\(self.selectTravelRegionId ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             let dictResponse = dictResponse as? [String:Any]
@@ -732,6 +784,7 @@ extension BusinessViewC {
 //            self.selectTravelSpecialityId = ""
 //            self.selectTravelCountryId = ""
 //            self.selectTravelRegionId = ""
+            self.paginationData = false
             self.businessViewModel = BusinessViewModel(currentIndex: self.currentIndex)
             self.tblViewSearchOptions.reloadData()
             
@@ -739,41 +792,7 @@ extension BusinessViewC {
         }
     }
     
-    //    func getUserListFromHubSelctionApi(){
-    //        arrSearchimpotrDataModel.removeAll()
-    //        cellCount = 0
-    //        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetRoleListFromHubSlctn + "\(passHubId ?? "")" + "&role_id=" + "\(passRoleId ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errtype, statusCode) in
-    //            let response = dictResponse as? [String:Any]
-    //
-    //            if let data = response?["data"] as? [[String:Any]]{
-    //               // self.newSearchModel = NewFeedSearchModel.init(with: data)
-    //                if self.indexOfPageToRequest == 1 { self.arrSearchimpotrDataModel.removeAll() }
-    //               // self.arrSearchimpotrDataModel.append(contentsOf: self.newSearchModel?.importerSeacrhData ?? [SubjectData(with: [:])])
-    //                self.arrSearchimpotrDataModel = data.map({SubjectData.init(with: $0)})
-    //            }
-    //            //self.collectionViewBusinessCategory.reloadData()
-    //            print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
-    //            cellCount = self.arrSearchimpotrDataModel.count
-    //            if self.currentIndex == B2BSearch.Producer.rawValue{
-    //                self.extraCell = 5
-    //            }else if self.currentIndex == B2BSearch.Importer.rawValue{
-    //                self.extraCell = 6
-    //            }else if self.currentIndex == B2BSearch.Restaurant.rawValue{
-    //                self.extraCell = 4
-    //            }else if self.currentIndex == B2BSearch.TravelAgencies.rawValue{
-    //                self.extraCell = 5
-    //            }else if self.currentIndex == B2BSearch.Expert.rawValue{
-    //                self.extraCell = 6
-    //            }
-    //            let indexPath = IndexPath(row: self.currentIndex ?? 0, section: 0)
-    //            self.collectionViewBusinessCategory.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-    //            self.businessViewModel = BusinessViewModel(currentIndex: self.currentIndex ?? 0)
-    //            self.tblViewSearchOptions.reloadData()
-    //
-    //
-    //        }
-    //
-    //        }
+    
 }
 extension UITableView {
     /// Reloads a table view without losing track of what was selected.

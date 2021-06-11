@@ -12,6 +12,8 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var postView: UIView!
     @IBOutlet weak var btnCreateStore: UIButton!
+    @IBOutlet weak var marketplaceView: UIView!
+    var isCreateStore = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +22,18 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
         }else{
             self.btnCreateStore.isHidden = true
         }
+        self.btnCreateStore.setTitleColor(UIColor.init(hexString: "#4BB3FD"), for: .normal)
+        marketplaceView.backgroundColor = UIColor.init(hexString: "#4BB3FD")
         let tap = UITapGestureRecognizer(target: self, action: #selector(openPost))
         self.postView.addGestureRecognizer(tap)
+        
+        if isCreateStore == true{
+            self.btnCreateStore.setTitle("Go to My Store", for: .normal)
+            self.btnCreateStore.isUserInteractionEnabled = false
+        }else{
+            self.btnCreateStore.setTitle("Create your Store", for: .normal)
+            self.btnCreateStore.isUserInteractionEnabled = true
+        }
          
     }
     
