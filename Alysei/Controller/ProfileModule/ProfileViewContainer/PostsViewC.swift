@@ -12,11 +12,13 @@ class PostsViewC: AlysieBaseViewC{
   //MARK: - IBOutlet -
   
   @IBOutlet weak var collectionViewPosts: UICollectionView!
-  
+    var role: String?
   //MARK: - ViewLifeCycle Methods -
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    
   }
   
   private func getPostsCollectionCell(_ indexPath: IndexPath) -> UICollectionViewCell{
@@ -24,6 +26,7 @@ class PostsViewC: AlysieBaseViewC{
     let postsCollectionCell = collectionViewPosts.dequeueReusableCell(withReuseIdentifier: PostsCollectionCell.identifier(), for: indexPath) as! PostsCollectionCell
     return postsCollectionCell
   }
+    
 }
 
 //MARK: - CollectionView Methods -

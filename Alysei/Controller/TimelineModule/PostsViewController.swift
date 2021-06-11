@@ -19,10 +19,13 @@ class PostsViewController: AlysieBaseViewC {
     var selectedPostId: Int?
     var likeUnlike: Int?
     var indexOfPageToRequest = 1
+    var role: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
        // callNewFeedApi(pageNo)
+        self.role = kSharedUserDefaults.loggedInUserModal.memberRoleId
+            
         let tap = UITapGestureRecognizer(target: self, action: #selector(openMarketPlace))
         self.marketplaceView.addGestureRecognizer(tap)
         
@@ -32,6 +35,25 @@ class PostsViewController: AlysieBaseViewC {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if self.role == "10" {
+        if let viewController2 = self.tabBarController?.viewControllers?[1] {
+
+            //viewController2.tabBarItem.image = UIImage(named: "b2btab1_icon")
+            viewController2.tabBarItem.title = "Hubs"
+           // viewController2.tabBarItem.isEnabled = false
+            //viewController2.tabBarItem.selectedImage = UIImage(named: "turnoff_comments_icon")
+
+        }
+        }else{
+            if let viewController2 = self.tabBarController?.viewControllers?[1] {
+
+                //viewController2.tabBarItem.image = UIImage(named: "b2b_normal")
+                viewController2.tabBarItem.title = "B2B"
+               // viewController2.tabBarItem.isEnabled = true
+               // viewController2.tabBarItem.selectedImage = UIImage(named: "b2b_active")
+                
+            }
+        }
         arrNewFeedDataModel.removeAll()
 
         self.postTableView.separatorStyle = .singleLine

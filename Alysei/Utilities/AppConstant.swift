@@ -194,6 +194,7 @@ struct APIUrl{
     static let kSubProductCategoryId = "get/marketplace/product/subcategories?product_category_id="
     static let kBrandLabel = "get/marketplace/brand/label"
     static let kSaveProduct = "save/product"
+    static let kHubSubscribeUnscribe = "subscribe/unsubscribe/hub?hub_id="
     
     
     enum FeaturedProduct {
@@ -317,6 +318,7 @@ struct AppConstants {
     static let kEnterText = "Enter your text here......"
     static let kVATNo = "VAT No."
     static let kZipCode = "Zip/Postal Code"
+    static let is_subscribed_with_hub = "is_subscribed_with_hub"
     
     
 }

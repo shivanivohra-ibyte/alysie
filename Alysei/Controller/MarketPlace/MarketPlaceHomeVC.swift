@@ -11,10 +11,15 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
     
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var postView: UIView!
+    @IBOutlet weak var btnCreateStore: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if kSharedUserDefaults.loggedInUserModal.memberRoleId == "\(UserRoles.producer.rawValue)"{
+            self.btnCreateStore.isHidden = false
+        }else{
+            self.btnCreateStore.isHidden = true
+        }
         let tap = UITapGestureRecognizer(target: self, action: #selector(openPost))
         self.postView.addGestureRecognizer(tap)
          

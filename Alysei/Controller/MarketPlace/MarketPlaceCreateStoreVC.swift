@@ -36,6 +36,7 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     @IBOutlet weak var txtProducerMobileNumber: UITextField!
     @IBOutlet weak var txtProducerEmail: UITextField!
     @IBOutlet weak var imageLabel: UILabel!
+    
 
     var uploadImageArray = [UIImage]()
     var selectedAssets = [TLPHAsset]()
@@ -157,8 +158,8 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     //MARK:- IBAction
     
     @IBAction func btnNextAction(_ sender: UIButton){
-        callCreateStoreApi()
-        //let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
+        //callCreateStoreApi()
+        let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
     }
     @IBAction func btnBackAction(_ sender: UIButton){
         self.navigationController?.popViewController(animated: true)

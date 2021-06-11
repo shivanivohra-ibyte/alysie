@@ -442,8 +442,11 @@ class BusinessViewC: AlysieBaseViewC {
 extension BusinessViewC: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+        if kSharedUserDefaults.loggedInUserModal.memberRoleId == "10"{
+            return 1
+        }else{
         return StaticArrayData.kBusinessCategoryDict.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

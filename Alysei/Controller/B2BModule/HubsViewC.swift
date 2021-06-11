@@ -13,12 +13,15 @@ class HubsViewC: AlysieBaseViewC {
     @IBOutlet weak var hubName: UILabel!
     @IBOutlet weak var hubLocation: UILabel!
     @IBOutlet weak var lblSubHeading: UILabel!
+    @IBOutlet weak var btnSubscribe: UIButton!
     
     var arruserCount : [UserRoleCount]?
     var passHubId: String?
     var passHubName: String?
     var passHubLocation: String?
     var getRoleViewModel: GetRoleViewModel!
+    var isHubSubscribed: Int?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +31,24 @@ class HubsViewC: AlysieBaseViewC {
         callUserCountApi()
         // Do any additional setup after loading the view.
     }
+    func setData(){
+        if self.isHubSubscribed == 0 {
+            self.btnSubscribe.setTitle("Subscribe", for: .normal)
+        }else{
+            self.btnSubscribe.setTitle("Unsubscribe", for: .normal)
+        }
+    }
     @IBAction func btnBackAction(_ sender: UIButton){
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func btnSubscribe(_ sender: UIButton){
+        if self.isHubSubscribed == 0{
+            self.isHubSubscribed = 1
+        }else{
+            self.isHubSubscribed = 0
+        }
+        callSubscribeNUnsubscribeApi()
     }
 
 }
@@ -77,11 +96,20 @@ extension HubsViewC{
     func callUserCountApi(){
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetRolesUserCount + "\(passHubId ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errtype, statusCode) in
             let response = dictResponse as? [String:Any]
-            
+            self.isHubSubscribed = response?["is_subscribed_with_hub"] as? Int
+            print("HUbSubscribed ----------------------\(self.isHubSubscribed ?? 0)")
             if let data =  response?["data"] as? [[String:Any]]{
                 self.arruserCount = data.map({UserRoleCount.init(with: $0)})
             }
+            self.setData()
             self.detailCollectionView.reloadData()
+        }
+    }
+    
+    func callSubscribeNUnsubscribeApi(){
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kHubSubscribeUnscribe + "\(self.passHubId ?? "")" + "&subscription_type=" + "\(self.isHubSubscribed ?? 0)", requestMethod: .POST, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statuscode) in
+            
+            self.setData()
         }
     }
 }

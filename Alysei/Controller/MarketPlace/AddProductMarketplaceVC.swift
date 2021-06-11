@@ -16,7 +16,7 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     @IBOutlet weak var view2: UIView!
     @IBOutlet weak var view3: UIView!
     @IBOutlet weak var view4: UIView!
-    @IBOutlet weak var view5: UIView!
+    //@IBOutlet weak var view5: UIView!
     @IBOutlet weak var view6: UIView!
     @IBOutlet weak var view7: UIView!
     @IBOutlet weak var view8: UIView!
@@ -33,7 +33,7 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     @IBOutlet weak var txtProductDesc: UITextView!
     @IBOutlet weak var txtProductKeyWord: UITextField!
     @IBOutlet weak var txtProductCategory: UITextField!
-    @IBOutlet weak var txtProductSubCategory: UITextField!
+    //@IBOutlet weak var txtProductSubCategory: UITextField!
     @IBOutlet weak var txtProductQuantityAvaliable: UITextField!
     @IBOutlet weak var txtProductBrandLabel: UITextField!
     @IBOutlet weak var txtProductMinOrderQuantity: UITextField!
@@ -63,8 +63,8 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
         setDataUI()
         let tap = UITapGestureRecognizer(target: self, action: #selector(openProductCategory))
         self.view4.addGestureRecognizer(tap)
-        let subTap = UITapGestureRecognizer(target: self, action: #selector(openSubProductCategory))
-        self.view5.addGestureRecognizer(subTap)
+        //let subTap = UITapGestureRecognizer(target: self, action: #selector(openSubProductCategory))
+        //self.view5.addGestureRecognizer(subTap)
         let brandTap = UITapGestureRecognizer(target: self, action: #selector(openBrands))
         self.view7.addGestureRecognizer(brandTap)
         let sampleTap = UITapGestureRecognizer(target: self, action: #selector(openSample))
@@ -77,7 +77,7 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
         view2.addBorder()
         view3.addBorder()
         view4.addBorder()
-        view5.addBorder()
+       // view5.addBorder()
         view6.addBorder()
         view7.addBorder()
         view8.addBorder()
@@ -157,7 +157,7 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
         if openDropDown == .productType{
         dataDropDown.anchorView = view4
         }else if openDropDown == .productCategoryType{
-            dataDropDown.anchorView = view5
+           // dataDropDown.anchorView = view5
         }else if openDropDown == .brandLabel{
             dataDropDown.anchorView = view7
         }else if openDropDown == .availableForSample{
@@ -169,7 +169,7 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
             self.txtProductCategory.text = item
                 self.productId = productType?[index].marketplaceProductCategoryId
             }else if openDropDown == .productCategoryType{
-                self.txtProductSubCategory.text = item
+               // self.txtProductSubCategory.text = item
                     self.subProductId = productType?[index].marketplaceProductSubcategoryId
             }else if openDropDown == .brandLabel{
                 self.txtProductBrandLabel.text = item
