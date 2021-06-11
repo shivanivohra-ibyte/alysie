@@ -188,7 +188,7 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     
     @IBAction func btnNextAction(_ sender: UIButton){
         self.addProductApi()
-        //_ = pushViewController(withName: MarketPlaceConfirmationVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
+       // _ = pushViewController(withName: MarketPlaceConfirmationVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
     }
     
     @IBAction func btnBackAction(_ sender: UIButton){

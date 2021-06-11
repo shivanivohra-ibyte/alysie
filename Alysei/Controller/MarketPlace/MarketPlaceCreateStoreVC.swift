@@ -9,6 +9,7 @@ import UIKit
 import TLPhotoPicker
 import Photos
 import DropDown
+var userMobileNumer = ""
 
 class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDelegate{
     
@@ -36,8 +37,10 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     @IBOutlet weak var txtProducerMobileNumber: UITextField!
     @IBOutlet weak var txtProducerEmail: UITextField!
     @IBOutlet weak var imageLabel: UILabel!
+    @IBOutlet weak var btnInfoIcon: UIButton!
     
-
+    
+    
     var uploadImageArray = [UIImage]()
     var selectedAssets = [TLPHAsset]()
     var picker = UIImagePickerController()
@@ -53,9 +56,10 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         setDataUI()
-        
+       // picker.
         let tap = UITapGestureRecognizer(target: self, action: #selector(gotomapView))
         self.view8.addGestureRecognizer(tap)
+        
         
         let regionTap = UITapGestureRecognizer(target: self, action: #selector(openRegionDropDown))
         self.view7.addGestureRecognizer(regionTap)
@@ -63,12 +67,16 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     }
     
     func setDataUI(){
-       
+        
         if let userEmail =  kSharedUserDefaults.loggedInUserModal.email{
             self.txtProducerEmail.text = userEmail
         }
-        if let userPhone = kSharedUserDefaults.loggedInUserModal.phone{
-            self.txtProducerMobileNumber.text = userPhone
+        
+        print("userMobileNumer----------\(userMobileNumer)")
+        if userMobileNumer == ""{
+            self.txtProducerMobileNumber.text = kSharedUserDefaults.loggedInUserModal.phone
+        }else{
+        self.txtProducerMobileNumber.text = userMobileNumer
         }
         view1.addBorder()
         view2.addBorder()
@@ -85,7 +93,7 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
         headerView.drawBottomShadow()
     }
     private func alertToAddCustomPicker() -> Void {
-//        let viewCon = CustomPhotoPickerViewController()
+        //        let viewCon = CustomPhotoPickerViewController()
         let viewCon = TLPhotosPickerViewController()
         viewCon.delegate = self
         viewCon.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
@@ -93,31 +101,37 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
         }
         var configure = TLPhotosPickerConfigure()
         configure.allowedVideoRecording = false
-
+        
         configure.mediaType = .image
         configure.numberOfColumn = 3
-
+        
         viewCon.configure = configure
         viewCon.selectedAssets = self.selectedAssets
         viewCon.logDelegate = self
-
+        
         self.present(viewCon, animated: true, completion: nil)
     }
     
     func dismissPhotoPicker(withTLPHAssets: [TLPHAsset]) {
         // use selected order, fullresolution image
         print("dismiss")
-        self.selectedAssets = withTLPHAssets
-
-        print("selectedAssest-----------------\(self.selectedAssets)")
+//        if withTLPHAssets.count >= 10 {
+//            self.showExceededMaximumAlert(vc: picker)
+//            return
+//        }else{
+            self.selectedAssets = withTLPHAssets
+            
+            print("selectedAssest-----------------\(self.selectedAssets)")
+            
+            self.collectionViewImage.reloadData()
+            self.btnScroll()
+        //}
         
-        self.collectionViewImage.reloadData()
-        self.btnScroll()
-       
+        
         //iCloud or video
-//        getAsyncCopyTemporaryFile()
+        //        getAsyncCopyTemporaryFile()
     }
-
+    
     func photoPickerDidCancel() {
         // cancel
         print("cancel")
@@ -148,7 +162,7 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
         dataDropDown.bottomOffset = CGPoint(x: 0, y: (dataDropDown.anchorView?.plainView.bounds.height)!)
         dataDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.txtStoreRegion.text = item
-           
+            
         }
         dataDropDown.cellHeight = 50
         dataDropDown.backgroundColor = UIColor.white
@@ -158,8 +172,20 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     //MARK:- IBAction
     
     @IBAction func btnNextAction(_ sender: UIButton){
-        //callCreateStoreApi()
-        let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
+        
+        if self.validateAllfields(){
+            callCreateStoreApi()
+        }
+        
+        //let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
+    }
+    
+    private func validateAllfields() -> Bool {
+        guard self.txtWebsite.text?.isValid(.url) == true else {
+            showAlert(withMessage: "Please enter a valid website url.")
+            return false
+        }
+        return true
     }
     @IBAction func btnBackAction(_ sender: UIButton){
         self.navigationController?.popViewController(animated: true)
@@ -174,63 +200,67 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
         uploadProfilePic = false
         alertToAddImage()
     }
-     private func alertToAddImage() -> Void {
-         
-         let alert:UIAlertController = UIAlertController(title: AlertMessage.kSourceType, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
- 
-         let cameraAction = UIAlertAction(title: AlertMessage.kTakePhoto,
-                                          style: UIAlertAction.Style.default) { (action) in
-             self.showImagePicker(withSourceType: .camera, mediaType: .image)
-           
-         }
- 
-         let galleryAction = UIAlertAction(title: AlertMessage.kChooseLibrary,
-                                           style: UIAlertAction.Style.default) { (action) in
-             self.showImagePicker(withSourceType: .photoLibrary, mediaType: .image)
-         }
- 
-         let cancelAction = UIAlertAction(title: AlertMessage.kCancel,
-                                          style: UIAlertAction.Style.cancel) { (action) in
-             print("\(AlertMessage.kCancel) tapped")
-         }
-         alert.addAction(cameraAction)
-         alert.addAction(galleryAction)
- 
-         alert.addAction(cancelAction)
-         self.present(alert, animated: true, completion: nil)
-     }
-        private func showImagePicker(withSourceType type: UIImagePickerController.SourceType,mediaType: MediaType) -> Void {
-
-            if UIImagePickerController.isSourceTypeAvailable(type) {
-
-                self.picker.mediaTypes = mediaType.CameraMediaType
-                self.picker.allowsEditing = true
-                self.picker.sourceType = type
-                self.present(self.picker,animated: true,completion: {
-                    self.picker.delegate = self
-                })
-                self.picker.delegate = self }
-            else{
-                self.showAlert(withMessage: "This feature is not available.")
-            }
+    
+    @IBAction func btnWebsiteInfo(_ sender: UIButton){
+        showAlert(withMessage: "Please enter valid website url, For example: www.website.com")
+    }
+    private func alertToAddImage() -> Void {
+        
+        let alert:UIAlertController = UIAlertController(title: AlertMessage.kSourceType, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+        
+        let cameraAction = UIAlertAction(title: AlertMessage.kTakePhoto,
+                                         style: UIAlertAction.Style.default) { (action) in
+            self.showImagePicker(withSourceType: .camera, mediaType: .image)
+            
         }
-}
-    extension MarketPlaceCreateStoreVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
-    
-            guard let selectedImage = info[.editedImage] as? UIImage else { return }
-            print(selectedImage.description)
-            self.dismiss(animated: true) {
-                if self.uploadProfilePic == true{
-                    self.imgProfile.image = selectedImage
-                }else{
-                self.imgCover.image = selectedImage
-                }
-            }
-    
+        
+        let galleryAction = UIAlertAction(title: AlertMessage.kChooseLibrary,
+                                          style: UIAlertAction.Style.default) { (action) in
+            self.showImagePicker(withSourceType: .photoLibrary, mediaType: .image)
+        }
+        
+        let cancelAction = UIAlertAction(title: AlertMessage.kCancel,
+                                         style: UIAlertAction.Style.cancel) { (action) in
+            print("\(AlertMessage.kCancel) tapped")
+        }
+        alert.addAction(cameraAction)
+        alert.addAction(galleryAction)
+        
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    private func showImagePicker(withSourceType type: UIImagePickerController.SourceType,mediaType: MediaType) -> Void {
+        
+        if UIImagePickerController.isSourceTypeAvailable(type) {
+            
+            self.picker.mediaTypes = mediaType.CameraMediaType
+            self.picker.allowsEditing = true
+            self.picker.sourceType = type
+            self.present(self.picker,animated: true,completion: {
+                self.picker.delegate = self
+            })
+            self.picker.delegate = self }
+        else{
+            self.showAlert(withMessage: "This feature is not available.")
         }
     }
+}
+extension MarketPlaceCreateStoreVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+        
+        guard let selectedImage = info[.editedImage] as? UIImage else { return }
+        print(selectedImage.description)
+        self.dismiss(animated: true) {
+            if self.uploadProfilePic == true{
+                self.imgProfile.image = selectedImage
+            }else{
+                self.imgCover.image = selectedImage
+            }
+        }
+        
+    }
+}
 //MARK:- Custom Picker
 extension MarketPlaceCreateStoreVC: TLPhotosPickerLogDelegate {
     //For Log User Interaction
@@ -238,18 +268,20 @@ extension MarketPlaceCreateStoreVC: TLPhotosPickerLogDelegate {
                                 : TLPhotosPickerViewController) {
         print("selectedCameraCe ll")
     }
-
+    
     func selectedPhoto(picker: TLPhotosPickerViewController, at: Int) {
         print("selectedPhoto")
         print(picker.selectedAssets.count)
+        
         //self.collectionViewImage.reloadData()
         // let image = picker.selectedAssets[at]
         //  print(image)
     }
     
     func deselectedPhoto(picker: TLPhotosPickerViewController, at: Int) {
+        picker.isAccessibilityElement = true
         print("deselectedPhoto")
-       // self.collectionViewImage.reloadData()
+        // self.collectionViewImage.reloadData()
     }
     
     func selectedAlbum(picker: TLPhotosPickerViewController, title: String, at: Int) {
@@ -293,31 +325,32 @@ extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageMaketPlaceCollectionViewCell", for: indexPath) as? ImageMaketPlaceCollectionViewCell else {return UICollectionViewCell()}
-            if selectedAssets.count == 0{
+        if selectedAssets.count == 0{
             cell.viewAddImage.isHidden = false
             cell.btnDelete.isHidden = true
         }else {
-
-                    if indexPath.row < selectedAssets.count{
-                    cell.viewAddImage.isHidden = true
-                    cell.btnDelete.isHidden = false
-                        self.uploadImageArray = [UIImage]()
-                        for image in 0..<self.selectedAssets.count {
-                           
-                             let asset = self.selectedAssets[image]
-                            let image = asset.fullResolutionImage ?? UIImage()
-                            //self.imageLabel.text = "Photos 0/10 Choose your stores main photo first. Add more photos of your store max 10 allowed."
-                            self.uploadImageArray.append(image)
-                            
-                        }
-                        cell.image.image = uploadImageArray[indexPath.row]
-                       
-                }else{
-                   
+            
+            if indexPath.row < selectedAssets.count{
+                cell.viewAddImage.isHidden = true
+                cell.btnDelete.isHidden = false
+                self.uploadImageArray = [UIImage]()
+                for image in 0..<self.selectedAssets.count {
+                    
+                    let asset = self.selectedAssets[image]
+                    let image = asset.fullResolutionImage ?? UIImage()
+                    //self.imageLabel.text = "Photos 0/10 Choose your stores main photo first. Add more photos of your store max 10 allowed."
+                    self.uploadImageArray.append(image)
+                    
+                    
+                }
+                cell.image.image = uploadImageArray[indexPath.row]
+                
+            }else{
+                
                 cell.viewAddImage.isHidden = false
                 cell.btnDelete.isHidden = true
-
-        }
+                
+            }
             cell.btnDelete.tag = indexPath.row
             cell.btnDeleteCallback = { tag in
                 self.selectedAssets.remove(at: tag)
@@ -326,13 +359,13 @@ extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDat
             }
             return cell
         }
-       
+        
         return cell
     }
     
     func btnScroll() {
         collectionViewImage.scrollToItem(at: IndexPath(item: self.selectedAssets.count, section: 0), at: UICollectionView.ScrollPosition.right, animated:true)
-        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if self.selectedAssets.count == 0{
@@ -343,7 +376,7 @@ extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDat
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if self.selectedAssets.count ==  0 {
-           // alertToAddImage()
+            // alertToAddImage()
             alertToAddCustomPicker()
         }else if indexPath.row >= self.selectedAssets.count{
             //alertToAddImage()
@@ -396,7 +429,7 @@ extension MarketPlaceCreateStoreVC {
         let coverPic: [String:Any] = [APIConstants.kImage : self.imgCover.image ?? UIImage(),
                                       APIConstants.kImageName: "banner_id" ]
         let profilePic: [String:Any] = [APIConstants.kImage : self.imgProfile.image ?? UIImage(),
-                                      APIConstants.kImageName: "logo_id" ]
+                                        APIConstants.kImageName: "logo_id" ]
         
         storeImageParams.append(imageParam)
         storeImageParams.append(coverPic)
@@ -407,7 +440,7 @@ extension MarketPlaceCreateStoreVC {
             if let response = dictResponse["data"] as? [String:Any]{
                 self.marketPlaceId = (response["marketplace_store_id"] as? Int? ?? 0) ?? 0
             }
-
+            
             let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
             controller?.storeImage = self.imgProfile.image ?? UIImage()
             controller?.storeName = self.txtStoreName.text
@@ -430,6 +463,6 @@ extension MarketPlaceCreateStoreVC {
             
         }
     }
-
-
+    
+    
 }

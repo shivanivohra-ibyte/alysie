@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MarketPlaceConfirmationVC: UIViewController {
+class MarketPlaceConfirmationVC: AlysieBaseViewC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,12 +16,14 @@ class MarketPlaceConfirmationVC: UIViewController {
     }
     
     @IBAction func backToMarketAction(_ sender: UIButton){
-        for controller in self.navigationController!.viewControllers as Array {
-            if controller.isKind(of: MarketPlaceHomeVC.self) {
-                self.navigationController!.popToViewController(controller, animated: true)
-                break
-            }
-        }
+//        for controller in self.navigationController!.viewControllers as Array {
+//            if controller.isKind(of: MarketPlaceHomeVC.self) {
+//                self.navigationController!.popToViewController(controller, animated: true)
+//                break
+//            }
+//        }
+        let controller = pushViewController(withName: MarketPlaceHomeVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? MarketPlaceHomeVC
+        controller?.isCreateStore = true
     }
 
 }
