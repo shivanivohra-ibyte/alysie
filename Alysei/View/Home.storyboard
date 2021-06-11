@@ -2008,9 +2008,26 @@
                                                 <action selector="messageButtonTapped:" destination="RXC-XK-UKx" eventType="touchUpInside" id="Kya-hb-jNK"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XqZ-iA-quK" customClass="UIButtonExtended" customModule="Alysei" customModuleProvider="target">
+                                            <rect key="frame" x="15" y="364" width="120" height="44"/>
+                                            <color key="backgroundColor" red="0.29411764709999999" green="0.70196078429999997" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="44" id="DjE-eb-phi"/>
+                                                <constraint firstAttribute="width" constant="120" id="Kww-CZ-8BP"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="12"/>
+                                            <state key="normal" title="Connect"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="makeCircle" value="NO"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="respondButtonTapped:" destination="RXC-XK-UKx" eventType="touchUpInside" id="UYX-x8-wnB"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
+                                        <constraint firstItem="abZ-xo-HVg" firstAttribute="top" secondItem="XqZ-iA-quK" secondAttribute="bottom" constant="10" id="674-2w-oo6"/>
                                         <constraint firstItem="rao-J3-paC" firstAttribute="top" secondItem="abZ-xo-HVg" secondAttribute="bottom" id="7Fi-yM-lhr"/>
                                         <constraint firstItem="943-Bp-Ma1" firstAttribute="leading" secondItem="CQC-t6-3ep" secondAttribute="trailing" constant="8" symbolic="YES" id="7aa-i7-KrC"/>
                                         <constraint firstItem="CQC-t6-3ep" firstAttribute="leading" secondItem="iIF-Ev-jCZ" secondAttribute="leading" constant="15" id="8ok-9s-Wtu"/>
@@ -2036,6 +2053,8 @@
                                         <constraint firstItem="ohE-3u-TDX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iIF-Ev-jCZ" secondAttribute="top" id="nFU-om-hnb"/>
                                         <constraint firstItem="abZ-xo-HVg" firstAttribute="top" secondItem="uUz-OT-5d2" secondAttribute="bottom" constant="10" id="nbo-UL-xXN"/>
                                         <constraint firstItem="rao-J3-paC" firstAttribute="leading" secondItem="iIF-Ev-jCZ" secondAttribute="leading" id="oCR-VJ-xHC"/>
+                                        <constraint firstItem="XqZ-iA-quK" firstAttribute="leading" secondItem="iIF-Ev-jCZ" secondAttribute="leading" constant="15" id="qjf-Xb-8lJ"/>
+                                        <constraint firstItem="XqZ-iA-quK" firstAttribute="top" secondItem="5ar-in-dBB" secondAttribute="bottom" constant="10" id="qr0-Na-Coj"/>
                                         <constraint firstItem="7y3-jK-Gog" firstAttribute="leading" secondItem="iIF-Ev-jCZ" secondAttribute="leading" id="t0i-ph-FHz"/>
                                         <constraint firstAttribute="trailing" secondItem="abZ-xo-HVg" secondAttribute="trailing" id="uGh-PY-6wR"/>
                                         <constraint firstItem="abZ-xo-HVg" firstAttribute="top" secondItem="CQC-t6-3ep" secondAttribute="bottom" constant="10" id="uXQ-gu-OgC"/>

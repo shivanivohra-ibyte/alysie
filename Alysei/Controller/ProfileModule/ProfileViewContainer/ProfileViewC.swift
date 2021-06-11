@@ -49,7 +49,8 @@ class ProfileViewC: AlysieBaseViewC{
 
     @IBOutlet weak var respondeButton: UIButtonExtended!
     @IBOutlet weak var messageButton: UIButtonExtended!
-    
+    @IBOutlet weak var connectButton: UIButtonExtended!
+
     var percentage: String?
     
   //MARK: - Properties -
@@ -146,6 +147,7 @@ class ProfileViewC: AlysieBaseViewC{
     self.btnEditProfile.isHidden = true
     self.messageButton.isHidden = true
     self.respondeButton.isHidden = true
+    self.connectButton.isHidden = true
 
 
     switch self.userLevel {
@@ -154,7 +156,6 @@ class ProfileViewC: AlysieBaseViewC{
         self.btnEditProfile.isHidden = false
         self.btnEditProfile.isUserInteractionEnabled = true
     case .other:
-        print("other")
         self.messageButton.isHidden = false
         self.respondeButton.isHidden = false
         self.messageButton.isUserInteractionEnabled = true
