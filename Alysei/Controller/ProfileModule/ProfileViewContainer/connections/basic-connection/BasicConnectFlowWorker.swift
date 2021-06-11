@@ -13,6 +13,9 @@
 import UIKit
 
 class BasicConnectFlowWorker {
-    func doSomeWork() {
-    }
+//    func makeAPICall(_ urlRequest: URLRequest, complition: @escaping (Data?, Error?) -> ()) {
+//        WebServices.shared.request(urlRequest) { data, urlResponse, statusCode, error in
+//            complition(data, error)
+//        }
+//    }
 }

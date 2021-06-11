@@ -15,8 +15,24 @@ import UIKit
 enum BasicConnectFlow {
     // MARK: Use cases
     
-    enum Something {
-        struct Request {
+    enum Connection {
+        struct request: Codable {
+            var userID: String
+            var reason: String?
+
+            private enum CodingKeys: String, CodingKey {
+                case userID = "user_id"
+                case reason = "reason_to_connect"
+            }
+
+//            func data() -> Data? {
+//                let postData = NSMutableData()
+//                if let reason = self.reason {
+//                    postData.append("reason_to_connect=\(reason)&".data(using: .utf8)!)
+//                }
+//                return postData as Data
+//            }
+
         }
         struct Response {
         }

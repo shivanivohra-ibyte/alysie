@@ -13,6 +13,7 @@
 import UIKit
 
 protocol BasicConnectFlowBusinessLogic {
+    func sendConnectionRequest(_ request: BasicConnectFlow.Connection.request)
 }
 
 protocol BasicConnectFlowDataStore {
@@ -25,4 +26,23 @@ class BasicConnectFlowInteractor: BasicConnectFlowBusinessLogic, BasicConnectFlo
     //var name: String = ""
 
     // MARK:- protocol methods
+    func sendConnectionRequest(_ request: BasicConnectFlow.Connection.request) {
+        do {
+            let urlString = APIUrl.Connection.sendRequest
+
+            let body = try JSONEncoder().encode(request)
+
+            guard var request = WebServices.shared.buildURLRequest(urlString, method: .POST) else {
+                return
+            }
+
+            request.httpBody = body
+
+            WebServices.shared.request(request) { data, URLResponse, statusCode, error in
+
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }

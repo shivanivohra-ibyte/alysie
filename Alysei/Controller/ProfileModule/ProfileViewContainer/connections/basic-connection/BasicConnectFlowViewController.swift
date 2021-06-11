@@ -65,6 +65,7 @@ class BasicConnectFlowViewController: UIViewController, BasicConnectFlowDisplayL
 
     // MARK:- IBOutlets
     @IBOutlet weak var emailIDLabel: UILabel!
+    @IBOutlet weak var reasonToConnect: UITextFieldExtended!
 
     // MARK:- protocol methods
 
@@ -77,6 +78,10 @@ class BasicConnectFlowViewController: UIViewController, BasicConnectFlowDisplayL
 
 
     @IBAction func confirmButtonTapped(_ sender: UIButton) {
+
+        let requestModel = BasicConnectFlow.Connection.request(userID: "432",
+                                                               reason: self.reasonToConnect.text)
+        self.interactor?.sendConnectionRequest(requestModel)
 
     }
 }

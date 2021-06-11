@@ -216,8 +216,12 @@ struct APIUrl{
 
         static let photoList = kBASEURL + "get/all/user/post/1"
         static let postList = kBASEURL + "get/all/user/post/0"
-
     }
+
+    enum Connection {
+        static let sendRequest = kBASEURL + "send/connection/request"
+    }
+
     enum ReviewHub{
         static let kReviewHub = kBASEURL + "review/hubs"
     }
