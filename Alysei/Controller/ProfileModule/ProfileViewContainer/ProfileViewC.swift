@@ -59,6 +59,7 @@ class ProfileViewC: AlysieBaseViewC{
     var contactDetilViewModel: ContactDetail.Contact.Response!
     var signUpViewModel: SignUpViewModel!
     var userLevel: UserLevel = .other
+    var userID: String = ""
     var userType: UserRoles!
     var aboutViewModel: AboutView.viewModel!
     
@@ -156,10 +157,13 @@ class ProfileViewC: AlysieBaseViewC{
         self.btnEditProfile.isHidden = false
         self.btnEditProfile.isUserInteractionEnabled = true
     case .other:
-        self.messageButton.isHidden = false
-        self.respondeButton.isHidden = false
-        self.messageButton.isUserInteractionEnabled = true
-        self.respondeButton.isUserInteractionEnabled = true
+//        self.messageButton.isHidden = false
+//        self.respondeButton.isHidden = false
+//        self.messageButton.isUserInteractionEnabled = true
+//        self.respondeButton.isUserInteractionEnabled = true
+
+        self.connectButton.isHidden = false
+        self.connectButton.isUserInteractionEnabled = true
     }
 
   }
@@ -273,29 +277,35 @@ class ProfileViewC: AlysieBaseViewC{
     }
 
     @IBAction func respondButtonTapped(_ sender: UIButton) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-        let acceptButton = UIAlertAction(title: "Accept Request", style: .default) { action in
-            print("Action button")
-        }
-
-        let deleteButton = UIAlertAction(title: "Delete Request", style: .default) { action in
-            print("delete button")
-        }
-
-        let blockButton = UIAlertAction(title: "Block", style: .default) { action in
-            print("block button")
-        }
-
-        alert.addAction(acceptButton)
-        alert.addAction(deleteButton)
-        alert.addAction(blockButton)
-
-        self.present(alert, animated: true, completion: nil)
+        self.respondButtonTapped()
+//        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+//
+//        let acceptButton = UIAlertAction(title: "Accept Request", style: .default) { action in
+//            print("Action button")
+//        }
+//
+//        let deleteButton = UIAlertAction(title: "Delete Request", style: .default) { action in
+//            print("delete button")
+//        }
+//
+//        let blockButton = UIAlertAction(title: "Block", style: .default) { action in
+//            print("block button")
+//        }
+//
+//        alert.addAction(acceptButton)
+//        alert.addAction(deleteButton)
+//        alert.addAction(blockButton)
+//
+//        self.present(alert, animated: true, completion: nil)
     }
 
-    @IBAction func messageButtonTapped(_ sender: UIButton) {
+    @IBAction func connectButtonTapped(_ sender: UIButton) {
+        self.connectButtonTapped()
+    }
 
+
+    @IBAction func messageButtonTapped(_ sender: UIButton) {
+        self.messageButtonTapped()
     }
   
   //MARK: - Private Methods -
@@ -959,4 +969,66 @@ extension ProfileViewC: AddFeaturedProductCallBack {
     }
 
 
+}
+
+
+
+//MARK:- connection request module
+extension ProfileViewC {
+
+
+    func connectButtonTapped() {
+        self.performSegue(withIdentifier: "segueProfileTabToBasicConnection", sender: nil)
+    }
+
+    func respondButtonTapped() {
+
+        let alert:UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+
+
+        // acceptAction
+        let acceptAction = UIAlertAction(title: "Accept Request",
+                                         style: UIAlertAction.Style.default) { (action) in
+        }
+        let checkMarkImage = UIImage(named: "Group 382")?.withRenderingMode(.alwaysOriginal)
+        acceptAction.setValue(checkMarkImage, forKey: "image")
+        acceptAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+
+
+        // deleteAction
+        let deleteAction = UIAlertAction(title: "Delete Request",
+                                          style: UIAlertAction.Style.default) { (action) in
+        }
+        let deleteImage = UIImage(named: "Group 636")?.withRenderingMode(.alwaysOriginal)
+        deleteAction.setValue(deleteImage, forKey: "image")
+        deleteAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+
+
+        // blockAction
+        let blockAction = UIAlertAction(title: "Block",
+                                         style: UIAlertAction.Style.default) { (action) in
+            print("\(AlertMessage.kCancel) tapped")
+        }
+        let blockImage = UIImage(named: "block_icon")?.withRenderingMode(.alwaysOriginal)
+        blockAction.setValue(blockImage, forKey: "image")
+        blockAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+
+
+        // cancelAction
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: UIAlertAction.Style.cancel) { (action) in
+            print("\(AlertMessage.kCancel) tapped")
+        }
+
+        alert.addAction(acceptAction)
+        alert.addAction(deleteAction)
+        alert.addAction(blockAction)
+        alert.addAction(cancelAction)
+
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func messageButtonTapped() {
+        showAlert(withMessage: "Message functionality will be implemented here")
+    }
 }
