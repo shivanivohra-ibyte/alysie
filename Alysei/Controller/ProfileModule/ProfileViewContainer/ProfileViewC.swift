@@ -59,7 +59,7 @@ class ProfileViewC: AlysieBaseViewC{
     var contactDetilViewModel: ContactDetail.Contact.Response!
     var signUpViewModel: SignUpViewModel!
     var userLevel: UserLevel = .other
-    var userID: String = ""
+    var userID: Int!
     var userType: UserRoles!
     var aboutViewModel: AboutView.viewModel!
     
