@@ -21,6 +21,8 @@ class BasicConnectFlowViewController: UIViewController, BasicConnectFlowDisplayL
 
     // MARK:- Object lifecycle
 
+    var userModel: BasicConnectFlow.userDataModel!
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
@@ -61,6 +63,12 @@ class BasicConnectFlowViewController: UIViewController, BasicConnectFlowDisplayL
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let messageAttributedString = NSMutableAttributedString()
+        messageAttributedString.append(NSAttributedString(string: "Sending a request to connect with \n", attributes: [NSAttributedString.Key.font: AppFonts.regular(16.0).font]))
+        messageAttributedString.append(NSAttributedString(string: "@\(self.userModel.username)", attributes: [NSAttributedString.Key.font: AppFonts.bold(16.0).font]))
+
+        self.emailIDLabel.attributedText = messageAttributedString
     }
 
     // MARK:- IBOutlets
@@ -73,15 +81,16 @@ class BasicConnectFlowViewController: UIViewController, BasicConnectFlowDisplayL
 
     //MARK:- IBActions
     @IBAction func backbuttonTapped(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 
 
     @IBAction func confirmButtonTapped(_ sender: UIButton) {
 
-        let requestModel = BasicConnectFlow.Connection.request(userID: "432",
+        let requestModel = BasicConnectFlow.Connection.request(userID: self.userModel.userID,
                                                                reason: self.reasonToConnect.text)
         self.interactor?.sendConnectionRequest(requestModel)
 
     }
+
 }

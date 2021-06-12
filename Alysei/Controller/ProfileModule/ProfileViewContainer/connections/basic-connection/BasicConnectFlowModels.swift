@@ -14,10 +14,17 @@ import UIKit
 
 enum BasicConnectFlow {
     // MARK: Use cases
-    
+
+
+    struct userDataModel {
+//        var email: String
+        var userID: Int
+        var username: String
+    }
+
     enum Connection {
         struct request: Codable {
-            var userID: String
+            var userID: Int
             var reason: String?
 
             private enum CodingKeys: String, CodingKey {

@@ -216,6 +216,8 @@ struct APIUrl{
 
         static let photoList = kBASEURL + "get/all/user/post/1"
         static let postList = kBASEURL + "get/all/user/post/0"
+
+        static let visiterProfile = kBASEURL + "get/visitor/profile?visitor_profile_id="
     }
 
     enum Connection {

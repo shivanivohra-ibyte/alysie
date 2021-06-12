@@ -1332,6 +1332,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Cvf-ef-BMZ"/>
                     <connections>
+                        <outlet property="emailIDLabel" destination="hMd-8I-Hx2" id="TIi-g4-RVR"/>
                         <outlet property="reasonToConnect" destination="eLQ-jr-W7Y" id="2u0-5i-gHy"/>
                     </connections>
                 </viewController>
