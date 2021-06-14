@@ -19,12 +19,14 @@ enum UserProfile {
         var postCount: Int?
         var followerCount: Int?
         var userData: userDataModel?
+        var contactTab: contactTab?
 
         private enum CodingKeys: String, CodingKey {
             case about
             case postCount = "post_count"
             case userData = "user_data"
             case followerCount = "follower_count"
+            case contactTab = "contact_tab"
         }
     }
 
@@ -53,6 +55,28 @@ enum UserProfile {
             case lastName = "last_name"
             case profilePercentage = "profile_percentage"
          }
+    }
+
+
+    struct contactTab: Codable {
+        var website: String?
+        var address: String?
+        var email: String?
+        var phone: String?
+        var roleID: Int?
+        var userID: Int?
+        var fbLink: String?
+
+        private enum CodingKeys: String, CodingKey {
+            case website
+            case address
+            case email
+            case phone
+            case roleID = "role_id"
+            case userID = "user_id"
+            case fbLink = "fb_link"
+        }
+
     }
 
 

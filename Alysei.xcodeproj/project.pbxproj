@@ -208,6 +208,12 @@
 		6140882B26697BB100A98B0E /* UserPhotosGridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6140882A26697BB100A98B0E /* UserPhotosGridCollectionViewCell.swift */; };
 		61971C3E265A8AB1002DD260 /* ProfileTabRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61971C3D265A8AB1002DD260 /* ProfileTabRows.swift */; };
 		61971C40265A8DF3002DD260 /* TabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61971C3F265A8DF3002DD260 /* TabCollectionViewCell.swift */; };
+		61A40A1B267378BF00D7D078 /* BasicConnectFlowPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A40A15267378BF00D7D078 /* BasicConnectFlowPresenter.swift */; };
+		61A40A1C267378BF00D7D078 /* BasicConnectFlowWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A40A16267378BF00D7D078 /* BasicConnectFlowWorker.swift */; };
+		61A40A1D267378BF00D7D078 /* BasicConnectFlowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A40A17267378BF00D7D078 /* BasicConnectFlowRouter.swift */; };
+		61A40A1E267378BF00D7D078 /* BasicConnectFlowModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A40A18267378BF00D7D078 /* BasicConnectFlowModels.swift */; };
+		61A40A1F267378BF00D7D078 /* BasicConnectFlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A40A19267378BF00D7D078 /* BasicConnectFlowViewController.swift */; };
+		61A40A20267378BF00D7D078 /* BasicConnectFlowInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A40A1A267378BF00D7D078 /* BasicConnectFlowInteractor.swift */; };
 		61A7A3C8264C6164000F83E0 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A7A3C7264C6164000F83E0 /* Tabbar.swift */; };
 		61A8CB47261D98CA00B99233 /* ContactDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB41261D98CA00B99233 /* ContactDetailPresenter.swift */; };
 		61A8CB48261D98CA00B99233 /* ContactDetailWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB42261D98CA00B99233 /* ContactDetailWorker.swift */; };
@@ -495,6 +501,12 @@
 		6140882A26697BB100A98B0E /* UserPhotosGridCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosGridCollectionViewCell.swift; sourceTree = "<group>"; };
 		61971C3D265A8AB1002DD260 /* ProfileTabRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabRows.swift; sourceTree = "<group>"; };
 		61971C3F265A8DF3002DD260 /* TabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCollectionViewCell.swift; sourceTree = "<group>"; };
+		61A40A15267378BF00D7D078 /* BasicConnectFlowPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicConnectFlowPresenter.swift; sourceTree = "<group>"; };
+		61A40A16267378BF00D7D078 /* BasicConnectFlowWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicConnectFlowWorker.swift; sourceTree = "<group>"; };
+		61A40A17267378BF00D7D078 /* BasicConnectFlowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicConnectFlowRouter.swift; sourceTree = "<group>"; };
+		61A40A18267378BF00D7D078 /* BasicConnectFlowModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicConnectFlowModels.swift; sourceTree = "<group>"; };
+		61A40A19267378BF00D7D078 /* BasicConnectFlowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicConnectFlowViewController.swift; sourceTree = "<group>"; };
+		61A40A1A267378BF00D7D078 /* BasicConnectFlowInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicConnectFlowInteractor.swift; sourceTree = "<group>"; };
 		61A7A3C7264C6164000F83E0 /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
 		61A8CB41261D98CA00B99233 /* ContactDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailPresenter.swift; sourceTree = "<group>"; };
 		61A8CB42261D98CA00B99233 /* ContactDetailWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailWorker.swift; sourceTree = "<group>"; };
@@ -642,6 +654,7 @@
 		273E5E7225BB37F4009AF5A4 /* ProfileViewContainer */ = {
 			isa = PBXGroup;
 			children = (
+				61A40A07267373D400D7D078 /* connections */,
 				6140882C266B99A500A98B0E /* user-posts */,
 				6140882526697A1600A98B0E /* user-photos */,
 				273E5E7325BB37F4009AF5A4 /* ProfileViewC.swift */,
@@ -1338,6 +1351,27 @@
 			path = "user-posts";
 			sourceTree = "<group>";
 		};
+		61A40A07267373D400D7D078 /* connections */ = {
+			isa = PBXGroup;
+			children = (
+				61A40A08267373E000D7D078 /* basic-connection */,
+			);
+			path = connections;
+			sourceTree = "<group>";
+		};
+		61A40A08267373E000D7D078 /* basic-connection */ = {
+			isa = PBXGroup;
+			children = (
+				61A40A15267378BF00D7D078 /* BasicConnectFlowPresenter.swift */,
+				61A40A16267378BF00D7D078 /* BasicConnectFlowWorker.swift */,
+				61A40A17267378BF00D7D078 /* BasicConnectFlowRouter.swift */,
+				61A40A18267378BF00D7D078 /* BasicConnectFlowModels.swift */,
+				61A40A19267378BF00D7D078 /* BasicConnectFlowViewController.swift */,
+				61A40A1A267378BF00D7D078 /* BasicConnectFlowInteractor.swift */,
+			);
+			path = "basic-connection";
+			sourceTree = "<group>";
+		};
 		61A7A3C6264C6132000F83E0 /* tab */ = {
 			isa = PBXGroup;
 			children = (
@@ -1681,6 +1715,7 @@
 				27A443A725AE03720002BAAC /* UIButtonCornerRadius.swift in Sources */,
 				279AB32725FF42010061FCB3 /* HubsModels.swift in Sources */,
 				272EA30F25C1B00B009E0259 /* BusinessSearchTableCell.swift in Sources */,
+				61A40A1F267378BF00D7D078 /* BasicConnectFlowViewController.swift in Sources */,
 				61A8CB49261D98CA00B99233 /* ContactDetailRouter.swift in Sources */,
 				27D0FAB125CEE9FF00463FE0 /* LoginAccountViewC.swift in Sources */,
 				277803BC25D1AD91008CC701 /* SignUpMultiCheckboxTableCell.swift in Sources */,
@@ -1703,6 +1738,7 @@
 				6B5A8280260C56AD00ED60B7 /* WebServices.swift in Sources */,
 				C562C4B22626CACD009F9E3B /* ProfileCompletionViewController.swift in Sources */,
 				2742855E25B82EEC003F3DE5 /* AddFeatureTableCell.swift in Sources */,
+				61A40A1E267378BF00D7D078 /* BasicConnectFlowModels.swift in Sources */,
 				277D18A625BF3CE7007CA5C7 /* BusinessFiltersCollectionCell.swift in Sources */,
 				277D18A225BF3935007CA5C7 /* BusinessFiltersTableCell.swift in Sources */,
 				277D189D25BEC8C3007CA5C7 /* NetworkCategoryCollectionCell.swift in Sources */,
@@ -1736,6 +1772,7 @@
 				6BC4C0D726006C5D00791DCD /* OverLayForgetVC.swift in Sources */,
 				27A443B525AE03720002BAAC /* UIScreenExtended.swift in Sources */,
 				2742855D25B82EEC003F3DE5 /* EditUserSettingsViewC.swift in Sources */,
+				61A40A20267378BF00D7D078 /* BasicConnectFlowInteractor.swift in Sources */,
 				27A443C325AE03720002BAAC /* NSNumberExtended.swift in Sources */,
 				27BC68A325AC56C000A01B6A /* AppDelegate.swift in Sources */,
 				2716627D25BD45BF000C0189 /* BusinessCategoryCollectionCell.swift in Sources */,
@@ -1801,6 +1838,7 @@
 				C5957A32265CEB33004952D8 /* HubsViewC.swift in Sources */,
 				C507B8502668B9EE0014344A /* SelectMemberShipVC.swift in Sources */,
 				27A443AF25AE03720002BAAC /* MKMapViewExtended.swift in Sources */,
+				61A40A1B267378BF00D7D078 /* BasicConnectFlowPresenter.swift in Sources */,
 				27A443B725AE03720002BAAC /* UIImageViewBorderWidthAndColor.swift in Sources */,
 				27A443A525AE03720002BAAC /* UILabelCornerRadius.swift in Sources */,
 				27A4439125AE03720002BAAC /* NetworkUrl.swift in Sources */,
@@ -1816,6 +1854,7 @@
 				27A443AB25AE03720002BAAC /* UIViewBorderWidthAndColor.swift in Sources */,
 				61A8CB47261D98CA00B99233 /* ContactDetailPresenter.swift in Sources */,
 				274D90AA25B85D5D00C82A75 /* UpdatePasswordViewC.swift in Sources */,
+				61A40A1D267378BF00D7D078 /* BasicConnectFlowRouter.swift in Sources */,
 				C587D14D26413BE6002D72DF /* NewFeedModel.swift in Sources */,
 				27A443B125AE03720002BAAC /* DateExtended.swift in Sources */,
 				610D718C2628B24E000FA104 /* EventsPresenter.swift in Sources */,
@@ -1882,6 +1921,7 @@
 				27D0FAAF25CEE9FF00463FE0 /* RoleViewC.swift in Sources */,
 				27A443C825AE03720002BAAC /* UITextFieldSubLayerBorderWidthAndColor.swift in Sources */,
 				C513C19C26144DD20025CF27 /* SettingsScreenVC.swift in Sources */,
+				61A40A1C267378BF00D7D078 /* BasicConnectFlowWorker.swift in Sources */,
 				27A443B225AE03720002BAAC /* UITextViewSubLayerBorderWidthAndColor.swift in Sources */,
 				27A443BD25AE03720002BAAC /* BoolExtended.swift in Sources */,
 				610D718E2628B24E000FA104 /* EventsRouter.swift in Sources */,

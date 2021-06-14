@@ -59,8 +59,11 @@ class ProfileViewC: AlysieBaseViewC{
     var contactDetilViewModel: ContactDetail.Contact.Response!
     var signUpViewModel: SignUpViewModel!
     var userLevel: UserLevel = .other
+    var userID: Int!
     var userType: UserRoles!
     var aboutViewModel: AboutView.viewModel!
+
+    var userProfileModel: UserProfile.profileTopSectionModel!
     
     //var profileCompletion
     var currentIndex: Int = 0
@@ -156,10 +159,13 @@ class ProfileViewC: AlysieBaseViewC{
         self.btnEditProfile.isHidden = false
         self.btnEditProfile.isUserInteractionEnabled = true
     case .other:
-        self.messageButton.isHidden = false
-        self.respondeButton.isHidden = false
-        self.messageButton.isUserInteractionEnabled = true
-        self.respondeButton.isUserInteractionEnabled = true
+//        self.messageButton.isHidden = false
+//        self.respondeButton.isHidden = false
+//        self.messageButton.isUserInteractionEnabled = true
+//        self.respondeButton.isUserInteractionEnabled = true
+
+        self.connectButton.isHidden = false
+        self.connectButton.isUserInteractionEnabled = true
     }
 
   }
@@ -171,12 +177,16 @@ class ProfileViewC: AlysieBaseViewC{
     self.viewProfileCompletion.isHidden = true
     self.viewProfileHeight.constant = 0
     self.postRequestToGetFields()
-    self.fetchProfileDetails()
     self.fetchContactDetail()
     self.currentIndex = 0
     self.postRequestToGetProgress()
 
 
+    if self.userLevel == .own {
+        self.fetchProfileDetails()
+    } else {
+        self.fetchVisiterProfileDetails(4)
+    }
   }
   
   override func viewDidLayoutSubviews(){
@@ -273,29 +283,35 @@ class ProfileViewC: AlysieBaseViewC{
     }
 
     @IBAction func respondButtonTapped(_ sender: UIButton) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-        let acceptButton = UIAlertAction(title: "Accept Request", style: .default) { action in
-            print("Action button")
-        }
-
-        let deleteButton = UIAlertAction(title: "Delete Request", style: .default) { action in
-            print("delete button")
-        }
-
-        let blockButton = UIAlertAction(title: "Block", style: .default) { action in
-            print("block button")
-        }
-
-        alert.addAction(acceptButton)
-        alert.addAction(deleteButton)
-        alert.addAction(blockButton)
-
-        self.present(alert, animated: true, completion: nil)
+        self.respondButtonTapped()
+//        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+//
+//        let acceptButton = UIAlertAction(title: "Accept Request", style: .default) { action in
+//            print("Action button")
+//        }
+//
+//        let deleteButton = UIAlertAction(title: "Delete Request", style: .default) { action in
+//            print("delete button")
+//        }
+//
+//        let blockButton = UIAlertAction(title: "Block", style: .default) { action in
+//            print("block button")
+//        }
+//
+//        alert.addAction(acceptButton)
+//        alert.addAction(deleteButton)
+//        alert.addAction(blockButton)
+//
+//        self.present(alert, animated: true, completion: nil)
     }
 
-    @IBAction func messageButtonTapped(_ sender: UIButton) {
+    @IBAction func connectButtonTapped(_ sender: UIButton) {
+        self.connectButtonTapped()
+    }
 
+
+    @IBAction func messageButtonTapped(_ sender: UIButton) {
+        self.messageButtonTapped()
     }
   
   //MARK: - Private Methods -
@@ -508,6 +524,58 @@ class ProfileViewC: AlysieBaseViewC{
         }
     }
 
+
+    func fetchVisiterProfileDetails(_ userID: Int) {
+        SVProgressHUD.show()
+        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Profile.visiterProfile)\(userID)", method: .GET) else { return }
+        WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
+            SVProgressHUD.dismiss()
+            guard let data = data else { return }
+            do {
+                let responseModel = try JSONDecoder().decode(UserProfile.profileTopSectionModel.self, from: data)
+                print(responseModel)
+                self.userProfileModel = responseModel
+
+                self.fetchAboutDetail()
+
+                if let username = responseModel.data?.userData?.username {
+                    self.usernameLabel.text = "@\(username)".lowercased()
+                }
+                self.aboutLabel.text = "\(responseModel.data?.about ?? "")"
+
+                let roleID = UserRoles(rawValue: responseModel.data?.userData?.roleID ?? 0) ?? .voyagers
+                self.userType = roleID
+
+                self.updateListingTitle()
+                self.tabsCollectionView.reloadData()
+
+                var name = ""
+                switch roleID {
+                case .distributer1, .distributer2, .distributer3, .producer, .travelAgencies :
+                    name = "\(responseModel.data?.userData?.companyName ?? "")"
+                //                case .voiceExperts, .voyagers:
+                case .restaurant :
+                    name = "\(responseModel.data?.userData?.restaurantName ?? "")"
+                default:
+                    name = "\(responseModel.data?.userData?.firstName ?? "") \(responseModel.data?.userData?.lastName ?? "")"
+                }
+
+                self.lblDisplayName.text = "\(name)".capitalized
+                self.lblUserName.text = "\(name)".capitalized
+                self.lblDisplayNameNavigation.text = "\(name)".capitalized
+
+                self.viewProfileCompletion.isHidden = true
+                self.viewProfileHeight.constant = 0
+                self.tblViewProfileCompletion.isHidden = false
+                self.headerView.isHidden = true
+                self.tblViewPosts.isHidden = false
+                self.initialSetUp()
+            } catch {
+                print(error.localizedDescription)
+            }
+            if (error != nil) { print(error.debugDescription) }
+        }
+    }
 
     func fetchContactDetail() {
         SVProgressHUD.show()
@@ -930,6 +998,16 @@ extension ProfileViewC{
                 viewCon.viewModel = ContactDetail.Contact.ViewModel(response: self.contactDetilViewModel)
             }
         }
+
+        if segue.identifier == "segueProfileTabToBasicConnection" {
+            if let viewCon = segue.destination as? BasicConnectFlowViewController {
+                if let username = self.userProfileModel.data?.userData?.username,
+                   let userID = self.userProfileModel.data?.userData?.userID {
+                    viewCon.userModel = BasicConnectFlow.userDataModel(userID: userID,
+                                                                       username: username)
+                }
+            }
+        }
     }
   
   override func didUserGetData(from result: Any, type: Int) {
@@ -960,4 +1038,66 @@ extension ProfileViewC: AddFeaturedProductCallBack {
     }
 
 
+}
+
+
+
+//MARK:- connection request module
+extension ProfileViewC {
+
+
+    func connectButtonTapped() {
+        self.performSegue(withIdentifier: "segueProfileTabToBasicConnection", sender: nil)
+    }
+
+    func respondButtonTapped() {
+
+        let alert:UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertController.Style.actionSheet)
+
+
+        // acceptAction
+        let acceptAction = UIAlertAction(title: "Accept Request",
+                                         style: UIAlertAction.Style.default) { (action) in
+        }
+        let checkMarkImage = UIImage(named: "Group 382")?.withRenderingMode(.alwaysOriginal)
+        acceptAction.setValue(checkMarkImage, forKey: "image")
+        acceptAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+
+
+        // deleteAction
+        let deleteAction = UIAlertAction(title: "Delete Request",
+                                          style: UIAlertAction.Style.default) { (action) in
+        }
+        let deleteImage = UIImage(named: "Group 636")?.withRenderingMode(.alwaysOriginal)
+        deleteAction.setValue(deleteImage, forKey: "image")
+        deleteAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+
+
+        // blockAction
+        let blockAction = UIAlertAction(title: "Block",
+                                         style: UIAlertAction.Style.default) { (action) in
+            print("\(AlertMessage.kCancel) tapped")
+        }
+        let blockImage = UIImage(named: "block_icon")?.withRenderingMode(.alwaysOriginal)
+        blockAction.setValue(blockImage, forKey: "image")
+        blockAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+
+
+        // cancelAction
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: UIAlertAction.Style.cancel) { (action) in
+            print("\(AlertMessage.kCancel) tapped")
+        }
+
+        alert.addAction(acceptAction)
+        alert.addAction(deleteAction)
+        alert.addAction(blockAction)
+        alert.addAction(cancelAction)
+
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    func messageButtonTapped() {
+        showAlert(withMessage: "Message functionality will be implemented here")
+    }
 }
