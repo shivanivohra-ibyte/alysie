@@ -222,6 +222,7 @@ struct APIUrl{
 
     enum Connection {
         static let sendRequest = kBASEURL + "send/connection/request"
+        static let kProductTypeCategory = kBASEURL + "get/marketplace/product/categories"
     }
 
     enum ReviewHub{

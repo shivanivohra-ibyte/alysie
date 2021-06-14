@@ -599,6 +599,14 @@ extension BusinessViewC: UITableViewDataSource, UITableViewDelegate{
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = pushViewController(withName: ProfileViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? ProfileViewC
+        controller?.userLevel = .other
+        controller?.userID = arrSearchimpotrDataModel[indexPath.row].userId
+        
+        
+    }
+    
 }
 
 

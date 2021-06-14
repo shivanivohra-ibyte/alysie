@@ -90,7 +90,7 @@ class BasicConnectFlowViewController: UIViewController, BasicConnectFlowDisplayL
         let requestModel = BasicConnectFlow.Connection.request(userID: self.userModel.userID,
                                                                reason: self.reasonToConnect.text)
         self.interactor?.sendConnectionRequest(requestModel)
-
+        
     }
 
 }

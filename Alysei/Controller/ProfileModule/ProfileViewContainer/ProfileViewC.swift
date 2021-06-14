@@ -185,7 +185,7 @@ class ProfileViewC: AlysieBaseViewC{
     if self.userLevel == .own {
         self.fetchProfileDetails()
     } else {
-        self.fetchVisiterProfileDetails(4)
+        self.fetchVisiterProfileDetails(self.userID)
     }
   }
   
@@ -306,7 +306,10 @@ class ProfileViewC: AlysieBaseViewC{
     }
 
     @IBAction func connectButtonTapped(_ sender: UIButton) {
-        self.connectButtonTapped()
+        _ = pushViewController(withName: ConnectionProductTypeViewController.id(), fromStoryboard: StoryBoardConstants.kHome)
+        
+        //self.connectButtonTapped()
+        
     }
 
 
