@@ -75,15 +75,85 @@ class UserProductListViewController: UIViewController, UserProductListDisplayLog
   // MARK: Do something
   
   //@IBOutlet weak var nameTextField: UITextField!
+    
+    @IBOutlet weak var tableView: UITableView!
   
+    var productData: [SignUpOptionsDataModel]?
+    var selectedProductId = [String]()
+    var selectedProductName = [String]()
+    var selectProductCallback: (([String], [String]) ->Void)? = nil
+    
   func doSomething()
   {
     let request = UserProductList.Something.Request()
     interactor?.doSomething(request: request)
+    setSelectedData()
   }
   
+    func setSelectedData() {
+        
+        print("ProductId -------------------------\(selectedProductId)")
+        for i in 0..<(productData?.count ?? 0){
+            if selectedProductId.contains("\(self.productData?[i].userFieldOptionId ?? "")"){
+                self.productData?[i].isSelected = true
+            }else{
+                self.productData?[i].isSelected = false
+            }
+            if self.productData?[i].isSelected == true{
+                selectedProductId.append(productData?[i].optionName ?? "")
+                selectedProductId.append("\(productData?[i].userFieldOptionId ?? "")")
+                
+            }
+        }
+    }
   func displaySomething(viewModel: UserProductList.Something.ViewModel)
   {
     //nameTextField.text = viewModel.name
   }
+    
+    @IBAction func btnBackAction(_ sender: UIButton){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func btnDoneAction(_ sender: UIButton){
+        selectProductCallback?(selectedProductId, selectedProductName)
+        self.navigationController?.popViewController(animated: true)
+    }
+}
+
+extension UserProductListViewController: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return productData?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let productListCell = tableView.dequeueReusableCell(withIdentifier: "ProductListTViewCell", for: indexPath) as? ProductListTViewCell else{return UITableViewCell()}
+        let data = productData?[indexPath.row]
+        productListCell.lblProductName.text = data?.optionName
+        productListCell.btnCheckBox.setImage((data?.isSelected == true) ? UIImage(named: "icon_blueSelected") : UIImage(named: "icon_uncheckedBox"), for: .normal)
+        return productListCell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let data = productData?[indexPath.row]
+        data?.isSelected =  !(data?.isSelected ?? false)
+        if data?.isSelected == true {
+            self.selectedProductName.append(data?.optionName ?? "")
+            self.selectedProductId.append(data?.userFieldOptionId ?? "")
+            
+        } else{
+            if let index = selectedProductId.firstIndex(of: data?.optionName ?? "") {
+                self.selectedProductName.remove(at: index)
+                self.selectedProductId.remove(at: index)
+            }
+        }
+        print("ProductId -------------------------\(selectedProductId)")
+        self.tableView.reloadData()
+       // self.selectedProductId.append(productData?[indexPath.row].id ?? "")
+        
+    }
 }

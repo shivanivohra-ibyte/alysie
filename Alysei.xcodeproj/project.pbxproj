@@ -297,6 +297,7 @@
 		C5B98116263FE65D002BFA23 /* UserPostsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B98115263FE65D002BFA23 /* UserPostsTableViewCell.swift */; };
 		C5BA01F52648FA8900E1E542 /* AlyseiBGV.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = C5BA01F42648FA8900E1E542 /* AlyseiBGV.mp4 */; };
 		C5D68D542660CBF700B759F8 /* BusinessMultiOptionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D68D532660CBF700B759F8 /* BusinessMultiOptionsVC.swift */; };
+		C5F1F623267882C7005A25A8 /* ProductListTViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F1F622267882C7005A25A8 /* ProductListTViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -604,6 +605,7 @@
 		C5B98115263FE65D002BFA23 /* UserPostsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostsTableViewCell.swift; sourceTree = "<group>"; };
 		C5BA01F42648FA8900E1E542 /* AlyseiBGV.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = AlyseiBGV.mp4; sourceTree = "<group>"; };
 		C5D68D532660CBF700B759F8 /* BusinessMultiOptionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessMultiOptionsVC.swift; sourceTree = "<group>"; };
+		C5F1F622267882C7005A25A8 /* ProductListTViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListTViewCell.swift; sourceTree = "<group>"; };
 		D636814607C16FDC212EC4D0 /* Pods-Alysei.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alysei.release.xcconfig"; path = "Target Support Files/Pods-Alysei/Pods-Alysei.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1565,6 +1567,7 @@
 				C529209026777F00000C044B /* UserProductListModels.swift */,
 				C529209126777F00000C044B /* UserProductListViewController.swift */,
 				C529209226777F00000C044B /* UserProductListInteractor.swift */,
+				C5F1F622267882C7005A25A8 /* ProductListTViewCell.swift */,
 			);
 			path = productScreen;
 			sourceTree = "<group>";
@@ -1880,6 +1883,7 @@
 				27484D0625BB120500CCFC61 /* YourDataViewC.swift in Sources */,
 				27A443A225AE03720002BAAC /* UserDefaultsExtended.swift in Sources */,
 				279AB36125FF44710061FCB3 /* FooterCityHubTableViewCell.swift in Sources */,
+				C5F1F623267882C7005A25A8 /* ProductListTViewCell.swift in Sources */,
 				6B7F0F4D26049A950060FBA9 /* ActiveCollectionViewCell.swift in Sources */,
 				6BBA994A260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.swift in Sources */,
 				27D0FAB825CEE9FF00463FE0 /* SignUpTermsTableCell.swift in Sources */,

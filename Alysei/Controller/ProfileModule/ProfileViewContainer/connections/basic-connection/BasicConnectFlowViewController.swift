@@ -66,7 +66,7 @@ class BasicConnectFlowViewController: UIViewController, BasicConnectFlowDisplayL
 
         let messageAttributedString = NSMutableAttributedString()
         messageAttributedString.append(NSAttributedString(string: "Sending a request to connect with \n", attributes: [NSAttributedString.Key.font: AppFonts.regular(16.0).font]))
-        messageAttributedString.append(NSAttributedString(string: "@\(self.userModel.username)", attributes: [NSAttributedString.Key.font: AppFonts.bold(16.0).font]))
+        //messageAttributedString.append(NSAttributedString(string: "@\(self.userModel.username)", attributes: [NSAttributedString.Key.font: AppFonts.bold(16.0).font]))
 
         self.emailIDLabel.attributedText = messageAttributedString
     }
@@ -77,7 +77,7 @@ class BasicConnectFlowViewController: UIViewController, BasicConnectFlowDisplayL
 
     // MARK:- protocol methods
 
-
+    var selectProductId = [String]()
 
     //MARK:- IBActions
     @IBAction func backbuttonTapped(_ sender: UIButton) {

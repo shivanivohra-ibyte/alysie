@@ -15,13 +15,12 @@ import UIKit
 protocol ConnectionProductTypePresentationLogic
 {
   func presentSomething(response: ConnectionProductType.Something.Response)
-  func showProductCategory(_ productData: Data?,_ status: Bool?)
+  func showProductCategory(_ productData: [SignUpOptionsDataModel]?,_ status: Bool?)
 }
 
 class ConnectionProductTypePresenter: ConnectionProductTypePresentationLogic
 {
-    
-    func showProductCategory(_ productData: Data?, _ status: Bool?) {
+    func showProductCategory(_ productData: [SignUpOptionsDataModel]?, _ status: Bool?) {
         var message = "No Product found"
          if status == true{
             self.viewController?.displayProductData(productData)
@@ -29,6 +28,7 @@ class ConnectionProductTypePresenter: ConnectionProductTypePresentationLogic
          //self.viewController?.showAlertWithMessage(message)
          }
     }
+    
     
   weak var viewController: ConnectionProductTypeDisplayLogic?
   

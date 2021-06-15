@@ -449,6 +449,14 @@ extension HubUserListVC: UITableViewDataSource, UITableViewDelegate{
             return 70.0
         }
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = pushViewController(withName: ProfileViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? ProfileViewC
+        controller?.userLevel = .other
+        let index = (indexPath.row - (self.extraCell ?? 0))
+        controller?.userID = arrSearchimpotrDataModel[index].userId
+        
+        
+    }
     
 }
 extension HubUserListVC: TappedHubs{

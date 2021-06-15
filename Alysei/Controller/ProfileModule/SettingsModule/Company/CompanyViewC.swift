@@ -35,7 +35,8 @@ class CompanyViewC: AlysieBaseViewC  , UITextFieldDelegate{
     var vatNo: String?
     var FdaNo: String?
     var selectedUserOptionId: String?
-    
+    var selectedProductId = [String]()
+    var fromVC: isCameFrom?
     
     //MARK: - ViewLifeCycle Methods -
     
@@ -60,8 +61,10 @@ class CompanyViewC: AlysieBaseViewC  , UITextFieldDelegate{
     }
     
     @IBAction func tapSave(_ sender: UIButton) {
+        
         selectedUserOptionId = ""
         self.callSaveDocumentApi()
+        
         //        DispatchQueue.main.asyncAfter(deadline: . now() + 0.5) {
         //            self.navigationController?.popViewController(animated: true)
         //        }
@@ -191,6 +194,10 @@ extension CompanyViewC {
             }
             self.initialSetUp()
             self.tblViewCompany.reloadData()
+            if self.fromVC == .connectionRequest{
+                let controller = self.pushViewController(withName: BasicConnectFlowViewController.id(), fromStoryboard: StoryBoardConstants.kHome) as? BasicConnectFlowViewController
+                controller?.selectProductId = self.selectedProductId
+            }
         }
     }
     
@@ -233,7 +240,9 @@ extension CompanyViewC {
         
         
         TANetworkManager.sharedInstance.requestMultiPart(withServiceName: APIUrl.kUploadCertificate, requestMethod: .post, requestImages: imageParam, requestVideos: [:], requestData: params) { (dictResponse, error, errorType, statusCode) in
+            if self.fromVC != .connectionRequest{
             self.showAlert(withMessage: "Data Uploaded Successfully")
+            }
             self.photoOfLabelImage = UIImage()
             self.fceSidImage = UIImage()
             self.phytoImage = UIImage()
@@ -242,6 +251,7 @@ extension CompanyViewC {
             self.animalImage = UIImage()
             self.callGetCertificatesApi()
             self.tblViewCompany.reloadData()
+            
         }
     }
 }

@@ -28,6 +28,7 @@ class ConnectionProductTypeInteractor: ConnectionProductTypeBusinessLogic, Conne
     
     var presenter: ConnectionProductTypePresentationLogic?
     var worker: ConnectionProductTypeWorker?
+    var productData = [SignUpOptionsDataModel]()
     //var name: String = ""
     
     // MARK: Do something
@@ -49,12 +50,21 @@ class ConnectionProductTypeInteractor: ConnectionProductTypeBusinessLogic, Conne
                 return
             }
             print("urlRequest-----------------------------------\(request)")
-            WebServices.shared.request(request) { data, URLResponse, statusCode, error in
-                print("Show Product Screen--------------------------\(data ?? Data())")
-                self.presenter?.showProductCategory(data, true)
+            TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kProductConnection, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+                
+                let response = dictResponse as? [String:Any]
+                if let data = response?["data"] as? [[String:Any]]{
+                    self.productData = data.map({SignUpOptionsDataModel.init(withDictionary: $0)})
+                    print("Count ------------------------------\(self.productData.count )")
+                    
+                    self.presenter?.showProductCategory(self.productData, true)
+                }
             }
-        } catch {
-            print(error.localizedDescription)
+//            WebServices.shared.request(request) { data, URLResponse, statusCode, error in
+//                print("Show Product Screen--------------------------\(data ?? Data())")
+//                guard let data = data else { return }
+//                self.presenter?.showProductCategory(data, true)
+//            }
         }
 
     }

@@ -15,7 +15,7 @@ import UIKit
 protocol ConnectionProductTypeDisplayLogic: class
 {
   func displaySomething(viewModel: ConnectionProductType.Something.ViewModel)
-    func   displayProductData(_ productData: Data?)
+    func   displayProductData(_ productData: [SignUpOptionsDataModel]?)
 }
 
 class ConnectionProductTypeViewController: UIViewController, ConnectionProductTypeDisplayLogic
@@ -81,12 +81,21 @@ class ConnectionProductTypeViewController: UIViewController, ConnectionProductTy
   
   //@IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var vwProduct : UIView!
+    @IBOutlet weak var lblSelectedProduct: UILabel!
+    @IBOutlet weak var lblUserName: UILabel!
+    
+    var userName: String?
+    var productData: Data?
+    var selectedProductId = [String]()
   
   func doSomething()
   {
     let request = ConnectionProductType.Something.Request()
     interactor?.doSomething(request: request)
-    
+    lblSelectedProduct.text = "Select product type........."
+    lblSelectedProduct.textColor = UIColor.lightGray
+   
+    lblUserName.text = "Sending a request to connect with @" + "\(userName ?? "")"
     vwProduct.layer.borderWidth = 0.5
     vwProduct.layer.borderColor = UIColor.lightGray.cgColor
   }
@@ -96,9 +105,19 @@ class ConnectionProductTypeViewController: UIViewController, ConnectionProductTy
     //nameTextField.text = viewModel.name
   }
     
-    func displayProductData(_ productData: Data?) {
+    func displayProductData(_ productData: [SignUpOptionsDataModel]?) {
         print("Show Data")
-        router?.routeToProductScreen()
+       // self.productData = productData
+       // router?.routeToProductScreen()uc
+        let controller = pushViewController(withName: UserProductListViewController.id(), fromStoryboard: StoryBoardConstants.kHome) as? UserProductListViewController
+        controller?.productData = productData
+        controller?.selectedProductId = self.selectedProductId
+        controller?.selectProductCallback = { selectedProductId, selectedProductName in
+            self.selectedProductId = selectedProductId
+            self.lblSelectedProduct.textColor = UIColor.black
+            let productsName = selectedProductName.joined(separator: ",")
+            self.lblSelectedProduct.text = "\(productsName)"
+        }
     }
     
     @IBAction func btnBackAction(_ sender: UIButton){
@@ -106,13 +125,28 @@ class ConnectionProductTypeViewController: UIViewController, ConnectionProductTy
     }
     
     @IBAction func confirmButtonTapped(_ sender: UIButton) {
-
-
+        if self.selectedProductId.count == 0{
+            self.showAlert(withMessage: "Please select any product")
+        }else{
+        let controller = pushViewController(withName: CompanyViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? CompanyViewC
+            controller?.selectedProductId = self.selectedProductId
+            controller?.fromVC = .connectionRequest
+        }
     }
     
     @IBAction func viewProductTapped(_ sender: UIButton) {
         
         self.interactor?.showConnectionProduct()
+       
+        
+    }
+    
+    public func pushViewController(withName name: String, fromStoryboard storyboard: String) -> UIViewController {
 
+        let storyboard = UIStoryboard.init(name: storyboard, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: name)
+
+        self.navigationController?.pushViewController(viewController, animated: true)
+        return viewController
     }
 }
