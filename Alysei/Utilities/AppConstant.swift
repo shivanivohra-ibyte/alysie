@@ -191,6 +191,7 @@ struct APIUrl{
     static let kGetMemberShip = "get/marketplace/packages"
     static let kCreateStore = "save/store"
     static let kProducttCategory = "get/marketplace/product/categories"
+    static let kProductConnection = "get/products/for/connection"
     static let kSubProductCategoryId = "get/marketplace/product/subcategories?product_category_id="
     static let kBrandLabel = "get/marketplace/brand/label"
     static let kSaveProduct = "save/product"
@@ -222,6 +223,7 @@ struct APIUrl{
 
     enum Connection {
         static let sendRequest = kBASEURL + "send/connection/request"
+        static let kProductTypeCategory = kBASEURL + "get/marketplace/product/categories"
     }
 
     enum ReviewHub{

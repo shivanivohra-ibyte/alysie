@@ -153,6 +153,7 @@ enum ProfilePercentage: Int {
 enum isCameFrom {
     case save
     case addFeatureProduct
+    case connectionRequest
 }
 //class UserImage: {
 //

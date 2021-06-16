@@ -206,7 +206,8 @@ class SignUpStepOneDataModel: NSObject{
   var userFieldId: String?
   var userFieldOptionId: String?
   var isSelected: Bool = false
-  var arrSubSections: [SignUpSubSectionModel] = []
+    //var isSelected: Bool?
+    var arrSubSections: [SignUpSubSectionModel] = []
     var marketplaceProductCategoryId : Int?
     var marketplaceBrandLabelId: Int?
     var marketplaceProductSubcategoryId: Int?
@@ -238,6 +239,8 @@ class SignUpStepOneDataModel: NSObject{
       
       self.arrSubSections = option.map({SignUpSubSectionModel(withDictionary: $0)})
     }
+    
+    self.isSelected = Bool.getBool(dictOptions[APIConstants.kIsSelected])
   }
  }
  

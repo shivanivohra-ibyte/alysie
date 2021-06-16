@@ -58,7 +58,8 @@ class ProfileViewC: AlysieBaseViewC{
     var contactDetail = [ContactDetail.view.tableCellModel]()
     var contactDetilViewModel: ContactDetail.Contact.Response!
     var signUpViewModel: SignUpViewModel!
-    var userLevel: UserLevel = .other
+    //var userLevel: UserLevel = .other
+    var userLevel: UserLevel = .own
     var userID: Int!
     var userType: UserRoles!
     var aboutViewModel: AboutView.viewModel!
@@ -185,7 +186,7 @@ class ProfileViewC: AlysieBaseViewC{
     if self.userLevel == .own {
         self.fetchProfileDetails()
     } else {
-        self.fetchVisiterProfileDetails(self.userID ?? 4)
+        self.fetchVisiterProfileDetails(self.userID)
     }
   }
   
@@ -306,7 +307,11 @@ class ProfileViewC: AlysieBaseViewC{
     }
 
     @IBAction func connectButtonTapped(_ sender: UIButton) {
-        self.connectButtonTapped()
+        let controller = pushViewController(withName: ConnectionProductTypeViewController.id(), fromStoryboard: StoryBoardConstants.kHome) as? ConnectionProductTypeViewController
+        controller?.userName = self.usernameLabel.text
+    
+        //self.connectButtonTapped()
+        
     }
 
 
@@ -1089,8 +1094,6 @@ extension ProfileViewC: AddFeaturedProductCallBack {
 
 
 }
-
-
 
 //MARK:- connection request module
 extension ProfileViewC {
