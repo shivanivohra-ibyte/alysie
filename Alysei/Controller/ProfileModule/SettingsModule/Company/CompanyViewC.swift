@@ -37,6 +37,8 @@ class CompanyViewC: AlysieBaseViewC  , UITextFieldDelegate{
     var selectedUserOptionId: String?
     var selectedProductId = [String]()
     var fromVC: isCameFrom?
+    var tapSaveBtn = false
+    var userID : Int?
     
     //MARK: - ViewLifeCycle Methods -
     
@@ -61,7 +63,7 @@ class CompanyViewC: AlysieBaseViewC  , UITextFieldDelegate{
     }
     
     @IBAction func tapSave(_ sender: UIButton) {
-        
+        tapSaveBtn = true
         selectedUserOptionId = ""
         self.callSaveDocumentApi()
         
@@ -194,9 +196,10 @@ extension CompanyViewC {
             }
             self.initialSetUp()
             self.tblViewCompany.reloadData()
-            if self.fromVC == .connectionRequest{
+            if self.fromVC == .connectionRequest && self.tapSaveBtn == true{
                 let controller = self.pushViewController(withName: BasicConnectFlowViewController.id(), fromStoryboard: StoryBoardConstants.kHome) as? BasicConnectFlowViewController
                 controller?.selectProductId = self.selectedProductId
+                controller?.userID = self.userID
             }
         }
     }

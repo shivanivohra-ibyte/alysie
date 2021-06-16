@@ -9,14 +9,13 @@ import UIKit
 import TLPhotoPicker
 import Photos
 import DropDown
-var userMobileNumer = ""
+
 
 class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDelegate{
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var view2: UIView!
-    @IBOutlet weak var view3: UIView!
     @IBOutlet weak var view4: UIView!
     @IBOutlet weak var view5: UIView!
     @IBOutlet weak var view6: UIView!
@@ -33,7 +32,6 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     @IBOutlet weak var txtWebsite: UITextField!
     @IBOutlet weak var txtStoreRegion: UITextField!
     @IBOutlet weak var txtLocation: UITextField!
-    @IBOutlet weak var txtProducerName: UITextField!
     @IBOutlet weak var txtProducerMobileNumber: UITextField!
     @IBOutlet weak var txtProducerEmail: UITextField!
     @IBOutlet weak var imageLabel: UILabel!
@@ -52,9 +50,16 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     var arrStateName = [String]()
     var dataDropDown = DropDown()
     var marketPlaceId: Int?
+    var userEmail: String?
+    var userMobileNumber: String?
+    var userWebsite: String?
+    var userStoreName: String?
+    var userAbout: String?
+    var userLocation: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        callGetFieldStoreApi()
         setDataUI()
        // picker.
         let tap = UITapGestureRecognizer(target: self, action: #selector(gotomapView))
@@ -67,20 +72,14 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     }
     
     func setDataUI(){
-        
-        if let userEmail =  kSharedUserDefaults.loggedInUserModal.email{
-            self.txtProducerEmail.text = userEmail
-        }
-        
-        print("userMobileNumer----------\(userMobileNumer)")
-        if userMobileNumer == ""{
-            self.txtProducerMobileNumber.text = kSharedUserDefaults.loggedInUserModal.phone
-        }else{
-        self.txtProducerMobileNumber.text = userMobileNumer
-        }
+        self.txtProducerEmail.text =  self.userEmail
+        self.txtStoreName.text = self.userStoreName
+        self.txtWebsite.text = self.userWebsite
+        self.txtProducerMobileNumber.text = self.userMobileNumber
+        self.txtLocation.text = self.userLocation
+        self.txtDescription.text = self.userAbout
         view1.addBorder()
         view2.addBorder()
-        view3.addBorder()
         view4.addBorder()
         view5.addBorder()
         view6.addBorder()
@@ -146,7 +145,14 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     @objc func gotomapView(){
         let controller = pushViewController(withName: MapViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? MapViewC
         controller?.dismiss = { [weak self] (mapAddressModel , lat ,long) in
+            
+            if mapAddressModel.address1 == "" {
+                self?.txtLocation.text = "\(mapAddressModel.address2), \(mapAddressModel.mapAddress)".capitalized
+            }else if mapAddressModel.address2 == ""{
+                self?.txtLocation.text = "\(mapAddressModel.address1), \(mapAddressModel.mapAddress)".capitalized
+            }else{
             self?.txtLocation.text = "\(mapAddressModel.address1), \(mapAddressModel.address2), \(mapAddressModel.mapAddress)".capitalized
+            }
             self?.longitude = long
             self?.latitude = lat
         }
@@ -158,7 +164,7 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     
     func opendropDown(){
         dataDropDown.show()
-        dataDropDown.anchorView = txtStoreRegion
+        dataDropDown.anchorView = view7
         dataDropDown.bottomOffset = CGPoint(x: 0, y: (dataDropDown.anchorView?.plainView.bounds.height)!)
         dataDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.txtStoreRegion.text = item
@@ -414,12 +420,13 @@ extension MarketPlaceCreateStoreVC {
     func callCreateStoreApi(){
         let params: [String:Any] = [ APIConstants.kName: self.txtStoreName.text ?? "",
                                      APIConstants.kDescription: self.txtDescription.text ?? "",
-                                     APIConstants.kProducerName: self.txtProducerName.text ?? "",
+                                    // APIConstants.kProducerName: self.txtProducerName.text ?? "",
                                      APIConstants.kWebsite: self.txtWebsite.text ?? "",
                                      APIConstants.kStoreRegion: self.txtStoreRegion.text ?? "",
                                      APIConstants.kLocation: self.txtLocation.text ?? "",
                                      "lattitude": "\(self.latitude ?? 0.0)",
                                      APIConstants.kLongitude : "\(self.longitude ?? 0.0)",
+                                     APIConstants.kPhone : "\(self.userMobileNumber ?? "")"
                                      
         ]
         
@@ -460,6 +467,23 @@ extension MarketPlaceCreateStoreVC {
             }
             self.dataDropDown.dataSource = self.arrStateName
             self.opendropDown()
+            
+        }
+    }
+    
+    func  callGetFieldStoreApi(){
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetStoreFilledValue, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            let response = dictResponse as? [String:Any]
+            if let data = response?["data"] as? [String:Any]{
+                self.userEmail = data["email"]  as? String
+                self.userWebsite = data["website"] as? String
+                self.userMobileNumber = data["phone"] as? String
+                self.userStoreName = data["company_name"] as? String
+                self.userLocation = data["address"] as? String
+                self.userAbout = data["about"] as? String
+                
+                self.setDataUI()
+            }
             
         }
     }

@@ -24,7 +24,7 @@ class UserModel: NSObject{
   //var avatarId : String?
   var accountEnabled : String?
   var logout : Bool = false
-  
+    var isStoreCreated : String?
   var latitude : Double = 0.0
   var longitude : Double = 0.0
   var avatarId: String?
@@ -37,6 +37,7 @@ class UserModel: NSObject{
     var cover: cover?
     var phone: String?// newly constructed struct for cover id
  // var cover_id: AllProductsDataModel?
+   
     
   init(withDictionary dicResult: [String:Any]){
     
@@ -50,7 +51,7 @@ class UserModel: NSObject{
     
     let dictData = kSharedInstance.getDictionary(dicResult[APIConstants.kData])
     let dictRoles = kSharedInstance.getDictionary(dictData[APIConstants.kRoles])
-    
+    self.isStoreCreated = String.getString(dictData["is_store_created"])
     self.accessToken = String.getString(dicResult[APIConstants.kToken])
     self.userId = String.getString(dictData[APIConstants.kUserId])
     self.displayName = String.getString(dictData[APIConstants.kDisplayName])
@@ -76,6 +77,7 @@ class UserModel: NSObject{
     if let coverDict = dictData[APIConstants.kCoverId] as? [String: Any] {
         self.avatar = imageAttachementModel(coverDict, for: "profilePhoto-\(userId ?? "").jpg")
     }
+    //self.is_store_created = Int.getInt(dictData["is_store_created"])
 
     print(self)
 
@@ -192,4 +194,10 @@ enum DropDownCheck {
     case productCategoryType
     case brandLabel
     case availableForSample
+}
+
+enum B2BSeacrhExtraCell: Int{
+    case producrImporterTravel = 5
+    case restaurant = 4
+    case voExpert = 6
 }

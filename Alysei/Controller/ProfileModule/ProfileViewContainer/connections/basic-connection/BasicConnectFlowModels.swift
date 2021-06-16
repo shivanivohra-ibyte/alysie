@@ -25,11 +25,14 @@ enum BasicConnectFlow {
     enum Connection {
         struct request: Codable {
             var userID: Int
+           // var userID: String
             var reason: String?
+            var selectProductId: String?
 
             private enum CodingKeys: String, CodingKey {
                 case userID = "user_id"
                 case reason = "reason_to_connect"
+                case selectProductId = "user_field_option_id"
             }
 
 //            func data() -> Data? {

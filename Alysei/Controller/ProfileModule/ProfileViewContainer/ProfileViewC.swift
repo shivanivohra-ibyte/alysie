@@ -309,7 +309,7 @@ class ProfileViewC: AlysieBaseViewC{
     @IBAction func connectButtonTapped(_ sender: UIButton) {
         let controller = pushViewController(withName: ConnectionProductTypeViewController.id(), fromStoryboard: StoryBoardConstants.kHome) as? ConnectionProductTypeViewController
         controller?.userName = self.usernameLabel.text
-    
+        controller?.userID = self.userID
         //self.connectButtonTapped()
         
     }
@@ -596,7 +596,6 @@ class ProfileViewC: AlysieBaseViewC{
                 self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "contact_email",
                                                                        title: "Email", value: responseModel.data.email))
                 if let phone = responseModel.data.phone {
-                    userMobileNumer = phone
                     self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "contact_call",
                                                                            title: "Phone", value: phone))
                 }

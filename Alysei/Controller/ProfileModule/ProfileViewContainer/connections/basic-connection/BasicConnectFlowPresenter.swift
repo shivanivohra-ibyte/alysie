@@ -13,12 +13,14 @@
 import UIKit
 
 protocol BasicConnectFlowPresentationLogic {
-    
+    func showConnectionConfirmScreen()
 }
 
 class BasicConnectFlowPresenter: BasicConnectFlowPresentationLogic {
     weak var viewController: BasicConnectFlowDisplayLogic?
     
    
-    
+    func showConnectionConfirmScreen() {
+            self.viewController?.showConnectionScreen()
+    }
 }

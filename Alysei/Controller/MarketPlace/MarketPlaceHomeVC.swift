@@ -27,7 +27,7 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
         let tap = UITapGestureRecognizer(target: self, action: #selector(openPost))
         self.postView.addGestureRecognizer(tap)
         
-        if isCreateStore == true{
+        if kSharedUserDefaults.loggedInUserModal.isStoreCreated == "1" || self.isCreateStore == true{
             self.btnCreateStore.setTitle("Go to My Store", for: .normal)
             self.btnCreateStore.isUserInteractionEnabled = false
         }else{
