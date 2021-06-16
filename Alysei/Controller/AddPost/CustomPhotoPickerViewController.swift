@@ -21,6 +21,10 @@ class CustomPhotoPickerViewController: TLPhotosPickerViewController {
             self?.dismissCompletion?()
         }
     }
+
+    override func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("some")
+    }
     /*
      override func maxCheck() -> Bool {
      let imageCount = self.selectedAssets.filter{ $0.phAsset?.mediaType == .image }.count

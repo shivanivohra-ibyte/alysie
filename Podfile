@@ -16,5 +16,6 @@ target 'Alysei' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
   pod 'TLPhotoPicker'
+  pod 'YPImagePicker'
   pod 'DropDown'
 end
