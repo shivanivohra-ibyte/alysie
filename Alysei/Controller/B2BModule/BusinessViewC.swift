@@ -505,27 +505,27 @@ extension BusinessViewC: UICollectionViewDelegate, UICollectionViewDataSource,UI
             callSearchHubApi()
         case 1:
             self.searchType = 2
-            self.extraCell = 5
+            self.extraCell = B2BSeacrhExtraCell.producrImporterTravel.rawValue
             self.searchImpDone = false
             callSearchImporterApi()
         case 2:
             self.searchType = 2
-            self.extraCell = 4
+            self.extraCell =  B2BSeacrhExtraCell.restaurant.rawValue
             self.searchImpDone = false
             callSearchResturntApi()
         case 3:
             self.searchType = 2
-            self.extraCell = 6
+            self.extraCell = B2BSeacrhExtraCell.voExpert.rawValue
             self.searchImpDone = false
             callSearchExpertApi()
         case 4:
             self.searchType = 2
-            self.extraCell = 5
+            self.extraCell = B2BSeacrhExtraCell.producrImporterTravel.rawValue
             self.searchImpDone = false
             callSearchTravelApi()
         case 5:
             self.searchType = 2
-            self.extraCell = 5
+            self.extraCell = B2BSeacrhExtraCell.producrImporterTravel.rawValue
             self.searchImpDone = false
             callSearchProducerApi()
         default:
@@ -656,7 +656,7 @@ extension BusinessViewC {
                 self.arrSearchimpotrDataModel.append(contentsOf: self.newSearchModel?.importerSeacrhData ?? [SubjectData(with: [:])])
                // self.searchImpDone = false
             }
-            self.extraCell = 5
+            self.extraCell = B2BSeacrhExtraCell.producrImporterTravel.rawValue
 //            self.selectImpHubId = ""
 //            self.selectImpProductId = ""
 //            self.selectImpRegionTypeId = ""
@@ -693,7 +693,7 @@ extension BusinessViewC {
             //self.collectionViewBusinessCategory.reloadData()
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
             cellCount = self.arrSearchimpotrDataModel.count
-            self.extraCell = 5
+            self.extraCell = B2BSeacrhExtraCell.producrImporterTravel.rawValue
 //            self.selectProducerHubId = ""
 //            self.selectProducerProductType = ""
 //            self.selectProducerRegionId = ""
@@ -726,7 +726,7 @@ extension BusinessViewC {
             //self.collectionViewBusinessCategory.reloadData()
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
             cellCount = self.arrSearchimpotrDataModel.count
-            self.extraCell = 4
+            self.extraCell = B2BSeacrhExtraCell.restaurant.rawValue
 //            self.resHubId = ""
 //            self.resTypeId = ""
 //            self.restPickUp = ""
@@ -756,7 +756,7 @@ extension BusinessViewC {
             //self.collectionViewBusinessCategory.reloadData()
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
             cellCount = self.arrSearchimpotrDataModel.count
-            self.extraCell = 6
+            self.extraCell = B2BSeacrhExtraCell.voExpert.rawValue
             
 //            self.selectExpertHubId = ""
 //            self.selectExpertExpertiseId = ""
@@ -788,7 +788,7 @@ extension BusinessViewC {
             //self.collectionViewBusinessCategory.reloadData()
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
             cellCount = self.arrSearchimpotrDataModel.count
-            self.extraCell = 5
+            self.extraCell = B2BSeacrhExtraCell.producrImporterTravel.rawValue
 //            self.selectTravelHubId = ""
 //            self.selectTravelSpecialityId = ""
 //            self.selectTravelCountryId = ""

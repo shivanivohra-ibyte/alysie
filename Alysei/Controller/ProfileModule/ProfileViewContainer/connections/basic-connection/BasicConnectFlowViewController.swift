@@ -13,6 +13,8 @@
 import UIKit
 
 protocol BasicConnectFlowDisplayLogic: AnyObject {
+    
+    func showConnectionScreen()
 }
 
 class BasicConnectFlowViewController: UIViewController, BasicConnectFlowDisplayLogic {
@@ -78,7 +80,7 @@ class BasicConnectFlowViewController: UIViewController, BasicConnectFlowDisplayL
     // MARK:- protocol methods
 
     var selectProductId = [String]()
-
+    var userID: Int?
     //MARK:- IBActions
     @IBAction func backbuttonTapped(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -87,10 +89,25 @@ class BasicConnectFlowViewController: UIViewController, BasicConnectFlowDisplayL
 
     @IBAction func confirmButtonTapped(_ sender: UIButton) {
 
-        let requestModel = BasicConnectFlow.Connection.request(userID: self.userModel.userID,
-                                                               reason: self.reasonToConnect.text)
+        let optionName = self.selectProductId.joined(separator: ",")
+        let requestModel = BasicConnectFlow.Connection.request(//userID: self.userModel.userID,
+            userID: self.userID ?? 0,
+                                                               reason: self.reasonToConnect.text,
+                                                               selectProductId: optionName)
         self.interactor?.sendConnectionRequest(requestModel)
         
     }
+    func showConnectionScreen() {
+        let controller = pushViewController(withName: ConnectionConfirmVC.id(), fromStoryboard: StoryBoardConstants.kHome) as? ConnectionConfirmVC
+        controller?.userID = self.userID
+    }
+    
+    public func pushViewController(withName name: String, fromStoryboard storyboard: String) -> UIViewController {
 
+        let storyboard = UIStoryboard.init(name: storyboard, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: name)
+
+        self.navigationController?.pushViewController(viewController, animated: true)
+        return viewController
+    }
 }

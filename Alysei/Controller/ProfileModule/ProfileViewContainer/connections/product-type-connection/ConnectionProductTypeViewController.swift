@@ -87,6 +87,7 @@ class ConnectionProductTypeViewController: UIViewController, ConnectionProductTy
     var userName: String?
     var productData: Data?
     var selectedProductId = [String]()
+    var userID: Int?
   
   func doSomething()
   {
@@ -131,6 +132,7 @@ class ConnectionProductTypeViewController: UIViewController, ConnectionProductTy
         let controller = pushViewController(withName: CompanyViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? CompanyViewC
             controller?.selectedProductId = self.selectedProductId
             controller?.fromVC = .connectionRequest
+            controller?.userID = self.userID
         }
     }
     

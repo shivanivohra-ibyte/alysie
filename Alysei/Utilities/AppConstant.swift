@@ -196,6 +196,7 @@ struct APIUrl{
     static let kBrandLabel = "get/marketplace/brand/label"
     static let kSaveProduct = "save/product"
     static let kHubSubscribeUnscribe = "subscribe/unsubscribe/hub?hub_id="
+    static let kGetStoreFilledValue = "get/store/prefilled/values"
     
     
     enum FeaturedProduct {

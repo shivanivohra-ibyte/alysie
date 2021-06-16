@@ -285,6 +285,7 @@
 		C562C4B22626CACD009F9E3B /* ProfileCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C562C4B12626CACD009F9E3B /* ProfileCompletionViewController.swift */; };
 		C562C4C12626D582009F9E3B /* ProfileCompletionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C562C4C02626D582009F9E3B /* ProfileCompletionTableViewCell.swift */; };
 		C5753EB32653B6B90024E5C7 /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5753EB22653B6B80024E5C7 /* StateModel.swift */; };
+		C57B97B92679EF0C00B158D8 /* ConnectionConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57B97B82679EF0C00B158D8 /* ConnectionConfirmVC.swift */; };
 		C587D14D26413BE6002D72DF /* NewFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C587D14C26413BE6002D72DF /* NewFeedModel.swift */; };
 		C5923F7A265FAE7B003A3465 /* HubUserListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5923F79265FAE7B003A3465 /* HubUserListVC.swift */; };
 		C5957A32265CEB33004952D8 /* HubsViewC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5957A31265CEB33004952D8 /* HubsViewC.swift */; };
@@ -593,6 +594,7 @@
 		C562C4B12626CACD009F9E3B /* ProfileCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompletionViewController.swift; sourceTree = "<group>"; };
 		C562C4C02626D582009F9E3B /* ProfileCompletionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompletionTableViewCell.swift; sourceTree = "<group>"; };
 		C5753EB22653B6B80024E5C7 /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
+		C57B97B82679EF0C00B158D8 /* ConnectionConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionConfirmVC.swift; sourceTree = "<group>"; };
 		C587D14C26413BE6002D72DF /* NewFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedModel.swift; sourceTree = "<group>"; };
 		C5923F79265FAE7B003A3465 /* HubUserListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubUserListVC.swift; sourceTree = "<group>"; };
 		C5957A31265CEB33004952D8 /* HubsViewC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HubsViewC.swift; sourceTree = "<group>"; };
@@ -1383,6 +1385,7 @@
 				C529208C26777EA9000C044B /* productScreen */,
 				C529203B2677566E000C044B /* product-type-connection */,
 				61A40A08267373E000D7D078 /* basic-connection */,
+				C57B97B82679EF0C00B158D8 /* ConnectionConfirmVC.swift */,
 			);
 			path = connections;
 			sourceTree = "<group>";
@@ -2014,6 +2017,7 @@
 				27D4A15725BDE31400FB7039 /* BusinessListViewC.swift in Sources */,
 				27A443B425AE03720002BAAC /* UITextViewExtended.swift in Sources */,
 				278ACAA825BB045C0054ACB6 /* MembershipViewC.swift in Sources */,
+				C57B97B92679EF0C00B158D8 /* ConnectionConfirmVC.swift in Sources */,
 				6B65FFCA2603561E002832C8 /* CustomCollectionViewLayout.swift in Sources */,
 				278ACAA325BB031D0054ACB6 /* BlockingTableCell.swift in Sources */,
 			);
