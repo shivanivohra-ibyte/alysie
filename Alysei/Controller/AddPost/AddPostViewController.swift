@@ -9,7 +9,7 @@ import UIKit
 import TLPhotoPicker
 import Photos
 
-class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPickerViewControllerDelegate{
+class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPickerViewControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var btnCamera: UIButton!
     @IBOutlet weak var btnGallery: UIButton!
@@ -54,7 +54,6 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
         // collectionViewHeight.constant = 0
         //collectionViewImage.isHidden = true
         postPrivacyTableView.isHidden = true
-        txtPost.delegate = self
         txtPost.text = AppConstants.kEnterText
         txtPost.layer.borderWidth = 0.5
         txtPost.layer.borderColor = UIColor.lightGray.cgColor
@@ -146,23 +145,27 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
 //        self.present(alert, animated: true, completion: nil)
     //}
     private func alertToAddCustomPicker() -> Void {
-        let viewCon = PhotoPickerViewController()
+        let viewCon = CustomPhotoPickerViewController()
         viewCon.delegate = self
         viewCon.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
             self?.showExceededMaximumAlert(vc: picker)
         }
         var configure = TLPhotosPickerConfigure()
         configure.allowedVideoRecording = false
+        configure.allowedPhotograph = true
+        configure.usedCameraButton = true
 
         configure.mediaType = .image
         configure.numberOfColumn = 3
-        configure.groupByFetch = .day
+
 
         viewCon.configure = configure
         viewCon.selectedAssets = self.selectedAssets
         viewCon.logDelegate = self
 
-        self.present(viewCon, animated: false, completion: nil)
+        viewCon.modalPresentationStyle = .fullScreen
+        self.navigationController?.present(viewCon, animated: true, completion: nil)
+//        self.present(viewCon, animated: false, completion: nil)
     }
 
     func dismissPhotoPicker(withPHAssets: [PHAsset]) {
@@ -302,37 +305,37 @@ extension AddPostViewController: TLPhotosPickerLogDelegate {
         picker.present(alert, animated: true, completion: nil)
     }
     
-    func showUnsatisifiedSizeAlert(vc: UIViewController) {
-        let alert = UIAlertController(title: "Oups!", message: "The required size is: 300 x 300", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        vc.present(alert, animated: true, completion: nil)
-    }
+//    func showUnsatisifiedSizeAlert(vc: UIViewController) {
+//        let alert = UIAlertController(title: "Oups!", message: "The required size is: 300 x 300", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//        vc.present(alert, animated: true, completion: nil)
+//    }
 }
 //MARK: - ImagePickerViewDelegate Methods -
 
-//extension AddPostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-//
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
-//
-//        guard let selectedImage = info[.editedImage] as? UIImage else { return }
-//        print(selectedImage.description)
-//        self.dismiss(animated: true) {
-//            self.uploadImageArray.append(selectedImage)
-//            // let compressImageData = selectedImage.jpegData(compressionQuality: 0.5)
-//            // let image = UIImage(data: compressImageData!)
-//            // let image : UIImage = selectedImage
-//            // let imageData = image?.pngData()
-//            // let base64String = imageData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
-//            // let base64String = imageData?.base64EncodedString(options: .lineLength64Characters)
-//            // self.uploadImageArray64.append(base64String ?? "")
-//            // self.collectionViewHeight.constant = 200
-//            // self.collectionViewImage.isHidden = false
-//            self.collectionViewImage.reloadData()
-//            //print("UploadImage------------------------------------\(self.uploadImageArray)")
-//        }
-//
-//    }
-//}
+extension AddPostViewController: UIImagePickerControllerDelegate {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+
+        guard let selectedImage = info[.editedImage] as? UIImage else { return }
+        print(selectedImage.description)
+        self.dismiss(animated: true) {
+            self.uploadImageArray.append(selectedImage)
+            // let compressImageData = selectedImage.jpegData(compressionQuality: 0.5)
+            // let image = UIImage(data: compressImageData!)
+            // let image : UIImage = selectedImage
+            // let imageData = image?.pngData()
+            // let base64String = imageData!.base64EncodedStringWithOptions(.Encoding64CharacterLineLength)
+            // let base64String = imageData?.base64EncodedString(options: .lineLength64Characters)
+            // self.uploadImageArray64.append(base64String ?? "")
+            // self.collectionViewHeight.constant = 200
+            // self.collectionViewImage.isHidden = false
+            self.collectionViewImage.reloadData()
+            //print("UploadImage------------------------------------\(self.uploadImageArray)")
+        }
+
+    }
+}
 
 //MARK: UICollectionViewDataSource,UICollectionViewDelegate
 
