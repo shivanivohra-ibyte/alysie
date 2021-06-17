@@ -209,11 +209,11 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
     }
 
     @IBAction func websiteInfoButtonTapped(_ sender: UIButton) {
-        showAlert(withMessage: "URL format should be like https://www.example.com/")
+        showAlert(withMessage: "URL format should be like \n https://www.example.com/")
     }
 
     @IBAction func facebookInfoButtonTapped(_ sender: UIButton) {
-        showAlert(withMessage: "URL format should be like https://www.facebook.com/username")
+        showAlert(withMessage: "URL format should be like \n https://www.facebook.com/username")
     }
     
 }
