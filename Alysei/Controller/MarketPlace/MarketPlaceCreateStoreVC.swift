@@ -56,6 +56,7 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     var userStoreName: String?
     var userAbout: String?
     var userLocation: String?
+    var userRegion: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +79,7 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
         self.txtProducerMobileNumber.text = self.userMobileNumber
         self.txtLocation.text = self.userLocation
         self.txtDescription.text = self.userAbout
+        self.txtStoreRegion.text = self.userRegion
         view1.addBorder()
         view2.addBorder()
         view4.addBorder()
@@ -481,6 +483,7 @@ extension MarketPlaceCreateStoreVC {
                 self.userStoreName = data["company_name"] as? String
                 self.userLocation = data["address"] as? String
                 self.userAbout = data["about"] as? String
+                self.userRegion = data["region"] as? String
                 
                 self.setDataUI()
             }
