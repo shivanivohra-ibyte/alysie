@@ -129,7 +129,7 @@ extension PostDescTableViewCell: UICollectionViewDelegate,UICollectionViewDataSo
 //        }
 
         cell.imagePost.setImage(withString: kImageBaseUrl + String.getString(imageArray[indexPath.row]))
-        cell.imagePost.contentMode = .scaleAspectFit
+        cell.imagePost.contentMode = .scaleAspectFill
         //cell.imagePost.setImage(withString: kImageBaseUrl + String.getString(data?.attachments?.attachmentLink?.attachmentUrl))
         return cell
     }
@@ -214,6 +214,28 @@ class PostImageCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDele
     }
 
     @objc func pinch(sender:UIPinchGestureRecognizer) {
+        var touchBaseView = sender.view
+        if let tab = UIApplication.shared.windows.first?.rootViewController as? UITabBarController {
+            if let navCon = tab.viewControllers?.first as? UINavigationController {
+                if let viewCon = navCon.viewControllers.first as? HomeViewC {
+                    touchBaseView = viewCon.view
+                }
+            }
+        }
+//        let touch1 = sender.location(ofTouch: 0, in: touchBaseView)
+
+        let touch1 = sender.location(ofTouch: 0, in: touchBaseView)
+        var midPointX = touch1.x
+        var midPointY = touch1.y
+        if sender.numberOfTouches > 1 {
+            let touch2 = sender.location(ofTouch: 1, in: touchBaseView)
+            midPointX = (touch1.x + touch2.x)/2
+            midPointY = (touch1.y + touch2.y)/2
+        }
+
+        let touchedPoint = CGPoint(x: midPointX, y: midPointY)
+//        let touch2 = sender.location(ofTouch: 1, in: sender.view)
+
         if sender.state == .began {
             self.imagePost.frame = UIScreen.main.bounds
             let currentScale = self.imagePost.frame.size.width / self.imagePost.bounds.size.width
@@ -221,7 +243,7 @@ class PostImageCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDele
             if newScale > 1 {
                 self.isZooming = true
             }
-            self.showAlertOnTab(1.0)
+            self.showAlertOnTab(1.0, frame: self.imagePost.frame, center: touchedPoint)
 
         } else if sender.state == .changed {
             guard let view = sender.view else {return}
@@ -241,9 +263,9 @@ class PostImageCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDele
                 view.transform = transform
                 sender.scale = 1
             }
-            self.showAlertOnTab(1.0)
+            self.showAlertOnTab(1.0, frame: self.imagePost.frame, center: touchedPoint)
         } else if sender.state == .ended || sender.state == .failed || sender.state == .cancelled {
-            self.showAlertOnTab(0.0)
+            self.showAlertOnTab(0.0, frame: self.imagePost.frame, center: CGPoint())
             guard let center = self.originalImageCenter else {return}
 
             self.imagePost.frame = self.bounds
@@ -270,13 +292,15 @@ class PostImageCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDele
         }
     }
 
-    func  showAlertOnTab(_ alpha: CGFloat) {
+    func  showAlertOnTab(_ alpha: CGFloat, frame: CGRect, center: CGPoint) {
         if let tab = UIApplication.shared.windows.first?.rootViewController as? UITabBarController {
             if let navCon = tab.viewControllers?.first as? UINavigationController {
                 if let viewCon = navCon.viewControllers.first as? HomeViewC {
-//                    viewCon.fullScreenImageView.alpha = alpha
-//                    viewCon.fullScreenImageView.frame = UIScreen.main.bounds
-//                    viewCon.fullScreenImageView.image = self.imagePost.image
+                    viewCon.fullScreenImageView.frame = frame
+                    viewCon.fullScreenImageView.center = center
+                    viewCon.fullScreenImageView.alpha = alpha
+                    viewCon.fullScreenImageView.contentMode = .scaleAspectFill
+                    viewCon.fullScreenImageView.image = self.imagePost.image
                     print(viewCon.description)
                 }
             }
