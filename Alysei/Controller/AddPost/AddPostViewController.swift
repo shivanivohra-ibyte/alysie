@@ -8,8 +8,9 @@
 import UIKit
 import TLPhotoPicker
 import Photos
+import YPImagePicker
 
-class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPickerViewControllerDelegate{
+class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPickerViewControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var btnCamera: UIButton!
     @IBOutlet weak var btnGallery: UIButton!
@@ -33,8 +34,10 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
 //    var picker = UIImagePickerController()
     var uploadImageArray = [UIImage]()
     var uploadImageArray64 = [String]()
-    var selectedAssets = [TLPHAsset]()
-  
+//    var selectedAssets = [TLPHAsset]()
+    var imagesFromSource = [UIImage]()
+    var ypImages = [YPMediaItem]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -54,7 +57,6 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
         // collectionViewHeight.constant = 0
         //collectionViewImage.isHidden = true
         postPrivacyTableView.isHidden = true
-        txtPost.delegate = self
         txtPost.text = AppConstants.kEnterText
         txtPost.layer.borderWidth = 0.5
         txtPost.layer.borderColor = UIColor.lightGray.cgColor
@@ -146,50 +148,80 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
 //        self.present(alert, animated: true, completion: nil)
     //}
     private func alertToAddCustomPicker() -> Void {
-        let viewCon = PhotoPickerViewController()
-        viewCon.delegate = self
-        viewCon.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
-            self?.showExceededMaximumAlert(vc: picker)
-        }
-        var configure = TLPhotosPickerConfigure()
-        configure.allowedVideoRecording = false
+//        let viewCon = CustomPhotoPickerViewController()
+//        viewCon.delegate = self
+//        viewCon.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
+//            self?.showExceededMaximumAlert(vc: picker)
+//        }
+//        var configure = TLPhotosPickerConfigure()
+//        configure.allowedVideoRecording = false
+//        configure.allowedPhotograph = true
+//        configure.usedCameraButton = true
+//
+//        configure.mediaType = .image
+//        configure.numberOfColumn = 3
+//
+//
+//        viewCon.configure = configure
+//        viewCon.selectedAssets = self.selectedAssets
+//        viewCon.logDelegate = self
+//
+//        viewCon.modalPresentationStyle = .fullScreen
+//        self.navigationController?.present(viewCon, animated: true, completion: nil)
+//        self.present(viewCon, animated: false, completion: nil)
 
-        configure.mediaType = .image
-        configure.numberOfColumn = 3
-        configure.groupByFetch = .day
-
-        viewCon.configure = configure
-        viewCon.selectedAssets = self.selectedAssets
-        viewCon.logDelegate = self
-
-        self.present(viewCon, animated: false, completion: nil)
-    }
-
-    func dismissPhotoPicker(withPHAssets: [PHAsset]) {
-//        // if you want to used phasset.
-        print("dismiss")
-//        print("selectedAssets-----------\(self.selectedAssets)")
-//        self.collectionViewImage.reloadData()
-    }
-
-    func dismissPhotoPicker(withTLPHAssets: [TLPHAsset]) {
-        // use selected order, fullresolution image
-        print("dismiss")
-        self.selectedAssets = withTLPHAssets
-
-        print("selectedAssest-----------------\(self.selectedAssets)")
+        var config = YPImagePickerConfiguration()
+        config.screens = [.library, .photo]
+        config.library.maxNumberOfItems = 100000
+        config.showsPhotoFilters = false
         
-        self.collectionViewImage.reloadData()
-        self.btnScroll()
-       
-        //iCloud or video
-//        getAsyncCopyTemporaryFile()
+        config.library.preselectedItems = ypImages
+        let picker = YPImagePicker(configuration: config)
+
+        picker.didFinishPicking { [unowned picker] items, cancelled in
+            self.ypImages = items
+            for item in items {
+                switch item {
+                case .photo(let photo):
+                    self.imagesFromSource.append(photo.modifiedImage ?? photo.image)
+                    print(photo)
+                case .video(let video):
+                    print(video)
+                }
+            }
+            self.collectionViewImage.reloadData()
+            picker.dismiss(animated: true, completion: nil)
+        }
+
+        self.present(picker, animated: true, completion: nil)
+
     }
 
-    func photoPickerDidCancel() {
-        // cancel
-        print("cancel")
-    }
+//    func dismissPhotoPicker(withPHAssets: [PHAsset]) {
+////        // if you want to used phasset.
+//        print("dismiss")
+////        print("selectedAssets-----------\(self.selectedAssets)")
+////        self.collectionViewImage.reloadData()
+//    }
+
+//    func dismissPhotoPicker(withTLPHAssets: [TLPHAsset]) {
+//        // use selected order, fullresolution image
+//        print("dismiss")
+//        self.selectedAssets = withTLPHAssets
+//
+//        print("selectedAssest-----------------\(self.selectedAssets)")
+//
+//        self.collectionViewImage.reloadData()
+//        self.btnScroll()
+//
+//        //iCloud or video
+////        getAsyncCopyTemporaryFile()
+//    }
+
+//    func photoPickerDidCancel() {
+//        // cancel
+//        print("cancel")
+//    }
 
 //    func dismissComplete() {
 //        // picker dismiss completion
@@ -203,7 +235,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
     }
     
     @IBAction func postAction(_ sender: UIButton){
-        if (txtPost.text == AppConstants.kEnterText && self.selectedAssets.count == 0) {
+        if (txtPost.text == AppConstants.kEnterText && self.imagesFromSource.count == 0) {
 //            showAlert(withMessage: "Please enter some post")
             showAlert(withMessage: "Post can't be empty")
 
@@ -302,15 +334,15 @@ extension AddPostViewController: TLPhotosPickerLogDelegate {
         picker.present(alert, animated: true, completion: nil)
     }
     
-    func showUnsatisifiedSizeAlert(vc: UIViewController) {
-        let alert = UIAlertController(title: "Oups!", message: "The required size is: 300 x 300", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        vc.present(alert, animated: true, completion: nil)
-    }
+//    func showUnsatisifiedSizeAlert(vc: UIViewController) {
+//        let alert = UIAlertController(title: "Oups!", message: "The required size is: 300 x 300", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//        vc.present(alert, animated: true, completion: nil)
+//    }
 }
 //MARK: - ImagePickerViewDelegate Methods -
 
-//extension AddPostViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+//extension AddPostViewController: UIImagePickerControllerDelegate {
 //
 //    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
 //
@@ -338,31 +370,31 @@ extension AddPostViewController: TLPhotosPickerLogDelegate {
 
 extension AddPostViewController: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if self.selectedAssets.count == 0{
+        if self.imagesFromSource.count == 0 {
             return 1
         }else{
-            print("count-------------\(self.selectedAssets.count)")
-            return selectedAssets.count + 1
+            print("count-------------\(self.imagesFromSource.count)")
+            return imagesFromSource.count + 1
             //return uploadImageArray.count + 1
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as? ImageCollectionViewCell else {return UICollectionViewCell()}
-            if selectedAssets.count == 0{
+            if imagesFromSource.count == 0{
             cell.viewAddImage.isHidden = false
             cell.btnDelete.isHidden = true
         }else {
 
-                    if indexPath.row < selectedAssets.count{
+                    if indexPath.row < imagesFromSource.count{
                     cell.viewAddImage.isHidden = true
                     cell.btnDelete.isHidden = false
                         self.uploadImageArray = [UIImage]()
-                        for image in 0..<self.selectedAssets.count {
+                        for image in 0..<self.imagesFromSource.count {
                            
-                             let asset = self.selectedAssets[image]
-                            let image = asset.fullResolutionImage ?? UIImage()
-                            self.uploadImageArray.append(image)
+                             let asset = self.imagesFromSource[image]
+//                            let image = asset.fullResolutionImage ?? UIImage()
+                            self.uploadImageArray.append(asset)
                             
                         }
                         cell.image.image = uploadImageArray[indexPath.row]
@@ -375,7 +407,7 @@ extension AddPostViewController: UICollectionViewDelegate,UICollectionViewDataSo
         }
             cell.btnDelete.tag = indexPath.row
             cell.btnDeleteCallback = { tag in
-                self.selectedAssets.remove(at: tag)
+                self.imagesFromSource.remove(at: tag)
                 //self.uploadImageArray.remove(at: tag)
                 self.collectionViewImage.reloadData()
             }
@@ -386,21 +418,21 @@ extension AddPostViewController: UICollectionViewDelegate,UICollectionViewDataSo
     }
     
     func btnScroll() {
-        collectionViewImage.scrollToItem(at: IndexPath(item: self.selectedAssets.count, section: 0), at: UICollectionView.ScrollPosition.right, animated:true)
+        collectionViewImage.scrollToItem(at: IndexPath(item: self.imagesFromSource.count, section: 0), at: UICollectionView.ScrollPosition.right, animated:true)
         }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if self.selectedAssets.count == 0{
+        if self.imagesFromSource.count == 0{
             return CGSize(width: collectionView.bounds.width , height: 200)
         }else{
             return CGSize(width: collectionView.bounds.width / 3, height: 200)
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if self.selectedAssets.count ==  0 {
+        if self.imagesFromSource.count ==  0 {
            // alertToAddImage()
             alertToAddCustomPicker()
-        }else if indexPath.row >= self.selectedAssets.count{
+        }else if indexPath.row >= self.imagesFromSource.count{
             //alertToAddImage()
             alertToAddCustomPicker()
         }
@@ -504,7 +536,7 @@ extension AddPostViewController {
         self.uploadImageArray = [UIImage]()
         self.btnPostPrivacy.setTitle("Public", for: .normal)
         self.imgPrivacy.image = UIImage(named: "Public")
-        self.selectedAssets.removeAll()
+        self.imagesFromSource.removeAll()
         self.uploadImageArray.removeAll()
         self.collectionViewImage.reloadData()
 

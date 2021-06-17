@@ -575,6 +575,56 @@ class ProfileViewC: AlysieBaseViewC{
                 self.headerView.isHidden = true
                 self.tblViewPosts.isHidden = false
                 self.initialSetUp()
+
+
+                self.btnEditProfile.isHidden = true
+                self.messageButton.isHidden = true
+                self.respondeButton.isHidden = true
+                self.connectButton.isHidden = true
+
+
+                switch self.userLevel {
+                case .own:
+                    print("own")
+                    self.btnEditProfile.isHidden = false
+                    self.btnEditProfile.isUserInteractionEnabled = true
+                case .other:
+                    //        self.messageButton.isHidden = false
+                    //        self.respondeButton.isHidden = false
+                    //        self.messageButton.isUserInteractionEnabled = true
+                    //        self.respondeButton.isUserInteractionEnabled = true
+
+                    self.connectButton.isHidden = false
+                    self.connectButton.isUserInteractionEnabled = true
+                }
+
+                
+                if let selfUserTypeString = kSharedUserDefaults.loggedInUserModal.memberRoleId {
+                    if let selfUserType: UserRoles = UserRoles(rawValue: (Int(selfUserTypeString) ?? 10))  {
+                        switch selfUserType {
+
+                        case .producer:
+                            print("")
+                        case .distributer1:
+                            print("")
+                        case .distributer2:
+                            print("")
+                        case .distributer3:
+                            print("")
+                        case .voiceExperts:
+                            print("")
+                        case .travelAgencies:
+                            print("")
+                        case .restaurant:
+                            print("")
+                        case .voyagers:
+                            print("some")
+                        default:
+                            print("default")
+                        }
+                    }
+                }
+
             } catch {
                 print(error.localizedDescription)
             }

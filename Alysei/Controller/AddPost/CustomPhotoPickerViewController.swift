@@ -8,17 +8,22 @@
 import Foundation
 import TLPhotoPicker
 
-class PhotoPickerViewController: TLPhotosPickerViewController {
+class CustomPhotoPickerViewController: TLPhotosPickerViewController {
     override func makeUI() {
         super.makeUI()
         self.customNavItem.leftBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: .stop, target: nil, action: #selector(customAction))
     }
+    
     @objc func customAction() {
         self.delegate?.photoPickerDidCancel()
         self.dismiss(animated: true) { [weak self] in
             self?.delegate?.dismissComplete()
             self?.dismissCompletion?()
         }
+    }
+
+    override func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("some")
     }
     /*
      override func maxCheck() -> Bool {
@@ -32,10 +37,10 @@ class PhotoPickerViewController: TLPhotosPickerViewController {
 }
 
 extension TLPhotosPickerViewController {
-//    class func custom(withTLPHAssets: (([TLPHAsset]) -> Void)? = nil, didCancel: (() -> Void)? = nil) -> PhotoPickerViewController {
-//        let picker = PhotoPickerViewController(withTLPHAssets: withTLPHAssets, didCancel:didCancel)
-//        return picker
-//    }
+    class func custom(withTLPHAssets: (([TLPHAsset]) -> Void)? = nil, didCancel: (() -> Void)? = nil) -> CustomPhotoPickerViewController {
+        let picker = CustomPhotoPickerViewController(withTLPHAssets: withTLPHAssets, didCancel:didCancel)
+        return picker
+    }
 
     func wrapNavigationControllerWithoutBar() -> UINavigationController {
         let navController = UINavigationController(rootViewController: self)
