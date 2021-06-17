@@ -460,6 +460,9 @@ class ProfileViewC: AlysieBaseViewC{
         guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Profile.memberProfile)", method: .GET) else { return }
         WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
             SVProgressHUD.dismiss()
+            if statusCode == 401 {
+                kSharedUserDefaults.clearAllData()
+            }
             guard let data = data else { return }
             do {
                 let responseModel = try JSONDecoder().decode(UserProfile.profileTopSectionModel.self, from: data)

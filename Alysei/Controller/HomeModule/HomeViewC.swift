@@ -17,6 +17,8 @@ class HomeViewC: AlysieBaseViewC {
   
   
   //MARK: - Properties -
+
+    var fullScreenImageView = UIImageView()
   
   private lazy var membershipViewC: MembershipViewC = {
 
@@ -35,6 +37,9 @@ class HomeViewC: AlysieBaseViewC {
   override func viewDidLoad() {
     super.viewDidLoad()   
    // _ = membershipViewC
+    fullScreenImageView.alpha = 0.0
+    fullScreenImageView.isUserInteractionEnabled = false
+    self.view.addSubview(fullScreenImageView)
     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
         _ = self.postViewC
     }
