@@ -174,7 +174,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
         config.screens = [.library, .photo]
         config.library.maxNumberOfItems = 100000
         config.showsPhotoFilters = false
-        
+
         config.library.preselectedItems = ypImages
         let picker = YPImagePicker(configuration: config)
 

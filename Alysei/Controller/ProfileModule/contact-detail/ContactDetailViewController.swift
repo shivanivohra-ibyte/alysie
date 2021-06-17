@@ -68,6 +68,14 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+
+        self.emailTextField.placeholder = "email@example.com"
+        self.phoneTextField.placeholder = "999-999-9999"
+        self.facebookTextField.placeholder = "https://www.facebook.com"
+        self.websiteTextField.placeholder = "https://www.yourwebsite.com"
+
+
         if viewModel != nil {
             self.emailTextField.text = "\(viewModel.email)"
             self.phoneTextField.text = "\(viewModel.phone ?? "")"
@@ -198,6 +206,14 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
             self.interactor?.updateContactDetail(requestModel)
 
         }
+    }
+
+    @IBAction func websiteInfoButtonTapped(_ sender: UIButton) {
+        showAlert(withMessage: "URL format should be like \n https://www.example.com/")
+    }
+
+    @IBAction func facebookInfoButtonTapped(_ sender: UIButton) {
+        showAlert(withMessage: "URL format should be like \n https://www.facebook.com/username")
     }
     
 }

@@ -22,7 +22,6 @@ class PostDescTableViewCell: UITableViewCell {
     @IBOutlet weak var lblPostTime: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
 
-
     var data: NewFeedSearchDataModel?
     var likeCallback:((Int) -> Void)? = nil
     var islike: Int?
@@ -190,6 +189,9 @@ class PostImageCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDele
     var isZooming = false
     var originalImageCenter:CGPoint?
 
+    var fullScreenImage: UIImageView!
+
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -219,6 +221,8 @@ class PostImageCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDele
             if newScale > 1 {
                 self.isZooming = true
             }
+            self.showAlertOnTab(1.0)
+
         } else if sender.state == .changed {
             guard let view = sender.view else {return}
             let pinchCenter = CGPoint(x: sender.location(in: view).x - view.bounds.midX,
@@ -237,7 +241,9 @@ class PostImageCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDele
                 view.transform = transform
                 sender.scale = 1
             }
+            self.showAlertOnTab(1.0)
         } else if sender.state == .ended || sender.state == .failed || sender.state == .cancelled {
+            self.showAlertOnTab(0.0)
             guard let center = self.originalImageCenter else {return}
 
             self.imagePost.frame = self.bounds
@@ -261,6 +267,19 @@ class PostImageCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDele
                                       y:view.center.y + translation.y)
             }
             sender.setTranslation(CGPoint.zero, in: self.imagePost.superview)
+        }
+    }
+
+    func  showAlertOnTab(_ alpha: CGFloat) {
+        if let tab = UIApplication.shared.windows.first?.rootViewController as? UITabBarController {
+            if let navCon = tab.viewControllers?.first as? UINavigationController {
+                if let viewCon = navCon.viewControllers.first as? HomeViewC {
+//                    viewCon.fullScreenImageView.alpha = alpha
+//                    viewCon.fullScreenImageView.frame = UIScreen.main.bounds
+//                    viewCon.fullScreenImageView.image = self.imagePost.image
+                    print(viewCon.description)
+                }
+            }
         }
     }
 }
