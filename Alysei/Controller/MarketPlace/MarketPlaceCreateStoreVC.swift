@@ -63,12 +63,12 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
         callGetFieldStoreApi()
         setDataUI()
        // picker.
-        let tap = UITapGestureRecognizer(target: self, action: #selector(gotomapView))
-        self.view8.addGestureRecognizer(tap)
-        
-        
-        let regionTap = UITapGestureRecognizer(target: self, action: #selector(openRegionDropDown))
-        self.view7.addGestureRecognizer(regionTap)
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(gotomapView))
+//        self.view8.addGestureRecognizer(tap)
+//
+//
+//        let regionTap = UITapGestureRecognizer(target: self, action: #selector(openRegionDropDown))
+//        self.view7.addGestureRecognizer(regionTap)
         // Do any additional setup after loading the view.
     }
     
@@ -144,39 +144,39 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     }
     
     
-    @objc func gotomapView(){
-        let controller = pushViewController(withName: MapViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? MapViewC
-        controller?.dismiss = { [weak self] (mapAddressModel , lat ,long) in
-            
-            if mapAddressModel.address1 == "" {
-                self?.txtLocation.text = "\(mapAddressModel.address2), \(mapAddressModel.mapAddress)".capitalized
-            }else if mapAddressModel.address2 == ""{
-                self?.txtLocation.text = "\(mapAddressModel.address1), \(mapAddressModel.mapAddress)".capitalized
-            }else{
-            self?.txtLocation.text = "\(mapAddressModel.address1), \(mapAddressModel.address2), \(mapAddressModel.mapAddress)".capitalized
-            }
-            self?.longitude = long
-            self?.latitude = lat
-        }
-    }
-    
-    @objc func openRegionDropDown(){
-        self.callStateApi()
-    }
-    
-    func opendropDown(){
-        dataDropDown.show()
-        dataDropDown.anchorView = view7
-        dataDropDown.bottomOffset = CGPoint(x: 0, y: (dataDropDown.anchorView?.plainView.bounds.height)!)
-        dataDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.txtStoreRegion.text = item
-            
-        }
-        dataDropDown.cellHeight = 50
-        dataDropDown.backgroundColor = UIColor.white
-        dataDropDown.selectionBackgroundColor = UIColor.clear
-        dataDropDown.direction = .bottom
-    }
+//    @objc func gotomapView(){
+//        let controller = pushViewController(withName: MapViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? MapViewC
+//        controller?.dismiss = { [weak self] (mapAddressModel , lat ,long) in
+//
+//            if mapAddressModel.address1 == "" {
+//                self?.txtLocation.text = "\(mapAddressModel.address2), \(mapAddressModel.mapAddress)".capitalized
+//            }else if mapAddressModel.address2 == ""{
+//                self?.txtLocation.text = "\(mapAddressModel.address1), \(mapAddressModel.mapAddress)".capitalized
+//            }else{
+//            self?.txtLocation.text = "\(mapAddressModel.address1), \(mapAddressModel.address2), \(mapAddressModel.mapAddress)".capitalized
+//            }
+//            self?.longitude = long
+//            self?.latitude = lat
+//        }
+//    }
+//
+//    @objc func openRegionDropDown(){
+//        self.callStateApi()
+//    }
+//
+//    func opendropDown(){
+//        dataDropDown.show()
+//        dataDropDown.anchorView = view7
+//        dataDropDown.bottomOffset = CGPoint(x: 0, y: (dataDropDown.anchorView?.plainView.bounds.height)!)
+//        dataDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//            self.txtStoreRegion.text = item
+//
+//        }
+//        dataDropDown.cellHeight = 50
+//        dataDropDown.backgroundColor = UIColor.white
+//        dataDropDown.selectionBackgroundColor = UIColor.clear
+//        dataDropDown.direction = .bottom
+//    }
     //MARK:- IBAction
     
     @IBAction func btnNextAction(_ sender: UIButton){
@@ -457,21 +457,21 @@ extension MarketPlaceCreateStoreVC {
         }
         
     }
-    func callStateApi() {
-        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetCountryStates, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
-            
-            let response = dictResponse as? [String:Any]
-            if let data = response?["data"] as? [[String:Any]]{
-                self.stateModel = data.map({StateModel.init(with: $0)})
-                for state in 0..<(self.stateModel?.count ?? 0) {
-                    self.arrStateName.append(self.stateModel?[state].name ?? "")
-                }
-            }
-            self.dataDropDown.dataSource = self.arrStateName
-            self.opendropDown()
-            
-        }
-    }
+//    func callStateApi() {
+//        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetCountryStates, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+//
+//            let response = dictResponse as? [String:Any]
+//            if let data = response?["data"] as? [[String:Any]]{
+//                self.stateModel = data.map({StateModel.init(with: $0)})
+//                for state in 0..<(self.stateModel?.count ?? 0) {
+//                    self.arrStateName.append(self.stateModel?[state].name ?? "")
+//                }
+//            }
+//            self.dataDropDown.dataSource = self.arrStateName
+//            self.opendropDown()
+//
+//        }
+//    }
     
     func  callGetFieldStoreApi(){
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetStoreFilledValue, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
@@ -483,8 +483,9 @@ extension MarketPlaceCreateStoreVC {
                 self.userStoreName = data["company_name"] as? String
                 self.userLocation = data["address"] as? String
                 self.userAbout = data["about"] as? String
-                self.userRegion = data["region"] as? String
-                
+                let region = data["state"] as? [String:Any]
+                self.userRegion = region?["name"] as? String
+ 
                 self.setDataUI()
             }
             

@@ -424,6 +424,7 @@ extension AddProductMarketplaceVC{
     override func didUserGetData(from result: Any, type: Int) {
 //        self.showAlert(withMessage: "Post Successfully") {
 //        }
+        kSharedUserDefaults.setValue("1", forKey: "is_store_created")
         self.uploadImageArray = [UIImage]()
         self.selectedAssets.removeAll()
         self.uploadImageArray.removeAll()
