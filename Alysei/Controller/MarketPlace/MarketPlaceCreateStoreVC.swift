@@ -9,7 +9,7 @@ import UIKit
 import TLPhotoPicker
 import Photos
 import DropDown
-
+import YPImagePicker
 
 class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDelegate{
     
@@ -40,7 +40,9 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     
     
     var uploadImageArray = [UIImage]()
-    var selectedAssets = [TLPHAsset]()
+   // var selectedAssets = [TLPHAsset]()
+    var ypImages = [YPMediaItem]()
+    var imagesFromSource = [UIImage]()
     var picker = UIImagePickerController()
     var uploadProfilePic = false
     var latitude: Double?
@@ -95,22 +97,48 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     }
     private func alertToAddCustomPicker() -> Void {
         //        let viewCon = CustomPhotoPickerViewController()
-        let viewCon = TLPhotosPickerViewController()
-        viewCon.delegate = self
-        viewCon.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
-            self?.showExceededMaximumAlert(vc: picker)
+//        let viewCon = TLPhotosPickerViewController()
+//        viewCon.delegate = self
+//        viewCon.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
+//            self?.showExceededMaximumAlert(vc: picker)
+//        }
+//        var configure = TLPhotosPickerConfigure()
+//        configure.allowedVideoRecording = false
+//        
+//        configure.mediaType = .image
+//        configure.numberOfColumn = 3
+//        
+//        viewCon.configure = configure
+//        viewCon.selectedAssets = self.selectedAssets
+//        viewCon.logDelegate = self
+//        
+//        self.present(viewCon, animated: true, completion: nil)
+        
+        var config = YPImagePickerConfiguration()
+        config.screens = [.library, .photo]
+        config.library.maxNumberOfItems = 100000
+        config.showsPhotoFilters = false
+
+        config.library.preselectedItems = ypImages
+        let picker = YPImagePicker(configuration: config)
+
+        picker.didFinishPicking { [unowned picker] items, cancelled in
+            self.ypImages = items
+            for item in items {
+                switch item {
+                case .photo(let photo):
+                    self.imagesFromSource.append(photo.modifiedImage ?? photo.image)
+                    print(photo)
+                case .video(let video):
+                    print(video)
+                }
+            }
+            self.collectionViewImage.reloadData()
+            picker.dismiss(animated: true, completion: nil)
         }
-        var configure = TLPhotosPickerConfigure()
-        configure.allowedVideoRecording = false
-        
-        configure.mediaType = .image
-        configure.numberOfColumn = 3
-        
-        viewCon.configure = configure
-        viewCon.selectedAssets = self.selectedAssets
-        viewCon.logDelegate = self
-        
-        self.present(viewCon, animated: true, completion: nil)
+
+        self.present(picker, animated: true, completion: nil)
+
     }
     
     func dismissPhotoPicker(withTLPHAssets: [TLPHAsset]) {
@@ -120,9 +148,9 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
 //            self.showExceededMaximumAlert(vc: picker)
 //            return
 //        }else{
-            self.selectedAssets = withTLPHAssets
+            //self.selectedAssets = withTLPHAssets
             
-            print("selectedAssest-----------------\(self.selectedAssets)")
+            //print("selectedAssest-----------------\(self.selectedAssets)")
             
             self.collectionViewImage.reloadData()
             self.btnScroll()
@@ -185,7 +213,7 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
             callCreateStoreApi()
         }
         
-       // let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
+        //let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
     }
     
     private func validateAllfields() -> Bool {
@@ -322,35 +350,51 @@ extension MarketPlaceCreateStoreVC: TLPhotosPickerLogDelegate {
 
 extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if self.selectedAssets.count == 0{
+//        if self.selectedAssets.count == 0{
+//            return 1
+//        }else{
+//            print("count-------------\(self.selectedAssets.count)")
+//            return selectedAssets.count + 1
+//            //return uploadImageArray.count + 1
+//        }
+        if self.imagesFromSource.count == 0 {
             return 1
         }else{
-            print("count-------------\(self.selectedAssets.count)")
-            return selectedAssets.count + 1
+            print("count-------------\(self.imagesFromSource.count)")
+            return imagesFromSource.count + 1
             //return uploadImageArray.count + 1
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageMaketPlaceCollectionViewCell", for: indexPath) as? ImageMaketPlaceCollectionViewCell else {return UICollectionViewCell()}
-        if selectedAssets.count == 0{
+      //  if selectedAssets.count == 0{
+        if imagesFromSource.count == 0{
             cell.viewAddImage.isHidden = false
             cell.btnDelete.isHidden = true
         }else {
             
-            if indexPath.row < selectedAssets.count{
+           // if indexPath.row < selectedAssets.count{
+            if indexPath.row < imagesFromSource.count{
                 cell.viewAddImage.isHidden = true
                 cell.btnDelete.isHidden = false
                 self.uploadImageArray = [UIImage]()
-                for image in 0..<self.selectedAssets.count {
-                    
-                    let asset = self.selectedAssets[image]
-                    let image = asset.fullResolutionImage ?? UIImage()
-                    //self.imageLabel.text = "Photos 0/10 Choose your stores main photo first. Add more photos of your store max 10 allowed."
-                    self.uploadImageArray.append(image)
-                    
-                    
-                }
+//                for image in 0..<self.selectedAssets.count {
+//
+//                    let asset = self.selectedAssets[image]
+//                    let image = asset.fullResolutionImage ?? UIImage()
+//                    //self.imageLabel.text = "Photos 0/10 Choose your stores main photo first. Add more photos of your store max 10 allowed."
+//                    self.uploadImageArray.append(image)
+//
+//
+//                }
+                for image in 0..<self.imagesFromSource.count {
+                
+                let asset = self.imagesFromSource[image]
+//                            let image = asset.fullResolutionImage ?? UIImage()
+               self.uploadImageArray.append(asset)
+               
+           }
                 cell.image.image = uploadImageArray[indexPath.row]
                 
             }else{
@@ -361,8 +405,9 @@ extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDat
             }
             cell.btnDelete.tag = indexPath.row
             cell.btnDeleteCallback = { tag in
-                self.selectedAssets.remove(at: tag)
+                //self.selectedAssets.remove(at: tag)
                 //self.uploadImageArray.remove(at: tag)
+                self.imagesFromSource.remove(at: tag)
                 self.collectionViewImage.reloadData()
             }
             return cell
@@ -372,21 +417,34 @@ extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDat
     }
     
     func btnScroll() {
-        collectionViewImage.scrollToItem(at: IndexPath(item: self.selectedAssets.count, section: 0), at: UICollectionView.ScrollPosition.right, animated:true)
+        collectionViewImage.scrollToItem(at: IndexPath(item: self.imagesFromSource.count, section: 0), at: UICollectionView.ScrollPosition.right, animated:true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if self.selectedAssets.count == 0{
+//        if self.selectedAssets.count == 0{
+//            return CGSize(width: collectionView.bounds.width , height: 200)
+//        }else{
+//            return CGSize(width: collectionView.bounds.width / 3, height: 200)
+//        }
+        if self.imagesFromSource.count == 0{
             return CGSize(width: collectionView.bounds.width , height: 200)
         }else{
             return CGSize(width: collectionView.bounds.width / 3, height: 200)
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if self.selectedAssets.count ==  0 {
-            // alertToAddImage()
+//        if self.selectedAssets.count ==  0 {
+//            // alertToAddImage()
+//            alertToAddCustomPicker()
+//        }else if indexPath.row >= self.selectedAssets.count{
+//            //alertToAddImage()
+//            alertToAddCustomPicker()
+//        }
+        
+        if self.imagesFromSource.count ==  0 {
+           // alertToAddImage()
             alertToAddCustomPicker()
-        }else if indexPath.row >= self.selectedAssets.count{
+        }else if indexPath.row >= self.imagesFromSource.count{
             //alertToAddImage()
             alertToAddCustomPicker()
         }
