@@ -35,6 +35,7 @@ class MapViewC: AlysieBaseViewC {
     var locationManager = CLLocationManager()
   var centerMapCoordinate:CLLocationCoordinate2D!
   var marker = GMSMarker()
+    var circle = GMSCircle()
   var signUpStepTwoDataModel: SignUpStepTwoDataModel!
   var delegate: SaveAddressCallback?
     var latitude: Double?
@@ -47,6 +48,42 @@ class MapViewC: AlysieBaseViewC {
   override func viewDidLoad() {
     
     super.viewDidLoad()
+
+//    let circleLocation = CLLocationCoordinate2DMake(30.889316, 75.8576758)
+//    circle.position = circleLocation
+//    circle.fillColor = UIColor.red.withAlphaComponent(0.3)
+//    circle.strokeColor = .red
+//    circle.strokeWidth = 2.0
+////    circle.map = self.mapView
+//
+//    let path = GMSMutablePath()
+//    path.add(CLLocationCoordinate2D(latitude: 30.889316, longitude: 75.8576758))
+//    path.add(CLLocationCoordinate2D(latitude: 28.9921136, longitude: 76.3331312))
+//    path.add(CLLocationCoordinate2D(latitude: 30.0584217, longitude: 77.971143))
+//    path.add(CLLocationCoordinate2D(latitude: 30.889316, longitude: 75.8576758))
+//    let polyline = GMSPolyline(path: path)
+//    polyline.map = self.mapView
+//
+//    let label1 = GMSMarker(position: CLLocationCoordinate2D(latitude: 30.889316, longitude: 75.8576758))
+//    label1.title = "Ludhiana"
+//    label1.map = self.mapView
+//
+//    let label2 = GMSMarker(position: CLLocationCoordinate2D(latitude: 28.9921136, longitude: 76.3331312))
+//    label2.title = "Delhi"
+//    label2.map = self.mapView
+//
+//    let label3 = GMSMarker(position: CLLocationCoordinate2D(latitude: 30.0584217, longitude: 77.971143))
+//    label3.title = "Haridwar"
+//    label3.map = self.mapView
+//
+//    var bounds = GMSCoordinateBounds()
+//
+//    for index in 1...path.count() {
+//        bounds = bounds.includingCoordinate(path.coordinate(at: index))
+//    }
+//
+//    mapView.animate(with: GMSCameraUpdate.fit(bounds))
+
     self.mapView.addSubview(self.imgViewMarker)
     self.mapView.addSubview(self.viewSearchLocation)
 

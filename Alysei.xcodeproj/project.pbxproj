@@ -222,6 +222,10 @@
 		61A8CB4B261D98CA00B99233 /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB45261D98CA00B99233 /* ContactDetailViewController.swift */; };
 		61A8CB4C261D98CA00B99233 /* ContactDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB46261D98CA00B99233 /* ContactDetailInteractor.swift */; };
 		61A8CB6F26204CE500B99233 /* AboutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8CB6E26204CE400B99233 /* AboutViewModel.swift */; };
+		61C7BE3B267C89F0006DB3BB /* Flag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C7BE3A267C89F0006DB3BB /* Flag.swift */; };
+		61C7BE3D267C8A82006DB3BB /* Flag.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61C7BE3C267C8A82006DB3BB /* Flag.xib */; };
+		61C7BE3F267C8EB8006DB3BB /* FlagCountryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C7BE3E267C8EB8006DB3BB /* FlagCountryList.swift */; };
+		61C7BE41267C8FDA006DB3BB /* FlagCountryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C7BE40267C8FDA006DB3BB /* FlagCountryListCell.swift */; };
 		6B09A87C26245AC800483365 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B09A87B26245AC800483365 /* AddPostViewController.swift */; };
 		6B2F94F626202F3A0030928E /* Timeline.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B2F94F526202F3A0030928E /* Timeline.storyboard */; };
 		6B58C9AF26256EE300D250CD /* ReviewHubModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B58C9AE26256EE300D250CD /* ReviewHubModel.swift */; };
@@ -529,6 +533,10 @@
 		61A8CB45261D98CA00B99233 /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
 		61A8CB46261D98CA00B99233 /* ContactDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailInteractor.swift; sourceTree = "<group>"; };
 		61A8CB6E26204CE400B99233 /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
+		61C7BE3A267C89F0006DB3BB /* Flag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flag.swift; sourceTree = "<group>"; };
+		61C7BE3C267C8A82006DB3BB /* Flag.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Flag.xib; sourceTree = "<group>"; };
+		61C7BE3E267C8EB8006DB3BB /* FlagCountryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagCountryList.swift; sourceTree = "<group>"; };
+		61C7BE40267C8FDA006DB3BB /* FlagCountryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagCountryListCell.swift; sourceTree = "<group>"; };
 		6B09A87B26245AC800483365 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		6B2F94F526202F3A0030928E /* Timeline.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Timeline.storyboard; sourceTree = "<group>"; };
 		6B58C9AE26256EE300D250CD /* ReviewHubModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHubModel.swift; sourceTree = "<group>"; };
@@ -1420,6 +1428,10 @@
 				61A8CB44261D98CA00B99233 /* ContactDetailModels.swift */,
 				61A8CB45261D98CA00B99233 /* ContactDetailViewController.swift */,
 				61A8CB46261D98CA00B99233 /* ContactDetailInteractor.swift */,
+				61C7BE3A267C89F0006DB3BB /* Flag.swift */,
+				61C7BE3C267C8A82006DB3BB /* Flag.xib */,
+				61C7BE3E267C8EB8006DB3BB /* FlagCountryList.swift */,
+				61C7BE40267C8FDA006DB3BB /* FlagCountryListCell.swift */,
 			);
 			path = "contact-detail";
 			sourceTree = "<group>";
@@ -1691,6 +1703,7 @@
 				A84EED0725B1C2F700429B1D /* Home.storyboard in Resources */,
 				27A443D225AE03720002BAAC /* Montserrat-Thin.ttf in Resources */,
 				279AB34025FF42EC0061FCB3 /* FooterCityHubTableViewCell.xib in Resources */,
+				61C7BE3D267C8A82006DB3BB /* Flag.xib in Resources */,
 				27A443D325AE03720002BAAC /* Montserrat-Bold.ttf in Resources */,
 				27A443DB25AE03720002BAAC /* Montserrat-Italic.ttf in Resources */,
 				27A443CD25AE03720002BAAC /* Montserrat-Medium.ttf in Resources */,
@@ -1779,6 +1792,7 @@
 				277803BC25D1AD91008CC701 /* SignUpMultiCheckboxTableCell.swift in Sources */,
 				27BC68A425AC56C000A01B6A /* SceneDelegate.swift in Sources */,
 				27A443A325AE03720002BAAC /* UILabelBorderWidthAndColor.swift in Sources */,
+				61C7BE41267C8FDA006DB3BB /* FlagCountryListCell.swift in Sources */,
 				C52920452677575D000C044B /* ConnectionProductTypeModels.swift in Sources */,
 				27D0FAAE25CEE9FF00463FE0 /* LoginViewC.swift in Sources */,
 				610D71902628B24E000FA104 /* EventsViewController.swift in Sources */,
@@ -1888,6 +1902,7 @@
 				279AB36125FF44710061FCB3 /* FooterCityHubTableViewCell.swift in Sources */,
 				C5F1F623267882C7005A25A8 /* ProductListTViewCell.swift in Sources */,
 				6B7F0F4D26049A950060FBA9 /* ActiveCollectionViewCell.swift in Sources */,
+				61C7BE3B267C89F0006DB3BB /* Flag.swift in Sources */,
 				6BBA994A260AF40600AA7A81 /* ActiveCountriesCollectionViewCell.swift in Sources */,
 				27D0FAB825CEE9FF00463FE0 /* SignUpTermsTableCell.swift in Sources */,
 				C513C19F26144E9A0025CF27 /* SettingsScreenCollectionVC.swift in Sources */,
@@ -1895,6 +1910,7 @@
 				27A4439225AE03720002BAAC /* TANetworkManager.swift in Sources */,
 				27A443B825AE03720002BAAC /* UIImageViewCornerRadius.swift in Sources */,
 				279AB35C25FF44710061FCB3 /* SelectCityTableViewCell.swift in Sources */,
+				61C7BE3F267C8EB8006DB3BB /* FlagCountryList.swift in Sources */,
 				27D0FAB225CEE9FF00463FE0 /* ForgotPasswordViewC.swift in Sources */,
 				276E16B125DD8C5E00B17ACF /* TutorialCollectionCell.swift in Sources */,
 				271662A925BD7A1E000C0189 /* BusinessTextFieldTableCell.swift in Sources */,

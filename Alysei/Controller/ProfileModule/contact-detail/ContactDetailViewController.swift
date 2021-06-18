@@ -25,6 +25,8 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
     var viewModel: ContactDetail.Contact.ViewModel!
     var locationManager: CLLocationManager!
     var userType: UserRoles = .voyagers
+    var flagView: FlagView!
+    var countryCode = "91"
 
     // MARK:- Object lifecycle
 
@@ -62,6 +64,17 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
                 router.perform(selector, with: segue)
             }
         }
+
+        if segue.identifier == "segueContactToFlag" {
+            if let countryList = segue.destination as? FlagCountryList {
+                countryList.didSelectCountry = { [weak self](country) in
+                    let countryName = country.name.lowercased()
+                    self?.countryCode = country.callingCode
+                    self?.flagView?.flag.image = UIImage(named: countryName)
+                    self?.flagView?.countrtyCode.text = "+\(self?.countryCode ?? "91")"
+                }
+            }
+        }
     }
 
     // MARK:- View lifecycle
@@ -74,6 +87,9 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
         self.phoneTextField.placeholder = "999-999-9999"
         self.facebookTextField.placeholder = "https://www.facebook.com"
         self.websiteTextField.placeholder = "https://www.yourwebsite.com"
+
+        self.phoneTextField.keyboardType = .numberPad
+        self.addButtonToTextField(self.phoneTextField)
 
 
         if viewModel != nil {
@@ -186,6 +202,27 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
         }
 
         return true
+    }
+
+    private func addButtonToTextField(_ textField: UITextFieldExtended) {
+
+        guard let flag = Bundle.main.loadNibNamed("Flag", owner: self, options: nil)?.first as? FlagView else {
+            return
+        }
+        flagView = flag
+        flagView.button.addTarget(self, action: #selector(presentCountryList(_:)), for: .touchUpInside)
+        flagView.flag.image = UIImage(named: "india")
+        flagView.countrtyCode.text = "+91"
+        flag.flag.centerVertically()
+        flag.countrtyCode.centerVertically()
+
+        textField.leftViewMode = .always
+        textField.leftView = flagView
+        textField.rightView = UIView()
+    }
+
+    @objc func presentCountryList(_ sender: UIButton) {
+        performSegue(withIdentifier: "segueSignuptoCountry", sender: self)
     }
 
     // MARK:- @IBAction methods
