@@ -226,6 +226,7 @@
 		61C7BE3D267C8A82006DB3BB /* Flag.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61C7BE3C267C8A82006DB3BB /* Flag.xib */; };
 		61C7BE3F267C8EB8006DB3BB /* FlagCountryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C7BE3E267C8EB8006DB3BB /* FlagCountryList.swift */; };
 		61C7BE41267C8FDA006DB3BB /* FlagCountryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C7BE40267C8FDA006DB3BB /* FlagCountryListCell.swift */; };
+		61C7BE43267CB209006DB3BB /* Countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 61C7BE42267CAFA6006DB3BB /* Countries.json */; };
 		6B09A87C26245AC800483365 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B09A87B26245AC800483365 /* AddPostViewController.swift */; };
 		6B2F94F626202F3A0030928E /* Timeline.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B2F94F526202F3A0030928E /* Timeline.storyboard */; };
 		6B58C9AF26256EE300D250CD /* ReviewHubModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B58C9AE26256EE300D250CD /* ReviewHubModel.swift */; };
@@ -537,6 +538,7 @@
 		61C7BE3C267C8A82006DB3BB /* Flag.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Flag.xib; sourceTree = "<group>"; };
 		61C7BE3E267C8EB8006DB3BB /* FlagCountryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagCountryList.swift; sourceTree = "<group>"; };
 		61C7BE40267C8FDA006DB3BB /* FlagCountryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagCountryListCell.swift; sourceTree = "<group>"; };
+		61C7BE42267CAFA6006DB3BB /* Countries.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Countries.json; sourceTree = "<group>"; };
 		6B09A87B26245AC800483365 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		6B2F94F526202F3A0030928E /* Timeline.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Timeline.storyboard; sourceTree = "<group>"; };
 		6B58C9AE26256EE300D250CD /* ReviewHubModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHubModel.swift; sourceTree = "<group>"; };
@@ -1261,6 +1263,7 @@
 		27BC688225AC564100A01B6A /* Alysei */ = {
 			isa = PBXGroup;
 			children = (
+				61C7BE42267CAFA6006DB3BB /* Countries.json */,
 				6116531426163A7B00BB97CA /* GoogleService-Info.plist */,
 				27A443F725AE06F00002BAAC /* Info.plist */,
 				C5BA01F42648FA8900E1E542 /* AlyseiBGV.mp4 */,
@@ -1678,6 +1681,7 @@
 				A808778725ADB4F500AA4A69 /* Login.storyboard in Resources */,
 				279AB32F25FF42C50061FCB3 /* ConfirmSelectionVC.xib in Resources */,
 				C51C337B2664EA78002EC412 /* Marketplace.storyboard in Resources */,
+				61C7BE43267CB209006DB3BB /* Countries.json in Resources */,
 				6113776D263212B600EEBFDA /* Colors.xcassets in Resources */,
 				27B2FDE625C8782000CFEDA0 /* ProductSection.xib in Resources */,
 				27A443D425AE03720002BAAC /* Montserrat-MediumItalic.ttf in Resources */,

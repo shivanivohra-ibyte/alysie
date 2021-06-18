@@ -65,15 +65,18 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
             }
         }
 
-        if segue.identifier == "segueContactToFlag" {
-            if let countryList = segue.destination as? FlagCountryList {
-                countryList.didSelectCountry = { [weak self](country) in
-                    let countryName = country.name.lowercased()
-                    self?.countryCode = country.callingCode
-                    self?.flagView?.flag.image = UIImage(named: countryName)
-                    self?.flagView?.countrtyCode.text = "+\(self?.countryCode ?? "91")"
+        if segue.identifier == "segueContactDetailsToFlagCountry" {
+            if let navCon = segue.destination as? UINavigationController {
+                if let countryList = navCon.viewControllers.first as? FlagCountryList {
+                    countryList.didSelectCountry = { [weak self](country) in
+                        let countryName = country.name.lowercased()
+                        self?.countryCode = country.callingCode
+                        self?.flagView?.flag.image = UIImage(named: countryName)
+                        self?.flagView?.countrtyCode.text = "+\(self?.countryCode ?? "91")"
+                    }
                 }
             }
+
         }
     }
 
@@ -222,7 +225,7 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
     }
 
     @objc func presentCountryList(_ sender: UIButton) {
-        performSegue(withIdentifier: "segueSignuptoCountry", sender: self)
+        performSegue(withIdentifier: "segueContactDetailsToFlagCountry", sender: self)
     }
 
     // MARK:- @IBAction methods

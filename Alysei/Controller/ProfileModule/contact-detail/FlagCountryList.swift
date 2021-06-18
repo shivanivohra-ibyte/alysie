@@ -33,8 +33,13 @@ class FlagCountryList: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        countryList = parseJSONtoCountry("CountryList", fileExtension: "json")
+
+        self.navigationController?.navigationBar.isHidden = false
+
+        countryList = parseJSONtoCountry("Countries", fileExtension: "json")
         countryList = countryList.sorted(by: { $0.name < $1.name })
+
+        self.tableView.reloadData()
     }
 
     @IBAction func dismissSelf() {
