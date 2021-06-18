@@ -18,9 +18,7 @@ class ConnectionConfirmVC: AlysieBaseViewC {
     
 
     @IBAction func btnClose(_ sender: UIButton){
-            let controller = pushViewController(withName: ProfileViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? ProfileViewC
-            controller?.userLevel = .other
-            controller?.userID = self.userID
+            
             
         }
 

@@ -50,7 +50,7 @@ class ProfileViewC: AlysieBaseViewC{
     @IBOutlet weak var respondeButton: UIButtonExtended!
     @IBOutlet weak var messageButton: UIButtonExtended!
     @IBOutlet weak var connectButton: UIButtonExtended!
-
+  //  @IBOutlet weak var btnBack: UIButton!
     var percentage: String?
     
   //MARK: - Properties -
@@ -153,7 +153,7 @@ class ProfileViewC: AlysieBaseViewC{
     self.respondeButton.isHidden = true
     self.connectButton.isHidden = true
 
-
+    //self.btnBack.isHidden = userLevel == .other ? false : true
     switch self.userLevel {
     case .own:
         print("own")
@@ -313,7 +313,9 @@ class ProfileViewC: AlysieBaseViewC{
         //self.connectButtonTapped()
         
     }
-
+//    @IBAction func btnback(_ sender: UIButton){
+//        self.navigationController?.popViewController(animated: true)
+//    }
 
     @IBAction func messageButtonTapped(_ sender: UIButton) {
         self.messageButtonTapped()

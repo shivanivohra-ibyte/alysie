@@ -83,6 +83,7 @@ class ConnectionProductTypeViewController: UIViewController, ConnectionProductTy
     @IBOutlet weak var vwProduct : UIView!
     @IBOutlet weak var lblSelectedProduct: UILabel!
     @IBOutlet weak var lblUserName: UILabel!
+   
     
     var userName: String?
     var productData: Data?
@@ -95,7 +96,7 @@ class ConnectionProductTypeViewController: UIViewController, ConnectionProductTy
     interactor?.doSomething(request: request)
     lblSelectedProduct.text = "Select product type........."
     lblSelectedProduct.textColor = UIColor.lightGray
-   
+   print("UserName---------------------\(self.userName)")
     lblUserName.text = "Sending a request to connect with @" + "\(userName ?? "")"
     vwProduct.layer.borderWidth = 0.5
     vwProduct.layer.borderColor = UIColor.lightGray.cgColor
@@ -142,7 +143,7 @@ class ConnectionProductTypeViewController: UIViewController, ConnectionProductTy
        
         
     }
-    
+   
     public func pushViewController(withName name: String, fromStoryboard storyboard: String) -> UIViewController {
 
         let storyboard = UIStoryboard.init(name: storyboard, bundle: nil)
