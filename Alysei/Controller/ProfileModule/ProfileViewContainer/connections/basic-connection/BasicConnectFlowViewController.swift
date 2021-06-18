@@ -24,7 +24,7 @@ class BasicConnectFlowViewController: UIViewController, BasicConnectFlowDisplayL
     // MARK:- Object lifecycle
 
     var userModel: BasicConnectFlow.userDataModel!
-
+    @IBOutlet weak var vwConfirm: UIView!
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
@@ -65,7 +65,7 @@ class BasicConnectFlowViewController: UIViewController, BasicConnectFlowDisplayL
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        vwConfirm.isHidden = true
         let messageAttributedString = NSMutableAttributedString()
         messageAttributedString.append(NSAttributedString(string: "Sending a request to connect with \n", attributes: [NSAttributedString.Key.font: AppFonts.regular(16.0).font]))
         //messageAttributedString.append(NSAttributedString(string: "@\(self.userModel.username)", attributes: [NSAttributedString.Key.font: AppFonts.bold(16.0).font]))
@@ -88,18 +88,29 @@ class BasicConnectFlowViewController: UIViewController, BasicConnectFlowDisplayL
 
 
     @IBAction func confirmButtonTapped(_ sender: UIButton) {
-
+        self.reasonToConnect.resignFirstResponder()
         let optionName = self.selectProductId.joined(separator: ",")
         let requestModel = BasicConnectFlow.Connection.request(//userID: self.userModel.userID,
             userID: self.userID ?? 0,
                                                                reason: self.reasonToConnect.text,
                                                                selectProductId: optionName)
+       
         self.interactor?.sendConnectionRequest(requestModel)
         
     }
+    @IBAction func closeButton(_ sender: UIButton){
+            let controller = self.pushViewController(withName: ProfileViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? ProfileViewC
+            controller?.userLevel = .other
+            controller?.userID = self.userID
+        //showConnectionScreen()
+    }
     func showConnectionScreen() {
-        let controller = pushViewController(withName: ConnectionConfirmVC.id(), fromStoryboard: StoryBoardConstants.kHome) as? ConnectionConfirmVC
-        controller?.userID = self.userID
+//        let controller = pushViewController(withName: ConnectionConfirmVC.id(), fromStoryboard: StoryBoardConstants.kHome) as? ConnectionConfirmVC
+//        controller?.userID = self.userID
+        vwConfirm.isHidden = false
+        
+       
+        
     }
     
     public func pushViewController(withName name: String, fromStoryboard storyboard: String) -> UIViewController {

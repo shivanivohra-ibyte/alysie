@@ -14,8 +14,8 @@ import IQKeyboardManagerSwift
 import Firebase
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
-  
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
+    let locationManager = CLLocationManager()
   //MARK: - Properties -
   
   var window: UIWindow?
@@ -30,9 +30,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     GMSServices.provideAPIKey(googleAPIKey)
     GMSPlacesClient.provideAPIKey(googleAPIKey)
     FirebaseApp.configure()
+    
+    //Current location
+    // Ask for Authorisation from the User.
+    self.locationManager.requestAlwaysAuthorization()
+
+    // For use in foreground
+    self.locationManager.requestWhenInUseAuthorization()
+
+    if CLLocationManager.locationServicesEnabled() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.startUpdatingLocation()
+    }
     return true
   }
-
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+    }
   //MARK: UISceneSession Lifecycle
 
   func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
