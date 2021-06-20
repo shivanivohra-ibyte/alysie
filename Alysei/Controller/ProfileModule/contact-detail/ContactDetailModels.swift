@@ -21,6 +21,7 @@ enum ContactDetail {
             var address: String?
             var website: String?
             var facebookURL: String?
+            var countryCode: String?
 
             func data() -> Data? {
 
@@ -28,6 +29,9 @@ enum ContactDetail {
 
                 if let phone = self.phone {
                     postData.append("phone=\(phone)&".data(using: .utf8)!)
+                    if let countryCode = self.countryCode {
+                        postData.append("country_code=\(countryCode)&".data(using: .utf8)!)
+                    }
                 }
                 if let address = self.address {
                     postData.append("address=\(address)&".data(using: .utf8)!)
@@ -54,6 +58,7 @@ enum ContactDetail {
             var address: String? { response.data.address }
             var websiteURL: String? { response.data.website }
             var facebookURL: String? { response.data.fb_link }
+            var countryCode: String? { response.data.country_code }
         }
 
 
@@ -65,6 +70,7 @@ enum ContactDetail {
             var address: String?
             var website: String?
             var fb_link: String?
+            var country_code: String?
         }
     }
 

@@ -91,9 +91,6 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
         self.facebookTextField.placeholder = "https://www.facebook.com"
         self.websiteTextField.placeholder = "https://www.yourwebsite.com"
 
-        self.phoneTextField.keyboardType = .numberPad
-        self.addButtonToTextField(self.phoneTextField)
-
 
         if viewModel != nil {
             self.emailTextField.text = "\(viewModel.email)"
@@ -101,7 +98,12 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
             self.addressTextField.text = "\(viewModel.address ?? "")"
             self.websiteTextField.text = "\(viewModel.websiteURL ?? "")"
             self.facebookTextField.text = "\(viewModel.facebookURL ?? "")"
+            self.countryCode = viewModel.countryCode ?? self.countryCode
         }
+        
+        self.phoneTextField.keyboardType = .numberPad
+        self.addButtonToTextField(self.phoneTextField)
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -242,7 +244,8 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
             let requestModel = ContactDetail.Contact.Request(phone: self.phoneTextField.text,
                                                              address: self.addressTextField.text,
                                                              website: self.websiteTextField.text,
-                                                             facebookURL: self.facebookTextField.text)
+                                                             facebookURL: self.facebookTextField.text,
+                                                             countryCode: self.countryCode)
             self.interactor?.updateContactDetail(requestModel)
 
         }
