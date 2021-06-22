@@ -251,47 +251,22 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
         
         switch sender.tag {
         case 0:
-           // addLabel()
+            showInfo("Helps user to find product")
             print("0")
         case 1:
-           // addLabel()
+            showInfo("Handling Instruction can contains max 50 words")
             print("1")
         case 2:
-           // addLabel()
+            showInfo("Dispatch Instruction can contains max 200 words")
             print("2")
-        case 3:
-           /// addLabel()
-            print("3")
-        case 4:
-           // addLabel()
-            print("4")
-        case 5:
-           // addLabel()
-            print("5")
-        case 6:
-           // addLabel()
-            print("6")
-        case 7:
-          //  addLabel()
-            print("7")
-        case 8:
-          //  addLabel()
-            print("8")
-        case 9:
-           // addLabel()
-            print("9")
-        case 10:
-          //  addLabel()
-            print("10")
             
         default:
             break
         }
     }
-//     func addLabel(){
-//        self.tableView.alpha = 0.5
-//        descView.isHidden = false
-//     }
+    func showInfo(_ message: String){
+        self.showAlert(withMessage: message)
+     }
    
 }
 //MARK:- Custom Picker

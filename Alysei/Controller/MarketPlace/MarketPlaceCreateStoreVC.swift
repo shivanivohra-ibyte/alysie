@@ -213,7 +213,7 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
             callCreateStoreApi()
         }
         
-    //    let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
+   //     let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
     }
     
     private func validateAllfields() -> Bool {
@@ -452,7 +452,7 @@ extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDat
 }
 extension UIView{
     func addBorder(){
-        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderColor = UIColor.black.cgColor
         self.layer.borderWidth = 0.5
         self.layer.cornerRadius = 5
     }
@@ -468,7 +468,7 @@ class ImageMaketPlaceCollectionViewCell:UICollectionViewCell{
     override func awakeFromNib() {
         super.awakeFromNib()
         viewAddImage.layer.borderWidth = 0.5
-        viewAddImage.layer.borderColor = UIColor.lightGray.cgColor
+        viewAddImage.layer.borderColor = UIColor.black.cgColor
     }
     
     @IBAction func btnDeleteAction(_ sender: UIButton){
