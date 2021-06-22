@@ -33,6 +33,11 @@ class UserPhotosGridViewController: AlysieBaseViewC {
         self.userPhotosCollectionView.reloadData()
     }
 
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        self.fetchPostWithPhotsFromServer(pageNumber)
+//    }
+
 
 }
 

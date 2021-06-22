@@ -26,7 +26,7 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
     var locationManager: CLLocationManager!
     var userType: UserRoles = .voyagers
     var flagView: FlagView!
-    var countryCode = "91"
+    var countryCode = ""
 
     // MARK:- Object lifecycle
 

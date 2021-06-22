@@ -62,6 +62,7 @@ class ProfileViewC: AlysieBaseViewC{
     var userLevel: UserLevel = .own
     var userID: Int!
     var userType: UserRoles!
+    var visitorUserType: UserRoles!
     var aboutViewModel: AboutView.viewModel!
 
     var userProfileModel: UserProfile.profileTopSectionModel!
@@ -249,6 +250,7 @@ class ProfileViewC: AlysieBaseViewC{
 
 //    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height * 1.5)
 
+
     self.viewSeparator.center.x = self.btnContact.center.x
     self.btnPosts.isSelected = false
     self.btnAbout.isSelected = false
@@ -260,7 +262,9 @@ class ProfileViewC: AlysieBaseViewC{
     self.contactViewC.delegate = self
     self.contactViewC.tableData = self.contactDetail
 //    self.tblViewPosts.tableHeaderView?.setHeight(kScreenWidth + 200.0)
-
+    if self.userLevel == .other {
+        self.contactViewC.editContactDetailButton.isHidden = true
+    }
     self.contactViewC.view.bringSubviewToFront(self.contactViewC.editContactDetailButton)
   }
 
@@ -307,11 +311,38 @@ class ProfileViewC: AlysieBaseViewC{
     }
 
     @IBAction func connectButtonTapped(_ sender: UIButton) {
+
+        //
+
+        if (self.visitorUserType == .producer) && (self.userType == .distributer1 || self.userType == .distributer2 || self.userType == .distributer3) {
+            self.segueToCompleteConnectionFlow()
+            return
+        } else if self.userType == .voyagers {
+            if self.userType == .voyagers {
+            } else {
+            }
+        } else {
+        }
+        self.connectButtonTapped()
+    }
+
+    private func segueToCompleteConnectionFlow() {
         let controller = pushViewController(withName: ConnectionProductTypeViewController.id(), fromStoryboard: StoryBoardConstants.kHome) as? ConnectionProductTypeViewController
         controller?.userName = self.usernameLabel.text
         controller?.userID = self.userID
-        //self.connectButtonTapped()
-        
+    }
+
+    func udpateConnectionButtonForVisitorProfile(_ visitorType: UserRoles) {
+        if self.userType == .producer {
+
+        } else if self.userType == .voyagers {
+            if self.userType == .voyagers {
+                self.connectButton.setTitle("Connect", for: .normal)
+            } else {
+                self.connectButton.setTitle("Follow", for: .normal)
+            }
+        } else {
+        }
     }
 //    @IBAction func btnback(_ sender: UIButton){
 //        self.navigationController?.popViewController(animated: true)
@@ -516,7 +547,7 @@ class ProfileViewC: AlysieBaseViewC{
                     self.viewProfileCompletion.isHidden = false
                     self.tblViewProfileCompletion.isHidden = false
                     self.headerView.isHidden = true
-                    self.tblViewPosts.isHidden = true
+                    self.tblViewPosts.isHidden = false
                     self.viewProfileHeight.constant = 75
                     self.profilePercentage.text = "It's at \(responseModel.data?.userData?.profilePercentage ?? 0)%"
                     self.percentage = "\(responseModel.data?.userData?.profilePercentage ?? 0)"
@@ -554,8 +585,8 @@ class ProfileViewC: AlysieBaseViewC{
                 self.aboutLabel.text = "\(responseModel.data?.about ?? "")"
 
                 let roleID = UserRoles(rawValue: responseModel.data?.userData?.roleID ?? 0) ?? .voyagers
-                self.userType = roleID
-
+                self.visitorUserType = roleID
+                self.udpateConnectionButtonForVisitorProfile(roleID)
                 self.updateListingTitle()
                 self.tabsCollectionView.reloadData()
 
@@ -651,8 +682,10 @@ class ProfileViewC: AlysieBaseViewC{
                 self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "contact_email",
                                                                        title: "Email", value: responseModel.data.email))
                 if let phone = responseModel.data.phone {
+                    let countryCode = ((responseModel.data.country_code?.count ?? 0) > 0) ? "+\(responseModel.data.country_code ?? "") " : ""
+
                     self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "contact_call",
-                                                                           title: "Phone", value: phone))
+                                                                           title: "Phone", value: "\(countryCode)\(phone)"))
                 }
                 if let address = responseModel.data.address {
                     self.contactDetail.append(ContactDetail.view.tableCellModel(imageName: "contact_pin",
