@@ -42,6 +42,9 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     @IBOutlet weak var txtProductDispatchIns: UITextView!
     @IBOutlet weak var txtProductSample: UITextField!
     @IBOutlet weak var txtProductPrice: UITextField!
+    @IBOutlet weak var quantityView: UIView!
+    @IBOutlet weak var lblQunatityLabel: UILabel!
+    @IBOutlet weak var lblMinimumQuantity: UILabel!
 
     var uploadImageArray = [UIImage]()
     //var selectedAssets = [TLPHAsset]()
@@ -60,6 +63,7 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     var availableForSample: String?
     var sampleArr = ["Yes","No"]
     var spaceCount = 0
+    var quantityArr = ["No. of pieces", "No. of bottles","liters","kilograms","grams","milligrams"]
     
     
     override func viewDidLoad() {
@@ -73,6 +77,9 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
         self.view7.addGestureRecognizer(brandTap)
         let sampleTap = UITapGestureRecognizer(target: self, action: #selector(openSample))
         self.view11.addGestureRecognizer(sampleTap)
+        
+        let quantityTap = UITapGestureRecognizer(target: self, action: #selector(openQunatityDropDown))
+        self.quantityView.addGestureRecognizer(quantityTap)
         // Do any additional setup after loading the view.
     }
     
@@ -214,6 +221,22 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
         dataDropDown.selectionBackgroundColor = UIColor.clear
         dataDropDown.direction = .bottom
     }
+    @objc func openQunatityDropDown(){
+        dataDropDown.dataSource = self.quantityArr
+        dataDropDown.show()
+        dataDropDown.anchorView = quantityView
+        dataDropDown.bottomOffset = CGPoint(x: 0, y: (dataDropDown.anchorView?.plainView.bounds.height)!)
+        dataDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            self.lblQunatityLabel.text = item
+            self.lblMinimumQuantity.text = item
+           
+           
+        }
+        dataDropDown.cellHeight = 40
+        dataDropDown.backgroundColor = UIColor.white
+        dataDropDown.selectionBackgroundColor = UIColor.clear
+        dataDropDown.direction = .bottom
+    }
     //MARK:- IBAction
     
     @IBAction func btnNextAction(_ sender: UIButton){
@@ -224,7 +247,52 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     @IBAction func btnBackAction(_ sender: UIButton){
         self.navigationController?.popViewController(animated: true)
     }
-
+    @IBAction func btnCheckInfoAction(_ sender: UIButton){
+        
+        switch sender.tag {
+        case 0:
+           // addLabel()
+            print("0")
+        case 1:
+           // addLabel()
+            print("1")
+        case 2:
+           // addLabel()
+            print("2")
+        case 3:
+           /// addLabel()
+            print("3")
+        case 4:
+           // addLabel()
+            print("4")
+        case 5:
+           // addLabel()
+            print("5")
+        case 6:
+           // addLabel()
+            print("6")
+        case 7:
+          //  addLabel()
+            print("7")
+        case 8:
+          //  addLabel()
+            print("8")
+        case 9:
+           // addLabel()
+            print("9")
+        case 10:
+          //  addLabel()
+            print("10")
+            
+        default:
+            break
+        }
+    }
+//     func addLabel(){
+//        self.tableView.alpha = 0.5
+//        descView.isHidden = false
+//     }
+   
 }
 //MARK:- Custom Picker
 extension AddProductMarketplaceVC: TLPhotosPickerLogDelegate {
