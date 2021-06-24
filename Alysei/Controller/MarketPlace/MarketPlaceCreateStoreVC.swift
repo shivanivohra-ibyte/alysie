@@ -36,7 +36,7 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     @IBOutlet weak var txtProducerEmail: UITextField!
     @IBOutlet weak var imageLabel: UILabel!
     @IBOutlet weak var btnInfoIcon: UIButton!
-    
+    @IBOutlet weak var heightHeaderView: NSLayoutConstraint!
     
     
     var uploadImageArray = [UIImage]()
@@ -59,11 +59,19 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     var userAbout: String?
     var userLocation: String?
     var userRegion: String?
+    var fromVC: PushedFrom?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         callGetFieldStoreApi()
         setDataUI()
+        if fromVC == .myStoreDashboard{
+            self.headerView.isHidden = true
+            self.heightHeaderView.constant = 0
+        }else{
+            self.headerView.isHidden = false
+            self.heightHeaderView.constant = 64
+        }
        // picker.
 //        let tap = UITapGestureRecognizer(target: self, action: #selector(gotomapView))
 //        self.view8.addGestureRecognizer(tap)

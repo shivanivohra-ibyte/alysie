@@ -50,14 +50,18 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
     }
 
     @IBAction func btnGotoStores(_ sender: UIButton){
-        //_ = pushViewController(withName: MarketPlaceWalkthroughVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
-        
+       
+        //if kSharedUserDefaults.loggedInUserModal.isStoreCreated == "0"{
+        if btnCreateStore.title(for: .normal) == "Create your Store"{
         let vc = UIStoryboard(name: StoryBoardConstants.kMarketplace, bundle: nil).instantiateViewController(withIdentifier: "MarketPlaceWalkthroughVC") as! MarketPlaceWalkthroughVC
         
         vc.view.frame = self.containerView.bounds
         self.addChild(vc)
         self.containerView.addSubview(vc.view)
         vc.didMove(toParent: self)
+        }else{
+            _ = pushViewController(withName: MyStoreVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? MyStoreVC
+        }
     }
 
 }
