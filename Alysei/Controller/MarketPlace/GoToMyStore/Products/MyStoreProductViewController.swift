@@ -17,7 +17,7 @@ protocol MyStoreProductDisplayLogic: class
   func displaySomething(viewModel: MyStoreProduct.Something.ViewModel)
 }
 
-class MyStoreProductViewController: UIViewController, MyStoreProductDisplayLogic
+class MyStoreProductViewController: AlysieBaseViewC, MyStoreProductDisplayLogic
 {
   var interactor: MyStoreProductBusinessLogic?
   var router: (NSObjectProtocol & MyStoreProductRoutingLogic & MyStoreProductDataPassing)?
@@ -87,6 +87,11 @@ class MyStoreProductViewController: UIViewController, MyStoreProductDisplayLogic
   {
     //nameTextField.text = viewModel.name
   }
+    
+    @IBAction func addProductAction(_ sender: UIButton){
+        let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
+       
+    }
 }
 
 extension MyStoreProductViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{

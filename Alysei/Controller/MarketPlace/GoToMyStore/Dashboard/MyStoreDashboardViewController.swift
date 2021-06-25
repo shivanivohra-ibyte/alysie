@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import DropDown
 
 protocol MyStoreDashboardDisplayLogic: class
 {
@@ -81,7 +82,10 @@ class MyStoreDashboardViewController: UIViewController, MyStoreDashboardDisplayL
     @IBOutlet weak var imgStore: UIImageView!
     @IBOutlet weak var lblTotalProduct: UILabel!
     @IBOutlet weak var lblTotalCategories: UILabel!
-  
+    
+    
+   
+    
   func doSomething()
   {
     let request = MyStoreDashboard.Something.Request()
@@ -92,6 +96,8 @@ class MyStoreDashboardViewController: UIViewController, MyStoreDashboardDisplayL
   {
     //nameTextField.text = viewModel.name
   }
+    
+   
 }
 
 //Mark: TableView DataSource , Delegate

@@ -17,6 +17,7 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("kSharedUserDefaults.loggedInUserModal.isStoreCreated----------------\(kSharedUserDefaults.loggedInUserModal.isStoreCreated ?? "")")
         if kSharedUserDefaults.loggedInUserModal.memberRoleId == "\(UserRoles.producer.rawValue)"{
             self.btnCreateStore.isHidden = false
         }else{
@@ -29,10 +30,9 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
         
         if kSharedUserDefaults.loggedInUserModal.isStoreCreated == "1" || self.isCreateStore == true{
             self.btnCreateStore.setTitle("Go to My Store", for: .normal)
-            self.btnCreateStore.isUserInteractionEnabled = false
         }else{
             self.btnCreateStore.setTitle("Create your Store", for: .normal)
-            self.btnCreateStore.isUserInteractionEnabled = true
+        
         }
          
     }
@@ -51,10 +51,10 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
 
     @IBAction func btnGotoStores(_ sender: UIButton){
        
-        //if kSharedUserDefaults.loggedInUserModal.isStoreCreated == "0"{
-        if btnCreateStore.title(for: .normal) == "Create your Store"{
+        if kSharedUserDefaults.loggedInUserModal.isStoreCreated == "0"{
+
         let vc = UIStoryboard(name: StoryBoardConstants.kMarketplace, bundle: nil).instantiateViewController(withIdentifier: "MarketPlaceWalkthroughVC") as! MarketPlaceWalkthroughVC
-        
+
         vc.view.frame = self.containerView.bounds
         self.addChild(vc)
         self.containerView.addSubview(vc.view)
@@ -62,6 +62,7 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
         }else{
             _ = pushViewController(withName: MyStoreVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? MyStoreVC
         }
+     //   _ = pushViewController(withName: MyStoreVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? MyStoreVC
     }
 
 }
