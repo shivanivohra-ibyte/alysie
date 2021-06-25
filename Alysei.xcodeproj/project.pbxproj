@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -204,6 +204,7 @@
 		6116531526163A7C00BB97CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6116531426163A7B00BB97CA /* GoogleService-Info.plist */; };
 		61165344261642AC00BB97CA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61165343261642AC00BB97CA /* UserProfile.swift */; };
 		6127F16E260B49DB005848B3 /* SaveResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6127F16D260B49DB005848B3 /* SaveResources.swift */; };
+		6129994F2685E7F700B5DA46 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 6129994E2685E7F700B5DA46 /* SocketIO */; };
 		6140882726697A3C00A98B0E /* UserPhotosGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6140882626697A3C00A98B0E /* UserPhotosGridViewController.swift */; };
 		6140882B26697BB100A98B0E /* UserPhotosGridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6140882A26697BB100A98B0E /* UserPhotosGridCollectionViewCell.swift */; };
 		61971C3E265A8AB1002DD260 /* ProfileTabRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61971C3D265A8AB1002DD260 /* ProfileTabRows.swift */; };
@@ -683,6 +684,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C335E7EC45F29BF5A0AC467 /* Pods_Alysei.framework in Frameworks */,
+				6129994F2685E7F700B5DA46 /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1766,6 +1768,9 @@
 			dependencies = (
 			);
 			name = Alysei;
+			packageProductDependencies = (
+				6129994E2685E7F700B5DA46 /* SocketIO */,
+			);
 			productName = Alysie;
 			productReference = 27BC688025AC564100A01B6A /* Alysei.app */;
 			productType = "com.apple.product-type.application";
@@ -1793,6 +1798,9 @@
 				Base,
 			);
 			mainGroup = 27BC687725AC564100A01B6A;
+			packageReferences = (
+				6129994D2685E7F600B5DA46 /* XCRemoteSwiftPackageReference "socket" */,
+			);
 			productRefGroup = 27BC688125AC564100A01B6A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2393,6 +2401,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6129994D2685E7F600B5DA46 /* XCRemoteSwiftPackageReference "socket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 16.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6129994E2685E7F700B5DA46 /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6129994D2685E7F600B5DA46 /* XCRemoteSwiftPackageReference "socket" */;
+			productName = SocketIO;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 27BC687825AC564100A01B6A /* Project object */;
 }
