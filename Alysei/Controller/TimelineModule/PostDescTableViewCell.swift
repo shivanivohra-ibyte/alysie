@@ -22,6 +22,8 @@ struct PostLikeUnlikeRequestModel: Codable, SocketData {
     }
 }
 
+    let manager = SocketManager(socketURL: URL(string: "https://alyseisocket.ibyteworkshop.com")!, config: [.log(true), .compress])
+
 class PostDescTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userName: UILabel!
@@ -42,8 +44,11 @@ class PostDescTableViewCell: UITableViewCell {
     var islike: Int?
     var index: Int?
     var imageArray = [String]()
-    let manager = SocketManager(socketURL: URL(string: "https://alyseisocket.ibyteworkshop.com")!, config: [.log(true), .compress])
+//    let manager = SocketManager(socketURL: URL(string: "https://alyseisocket.ibyteworkshop.com")!, config: [.log(true), .compress])
+//    let socket = SocketManager(socketURL: URL(string: "https://alyseisocket.ibyteworkshop.com")!, config: [.log(true), .compress]).defaultSocket
 
+
+    let socket = manager.defaultSocket
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -61,32 +66,6 @@ class PostDescTableViewCell: UITableViewCell {
 
         self.imagePostCollectionView.addGestureRecognizer(tap2)
 
-        let selfID = Int(kSharedUserDefaults.loggedInUserModal.userId ?? "-1") ?? 0
-
-        let socket = manager.defaultSocket
-
-        socket.on(clientEvent: .connect) {data, ack in
-            print("socket connected")
-
-            print(data)
-            print(ack)
-
-            print("socket is connected")
-
-            let userIDSD = ["user_id": selfID].socketRepresentation()
-
-            socket.emit("init", userIDSD) {
-                print("init done")
-            }
-
-            socket.on("connected") { connectedData, connectedAck in
-                print(connectedData)
-            }
-
-        }
-
-        socket.connect()
-
         
         // Initialization code
     }
@@ -100,6 +79,36 @@ class PostDescTableViewCell: UITableViewCell {
     
     
     func configCell(_ data: NewFeedSearchDataModel, _ index: Int){
+
+        let selfID = Int(kSharedUserDefaults.loggedInUserModal.userId ?? "-1") ?? 0
+
+        socket.on(clientEvent: .connect) {data, ack in
+            print("socket connected")
+
+            print(data)
+            print(ack)
+
+            print("socket is connected")
+
+            let userIDSD = ["user_id": selfID].socketRepresentation()
+
+            self.socket.emit("init", userIDSD) {
+                print("init done")
+            }
+
+            self.socket.on("connected") { connectedData, connectedAck in
+                print(connectedData)
+            }
+
+        }
+
+        socket.on(clientEvent: .error) { data, ack in
+            print(data)
+        }
+
+        socket.connect()
+
+
         self.data = data
         self.index = index
         userName.text = data.subjectId?.companyName?.capitalized
@@ -152,12 +161,10 @@ class PostDescTableViewCell: UITableViewCell {
             islike = 0
         }
 
-        if (islike ?? 0) == 0 {
-            callLikeUnlikeApi(self.islike, self.data?.activityActionId, self.index)
-            return
-        }
-
-        let socket = manager.defaultSocket
+//        if (islike ?? 0) == 0 {
+//            callLikeUnlikeApi(self.islike, self.data?.activityActionId, self.index)
+//            return
+//        }
 
         let selfID = Int(kSharedUserDefaults.loggedInUserModal.userId ?? "-1") ?? 0
         let params = ["post_owner_id": self.data?.subjectId?.userId ?? -1,
@@ -179,15 +186,20 @@ class PostDescTableViewCell: UITableViewCell {
 //            socket.disconnect()
 
             if let data = showLikeData[0] as? [String: Any] {
-                if let likeStatus = data["like_status"] as? Int {
-                    if likeStatus == 0 {
-                        self.data?.likeCount = ((self.data?.likeCount ?? 1) - 1)
-                    }else{
-                        self.data?.likeCount = ((self.data?.likeCount ?? 1) + 1)
+
+                if let postID = data["post_id"] as? Int {
+                    if postID != (self.data?.postID ?? -1) {
+                        return
                     }
-                    self.data?.likeFlag = likeStatus
-                    self.likeCallback?(self.index ?? 0)
                 }
+
+                let totalLikes = data["total_likes"] as? Int
+                self.data?.likeCount = totalLikes ?? 0
+
+                let likeStatus = data["like_status"] as? Int
+                self.data?.likeFlag = likeStatus ?? 0
+
+                self.likeCallback?(self.index ?? 0)
             }
 
 
