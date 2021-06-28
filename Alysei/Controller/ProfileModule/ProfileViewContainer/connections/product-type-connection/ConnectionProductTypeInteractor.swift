@@ -44,12 +44,12 @@ class ConnectionProductTypeInteractor: ConnectionProductTypeBusinessLogic, Conne
     
     func showConnectionProduct(){
         do {
-            let urlString = APIUrl.Connection.kProductTypeCategory
-
-            guard let request = WebServices.shared.buildURLRequest(urlString, method: .GET) else {
-                return
-            }
-            print("urlRequest-----------------------------------\(request)")
+//            let urlString = APIUrl.Connection.kProductTypeCategory
+//
+//            guard let request = WebServices.shared.buildURLRequest(urlString, method: .GET) else {
+//                return
+//            }
+//            print("urlRequest-----------------------------------\(request)")
             TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kProductConnection, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
                 
                 let response = dictResponse as? [String:Any]

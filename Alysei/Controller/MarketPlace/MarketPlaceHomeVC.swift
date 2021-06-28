@@ -14,9 +14,11 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
     @IBOutlet weak var btnCreateStore: UIButton!
     @IBOutlet weak var marketplaceView: UIView!
     var isCreateStore = false
+    var storeCreated: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        callCheckIfStoredCreated()
         print("kSharedUserDefaults.loggedInUserModal.isStoreCreated----------------\(kSharedUserDefaults.loggedInUserModal.isStoreCreated ?? "")")
         if kSharedUserDefaults.loggedInUserModal.memberRoleId == "\(UserRoles.producer.rawValue)"{
             self.btnCreateStore.isHidden = false
@@ -28,13 +30,16 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
         let tap = UITapGestureRecognizer(target: self, action: #selector(openPost))
         self.postView.addGestureRecognizer(tap)
         
-        if kSharedUserDefaults.loggedInUserModal.isStoreCreated == "1" || self.isCreateStore == true{
+       
+         
+    }
+    func setUI(){
+        if  self.storeCreated == 1{
             self.btnCreateStore.setTitle("Go to My Store", for: .normal)
         }else{
             self.btnCreateStore.setTitle("Create your Store", for: .normal)
         
         }
-         
     }
     
 //    override func viewWillAppear(_ animated: Bool) {
@@ -50,9 +55,9 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
     }
 
     @IBAction func btnGotoStores(_ sender: UIButton){
-       
-        if kSharedUserDefaults.loggedInUserModal.isStoreCreated == "0"{
-
+        //self.callCheckIfStoredCreated()
+        //if kSharedUserDefaults.loggedInUserModal.isStoreCreated == "0"{
+            if self.storeCreated == 0{
         let vc = UIStoryboard(name: StoryBoardConstants.kMarketplace, bundle: nil).instantiateViewController(withIdentifier: "MarketPlaceWalkthroughVC") as! MarketPlaceWalkthroughVC
 
         vc.view.frame = self.containerView.bounds
@@ -62,7 +67,18 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
         }else{
             _ = pushViewController(withName: MyStoreVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? MyStoreVC
         }
-     //   _ = pushViewController(withName: MyStoreVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? MyStoreVC
+      //  _ = pushViewController(withName: MyStoreVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? MyStoreVC
     }
 
+}
+
+extension MarketPlaceHomeVC{
+    func callCheckIfStoredCreated(){
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kCheckIfStored, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errortype, statuscode) in
+            let response = dictResponse as? [String:Any]
+            
+            self.storeCreated = response?["is_store_created"] as? Int
+            self.setUI()
+        }
+    }
 }

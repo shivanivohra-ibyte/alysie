@@ -15,7 +15,7 @@ import UIKit
 protocol ConnectionProductTypeDisplayLogic: class
 {
   func displaySomething(viewModel: ConnectionProductType.Something.ViewModel)
-    func   displayProductData(_ productData: [SignUpOptionsDataModel]?)
+    func  displayProductData(_ productData: [SignUpOptionsDataModel]?)
 }
 
 class ConnectionProductTypeViewController: UIViewController, ConnectionProductTypeDisplayLogic

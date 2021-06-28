@@ -15,10 +15,18 @@ import UIKit
 protocol MyStoreProductDisplayLogic: class
 {
   func displaySomething(viewModel: MyStoreProduct.Something.ViewModel)
+    func displayProductListData(_ productArr: [MyStoreProductDetail]?)
 }
 
 class MyStoreProductViewController: AlysieBaseViewC, MyStoreProductDisplayLogic
 {
+    func displayProductListData(_ productArr: [MyStoreProductDetail]?) {
+        print("------------------------Show Data----------------------------------------------")
+        self.productList = productArr
+        collectionView.reloadData()
+    }
+    
+    
   var interactor: MyStoreProductBusinessLogic?
   var router: (NSObjectProtocol & MyStoreProductRoutingLogic & MyStoreProductDataPassing)?
 
@@ -70,12 +78,14 @@ class MyStoreProductViewController: AlysieBaseViewC, MyStoreProductDisplayLogic
   {
     super.viewDidLoad()
     doSomething()
+    self.interactor?.callMyStoreProductApi()
   }
   
   // MARK: Do something
   
   //@IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var collectionView: UICollectionView!
+    var productList: [MyStoreProductDetail]?
   
   func doSomething()
   {
@@ -96,11 +106,16 @@ class MyStoreProductViewController: AlysieBaseViewC, MyStoreProductDisplayLogic
 
 extension MyStoreProductViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+        //return 15
+        return productList?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyStoreProductCVCell", for: indexPath) as? MyStoreProductCVCell else {return UICollectionViewCell()}
+        cell.configCell(productList?[indexPath.row] ?? MyStoreProductDetail(with: [:]))
+        cell.deleteCallBack = { deleteProductId in
+            self.interactor?.callDeleteProductApi(deleteProductId)
+        }
         return cell
     }
     
