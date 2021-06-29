@@ -15,10 +15,13 @@ import UIKit
 protocol MyStoreProductPresentationLogic
 {
   func presentSomething(response: MyStoreProduct.Something.Response)
+    func showProduct(_ productArr: [MyStoreProductDetail])
 }
 
 class MyStoreProductPresenter: MyStoreProductPresentationLogic
 {
+   
+   
   weak var viewController: MyStoreProductDisplayLogic?
   
   // MARK: Do something
@@ -28,4 +31,10 @@ class MyStoreProductPresenter: MyStoreProductPresentationLogic
     let viewModel = MyStoreProduct.Something.ViewModel()
     viewController?.displaySomething(viewModel: viewModel)
   }
+    func showProduct(_ productArr: [MyStoreProductDetail]) {
+       // print("ProductArr----------------------------\(productArr)")
+        self.viewController?.displayProductListData(productArr)
+    }
+    
+    
 }

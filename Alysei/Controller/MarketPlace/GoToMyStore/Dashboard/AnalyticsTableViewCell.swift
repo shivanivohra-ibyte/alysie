@@ -18,6 +18,7 @@ class AnalyticsTableViewCell: UITableViewCell {
     var analyticsValue = ["112","42","12","100"]
     var analyticsColor = ["#2594FF","#4AAE4E","#FF9025","#FF3B25"]
     var arrData = ["Yearly","Monthly","Weekly","Yesterday","Today"]
+    var totalProduct: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,6 +47,10 @@ class AnalyticsTableViewCell: UITableViewCell {
         dataDropDown.selectionBackgroundColor = UIColor.clear
         dataDropDown.direction = .bottom
     }
+    func configeCell(_ totalProduct: String){
+        self.totalProduct = totalProduct
+        self.collectionView.reloadData()
+    }
 
 }
 
@@ -58,7 +63,7 @@ extension AnalyticsTableViewCell : UICollectionViewDelegate, UICollectionViewDat
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AnalyticsCollectionViewCell", for: indexPath) as? AnalyticsCollectionViewCell else {return UICollectionViewCell()}
         cell.lblTitle.text = analyticsArr[indexPath.row]
         cell.lblValue.text = analyticsValue[indexPath.row]
-        
+        cell.configCell(self.totalProduct ?? "")
         let color = UIColor.init(hexString: analyticsColor[indexPath.row]).cgColor
         cell.containeView.layer.backgroundColor = color
         return cell

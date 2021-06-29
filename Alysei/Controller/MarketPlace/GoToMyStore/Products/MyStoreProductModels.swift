@@ -23,6 +23,7 @@ enum MyStoreProduct
     }
     struct Response
     {
+        
     }
     struct ViewModel
     {

@@ -93,6 +93,7 @@ class MyStoreVC: UIViewController {
         let vc = UIStoryboard(name: StoryBoardConstants.kMarketplace, bundle: nil).instantiateViewController(withIdentifier: "MyStoreProductViewController") as! MyStoreProductViewController
         
         vc.view.frame = self.containerView.bounds
+        //vc.pushedFrom = .myStoreDashboard
         self.addChild(vc)
         self.containerView.addSubview(vc.view)
         vc.didMove(toParent: self)

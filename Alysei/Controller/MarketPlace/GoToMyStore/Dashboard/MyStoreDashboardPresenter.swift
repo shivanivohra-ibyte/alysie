@@ -15,6 +15,7 @@ import UIKit
 protocol MyStoreDashboardPresentationLogic
 {
   func presentSomething(response: MyStoreDashboard.Something.Response)
+  func passDashboardData(_ imgProfile: String, _ imgCover: String, _ totalProduct: Int)
 }
 
 class MyStoreDashboardPresenter: MyStoreDashboardPresentationLogic
@@ -28,4 +29,8 @@ class MyStoreDashboardPresenter: MyStoreDashboardPresentationLogic
     let viewModel = MyStoreDashboard.Something.ViewModel()
     viewController?.displaySomething(viewModel: viewModel)
   }
+    
+    func passDashboardData(_ imgProfile: String, _ imgCover: String, _ totalProdcut: Int){
+        self.viewController?.displayDashboardData(imgProfile,imgCover,totalProdcut)
+    }
 }

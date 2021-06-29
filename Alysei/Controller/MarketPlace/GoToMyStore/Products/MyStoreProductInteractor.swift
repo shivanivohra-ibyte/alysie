@@ -15,6 +15,9 @@ import UIKit
 protocol MyStoreProductBusinessLogic
 {
   func doSomething(request: MyStoreProduct.Something.Request)
+    func callMyStoreProductApi()
+    func callDeleteProductApi(_ marketPlaceProductId: Int)
+    func callEditProductApi()
 }
 
 protocol MyStoreProductDataStore
@@ -24,8 +27,11 @@ protocol MyStoreProductDataStore
 
 class MyStoreProductInteractor: MyStoreProductBusinessLogic, MyStoreProductDataStore
 {
+    
+    
   var presenter: MyStoreProductPresentationLogic?
   var worker: MyStoreProductWorker?
+    var myStoreProduct: [MyStoreProductDetail]?
   //var name: String = ""
   
   // MARK: Do something
@@ -38,4 +44,33 @@ class MyStoreProductInteractor: MyStoreProductBusinessLogic, MyStoreProductDataS
     let response = MyStoreProduct.Something.Response()
     presenter?.presentSomething(response: response)
   }
+    
+    func callMyStoreProductApi() {
+        
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kMyProductList, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            
+            let response = dictResponse as? [String:Any]
+            let dictData = response?["data"] as? [String:Any]
+            if let data = dictData?["data"] as? [[String:Any]]{
+                self.myStoreProduct = data.map({MyStoreProductDetail.init(with: $0)})
+                print("Count ------------------------------\(self.myStoreProduct?.count )")
+                
+                self.presenter?.showProduct(self.myStoreProduct ?? [MyStoreProductDetail]())
+            }
+        }
+    }
+    
+    func callEditProductApi(){
+        
+    }
+    
+    func callDeleteProductApi(_ marketPlaceProductId: Int){
+        let params: [String:Any] = [
+            AppConstants.marketplace_product_id : marketPlaceProductId
+        ]
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kDeleteProduct, requestMethod: .POST, requestParameters: params, withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            self.callMyStoreProductApi()
+            
+        }
+    }
 }
