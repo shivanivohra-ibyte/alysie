@@ -11,7 +11,6 @@ class MyStoreProductCVCell: UICollectionViewCell {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var imgProduct: UIImageView!
     @IBOutlet weak var lblProductName: UILabel!
-    @IBOutlet weak var lblStoreName: UILabel!
     @IBOutlet weak var lblRating: UILabel!
     @IBOutlet weak var lblReview: UILabel!
     

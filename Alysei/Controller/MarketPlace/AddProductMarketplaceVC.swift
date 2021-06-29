@@ -64,7 +64,7 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     var sampleArr = ["Yes","No"]
     var spaceCount = 0
     var quantityArr = ["No. of pieces", "No. of bottles","liters","kilograms","grams","milligrams"]
-    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,6 +102,7 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
         showStoreName.text = self.storeName
         headerView.drawBottomShadow()
         showStoreImage.layer.cornerRadius = self.showStoreImage.frame.height / 2
+        callGetDashboardStoreDetail()
     }
     private func alertToAddCustomPicker() -> Void {
 //        let viewCon = TLPhotosPickerViewController()
@@ -492,6 +493,19 @@ extension AddProductMarketplaceVC{
         
         print("ImageParam------------------------------\(imageParam)")
         CommonUtil.sharedInstance.postRequestToImageUpload(withParameter: params, url: APIUrl.kSaveProduct, image: imageParam, controller: self, type: 0)
+    }
+    
+    func callGetDashboardStoreDetail(){
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetStoreDetails, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            
+            let response = dictResponse as? [String:Any]
+            
+            if let data = response?["data"] as? [String:Any]{
+               // self.storeImage = data["logo_id"] as? String
+                self.setDataUI()
+            }
+            
+        }
     }
     
 //    func addProductApi(){

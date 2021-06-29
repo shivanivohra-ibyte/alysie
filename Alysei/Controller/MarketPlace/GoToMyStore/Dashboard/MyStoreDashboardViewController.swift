@@ -16,10 +16,13 @@ import DropDown
 protocol MyStoreDashboardDisplayLogic: class
 {
   func displaySomething(viewModel: MyStoreDashboard.Something.ViewModel)
+    func displayDashboardData(_ imgProfile: String, _ imgCover: String, _ totalProduct: Int)
 }
 
 class MyStoreDashboardViewController: UIViewController, MyStoreDashboardDisplayLogic
 {
+    
+    
   var interactor: MyStoreDashboardBusinessLogic?
   var router: (NSObjectProtocol & MyStoreDashboardRoutingLogic & MyStoreDashboardDataPassing)?
 
@@ -71,7 +74,9 @@ class MyStoreDashboardViewController: UIViewController, MyStoreDashboardDisplayL
   {
     super.viewDidLoad()
     doSomething()
-    
+    imgStore.layer.borderWidth = 0.5
+    imgStore.layer.borderColor = UIColor.white.cgColor
+    self.interactor?.callDashBoardApi()
   }
     
   // MARK: Do something
@@ -90,13 +95,20 @@ class MyStoreDashboardViewController: UIViewController, MyStoreDashboardDisplayL
   {
     let request = MyStoreDashboard.Something.Request()
     interactor?.doSomething(request: request)
+    
   }
   
   func displaySomething(viewModel: MyStoreDashboard.Something.ViewModel)
   {
     //nameTextField.text = viewModel.name
   }
-    
+    func displayDashboardData(_ imgProfile: String, _ imgCover: String, _ totalProduct: Int) {
+        self.imgStore.setImage(withString: kImageBaseUrl + String.getString(imgProfile))
+        self.imgCoverImg.setImage(withString: kImageBaseUrl + String.getString(imgCover))
+        self.lblTotalProduct.text = "\(totalProduct)"
+        self.tableView.reloadData()
+        
+    }
    
 }
 
@@ -109,6 +121,7 @@ extension MyStoreDashboardViewController: UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AnalyticsTableViewCell", for: indexPath) as? AnalyticsTableViewCell else{return UITableViewCell()}
+        cell.configeCell(self.lblTotalProduct.text ?? "")
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -15,6 +15,7 @@ import UIKit
 protocol MyStoreDashboardBusinessLogic
 {
   func doSomething(request: MyStoreDashboard.Something.Request)
+    func callDashBoardApi()
 }
 
 protocol MyStoreDashboardDataStore
@@ -38,4 +39,17 @@ class MyStoreDashboardInteractor: MyStoreDashboardBusinessLogic, MyStoreDashboar
     let response = MyStoreDashboard.Something.Response()
     presenter?.presentSomething(response: response)
   }
+    
+    func callDashBoardApi(){
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetDashbordScreen, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errType, statusCode) in
+            
+            let response = dictResponse as? [String:Any]
+            
+            let imgBanner = response?["banner"] as? String
+            let imgCover = response?["logo"] as? String
+            let totalProduct = response?["total_product"] as? Int
+            
+            self.presenter?.passDashboardData(imgBanner ?? "",imgCover ?? "",totalProduct ?? 0)
+        }
+    }
 }

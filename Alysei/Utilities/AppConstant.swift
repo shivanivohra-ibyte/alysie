@@ -200,6 +200,9 @@ struct APIUrl{
     static let kCheckIfStored = "checkif/store/created"
     static let kMyProductList = "get/myproduct/list"
     static let kDeleteProduct = "delete/product"
+    static let kGetStoreDetails = "get/store/details"
+    static let kGetDashbordScreen = "get/dashboard/screen"
+    static let kUpdateStore = "update/store/details"
     
     
     enum FeaturedProduct {

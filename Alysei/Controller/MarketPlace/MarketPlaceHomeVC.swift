@@ -13,11 +13,14 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
     @IBOutlet weak var postView: UIView!
     @IBOutlet weak var btnCreateStore: UIButton!
     @IBOutlet weak var marketplaceView: UIView!
+    @IBOutlet weak var headerView: UIView!
+    
     var isCreateStore = false
     var storeCreated: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        headerView.addShadow()
         callCheckIfStoredCreated()
         print("kSharedUserDefaults.loggedInUserModal.isStoreCreated----------------\(kSharedUserDefaults.loggedInUserModal.isStoreCreated ?? "")")
         if kSharedUserDefaults.loggedInUserModal.memberRoleId == "\(UserRoles.producer.rawValue)"{
