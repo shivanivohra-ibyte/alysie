@@ -42,6 +42,10 @@ enum UserProfile {
         var lastName: String?
         var restaurantName: String?
         var profilePercentage: Int?
+        var followFlag: Int?
+        var connectionFlag: Int?
+        var availableToFollow: Int?
+        var availableToConnect: Int?
         
          private enum CodingKeys: String, CodingKey {
             case avatar = "avatar_id"
@@ -54,6 +58,10 @@ enum UserProfile {
             case firstName = "first_name"
             case lastName = "last_name"
             case profilePercentage = "profile_percentage"
+            case followFlag = "follow_flag"
+            case availableToFollow = "available_to_follow"
+            case availableToConnect = "available_to_connect"
+            case connectionFlag = "connection_flag"
          }
     }
 

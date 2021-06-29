@@ -74,7 +74,7 @@ class AboutViewC: UIViewController {
         }
 
 
-        self.secondaryListTitle.text = "\(viewModel.secondListTitle ?? "")"
+        self.secondaryListTitle.text = "\(viewModel?.secondListTitle ?? "")"
 
         if (self.viewModel?.secondList?.count ?? 0) > 0 {
             self.secondaryCollectionView.reloadData()

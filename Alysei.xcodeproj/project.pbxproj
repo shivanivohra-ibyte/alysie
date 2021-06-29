@@ -205,6 +205,7 @@
 		61165344261642AC00BB97CA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61165343261642AC00BB97CA /* UserProfile.swift */; };
 		6127F16E260B49DB005848B3 /* SaveResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6127F16D260B49DB005848B3 /* SaveResources.swift */; };
 		6129994F2685E7F700B5DA46 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 6129994E2685E7F700B5DA46 /* SocketIO */; };
+		612999512687231300B5DA46 /* ProfileScreenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612999502687231100B5DA46 /* ProfileScreenModels.swift */; };
 		6140882726697A3C00A98B0E /* UserPhotosGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6140882626697A3C00A98B0E /* UserPhotosGridViewController.swift */; };
 		6140882B26697BB100A98B0E /* UserPhotosGridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6140882A26697BB100A98B0E /* UserPhotosGridCollectionViewCell.swift */; };
 		61971C3E265A8AB1002DD260 /* ProfileTabRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61971C3D265A8AB1002DD260 /* ProfileTabRows.swift */; };
@@ -545,6 +546,7 @@
 		6116531426163A7B00BB97CA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		61165343261642AC00BB97CA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		6127F16D260B49DB005848B3 /* SaveResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveResources.swift; sourceTree = "<group>"; };
+		612999502687231100B5DA46 /* ProfileScreenModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenModels.swift; sourceTree = "<group>"; };
 		6140882626697A3C00A98B0E /* UserPhotosGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosGridViewController.swift; sourceTree = "<group>"; };
 		6140882A26697BB100A98B0E /* UserPhotosGridCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosGridCollectionViewCell.swift; sourceTree = "<group>"; };
 		61971C3D265A8AB1002DD260 /* ProfileTabRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabRows.swift; sourceTree = "<group>"; };
@@ -753,6 +755,7 @@
 				61A40A07267373D400D7D078 /* connections */,
 				6140882C266B99A500A98B0E /* user-posts */,
 				6140882526697A1600A98B0E /* user-photos */,
+				612999502687231100B5DA46 /* ProfileScreenModels.swift */,
 				273E5E7325BB37F4009AF5A4 /* ProfileViewC.swift */,
 				273E5E7625BB381E009AF5A4 /* PostsViewC.swift */,
 				270BB80025BB3FE2002B264C /* PostsCollectionCell.swift */,
@@ -2172,6 +2175,7 @@
 				279AB35025FF44550061FCB3 /* ConfirmSelectionVC.swift in Sources */,
 				27A4439A25AE03720002BAAC /* RSView.swift in Sources */,
 				279AB35225FF44550061FCB3 /* HubsListVC.swift in Sources */,
+				612999512687231300B5DA46 /* ProfileScreenModels.swift in Sources */,
 				6BC4C0DF260088C500791DCD /* ImageLoader.swift in Sources */,
 				27D0FAAF25CEE9FF00463FE0 /* RoleViewC.swift in Sources */,
 				27A443C825AE03720002BAAC /* UITextFieldSubLayerBorderWidthAndColor.swift in Sources */,

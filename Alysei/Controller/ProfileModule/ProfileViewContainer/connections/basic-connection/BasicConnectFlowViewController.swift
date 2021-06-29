@@ -91,7 +91,7 @@ class BasicConnectFlowViewController: UIViewController, BasicConnectFlowDisplayL
         self.reasonToConnect.resignFirstResponder()
         let optionName = self.selectProductId.joined(separator: ",")
         let requestModel = BasicConnectFlow.Connection.request(//userID: self.userModel.userID,
-            userID: self.userID ?? 0,
+            userID: self.userModel.userID,
                                                                reason: self.reasonToConnect.text,
                                                                selectProductId: optionName)
        
@@ -99,10 +99,7 @@ class BasicConnectFlowViewController: UIViewController, BasicConnectFlowDisplayL
         
     }
     @IBAction func closeButton(_ sender: UIButton){
-            let controller = self.pushViewController(withName: ProfileViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? ProfileViewC
-            controller?.userLevel = .other
-            controller?.userID = self.userID
-        //showConnectionScreen()
+        self.navigationController?.popViewController(animated: true)
     }
     func showConnectionScreen() {
 //        let controller = pushViewController(withName: ConnectionConfirmVC.id(), fromStoryboard: StoryBoardConstants.kHome) as? ConnectionConfirmVC
