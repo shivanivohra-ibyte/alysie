@@ -47,8 +47,8 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     var imagesFromSource = [UIImage]()
     var picker = UIImagePickerController()
     var uploadProfilePic = false
-    var latitude: Double?
-    var longitude:Double?
+    var latitude: String?
+    var longitude:String?
     var storeImageParams = [[String:Any]]()
     var stateModel: [StateModel]?
     var arrStateName = [String]()
@@ -403,7 +403,12 @@ extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDat
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageMaketPlaceCollectionViewCell", for: indexPath) as? ImageMaketPlaceCollectionViewCell else {return UICollectionViewCell()}
       //  if selectedAssets.count == 0{
          if fromVC == .myStoreDashboard {
+            if indexPath.row < storeData?.store_gallery?.count ?? 0{
             cell.image.setImage(withString: kImageBaseUrl + String.getString(storeData?.store_gallery?[indexPath.row].attachment_url))
+            }else{
+                cell.viewAddImage.isHidden = false
+                cell.btnDelete.isHidden = true
+            }
          }else{
         if imagesFromSource.count == 0{
             cell.viewAddImage.isHidden = false
@@ -522,8 +527,8 @@ extension MarketPlaceCreateStoreVC {
                                      APIConstants.kWebsite: self.txtWebsite.text ?? "",
                                      APIConstants.kStoreRegion: self.txtStoreRegion.text ?? "",
                                      APIConstants.kLocation: self.txtLocation.text ?? "",
-                                     "lattitude": "\(self.latitude ?? 0.0)",
-                                     APIConstants.kLongitude : "\(self.longitude ?? 0.0)",
+                                     "lattitude": "\(self.latitude ?? "0")",
+                                     APIConstants.kLongitude : "\(self.longitude ?? "0")",
                                      APIConstants.kPhone : "\(self.userMobileNumber ?? "")"
                                      
         ]
@@ -581,7 +586,8 @@ extension MarketPlaceCreateStoreVC {
                 self.userAbout = data["about"] as? String
                 let region = data["state"] as? [String:Any]
                 self.userRegion = region?["name"] as? String
- 
+                self.latitude = data["lattitude"] as? String
+                self.longitude = data["longitude"] as? String
                 self.setDataUI()
             }
             
@@ -604,6 +610,8 @@ extension MarketPlaceCreateStoreVC {
                 let region = data["state"] as? [String:Any]
                 self.userRegion = region?["name"] as? String
                 self.storeDescription = data["description"] as? String
+                self.latitude = data["lattitude"] as? String
+                self.longitude = data["longitude"] as? String
                 self.setDataUI()
                // self.tableView.reloadData()
                 self.collectionViewImage.reloadData()
@@ -619,8 +627,8 @@ extension MarketPlaceCreateStoreVC {
                                      APIConstants.kWebsite: self.txtWebsite.text ?? "",
                                      APIConstants.kStoreRegion: self.txtStoreRegion.text ?? "",
                                      APIConstants.kLocation: self.txtLocation.text ?? "",
-                                     "lattitude": "\(self.latitude ?? 0.0)",
-                                     APIConstants.kLongitude : "\(self.longitude ?? 0.0)",
+                                     "lattitude": "\(self.latitude ?? "0")",
+                                     APIConstants.kLongitude : "\(self.longitude ?? "0")",
                                      APIConstants.kPhone : "\(self.userMobileNumber ?? "")"
                                      
         ]
