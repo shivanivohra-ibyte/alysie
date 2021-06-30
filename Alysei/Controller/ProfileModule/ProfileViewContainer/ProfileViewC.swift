@@ -47,9 +47,11 @@ class ProfileViewC: AlysieBaseViewC{
     @IBOutlet weak var percentageLabel: UILabel!
 
 
+    @IBOutlet weak var menuButton: UIButtonExtended!
     @IBOutlet weak var respondeButton: UIButtonExtended!
     @IBOutlet weak var messageButton: UIButtonExtended!
     @IBOutlet weak var connectButton: UIButtonExtended!
+    @IBOutlet weak var backButton: UIButtonExtended!
   //  @IBOutlet weak var btnBack: UIButton!
     var percentage: String?
     
@@ -186,13 +188,10 @@ class ProfileViewC: AlysieBaseViewC{
     case .own:
         print("own")
         self.btnEditProfile.isHidden = false
+        self.backButton.isHidden = true
         self.btnEditProfile.isUserInteractionEnabled = true
     case .other:
-//        self.messageButton.isHidden = false
-//        self.respondeButton.isHidden = false
-//        self.messageButton.isUserInteractionEnabled = true
-//        self.respondeButton.isUserInteractionEnabled = true
-
+        
         self.connectButton.isHidden = false
         self.connectButton.isUserInteractionEnabled = true
     }
@@ -1168,7 +1167,28 @@ extension ProfileViewC {
             if connectionStatus == 0 {
                 self.performSegue(withIdentifier: "segueProfileTabToBasicConnection", sender: nil)
             } else if connectionStatus == 2 {
-                self.cancelConnectionRequest()
+                let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+                let cancelConnectionRequestAction = UIAlertAction(title: "Cancel Request", style: .default) { action in
+                    self.cancelConnectionRequest()
+                }
+                cancelConnectionRequestAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+
+
+                let blockUserAction = UIAlertAction(title: "Block", style: .destructive) { action in
+                    self.blockUserFromConnectionRequest(ProfileScreenModels.BlockConnectRequest(userID: self.userID))
+                }
+                blockUserAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+
+
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                cancelAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+
+                alertController.addAction(cancelConnectionRequestAction)
+                alertController.addAction(blockUserAction)
+                alertController.addAction(cancelAction)
+
+                self.present(alertController, animated: true, completion: nil)
             }
             return
         } else if self.userType == .voyagers { //&& self.visitorUserType != .voyagers {
@@ -1203,6 +1223,20 @@ extension ProfileViewC {
         guard var request = WebServices.shared.buildURLRequest(urlString, method: .POST) else {
             return
         }
+
+        WebServices.shared.request(request) { data, URLResponse, statusCode, error in
+            print("Success---------------------------Successssss")
+            self.fetchVisiterProfileDetails(self.userID)
+        }
+    }
+
+    func blockUserFromConnectionRequest(_ model: ProfileScreenModels.BlockConnectRequest) {
+        let urlString = "\(APIUrl.Connection.blockConnectionRequest)"
+        guard var request = WebServices.shared.buildURLRequest(urlString, method: .POST) else {
+            return
+        }
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.httpBody = model.urlEncoded()
 
         WebServices.shared.request(request) { data, URLResponse, statusCode, error in
             print("Success---------------------------Successssss")

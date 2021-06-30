@@ -26,4 +26,18 @@ enum ProfileScreenModels {
         }
     }
 
+
+    struct BlockConnectRequest: Codable {
+        var userID: Int
+
+        private enum CodingKeys: String, CodingKey {
+            case userID = "block_user_id"
+        }
+
+        func urlEncoded() -> Data? {
+            let body = "block_user_id=\(userID)"
+            return body.data(using: .utf8)
+        }
+    }
+
 }

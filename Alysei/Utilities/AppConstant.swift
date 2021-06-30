@@ -232,6 +232,7 @@ struct APIUrl{
         static let sendRequest = kBASEURL + "send/connection/request"
         static let sendFollowRequest = kBASEURL + "follow/user"
         static let cancelConnectionRequest = kBASEURL + "cancel/connection/request?visitor_profile_id="
+        static let blockConnectionRequest = kBASEURL + "block/user"
         static let kProductTypeCategory = kBASEURL + "get/marketplace/product/categories"
     }
 

@@ -204,7 +204,7 @@
 		6116531526163A7C00BB97CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6116531426163A7B00BB97CA /* GoogleService-Info.plist */; };
 		61165344261642AC00BB97CA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61165343261642AC00BB97CA /* UserProfile.swift */; };
 		6127F16E260B49DB005848B3 /* SaveResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6127F16D260B49DB005848B3 /* SaveResources.swift */; };
-		6129994F2685E7F700B5DA46 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 6129994E2685E7F700B5DA46 /* SocketIO */; };
+		6129994F2685E7F700B5DA46 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6129994E2685E7F700B5DA46 /* SwiftPackageProductDependency */; };
 		612999512687231300B5DA46 /* ProfileScreenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612999502687231100B5DA46 /* ProfileScreenModels.swift */; };
 		6140882726697A3C00A98B0E /* UserPhotosGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6140882626697A3C00A98B0E /* UserPhotosGridViewController.swift */; };
 		6140882B26697BB100A98B0E /* UserPhotosGridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6140882A26697BB100A98B0E /* UserPhotosGridCollectionViewCell.swift */; };
@@ -686,7 +686,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C335E7EC45F29BF5A0AC467 /* Pods_Alysei.framework in Frameworks */,
-				6129994F2685E7F700B5DA46 /* SocketIO in Frameworks */,
+				6129994F2685E7F700B5DA46 /* BuildFile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1763,8 +1763,8 @@
 				27BC687C25AC564100A01B6A /* Sources */,
 				27BC687D25AC564100A01B6A /* Frameworks */,
 				27BC687E25AC564100A01B6A /* Resources */,
-				CC9397C13AE861760B37BB79 /* [CP] Embed Pods Frameworks */,
-				866E2C01E568768B6BAFADFD /* [CP] Copy Pods Resources */,
+				A81C6D32A86C8E4E961022EF /* [CP] Embed Pods Frameworks */,
+				F025A27EDBAA95CDF7EA47BC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1772,7 +1772,7 @@
 			);
 			name = Alysei;
 			packageProductDependencies = (
-				6129994E2685E7F700B5DA46 /* SocketIO */,
+				6129994E2685E7F700B5DA46 /* SwiftPackageProductDependency */,
 			);
 			productName = Alysie;
 			productReference = 27BC688025AC564100A01B6A /* Alysei.app */;
@@ -1802,7 +1802,7 @@
 			);
 			mainGroup = 27BC687725AC564100A01B6A;
 			packageReferences = (
-				6129994D2685E7F600B5DA46 /* XCRemoteSwiftPackageReference "socket" */,
+				6129994D2685E7F600B5DA46 /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = 27BC688125AC564100A01B6A /* Products */;
 			projectDirPath = "";
@@ -1889,24 +1889,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		866E2C01E568768B6BAFADFD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Alysei/Pods-Alysei-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Alysei/Pods-Alysei-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Alysei/Pods-Alysei-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CC9397C13AE861760B37BB79 /* [CP] Embed Pods Frameworks */ = {
+		A81C6D32A86C8E4E961022EF /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1921,6 +1904,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Alysei/Pods-Alysei-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F025A27EDBAA95CDF7EA47BC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Alysei/Pods-Alysei-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Alysei/Pods-Alysei-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Alysei/Pods-Alysei-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2407,7 +2407,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6129994D2685E7F600B5DA46 /* XCRemoteSwiftPackageReference "socket" */ = {
+		6129994D2685E7F600B5DA46 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
 			requirement = {
@@ -2418,9 +2418,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6129994E2685E7F700B5DA46 /* SocketIO */ = {
+		6129994E2685E7F700B5DA46 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6129994D2685E7F600B5DA46 /* XCRemoteSwiftPackageReference "socket" */;
+			package = 6129994D2685E7F600B5DA46 /* RemoteSwiftPackageReference */;
 			productName = SocketIO;
 		};
 /* End XCSwiftPackageProductDependency section */
