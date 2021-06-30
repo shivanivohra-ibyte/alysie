@@ -34,6 +34,7 @@ class NewFeedSearchDataModel{
     var subjectId: SubjectData?
     var body: String?
     //var shared_post_id:
+    var postID: Int?
     var attachmentCount: Int?
     var commentCount: Int?
     var likeCount: Int?
@@ -60,6 +61,7 @@ class NewFeedSearchDataModel{
         self.id = Int.getInt(dictResponse["id"])
         self.likeFlag = Int.getInt(dictResponse["like_flag"])
         self.posted_at = String.getString(dictResponse["posted_at"])
+        self.postID = Int.getInt(dictResponse["activity_action_id"])
         if let attachments = dictResponse["attachments"] as? [[String:Any]]{
             self.attachments = attachments.map({Attachments.init(with: $0)})
         }

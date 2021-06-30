@@ -47,9 +47,11 @@ class ProfileViewC: AlysieBaseViewC{
     @IBOutlet weak var percentageLabel: UILabel!
 
 
+    @IBOutlet weak var menuButton: UIButtonExtended!
     @IBOutlet weak var respondeButton: UIButtonExtended!
     @IBOutlet weak var messageButton: UIButtonExtended!
     @IBOutlet weak var connectButton: UIButtonExtended!
+    @IBOutlet weak var backButton: UIButtonExtended!
   //  @IBOutlet weak var btnBack: UIButton!
     var percentage: String?
     
@@ -128,6 +130,33 @@ class ProfileViewC: AlysieBaseViewC{
 
     self.btnEditProfile.layer.cornerRadius = 0.0
 
+    if let selfUserTypeString = kSharedUserDefaults.loggedInUserModal.memberRoleId {
+        if let selfUserType: UserRoles = UserRoles(rawValue: (Int(selfUserTypeString) ?? 10))  {
+            self.userType = selfUserType
+//            switch selfUserType {
+//
+//            case .producer:
+//                print("")
+//            case .distributer1:
+//                print("")
+//            case .distributer2:
+//                print("")
+//            case .distributer3:
+//                print("")
+//            case .voiceExperts:
+//                print("")
+//            case .travelAgencies:
+//                print("")
+//            case .restaurant:
+//                print("")
+//            case .voyagers:
+//                print("some")
+//            default:
+//                print("default")
+//            }
+        }
+    }
+
 //    let multiplier: CGFloat = (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0) > 0.0 ? 0.65 : 0.42
 //    let space = self.view.frame.height * multiplier
 //    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + 660)
@@ -159,13 +188,10 @@ class ProfileViewC: AlysieBaseViewC{
     case .own:
         print("own")
         self.btnEditProfile.isHidden = false
+        self.backButton.isHidden = true
         self.btnEditProfile.isUserInteractionEnabled = true
     case .other:
-//        self.messageButton.isHidden = false
-//        self.respondeButton.isHidden = false
-//        self.messageButton.isUserInteractionEnabled = true
-//        self.respondeButton.isUserInteractionEnabled = true
-
+        
         self.connectButton.isHidden = false
         self.connectButton.isUserInteractionEnabled = true
     }
@@ -187,7 +213,9 @@ class ProfileViewC: AlysieBaseViewC{
     if self.userLevel == .own {
         self.fetchProfileDetails()
     } else {
-        self.fetchVisiterProfileDetails(self.userID)
+        if self.userID != nil {
+            self.fetchVisiterProfileDetails(self.userID)
+        }
     }
   }
   
@@ -333,13 +361,36 @@ class ProfileViewC: AlysieBaseViewC{
     }
 
     func udpateConnectionButtonForVisitorProfile(_ visitorType: UserRoles) {
-        if self.userType == .producer {
+        let availableToFollow = (self.userProfileModel.data?.userData?.availableToFollow ?? 1)
+        let availableToConnect = (self.userProfileModel.data?.userData?.availableToConnect ?? 1)
+        let connectionFlag = self.userProfileModel.data?.userData?.connectionFlag ?? 0
 
+        guard (availableToFollow == 1) || (availableToConnect == 1) || (connectionFlag > 0) else {
+            self.connectButton.isHidden = true
+            return
+        }
+
+        if self.userType != .voyagers {
+//            let title = (self.userProfileModel.data?.userData?.connectionFlag ?? 0) == 1 ? "Pending" : "Connect"
+            var title = "Connect"
+            switch connectionFlag {
+            case 0:
+                title = "Connect"
+            case 1:
+                title = "Connected"
+            case 2:
+                title = "Pending"
+            default:
+                title = "Connect"
+            }
+            self.connectButton.setTitle("\(title)", for: .normal)
         } else if self.userType == .voyagers {
-            if self.userType == .voyagers {
-                self.connectButton.setTitle("Connect", for: .normal)
+            if self.visitorUserType == .voyagers {
+                let title = (self.userProfileModel.data?.userData?.connectionFlag ?? 0) == 1 ? "Pending" : "Connect"
+                self.connectButton.setTitle("\(title)", for: .normal)
             } else {
-                self.connectButton.setTitle("Follow", for: .normal)
+                let title = (self.userProfileModel.data?.userData?.followFlag ?? 0) == 1 ? "Unfollow" : "Follow"
+                self.connectButton.setTitle("\(title)", for: .normal)
             }
         } else {
         }
@@ -634,32 +685,6 @@ class ProfileViewC: AlysieBaseViewC{
                     self.connectButton.isUserInteractionEnabled = true
                 }
 
-                
-                if let selfUserTypeString = kSharedUserDefaults.loggedInUserModal.memberRoleId {
-                    if let selfUserType: UserRoles = UserRoles(rawValue: (Int(selfUserTypeString) ?? 10))  {
-                        switch selfUserType {
-
-                        case .producer:
-                            print("")
-                        case .distributer1:
-                            print("")
-                        case .distributer2:
-                            print("")
-                        case .distributer3:
-                            print("")
-                        case .voiceExperts:
-                            print("")
-                        case .travelAgencies:
-                            print("")
-                        case .restaurant:
-                            print("")
-                        case .voyagers:
-                            print("some")
-                        default:
-                            print("default")
-                        }
-                    }
-                }
 
             } catch {
                 print(error.localizedDescription)
@@ -1093,11 +1118,10 @@ extension ProfileViewC{
 
         if segue.identifier == "segueProfileTabToBasicConnection" {
             if let viewCon = segue.destination as? BasicConnectFlowViewController {
-                if let username = self.userProfileModel.data?.userData?.username,
-                   let userID = self.userProfileModel.data?.userData?.userID {
-                    viewCon.userModel = BasicConnectFlow.userDataModel(userID: userID,
-                                                                       username: username)
-                }
+                let username = self.userProfileModel.data?.userData?.username ?? ""
+                let profileID = (self.userProfileModel.data?.userData?.userID) ?? (self.userID) ?? 1
+                viewCon.userModel = BasicConnectFlow.userDataModel(userID: profileID,
+                                                                   username: username)
             }
         }
     }
@@ -1137,8 +1161,89 @@ extension ProfileViewC {
 
 
     func connectButtonTapped() {
-        self.performSegue(withIdentifier: "segueProfileTabToBasicConnection", sender: nil)
+
+        if self.userType != .voyagers {
+            let connectionStatus = self.userProfileModel.data?.userData?.connectionFlag ?? 0
+            if connectionStatus == 0 {
+                self.performSegue(withIdentifier: "segueProfileTabToBasicConnection", sender: nil)
+            } else if connectionStatus == 2 {
+                let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+                let cancelConnectionRequestAction = UIAlertAction(title: "Cancel Request", style: .default) { action in
+                    self.cancelConnectionRequest()
+                }
+                cancelConnectionRequestAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+
+
+                let blockUserAction = UIAlertAction(title: "Block", style: .destructive) { action in
+                    self.blockUserFromConnectionRequest(ProfileScreenModels.BlockConnectRequest(userID: self.userID))
+                }
+                blockUserAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+
+
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                cancelAction.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
+
+                alertController.addAction(cancelConnectionRequestAction)
+                alertController.addAction(blockUserAction)
+                alertController.addAction(cancelAction)
+
+                self.present(alertController, animated: true, completion: nil)
+            }
+            return
+        } else if self.userType == .voyagers { //&& self.visitorUserType != .voyagers {
+            let followStatus = (self.userProfileModel.data?.userData?.followFlag ?? 0) == 1 ? 0 : 1
+            let model = ProfileScreenModels.VoyagersConnectRequest(userID: self.userID, followStatus: followStatus)
+            self.voyagersFollwUnFollowRequest(model)
+        }
     }
+
+    func voyagersFollwUnFollowRequest(_ model: ProfileScreenModels.VoyagersConnectRequest) {
+        do {
+            let urlString = APIUrl.Connection.sendFollowRequest
+//            let body = try JSONEncoder().encode(model)
+            guard var request = WebServices.shared.buildURLRequest(urlString, method: .POST) else {
+                return
+            }
+            request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+            request.httpBody = model.urlEncoded()
+
+            WebServices.shared.request(request) { data, URLResponse, statusCode, error in
+                print("Success---------------------------Successssss")
+                self.fetchVisiterProfileDetails(self.userID)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+
+    func cancelConnectionRequest() {
+        // https://alyseiapi.ibyteworkshop.com/public/api/cancel/connection/request?visitor_profile_id=596
+        let urlString = "\(APIUrl.Connection.cancelConnectionRequest)\(self.userID ?? -1)"
+        guard var request = WebServices.shared.buildURLRequest(urlString, method: .POST) else {
+            return
+        }
+
+        WebServices.shared.request(request) { data, URLResponse, statusCode, error in
+            print("Success---------------------------Successssss")
+            self.fetchVisiterProfileDetails(self.userID)
+        }
+    }
+
+    func blockUserFromConnectionRequest(_ model: ProfileScreenModels.BlockConnectRequest) {
+        let urlString = "\(APIUrl.Connection.blockConnectionRequest)"
+        guard var request = WebServices.shared.buildURLRequest(urlString, method: .POST) else {
+            return
+        }
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.httpBody = model.urlEncoded()
+
+        WebServices.shared.request(request) { data, URLResponse, statusCode, error in
+            print("Success---------------------------Successssss")
+            self.fetchVisiterProfileDetails(self.userID)
+        }
+    }
+
 
     func respondButtonTapped() {
 

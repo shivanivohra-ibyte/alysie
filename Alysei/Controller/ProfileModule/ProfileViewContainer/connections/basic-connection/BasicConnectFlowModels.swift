@@ -35,6 +35,10 @@ enum BasicConnectFlow {
                 case selectProductId = "user_field_option_id"
             }
 
+            func urlEncoded() -> Data? {
+                let body = "user_id=\(userID)&reason_to_connect=\(reason ?? "")&user_field_option_id=\(selectProductId ?? "")"
+                return body.data(using: .utf8)
+            }
 //            func data() -> Data? {
 //                let postData = NSMutableData()
 //                if let reason = self.reason {
