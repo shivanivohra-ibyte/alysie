@@ -203,8 +203,9 @@
 		6113776D263212B600EEBFDA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6113776C263212B600EEBFDA /* Colors.xcassets */; };
 		6116531526163A7C00BB97CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6116531426163A7B00BB97CA /* GoogleService-Info.plist */; };
 		61165344261642AC00BB97CA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61165343261642AC00BB97CA /* UserProfile.swift */; };
+		611BD9FB268C3D2900EAD7B5 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 611BD9FA268C3D2900EAD7B5 /* CHANGELOG.md */; };
 		6127F16E260B49DB005848B3 /* SaveResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6127F16D260B49DB005848B3 /* SaveResources.swift */; };
-		6129994F2685E7F700B5DA46 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6129994E2685E7F700B5DA46 /* SwiftPackageProductDependency */; };
+		6129994F2685E7F700B5DA46 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 6129994E2685E7F700B5DA46 /* SocketIO */; };
 		612999512687231300B5DA46 /* ProfileScreenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612999502687231100B5DA46 /* ProfileScreenModels.swift */; };
 		6140882726697A3C00A98B0E /* UserPhotosGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6140882626697A3C00A98B0E /* UserPhotosGridViewController.swift */; };
 		6140882B26697BB100A98B0E /* UserPhotosGridCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6140882A26697BB100A98B0E /* UserPhotosGridCollectionViewCell.swift */; };
@@ -545,6 +546,7 @@
 		6113776C263212B600EEBFDA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		6116531426163A7B00BB97CA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		61165343261642AC00BB97CA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		611BD9FA268C3D2900EAD7B5 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		6127F16D260B49DB005848B3 /* SaveResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveResources.swift; sourceTree = "<group>"; };
 		612999502687231100B5DA46 /* ProfileScreenModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenModels.swift; sourceTree = "<group>"; };
 		6140882626697A3C00A98B0E /* UserPhotosGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosGridViewController.swift; sourceTree = "<group>"; };
@@ -686,7 +688,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C335E7EC45F29BF5A0AC467 /* Pods_Alysei.framework in Frameworks */,
-				6129994F2685E7F700B5DA46 /* BuildFile in Frameworks */,
+				6129994F2685E7F700B5DA46 /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1306,6 +1308,7 @@
 		27BC687725AC564100A01B6A = {
 			isa = PBXGroup;
 			children = (
+				611BD9FA268C3D2900EAD7B5 /* CHANGELOG.md */,
 				27BC688225AC564100A01B6A /* Alysei */,
 				27BC688125AC564100A01B6A /* Products */,
 				C4D53758216B553EA7E32FEE /* Pods */,
@@ -1772,7 +1775,7 @@
 			);
 			name = Alysei;
 			packageProductDependencies = (
-				6129994E2685E7F700B5DA46 /* SwiftPackageProductDependency */,
+				6129994E2685E7F700B5DA46 /* SocketIO */,
 			);
 			productName = Alysie;
 			productReference = 27BC688025AC564100A01B6A /* Alysei.app */;
@@ -1802,7 +1805,7 @@
 			);
 			mainGroup = 27BC687725AC564100A01B6A;
 			packageReferences = (
-				6129994D2685E7F600B5DA46 /* RemoteSwiftPackageReference */,
+				6129994D2685E7F600B5DA46 /* XCRemoteSwiftPackageReference "socket" */,
 			);
 			productRefGroup = 27BC688125AC564100A01B6A /* Products */;
 			projectDirPath = "";
@@ -1853,6 +1856,7 @@
 				61C7BE3D267C8A82006DB3BB /* Flag.xib in Resources */,
 				27A443D325AE03720002BAAC /* Montserrat-Bold.ttf in Resources */,
 				27A443DB25AE03720002BAAC /* Montserrat-Italic.ttf in Resources */,
+				611BD9FB268C3D2900EAD7B5 /* CHANGELOG.md in Resources */,
 				27A443CD25AE03720002BAAC /* Montserrat-Medium.ttf in Resources */,
 				279AB33B25FF42EC0061FCB3 /* HubSelectionTableViewCell.xib in Resources */,
 				27BC688D25AC564200A01B6A /* Assets.xcassets in Resources */,
@@ -2407,7 +2411,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6129994D2685E7F600B5DA46 /* RemoteSwiftPackageReference */ = {
+		6129994D2685E7F600B5DA46 /* XCRemoteSwiftPackageReference "socket" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
 			requirement = {
@@ -2418,9 +2422,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6129994E2685E7F700B5DA46 /* SwiftPackageProductDependency */ = {
+		6129994E2685E7F700B5DA46 /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6129994D2685E7F600B5DA46 /* RemoteSwiftPackageReference */;
+			package = 6129994D2685E7F600B5DA46 /* XCRemoteSwiftPackageReference "socket" */;
 			productName = SocketIO;
 		};
 /* End XCSwiftPackageProductDependency section */
