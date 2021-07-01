@@ -129,6 +129,7 @@ class ProfileViewC: AlysieBaseViewC{
     _ = postsViewC
 
     self.btnEditProfile.layer.cornerRadius = 0.0
+    self.viewSeparator.alpha = 0.0
 
     if let selfUserTypeString = kSharedUserDefaults.loggedInUserModal.memberRoleId {
         if let selfUserType: UserRoles = UserRoles(rawValue: (Int(selfUserTypeString) ?? 10))  {
@@ -177,6 +178,8 @@ class ProfileViewC: AlysieBaseViewC{
 
     self.tabsCollectionView.dataSource = self
     self.tabsCollectionView.delegate = self
+    self.tabsCollectionView.allowsSelection = true
+    self.tabsCollectionView.allowsMultipleSelection = false
 
     self.btnEditProfile.isHidden = true
     self.messageButton.isHidden = true
@@ -473,7 +476,7 @@ class ProfileViewC: AlysieBaseViewC{
     return featuredProductCollectionCell
   }
 
-    private func getTabCollectionViewCell(_ indexPath: IndexPath) -> UICollectionViewCell {
+    private func getTabCollectionViewCell(_ indexPath: IndexPath, isSelected: Bool = false) -> UICollectionViewCell {
         guard let cell = self.tabsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? TabCollectionViewCell else {
             return UICollectionViewCell()
         }
@@ -565,7 +568,20 @@ class ProfileViewC: AlysieBaseViewC{
 
                 self.updateListingTitle()
 
-                self.tabsCollectionView.reloadData()
+                UIView.animate(withDuration: 0.01) {
+                    self.tabsCollectionView.reloadData()
+                } completion: { bool in
+
+                    if let cell = self.tabsCollectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? TabCollectionViewCell {
+                        cell.isSelected = true
+//                        cell.isUnderlineBorderVisible(true)
+                    }
+                    self.collectionView(self.tabsCollectionView, didSelectItemAt: IndexPath(item: 0, section: 0))
+                    self.tabsCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .top)
+
+                }
+//                self.tabsCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .top)
+
 
                 self.editProfileViewCon?.userType = self.userType
                 var name = ""
@@ -895,7 +911,16 @@ extension ProfileViewC: UICollectionViewDelegate, UICollectionViewDataSource,UIC
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
     if collectionView == self.tabsCollectionView {
-        return self.getTabCollectionViewCell(indexPath)
+        if let cell = self.getTabCollectionViewCell(indexPath) as? TabCollectionViewCell {
+            cell.backgroundColor = .clear
+            cell.isUnderlineBorderVisible(false)
+//            if cell.isCellSelected {
+//                cell.backgroundColor = .yellow
+//                cell.isUnderlineBorderVisible(true)
+//            }
+//            cell.isCellSelected = false
+            return cell
+        }
     }
 
         
@@ -913,9 +938,27 @@ extension ProfileViewC: UICollectionViewDelegate, UICollectionViewDataSource,UIC
         } else if indexPath.row == 3 {
             self.tapContact(UIButton())
         }
+
+        if let cell = self.tabsCollectionView.cellForItem(at: indexPath) as? TabCollectionViewCell {
+//            cell.isCellSelected = true
+//            cell.backgroundColor = .yellow
+            cell.isUnderlineBorderVisible(true)
+        }
     }
-        
   }
+    
+
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        print("inside didDeSelect")
+        if collectionView == self.tabsCollectionView {
+            if let cell = self.tabsCollectionView.cellForItem(at: indexPath) as? TabCollectionViewCell {
+                cell.isUnderlineBorderVisible(false)
+//                cell.backgroundColor = .clear
+//                cell.isCellSelected = false
+            }
+//            collectionView.reloadItems(at: [indexPath])
+        }
+    }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
