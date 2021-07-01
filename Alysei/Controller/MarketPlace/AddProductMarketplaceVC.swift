@@ -64,11 +64,13 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     var sampleArr = ["Yes","No"]
     var spaceCount = 0
     var quantityArr = ["No. of pieces", "No. of bottles","liters","kilograms","grams","milligrams"]
-   
+    var detailStoreImage: String?
+    var detailStoreName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setDataUI()
+        callGetDashboardStoreDetail()
         let tap = UITapGestureRecognizer(target: self, action: #selector(openProductCategory))
         self.view4.addGestureRecognizer(tap)
         //let subTap = UITapGestureRecognizer(target: self, action: #selector(openSubProductCategory))
@@ -98,11 +100,11 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
         view12.addBorder()
         txtProductHandleIns.delegate = self
         txtProductDispatchIns.delegate = self
-        showStoreImage.image = self.storeImage
-        showStoreName.text = self.storeName
+        //showStoreImage.image = self.storeImage
+        //showStoreName.text = self.storeName
         headerView.drawBottomShadow()
         showStoreImage.layer.cornerRadius = self.showStoreImage.frame.height / 2
-        callGetDashboardStoreDetail()
+        
     }
     private func alertToAddCustomPicker() -> Void {
 //        let viewCon = TLPhotosPickerViewController()
@@ -502,6 +504,10 @@ extension AddProductMarketplaceVC{
             
             if let data = response?["data"] as? [String:Any]{
                // self.storeImage = data["logo_id"] as? String
+                self.detailStoreImage = data["logo_id"] as? String
+                self.detailStoreName = data["name"] as? String
+                self.imgStore.setImage(withString: kImageBaseUrl + String.getString(self.detailStoreImage))
+               self.showStoreName.text = self.detailStoreName
                 self.setDataUI()
             }
             
