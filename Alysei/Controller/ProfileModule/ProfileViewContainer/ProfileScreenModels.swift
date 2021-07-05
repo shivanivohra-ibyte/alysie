@@ -40,4 +40,22 @@ enum ProfileScreenModels {
         }
     }
 
+
+//    struct AboutUserResponseModel: Codable {
+//        var data: data
+//
+//        struct data: Codable {
+//            var about_tab: aboutTab
+//        }
+//
+//
+//    }
+
+
+//    struct AboutUserResponseViewModel {
+//        var response: AboutUserResponseModel
+//    }
+
+
+
 }

@@ -216,6 +216,7 @@ struct APIUrl{
 
     enum Profile {
         static let memberProfile = kBASEURL + "get/member/profile"
+        static let userProfile = kBASEURL + "get/profile"
 
         static let fetchContactDetails = kBASEURL + "get/member/contact/tab"
         static let updateContactDetails = kBASEURL + "update/contact/details"

@@ -20,6 +20,7 @@ enum UserProfile {
         var followerCount: Int?
         var userData: userDataModel?
         var contactTab: contactTab?
+        var aboutTab: [aboutTab]?
 
         private enum CodingKeys: String, CodingKey {
             case about
@@ -27,6 +28,7 @@ enum UserProfile {
             case userData = "user_data"
             case followerCount = "follower_count"
             case contactTab = "contact_tab"
+            case aboutTab = "about_tab"
         }
     }
 
@@ -84,7 +86,12 @@ enum UserProfile {
             case userID = "user_id"
             case fbLink = "fb_link"
         }
+    }
 
+    struct aboutTab: Codable {
+        var title: String
+        var type: String
+        var value: String
     }
 
 

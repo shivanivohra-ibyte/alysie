@@ -129,6 +129,7 @@ class ProfileViewC: AlysieBaseViewC{
     _ = postsViewC
 
     self.btnEditProfile.layer.cornerRadius = 0.0
+    self.viewSeparator.alpha = 0.0
 
     if let selfUserTypeString = kSharedUserDefaults.loggedInUserModal.memberRoleId {
         if let selfUserType: UserRoles = UserRoles(rawValue: (Int(selfUserTypeString) ?? 10))  {
@@ -162,7 +163,7 @@ class ProfileViewC: AlysieBaseViewC{
 //    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + 660)
 //    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + space)
 
-    self.tblViewPosts.tableHeaderView?.setHeight(520.0 + (self.view.frame.height * 0.75) + ((UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0) * 4.0))
+    self.tblViewPosts.tableHeaderView?.setHeight(500.0 + (self.view.frame.height * 0.75) + ((UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0) * 4.0))
     //self.tblViewPosts.tableFooterView = UIView()
     self.btnPosts.isSelected = true
     self.tblViewProfileCompletion.isHidden = true
@@ -177,6 +178,8 @@ class ProfileViewC: AlysieBaseViewC{
 
     self.tabsCollectionView.dataSource = self
     self.tabsCollectionView.delegate = self
+    self.tabsCollectionView.allowsSelection = true
+    self.tabsCollectionView.allowsMultipleSelection = false
 
     self.btnEditProfile.isHidden = true
     self.messageButton.isHidden = true
@@ -272,6 +275,10 @@ class ProfileViewC: AlysieBaseViewC{
     self.moveToNew(childViewController: aboutViewC, fromController: self.currentChild)
 
     self.aboutViewC.viewModel = self.aboutViewModel
+    if let aboutModel = self.userProfileModel?.data?.aboutTab {
+        self.aboutViewC.aboutTabModel = aboutModel
+    }
+
   }
   
   @IBAction func tapContact(_ sender: UIButton) {
@@ -473,7 +480,7 @@ class ProfileViewC: AlysieBaseViewC{
     return featuredProductCollectionCell
   }
 
-    private func getTabCollectionViewCell(_ indexPath: IndexPath) -> UICollectionViewCell {
+    private func getTabCollectionViewCell(_ indexPath: IndexPath, isSelected: Bool = false) -> UICollectionViewCell {
         guard let cell = self.tabsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? TabCollectionViewCell else {
             return UICollectionViewCell()
         }
@@ -481,7 +488,8 @@ class ProfileViewC: AlysieBaseViewC{
         let imageName = ProfileTabRows().imageName(self.userType)[indexPath.row]
 
         let title = ProfileTabRows().rowsTitle(self.userType)[indexPath.row]
-        cell.imageView.image = UIImage(named: imageName)//?.withRenderingMode(.alwaysTemplate)
+        cell.imageView.image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+        cell.imageView.tintColor = UIColor(named: "grey2")
         cell.titleLabel.text = title
         return cell
 
@@ -541,7 +549,7 @@ class ProfileViewC: AlysieBaseViewC{
 
     private func fetchProfileDetails() {
         SVProgressHUD.show()
-        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Profile.memberProfile)", method: .GET) else { return }
+        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Profile.userProfile)", method: .GET) else { return }
         WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
             SVProgressHUD.dismiss()
             if statusCode == 401 {
@@ -552,7 +560,9 @@ class ProfileViewC: AlysieBaseViewC{
                 let responseModel = try JSONDecoder().decode(UserProfile.profileTopSectionModel.self, from: data)
                 print(responseModel)
 
-                self.fetchAboutDetail()
+                self.userProfileModel = responseModel
+
+//                self.fetchAboutDetail()
 
 
                 if let username = responseModel.data?.userData?.username {
@@ -565,7 +575,20 @@ class ProfileViewC: AlysieBaseViewC{
 
                 self.updateListingTitle()
 
-                self.tabsCollectionView.reloadData()
+                UIView.animate(withDuration: 0.01) {
+                    self.tabsCollectionView.reloadData()
+                } completion: { bool in
+
+                    if let cell = self.tabsCollectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? TabCollectionViewCell {
+                        cell.isSelected = true
+//                        cell.isUnderlineBorderVisible(true)
+                    }
+                    self.collectionView(self.tabsCollectionView, didSelectItemAt: IndexPath(item: 0, section: 0))
+                    self.tabsCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .top)
+
+                }
+//                self.tabsCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .top)
+
 
                 self.editProfileViewCon?.userType = self.userType
                 var name = ""
@@ -895,7 +918,11 @@ extension ProfileViewC: UICollectionViewDelegate, UICollectionViewDataSource,UIC
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
     if collectionView == self.tabsCollectionView {
-        return self.getTabCollectionViewCell(indexPath)
+        if let cell = self.getTabCollectionViewCell(indexPath) as? TabCollectionViewCell {
+            cell.backgroundColor = .clear
+            cell.isUnderlineBorderVisible(false)
+            return cell
+        }
     }
 
         
@@ -913,9 +940,24 @@ extension ProfileViewC: UICollectionViewDelegate, UICollectionViewDataSource,UIC
         } else if indexPath.row == 3 {
             self.tapContact(UIButton())
         }
+
+        if let cell = self.tabsCollectionView.cellForItem(at: indexPath) as? TabCollectionViewCell {
+            cell.isUnderlineBorderVisible(true)
+            cell.imageView.tintColor = UIColor(named: "blueberryColor")
+        }
     }
-        
   }
+
+
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        print("inside didDeSelect")
+        if collectionView == self.tabsCollectionView {
+            if let cell = self.tabsCollectionView.cellForItem(at: indexPath) as? TabCollectionViewCell {
+                cell.isUnderlineBorderVisible(false)
+                cell.imageView.tintColor = UIColor(named: "grey2")
+            }
+        }
+    }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
@@ -940,6 +982,15 @@ extension ProfileViewC: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
     }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableView == self.tblViewPosts {
+            let height = (500.0 + (self.view.frame.height * 0.75) + ((UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0) * 4.0))
+            return height
+        }
+        return UITableView.automaticDimension
+    }
+
 }
 
 extension ProfileViewC: AnimationProfileCallBack{
