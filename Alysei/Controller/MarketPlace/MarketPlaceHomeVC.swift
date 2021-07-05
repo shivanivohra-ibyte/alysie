@@ -55,6 +55,7 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
 //    }
     @objc func openPost(){
         self.navigationController?.popViewController(animated: true)
+        
     }
 
     @IBAction func btnGotoStores(_ sender: UIButton){
