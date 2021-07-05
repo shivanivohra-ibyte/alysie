@@ -163,7 +163,7 @@ class ProfileViewC: AlysieBaseViewC{
 //    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + 660)
 //    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + space)
 
-    self.tblViewPosts.tableHeaderView?.setHeight(520.0 + (self.view.frame.height * 0.75) + ((UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0) * 4.0))
+    self.tblViewPosts.tableHeaderView?.setHeight(500.0 + (self.view.frame.height * 0.75) + ((UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0) * 4.0))
     //self.tblViewPosts.tableFooterView = UIView()
     self.btnPosts.isSelected = true
     self.tblViewProfileCompletion.isHidden = true
@@ -275,6 +275,10 @@ class ProfileViewC: AlysieBaseViewC{
     self.moveToNew(childViewController: aboutViewC, fromController: self.currentChild)
 
     self.aboutViewC.viewModel = self.aboutViewModel
+    if let aboutModel = self.userProfileModel?.data?.aboutTab {
+        self.aboutViewC.aboutTabModel = aboutModel
+    }
+
   }
   
   @IBAction func tapContact(_ sender: UIButton) {
@@ -484,7 +488,8 @@ class ProfileViewC: AlysieBaseViewC{
         let imageName = ProfileTabRows().imageName(self.userType)[indexPath.row]
 
         let title = ProfileTabRows().rowsTitle(self.userType)[indexPath.row]
-        cell.imageView.image = UIImage(named: imageName)//?.withRenderingMode(.alwaysTemplate)
+        cell.imageView.image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+        cell.imageView.tintColor = UIColor(named: "grey2")
         cell.titleLabel.text = title
         return cell
 
@@ -544,7 +549,7 @@ class ProfileViewC: AlysieBaseViewC{
 
     private func fetchProfileDetails() {
         SVProgressHUD.show()
-        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Profile.memberProfile)", method: .GET) else { return }
+        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Profile.userProfile)", method: .GET) else { return }
         WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
             SVProgressHUD.dismiss()
             if statusCode == 401 {
@@ -555,7 +560,9 @@ class ProfileViewC: AlysieBaseViewC{
                 let responseModel = try JSONDecoder().decode(UserProfile.profileTopSectionModel.self, from: data)
                 print(responseModel)
 
-                self.fetchAboutDetail()
+                self.userProfileModel = responseModel
+
+//                self.fetchAboutDetail()
 
 
                 if let username = responseModel.data?.userData?.username {
@@ -914,11 +921,6 @@ extension ProfileViewC: UICollectionViewDelegate, UICollectionViewDataSource,UIC
         if let cell = self.getTabCollectionViewCell(indexPath) as? TabCollectionViewCell {
             cell.backgroundColor = .clear
             cell.isUnderlineBorderVisible(false)
-//            if cell.isCellSelected {
-//                cell.backgroundColor = .yellow
-//                cell.isUnderlineBorderVisible(true)
-//            }
-//            cell.isCellSelected = false
             return cell
         }
     }
@@ -940,23 +942,20 @@ extension ProfileViewC: UICollectionViewDelegate, UICollectionViewDataSource,UIC
         }
 
         if let cell = self.tabsCollectionView.cellForItem(at: indexPath) as? TabCollectionViewCell {
-//            cell.isCellSelected = true
-//            cell.backgroundColor = .yellow
             cell.isUnderlineBorderVisible(true)
+            cell.imageView.tintColor = UIColor(named: "blueberryColor")
         }
     }
   }
-    
+
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         print("inside didDeSelect")
         if collectionView == self.tabsCollectionView {
             if let cell = self.tabsCollectionView.cellForItem(at: indexPath) as? TabCollectionViewCell {
                 cell.isUnderlineBorderVisible(false)
-//                cell.backgroundColor = .clear
-//                cell.isCellSelected = false
+                cell.imageView.tintColor = UIColor(named: "grey2")
             }
-//            collectionView.reloadItems(at: [indexPath])
         }
     }
   
@@ -983,6 +982,15 @@ extension ProfileViewC: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
     }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableView == self.tblViewPosts {
+            let height = (500.0 + (self.view.frame.height * 0.75) + ((UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0) * 4.0))
+            return height
+        }
+        return UITableView.automaticDimension
+    }
+
 }
 
 extension ProfileViewC: AnimationProfileCallBack{

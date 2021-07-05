@@ -9,8 +9,15 @@ import UIKit
 
 
 
+
 class AboutViewC: UIViewController {
 
+
+    enum TableViewCellType: String {
+        case cellWithCollection = "checkbox"
+        case cellWithText = "text"
+        case cellWithTextAndSwitch = "radio"
+    }
 
     @IBOutlet var aboutCollectionView: UICollectionView!
     @IBOutlet var aboutLabel: UILabel!
@@ -24,7 +31,11 @@ class AboutViewC: UIViewController {
     @IBOutlet var secondaryCollectionView: UICollectionView!
     @IBOutlet var secondaryListTitle: UILabel!
 
+
+    @IBOutlet var tableView: UITableView!
+
     var viewModel: AboutView.viewModel!
+    var aboutTabModel = [UserProfile.aboutTab]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +46,11 @@ class AboutViewC: UIViewController {
         self.aboutCollectionView.delegate = self
         self.aboutCollectionView.dataSource = self
 
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+
+        self.tableView.tableFooterView = UIView()
+
     }
 
 
@@ -42,6 +58,8 @@ class AboutViewC: UIViewController {
         super.viewWillAppear(animated)
 
         self.resetAllAlpha()
+
+        self.tableView.reloadData()
         
         if (self.viewModel?.rows?.count ?? 0) > 0 {
             self.listTitleLabel.text = "\(viewModel.listTitle ?? "")"
@@ -84,8 +102,6 @@ class AboutViewC: UIViewController {
             self.secondaryCollectionView.alpha = 0.0
             self.secondaryListTitle.alpha = 0.0
         }
-
-
     }
 
     func resetAllAlpha() {
@@ -97,11 +113,55 @@ class AboutViewC: UIViewController {
 
         self.subDetailStaticLabel.alpha = 1.0
         self.subDetailLabel.alpha = 1.0
+    }
 
-
+    func loadPage() {
+        self.tableView.reloadData()
     }
 
 }
+
+extension AboutViewC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.aboutTabModel.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellDetail = self.aboutTabModel[indexPath.row]
+        let cellType = TableViewCellType(rawValue: cellDetail.type) ?? .cellWithText
+        switch cellType {
+
+        case .cellWithCollection:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "cellWithCollectionView") as? AboutViewTableCellWithCollection {
+                var model = AboutViewCModels.collectionViewCellData()
+                model.title = cellDetail.title
+                model.products = cellDetail.value.components(separatedBy: ",")
+                cell.seutp(model)
+                return cell
+            }
+        case .cellWithText:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "cellWithText") as? AboutViewTableCellWithText {
+                cell.titleLabel.text = cellDetail.title.capitalized
+                cell.descriptionLabel.text = cellDetail.value.capitalized
+                return cell
+            }
+        case .cellWithTextAndSwitch:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "cellWithTextAndSwitch") as? AboutViewTableCellWithTextAndSwitch {
+                cell.titleLabel.text = cellDetail.title.capitalized
+                let detail = cellDetail.value.capitalized
+                if detail.count > 0 {
+                    cell.descriptionLabel.text = detail
+                } else {
+                    cell.descriptionLabel.text = "No"
+                }
+                cell.valueSwitch.isHidden = true
+                return cell
+            }
+        }
+        return UITableViewCell()
+    }
+}
+
 
 
 extension AboutViewC: UICollectionViewDelegate, UICollectionViewDataSource {

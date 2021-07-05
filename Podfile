@@ -18,4 +18,5 @@ target 'Alysei' do
   pod 'TLPhotoPicker'
   pod 'YPImagePicker'
   pod 'DropDown'
+  pod 'Koloda'
 end

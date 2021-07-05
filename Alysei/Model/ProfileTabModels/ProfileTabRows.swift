@@ -57,21 +57,21 @@ struct ProfileTabRows {
     func imageName(_ userRole: UserRoles) -> [String] {
         switch userRole {
         case .producer:
-            return ["posts_icon_normal", "photo-icon-normal", "about_icon_normal", "contact_icon_normal", "contact_icon_normal" ]
+            return ["posts_icon_normal", "photo-icon-normal", "about_icon_normal", "contact_icon_normal", "profile_awards" ]
         case .distributer1:
-            return ["posts_icon_normal", "photo-icon-normal", "about_icon_normal", "contact_icon_normal", "contact_icon_normal" ]
+            return ["posts_icon_normal", "photo-icon-normal", "about_icon_normal", "contact_icon_normal", "profile_awards" ]
         case .distributer2:
-            return ["posts_icon_normal", "photo-icon-normal", "about_icon_normal", "contact_icon_normal", "contact_icon_normal" ]
+            return ["posts_icon_normal", "photo-icon-normal", "about_icon_normal", "contact_icon_normal", "profile_awards" ]
         case .distributer3:
-            return ["posts_icon_normal", "photo-icon-normal", "about_icon_normal", "contact_icon_normal", "contact_icon_normal" ]
+            return ["posts_icon_normal", "photo-icon-normal", "about_icon_normal", "contact_icon_normal", "profile_awards" ]
         case .voiceExperts:
-            return ["posts_icon_normal", "photo-icon-normal", "about_icon_normal", "contact_icon_normal", "contact_icon_normal" ]
+            return ["posts_icon_normal", "photo-icon-normal", "about_icon_normal", "contact_icon_normal", "profile_awards" ]
         case .travelAgencies:
-            return ["posts_icon_normal", "photo-icon-normal", "about_icon_normal", "contact_icon_normal", "contact_icon_normal" ]
+            return ["posts_icon_normal", "photo-icon-normal", "about_icon_normal", "contact_icon_normal", "profile_awards" ]
         case .restaurant:
-            return ["posts_icon_normal", "photo-icon-normal", "about_icon_normal", "contact_icon_normal", "contact_icon_normal" ]
+            return ["posts_icon_normal", "photo-icon-normal", "about_icon_normal", "contact_icon_normal", "profile_awards" ]
         case .voyagers:
-            return ["posts_icon_normal", "photo-icon-normal", "about_icon_normal", "contact_icon_normal", "contact_icon_normal" ]
+            return ["posts_icon_normal", "photo-icon-normal", "about_icon_normal", "contact_icon_normal", "profile_awards" ]
         }
     }
 

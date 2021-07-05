@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Koloda
+
 
 class TabCollectionViewCell: UICollectionViewCell {
 
