@@ -164,7 +164,8 @@ class ProfileViewC: AlysieBaseViewC{
 //    self.tblViewPosts.tableHeaderView?.setHeight(self.view.frame.height + space)
 
     self.tblViewPosts.tableHeaderView?.setHeight(500.0 + (self.view.frame.height * 0.75) + ((UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0) * 4.0))
-    //self.tblViewPosts.tableFooterView = UIView()
+    self.tblViewPosts.tableFooterView = UIView()
+    
     self.btnPosts.isSelected = true
     self.tblViewProfileCompletion.isHidden = true
     self.headerView.isHidden = true
