@@ -39,6 +39,7 @@ class MyStoreProductDetail{
     var dispatch_instruction: String?
     var available_for_sample: String?
     var product_price: String?
+    var product_Name: String?
     var name : String?
     var website: String?
     var phone: String?
@@ -46,6 +47,7 @@ class MyStoreProductDetail{
     var banner_id: String?
     var product_gallery: [ProductGallery]?
     var store_gallery: [ProductGallery]?
+    var labels: Labels?
     init(with data: [String:Any]?) {
         self.marketplace_product_id = Int.getInt(data?["marketplace_product_id"])
         self.user_id = Int.getInt(data?["user_id"])
@@ -73,6 +75,10 @@ class MyStoreProductDetail{
         if let store_gallery = data?["store_gallery"] as? [[String:Any]]{
             self.store_gallery = store_gallery.map({ProductGallery.init(with: $0)})
         }
+        if let labels = data?["labels"] as? [String:Any]{
+            self.labels = Labels.init(with: labels)
+        }
+        self.product_Name = String.getString(data?["product_category_name"])
     }
 }
 
@@ -91,4 +97,15 @@ class ProductGallery{
         self.marketplace_store_gallery_id = String.getString(data?["marketplace_store_gallery_id"])
         self.marketplace_store_id = String.getString(data?["marketplace_store_id"])
     }
+    
 }
+    class Labels{
+        var marketplace_brand_label_id: Int?
+        var name: String?
+        
+        init(with data: [String:Any]){
+            self.marketplace_brand_label_id = Int.getInt(data["marketplace_brand_label_id"])
+            self.name = String.getString(data["name"])
+        }
+    }
+

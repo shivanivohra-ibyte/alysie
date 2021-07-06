@@ -203,6 +203,7 @@ struct APIUrl{
     static let kGetStoreDetails = "get/store/details"
     static let kGetDashbordScreen = "get/dashboard/screen"
     static let kUpdateStore = "update/store/details"
+    static let kUpdateProductApi = "update/product/details"
     
     
     enum FeaturedProduct {
@@ -479,6 +480,7 @@ struct APIConstants {
     static let kProductCategoryId = "product_category_id"
     static let kProductSubCategoryId = "product_subcategory_id"
     static let kbrandLabelId = "brand_label_id"
+    static let kMarketPlaceProduct_id = "marketplace_product_id"
     
 }
 

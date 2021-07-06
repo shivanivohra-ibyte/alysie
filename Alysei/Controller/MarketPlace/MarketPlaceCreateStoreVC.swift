@@ -42,7 +42,7 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     @IBOutlet weak var btnNext: UIButton!
     
     var uploadImageArray = [UIImage]()
-   // var selectedAssets = [TLPHAsset]()
+    // var selectedAssets = [TLPHAsset]()
     var ypImages = [YPMediaItem]()
     var imagesFromSource = [UIImage]()
     var picker = UIImagePickerController()
@@ -64,10 +64,11 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
     var storeDescription: String?
     var fromVC: PushedFrom?
     var storeData: MyStoreProductDetail?
+    var uploadStoreImage = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         setDataUI()
         if fromVC == .myStoreDashboard{
             callGetDashboardStoreDetail()
@@ -78,20 +79,12 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
             self.heightHeaderView.constant = 40
         }else{
             callGetFieldStoreApi()
-           // self.headerView.isHidden = false
+            // self.headerView.isHidden = false
             self.btnBack.isHidden = false
             self.headerTitle.isHidden = false
             self.btnNext.setTitle("Next", for: .normal)
             self.heightHeaderView.constant = 64
         }
-       // picker.
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(gotomapView))
-//        self.view8.addGestureRecognizer(tap)
-//
-//
-//        let regionTap = UITapGestureRecognizer(target: self, action: #selector(openRegionDropDown))
-//        self.view7.addGestureRecognizer(regionTap)
-        // Do any additional setup after loading the view.
     }
     
     func setDataUI(){
@@ -115,38 +108,23 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
         view7.addBorder()
         view8.addBorder()
         imgProfile.layer.cornerRadius = self.imgProfile.frame.height / 2
+        imgProfile.layer.borderWidth = 1.5
+        imgProfile.layer.borderColor = UIColor.white.cgColor
         btnCoverCameraImage.layer.cornerRadius = self.btnCoverCameraImage.frame.height / 2
         btnProfileCameraImage.layer.cornerRadius = self.btnProfileCameraImage.frame.height / 2
         imgCover.layer.cornerRadius = 15
         headerView.drawBottomShadow()
     }
     private func alertToAddCustomPicker() -> Void {
-        //        let viewCon = CustomPhotoPickerViewController()
-//        let viewCon = TLPhotosPickerViewController()
-//        viewCon.delegate = self
-//        viewCon.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
-//            self?.showExceededMaximumAlert(vc: picker)
-//        }
-//        var configure = TLPhotosPickerConfigure()
-//        configure.allowedVideoRecording = false
-//        
-//        configure.mediaType = .image
-//        configure.numberOfColumn = 3
-//        
-//        viewCon.configure = configure
-//        viewCon.selectedAssets = self.selectedAssets
-//        viewCon.logDelegate = self
-//        
-//        self.present(viewCon, animated: true, completion: nil)
         
         var config = YPImagePickerConfiguration()
         config.screens = [.library, .photo]
         config.library.maxNumberOfItems = 100000
         config.showsPhotoFilters = false
-
+        
         config.library.preselectedItems = ypImages
         let picker = YPImagePicker(configuration: config)
-
+        
         picker.didFinishPicking { [unowned picker] items, cancelled in
             self.ypImages = items
             for item in items {
@@ -161,29 +139,15 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
             self.collectionViewImage.reloadData()
             picker.dismiss(animated: true, completion: nil)
         }
-
+        
         self.present(picker, animated: true, completion: nil)
-
+        
     }
     
     func dismissPhotoPicker(withTLPHAssets: [TLPHAsset]) {
-        // use selected order, fullresolution image
         print("dismiss")
-//        if withTLPHAssets.count >= 10 {
-//            self.showExceededMaximumAlert(vc: picker)
-//            return
-//        }else{
-            //self.selectedAssets = withTLPHAssets
-            
-            //print("selectedAssest-----------------\(self.selectedAssets)")
-            
-            self.collectionViewImage.reloadData()
-            self.btnScroll()
-        //}
-        
-        
-        //iCloud or video
-        //        getAsyncCopyTemporaryFile()
+        self.collectionViewImage.reloadData()
+        self.btnScroll()
     }
     
     func photoPickerDidCancel() {
@@ -196,53 +160,19 @@ class MarketPlaceCreateStoreVC: AlysieBaseViewC ,TLPhotosPickerViewControllerDel
         vc.present(alert, animated: true, completion: nil)
     }
     
-    
-//    @objc func gotomapView(){
-//        let controller = pushViewController(withName: MapViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? MapViewC
-//        controller?.dismiss = { [weak self] (mapAddressModel , lat ,long) in
-//
-//            if mapAddressModel.address1 == "" {
-//                self?.txtLocation.text = "\(mapAddressModel.address2), \(mapAddressModel.mapAddress)".capitalized
-//            }else if mapAddressModel.address2 == ""{
-//                self?.txtLocation.text = "\(mapAddressModel.address1), \(mapAddressModel.mapAddress)".capitalized
-//            }else{
-//            self?.txtLocation.text = "\(mapAddressModel.address1), \(mapAddressModel.address2), \(mapAddressModel.mapAddress)".capitalized
-//            }
-//            self?.longitude = long
-//            self?.latitude = lat
-//        }
-//    }
-//
-//    @objc func openRegionDropDown(){
-//        self.callStateApi()
-//    }
-//
-//    func opendropDown(){
-//        dataDropDown.show()
-//        dataDropDown.anchorView = view7
-//        dataDropDown.bottomOffset = CGPoint(x: 0, y: (dataDropDown.anchorView?.plainView.bounds.height)!)
-//        dataDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-//            self.txtStoreRegion.text = item
-//
-//        }
-//        dataDropDown.cellHeight = 50
-//        dataDropDown.backgroundColor = UIColor.white
-//        dataDropDown.selectionBackgroundColor = UIColor.clear
-//        dataDropDown.direction = .bottom
-//    }
     //MARK:- IBAction
     
     @IBAction func btnNextAction(_ sender: UIButton){
         
         if self.validateAllfields(){
             if fromVC == .myStoreDashboard{
-              callUpdateStoreApi()
+                callUpdateStoreApi()
             }else{
-            callCreateStoreApi()
+                callCreateStoreApi()
             }
         }
         
-   //     let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
+        //     let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
     }
     
     private func validateAllfields() -> Bool {
@@ -337,10 +267,7 @@ extension MarketPlaceCreateStoreVC: TLPhotosPickerLogDelegate {
     func selectedPhoto(picker: TLPhotosPickerViewController, at: Int) {
         print("selectedPhoto")
         print(picker.selectedAssets.count)
-        
-        //self.collectionViewImage.reloadData()
-        // let image = picker.selectedAssets[at]
-        //  print(image)
+     
     }
     
     func deselectedPhoto(picker: TLPhotosPickerViewController, at: Int) {
@@ -379,82 +306,76 @@ extension MarketPlaceCreateStoreVC: TLPhotosPickerLogDelegate {
 
 extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if self.selectedAssets.count == 0{
-//            return 1
-//        }else{
-//            print("count-------------\(self.selectedAssets.count)")
-//            return selectedAssets.count + 1
-//            //return uploadImageArray.count + 1
-//        }
         if fromVC == .myStoreDashboard {
-            return (self.storeData?.store_gallery?.count ?? 0) + 1
+            print("StoreData Count------------------------------\(self.storeData?.store_gallery?.count ?? 0)")
+            return (self.imagesFromSource.count ) + 1
+            //return (self.uploadImageArray.count ) + 1
         }else{
-        if self.imagesFromSource.count == 0 {
-            return 1
-        }else{
-            print("count-------------\(self.imagesFromSource.count)")
-            return imagesFromSource.count + 1
-            //return uploadImageArray.count + 1
-        }
+            if self.imagesFromSource.count == 0 {
+                return 1
+            }else{
+                print("count-------------\(self.imagesFromSource.count)")
+                return imagesFromSource.count + 1
+                //return uploadImageArray.count + 1
+            }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageMaketPlaceCollectionViewCell", for: indexPath) as? ImageMaketPlaceCollectionViewCell else {return UICollectionViewCell()}
-      //  if selectedAssets.count == 0{
-         if fromVC == .myStoreDashboard {
-            if indexPath.row < storeData?.store_gallery?.count ?? 0{
-            cell.image.setImage(withString: kImageBaseUrl + String.getString(storeData?.store_gallery?[indexPath.row].attachment_url))
-            }else{
-                cell.viewAddImage.isHidden = false
-                cell.btnDelete.isHidden = true
-            }
-         }else{
-        if imagesFromSource.count == 0{
-            cell.viewAddImage.isHidden = false
-            cell.btnDelete.isHidden = true
-        }else {
-            
-           // if indexPath.row < selectedAssets.count{
-            if indexPath.row < imagesFromSource.count{
+        //  if selectedAssets.count == 0{
+        if fromVC == .myStoreDashboard {
+            if indexPath.row < imagesFromSource.count {
                 cell.viewAddImage.isHidden = true
                 cell.btnDelete.isHidden = false
-                self.uploadImageArray = [UIImage]()
-//                for image in 0..<self.selectedAssets.count {
-//
-//                    let asset = self.selectedAssets[image]
-//                    let image = asset.fullResolutionImage ?? UIImage()
-//                    //self.imageLabel.text = "Photos 0/10 Choose your stores main photo first. Add more photos of your store max 10 allowed."
-//                    self.uploadImageArray.append(image)
-//
-//
-//                }
-                for image in 0..<self.imagesFromSource.count {
                 
-                let asset = self.imagesFromSource[image]
-//                            let image = asset.fullResolutionImage ?? UIImage()
-               self.uploadImageArray.append(asset)
-               
-           }
-                cell.image.image = uploadImageArray[indexPath.row]
+                //MARK: Image Not Loading
+                
+                cell.image.image = imagesFromSource[indexPath.row]
+                // cell.image.setImage(withString: kImageBaseUrl + "\(uploadStoreImage[indexPath.row])")
                 
             }else{
-                
                 cell.viewAddImage.isHidden = false
                 cell.btnDelete.isHidden = true
+            }
+        }else{
+            if imagesFromSource.count == 0{
+                cell.viewAddImage.isHidden = false
+                cell.btnDelete.isHidden = true
+            }else {
                 
+                if indexPath.row < imagesFromSource.count{
+                    cell.viewAddImage.isHidden = true
+                    cell.btnDelete.isHidden = false
+                    self.uploadImageArray = [UIImage]()
+                    for image in 0..<self.imagesFromSource.count {
+                        
+                        let asset = self.imagesFromSource[image]
+                        //                            let image = asset.fullResolutionImage ?? UIImage()
+                        self.uploadImageArray.append(asset)
+                        
+                    }
+                    cell.image.image = uploadImageArray[indexPath.row]
+                    
+                }else{
+                    
+                    cell.viewAddImage.isHidden = false
+                    cell.btnDelete.isHidden = true
+                    
+                }
             }
         }
-            cell.btnDelete.tag = indexPath.row
-            cell.btnDeleteCallback = { tag in
-                //self.selectedAssets.remove(at: tag)
-                //self.uploadImageArray.remove(at: tag)
+        cell.btnDelete.tag = indexPath.row
+        cell.btnDeleteCallback = { tag in
+            if self.fromVC == .myStoreDashboard{
+                self.imagesFromSource.remove(at: tag)
+                self.collectionViewImage.reloadData()
+            }else{
                 self.imagesFromSource.remove(at: tag)
                 self.collectionViewImage.reloadData()
             }
-            return cell
         }
-            
+        
         
         return cell
     }
@@ -464,28 +385,26 @@ extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        if self.selectedAssets.count == 0{
-//            return CGSize(width: collectionView.bounds.width , height: 200)
-//        }else{
-//            return CGSize(width: collectionView.bounds.width / 3, height: 200)
-//        }
-        if self.imagesFromSource.count == 0{
+    
+        if fromVC == .myStoreDashboard{
+            return CGSize(width: collectionView.bounds.width / 3, height: 200)
+        }else if self.imagesFromSource.count == 0{
             return CGSize(width: collectionView.bounds.width , height: 200)
         }else{
             return CGSize(width: collectionView.bounds.width / 3, height: 200)
         }
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if self.selectedAssets.count ==  0 {
-//            // alertToAddImage()
-//            alertToAddCustomPicker()
-//        }else if indexPath.row >= self.selectedAssets.count{
-//            //alertToAddImage()
-//            alertToAddCustomPicker()
-//        }
+        //        if self.selectedAssets.count ==  0 {
+        //            // alertToAddImage()
+        //            alertToAddCustomPicker()
+        //        }else if indexPath.row >= self.selectedAssets.count{
+        //            //alertToAddImage()
+        //            alertToAddCustomPicker()
+        //        }
         
         if self.imagesFromSource.count ==  0 {
-           // alertToAddImage()
+            // alertToAddImage()
             alertToAddCustomPicker()
         }else if indexPath.row >= self.imagesFromSource.count{
             //alertToAddImage()
@@ -523,7 +442,7 @@ extension MarketPlaceCreateStoreVC {
     func callCreateStoreApi(){
         let params: [String:Any] = [ APIConstants.kName: self.txtStoreName.text ?? "",
                                      APIConstants.kDescription: self.txtDescription.text ?? "",
-                                    // APIConstants.kProducerName: self.txtProducerName.text ?? "",
+                                     // APIConstants.kProducerName: self.txtProducerName.text ?? "",
                                      APIConstants.kWebsite: self.txtWebsite.text ?? "",
                                      APIConstants.kStoreRegion: self.txtStoreRegion.text ?? "",
                                      APIConstants.kLocation: self.txtLocation.text ?? "",
@@ -558,22 +477,6 @@ extension MarketPlaceCreateStoreVC {
         }
         
     }
-//    func callStateApi() {
-//        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetCountryStates, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
-//
-//            let response = dictResponse as? [String:Any]
-//            if let data = response?["data"] as? [[String:Any]]{
-//                self.stateModel = data.map({StateModel.init(with: $0)})
-//                for state in 0..<(self.stateModel?.count ?? 0) {
-//                    self.arrStateName.append(self.stateModel?[state].name ?? "")
-//                }
-//            }
-//            self.dataDropDown.dataSource = self.arrStateName
-//            self.opendropDown()
-//
-//        }
-//    }
-    
     func  callGetFieldStoreApi(){
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetStoreFilledValue, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             let response = dictResponse as? [String:Any]
@@ -600,20 +503,30 @@ extension MarketPlaceCreateStoreVC {
             let response = dictResponse as? [String:Any]
             
             if let data = response?["data"] as? [String:Any]{
-                self.storeData = MyStoreProductDetail.init(with: data)
-                self.userEmail = data["email"]  as? String
-                self.userWebsite = data["website"] as? String
-                self.userMobileNumber = data["phone"] as? String
-                self.userStoreName = data["company_name"] as? String
-                self.userLocation = data["address"] as? String
-                self.userAbout = data["about"] as? String
-                let region = data["state"] as? [String:Any]
-                self.userRegion = region?["name"] as? String
-                self.storeDescription = data["description"] as? String
-                self.latitude = data["lattitude"] as? String
-                self.longitude = data["longitude"] as? String
+                if let prefilled = data["prefilled"] as? [String:Any]{
+                    self.storeData = MyStoreProductDetail.init(with: data)
+                    self.userEmail = prefilled["email"]  as? String
+                    self.userWebsite = prefilled["website"] as? String
+                    self.userMobileNumber = prefilled["phone"] as? String
+                    self.userStoreName = prefilled["company_name"] as? String
+                    self.userLocation = prefilled["address"] as? String
+                    self.userAbout = prefilled["about"] as? String
+                    let region = prefilled["state"] as? [String:Any]
+                    self.userRegion = region?["name"] as? String
+                    self.storeDescription = prefilled["about"] as? String
+                    self.latitude = prefilled["lattitude"] as? String
+                    self.longitude = prefilled["longitude"] as? String
+                    for img in 0..<(self.storeData?.store_gallery?.count ?? 0){
+                        //let image = String.getString(self.storeData?.store_gallery?[img].attachment_url)
+                        //self.uploadStoreImage.append(image ?? "")
+                        let image = UIImage(named: kImageBaseUrl + "\(String.getString(self.storeData?.store_gallery?[img].attachment_url))")
+                        print("ImageUrl----------------------------------\(image ?? UIImage())")
+                        self.imagesFromSource.append(image ?? UIImage())
+                    }
+                }
                 self.setDataUI()
-               // self.tableView.reloadData()
+                
+                // self.tableView.reloadData()
                 self.collectionViewImage.reloadData()
             }
             
@@ -623,7 +536,7 @@ extension MarketPlaceCreateStoreVC {
     func callUpdateStoreApi(){
         let params: [String:Any] = [ APIConstants.kName: self.txtStoreName.text ?? "",
                                      APIConstants.kDescription: self.txtDescription.text ?? "",
-                                    // APIConstants.kProducerName: self.txtProducerName.text ?? "",
+                                     // APIConstants.kProducerName: self.txtProducerName.text ?? "",
                                      APIConstants.kWebsite: self.txtWebsite.text ?? "",
                                      APIConstants.kStoreRegion: self.txtStoreRegion.text ?? "",
                                      APIConstants.kLocation: self.txtLocation.text ?? "",
@@ -651,10 +564,6 @@ extension MarketPlaceCreateStoreVC {
                 self.marketPlaceId = (response["marketplace_store_id"] as? Int? ?? 0) ?? 0
             }
             
-            let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
-            controller?.storeImage = self.imgProfile.image ?? UIImage()
-            controller?.storeName = self.txtStoreName.text
-            controller?.marketPlaceStoreId = self.marketPlaceId
         }
     }
     

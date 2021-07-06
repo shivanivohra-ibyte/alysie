@@ -66,10 +66,17 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     var quantityArr = ["No. of pieces", "No. of bottles","liters","kilograms","grams","milligrams"]
     var detailStoreImage: String?
     var detailStoreName: String?
+    var fromVC: PushedFrom?
+    var passEditProductDetail : MyStoreProductDetail?
+    var uploadStoreImage = [String]()
+    var marketPlaceProductId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setDataUI()
+        if fromVC == .myStoreDashboard{
+            setEditProductDetail()
+        }
         callGetDashboardStoreDetail()
         let tap = UITapGestureRecognizer(target: self, action: #selector(openProductCategory))
         self.view4.addGestureRecognizer(tap)
@@ -86,6 +93,7 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     }
     
     func setDataUI(){
+
         view1.addBorder()
         view2.addBorder()
         view3.addBorder()
@@ -106,6 +114,24 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
         showStoreImage.layer.cornerRadius = self.showStoreImage.frame.height / 2
         
     }
+    func setEditProductDetail(){
+        self.txtProductTitle.text = self.passEditProductDetail?.title
+        self.txtProductDesc.text = self.passEditProductDetail?.description
+        self.txtProductKeyWord.text = self.passEditProductDetail?.keywords
+        self.txtProductCategory.text = self.passEditProductDetail?.product_Name
+        self.txtProductPrice.text = self.passEditProductDetail?.product_price
+        self.txtProductQuantityAvaliable.text = "\(self.passEditProductDetail?.quantity_available ?? 0)"
+        self.txtProductBrandLabel.text = self.passEditProductDetail?.labels?.name
+        self.txtProductMinOrderQuantity.text = self.passEditProductDetail?.min_order_quantity
+        self.txtProductHandleIns.text = self.passEditProductDetail?.handling_instruction
+        self.txtProductDispatchIns.text = self.passEditProductDetail?.dispatch_instruction
+        self.txtProductSample.text = self.passEditProductDetail?.available_for_sample
+        for i in 0..<(self.passEditProductDetail?.product_gallery?.count ?? 0) {
+            uploadStoreImage.append(self.passEditProductDetail?.product_gallery?[i].attachment_url ?? "")
+        }
+        collectionViewImage.reloadData()
+    }
+        
     private func alertToAddCustomPicker() -> Void {
 //        let viewCon = TLPhotosPickerViewController()
 //        viewCon.delegate = self
@@ -136,7 +162,11 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
             for item in items {
                 switch item {
                 case .photo(let photo):
+                    if self.fromVC == .myStoreDashboard{
+                        self.uploadStoreImage.append("\(photo.url)")
+                    }else{
                     self.imagesFromSource.append(photo.modifiedImage ?? photo.image)
+                    }
                     print(photo)
                 case .video(let video):
                     print(video)
@@ -243,7 +273,11 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     //MARK:- IBAction
     
     @IBAction func btnNextAction(_ sender: UIButton){
+        if fromVC == .myStoreDashboard{
+            self.UpdateProductApi()
+        }else{
         self.addProductApi()
+        }
        // _ = pushViewController(withName: MarketPlaceConfirmationVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
     }
     
@@ -346,6 +380,9 @@ extension AddProductMarketplaceVC: UITextViewDelegate{
 }
 extension AddProductMarketplaceVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if fromVC == .myStoreDashboard{
+            return (uploadStoreImage.count ) + 1
+        }else{
         if self.imagesFromSource.count == 0{
             return 1
         }else{
@@ -353,10 +390,26 @@ extension AddProductMarketplaceVC: UICollectionViewDelegate,UICollectionViewData
             return imagesFromSource.count + 1
             //return uploadImageArray.count + 1
         }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageMaketPlaceCollectionViewCell", for: indexPath) as? ImageMaketPlaceCollectionViewCell else {return UICollectionViewCell()}
+        
+        if fromVC == .myStoreDashboard {
+            if indexPath.row < uploadStoreImage.count {
+                cell.viewAddImage.isHidden = true
+               cell.btnDelete.isHidden = false
+                //print("ShowImage------------------------------------\(uploadImageArray[indexPath.row])")
+               // cell.image.image = imagesFromSource[indexPath.row]
+                //cell.image.setImage(withString: imagesFromSource[indexPath.row])
+                cell.image.setImage(withString: kImageBaseUrl + "\(uploadStoreImage[indexPath.row])")
+
+            }else{
+                cell.viewAddImage.isHidden = false
+                cell.btnDelete.isHidden = true
+            }
+        }else{
             if imagesFromSource.count == 0{
             cell.viewAddImage.isHidden = false
             cell.btnDelete.isHidden = true
@@ -381,14 +434,19 @@ extension AddProductMarketplaceVC: UICollectionViewDelegate,UICollectionViewData
                 cell.btnDelete.isHidden = true
 
         }
+        }
+        }
             cell.btnDelete.tag = indexPath.row
             cell.btnDeleteCallback = { tag in
+                if self.fromVC == .myStoreDashboard{
+                    self.uploadStoreImage.remove(at: tag)
+                }else{
                 self.imagesFromSource.remove(at: tag)
+                }
                 //self.uploadImageArray.remove(at: tag)
                 self.collectionViewImage.reloadData()
             }
-            return cell
-        }
+            //return cell
        
         return cell
     }
@@ -398,7 +456,9 @@ extension AddProductMarketplaceVC: UICollectionViewDelegate,UICollectionViewData
         }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if self.imagesFromSource.count == 0{
+        if fromVC == .myStoreDashboard{
+            return CGSize(width: collectionView.bounds.width / 3, height: 200)
+        }else if self.imagesFromSource.count == 0{
             return CGSize(width: collectionView.bounds.width , height: 200)
         }else{
             return CGSize(width: collectionView.bounds.width / 3, height: 200)
@@ -496,7 +556,30 @@ extension AddProductMarketplaceVC{
         print("ImageParam------------------------------\(imageParam)")
         CommonUtil.sharedInstance.postRequestToImageUpload(withParameter: params, url: APIUrl.kSaveProduct, image: imageParam, controller: self, type: 0)
     }
+    func UpdateProductApi(){
+        let params: [String:Any] = [
+            APIConstants.kMarketPlaceProduct_id: "\(self.marketPlaceProductId ?? "0")",
+            APIConstants.kTitle: self.txtProductTitle.text ?? "",
+            APIConstants.kDescription: self.txtProductDesc.text ?? "",
+            APIConstants.kKeywords: self.txtProductKeyWord.text ?? "",
+            APIConstants.kProductCategoryId : "\(self.productId ?? 0)",
+            APIConstants.kProductSubCategoryId: "\(self.subProductId ?? 0)",
+            APIConstants.kQuantityAvailable: self.txtProductQuantityAvaliable.text ?? "",
+            APIConstants.kbrandLabelId: "\(self.brandLabelId ?? 0)",
+            APIConstants.kMinOrderQuantity: self.txtProductMinOrderQuantity.text ?? "",
+            APIConstants.kHandlingInstruction: self.txtProductHandleIns.text ?? "",
+            APIConstants.kDispatchInstruction: self.txtProductDispatchIns.text ?? "",
+            APIConstants.kAvailableForSample: self.txtProductSample.text ?? "",
+            APIConstants.kProductPrice: self.txtProductPrice.text ?? ""
+        ]
+        
+        let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
+                                         APIConstants.kImageName: "gallery_images"]
     
+        
+        print("ImageParam------------------------------\(imageParam)")
+        CommonUtil.sharedInstance.postRequestToImageUpload(withParameter: params, url: APIUrl.kUpdateProductApi, image: imageParam, controller: self, type: 0)
+    }
     func callGetDashboardStoreDetail(){
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetStoreDetails, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             
@@ -547,8 +630,11 @@ extension AddProductMarketplaceVC{
         self.imagesFromSource.removeAll()
         self.uploadImageArray.removeAll()
         self.collectionViewImage.reloadData()
-
+        if fromVC == .myStoreDashboard{
+            self.navigationController?.popViewController(animated: true)
+        }else{
         _ = pushViewController(withName: MarketPlaceConfirmationVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
+        }
 
     }
 }

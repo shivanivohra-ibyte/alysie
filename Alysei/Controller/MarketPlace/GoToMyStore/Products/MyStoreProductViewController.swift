@@ -81,6 +81,12 @@ class MyStoreProductViewController: AlysieBaseViewC, MyStoreProductDisplayLogic
     doSomething()
     self.interactor?.callMyStoreProductApi()
   }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(true)
+//        self.interactor?.callMyStoreProductApi()
+//        
+//    }
   
   // MARK: Do something
   
@@ -115,8 +121,16 @@ extension MyStoreProductViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyStoreProductCVCell", for: indexPath) as? MyStoreProductCVCell else {return UICollectionViewCell()}
         cell.configCell(productList?[indexPath.row] ?? MyStoreProductDetail(with: [:]))
+        cell.deleteButton.tag = indexPath.row
+        cell.editButton.tag = indexPath.row
         cell.deleteCallBack = { deleteProductId in
             self.interactor?.callDeleteProductApi(deleteProductId)
+        }
+        cell.editCallBack = { editProductId, tag in
+            let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
+            controller?.fromVC = .myStoreDashboard
+            controller?.marketPlaceProductId = "\(editProductId)"
+            controller?.passEditProductDetail = self.productList?[tag]
         }
         return cell
     }

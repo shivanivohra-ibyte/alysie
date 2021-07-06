@@ -17,7 +17,7 @@ protocol MyStoreProductBusinessLogic
   func doSomething(request: MyStoreProduct.Something.Request)
     func callMyStoreProductApi()
     func callDeleteProductApi(_ marketPlaceProductId: Int)
-    func callEditProductApi()
+   // func callEditProductApi(_ marketPlaceProductId: Int)
 }
 
 protocol MyStoreProductDataStore
@@ -27,7 +27,7 @@ protocol MyStoreProductDataStore
 
 class MyStoreProductInteractor: MyStoreProductBusinessLogic, MyStoreProductDataStore
 {
-    
+
     
   var presenter: MyStoreProductPresentationLogic?
   var worker: MyStoreProductWorker?
@@ -53,16 +53,16 @@ class MyStoreProductInteractor: MyStoreProductBusinessLogic, MyStoreProductDataS
             let dictData = response?["data"] as? [String:Any]
             if let data = dictData?["data"] as? [[String:Any]]{
                 self.myStoreProduct = data.map({MyStoreProductDetail.init(with: $0)})
-                print("Count ------------------------------\(self.myStoreProduct?.count )")
+                print("Count ------------------------------\(self.myStoreProduct?.count ?? 0)")
                 
                 self.presenter?.showProduct(self.myStoreProduct ?? [MyStoreProductDetail]())
             }
         }
     }
     
-    func callEditProductApi(){
-        
-    }
+//    func callEditProductApi(_ marketPlaceProductId: Int){
+//
+//    }
     
     func callDeleteProductApi(_ marketPlaceProductId: Int){
         let params: [String:Any] = [

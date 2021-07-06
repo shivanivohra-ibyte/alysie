@@ -13,7 +13,10 @@ class MyStoreProductCVCell: UICollectionViewCell {
     @IBOutlet weak var lblProductName: UILabel!
     @IBOutlet weak var lblRating: UILabel!
     @IBOutlet weak var lblReview: UILabel!
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
     
+    var editCallBack:((Int, Int) -> Void)? = nil
     var deleteCallBack:((Int) -> Void)? = nil
     var data: MyStoreProductDetail?
     
@@ -32,7 +35,7 @@ class MyStoreProductCVCell: UICollectionViewCell {
     }
     
     @IBAction func editProduct(_ sender: UIButton){
-        
+        self.editCallBack?(self.data?.marketplace_product_id ?? 0, sender.tag)
     }
     
     @IBAction func deleteProduct(_ sender: UIButton){

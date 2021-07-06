@@ -45,8 +45,8 @@ class MyStoreDashboardInteractor: MyStoreDashboardBusinessLogic, MyStoreDashboar
             
             let response = dictResponse as? [String:Any]
             
-            let imgBanner = response?["banner"] as? String
-            let imgCover = response?["logo"] as? String
+            let imgBanner = response?["logo"] as? String
+            let imgCover = response?["banner"] as? String
             let totalProduct = response?["total_product"] as? Int
             
             self.presenter?.passDashboardData(imgBanner ?? "",imgCover ?? "",totalProduct ?? 0)
