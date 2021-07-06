@@ -53,9 +53,10 @@ class ProfileViewC: AlysieBaseViewC{
     @IBOutlet weak var connectButton: UIButtonExtended!
     @IBOutlet weak var backButton: UIButtonExtended!
     //  @IBOutlet weak var btnBack: UIButton!
-    var percentage: String?
 
     //MARK: - Properties -
+
+    var percentage: String?
 
     var contactDetail = [ContactDetail.view.tableCellModel]()
     var contactDetilViewModel: ContactDetail.Contact.Response!
@@ -207,7 +208,40 @@ class ProfileViewC: AlysieBaseViewC{
             self.connectButton.isUserInteractionEnabled = true
         }
 
+        let swipeLeftGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeftRightGesturePerformed(_:)))
+        swipeLeftGesture.direction = .left
+        self.view.addGestureRecognizer(swipeLeftGesture)
+
+
+        let swipeRightGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeftRightGesturePerformed(_:)))
+        swipeRightGesture.direction = .right
+        self.view.addGestureRecognizer(swipeRightGesture)
+
     }
+
+    @objc func swipeLeftRightGesturePerformed(_ gesture: UISwipeGestureRecognizer) {
+
+        print("\(gesture.direction)")
+
+        if gesture.direction == .right {
+            if (self.tabsCollectionView.indexPathsForSelectedItems?.last?.row ?? 0) > 0 {
+                let row = self.tabsCollectionView.indexPathsForSelectedItems?.last?.row ?? 0
+                self.collectionView(self.tabsCollectionView, didDeselectItemAt: IndexPath(item: row, section: 0))
+                self.collectionView(self.tabsCollectionView, didSelectItemAt: IndexPath(item: row - 1, section: 0))
+                self.tabsCollectionView.selectItem(at: IndexPath(item: row - 1, section: 0), animated: true, scrollPosition: .centeredVertically)
+            }
+        } else if gesture.direction == .left {
+            let totalRows = ProfileTabRows().noOfRows(self.userType)
+            if (self.tabsCollectionView.indexPathsForSelectedItems?.last?.row ?? 0) < totalRows {
+                let row = self.tabsCollectionView.indexPathsForSelectedItems?.last?.row ?? 0
+                self.collectionView(self.tabsCollectionView, didDeselectItemAt: IndexPath(item: row, section: 0))
+                self.collectionView(self.tabsCollectionView, didSelectItemAt: IndexPath(item: row + 1, section: 0))
+                self.tabsCollectionView.selectItem(at: IndexPath(item: row + 1, section: 0), animated: true, scrollPosition: .centeredVertically)
+            }
+        }
+
+    }
+
 
     override func viewWillAppear(_ animated: Bool) {
 
