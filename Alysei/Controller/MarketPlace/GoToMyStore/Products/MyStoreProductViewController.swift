@@ -82,11 +82,11 @@ class MyStoreProductViewController: AlysieBaseViewC, MyStoreProductDisplayLogic
     self.interactor?.callMyStoreProductApi()
   }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(true)
-//        self.interactor?.callMyStoreProductApi()
-//        
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.interactor?.callMyStoreProductApi()
+
+    }
   
   // MARK: Do something
   

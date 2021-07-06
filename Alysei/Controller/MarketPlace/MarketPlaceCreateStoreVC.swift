@@ -330,7 +330,6 @@ extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDat
                 cell.btnDelete.isHidden = false
                 
                 //MARK: Image Not Loading
-                
                 cell.image.image = imagesFromSource[indexPath.row]
                 // cell.image.setImage(withString: kImageBaseUrl + "\(uploadStoreImage[indexPath.row])")
                 
