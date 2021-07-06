@@ -519,9 +519,15 @@ extension MarketPlaceCreateStoreVC {
                     for img in 0..<(self.storeData?.store_gallery?.count ?? 0){
                         //let image = String.getString(self.storeData?.store_gallery?[img].attachment_url)
                         //self.uploadStoreImage.append(image ?? "")
-                        let image = UIImage(named: kImageBaseUrl + "\(String.getString(self.storeData?.store_gallery?[img].attachment_url))")
-                        print("ImageUrl----------------------------------\(image ?? UIImage())")
-                        self.imagesFromSource.append(image ?? UIImage())
+                        let urlString = kImageBaseUrl + "\(String.getString(self.storeData?.store_gallery?[img].attachment_url))"
+                        do {
+                            let imageData = try Data(contentsOf: URL(string: urlString)!)
+                            if let image = UIImage(data: imageData) {
+                                self.imagesFromSource.append(image)
+                            }
+                        } catch {
+                            print("\(error.localizedDescription)")
+                        }
                     }
                 }
                 self.setDataUI()
