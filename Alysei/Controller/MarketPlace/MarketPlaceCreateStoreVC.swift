@@ -460,7 +460,7 @@ extension MarketPlaceCreateStoreVC {
         ]
         
        let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
-                                         APIConstants.kImageName: "gallery_images[]"]
+                                         APIConstants.kImageName: "gallery_images"]
         //let imageParam : [String:Any] = [APIConstants.kImage: self.imagesFromSource,
                                         // APIConstants.kImageName: "gallery_images"]
         
@@ -472,6 +472,7 @@ extension MarketPlaceCreateStoreVC {
         storeImageParams.append(imageParam)
         storeImageParams.append(coverPic)
         storeImageParams.append(profilePic)
+        print("StoreImageParams----------------------------------------\(storeImageParams)")
         
         CommonUtil.sharedInstance.postToServerRequestMultiPart(APIUrl.kCreateStore, params: params, imageParams: storeImageParams, controller: self) { (dictResponse) in
             
@@ -562,7 +563,7 @@ extension MarketPlaceCreateStoreVC {
         ]
         
         let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
-                                         APIConstants.kImageName: "gallery_images[]"]
+                                         APIConstants.kImageName: "gallery_images"]
         
         let coverPic: [String:Any] = [APIConstants.kImage : self.imgCover.image ?? UIImage(),
                                       APIConstants.kImageName: "banner_id" ]
@@ -572,6 +573,9 @@ extension MarketPlaceCreateStoreVC {
         storeImageParams.append(imageParam)
         storeImageParams.append(coverPic)
         storeImageParams.append(profilePic)
+        print("StoreImageParams----------------------------------------\(storeImageParams)")
+        
+        //CommonUtil.sharedInstance.postRequestToImageUpload(withParameter: params, url: APIUrl.kUpdateStore, image: imageParam, controller: self, type: 0)
         
         CommonUtil.sharedInstance.postToServerRequestMultiPart(APIUrl.kUpdateStore, params: params, imageParams: storeImageParams, controller: self) { (dictResponse) in
             
@@ -582,5 +586,14 @@ extension MarketPlaceCreateStoreVC {
         }
     }
     
-    
+//override func didUserGetData(from result: Any, type: Int) {
+//    if type == 0{
+//    let dictResonse = result as? [String:Any]
+//    if let response = dictResonse["data"] as? [String:Any]{
+//        self.marketPlaceId = (response["marketplace_store_id"] as? Int? ?? 0) ?? 0
+//    }
+//    }else{
+//
+//    }
+//}
 }

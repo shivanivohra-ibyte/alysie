@@ -279,10 +279,18 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     //MARK:- IBAction
     
     @IBAction func btnNextAction(_ sender: UIButton){
+        
+        let quantityAvailable = Int(self.txtProductQuantityAvaliable.text ?? "0") ?? 0
+        let minOrderQuantity = Int(self.txtProductMinOrderQuantity.text ?? "0") ?? 0
+        
+        if minOrderQuantity > quantityAvailable{
+            self.showAlert(withMessage: "Minimum Order quantity should be less or equal to quantity Available")
+        }else{
         if fromVC == .myStoreDashboard{
             self.UpdateProductApi()
         }else{
         self.addProductApi()
+        }
         }
        // _ = pushViewController(withName: MarketPlaceConfirmationVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
     }
@@ -556,7 +564,7 @@ extension AddProductMarketplaceVC{
         ]
         
         let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
-                                         APIConstants.kImageName: "gallery_images[]"]
+                                         APIConstants.kImageName: "gallery_images"]
     
         
         print("ImageParam------------------------------\(imageParam)")
@@ -580,7 +588,7 @@ extension AddProductMarketplaceVC{
         ]
         
         let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
-                                         APIConstants.kImageName: "gallery_images[]"]
+                                         APIConstants.kImageName: "gallery_images"]
     
         
         print("ImageParam------------------------------\(imageParam)")

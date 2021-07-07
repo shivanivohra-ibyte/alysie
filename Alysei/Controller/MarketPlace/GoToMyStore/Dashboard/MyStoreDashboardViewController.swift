@@ -17,10 +17,13 @@ protocol MyStoreDashboardDisplayLogic: class
 {
   func displaySomething(viewModel: MyStoreDashboard.Something.ViewModel)
     func displayDashboardData(_ imgProfile: String, _ imgCover: String, _ totalProduct: Int)
+    func categoryCount(_ CategoryCount: Int)
 }
 
 class MyStoreDashboardViewController: UIViewController, MyStoreDashboardDisplayLogic
 {
+   
+    
     
     
   var interactor: MyStoreDashboardBusinessLogic?
@@ -77,6 +80,7 @@ class MyStoreDashboardViewController: UIViewController, MyStoreDashboardDisplayL
     imgStore.layer.borderWidth = 1.5
     imgStore.layer.borderColor = UIColor.white.cgColor
     self.interactor?.callDashBoardApi()
+    self.interactor?.callCategoryApi()
   }
     
   // MARK: Do something
@@ -108,6 +112,9 @@ class MyStoreDashboardViewController: UIViewController, MyStoreDashboardDisplayL
         self.lblTotalProduct.text = "\(totalProduct)"
         self.tableView.reloadData()
         
+    }
+    func categoryCount(_ CategoryCount: Int) {
+        self.lblTotalCategories.text = "\(CategoryCount)"
     }
    
 }

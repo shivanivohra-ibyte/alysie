@@ -16,6 +16,7 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
     @IBOutlet weak var headerView: UIView!
     
     var isCreateStore = false
+    var productCount: Int?
     var storeCreated: Int?
     
     override func viewDidLoad() {
@@ -37,7 +38,7 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
          
     }
     func setUI(){
-        if  self.storeCreated == 1{
+        if  (self.storeCreated == 1) && (self.productCount ?? 0 >= 1){
             self.btnCreateStore.setTitle("Go to My Store", for: .normal)
         }else{
             self.btnCreateStore.setTitle("Create your Store", for: .normal)
@@ -68,7 +69,9 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
         self.addChild(vc)
         self.containerView.addSubview(vc.view)
         vc.didMove(toParent: self)
-        }else{
+            }else if self.storeCreated == 1 && self.productCount == 0{
+                _ = pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
+            }else{
             _ = pushViewController(withName: MyStoreVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? MyStoreVC
         }
       //  _ = pushViewController(withName: MyStoreVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? MyStoreVC
@@ -82,6 +85,7 @@ extension MarketPlaceHomeVC{
             let response = dictResponse as? [String:Any]
             
             self.storeCreated = response?["is_store_created"] as? Int
+            self.productCount = response?["product_count"] as? Int
             self.setUI()
         }
     }
