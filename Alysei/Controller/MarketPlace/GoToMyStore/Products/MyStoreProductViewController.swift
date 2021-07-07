@@ -108,6 +108,7 @@ class MyStoreProductViewController: AlysieBaseViewC, MyStoreProductDisplayLogic
     
     @IBAction func addProductAction(_ sender: UIButton){
         let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
+        controller?.fromVC = .addProduct
        
     }
 }

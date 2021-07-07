@@ -307,7 +307,7 @@ extension MarketPlaceCreateStoreVC: TLPhotosPickerLogDelegate {
 extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if fromVC == .myStoreDashboard {
-            print("StoreData Count------------------------------\(self.storeData?.store_gallery?.count ?? 0)")
+            print("StoreData Count------------------------------\(self.imagesFromSource.count )")
             return (self.imagesFromSource.count ) + 1
             //return (self.uploadImageArray.count ) + 1
         }else{
@@ -328,9 +328,16 @@ extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDat
             if indexPath.row < imagesFromSource.count {
                 cell.viewAddImage.isHidden = true
                 cell.btnDelete.isHidden = false
-                
+                self.uploadImageArray = [UIImage]()
                 //MARK: Image Not Loading
-                cell.image.image = imagesFromSource[indexPath.row]
+                for image in 0..<self.imagesFromSource.count {
+                    
+                    let asset = self.imagesFromSource[image]
+                    //                            let image = asset.fullResolutionImage ?? UIImage()
+                    self.uploadImageArray.append(asset)
+                    
+                }
+                cell.image.image = uploadImageArray[indexPath.row]
                 // cell.image.setImage(withString: kImageBaseUrl + "\(uploadStoreImage[indexPath.row])")
                 
             }else{
@@ -347,6 +354,7 @@ extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDat
                     cell.viewAddImage.isHidden = true
                     cell.btnDelete.isHidden = false
                     self.uploadImageArray = [UIImage]()
+                    //self.imagesFromSource = [UIImage]()
                     for image in 0..<self.imagesFromSource.count {
                         
                         let asset = self.imagesFromSource[image]
@@ -451,8 +459,10 @@ extension MarketPlaceCreateStoreVC {
                                      
         ]
         
-        let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
-                                         APIConstants.kImageName: "gallery_images"]
+       let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
+                                         APIConstants.kImageName: "gallery_images[]"]
+        //let imageParam : [String:Any] = [APIConstants.kImage: self.imagesFromSource,
+                                        // APIConstants.kImageName: "gallery_images"]
         
         let coverPic: [String:Any] = [APIConstants.kImage : self.imgCover.image ?? UIImage(),
                                       APIConstants.kImageName: "banner_id" ]
@@ -552,7 +562,7 @@ extension MarketPlaceCreateStoreVC {
         ]
         
         let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
-                                         APIConstants.kImageName: "gallery_images"]
+                                         APIConstants.kImageName: "gallery_images[]"]
         
         let coverPic: [String:Any] = [APIConstants.kImage : self.imgCover.image ?? UIImage(),
                                       APIConstants.kImageName: "banner_id" ]
