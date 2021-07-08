@@ -16,6 +16,7 @@ protocol MyStoreDashboardPresentationLogic
 {
   func presentSomething(response: MyStoreDashboard.Something.Response)
   func passDashboardData(_ imgProfile: String, _ imgCover: String, _ totalProduct: Int)
+    func getCategoryValue(_ categoryValue: Int)
 }
 
 class MyStoreDashboardPresenter: MyStoreDashboardPresentationLogic
@@ -32,5 +33,9 @@ class MyStoreDashboardPresenter: MyStoreDashboardPresentationLogic
     
     func passDashboardData(_ imgProfile: String, _ imgCover: String, _ totalProdcut: Int){
         self.viewController?.displayDashboardData(imgProfile,imgCover,totalProdcut)
+    }
+    
+    func getCategoryValue(_ categoryCount : Int){
+        self.viewController?.categoryCount(categoryCount)
     }
 }

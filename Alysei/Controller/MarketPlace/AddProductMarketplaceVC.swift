@@ -68,7 +68,7 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     var detailStoreName: String?
     var fromVC: PushedFrom?
     var passEditProductDetail : MyStoreProductDetail?
-    var uploadStoreImage = [String]()
+   // var uploadStoreImage = [String]()
     var marketPlaceProductId: String?
     
     override func viewDidLoad() {
@@ -126,8 +126,18 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
         self.txtProductHandleIns.text = self.passEditProductDetail?.handling_instruction
         self.txtProductDispatchIns.text = self.passEditProductDetail?.dispatch_instruction
         self.txtProductSample.text = self.passEditProductDetail?.available_for_sample
-        for i in 0..<(self.passEditProductDetail?.product_gallery?.count ?? 0) {
-            uploadStoreImage.append(self.passEditProductDetail?.product_gallery?[i].attachment_url ?? "")
+        self.productId = self.passEditProductDetail?.product_category_id
+        self.subProductId = self.passEditProductDetail?.product_subcategory_id
+        for img in 0..<(self.passEditProductDetail?.product_gallery?.count ?? 0) {
+            let urlString = kImageBaseUrl + "\(String.getString(self.passEditProductDetail?.product_gallery?[img].attachment_url))"
+            do {
+                let imageData = try Data(contentsOf: URL(string: urlString)!)
+                if let image = UIImage(data: imageData) {
+                    self.imagesFromSource.append(image)
+                }
+            } catch {
+                print("\(error.localizedDescription)")
+            }
         }
         collectionViewImage.reloadData()
     }
@@ -162,11 +172,7 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
             for item in items {
                 switch item {
                 case .photo(let photo):
-                    if self.fromVC == .myStoreDashboard{
-                        self.uploadStoreImage.append("\(photo.url)")
-                    }else{
                     self.imagesFromSource.append(photo.modifiedImage ?? photo.image)
-                    }
                     print(photo)
                 case .video(let video):
                     print(video)
@@ -273,10 +279,18 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     //MARK:- IBAction
     
     @IBAction func btnNextAction(_ sender: UIButton){
+        
+        let quantityAvailable = Int(self.txtProductQuantityAvaliable.text ?? "0") ?? 0
+        let minOrderQuantity = Int(self.txtProductMinOrderQuantity.text ?? "0") ?? 0
+        
+        if minOrderQuantity > quantityAvailable{
+            self.showAlert(withMessage: "Minimum Order quantity should be less or equal to quantity Available")
+        }else{
         if fromVC == .myStoreDashboard{
             self.UpdateProductApi()
         }else{
         self.addProductApi()
+        }
         }
        // _ = pushViewController(withName: MarketPlaceConfirmationVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
     }
@@ -381,7 +395,7 @@ extension AddProductMarketplaceVC: UITextViewDelegate{
 extension AddProductMarketplaceVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if fromVC == .myStoreDashboard{
-            return (uploadStoreImage.count ) + 1
+            return (imagesFromSource.count ) + 1
         }else{
         if self.imagesFromSource.count == 0{
             return 1
@@ -397,13 +411,13 @@ extension AddProductMarketplaceVC: UICollectionViewDelegate,UICollectionViewData
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageMaketPlaceCollectionViewCell", for: indexPath) as? ImageMaketPlaceCollectionViewCell else {return UICollectionViewCell()}
         
         if fromVC == .myStoreDashboard {
-            if indexPath.row < uploadStoreImage.count {
+            if indexPath.row < imagesFromSource.count {
                 cell.viewAddImage.isHidden = true
                cell.btnDelete.isHidden = false
                 //print("ShowImage------------------------------------\(uploadImageArray[indexPath.row])")
                // cell.image.image = imagesFromSource[indexPath.row]
                 //cell.image.setImage(withString: imagesFromSource[indexPath.row])
-                cell.image.setImage(withString: kImageBaseUrl + "\(uploadStoreImage[indexPath.row])")
+                cell.image.setImage(withString: kImageBaseUrl + "\(imagesFromSource[indexPath.row])")
 
             }else{
                 cell.viewAddImage.isHidden = false
@@ -439,7 +453,7 @@ extension AddProductMarketplaceVC: UICollectionViewDelegate,UICollectionViewData
             cell.btnDelete.tag = indexPath.row
             cell.btnDeleteCallback = { tag in
                 if self.fromVC == .myStoreDashboard{
-                    self.uploadStoreImage.remove(at: tag)
+                    self.imagesFromSource.remove(at: tag)
                 }else{
                 self.imagesFromSource.remove(at: tag)
                 }
@@ -591,6 +605,7 @@ extension AddProductMarketplaceVC{
                 self.detailStoreName = data["name"] as? String
                 self.imgStore.setImage(withString: kImageBaseUrl + String.getString(self.detailStoreImage))
                self.showStoreName.text = self.detailStoreName
+                self.marketPlaceStoreId = data["marketplace_store_id"] as?Int
                 self.setDataUI()
             }
             
@@ -633,7 +648,11 @@ extension AddProductMarketplaceVC{
         if fromVC == .myStoreDashboard{
             self.navigationController?.popViewController(animated: true)
         }else{
+            if fromVC == .addProduct{
+                self.navigationController?.popViewController(animated: true)
+            }else{
         _ = pushViewController(withName: MarketPlaceConfirmationVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
+            }
         }
 
     }

@@ -16,6 +16,7 @@ protocol MyStoreDashboardBusinessLogic
 {
   func doSomething(request: MyStoreDashboard.Something.Request)
     func callDashBoardApi()
+    func callCategoryApi()
 }
 
 protocol MyStoreDashboardDataStore
@@ -50,6 +51,17 @@ class MyStoreDashboardInteractor: MyStoreDashboardBusinessLogic, MyStoreDashboar
             let totalProduct = response?["total_product"] as? Int
             
             self.presenter?.passDashboardData(imgBanner ?? "",imgCover ?? "",totalProduct ?? 0)
+        }
+    }
+    
+    func callCategoryApi(){
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetCategories, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errType, statusCode) in
+            
+            let response = dictResponse as? [String:Any]
+            
+            let CategoryCount = response?["count"] as? Int
+            
+            self.presenter?.getCategoryValue(CategoryCount ?? 0)
         }
     }
 }

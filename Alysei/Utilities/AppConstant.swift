@@ -204,7 +204,7 @@ struct APIUrl{
     static let kGetDashbordScreen = "get/dashboard/screen"
     static let kUpdateStore = "update/store/details"
     static let kUpdateProductApi = "update/product/details"
-    
+    static let kGetCategories = "get/marketplace/product/categories"
     
     enum FeaturedProduct {
         static let delete = kBASEURL + "delete/featured/listing?featured_listing_id="
@@ -752,6 +752,7 @@ enum PushedFrom: Int {
     case selectHubCities
     case confirmSelection
     case myStoreDashboard
+    case addProduct
     
 }
 

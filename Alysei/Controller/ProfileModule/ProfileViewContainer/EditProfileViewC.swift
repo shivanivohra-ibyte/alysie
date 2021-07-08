@@ -60,6 +60,7 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
     func fetchProductsFromProfile() {
         if let nav = self.parent as? UINavigationController, let profileCon = nav.viewControllers.first as? ProfileViewC {
             profileCon.reloadFields()
+    
         }
     }
 
@@ -67,7 +68,7 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
         super.viewWillAppear(animated)
         scrollToTop()
         fetchProductsFromProfile()
-        self.tableViewEditProfile.reloadData()
+       self.tableViewEditProfile.reloadData()
     }
     func scrollToTop(){
        // self.tableViewEditProfile.setContentOffset(CGPointMake(0,  UIApplication.shared.statusBarFrame.height ), animated: true)
@@ -103,6 +104,7 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
 
     func productAdded() {
         self.fetchProductsFromProfile()
+
     }
 
     //MARK:  - Private Methods -

@@ -174,7 +174,7 @@ class CommonUtil: NSObject {
                 case 200:
                     
                     completionHandler(dictResult)
-                    
+                    print("Images Send")
                     
                 default:
                     controller.showAlert(withMessage: String.getString(dictResult["errors"]))

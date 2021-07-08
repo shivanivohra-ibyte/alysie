@@ -33,11 +33,11 @@ class ProfileViewC: AlysieBaseViewC{
     @IBOutlet weak var aboutLabel: UILabel!
     //  @IBOutlet weak var lblEmail: UILabel!
     @IBOutlet weak var btnEditProfile: UIButtonExtended!
-    @IBOutlet weak var viewProfileCompletion: UIView!
-    @IBOutlet weak var viewProfileHeight: NSLayoutConstraint!
-    @IBOutlet weak var profilePercentage: UILabel!
-    @IBOutlet weak var lblUserName: UILabel!
-    @IBOutlet weak var lblHintText: UILabel!
+//    @IBOutlet weak var viewProfileCompletion: UIView!
+//    @IBOutlet weak var viewProfileHeight: NSLayoutConstraint!
+//    @IBOutlet weak var profilePercentage: UILabel!
+//    @IBOutlet weak var lblUserName: UILabel!
+//    @IBOutlet weak var lblHintText: UILabel!
     @IBOutlet weak var headerView: UIView!
 
     //ProfileCompletionView
@@ -178,8 +178,8 @@ class ProfileViewC: AlysieBaseViewC{
         self.tblViewProfileCompletion.isHidden = true
         self.headerView.isHidden = true
         self.tblViewPosts.isHidden = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        self.viewProfileCompletion.addGestureRecognizer(tap)
+       // let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+       // self.viewProfileCompletion.addGestureRecognizer(tap)
         self.currentIndex = 0
         self.postRequestToGetProgress()
 
@@ -247,8 +247,8 @@ class ProfileViewC: AlysieBaseViewC{
 
         super.viewWillAppear(animated)
         setNeedsStatusBarAppearanceUpdate()
-        self.viewProfileCompletion.isHidden = true
-        self.viewProfileHeight.constant = 0
+       // self.viewProfileCompletion.isHidden = true
+       // self.viewProfileHeight.constant = 0
         self.postRequestToGetFields()
         self.fetchContactDetail()
         self.currentIndex = 0
@@ -633,6 +633,8 @@ class ProfileViewC: AlysieBaseViewC{
 
 
                 self.editProfileViewCon?.userType = self.userType
+
+                self.collectionViewAddProduct.reloadData()
                 var name = ""
                 switch roleID {
                 case .distributer1, .distributer2, .distributer3, .producer, .travelAgencies :
@@ -645,27 +647,26 @@ class ProfileViewC: AlysieBaseViewC{
                 }
 
                 self.lblDisplayName.text = "\(name)".capitalized
-                self.lblUserName.text = "\(name)".capitalized
+               // self.lblUserName.text = "\(name)".capitalized
                 self.lblDisplayNameNavigation.text = "\(name)".capitalized
                 let userPercentage = responseModel.data?.userData?.profilePercentage ?? 0
                 self.percentageLabel.text = "\(responseModel.data?.userData?.profilePercentage ?? 0)% completed"
                 let floatPercentage = Float(userPercentage )
                 self.progressbar.setProgress((floatPercentage/100), animated: false)
                 if responseModel.data?.userData?.profilePercentage == ProfilePercentage.percent100.rawValue {
-                    self.viewProfileCompletion.isHidden = true
-                    self.viewProfileHeight.constant = 0
+//                    self.viewProfileCompletion.isHidden = true
+//                    self.viewProfileHeight.constant = 0
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
                         self.tblViewProfileCompletion.isHidden = true
                         self.headerView.isHidden = false
                         self.tblViewPosts.isHidden = false
                     }
                 }else{
-                    self.viewProfileCompletion.isHidden = false
+                   // self.viewProfileCompletion.isHidden = false
                     self.tblViewProfileCompletion.isHidden = false
                     self.headerView.isHidden = true
                     self.tblViewPosts.isHidden = false
-                    self.viewProfileHeight.constant = 75
-                    self.profilePercentage.text = "It's at \(responseModel.data?.userData?.profilePercentage ?? 0)%"
+                   // self.profilePercentage.text = "It's at \(responseModel.data?.userData?.profilePercentage ?? 0)%"
                     self.percentage = "\(responseModel.data?.userData?.profilePercentage ?? 0)"
                 }
                 kSharedUserDefaults.loggedInUserModal.firstName = responseModel.data?.userData?.firstName
@@ -718,12 +719,11 @@ class ProfileViewC: AlysieBaseViewC{
                 }
 
                 self.lblDisplayName.text = "\(name)".capitalized
-                self.lblUserName.text = "\(name)".capitalized
+               // self.lblUserName.text = "\(name)".capitalized
                 self.lblDisplayNameNavigation.text = "\(name)".capitalized
 
-                self.viewProfileCompletion.isHidden = true
-                self.viewProfileHeight.constant = 0
-                self.tblViewProfileCompletion.isHidden = false
+                //self.viewProfileCompletion.isHidden = true
+                //self.tblViewProfileCompletion.isHidden = false
                 self.headerView.isHidden = true
                 self.tblViewPosts.isHidden = false
                 self.initialSetUp()
@@ -1226,10 +1226,10 @@ extension ProfileViewC{
         self.signUpViewModel = SignUpViewModel(dicData, roleId: nil)
         editProfileViewCon?.signUpViewModel = self.signUpViewModel
         //    let indexPath = IndexPath(row: 0, section: self.signUpViewModel.arrProductCategories.count - 1)
+        
+        self.collectionViewAddProduct.reloadData()
         editProfileViewCon?.userType = self.userType ?? .voyagers
         editProfileViewCon?.tableViewEditProfile?.reloadData()
-
-        self.collectionViewAddProduct.reloadData()
         print("Some")
     }
 

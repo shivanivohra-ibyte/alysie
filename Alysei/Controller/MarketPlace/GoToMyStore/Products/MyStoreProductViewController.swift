@@ -82,11 +82,11 @@ class MyStoreProductViewController: AlysieBaseViewC, MyStoreProductDisplayLogic
     self.interactor?.callMyStoreProductApi()
   }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(true)
-//        self.interactor?.callMyStoreProductApi()
-//        
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.interactor?.callMyStoreProductApi()
+
+    }
   
   // MARK: Do something
   
@@ -108,6 +108,7 @@ class MyStoreProductViewController: AlysieBaseViewC, MyStoreProductDisplayLogic
     
     @IBAction func addProductAction(_ sender: UIButton){
         let controller = self.pushViewController(withName: AddProductMarketplaceVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? AddProductMarketplaceVC
+        controller?.fromVC = .addProduct
        
     }
 }
