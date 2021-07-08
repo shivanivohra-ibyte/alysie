@@ -102,14 +102,15 @@ class CommonUtil: NSObject {
    // }
     }
     
-  func postRequestToImageUpload(withParameter params:[String: Any], url:String, image:[String: Any], controller: UIViewController, type: Int) {
+    func postRequestToImageUpload(withParameter params:[String: Any], url:String, image:[String: Any], controller: UIViewController,imageGroupName: String? = "attachments[]", type: Int) {
     
     SVProgressHUD.show()
     TANetworkManager.sharedInstance.tempMultiPart(withServiceName: url,
                                                      requestMethod: .post,
                                                      requestImages: image,
                                                      requestVideos: [],
-                                                     requestData: params)
+                                                     requestData: params,
+                                                     imageGroupName: imageGroupName)
     { (result: Any?, error: Error?, errorType: ErrorType, statusCode: Int?) in
       SVProgressHUD.dismiss()
         if let app = UIApplication.shared.delegate as? AppDelegate,  let window = app.window {

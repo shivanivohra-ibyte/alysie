@@ -49,6 +49,8 @@ class MyStoreProductInteractor: MyStoreProductBusinessLogic, MyStoreProductDataS
         
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kMyProductList, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             
+            switch statusCode{
+            case 200:
             let response = dictResponse as? [String:Any]
             let dictData = response?["data"] as? [String:Any]
             if let data = dictData?["data"] as? [[String:Any]]{
@@ -56,6 +58,12 @@ class MyStoreProductInteractor: MyStoreProductBusinessLogic, MyStoreProductDataS
                 print("Count ------------------------------\(self.myStoreProduct?.count ?? 0)")
                 
                 self.presenter?.showProduct(self.myStoreProduct ?? [MyStoreProductDetail]())
+            }
+                
+            case 409:
+                self.presenter?.showProduct([MyStoreProductDetail]())
+            default:
+                break
             }
         }
     }

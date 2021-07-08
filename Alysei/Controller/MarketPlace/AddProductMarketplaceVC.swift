@@ -45,7 +45,7 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     @IBOutlet weak var quantityView: UIView!
     @IBOutlet weak var lblQunatityLabel: UILabel!
     @IBOutlet weak var lblMinimumQuantity: UILabel!
-
+    
     var uploadImageArray = [UIImage]()
     //var selectedAssets = [TLPHAsset]()
     var imagesFromSource = [UIImage]()
@@ -68,7 +68,7 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     var detailStoreName: String?
     var fromVC: PushedFrom?
     var passEditProductDetail : MyStoreProductDetail?
-   // var uploadStoreImage = [String]()
+    // var uploadStoreImage = [String]()
     var marketPlaceProductId: String?
     
     override func viewDidLoad() {
@@ -93,12 +93,12 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     }
     
     func setDataUI(){
-
+        
         view1.addBorder()
         view2.addBorder()
         view3.addBorder()
         view4.addBorder()
-       // view5.addBorder()
+        // view5.addBorder()
         view6.addBorder()
         view7.addBorder()
         view8.addBorder()
@@ -139,34 +139,35 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
                 print("\(error.localizedDescription)")
             }
         }
+        print("ImageFromSourceData------------------------\(self.imagesFromSource)")
         collectionViewImage.reloadData()
     }
-        
+    
     private func alertToAddCustomPicker() -> Void {
-//        let viewCon = TLPhotosPickerViewController()
-//        viewCon.delegate = self
-//        viewCon.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
-//            self?.showExceededMaximumAlert(vc: picker)
-//        }
-//        var configure = TLPhotosPickerConfigure()
-//        configure.allowedVideoRecording = false
-//
-//        configure.mediaType = .image
-//        configure.numberOfColumn = 3
-//
-//        viewCon.configure = configure
-//        viewCon.selectedAssets = self.selectedAssets
-//        viewCon.logDelegate = self
-//
-//        self.present(viewCon, animated: true, completion: nil)
+        //        let viewCon = TLPhotosPickerViewController()
+        //        viewCon.delegate = self
+        //        viewCon.didExceedMaximumNumberOfSelection = { [weak self] (picker) in
+        //            self?.showExceededMaximumAlert(vc: picker)
+        //        }
+        //        var configure = TLPhotosPickerConfigure()
+        //        configure.allowedVideoRecording = false
+        //
+        //        configure.mediaType = .image
+        //        configure.numberOfColumn = 3
+        //
+        //        viewCon.configure = configure
+        //        viewCon.selectedAssets = self.selectedAssets
+        //        viewCon.logDelegate = self
+        //
+        //        self.present(viewCon, animated: true, completion: nil)
         var config = YPImagePickerConfiguration()
         config.screens = [.library, .photo]
         config.library.maxNumberOfItems = 100000
         config.showsPhotoFilters = false
-
+        
         config.library.preselectedItems = ypImages
         let picker = YPImagePicker(configuration: config)
-
+        
         picker.didFinishPicking { [unowned picker] items, cancelled in
             self.ypImages = items
             for item in items {
@@ -181,7 +182,7 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
             self.collectionViewImage.reloadData()
             picker.dismiss(animated: true, completion: nil)
         }
-
+        
         self.present(picker, animated: true, completion: nil)
     }
     
@@ -189,16 +190,16 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
         // use selected order, fullresolution image
         //print("dismiss")
         //self.selectedAssets = withTLPHAssets
-
+        
         //print("selectedAssest-----------------\(self.selectedAssets)")
         
         self.collectionViewImage.reloadData()
         self.btnScroll()
-       
+        
         //iCloud or video
-//        getAsyncCopyTemporaryFile()
+        //        getAsyncCopyTemporaryFile()
     }
-
+    
     func photoPickerDidCancel() {
         // cancel
         print("cancel")
@@ -231,9 +232,9 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     func opendropDown(){
         dataDropDown.show()
         if openDropDown == .productType{
-        dataDropDown.anchorView = view4
+            dataDropDown.anchorView = view4
         }else if openDropDown == .productCategoryType{
-           // dataDropDown.anchorView = view5
+            // dataDropDown.anchorView = view5
         }else if openDropDown == .brandLabel{
             dataDropDown.anchorView = view7
         }else if openDropDown == .availableForSample{
@@ -242,18 +243,18 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
         dataDropDown.bottomOffset = CGPoint(x: 0, y: (dataDropDown.anchorView?.plainView.bounds.height)!)
         dataDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             if openDropDown == .productType{
-            self.txtProductCategory.text = item
+                self.txtProductCategory.text = item
                 self.productId = productType?[index].marketplaceProductCategoryId
             }else if openDropDown == .productCategoryType{
-               // self.txtProductSubCategory.text = item
-                    self.subProductId = productType?[index].marketplaceProductSubcategoryId
+                // self.txtProductSubCategory.text = item
+                self.subProductId = productType?[index].marketplaceProductSubcategoryId
             }else if openDropDown == .brandLabel{
                 self.txtProductBrandLabel.text = item
-                    self.brandLabelId = productType?[index].marketplaceBrandLabelId
+                self.brandLabelId = productType?[index].marketplaceBrandLabelId
             }else if openDropDown == .availableForSample{
                 self.txtProductSample.text = item
             }
-           
+            
         }
         dataDropDown.cellHeight = 40
         dataDropDown.backgroundColor = UIColor.white
@@ -268,8 +269,8 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
         dataDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.lblQunatityLabel.text = item
             self.lblMinimumQuantity.text = item
-           
-           
+            
+            
         }
         dataDropDown.cellHeight = 40
         dataDropDown.backgroundColor = UIColor.white
@@ -286,13 +287,13 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
         if minOrderQuantity > quantityAvailable{
             self.showAlert(withMessage: "Minimum Order quantity should be less or equal to quantity Available")
         }else{
-        if fromVC == .myStoreDashboard{
-            self.UpdateProductApi()
-        }else{
-        self.addProductApi()
+            if fromVC == .myStoreDashboard{
+                self.UpdateProductApi()
+            }else{
+                self.addProductApi()
+            }
         }
-        }
-       // _ = pushViewController(withName: MarketPlaceConfirmationVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
+        // _ = pushViewController(withName: MarketPlaceConfirmationVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
     }
     
     @IBAction func btnBackAction(_ sender: UIButton){
@@ -317,8 +318,8 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     }
     func showInfo(_ message: String){
         self.showAlert(withMessage: message)
-     }
-   
+    }
+    
 }
 //MARK:- Custom Picker
 extension AddProductMarketplaceVC: TLPhotosPickerLogDelegate {
@@ -326,7 +327,7 @@ extension AddProductMarketplaceVC: TLPhotosPickerLogDelegate {
     func selectedCameraCell(picker: TLPhotosPickerViewController) {
         print("selectedCameraCell")
     }
-
+    
     func selectedPhoto(picker: TLPhotosPickerViewController, at: Int) {
         print("selectedPhoto")
         print(picker.selectedAssets.count)
@@ -337,7 +338,7 @@ extension AddProductMarketplaceVC: TLPhotosPickerLogDelegate {
     
     func deselectedPhoto(picker: TLPhotosPickerViewController, at: Int) {
         print("deselectedPhoto")
-       // self.collectionViewImage.reloadData()
+        // self.collectionViewImage.reloadData()
     }
     
     func selectedAlbum(picker: TLPhotosPickerViewController, title: String, at: Int) {
@@ -370,7 +371,7 @@ extension AddProductMarketplaceVC: TLPhotosPickerLogDelegate {
 extension AddProductMarketplaceVC: UITextViewDelegate{
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-
+        
         if textView == txtProductDispatchIns{
             
             let spaceCount = textView.text.filter{$0 == " "}.count
@@ -384,26 +385,26 @@ extension AddProductMarketplaceVC: UITextViewDelegate{
             if spaceCount <= 50{
                 return true
             }else{
-             return false
+                return false
             }
         }
         return true
-
+        
     }
-   
+    
 }
 extension AddProductMarketplaceVC: UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if fromVC == .myStoreDashboard{
             return (imagesFromSource.count ) + 1
         }else{
-        if self.imagesFromSource.count == 0{
-            return 1
-        }else{
-            print("count-------------\(self.imagesFromSource.count)")
-            return imagesFromSource.count + 1
-            //return uploadImageArray.count + 1
-        }
+            if self.imagesFromSource.count == 0{
+                return 1
+            }else{
+                print("count-------------\(self.imagesFromSource.count)")
+                return imagesFromSource.count + 1
+                //return uploadImageArray.count + 1
+            }
         }
     }
     
@@ -413,61 +414,70 @@ extension AddProductMarketplaceVC: UICollectionViewDelegate,UICollectionViewData
         if fromVC == .myStoreDashboard {
             if indexPath.row < imagesFromSource.count {
                 cell.viewAddImage.isHidden = true
-               cell.btnDelete.isHidden = false
+                cell.btnDelete.isHidden = false
+                self.uploadImageArray = [UIImage]()
                 //print("ShowImage------------------------------------\(uploadImageArray[indexPath.row])")
-               // cell.image.image = imagesFromSource[indexPath.row]
-                //cell.image.setImage(withString: imagesFromSource[indexPath.row])
-                cell.image.setImage(withString: kImageBaseUrl + "\(imagesFromSource[indexPath.row])")
-
+                // cell.image.image = imagesFromSource[indexPath.row]
+                for image in 0..<self.imagesFromSource.count {
+                    
+                    let asset = self.imagesFromSource[image]
+                    //                            let image = asset.fullResolutionImage ?? UIImage()
+                    self.uploadImageArray.append(asset)
+                    
+                }
+                cell.image.image = uploadImageArray[indexPath.row]
+                //cell.image.setImage(withString: kImageBaseUrl + "\(imagesFromSource[indexPath.row])")
+                
             }else{
                 cell.viewAddImage.isHidden = false
                 cell.btnDelete.isHidden = true
             }
         }else{
             if imagesFromSource.count == 0{
-            cell.viewAddImage.isHidden = false
-            cell.btnDelete.isHidden = true
-        }else {
-
-                    if indexPath.row < imagesFromSource.count{
-                    cell.viewAddImage.isHidden = true
-                    cell.btnDelete.isHidden = false
-                        self.uploadImageArray = [UIImage]()
-                        for image in 0..<self.imagesFromSource.count {
-                           
-                             let asset = self.imagesFromSource[image]
-                            //let image = asset.fullResolutionImage ?? UIImage()
-                            self.uploadImageArray.append(asset)
-                            
-                        }
-                        cell.image.image = uploadImageArray[indexPath.row]
-                       
-                }else{
-                   
                 cell.viewAddImage.isHidden = false
                 cell.btnDelete.isHidden = true
-
-        }
-        }
-        }
-            cell.btnDelete.tag = indexPath.row
-            cell.btnDeleteCallback = { tag in
-                if self.fromVC == .myStoreDashboard{
-                    self.imagesFromSource.remove(at: tag)
+            }else {
+                
+                if indexPath.row < imagesFromSource.count{
+                    cell.viewAddImage.isHidden = true
+                    cell.btnDelete.isHidden = false
+                    self.uploadImageArray = [UIImage]()
+                    for image in 0..<self.imagesFromSource.count {
+                        
+                        let asset = self.imagesFromSource[image]
+                        //let image = asset.fullResolutionImage ?? UIImage()
+                        self.uploadImageArray.append(asset)
+                        
+                    }
+                    cell.image.image = uploadImageArray[indexPath.row]
+                    
                 }else{
-                self.imagesFromSource.remove(at: tag)
+                    
+                    cell.viewAddImage.isHidden = false
+                    cell.btnDelete.isHidden = true
+                    
                 }
-                //self.uploadImageArray.remove(at: tag)
-                self.collectionViewImage.reloadData()
             }
-            //return cell
-       
+        }
+        cell.btnDelete.tag = indexPath.row
+        cell.btnDeleteCallback = { tag in
+            //                if self.fromVC == .myStoreDashboard{
+            //                    self.imagesFromSource.remove(at: tag)
+            //                }else{
+            //                self.imagesFromSource.remove(at: tag)
+            //                }
+            self.imagesFromSource.remove(at: tag)
+            //self.uploadImageArray.remove(at: tag)
+            self.collectionViewImage.reloadData()
+        }
+        //return cell
+        
         return cell
     }
     
     func btnScroll() {
         collectionViewImage.scrollToItem(at: IndexPath(item: self.imagesFromSource.count, section: 0), at: UICollectionView.ScrollPosition.right, animated:true)
-        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if fromVC == .myStoreDashboard{
@@ -480,7 +490,7 @@ extension AddProductMarketplaceVC: UICollectionViewDelegate,UICollectionViewData
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if self.imagesFromSource.count ==  0 {
-           // alertToAddImage()
+            // alertToAddImage()
             alertToAddCustomPicker()
         }else if indexPath.row >= self.imagesFromSource.count{
             //alertToAddImage()
@@ -503,10 +513,10 @@ extension AddProductMarketplaceVC{
                 }
                 self.dataDropDown.dataSource = self.arrProductType
                 self.opendropDown()
-               
+                
             }
         }
-       
+        
     }
     func callSubProductCategory(){
         self.arrProductType.removeAll()
@@ -522,10 +532,10 @@ extension AddProductMarketplaceVC{
                 }
                 self.dataDropDown.dataSource = self.arrProductType
                 self.opendropDown()
-               
+                
             }
         }
-       
+        
     }
     func callBrandCategory(){
         self.arrProductType.removeAll()
@@ -541,7 +551,7 @@ extension AddProductMarketplaceVC{
                 }
                 self.dataDropDown.dataSource = self.arrProductType
                 self.opendropDown()
-               
+                
             }
         }
         
@@ -564,11 +574,11 @@ extension AddProductMarketplaceVC{
         ]
         
         let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
-                                         APIConstants.kImageName: "gallery_images"]
-    
+                                         APIConstants.kImageName: "gallery_images[]"]
+        
         
         print("ImageParam------------------------------\(imageParam)")
-        CommonUtil.sharedInstance.postRequestToImageUpload(withParameter: params, url: APIUrl.kSaveProduct, image: imageParam, controller: self, type: 0)
+        CommonUtil.sharedInstance.postRequestToImageUpload(withParameter: params, url: APIUrl.kSaveProduct, image: imageParam, controller: self, imageGroupName: "gallery_images[]", type: 0)
     }
     func UpdateProductApi(){
         let params: [String:Any] = [
@@ -588,11 +598,11 @@ extension AddProductMarketplaceVC{
         ]
         
         let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
-                                         APIConstants.kImageName: "gallery_images"]
-    
+                                         APIConstants.kImageName: "gallery_images[]"]
+        
         
         print("ImageParam------------------------------\(imageParam)")
-        CommonUtil.sharedInstance.postRequestToImageUpload(withParameter: params, url: APIUrl.kUpdateProductApi, image: imageParam, controller: self, type: 0)
+        CommonUtil.sharedInstance.postRequestToImageUpload(withParameter: params, url: APIUrl.kUpdateProductApi, image: imageParam, controller: self, imageGroupName: "gallery_images[]", type: 0)
     }
     func callGetDashboardStoreDetail(){
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetStoreDetails, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
@@ -600,11 +610,11 @@ extension AddProductMarketplaceVC{
             let response = dictResponse as? [String:Any]
             
             if let data = response?["data"] as? [String:Any]{
-               // self.storeImage = data["logo_id"] as? String
+                // self.storeImage = data["logo_id"] as? String
                 self.detailStoreImage = data["logo_id"] as? String
                 self.detailStoreName = data["name"] as? String
                 self.imgStore.setImage(withString: kImageBaseUrl + String.getString(self.detailStoreImage))
-               self.showStoreName.text = self.detailStoreName
+                self.showStoreName.text = self.detailStoreName
                 self.marketPlaceStoreId = data["marketplace_store_id"] as?Int
                 self.setDataUI()
             }
@@ -612,34 +622,34 @@ extension AddProductMarketplaceVC{
         }
     }
     
-//    func addProductApi(){
-//        let params: [String:Any] = [
-//            APIConstants.kmarketplaceStoreId: "\(self.marketPlaceStoreId ?? 0)",
-//            APIConstants.kTitle: self.txtProductTitle.text ?? "",
-//            APIConstants.kDescription: self.txtProductDesc.text ?? "",
-//            APIConstants.kKeywords: self.txtProductKeyWord.text ?? "",
-//            APIConstants.kProductCategoryId : "\(self.productId ?? 0)",
-//            APIConstants.kProductSubCategoryId: "\(self.subProductId ?? 0)",
-//            APIConstants.kQuantityAvailable: self.txtProductQuantityAvaliable.text ?? "",
-//            APIConstants.kbrandLabelId: "\(self.brandLabelId ?? 0)",
-//            APIConstants.kMinOrderQuantity: self.txtProductMinOrderQuantity.text ?? "",
-//            APIConstants.kHandlingInstruction: self.txtProductHandleIns.text ?? "",
-//            APIConstants.kDispatchInstruction: self.txtProductDispatchIns.text ?? "",
-//            APIConstants.kAvailableForSample: self.txtProductSample.text ?? "",
-//            APIConstants.kProductPrice: self.txtProductPrice.text ?? ""
-//        ]
-//
-//        let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
-//                                         APIConstants.kImageName: "gallery_images"]
-//
-//
-//        print("ImageParam------------------------------\(imageParam)")
-//        CommonUtil.sharedInstance.postRequestToImageUpload(withParameter: params, url: APIUrl.kSaveProduct, image: imageParam, controller: self, type: 0)
-//    }
+    //    func addProductApi(){
+    //        let params: [String:Any] = [
+    //            APIConstants.kmarketplaceStoreId: "\(self.marketPlaceStoreId ?? 0)",
+    //            APIConstants.kTitle: self.txtProductTitle.text ?? "",
+    //            APIConstants.kDescription: self.txtProductDesc.text ?? "",
+    //            APIConstants.kKeywords: self.txtProductKeyWord.text ?? "",
+    //            APIConstants.kProductCategoryId : "\(self.productId ?? 0)",
+    //            APIConstants.kProductSubCategoryId: "\(self.subProductId ?? 0)",
+    //            APIConstants.kQuantityAvailable: self.txtProductQuantityAvaliable.text ?? "",
+    //            APIConstants.kbrandLabelId: "\(self.brandLabelId ?? 0)",
+    //            APIConstants.kMinOrderQuantity: self.txtProductMinOrderQuantity.text ?? "",
+    //            APIConstants.kHandlingInstruction: self.txtProductHandleIns.text ?? "",
+    //            APIConstants.kDispatchInstruction: self.txtProductDispatchIns.text ?? "",
+    //            APIConstants.kAvailableForSample: self.txtProductSample.text ?? "",
+    //            APIConstants.kProductPrice: self.txtProductPrice.text ?? ""
+    //        ]
+    //
+    //        let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
+    //                                         APIConstants.kImageName: "gallery_images"]
+    //
+    //
+    //        print("ImageParam------------------------------\(imageParam)")
+    //        CommonUtil.sharedInstance.postRequestToImageUpload(withParameter: params, url: APIUrl.kSaveProduct, image: imageParam, controller: self, type: 0)
+    //    }
     
     override func didUserGetData(from result: Any, type: Int) {
-//        self.showAlert(withMessage: "Post Successfully") {
-//        }
+        //        self.showAlert(withMessage: "Post Successfully") {
+        //        }
         kSharedUserDefaults.setValue("1", forKey: "is_store_created")
         self.uploadImageArray = [UIImage]()
         self.imagesFromSource.removeAll()
@@ -651,10 +661,10 @@ extension AddProductMarketplaceVC{
             if fromVC == .addProduct{
                 self.navigationController?.popViewController(animated: true)
             }else{
-        _ = pushViewController(withName: MarketPlaceConfirmationVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
+                _ = pushViewController(withName: MarketPlaceConfirmationVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
             }
         }
-
+        
     }
 }
 

@@ -376,9 +376,11 @@ extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDat
         cell.btnDeleteCallback = { tag in
             if self.fromVC == .myStoreDashboard{
                 self.imagesFromSource.remove(at: tag)
+                self.uploadImageArray.remove(at: tag)
                 self.collectionViewImage.reloadData()
             }else{
                 self.imagesFromSource.remove(at: tag)
+                self.uploadImageArray.remove(at: tag)
                 self.collectionViewImage.reloadData()
             }
         }
@@ -460,7 +462,7 @@ extension MarketPlaceCreateStoreVC {
         ]
         
        let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
-                                         APIConstants.kImageName: "gallery_images"]
+                                         APIConstants.kImageName: "gallery_images[]"]
         //let imageParam : [String:Any] = [APIConstants.kImage: self.imagesFromSource,
                                         // APIConstants.kImageName: "gallery_images"]
         
@@ -563,7 +565,7 @@ extension MarketPlaceCreateStoreVC {
         ]
         
         let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
-                                         APIConstants.kImageName: "gallery_images"]
+                                         APIConstants.kImageName: "gallery_images[]"]
         
         let coverPic: [String:Any] = [APIConstants.kImage : self.imgCover.image ?? UIImage(),
                                       APIConstants.kImageName: "banner_id" ]
@@ -581,8 +583,11 @@ extension MarketPlaceCreateStoreVC {
             
             if let response = dictResponse["data"] as? [String:Any]{
                 self.marketPlaceId = (response["marketplace_store_id"] as? Int? ?? 0) ?? 0
+                //self.uploadImageArray = [UIImage]()
+                //self.imagesFromSource = [UIImage]()
+               // self.callGetDashboardStoreDetail()
             }
-            
+          
         }
     }
     

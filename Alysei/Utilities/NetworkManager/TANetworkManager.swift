@@ -283,6 +283,13 @@ func requestApi(withServiceName serviceName: String,requestMethod method: kHTTPM
             {
               multipartFormData.append(imageData, withName: String.getString(validDict["imageName"]), fileName: String.getString(NSNumber.getNSNumber(message: self.getCurrentTimeStamp()).intValue) + ".jpeg", mimeType: "image/jpeg")
             }
+          }else if let images = validDict["image"] as? [UIImage]{
+            for image in images{
+                if let imageData: Data = image.jpegData(compressionQuality: 0.5)
+                {
+                  multipartFormData.append(imageData, withName: String.getString(validDict["imageName"]), fileName: String.getString(NSNumber.getNSNumber(message: self.getCurrentTimeStamp()).intValue) + ".jpeg", mimeType: "image/jpeg")
+                }
+            }
           }
         }
       }, to: serviceUrl, method: method, headers: headers).responseJSON { (dataResponse: AFDataResponse<Any>) in
@@ -309,7 +316,7 @@ func requestApi(withServiceName serviceName: String,requestMethod method: kHTTPM
   }
 
   
-    func tempMultiPart(withServiceName serviceName: String, requestMethod method: HTTPMethod, requestImages arrImages: NonNullDictionary, requestVideos arrVideos: [NonNullDictionary] = [] , requestData postData: NonNullDictionary, completionClosure: @escaping (_ result: Any?, _ error: Error?, _ errorType: ErrorType, _ statusCode: Int?) -> ()) -> Void{
+    func tempMultiPart(withServiceName serviceName: String, requestMethod method: HTTPMethod, requestImages arrImages: NonNullDictionary, requestVideos arrVideos: [NonNullDictionary] = [] , requestData postData: NonNullDictionary, imageGroupName: String?, completionClosure: @escaping (_ result: Any?, _ error: Error?, _ errorType: ErrorType, _ statusCode: Int?) -> ()) -> Void{
       
         if NetworkReachabilityManager()?.isReachable == true{
           
@@ -358,7 +365,8 @@ func requestApi(withServiceName serviceName: String,requestMethod method: kHTTPM
                         if imgFileName.isEmpty { imgFileName = self.createImageFileName() }
 
 //                        let imgFileName = "image\(index).jpg"
-                        multipartFormData.append(imageData, withName: "attachments[]", fileName: imgFileName, mimeType: TANetworkManager.IMG_MIMETYPE)
+                        //multipartFormData.append(imageData, withName: "attachments[]", fileName: imgFileName, mimeType: TANetworkManager.IMG_MIMETYPE)
+                        multipartFormData.append(imageData, withName: "\(imageGroupName ?? "attachments[]")", fileName: imgFileName, mimeType: TANetworkManager.IMG_MIMETYPE)
 //                        multipartFormData.append(imageData.base64EncodedData(), withName: TANetworkManager.toString(arrImages["imageName"]))
                     }
                 }
