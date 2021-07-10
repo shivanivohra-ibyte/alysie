@@ -379,7 +379,7 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
         //imageParam.
 
         //imageParam[APIConstants.kImageName:APIConstants.k] =
-
+ 
         let dictStepOne = self.signUpViewModel.toDictionaryStepOne()
         var imageParam = [[String:Any]]()
 
