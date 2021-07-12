@@ -467,6 +467,10 @@ extension AddProductMarketplaceVC: UICollectionViewDelegate,UICollectionViewData
             //                self.imagesFromSource.remove(at: tag)
             //                }
             self.imagesFromSource.remove(at: tag)
+            if self.fromVC == .myStoreDashboard{
+            print("marketplace_product_gallery_id----------------------------\(self.passEditProductDetail?.product_gallery?[tag].marketplace_product_gallery_id ?? 0)")
+            self.removeGalleryPic(self.passEditProductDetail?.product_gallery?[tag].marketplace_product_gallery_id)
+            }
             //self.uploadImageArray.remove(at: tag)
             self.collectionViewImage.reloadData()
         }
@@ -621,6 +625,18 @@ extension AddProductMarketplaceVC{
             
         }
     }
+        
+        func removeGalleryPic(_ galleryPicId: Int?){
+            
+            let params: [String:Any] = [
+                "gallery_type": "2",
+                "marketplace_product_gallery_id": galleryPicId ?? 0
+            ]
+            TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kDeleteGalleryPic, requestMethod: .POST, requestParameters: params, withProgressHUD: true) { (dictResponse, error, errortype, statuscode) in
+                
+                print("Image Deleted")
+            }
+        }
     
     //    func addProductApi(){
     //        let params: [String:Any] = [
