@@ -29,7 +29,6 @@ class PostsViewController: AlysieBaseViewC {
         let tap = UITapGestureRecognizer(target: self, action: #selector(openMarketPlace))
         self.marketplaceView.addGestureRecognizer(tap)
         
-        
         // Do any additional setup after loading the view.
     }
     
@@ -59,6 +58,15 @@ class PostsViewController: AlysieBaseViewC {
         self.postTableView.separatorStyle = .singleLine
         callNewFeedApi(1)
     }
+
+
+    //MARK:- segue
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "seguePostsToComment" {
+        }
+    }
+
     
     @objc func openMarketPlace(){
        // let vc = pushViewController(withName: MarketPlaceHomeVC.id(), fromStoryboard: StoryBoardConstants.kMarketplace)
@@ -87,6 +95,10 @@ class PostsViewController: AlysieBaseViewC {
             self.postTableView.reloadData()
             }
         }
+    }
+
+    @objc func showCommentScreen() {
+        self.performSegue(withIdentifier: "seguePostsToComment", sender: self)
     }
 }
 
@@ -120,7 +132,10 @@ extension PostsViewController: UITableViewDelegate,UITableViewDataSource{
                     //self.postTableView.reloadRows(at: [IndexPath(row: index, section: 1)], with: .automatic)
                     cell.lblPostLikeCount.text = "\(data.likeCount ?? 0)"
                     cell.likeImage.image = data.likeFlag == 0 ? UIImage(named: "like_icon") : UIImage(named: "liked_icon")
+                }
 
+                cell.commentCallback = {
+                    self.showCommentScreen()
                 }
 
             }

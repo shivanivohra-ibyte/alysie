@@ -14,6 +14,11 @@ class SelfPostCommentsCell: UITableViewCell {
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var viewReplyButton: UIButton!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.userImageView.layer.cornerRadius = self.userImageView.frame.width / 2.0
+    }
 }
 
 class OtherUserPostCommentsCell: SelfPostCommentsCell {

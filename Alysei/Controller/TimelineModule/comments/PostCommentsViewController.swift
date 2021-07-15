@@ -63,11 +63,56 @@ class PostCommentsViewController: UIViewController, PostCommentsDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.tableView.register(UINib(nibName: "PostCommentsCell", bundle: nil), forCellReuseIdentifier: "cell")
+
+        self.tableView.tableFooterView = UIView()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.allowsSelection = false
     }
 
     // MARK:- IBOutlets
-    //@IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var backButton: UIButtonExtended!
+    @IBOutlet weak var titleLabel: UILabelExtended!
+    @IBOutlet weak var tableView: UITableView!
+
+    @IBOutlet weak var bottomViewForCommentTextField: UIView!
+    @IBOutlet weak var commentTextfield: UITextFieldBorderWidthAndColor!
+    @IBOutlet weak var profilePhotoButton: UIButtonExtended!
+    @IBOutlet weak var sendCommentButton: UIButtonExtended!
 
     // MARK:- protocol methods
-    
+
+    // MARK:- IBAction methods
+    @IBAction func backButtonTapped(_ sender: UIButtonExtended) {
+        self.navigationController?.popViewController(animated: true)
+    }
+
+    @IBAction func profilePhotoButtonTapped(_ sender: UIButtonExtended) {
+
+    }
+
+    @IBAction func sendCommentButtonTapped(_ sender: UIButtonExtended) {
+
+    }
+
+}
+
+extension PostCommentsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? SelfPostCommentsCell else {
+            return UITableViewCell()
+        }
+
+        cell.descriptionLabel.text = "Description"
+        cell.userNameLabel.text = "Username"
+        cell.timeLabel.text = "10 h"
+        cell.userImageView.setImage(withString: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=400")
+        return cell
+    }
 }

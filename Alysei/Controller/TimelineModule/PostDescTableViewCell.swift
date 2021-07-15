@@ -36,11 +36,13 @@ class PostDescTableViewCell: UITableViewCell {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var viewLike: UIView!
     @IBOutlet weak var likeImage: UIImageView!
+    @IBOutlet weak var commentImage: UIImageView!
     @IBOutlet weak var lblPostTime: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
 
     var data: NewFeedSearchDataModel?
     var likeCallback:((Int) -> Void)? = nil
+    var commentCallback:(() -> Void)? = nil
     var islike: Int?
     var index: Int?
     var imageArray = [String]()
@@ -64,7 +66,13 @@ class PostDescTableViewCell: UITableViewCell {
         let tap2 = UITapGestureRecognizer(target: self, action: #selector(likeAction))
         tap2.numberOfTapsRequired = 2
 
+
         self.imagePostCollectionView.addGestureRecognizer(tap2)
+
+
+        let showCommentsGesture = UITapGestureRecognizer(target: self, action: #selector(self.showCommentsScreen))
+        showCommentsGesture.numberOfTapsRequired = 1
+        self.commentImage.addGestureRecognizer(showCommentsGesture)
 
         
         // Initialization code
@@ -154,6 +162,7 @@ class PostDescTableViewCell: UITableViewCell {
 
         self.imagePostCollectionView.reloadData()
     }
+
     @objc func likeAction(_ tap: UITapGestureRecognizer){
         if self.data?.likeFlag == 0 {
             islike = 1
@@ -210,6 +219,10 @@ class PostDescTableViewCell: UITableViewCell {
             print(data)
         }
 
+    }
+
+    @objc func showCommentsScreen() {
+        self.commentCallback?()
     }
 
 
