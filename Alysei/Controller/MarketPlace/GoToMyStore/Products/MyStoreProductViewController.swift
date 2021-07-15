@@ -23,7 +23,7 @@ class MyStoreProductViewController: AlysieBaseViewC, MyStoreProductDisplayLogic
     func displayProductListData(_ productArr: [MyStoreProductDetail]?) {
         print("------------------------Show Data----------------------------------------------")
         self.productList = productArr
-        self.myTotalProducts.text = "My Products (\(productArr?.count ?? 0))"
+        self.myTotalProducts.text = "(\(productArr?.count ?? 0))"
         collectionView.reloadData()
     }
     

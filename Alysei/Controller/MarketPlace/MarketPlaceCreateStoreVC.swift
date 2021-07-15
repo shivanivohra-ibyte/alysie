@@ -374,13 +374,19 @@ extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDat
         }
         cell.btnDelete.tag = indexPath.row
         cell.btnDeleteCallback = { tag in
+//            if self.fromVC == .myStoreDashboard{
+//                self.imagesFromSource.remove(at: tag)
+//                self.uploadImageArray.remove(at: tag)
+//                self.collectionViewImage.reloadData()
+//            }else{
+                self.imagesFromSource.remove(at: tag)
             if self.fromVC == .myStoreDashboard{
-                self.imagesFromSource.remove(at: tag)
-                self.collectionViewImage.reloadData()
-            }else{
-                self.imagesFromSource.remove(at: tag)
-                self.collectionViewImage.reloadData()
+                print("marketplace_product_gallery_id----------------------------\(self.storeData?.product_gallery?[tag].marketplace_product_gallery_id ?? 0)")
+                self.removeStorePic(self.storeData?.store_gallery?[tag].marketplace_product_gallery_id)
             }
+               // self.uploadImageArray.remove(at: tag)
+                self.collectionViewImage.reloadData()
+            //}
         }
         
         
@@ -393,9 +399,13 @@ extension MarketPlaceCreateStoreVC: UICollectionViewDelegate,UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
-        if fromVC == .myStoreDashboard{
+        if fromVC == .myStoreDashboard && storeData?.store_gallery?.count ?? 0 >= 1{
             return CGSize(width: collectionView.bounds.width / 3, height: 200)
-        }else if self.imagesFromSource.count == 0{
+        }
+//        else if self.uploadImageArray.count == 0{
+//            return CGSize(width: collectionView.bounds.width , height: 200)
+//        }
+        else if self.imagesFromSource.count == 0{
             return CGSize(width: collectionView.bounds.width , height: 200)
         }else{
             return CGSize(width: collectionView.bounds.width / 3, height: 200)
@@ -460,7 +470,7 @@ extension MarketPlaceCreateStoreVC {
         ]
         
        let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
-                                         APIConstants.kImageName: "gallery_images"]
+                                         APIConstants.kImageName: "gallery_images[]"]
         //let imageParam : [String:Any] = [APIConstants.kImage: self.imagesFromSource,
                                         // APIConstants.kImageName: "gallery_images"]
         
@@ -563,7 +573,7 @@ extension MarketPlaceCreateStoreVC {
         ]
         
         let imageParam : [String:Any] = [APIConstants.kImage: self.uploadImageArray,
-                                         APIConstants.kImageName: "gallery_images"]
+                                         APIConstants.kImageName: "gallery_images[]"]
         
         let coverPic: [String:Any] = [APIConstants.kImage : self.imgCover.image ?? UIImage(),
                                       APIConstants.kImageName: "banner_id" ]
@@ -581,10 +591,26 @@ extension MarketPlaceCreateStoreVC {
             
             if let response = dictResponse["data"] as? [String:Any]{
                 self.marketPlaceId = (response["marketplace_store_id"] as? Int? ?? 0) ?? 0
+                //self.uploadImageArray = [UIImage]()
+                //self.imagesFromSource = [UIImage]()
+               // self.callGetDashboardStoreDetail()
             }
-            
+          
         }
     }
+        
+        func removeStorePic(_ storePicId: Int?){
+            
+            let params: [String:Any] = [
+                "gallery_type": "1",
+                "marketplace_product_gallery_id": storePicId ?? 0
+            ]
+            TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kDeleteGalleryPic, requestMethod: .POST, requestParameters: params, withProgressHUD: true) { (dictResponse, error, errortype, statuscode) in
+                
+                print("Image Deleted")
+            }
+        }
+
     
 //override func didUserGetData(from result: Any, type: Int) {
 //    if type == 0{

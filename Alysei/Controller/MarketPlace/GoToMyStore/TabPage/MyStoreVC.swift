@@ -23,10 +23,13 @@ class MyStoreVC: UIViewController {
     @IBOutlet weak var viewContStore: UIView!
     @IBOutlet weak var viewContProduct: UIView!
     @IBOutlet weak var viewContInquiry: UIView!
+    @IBOutlet weak var lblStoreName: UILabel!
     
-    
+    var userStoreName: String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        callGetFieldStoreApi()
         //stackView.addSubview
         self.loadDashboard()
         selectDashboardUI()
@@ -77,6 +80,10 @@ class MyStoreVC: UIViewController {
         imgInquiries.image = UIImage(named: "inquiries_inactive")
         
     }
+    
+    func setDataUI(){
+        self.lblStoreName.text = self.userStoreName
+    }
     @objc func loadDashboard(){
         selectDashboardUI()
         let vc = UIStoryboard(name: StoryBoardConstants.kMarketplace, bundle: nil).instantiateViewController(withIdentifier: "MyStoreDashboardViewController") as! MyStoreDashboardViewController
@@ -116,3 +123,14 @@ class MyStoreVC: UIViewController {
     }
     
 }
+extension MyStoreVC{
+    func  callGetFieldStoreApi(){
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetStoreFilledValue, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            let response = dictResponse as? [String:Any]
+            if let data = response?["data"] as? [String:Any]{
+                self.userStoreName = data["company_name"] as? String
+                self.setDataUI()
+            }
+            
+        }
+    }}

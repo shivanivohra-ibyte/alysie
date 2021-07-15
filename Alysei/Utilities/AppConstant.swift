@@ -205,6 +205,7 @@ struct APIUrl{
     static let kUpdateStore = "update/store/details"
     static let kUpdateProductApi = "update/product/details"
     static let kGetCategories = "get/marketplace/product/categories"
+    static let kDeleteGalleryPic = "delete/gallery/image"
     
     enum FeaturedProduct {
         static let delete = kBASEURL + "delete/featured/listing?featured_listing_id="
