@@ -13,6 +13,7 @@
 import UIKit
 
 protocol PostCommentsDisplayLogic: class {
+    func loadComments(_ response: PostComments.Comment.Response)
 }
 
 class PostCommentsViewController: UIViewController, PostCommentsDisplayLogic {
@@ -26,7 +27,9 @@ class PostCommentsViewController: UIViewController, PostCommentsDisplayLogic {
         setup()
     }
 
-    var postID: Int!
+    var postCommentsUserDataModel: PostCommentsUserData!
+    var model: PostComments.Comment.Response!
+    var postOwnerID: Int!
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -70,6 +73,9 @@ class PostCommentsViewController: UIViewController, PostCommentsDisplayLogic {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.allowsSelection = false
+
+        self.interactor?.fetchComments(self.postCommentsUserDataModel.postID)
+        self.commentTextfield.becomeFirstResponder()
     }
 
     // MARK:- IBOutlets
@@ -83,6 +89,13 @@ class PostCommentsViewController: UIViewController, PostCommentsDisplayLogic {
     @IBOutlet weak var sendCommentButton: UIButtonExtended!
 
     // MARK:- protocol methods
+    func loadComments(_ response: PostComments.Comment.Response) {
+        self.model = response
+        self.tableView.reloadData()
+        if !self.commentTextfield.isFirstResponder {
+            self.commentTextfield.becomeFirstResponder()
+        }
+    }
 
     // MARK:- IBAction methods
     @IBAction func backButtonTapped(_ sender: UIButtonExtended) {
@@ -94,25 +107,37 @@ class PostCommentsViewController: UIViewController, PostCommentsDisplayLogic {
     }
 
     @IBAction func sendCommentButtonTapped(_ sender: UIButtonExtended) {
+        guard let text = self.commentTextfield.text else {
+            showAlert(withMessage: "Comment can't be blank.")
+            return
+        }
 
+        let selfID = Int(kSharedUserDefaults.loggedInUserModal.userId ?? "-1") ?? 0
+        let requestModel = PostComments.Post.Request(post_owner_id: self.postCommentsUserDataModel.userID,
+                                                     user_id: selfID,
+                                                     post_id: self.postCommentsUserDataModel.postID,
+                                                     comment: text)
+        self.interactor?.postComment(requestModel)
     }
 
 }
 
 extension PostCommentsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return model?.data.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? SelfPostCommentsCell else {
             return UITableViewCell()
         }
-
-        cell.descriptionLabel.text = "Description"
-        cell.userNameLabel.text = "Username"
-        cell.timeLabel.text = "10 h"
-        cell.userImageView.setImage(withString: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=400")
+        let commentData = self.model.data[indexPath.row]
+        let name = commentData.poster?.name ?? commentData.poster?.restaurantName ?? commentData.poster?.companyName ?? ""
+        cell.descriptionLabel.text = "\(commentData.body)"
+        cell.userNameLabel.text = "\(name)"
+        cell.timeLabel.text = "\(commentData.convertDate())"
+//        cell.userImageView.setImage(withString: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=400")
+        cell.userImageView.setImage(withString: "\(imageDomain)/\(commentData.poster?.avatarID.attachmentUrl ?? "")")
         return cell
     }
 }

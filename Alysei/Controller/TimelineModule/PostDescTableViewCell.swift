@@ -42,7 +42,7 @@ class PostDescTableViewCell: UITableViewCell {
 
     var data: NewFeedSearchDataModel?
     var likeCallback:((Int) -> Void)? = nil
-    var commentCallback:(() -> Void)? = nil
+    var commentCallback:((PostCommentsUserData) -> Void)? = nil
     var islike: Int?
     var index: Int?
     var imageArray = [String]()
@@ -222,7 +222,9 @@ class PostDescTableViewCell: UITableViewCell {
     }
 
     @objc func showCommentsScreen() {
-        self.commentCallback?()
+        let model = PostCommentsUserData(userID: self.data?.subjectId?.userId ?? -1,
+                                         postID: self.index ?? 0)
+        self.commentCallback?(model)
     }
 
 

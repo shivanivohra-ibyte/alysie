@@ -11,8 +11,11 @@
 //
 
 import UIKit
+import SocketIO
 
 protocol PostCommentsBusinessLogic {
+    func fetchComments(_ postID: Int)
+    func postComment(_ request: PostComments.Post.Request)
 }
 
 protocol PostCommentsDataStore {
@@ -24,5 +27,79 @@ class PostCommentsInteractor: PostCommentsBusinessLogic, PostCommentsDataStore {
     var worker: PostCommentsWorker?
     //var name: String = ""
 
+    let socket = manager.defaultSocket
+
     // MARK:- protocol methods
+    func fetchComments(_ postID: Int) {
+        guard let urlRequest = WebServices.shared.buildURLRequest("\(APIUrl.Posts.comments)\(postID)", method: .GET) else { return }
+//        urlRequest.httpBody = requestModel.data()
+        WebServices.shared.request(urlRequest) { (data, response, statusCode, error)  in
+            do {
+                if statusCode == 200 {
+                    guard let data = data else {
+                        return
+                    }
+                    let response = try JSONDecoder().decode(PostComments.Comment.Response.self, from: data)
+                    self.presenter?.displayComments(response)
+                } else {
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    func updateContactDetail(_ requestModel: ContactDetail.Contact.Request) {
+
+    }
+
+    func postComment(_ request: PostComments.Post.Request) {
+        // post_owner_id, user_id, post_id, comment
+        let params: [String : Any] = ["post_owner_id": request.post_owner_id,
+                                      "user_id": request.user_id,
+                                      "post_id": request.post_id,
+                                      "comment": request.comment]
+
+        let sd = params.socketRepresentation()
+`
+        socket.emit("doComment", with: [sd]) {
+            print("doComment - inside ")
+            self.fetchComments(request.post_id)
+        }
+
+        socket.on("showComment") { showLikeData, showLikeAck in
+            print("inside show like - start")
+            print(showLikeData)
+            print("inside show like - end")
+        }
+    }
+
+
 }
+
+
+/*
+
+ [11:28 AM, 7/10/2021] Deepak: https://alyseiapi.ibyteworkshop.com/public/api/get/post/comments?post_id=2
+ [11:28 AM, 7/10/2021] Deepak: 1-> https://alyseiapi.ibyteworkshop.com/public/api/share/post
+ shared_post_id=?
+ it coming empty in get all post api
+
+ 2-> https://alyseiapi.ibyteworkshop.com/public/api/get/post/comments?post_id=2
+ add two key
+ 1-> posted user name
+ 2->posted user profile image
+
+ 3-> https://alyseiapi.ibyteworkshop.com/public/api/get/comment/replies?comment_id=2
+ this api response making it similar as https://alyseiapi.ibyteworkshop.com/public/api/get/post/comments?post_id=2
+
+ 4->https://alyseiapi.ibyteworkshop.com/public/api/get/comment/replies?comment_id=2
+ please provide me some data on reply api
+
+ 5->https://alyseiapi.ibyteworkshop.com/public/api/delete/post
+ in this api when we delete any post in which some image are there. Showing this error
+
+ {"success":409,"errors":{"exception":["unlink(public\/uploads\/2021\/06\/20897674091625020466.jpg): No such file or directory"]}}
+
+
+ */

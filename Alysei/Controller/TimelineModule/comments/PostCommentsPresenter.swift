@@ -13,11 +13,15 @@
 import UIKit
 
 protocol PostCommentsPresentationLogic {
+    func displayComments(_ response: PostComments.Comment.Response)
 }
 
 class PostCommentsPresenter: PostCommentsPresentationLogic {
     weak var viewController: PostCommentsDisplayLogic?
     
     // MARK:- protocol methods
+    func displayComments(_ response: PostComments.Comment.Response) {
+        self.viewController?.loadComments(response)
+    }
     
 }

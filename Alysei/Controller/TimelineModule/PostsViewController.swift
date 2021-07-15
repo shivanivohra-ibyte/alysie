@@ -7,6 +7,11 @@
 
 import UIKit
 
+struct PostCommentsUserData {
+    var userID: Int
+    var postID: Int
+}
+
 class PostsViewController: AlysieBaseViewC {
     
     @IBOutlet weak var postTableView: UITableView!
@@ -64,6 +69,11 @@ class PostsViewController: AlysieBaseViewC {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "seguePostsToComment" {
+            if let model = sender as? PostCommentsUserData {
+                if let viewCon = segue.destination as? PostCommentsViewController {
+                    viewCon.postCommentsUserDataModel = model
+                }
+            }
         }
     }
 
@@ -97,8 +107,8 @@ class PostsViewController: AlysieBaseViewC {
         }
     }
 
-    @objc func showCommentScreen() {
-        self.performSegue(withIdentifier: "seguePostsToComment", sender: self)
+    func showCommentScreen(_ model: PostCommentsUserData) {
+        self.performSegue(withIdentifier: "seguePostsToComment", sender: model)
     }
 }
 
@@ -134,8 +144,8 @@ extension PostsViewController: UITableViewDelegate,UITableViewDataSource{
                     cell.likeImage.image = data.likeFlag == 0 ? UIImage(named: "like_icon") : UIImage(named: "liked_icon")
                 }
 
-                cell.commentCallback = {
-                    self.showCommentScreen()
+                cell.commentCallback = { postCommentsUserData in
+                    self.showCommentScreen(postCommentsUserData)
                 }
 
             }

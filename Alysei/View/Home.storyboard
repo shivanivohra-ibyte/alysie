@@ -5379,7 +5379,7 @@ any other devices.</string>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gBM-UH-OUl">
-                                <rect key="frame" x="0.0" y="581" width="414" height="70"/>
+                                <rect key="frame" x="0.0" y="581" width="414" height="80"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qC0-48-8cZ">
                                         <rect key="frame" x="10" y="0.0" width="394" height="70"/>
@@ -5396,7 +5396,7 @@ any other devices.</string>
                                                 </connections>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Leave a comment" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vga-nk-FXB" customClass="UITextFieldBorderWidthAndColor" customModule="Alysei" customModuleProvider="target">
-                                                <rect key="frame" x="54" y="7" width="270" height="56"/>
+                                                <rect key="frame" x="54" y="3" width="270" height="64"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="0.0"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <userDefinedRuntimeAttributes>
@@ -5424,17 +5424,17 @@ any other devices.</string>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="qC0-48-8cZ" firstAttribute="leading" secondItem="gBM-UH-OUl" secondAttribute="leading" constant="10" id="8tA-vC-WqF"/>
-                                    <constraint firstAttribute="height" constant="70" id="HLJ-qJ-S4T"/>
+                                    <constraint firstAttribute="height" constant="80" id="HLJ-qJ-S4T"/>
                                     <constraint firstItem="qC0-48-8cZ" firstAttribute="top" secondItem="gBM-UH-OUl" secondAttribute="top" id="Lr9-zG-yRP"/>
                                     <constraint firstItem="vga-nk-FXB" firstAttribute="height" secondItem="gBM-UH-OUl" secondAttribute="height" multiplier="0.8" id="eW6-zi-rRh"/>
-                                    <constraint firstAttribute="bottom" secondItem="qC0-48-8cZ" secondAttribute="bottom" id="wR9-5r-X3p"/>
+                                    <constraint firstAttribute="bottom" secondItem="qC0-48-8cZ" secondAttribute="bottom" constant="10" id="wR9-5r-X3p"/>
                                     <constraint firstAttribute="trailing" secondItem="qC0-48-8cZ" secondAttribute="trailing" constant="10" id="xpm-HU-ENz"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
-                            <constraint firstItem="n9W-7P-bj9" firstAttribute="top" secondItem="gBM-UH-OUl" secondAttribute="bottom" id="1mC-dV-Lm4"/>
+                            <constraint firstItem="n9W-7P-bj9" firstAttribute="top" secondItem="gBM-UH-OUl" secondAttribute="bottom" constant="-10" id="1mC-dV-Lm4"/>
                             <constraint firstAttribute="trailing" secondItem="WfB-Rv-KQQ" secondAttribute="trailing" id="5k4-xc-xtD"/>
                             <constraint firstItem="Kde-cy-VWn" firstAttribute="leading" secondItem="CSa-AQ-FSW" secondAttribute="leading" id="AJ1-L6-rTE"/>
                             <constraint firstAttribute="trailing" secondItem="gBM-UH-OUl" secondAttribute="trailing" id="VZo-mi-Z1D"/>

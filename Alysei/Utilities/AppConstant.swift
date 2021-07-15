@@ -210,6 +210,10 @@ struct APIUrl{
     enum FeaturedProduct {
         static let delete = kBASEURL + "delete/featured/listing?featured_listing_id="
     }
+
+    enum Posts {
+        static let comments = kBASEURL + "get/post/comments?post_id="
+    }
     
     enum Images {
         static let removeProfilePhoto = kBASEURL + "remove/cover/profile/image?image_type=1"
