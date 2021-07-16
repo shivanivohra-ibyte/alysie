@@ -345,12 +345,16 @@ class ProfileViewC: AlysieBaseViewC{
         self.contactViewC.view.bringSubviewToFront(self.contactViewC.editContactDetailButton)
     }
 
-    @IBAction func tapEditProfile(_ sender: UIButton) {
-
+    fileprivate func initiateEditProfileViewController() {
         let controller = pushViewController(withName: EditProfileViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? EditProfileViewC
         controller?.signUpViewModel = self.signUpViewModel
         controller?.userType = self.userType ?? .voyagers
         self.editProfileViewCon = controller
+    }
+
+    @IBAction func tapEditProfile(_ sender: UIButton) {
+
+        initiateEditProfileViewController()
         //    updateProductsInEditProfile()
     }
 
@@ -1220,6 +1224,10 @@ extension ProfileViewC{
     }
 
     override func didUserGetData(from result: Any, type: Int) {
+
+        if editProfileViewCon == nil {
+            self.initiateEditProfileViewController()
+        }
 
         let dicResult = kSharedInstance.getDictionary(result)
         let dicData = kSharedInstance.getDictionary(dicResult[APIConstants.kData])
