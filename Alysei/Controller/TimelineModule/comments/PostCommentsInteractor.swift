@@ -61,7 +61,7 @@ class PostCommentsInteractor: PostCommentsBusinessLogic, PostCommentsDataStore {
                                       "comment": request.comment]
 
         let sd = params.socketRepresentation()
-`
+
         socket.emit("doComment", with: [sd]) {
             print("doComment - inside ")
             self.fetchComments(request.post_id)

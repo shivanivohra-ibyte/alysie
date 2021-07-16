@@ -60,8 +60,18 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
     func fetchProductsFromProfile() {
         if let nav = self.parent as? UINavigationController, let profileCon = nav.viewControllers.first as? ProfileViewC {
             profileCon.reloadFields()
-    
+
         }
+
+//        CommonUtil.sharedInstance.postRequestToServer(url: APIUrl.kUserSubmittedFields, method: .GET, controller: self, type: 0, param: [:], btnTapped: UIButton())
+
+        guard let request = WebServices.shared.buildURLRequest(APIUrl.kUserSubmittedFields, method: .GET) else {
+            return
+        }
+        WebServices.shared.request(request) { data, urlResponse, statusCode, error in
+
+        }
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
