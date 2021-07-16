@@ -30,6 +30,10 @@ class ContactViewC: AlysieBaseViewC {
   override func viewDidLoad() {
      
     super.viewDidLoad()
+
+    self.tblViewContactUs.showsHorizontalScrollIndicator = false
+    self.tblViewContactUs.showsVerticalScrollIndicator = false
+    
     self.view.isUserInteractionEnabled = true
     self.editContactDetailButton.isUserInteractionEnabled = true
     self.tblViewContactUs.isUserInteractionEnabled = true

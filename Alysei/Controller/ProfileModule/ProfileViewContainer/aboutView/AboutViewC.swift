@@ -42,7 +42,9 @@ class AboutViewC: UIViewController {
 
         // Do any additional setup after loading the view.
 
-
+        self.tableView.showsHorizontalScrollIndicator = false
+        self.tableView.showsVerticalScrollIndicator = false
+        
         self.aboutCollectionView.delegate = self
         self.aboutCollectionView.dataSource = self
 
