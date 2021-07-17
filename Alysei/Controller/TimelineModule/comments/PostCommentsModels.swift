@@ -84,7 +84,7 @@ enum PostComments {
             var email: String?
             var companyName: String?
             var restaurantName: String?
-            var avatarID: Avatar
+            var avatarID: Avatar?
 
             private enum CodingKeys: String, CodingKey {
                 case roleID = "role_id"

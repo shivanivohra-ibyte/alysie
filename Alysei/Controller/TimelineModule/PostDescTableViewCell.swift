@@ -118,7 +118,8 @@ class PostDescTableViewCell: UITableViewCell {
 
 
         self.data = data
-        self.index = index
+//        self.index = index
+        self.index = self.data?.postID ?? 0
         userName.text = data.subjectId?.companyName?.capitalized
         userNickName.text = data.subjectId?.name?.capitalized
         lblPostDesc.text = data.body
@@ -223,7 +224,7 @@ class PostDescTableViewCell: UITableViewCell {
 
     @objc func showCommentsScreen() {
         let model = PostCommentsUserData(userID: self.data?.subjectId?.userId ?? -1,
-                                         postID: self.index ?? 0)
+                                         postID: self.data?.postID ?? 0)
         self.commentCallback?(model)
     }
 

@@ -75,7 +75,7 @@ class PostCommentsViewController: UIViewController, PostCommentsDisplayLogic {
         self.tableView.allowsSelection = false
 
         self.interactor?.fetchComments(self.postCommentsUserDataModel.postID)
-        self.commentTextfield.becomeFirstResponder()
+//        self.commentTextfield.becomeFirstResponder()
     }
 
     // MARK:- IBOutlets
@@ -91,10 +91,12 @@ class PostCommentsViewController: UIViewController, PostCommentsDisplayLogic {
     // MARK:- protocol methods
     func loadComments(_ response: PostComments.Comment.Response) {
         self.model = response
+        self.commentTextfield.text = ""
         self.tableView.reloadData()
-        if !self.commentTextfield.isFirstResponder {
-            self.commentTextfield.becomeFirstResponder()
-        }
+        self.commentTextfield.resignFirstResponder()
+//        if !self.commentTextfield.isFirstResponder {
+//            self.commentTextfield.becomeFirstResponder()
+//        }
     }
 
     // MARK:- IBAction methods
@@ -137,7 +139,7 @@ extension PostCommentsViewController: UITableViewDelegate, UITableViewDataSource
         cell.userNameLabel.text = "\(name)"
         cell.timeLabel.text = "\(commentData.convertDate())"
 //        cell.userImageView.setImage(withString: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=400")
-        cell.userImageView.setImage(withString: "\(imageDomain)/\(commentData.poster?.avatarID.attachmentUrl ?? "")")
+        cell.userImageView.setImage(withString: "\(imageDomain)/\(commentData.poster?.avatarID?.attachmentUrl ?? "")")
         return cell
     }
 }

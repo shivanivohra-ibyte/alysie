@@ -23,6 +23,46 @@ protocol PostCommentsDataStore {
 }
 
 class PostCommentsInteractor: PostCommentsBusinessLogic, PostCommentsDataStore {
+
+    struct dummy: Codable {
+        var comments : [comments]
+    }
+
+    struct comments: Codable {
+        var body: String
+        var updatedAt : String
+        var createdAt : String
+        var poster: poster?
+
+        private enum CodingKeys: String, CodingKey {
+            case updatedAt = "updated_at"
+            case createdAt = "created_at"
+            case body
+            case poster
+        }
+    }
+
+    struct poster: Codable {
+        var roleID: Int
+        var userID: Int
+        var name: String?
+        var email: String?
+        var companyName: String?
+        var restaurantName: String?
+        var avatarID: Avatar
+
+        private enum CodingKeys: String, CodingKey {
+            case roleID = "role_id"
+            case userID = "user_id"
+            case name
+            case email
+            case companyName = "company_name"
+            case restaurantName = "restaurant_name"
+            case avatarID = "avatar_id"
+        }
+    }
+
+
     var presenter: PostCommentsPresentationLogic?
     var worker: PostCommentsWorker?
     //var name: String = ""
@@ -64,12 +104,33 @@ class PostCommentsInteractor: PostCommentsBusinessLogic, PostCommentsDataStore {
 
         socket.emit("doComment", with: [sd]) {
             print("doComment - inside ")
-            self.fetchComments(request.post_id)
+            DispatchQueue.main.async {
+                self.fetchComments(request.post_id)
+            }
+
         }
 
         socket.on("showComment") { showLikeData, showLikeAck in
             print("inside show like - start")
             print(showLikeData)
+            do {
+
+                let json = try JSONSerialization.data(withJSONObject: showLikeData, options: [])
+                print(json)
+//                let data = Data(showl)
+                if let newTech = try JSONSerialization.jsonObject(with: json, options: []) as? dummy {
+                    print(newTech.comments.count)
+                }
+                if let newTech2 = try JSONSerialization.jsonObject(with: json, options: []) as? [comments] {
+                    print(newTech2)
+                }
+
+                let jsonResponse = try JSONSerialization.jsonObject(with: json, options: [])
+                print(jsonResponse)
+
+            } catch {
+                print(error.localizedDescription)
+            }
             print("inside show like - end")
         }
     }

@@ -34,7 +34,7 @@ class ProfileViewC: AlysieBaseViewC{
     //  @IBOutlet weak var lblEmail: UILabel!
     @IBOutlet weak var btnEditProfile: UIButtonExtended!
 //    @IBOutlet weak var viewProfileCompletion: UIView!
-//    @IBOutlet weak var viewProfileHeight: NSLayoutConstraint!
+//    @IBOutlet weak var viewProfiletab: NSLayoutConstraint!
 //    @IBOutlet weak var profilePercentage: UILabel!
 //    @IBOutlet weak var lblUserName: UILabel!
 //    @IBOutlet weak var lblHintText: UILabel!
@@ -170,7 +170,7 @@ class ProfileViewC: AlysieBaseViewC{
         let tableHeaderViewHeight = (UIApplication.shared.windows.first?.frame.height ?? self.view.frame.height) - (self.tabBarController?.tabBar.frame.height ?? 0.0) - 70 - topMargin
 //        self.tblViewPosts.tableHeaderView?.setHeight(tableHeaderViewHeight)
 
-        let someHeight = (self.tblViewPosts.tableHeaderView?.frame.height ?? 0) + tableHeaderViewHeight
+        let someHeight = (self.tblViewPosts.tableHeaderView?.frame.height ?? 0) + tableHeaderViewHeight - 50.0
         self.tblViewPosts.tableHeaderView?.setHeight(someHeight)
 
         //self.tblViewPosts.tableFooterView = UIView()
@@ -552,6 +552,7 @@ class ProfileViewC: AlysieBaseViewC{
             //          self.view.isUserInteractionEnabled = false
             self.addChild(newVC)
             newVC.view.frame = self.containerView.bounds
+            newVC.view.setHeight(self.view.frame.height - 100.0)
 
             oldVC.willMove(toParent: nil)
 
@@ -1196,7 +1197,7 @@ extension ProfileViewC: AnimationProfileCallBack{
             guard let controller = self.storyboard?.instantiateViewController(identifier: "EditProfileViewC") as? EditProfileViewC else {return}
             controller.signUpViewModel = self.signUpViewModel
             controller.userType = self.userType ?? .voyagers
-            //self.editProfileViewCon = controller
+            self.editProfileViewCon = controller
             self.navigationController?.pushViewController(controller, animated: true)
 
         }
@@ -1226,7 +1227,7 @@ extension ProfileViewC{
     override func didUserGetData(from result: Any, type: Int) {
 
         if editProfileViewCon == nil {
-            self.initiateEditProfileViewController()
+//            self.initiateEditProfileViewController()
         }
 
         let dicResult = kSharedInstance.getDictionary(result)
