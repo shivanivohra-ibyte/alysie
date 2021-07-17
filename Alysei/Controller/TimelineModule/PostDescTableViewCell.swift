@@ -86,7 +86,7 @@ class PostDescTableViewCell: UITableViewCell {
     }
     
     
-    func configCell(_ data: NewFeedSearchDataModel, _ index: Int){
+    func configCell(_ modelData: NewFeedSearchDataModel, _ index: Int){
 
         let selfID = Int(kSharedUserDefaults.loggedInUserModal.userId ?? "-1") ?? 0
 
@@ -117,17 +117,17 @@ class PostDescTableViewCell: UITableViewCell {
         socket.connect()
 
 
-        self.data = data
+        self.data = modelData
 //        self.index = index
         self.index = self.data?.postID ?? 0
-        userName.text = data.subjectId?.companyName?.capitalized
-        userNickName.text = data.subjectId?.name?.capitalized
-        lblPostDesc.text = data.body
-        lblPostLikeCount.text = "\(data.likeCount ?? 0)"
-        lblPostCommentCount.text = "\(data.commentCount ?? 0)"
-        lblPostTime.text = data.posted_at
+        userName.text = modelData.subjectId?.companyName?.capitalized
+        userNickName.text = modelData.subjectId?.name?.capitalized
+        lblPostDesc.text = modelData.body
+        lblPostLikeCount.text = "\(modelData.likeCount ?? 0)"
+        lblPostCommentCount.text = "\(modelData.commentCount ?? 0)"
+        lblPostTime.text = modelData.posted_at
         //islike = data.likeFlag
-        if data.attachmentCount == 0 {
+        if modelData.attachmentCount == 0 {
             imageHeightCVConstant.constant = 0
 //            imagePostCollectionView.alpha = 0.0
         }else{
@@ -136,21 +136,21 @@ class PostDescTableViewCell: UITableViewCell {
         }
         self.userImage.layer.borderWidth = 0.5
         self.userImage.layer.borderColor = UIColor.lightGray.cgColor
-        print("ImageUrl--------------------------------\(String.getString(data.subjectId?.avatarId?.attachmentUrl) )")
-        if String.getString(data.subjectId?.avatarId?.attachmentUrl) == ""{
+        print("ImageUrl--------------------------------\(String.getString(modelData.subjectId?.avatarId?.attachmentUrl) )")
+        if String.getString(modelData.subjectId?.avatarId?.attachmentUrl) == ""{
             self.userImage.image = UIImage(named: "profile_icon")
         }else{
-        self.userImage.setImage(withString: kImageBaseUrl + String.getString(data.subjectId?.avatarId?.attachmentUrl))
+        self.userImage.setImage(withString: kImageBaseUrl + String.getString(modelData.subjectId?.avatarId?.attachmentUrl))
         }
-        likeImage.image = data.likeFlag == 0 ? UIImage(named: "like_icon") : UIImage(named: "liked_icon")
+        likeImage.image = modelData.likeFlag == 0 ? UIImage(named: "like_icon") : UIImage(named: "liked_icon")
 
         self.imagePostCollectionView.isPagingEnabled = true
 
         self.imagePostCollectionView.showsHorizontalScrollIndicator = false
 
         self.imageArray.removeAll()
-        for i in  0..<(data.attachmentCount ?? 0) {
-            self.imageArray.append(data.attachments?[i].attachmentLink?.attachmentUrl ?? "")
+        for i in  0..<(modelData.attachmentCount ?? 0) {
+            self.imageArray.append(modelData.attachments?[i].attachmentLink?.attachmentUrl ?? "")
         }
 
 

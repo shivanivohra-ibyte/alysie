@@ -84,6 +84,7 @@ class NewFeedSearchDataModel{
         self.body = data.body
         self.subjectId = data.subjectData
         self.attachmentCount = data.attachmentCount
+        self.attachments = data.attachments
     }
 }
 
