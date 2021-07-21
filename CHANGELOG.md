@@ -4,6 +4,7 @@
 **Changes** 
 ### Fixed
 - bug fixes
+- post images were not visible under profile
 
 ## v1.0.33 - 17-July-2021
 **Changes** 
