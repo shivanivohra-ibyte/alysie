@@ -75,6 +75,15 @@ class PostCommentsViewController: UIViewController, PostCommentsDisplayLogic {
         self.tableView.allowsSelection = false
 
         self.interactor?.fetchComments(self.postCommentsUserDataModel.postID)
+        self.profilePhotoButton.layer.cornerRadius = self.profilePhotoButton.frame.width / 2.0
+        self.profilePhotoButton.layer.masksToBounds = true
+
+        if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().profilePhoto) {
+            self.profilePhotoButton.setImage(profilePhoto, for: .normal)
+//        } else {
+            let profilePhoto = UIImage(named: "profile_icon")
+            self.profilePhotoButton.setImage(profilePhoto, for: .normal)
+        }
 //        self.commentTextfield.becomeFirstResponder()
     }
 
