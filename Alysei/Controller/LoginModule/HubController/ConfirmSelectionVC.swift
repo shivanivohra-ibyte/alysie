@@ -33,10 +33,12 @@ class ConfirmSelectionVC: UIViewController , SelectList{
     
     func didSelectList(data: Any?, index: IndexPath) {
         guard let data = data as? SelectdHubs else {return}
-        let nextVC = StateListVC()
+        let nextVC = HubsListVC()
         nextVC.country = data.country
         nextVC.selectedHubs = self.selectedHubs
-        nextVC.modalPresentationStyle = .overFullScreen
+        nextVC.isEditHub = self.isEditHub
+        nextVC.selectedHubs = self.selectedHubs
+        nextVC.hasCome = .initialCountry
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
     func didSelectReviewList(data: Any?, index: IndexPath, isEdithub:Bool) {
@@ -49,9 +51,38 @@ class ConfirmSelectionVC: UIViewController , SelectList{
         nextVC.modalPresentationStyle = .overFullScreen
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
+    
+    @IBAction func proceedNext(_ sender: UIButton) {
+        
+        var allHubs = [CountryHubs]()
+        var addOrUpdate = 0
+        for hub in self.selectedHubs {
+            allHubs = allHubs + (hub.hubs )
+        }
+        if allHubs.isEmpty  && isEditHub != true {
+            showAlert(withMessage: "Please select at least 1 hub to continue")
+        }else{
+            let selectedCity = allHubs.filter{$0.type == .city}
+            let selectedHubs = allHubs.filter{$0.type == .hubs}
+            let hubsID = selectedHubs.map{Int.getInt($0.id)}
+            if self.isEditHub == true{
+                addOrUpdate = 2
+            }else{
+                addOrUpdate = 1
+            }
+            let params = ["params":["add_or_update": addOrUpdate,
+                                    "selectedhubs":hubsID,
+                                    "selectedcity":self.createCityJson(hubs: selectedCity)]]
+            print(params)
+            TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kPostHub, requestMethod: .POST, requestParameters: params, withProgressHUD: true) { (dictResposne, error, errorType, statuscode) in
+                kSharedAppDelegate.pushToTabBarViewC()
+            }
+        }
+    }
+    
     @IBAction func nextVC(_ sender: UIButton) {
         if isEditHub == true{
-            
+
         }else{
         if self.selectedHubs.isEmpty {
             showAlert(withMessage: "Please select at least 1 hub to continue"){

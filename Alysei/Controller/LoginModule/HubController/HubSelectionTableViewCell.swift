@@ -66,6 +66,7 @@ class HubSelectionTableViewCell: UITableViewCell {
         self.country = country
         self.checkloadList = loadCell
         self.checkCase = checkCase
+       // self.latitude = self.
        
         if data.hubs_array?.count == 0 || data.city_array?.count == 0 {
             self.lblNoHub.isHidden = false

@@ -5,7 +5,7 @@
 //
 
 import UIKit
-enum HasCome {case initialCountry,showCountry,hubs,city}
+enum HasCome {case initialCountry,showCountry,hubs,city }
 
 class CountryListVC: AlysieBaseViewC , SelectList {
     
@@ -13,7 +13,6 @@ class CountryListVC: AlysieBaseViewC , SelectList {
     
     @IBOutlet weak var tableVIew: CountryTableView!
     @IBOutlet weak var activeCountryCV: ActiveCollectionView!
-    @IBOutlet weak var inActiveCountryCV: InactiveCollectionView!
     @IBOutlet weak var viewBottom: UIView!
     @IBOutlet weak var heightOFBottom: NSLayoutConstraint!
     @IBOutlet weak var btnSelection: UIButton!
@@ -21,8 +20,9 @@ class CountryListVC: AlysieBaseViewC , SelectList {
     @IBOutlet weak var labelHeading: UILabel!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var btnBackWidth: NSLayoutConstraint!
-    @IBOutlet weak var changeRole: UIButton!
     @IBOutlet weak var activeInactiveView: UIView!
+
+    
     var isEditHub : Bool?
     
     //MARK: - Properties -
@@ -32,18 +32,14 @@ class CountryListVC: AlysieBaseViewC , SelectList {
     var selectedHubs = [SelectdHubs]()
     var roleId: String?
     var arrActiveUpcoming: ActiveUpcomingCountry?
-   // var isChckfirstEditSlcted = true
     var addOrUpdate: Int?
     
     // MARK: - ViewLifeCycle Methods -
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         self.viewHeader.addShadow()
         self.activeInactiveView.isHidden = false
-        self.inActiveCountryCV.isHidden = true
-        self.inActiveCountryCV.isUserInteractionEnabled = false
         self.tableVIew.isHidden = true
         self.tableVIew.hascome = .showCountry
         self.activeCountryCV.hascome = .showCountry
@@ -70,7 +66,6 @@ class CountryListVC: AlysieBaseViewC , SelectList {
         btnSelection.layer.borderColor = UIColor.black.cgColor
         self.tableVIew.selectDelegate = self
         self.activeCountryCV.selectDelegate = self
-        self.inActiveCountryCV.selectDelegate = self
         self.isEditHub == true ? self.requestToGetSelectedHubCountries() :  self.postRequestToGetCountries()
     }
     
@@ -85,31 +80,29 @@ class CountryListVC: AlysieBaseViewC , SelectList {
             let selectedHubsC = kSharedInstance.getStringArray(self.selectedHubs.map{$0.country.id})
             _ = self.arrActiveUpcoming?.arrActiveCountries.map{$0.isSelected = selectedHubsC.contains($0.id ?? "")}
             self.activeCountryCV.countries = self.arrActiveUpcoming?.arrActiveCountries
-            self.inActiveCountryCV.countries = self.arrActiveUpcoming?.arrUpcomingCountries
         }
     }
-        private func requestToGetSelectedHubCountries() -> Void{
-            disableWindowInteraction()
-            TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetSelectedHubCountry, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errortype, statusCode) in
-                
-                let dicResult = kSharedInstance.getDictionary(dictResponse)
-                guard let data = dicResult["data"] as? [String:Any] else {return}
-                self.arrActiveUpcoming = ActiveUpcomingCountry.init(data: data)
-                let selectedHubsC = kSharedInstance.getStringArray(self.selectedHubs.map{$0.country.id})
-                if self.isEditHub == false{
+    private func requestToGetSelectedHubCountries() -> Void{
+        disableWindowInteraction()
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetSelectedHubCountry, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errortype, statusCode) in
+            
+            let dicResult = kSharedInstance.getDictionary(dictResponse)
+            guard let data = dicResult["data"] as? [String:Any] else {return}
+            self.arrActiveUpcoming = ActiveUpcomingCountry.init(data: data)
+            let selectedHubsC = kSharedInstance.getStringArray(self.selectedHubs.map{$0.country.id})
+            if self.isEditHub == false{
                 _ = self.arrActiveUpcoming?.arrActiveCountries.map{$0.isSelected = selectedHubsC.contains($0.id ?? "")}
-                }
-//                else if  (self.isEditHub == true) { //&& (self.isChckfirstEditSlcted == false) {
-//                    _ = self.arrActiveUpcoming?.arrActiveCountries.map{$0.isSelected = selectedHubsC.contains($0.id ?? "")}
-//                }
-                else{
-                   // self.isChckfirstEditSlcted = false
-                    print("Check Remaining")
-                }
-                self.activeCountryCV.countries = self.arrActiveUpcoming?.arrActiveCountries
-                self.inActiveCountryCV.countries = self.arrActiveUpcoming?.arrUpcomingCountries
             }
+            //                else if  (self.isEditHub == true) { //&& (self.isChckfirstEditSlcted == false) {
+            //                    _ = self.arrActiveUpcoming?.arrActiveCountries.map{$0.isSelected = selectedHubsC.contains($0.id ?? "")}
+            //                }
+            else{
+                // self.isChckfirstEditSlcted = false
+                print("Check Remaining")
+            }
+            self.activeCountryCV.countries = self.arrActiveUpcoming?.arrActiveCountries
         }
+    }
     
     
     //MARK:  - IBAction -
@@ -168,14 +161,17 @@ class CountryListVC: AlysieBaseViewC , SelectList {
         if firstIndex == nil {
             self.selectedHubs.append(SelectdHubs.createHub(country: data))
         }
-        let nextVC = StateListVC()
+
+        let nextVC = HubsListVC()
+        //let nextVC = StateWiseHubListVC()
+        nextVC.hasCome = self.hasCome
         nextVC.country = data
+        nextVC.selectCountryId = String.getString(data.id)
         nextVC.selectedHubs = self.selectedHubs
         nextVC.isEditHub = self.isEditHub
         nextVC.roleId = kSharedUserDefaults.loggedInUserModal.memberRoleId
         enableWindowInteraction()
         self.navigationController?.pushViewController(nextVC, animated: true)
-        print(data)
     }
     func didSelectReviewList(data: Any?, index: IndexPath, isEdithub: Bool){
         print(data,index)
@@ -208,7 +204,7 @@ extension UIView {
     }
 }
 
-extension CountryListVC{
+extension CountryListVC {
     
     override func didUserGetData(from result: Any, type: Int) {
         

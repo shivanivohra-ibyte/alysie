@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,18 +27,18 @@
                         <rect key="frame" x="20" y="5" width="431" height="90"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1KX-vI-V9O">
-                                <rect key="frame" x="60" y="35" width="33" height="20"/>
+                                <rect key="frame" x="60" y="35.5" width="28.5" height="19"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Bg-lm-Xlx">
-                                <rect key="frame" x="381" y="27.5" width="35" height="35"/>
+                                <rect key="frame" x="388" y="31" width="28" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="6Bg-lm-Xlx" secondAttribute="height" multiplier="1:1" id="4qX-ZR-WlT"/>
-                                    <constraint firstAttribute="height" constant="35" id="jxp-5A-hI9"/>
+                                    <constraint firstAttribute="height" constant="28" id="jxp-5A-hI9"/>
                                 </constraints>
-                                <state key="normal" image="icon_eye_open"/>
+                                <state key="normal" image="Location-1"/>
                                 <connections>
                                     <action selector="btnRightCheckBoxAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="PwR-jb-HJz"/>
                                 </connections>
@@ -47,6 +47,13 @@
                                 <rect key="frame" x="10" y="32.5" width="25" height="25"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="yeU-df-IFD">
+                                <rect key="frame" x="10" y="30" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="yeU-df-IFD" secondAttribute="height" multiplier="1:1" id="3ff-QW-3MJ"/>
+                                    <constraint firstAttribute="height" constant="30" id="7t4-fi-aVI"/>
+                                </constraints>
+                            </imageView>
                             <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NW8-Od-0DT">
                                 <rect key="frame" x="10" y="32.5" width="25" height="25"/>
                                 <constraints>
@@ -66,10 +73,12 @@
                             <constraint firstAttribute="trailing" secondItem="6Bg-lm-Xlx" secondAttribute="trailing" constant="15" id="4mz-rt-995"/>
                             <constraint firstItem="6Bg-lm-Xlx" firstAttribute="centerY" secondItem="1KX-vI-V9O" secondAttribute="centerY" id="6Eu-VG-P05"/>
                             <constraint firstItem="pJd-3Z-99I" firstAttribute="centerY" secondItem="NW8-Od-0DT" secondAttribute="centerY" id="8cx-8P-bon"/>
-                            <constraint firstItem="NW8-Od-0DT" firstAttribute="centerY" secondItem="1KX-vI-V9O" secondAttribute="centerY" id="8oT-r3-7PT"/>
                             <constraint firstItem="NW8-Od-0DT" firstAttribute="leading" secondItem="wR8-C8-2X7" secondAttribute="leading" constant="10" id="BnM-w7-jAB"/>
                             <constraint firstItem="pJd-3Z-99I" firstAttribute="bottom" secondItem="NW8-Od-0DT" secondAttribute="bottom" id="GFt-2r-gXd"/>
                             <constraint firstItem="NW8-Od-0DT" firstAttribute="centerY" secondItem="wR8-C8-2X7" secondAttribute="centerY" id="Iqk-Bz-5Sz"/>
+                            <constraint firstItem="1KX-vI-V9O" firstAttribute="centerY" secondItem="wR8-C8-2X7" secondAttribute="centerY" id="J6W-29-8wP"/>
+                            <constraint firstItem="yeU-df-IFD" firstAttribute="leading" secondItem="wR8-C8-2X7" secondAttribute="leading" constant="10" id="Yvk-he-eHX"/>
+                            <constraint firstItem="yeU-df-IFD" firstAttribute="centerY" secondItem="1KX-vI-V9O" secondAttribute="centerY" id="krS-d5-Mse"/>
                             <constraint firstItem="pJd-3Z-99I" firstAttribute="trailing" secondItem="NW8-Od-0DT" secondAttribute="trailing" id="l1O-L7-Cbe"/>
                         </constraints>
                     </view>
@@ -84,9 +93,13 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="buttonLeftCentreVertical" destination="Iqk-Bz-5Sz" id="Iql-Ok-m9B"/>
                 <outlet property="buttonLeftCheckWidth" destination="QFm-DE-aZL" id="Wx7-Se-AXF"/>
                 <outlet property="buttonLeftCheckbox" destination="NW8-Od-0DT" id="aED-3Q-5Nv"/>
+                <outlet property="buttonLeftHeight" destination="6iN-yH-pSu" id="srZ-1s-c6p"/>
+                <outlet property="buttonLeftLeading" destination="BnM-w7-jAB" id="tfI-m0-AEd"/>
                 <outlet property="buttonRightCheckBox" destination="6Bg-lm-Xlx" id="qhO-hN-iCf"/>
+                <outlet property="imgHub" destination="yeU-df-IFD" id="nyQ-wj-glN"/>
                 <outlet property="labelCityName" destination="1KX-vI-V9O" id="c8X-4m-0wV"/>
                 <outlet property="viewContainer" destination="wR8-C8-2X7" id="YpB-hD-aDs"/>
             </connections>
@@ -94,8 +107,9 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="icon_eye_open" width="20" height="13"/>
+        <image name="Location-1" width="29.5" height="30.5"/>
         <image name="icon_uncheckedBox" width="26" height="26"/>
+        <image name="image_placeholder" width="41" height="33"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

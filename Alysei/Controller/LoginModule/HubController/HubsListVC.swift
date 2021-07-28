@@ -10,11 +10,14 @@ class HubsListVC: UIViewController {
     
     // MARK:- Objects
     @IBOutlet weak var tableView: HubsListTable!
+    //@IBOutlet weak var collectionView: SelectHubStateList!
     @IBOutlet weak var lblHeading: UILabel!
     @IBOutlet weak var bottomStack: UIStackView!
     @IBOutlet weak var bottomStackHeight: NSLayoutConstraint!
     @IBOutlet weak var viewHeader: UIView!
     @IBOutlet weak var viewBottomStack: UIView!
+    @IBOutlet weak var heightOfCollectionView: NSLayoutConstraint!
+    @IBOutlet weak var lblShowSelectedHub: UILabel!
     
     var city = [CountryHubs]()
     var country: CountryModel?
@@ -25,7 +28,10 @@ class HubsListVC: UIViewController {
     var isEditHub: Bool?
     var isChckHubfirstEditSlcted = true
     var isChckCityfirstEditSlcted = true
+    var totalHub: Int?
+    var selectedHubCount: Int?
     
+    var selectCountryId = ""
   
     // MARK:- lifeCycle
     override func viewDidLoad() {
@@ -34,19 +40,36 @@ class HubsListVC: UIViewController {
         self.tableView.hasCome = self.hasCome
         self.tableView.country = self.country
         self.tableView.roleId = self.roleId
-        self.lblHeading.text = self.hasCome == .hubs ? "Select Hubs" : "Find your City"
-         hideEyeIcon = self.hasCome == .hubs ? false : true
-        self.bottomStack.isHidden = self.hasCome == .hubs ? false : true
-        self.viewBottomStack.isHidden = self.hasCome == .hubs ? false : true
-        self.bottomStackHeight.constant = self.hasCome == .hubs ? 30 : 0
-        self.bottomStack.backgroundColor = UIColor.init(hexString: "#1D4873")
-        self.hasCome == .hubs ? self.callHubViewApi() : self.postRequestToGetCity()
+        self.tableView.passCallBack = {
+            var selectedHubs = [CountryHubs]()
+            for hub in self.hubsViaCity ?? [] {
+                for subHub in hub.hubs_array ?? [] { if subHub.isSelected {selectedHubs.append(subHub)}}
+            }
+            let selectedHub = self.selectedHubs.first{$0.country.id == self.country?.id}
+            selectedHub?.hubs = (selectedHub?.hubs.filter{$0.type == .city} ?? []) + selectedHubs
+            self.setSelectedHubLabel(selectedHub?.hubs.count, totalHub: self.totalHub)
+        }
+        
+        if self.hasCome == .initialCountry {
+            self.lblHeading.text =  "Select Hubs"
+            hideEyeIcon = self.hasCome != .initialCountry
+            self.bottomStack.isHidden =  false
+            self.viewBottomStack.isHidden = false
+            self.bottomStackHeight.constant = 30
+            self.bottomStack.backgroundColor = UIColor.init(hexString: "#1D4873")
+            self.heightOfCollectionView.constant = 0
+            self.callStateWiseHubListApi()
+        }
+ 
+//        switch self.hasCome {
+//        case .initialCountry:
+//        case .hubs:
+//            self.callHubViewApi()
+//        default:
+//            self.postRequestToGetCity()
+//        }
     }
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        tableView.reloadData()
-//    }
-    
+
     private func callHubViewApi(){
         let countryID = String.getString(country?.id)
         let cityID = kSharedInstance.getStringArray(self.city.map{$0.id})
@@ -75,13 +98,10 @@ class HubsListVC: UIViewController {
             }
             
             self.tableView.hubsViaCity = self.hubsViaCity
+            //self.collectionView.hubsViaCity = self.hubsViaCity
         }
     }
-//   
-//    self.countries = data.map{CountryModel(data: $0)}
-//    let selectedHubsC = kSharedInstance.getStringArray(self.selectedHubs.map{$0.country.id})
-//    _ = self.countries?.map{$0.isSelected = selectedHubsC.contains($0.id ?? "")}
-//    self.tableVIew.countries = self.countries
+
     
     private func postRequestToGetCity() -> Void{
         let countryID = String.getString(country?.id)
@@ -111,8 +131,32 @@ class HubsListVC: UIViewController {
                 print("Check Remaining")
             }
             self.tableView.hubsViaCity = self.hubsViaCity
+            //self.collectionView.hubsViaCity = self.hubsViaCity
         }
     }
+    
+    func callStateWiseHubListApi(){
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kGetStateWiseHub + "\(selectCountryId )", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            let response = dictResponse as? [String:Any]
+            if let data = response?["data"] as? [String:Any]{
+                let hubs = kSharedInstance.getArray(withDictionary: data["hubs"])
+//                self.selectedHubCount = self.selectedHubs.first{$0.country.id == self.country?.id}?.hubs.count
+                self.hubsViaCity = hubs.map{HubsViaCity(data: $0)}
+               
+            }
+            for i in 0..<(self.hubsViaCity?.count ?? 0){
+                self.totalHub = (self.totalHub ?? 0) + (self.hubsViaCity?[i].hubs_array?.count ?? 0)
+            }
+            self.setSelectedHubLabel(0, totalHub: self.totalHub)
+            self.tableView.hasCome = .hubs
+            self.tableView.hubsViaCity = self.hubsViaCity
+        }
+    }
+    
+    func setSelectedHubLabel(_ selectedHub: Int? , totalHub: Int?){
+        lblShowSelectedHub.text = "\(selectedHub ?? 0)" + " " + "of" + " " + "\(totalHub ?? 0)" + " " + "hubs selected"
+    }
+    
     @IBAction func nextButtonAction(_ sender: UIButton) {
         var selectedHubs = [CountryHubs]()
         for hub in self.hubsViaCity ?? [] {
@@ -126,9 +170,13 @@ class HubsListVC: UIViewController {
         if selectedHub?.hubs.isEmpty ?? false {
             showAlert(withMessage: "Please select atleast one hub")
         }else{
-        let nextVC = CountryListVC()
-        nextVC.hasCome = .showCountry
-        nextVC.selectedHubs = self.selectedHubs
+        let nextVC = ConfirmSelectionVC()
+            nextVC.selectedHubs = self.selectedHubs
+            nextVC.updatedHubs = { hubs in self.selectedHubs = hubs}
+            
+            nextVC.roleId = kSharedUserDefaults.loggedInUserModal.memberRoleId
+            nextVC.isEditHub = self.isEditHub
+            nextVC.modalPresentationStyle = .overFullScreen
         self.navigationController?.pushViewController(nextVC, animated: true)
         }
     }
@@ -141,10 +189,8 @@ class HubsListVC: UIViewController {
         }
         let selectedHub = self.selectedHubs.first{$0.country.id == self.country?.id}
         selectedHub?.hubs = (selectedHub?.hubs.filter{$0.type == .city} ?? []) + selectedHubs
-        let nextvc = HubsListVC()
+        let nextvc = StateListVC()
         nextvc.country = self.country
-        nextvc.city =  self.city
-        nextvc.hasCome = .city
         nextvc.selectedHubs = self.selectedHubs
         self.navigationController?.pushViewController(nextvc, animated: true)
     }

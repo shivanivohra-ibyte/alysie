@@ -12,6 +12,9 @@
         <array key="Montserrat-Bold.ttf">
             <string>Montserrat-Bold</string>
         </array>
+        <array key="Montserrat-Medium.ttf">
+            <string>Montserrat-Medium</string>
+        </array>
         <array key="Montserrat-Regular.ttf">
             <string>Montserrat-Regular</string>
         </array>
@@ -21,7 +24,9 @@
             <connections>
                 <outlet property="bottomStack" destination="UwA-bB-z8w" id="NfB-is-yuh"/>
                 <outlet property="bottomStackHeight" destination="wiD-w7-YDu" id="59v-Sd-axD"/>
+                <outlet property="heightOfCollectionView" destination="Dzs-i1-r2F" id="yxB-y3-kfT"/>
                 <outlet property="lblHeading" destination="tof-SA-F88" id="7Mo-Cy-cAp"/>
+                <outlet property="lblShowSelectedHub" destination="fmH-rx-6Fp" id="TPH-sR-Uf9"/>
                 <outlet property="tableView" destination="9wV-Gv-VCW" id="LDv-Vg-nvR"/>
                 <outlet property="view" destination="jdr-8t-QXn" id="nky-kz-8XI"/>
                 <outlet property="viewBottomStack" destination="Jie-dU-7jB" id="TD4-I2-Vpt"/>
@@ -80,7 +85,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9wV-Gv-VCW" customClass="HubsListTable" customModule="Alysei" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="115" width="414" height="687"/>
+                    <rect key="frame" x="0.0" y="195" width="414" height="607"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jie-dU-7jB">
@@ -114,29 +119,50 @@
                         <action selector="clickHear:" destination="-1" eventType="touchUpInside" id="pna-hS-YkF"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I0G-0y-GYh">
+                    <rect key="frame" x="0.0" y="125" width="414" height="50"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 of 0 hubs selected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fmH-rx-6Fp">
+                            <rect key="frame" x="10" y="16" width="394" height="18.5"/>
+                            <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="15"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="fmH-rx-6Fp" firstAttribute="leading" secondItem="I0G-0y-GYh" secondAttribute="leading" constant="10" id="DZ6-Eb-F2X"/>
+                        <constraint firstAttribute="height" constant="50" id="Dzs-i1-r2F"/>
+                        <constraint firstAttribute="trailing" secondItem="fmH-rx-6Fp" secondAttribute="trailing" constant="10" id="ozL-GB-6GW"/>
+                        <constraint firstItem="fmH-rx-6Fp" firstAttribute="centerY" secondItem="I0G-0y-GYh" secondAttribute="centerY" id="wZr-Dq-PA7"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="0nC-a3-rmM"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Jie-dU-7jB" firstAttribute="top" secondItem="UwA-bB-z8w" secondAttribute="top" constant="-2" id="3jv-6c-92A"/>
+                <constraint firstItem="9wV-Gv-VCW" firstAttribute="top" secondItem="I0G-0y-GYh" secondAttribute="bottom" constant="20" id="6Y2-bl-Fnf"/>
                 <constraint firstItem="k8g-Qj-3Fc" firstAttribute="leading" secondItem="Jie-dU-7jB" secondAttribute="leading" id="6hD-xY-Vqv"/>
                 <constraint firstItem="UwA-bB-z8w" firstAttribute="top" secondItem="9wV-Gv-VCW" secondAttribute="bottom" constant="10" id="75i-ad-fzm"/>
                 <constraint firstItem="Jie-dU-7jB" firstAttribute="leading" secondItem="UwA-bB-z8w" secondAttribute="leading" constant="-10" id="Afj-cb-n5y"/>
                 <constraint firstItem="ro2-Db-Eba" firstAttribute="leading" secondItem="0nC-a3-rmM" secondAttribute="leading" id="Emp-4x-oax"/>
                 <constraint firstItem="k8g-Qj-3Fc" firstAttribute="top" secondItem="Jie-dU-7jB" secondAttribute="top" id="LsL-Yo-8gS"/>
                 <constraint firstItem="k8g-Qj-3Fc" firstAttribute="trailing" secondItem="Jie-dU-7jB" secondAttribute="trailing" id="MA9-u8-OUm"/>
+                <constraint firstAttribute="trailing" secondItem="I0G-0y-GYh" secondAttribute="trailing" id="MtL-Is-aoL"/>
                 <constraint firstItem="Jie-dU-7jB" firstAttribute="trailing" secondItem="UwA-bB-z8w" secondAttribute="trailing" constant="10" id="O7a-Sb-jkN"/>
                 <constraint firstItem="ro2-Db-Eba" firstAttribute="top" secondItem="jdr-8t-QXn" secondAttribute="top" id="Oc6-2q-var"/>
-                <constraint firstItem="9wV-Gv-VCW" firstAttribute="top" secondItem="ro2-Db-Eba" secondAttribute="bottom" constant="15" id="Wx9-bv-Flc"/>
                 <constraint firstItem="0nC-a3-rmM" firstAttribute="trailing" secondItem="9wV-Gv-VCW" secondAttribute="trailing" id="cy5-kr-deu"/>
                 <constraint firstItem="UwA-bB-z8w" firstAttribute="centerX" secondItem="0nC-a3-rmM" secondAttribute="centerX" id="hSa-gc-yFg"/>
+                <constraint firstItem="I0G-0y-GYh" firstAttribute="top" secondItem="ro2-Db-Eba" secondAttribute="bottom" constant="25" id="i0u-n1-Msl"/>
                 <constraint firstItem="9wV-Gv-VCW" firstAttribute="leading" secondItem="0nC-a3-rmM" secondAttribute="leading" id="jqV-oK-h8A"/>
                 <constraint firstItem="0nC-a3-rmM" firstAttribute="bottom" secondItem="UwA-bB-z8w" secondAttribute="bottom" constant="10" id="k1t-U6-i6m"/>
                 <constraint firstItem="k8g-Qj-3Fc" firstAttribute="bottom" secondItem="Jie-dU-7jB" secondAttribute="bottom" id="oHz-Zk-jtV"/>
                 <constraint firstItem="Jie-dU-7jB" firstAttribute="bottom" secondItem="UwA-bB-z8w" secondAttribute="bottom" constant="2" id="oI9-6I-uhL"/>
                 <constraint firstItem="ro2-Db-Eba" firstAttribute="trailing" secondItem="0nC-a3-rmM" secondAttribute="trailing" id="tar-W4-kDM"/>
+                <constraint firstItem="I0G-0y-GYh" firstAttribute="leading" secondItem="jdr-8t-QXn" secondAttribute="leading" id="zRN-bl-hlF"/>
             </constraints>
-            <point key="canvasLocation" x="161" y="722"/>
+            <point key="canvasLocation" x="160.86956521739131" y="721.875"/>
         </view>
     </objects>
     <resources>

@@ -156,6 +156,7 @@ enum isCameFrom {
     case save
     case addFeatureProduct
     case connectionRequest
+    case locateHub
 }
 //class UserImage: {
 //

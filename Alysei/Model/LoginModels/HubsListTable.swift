@@ -12,6 +12,7 @@ class HubsListTable: UITableView {
     var hasCome:HasCome? = .hubs
     var country: CountryModel?
      var roleId: String?
+    var passCallBack: (() -> Void)? = nil
     // MARK:- life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,15 +36,28 @@ extension HubsListTable : UITableViewDelegate   , UITableViewDataSource {
         cell.selectionStyle = .none
         cell.hasCome = self.hasCome
         cell.country = self.country
+        cell.arrhubsViaCity = self.hubsViaCity
+        cell.passCallback = {
+            print("Reloading------------------")
+            self.reloadData()
+            self.passCallBack?()
+        }
         cell.awakeFromNib()
         return cell
     }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 350
+//    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 350
+        
+        //print("self.hubsViaCity?.count-------------\(self.hubsViaCity?.count ?? 0)")
+        return CGFloat( 95 + 70 * (self.hubsViaCity?[indexPath.row].hubs_array?.count ?? 0))
+        //return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
+       // self.passCallBack?()
     }
 }
 

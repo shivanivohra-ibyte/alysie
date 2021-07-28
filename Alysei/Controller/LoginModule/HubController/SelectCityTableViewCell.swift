@@ -14,8 +14,13 @@ class SelectCityTableViewCell: UITableViewCell {
     @IBOutlet weak var buttonLeftCheckbox: UIButton!
     @IBOutlet weak var buttonRightCheckBox: UIButton!
     @IBOutlet weak var buttonLeftCheckWidth: NSLayoutConstraint!
+    @IBOutlet weak var buttonLeftHeight: NSLayoutConstraint!
    // @IBOutlet weak var imageHub: ImageLoader!
     @IBOutlet weak var labelCityName: UILabel!
+    @IBOutlet weak var buttonLeftLeading: NSLayoutConstraint!
+    @IBOutlet weak var buttonLeftCentreVertical: NSLayoutConstraint!
+    @IBOutlet weak var imgHub: UIImageView!
+    
    // @IBOutlet weak var checkMarkView: Checkmark!
     
     var leftBtnCallBack: ((String,String,Bool,Int) -> Void)? = nil
@@ -24,6 +29,9 @@ class SelectCityTableViewCell: UITableViewCell {
     var index: Int?
     var selectState:String?
     var selectStateId: String?
+    var hubLongitude: String?
+    var hubLatitude: String?
+    
     var checkCase: CountryCityHubSelection?
 
 
@@ -53,8 +61,16 @@ class SelectCityTableViewCell: UITableViewCell {
         buttonLeftCheckbox.isHidden = false
        // buttonLeftCheckWidth.constant = 20
        labelCityName.text = data?.name
+        self.imgHub.layer.cornerRadius = 15
+        self.imgHub.setImage(withString: kImageBaseUrl + String.getString(data?.imageHub))
         self.buttonLeftCheckbox.setImage((data?.isSelected == true) ? UIImage(named: "icon_blueSelected") : UIImage(named: "icon_uncheckedBox"), for: .normal)
         self.buttonRightCheckBox.isHidden = hideEyeIcon == true ? true : false
+        self.buttonLeftCheckWidth.constant = hideEyeIcon == true ? 25 : 12
+        self.buttonLeftHeight.constant = hideEyeIcon == true ? 25 : 12
+        
+        self.buttonLeftLeading.constant = hideEyeIcon == true ? 15 : 28
+        self.buttonLeftCentreVertical.constant = hideEyeIcon == true ? 0 : 6
+        self.imgHub.isHidden = hideEyeIcon == true ? true : false
     }
     
     @IBAction func btnLeftCheckBoxAction(_ sender: UIButton){
@@ -62,7 +78,14 @@ class SelectCityTableViewCell: UITableViewCell {
         //self.leftBtnCallBack?(selectState ?? "",data?.id ?? "",sender.isSelected,sender.tag)
     }
     @IBAction func btnRightCheckBoxAction(_ sender: UIButton){
-        guard let nextVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "DemoMapViewViewController") as? DemoMapViewViewController else{return}
+        guard let nextVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(identifier: "MapViewC") as? MapViewC else{return}
+
+        nextVC.fromVC = .locateHub
+        
+        print("hubLatitude--------------------------\(self.hubLatitude ?? "")")
+        print("hubLongCordinate--------------------------\(self.hubLongitude ?? "")")
+        nextVC.hubLatCordinate = Double.getDouble(self.hubLatitude)
+        nextVC.hubLongCordinate = Double.getDouble(self.hubLongitude)
         let parentController = self.parentViewController as? HubsListVC
         parentController?.show(nextVC, sender: nil)
         //self.rightBtnCallBack?(sender)

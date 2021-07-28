@@ -29,9 +29,13 @@ class MapViewC: AlysieBaseViewC {
   @IBOutlet weak var imgViewMarker: UIImageView!
   @IBOutlet weak var btnSearchLocation: UIButton!
   @IBOutlet weak var viewSearchLocation: UIViewExtended!
+  @IBOutlet weak var viewBottomHeight: NSLayoutConstraint!
   
   //MARK: - Properties -
 
+    var fromVC: isCameFrom?
+    var hubLatCordinate: Double?
+    var hubLongCordinate:Double?
     var locationManager = CLLocationManager()
   var centerMapCoordinate:CLLocationCoordinate2D!
   var marker = GMSMarker()
@@ -84,22 +88,42 @@ class MapViewC: AlysieBaseViewC {
 //
 //    mapView.animate(with: GMSCameraUpdate.fit(bounds))
 
-    self.mapView.addSubview(self.imgViewMarker)
-    self.mapView.addSubview(self.viewSearchLocation)
-
-
-    locationManager.delegate = self
-    locationManager.startUpdatingLocation()
+   
 
     self.mapView.isMyLocationEnabled = true
+    if fromVC == .locateHub {
+        print("add Circle")
+        viewBottom.isHidden = true
+        viewSearchLocation.isHidden = true
+        viewBottomHeight.constant = 0
+        self.intialGoogleSetup(withLatitude:hubLatCordinate ?? 0.0, withLongitude: hubLongCordinate ?? 0.0)
+       
+    }else{
+    self.mapView.addSubview(self.viewSearchLocation)
+        self.mapView.addSubview(self.imgViewMarker)
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+        viewBottom.isHidden = false
+        viewSearchLocation.isHidden = false
+        viewBottomHeight.constant = 180
+        self.intialGoogleSetup(withLatitude: kSharedUserDefaults.latitude, withLongitude: kSharedUserDefaults.longitude)
+    }
+
     
-    self.intialGoogleSetup(withLatitude: kSharedUserDefaults.latitude, withLongitude: kSharedUserDefaults.longitude)
+   
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
   }
-  
+    func addCircle(){
+        let circleCenter : CLLocationCoordinate2D  = CLLocationCoordinate2DMake(hubLatCordinate ?? 0.0 , hubLongCordinate ?? 0.0)
+        let circ = GMSCircle(position: circleCenter, radius: 300000)
+        circ.fillColor = UIColor(red: 0.0, green: 0.7, blue: 0, alpha: 0.1)
+        circ.strokeColor = UIColor(red: 255/255, green: 153/255, blue: 51/255, alpha: 0.5)
+        circ.strokeWidth = 2.5;
+        circ.map = self.mapView
+    }
   //MARK: - IBAction -
   
   @IBAction func tapBack(_ sender: UIButton) {
@@ -138,13 +162,30 @@ class MapViewC: AlysieBaseViewC {
     
     self.getAddressFromGeoCodeAPI(latitude: latitude, longitude: longitude, handler: { (response: String?) in
       self.lblUpdateLocation.text = response
-      kSharedUserDefaults.latitude = latitude
-      kSharedUserDefaults.longitude = longitude
-      let latitudeDegree = CLLocationDegrees(exactly: latitude)
-      let longitudeDegree = CLLocationDegrees(exactly: longitude)
-      self.centerMapCoordinate = CLLocationCoordinate2D(latitude: latitudeDegree ?? 0.0, longitude: longitudeDegree ?? 0.0 )
+//      kSharedUserDefaults.latitude = latitude
+//      kSharedUserDefaults.longitude = longitude
+//      let latitudeDegree = CLLocationDegrees(exactly: latitude)
+//      let longitudeDegree = CLLocationDegrees(exactly: longitude)
+//      self.centerMapCoordinate = CLLocationCoordinate2D(latitude: latitudeDegree ?? 0.0, longitude: longitudeDegree ?? 0.0 )
+        if self.fromVC == .locateHub{
+            let latitudeDegree = CLLocationDegrees(exactly: self.hubLatCordinate ?? 0.0)
+            let longitudeDegree = CLLocationDegrees(exactly: self.hubLongCordinate ?? 0.0)
+            print("hubLatCordinate----------------------------------------\(self.hubLatCordinate ?? 0.0)")
+            print("hubLongCordinate----------------------------------------\(self.hubLongCordinate ?? 0.0)")
+            print("hubLatDegreeCordinate----------------------------------------\(latitudeDegree ?? 0.0)")
+            print("hubLongDegreeCordinate----------------------------------------\(longitudeDegree ?? 0.0)")
+            let camera = GMSCameraPosition.camera(withLatitude: latitudeDegree ?? 0.0 , longitude: longitudeDegree ?? 0.0, zoom: 6.0)
+            self.mapView.camera = camera
+            self.addCircle()
+        }else{
+            kSharedUserDefaults.latitude = latitude
+            kSharedUserDefaults.longitude = longitude
+            let latitudeDegree = CLLocationDegrees(exactly: latitude)
+            let longitudeDegree = CLLocationDegrees(exactly: longitude)
       let camera = GMSCameraPosition.camera(withLatitude: latitudeDegree ?? 0.0 , longitude: longitudeDegree ?? 0.0, zoom: 18.0)
-      self.mapView.camera = camera
+            self.mapView.camera = camera
+        }
+     
       self.mapView.delegate = self
     })
   }
@@ -227,7 +268,7 @@ extension MapViewC: SaveAddressCallback{
     
   
 //    func addressSaved(_ model: SignUpStepTwoDataModel, addressLineOne: String, addressLineTwo: String, mapAddress:String) {
-//    
-//   
+//
+//
 //  }
 }

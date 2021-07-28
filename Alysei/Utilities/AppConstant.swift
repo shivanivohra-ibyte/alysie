@@ -123,6 +123,7 @@ struct StoryBoardConstants {
     static let kSplash = "Splash"
     static let kHubs = "Hubs"
     static let kMarketplace = "Marketplace"
+    static let kHubSelection = "HubSelection"
 }
 
 struct ButtonTitle {
@@ -206,6 +207,7 @@ struct APIUrl{
     static let kUpdateProductApi = "update/product/details"
     static let kGetCategories = "get/marketplace/product/categories"
     static let kDeleteGalleryPic = "delete/gallery/image"
+    static let kGetStateWiseHub = "get/state/wise/hubs?country_id="
     
     enum FeaturedProduct {
         static let delete = kBASEURL + "delete/featured/listing?featured_listing_id="

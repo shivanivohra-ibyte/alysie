@@ -14,31 +14,42 @@ class HubsViaCityCell: UITableViewCell , SelectList{
     @IBOutlet weak var txtSearch: UITextField!
     @IBOutlet weak var noHubImage: UIImageView!
     var hasCome:HasCome? = .hubs
+    var arrhubsViaCity:[HubsViaCity]?
     var hubsViaCity = HubsViaCity()
     var checkList: String?
     var country: CountryModel?
     var filterHubs = HubsViaCity()
+    var passCallback : (() -> Void)? = nil
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.viewSearchHeight.constant = hasCome == .hubs ? 0 : 45
-        self.viewSearch.isHidden = hasCome == .hubs ? true : false
-        self.txtSearch.isHidden = hasCome == .hubs ? true : false
-        self.hasCome == .hubs ? (txtSearch.isHidden = true) : (txtSearch.isHidden = false)
+        self.viewSearch.isHidden = hasCome == .hubs
+        self.txtSearch.isHidden = hasCome == .hubs
+        self.txtSearch.isHidden = self.hasCome == .hubs
         self.filterHubs.hubs_array = hubsViaCity.hubs_array
+        self.tableView.hubLatitude = hubsViaCity.latitude
+        self.tableView.hubLongitude = hubsViaCity.longitude
         self.lblNoHub.isHidden = filterHubs.hubs_array?.isEmpty == false
         //self.noHubImage.isHidden = filterHubs.hubs_array?.isEmpty == true
         self.noHubImage.isHidden = true
         self.tableView.states = filterHubs.hubs_array
+        self.tableView.arrhubsViaCity = self.arrhubsViaCity
         self.tableView.selectDelegate = self
         self.tableView.hasCome = .hubs
+        self.tableView.hubCountCallBack = {
+            print("Passing Hub Count")
+            self.passCallback?()
+        }
         self.txtSearch.addTarget(self, action: #selector(self.didchange(_:)), for: .editingChanged)
         self.setText()
     }
 
     func setText(){
         self.checkList = hasCome == .hubs ? "hubs" : "city"
-        if let attributedString = self.createAttributedString(stringArray: ["Select the \(self.checkList ?? "") from ","\(country?.name ?? "")" +  "/" + "\( hubsViaCity.state_name ?? "")", " where you \(userType ?? "")"], attributedPart: 1, attributes: [NSAttributedString.Key.foregroundColor: UIColor.blue]) {
+       // if let attributedString = self.createAttributedString(stringArray: ["Select the \(self.checkList ?? "") from ","\(country?.name ?? "")" +  "/" + "\( hubsViaCity.state_name ?? "")", " where you \(userType ?? "")"], attributedPart: 1, attributes: [NSAttributedString.Key.foregroundColor: UIColor.blue]) {
+            if let attributedString = self.createAttributedString(stringArray: ["\(country?.name ?? "")" +  "/" + "\( hubsViaCity.state_name ?? "")"], attributedPart: 1, attributes: [NSAttributedString.Key.foregroundColor: UIColor.black]) {
             self.lblHeading.attributedText = attributedString
         }
     }
@@ -51,6 +62,7 @@ class HubsViaCityCell: UITableViewCell , SelectList{
         self.noHubImage.isHidden = true
         self.tableView.states = filterHubs.hubs_array
         
+        
     }
     
     // MARK:- Function forb Search Data
@@ -62,6 +74,7 @@ class HubsViaCityCell: UITableViewCell , SelectList{
            // self.noHubImage.isHidden = filterHubs.hubs_array?.isEmpty == true
             self.noHubImage.isHidden = true
             self.tableView.states = filterHubs.hubs_array
+           // self.tableView.arrhubsViaCity = filterHubs
         }
     }
     

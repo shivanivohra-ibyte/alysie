@@ -215,6 +215,7 @@ class SignUpStepOneDataModel: NSObject{
   
   var id: String?
   var name: String?
+    var title: String?
   var phoneCode: String?
   var countryId: String?
   var stateId: String?
@@ -232,6 +233,7 @@ class SignUpStepOneDataModel: NSObject{
     self.phoneCode = String.getString(dictOptions[APIConstants.kPhonecode])
     self.countryId = String.getString(dictOptions[APIConstants.kCountryId])
     self.stateId = String.getString(dictOptions[APIConstants.kStateId])
+    self.title = String.getString(dictOptions[APIConstants.kTitle])
     self.marketplaceProductCategoryId = Int.getInt(dictOptions["marketplace_product_category_id"])
     self.marketplaceBrandLabelId = Int.getInt(dictOptions["marketplace_brand_label_id"])
     self.marketplaceProductSubcategoryId = Int.getInt(dictOptions["marketplace_product_subcategory_id"])

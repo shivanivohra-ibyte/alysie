@@ -9,13 +9,20 @@ import Foundation
 import UIKit
 import SwiftUI
 
+
 class StateListTable: UITableView {
   
     var selectDelegate:SelectList?
     var states:[CountryHubs]?{didSet{self.reloadData()}}
    var roleId: String?
     var hasCome: HasCome?
-
+    var hubCountCallBack:(() -> Void)? = nil
+   var hubcount = 0
+    var hubLatitude: String?
+    var hubLongitude:String?
+    var arrhubsViaCity:[HubsViaCity]?
+   // var hubsViaCity:[HubsViaCity]?{didSet{self.reloadData()}}
+   
     // MARK:- life Cycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,6 +53,8 @@ extension StateListTable : UITableViewDelegate   , UITableViewDataSource {
         guard let states = self.states?[indexPath.row] else { return UITableViewCell() }
         let cell = self.dequeueReusableCell(withIdentifier: "SelectCityTableViewCell", for: indexPath) as! SelectCityTableViewCell
         cell.selectionStyle = .none
+        cell.hubLatitude = self.hubLatitude
+        cell.hubLongitude = self.hubLongitude
         cell.buttonRightCheckBox.isHidden = self.hasCome == .hubs ? false : true
         cell.configCell(states, indexPath.row, .city)
         return cell
@@ -53,16 +62,28 @@ extension StateListTable : UITableViewDelegate   , UITableViewDataSource {
   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       
-     // if  roleId == "9"{ 
-        if  kSharedUserDefaults.loggedInUserModal.memberRoleId == "9"{
+     // if  roleId == "9"{
+        if  kSharedUserDefaults.loggedInUserModal.memberRoleId == "\(UserRoles.restaurant.rawValue)"{
+           
+            for i in 0..<(self.arrhubsViaCity?.count ?? 0){
+                for j in 0..<(self.arrhubsViaCity?[i].hubs_array?.count ?? 0){
+                _ = self.arrhubsViaCity?[i].hubs_array?[j].isSelected = false
+                    print("False or true ---------------------\(self.arrhubsViaCity?[i].hubs_array?[j].name ?? "") is \(self.arrhubsViaCity?[i].hubs_array?[j].isSelected ?? true)")
+        }
+            }
             for i in 0..<(self.states?.count ?? 0){
             _ = self.states?[i].isSelected = false
         }
             self.states?[indexPath.row].isSelected = true
+            hubCountCallBack?()
             self.reloadData()
         }else{
           self.states?[indexPath.row].isSelected = !(self.states?[indexPath.row].isSelected ?? true)
+           
           self.reloadData()
         }
+        hubCountCallBack?()
+        print("Call HubCout")
+        
     }
 }

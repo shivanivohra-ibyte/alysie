@@ -117,12 +117,16 @@ class HubsViaCity {
     var hubs_array:[CountryHubs]?
     var state_id:String?
     var state_name:String?
+    var longitude: String?
+    var latitude: String?
     
     init(data:[String:Any]?) {
         self.state_id = String.getString(data?["state_id"])
         self.state_name = String.getString(data?["state_name"])
         let hubsArray = kSharedInstance.getArray(withDictionary: data?["hubs_array"])
         self.hubs_array = hubsArray.map{CountryHubs(hub: $0)}
+        self.longitude = String.getString(data?["longitude"])
+        self.latitude = String.getString(data?["lattitude"])
     }
     
     init(city data:[String:Any]?) {
