@@ -578,11 +578,11 @@ class ProfileViewC: AlysieBaseViewC{
         case .distributer1, .distributer2, .distributer3, .producer:
             self.featuredListingTitleLabel.text = "Featured Product"
         case .restaurant:
-            self.featuredListingTitleLabel.text = "Featured Recipe"
+            self.featuredListingTitleLabel.text = "Featured Menu"
         case .travelAgencies:
-            self.featuredListingTitleLabel.text = "Featured Trips"
+            self.featuredListingTitleLabel.text = "Featured Packages"
         case .voiceExperts:
-            self.featuredListingTitleLabel.text = "Featured Blogs"
+            self.featuredListingTitleLabel.text = "Featured"
         default:
             print("no user role found")
         }
