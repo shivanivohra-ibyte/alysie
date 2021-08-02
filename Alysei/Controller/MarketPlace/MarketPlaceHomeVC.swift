@@ -14,6 +14,7 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
     @IBOutlet weak var btnCreateStore: UIButton!
     @IBOutlet weak var marketplaceView: UIView!
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var viewSearch: UIView!
     
     var isCreateStore = false
     var productCount: Int?
@@ -34,7 +35,8 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
         let tap = UITapGestureRecognizer(target: self, action: #selector(openPost))
         self.postView.addGestureRecognizer(tap)
         
-       
+        let searchTap = UITapGestureRecognizer(target: self, action: #selector(openSearchView))
+        self.viewSearch.addGestureRecognizer(searchTap)
          
     }
     func setUI(){
@@ -44,6 +46,10 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
             self.btnCreateStore.setTitle("Create your Store", for: .normal)
         
         }
+    }
+    @objc func openSearchView(){
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SearchProductVC") as? SearchProductVC else {return}
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
 //    override func viewWillAppear(_ animated: Bool) {

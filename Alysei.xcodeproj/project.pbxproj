@@ -272,6 +272,9 @@
 		C554DB99266A29D800D4EECC /* AddProductMarketplaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C554DB98266A29D800D4EECC /* AddProductMarketplaceVC.swift */; };
 		C554DBF4266A36B400D4EECC /* MarketPlaceConfirmationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C554DBF3266A36B400D4EECC /* MarketPlaceConfirmationVC.swift */; };
 		C55625F8266F5252007272C5 /* Membership.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55625F7266F5252007272C5 /* Membership.swift */; };
+		C55E2AA626B283A40083F831 /* SearchProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55E2AA426B283A30083F831 /* SearchProductVC.swift */; };
+		C55E2AA726B283A40083F831 /* SearchProductTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55E2AA526B283A40083F831 /* SearchProductTableVC.swift */; };
+		C55E2AAA26B288C60083F831 /* SearchProductListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C55E2AA926B288C60083F831 /* SearchProductListVC.swift */; };
 		C562C4B22626CACD009F9E3B /* ProfileCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C562C4B12626CACD009F9E3B /* ProfileCompletionViewController.swift */; };
 		C562C4C12626D582009F9E3B /* ProfileCompletionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C562C4C02626D582009F9E3B /* ProfileCompletionTableViewCell.swift */; };
 		C56C285B268465770042A0A3 /* MyStoreDashboardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56C2855268465760042A0A3 /* MyStoreDashboardPresenter.swift */; };
@@ -644,6 +647,9 @@
 		C554DB98266A29D800D4EECC /* AddProductMarketplaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductMarketplaceVC.swift; sourceTree = "<group>"; };
 		C554DBF3266A36B400D4EECC /* MarketPlaceConfirmationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceConfirmationVC.swift; sourceTree = "<group>"; };
 		C55625F7266F5252007272C5 /* Membership.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Membership.swift; sourceTree = "<group>"; };
+		C55E2AA426B283A30083F831 /* SearchProductVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchProductVC.swift; sourceTree = "<group>"; };
+		C55E2AA526B283A40083F831 /* SearchProductTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchProductTableVC.swift; sourceTree = "<group>"; };
+		C55E2AA926B288C60083F831 /* SearchProductListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductListVC.swift; sourceTree = "<group>"; };
 		C562C4B12626CACD009F9E3B /* ProfileCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompletionViewController.swift; sourceTree = "<group>"; };
 		C562C4C02626D582009F9E3B /* ProfileCompletionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCompletionTableViewCell.swift; sourceTree = "<group>"; };
 		C56C2855268465760042A0A3 /* MyStoreDashboardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoreDashboardPresenter.swift; sourceTree = "<group>"; };
@@ -1654,6 +1660,9 @@
 				C507B8522668E5F60014344A /* MarketPlaceCreateStoreVC.swift */,
 				C554DB98266A29D800D4EECC /* AddProductMarketplaceVC.swift */,
 				C554DBF3266A36B400D4EECC /* MarketPlaceConfirmationVC.swift */,
+				C55E2AA526B283A40083F831 /* SearchProductTableVC.swift */,
+				C55E2AA426B283A30083F831 /* SearchProductVC.swift */,
+				C55E2AA926B288C60083F831 /* SearchProductListVC.swift */,
 			);
 			path = MarketPlace;
 			sourceTree = "<group>";
@@ -2135,6 +2144,7 @@
 				27A443C325AE03720002BAAC /* NSNumberExtended.swift in Sources */,
 				27BC68A325AC56C000A01B6A /* AppDelegate.swift in Sources */,
 				2716627D25BD45BF000C0189 /* BusinessCategoryCollectionCell.swift in Sources */,
+				C55E2AA726B283A40083F831 /* SearchProductTableVC.swift in Sources */,
 				C5D6F7F626B1829D006FFCDF /* HubCountryListViewController.swift in Sources */,
 				C5D6F7DC26B1829D006FFCDF /* DemoMapViewViewController.swift in Sources */,
 				610D718F2628B24E000FA104 /* EventsModels.swift in Sources */,
@@ -2214,6 +2224,7 @@
 				A84EED0325B1A31300429B1D /* EditProfileSelectTableCell.swift in Sources */,
 				27D0FAB325CEE9FF00463FE0 /* ProductSection.swift in Sources */,
 				C5957A32265CEB33004952D8 /* HubsViewC.swift in Sources */,
+				C55E2AAA26B288C60083F831 /* SearchProductListVC.swift in Sources */,
 				C507B8502668B9EE0014344A /* SelectMemberShipVC.swift in Sources */,
 				27A443AF25AE03720002BAAC /* MKMapViewExtended.swift in Sources */,
 				61A40A1B267378BF00D7D078 /* BasicConnectFlowPresenter.swift in Sources */,
@@ -2321,6 +2332,7 @@
 				C5D6F7E326B1829D006FFCDF /* StateListVC.swift in Sources */,
 				27A443BD25AE03720002BAAC /* BoolExtended.swift in Sources */,
 				610D718E2628B24E000FA104 /* EventsRouter.swift in Sources */,
+				C55E2AA626B283A40083F831 /* SearchProductVC.swift in Sources */,
 				27A443AD25AE03720002BAAC /* UIviewCornerRadius.swift in Sources */,
 				6BBA9952260AF55900AA7A81 /* InactiveCollectionView.swift in Sources */,
 				C5D6F7F426B1829D006FFCDF /* HubSelectStatesCollectionViewCell.swift in Sources */,
