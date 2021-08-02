@@ -1,16 +1,13 @@
 //
-//  SearchProductTableVC.swift
+//  ProductDescOptionTableVC.swift
 //  Alysei
 //
-//  Created by SHALINI YADAV on 7/28/21.
+//  Created by SHALINI YADAV on 8/2/21.
 //
 
 import UIKit
 
-class SearchProductTableVC: UITableViewCell {
-    
-    @IBOutlet weak var lblSearchText: UILabel!
-    @IBOutlet weak var lblProductCategoryName : UILabel!
+class ProductDescOptionTableVC: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

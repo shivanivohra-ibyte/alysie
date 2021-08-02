@@ -11,11 +11,16 @@ class SearchProductVC: UIViewController {
     
     @IBOutlet weak var vwHeader: UIView!
     @IBOutlet weak var searchTableView: UITableView!
+    @IBOutlet weak var txtSearch: UITextField!
     
-
+    var arrRecentSearch: [ProductSearchListModel]?
+    var isSearchEnable = false
     override func viewDidLoad() {
         super.viewDidLoad()
         vwHeader.addShadow()
+        txtSearch.delegate = self
+        callRecentListApi()
+        
         // Do any additional setup after loading the view.
     }
     @IBAction func backAction(_ sender: UIButton){
@@ -26,12 +31,18 @@ class SearchProductVC: UIViewController {
 
 extension SearchProductVC: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return arrRecentSearch?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchProductTableVC", for: indexPath) as? SearchProductTableVC else { return UITableViewCell()}
         cell.selectionStyle = .none
+        if isSearchEnable == false{
+        cell.lblSearchText.text = arrRecentSearch?[indexPath.row].searchKeyword
+        }else{
+            cell.lblSearchText.text = arrRecentSearch?[indexPath.row].title
+            cell.lblProductCategoryName.text = arrRecentSearch?[indexPath.row].product_category_name
+        }
         return cell
     }
     
@@ -41,7 +52,47 @@ extension SearchProductVC: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SearchProductListVC") as? SearchProductListVC else {return}
+        if isSearchEnable == false{
+            nextVC.selectProductName = arrRecentSearch?[indexPath.row].searchKeyword
+        }else{
+            nextVC.selectProductName = arrRecentSearch?[indexPath.row].title
+        }
+       
                 self.navigationController?.pushViewController(nextVC, animated: true)
     }
     
+}
+extension SearchProductVC : UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text,
+                   let textRange = Range(range, in: text) {
+                   let updatedText = text.replacingCharacters(in: textRange,
+                                                               with: string)
+            isSearchEnable = true
+            callSearchApi(updatedText)
+                }
+                return true
+    }
+}
+extension SearchProductVC {
+    func callRecentListApi(){
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kProductRecentSearch, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            
+            let response = dictResponse as? [String:Any]
+            if  let data = response?["data"] as? [[String:Any]]{
+                self.arrRecentSearch = data.map({ProductSearchListModel.init(with: $0)})
+            }
+            self.searchTableView.reloadData()
+        }
+    }
+    
+    func callSearchApi(_ text: String){
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kProductSearch + "product?keyword=" + "\(txtSearch.text ?? "")" + "&available_for_sample=" + "\("")" + "&sort_by=" + "\("")" + "&category=" + "\("")" + "&price_range=" + "\("")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            let response = dictResponse as? [String:Any]
+            if  let data = response?["data"] as? [[String:Any]]{
+                self.arrRecentSearch = data.map({ProductSearchListModel.init(with: $0)})
+            }
+            self.searchTableView.reloadData()
+        }
+    }
 }

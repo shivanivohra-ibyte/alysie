@@ -61,7 +61,13 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
 //        vc.didMove(toParent: self)
 //    }
     @objc func openPost(){
-        self.navigationController?.popViewController(animated: true)
+       // self.navigationController?.popViewController(animated: true)
+        for controller in self.navigationController!.viewControllers as Array {
+            if controller.isKind(of: HomeViewC.self) {
+                self.navigationController!.popToViewController(controller, animated: true)
+                break
+            }
+        }
         
     }
 

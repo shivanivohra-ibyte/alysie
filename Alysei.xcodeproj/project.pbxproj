@@ -365,6 +365,13 @@
 		C5D6F7F526B1829D006FFCDF /* CountryListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D6F7D826B1829D006FFCDF /* CountryListCollectionViewCell.swift */; };
 		C5D6F7F626B1829D006FFCDF /* HubCountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D6F7D926B1829D006FFCDF /* HubCountryListViewController.swift */; };
 		C5D6F7F726B1829D006FFCDF /* HubStateListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D6F7DA26B1829D006FFCDF /* HubStateListViewController.swift */; };
+		C5E9A39E26B7DE5C0005AE89 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E9A39D26B7DE5C0005AE89 /* ProductDetailVC.swift */; };
+		C5E9A3A126B7E3DD0005AE89 /* ProductDetailTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E9A3A026B7E3DD0005AE89 /* ProductDetailTableVC.swift */; };
+		C5E9A3A426B7EAC50005AE89 /* ProductDescriptionTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E9A3A326B7EAC50005AE89 /* ProductDescriptionTableVC.swift */; };
+		C5E9A3A726B7EBB10005AE89 /* ProductDescOptionTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E9A3A626B7EBB10005AE89 /* ProductDescOptionTableVC.swift */; };
+		C5E9A3AA26B7ED200005AE89 /* ProductRatingTableVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E9A3A926B7ED200005AE89 /* ProductRatingTableVCell.swift */; };
+		C5E9A3AD26B7F5E50005AE89 /* SimilarProductTableVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E9A3AC26B7F5E40005AE89 /* SimilarProductTableVCell.swift */; };
+		C5E9A3B026B8033C0005AE89 /* ProductRecentSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E9A3AF26B8033C0005AE89 /* ProductRecentSearchModel.swift */; };
 		C5F1F623267882C7005A25A8 /* ProductListTViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F1F622267882C7005A25A8 /* ProductListTViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -740,6 +747,13 @@
 		C5D6F7D826B1829D006FFCDF /* CountryListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryListCollectionViewCell.swift; sourceTree = "<group>"; };
 		C5D6F7D926B1829D006FFCDF /* HubCountryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HubCountryListViewController.swift; sourceTree = "<group>"; };
 		C5D6F7DA26B1829D006FFCDF /* HubStateListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HubStateListViewController.swift; sourceTree = "<group>"; };
+		C5E9A39D26B7DE5C0005AE89 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
+		C5E9A3A026B7E3DD0005AE89 /* ProductDetailTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailTableVC.swift; sourceTree = "<group>"; };
+		C5E9A3A326B7EAC50005AE89 /* ProductDescriptionTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDescriptionTableVC.swift; sourceTree = "<group>"; };
+		C5E9A3A626B7EBB10005AE89 /* ProductDescOptionTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDescOptionTableVC.swift; sourceTree = "<group>"; };
+		C5E9A3A926B7ED200005AE89 /* ProductRatingTableVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRatingTableVCell.swift; sourceTree = "<group>"; };
+		C5E9A3AC26B7F5E40005AE89 /* SimilarProductTableVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarProductTableVCell.swift; sourceTree = "<group>"; };
+		C5E9A3AF26B8033C0005AE89 /* ProductRecentSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRecentSearchModel.swift; sourceTree = "<group>"; };
 		C5F1F622267882C7005A25A8 /* ProductListTViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListTViewCell.swift; sourceTree = "<group>"; };
 		D636814607C16FDC212EC4D0 /* Pods-Alysei.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alysei.release.xcconfig"; path = "Target Support Files/Pods-Alysei/Pods-Alysei.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1663,6 +1677,12 @@
 				C55E2AA526B283A40083F831 /* SearchProductTableVC.swift */,
 				C55E2AA426B283A30083F831 /* SearchProductVC.swift */,
 				C55E2AA926B288C60083F831 /* SearchProductListVC.swift */,
+				C5E9A39D26B7DE5C0005AE89 /* ProductDetailVC.swift */,
+				C5E9A3A026B7E3DD0005AE89 /* ProductDetailTableVC.swift */,
+				C5E9A3A326B7EAC50005AE89 /* ProductDescriptionTableVC.swift */,
+				C5E9A3A626B7EBB10005AE89 /* ProductDescOptionTableVC.swift */,
+				C5E9A3A926B7ED200005AE89 /* ProductRatingTableVCell.swift */,
+				C5E9A3AC26B7F5E40005AE89 /* SimilarProductTableVCell.swift */,
 			);
 			path = MarketPlace;
 			sourceTree = "<group>";
@@ -1710,6 +1730,7 @@
 			isa = PBXGroup;
 			children = (
 				C55625F7266F5252007272C5 /* Membership.swift */,
+				C5E9A3AF26B8033C0005AE89 /* ProductRecentSearchModel.swift */,
 			);
 			path = Marketplace;
 			sourceTree = "<group>";
@@ -2089,6 +2110,7 @@
 				6B5A8280260C56AD00ED60B7 /* WebServices.swift in Sources */,
 				6139AC872693A1A000000CD8 /* ProfileViewC.swift in Sources */,
 				C562C4B22626CACD009F9E3B /* ProfileCompletionViewController.swift in Sources */,
+				C5E9A3B026B8033C0005AE89 /* ProductRecentSearchModel.swift in Sources */,
 				2742855E25B82EEC003F3DE5 /* AddFeatureTableCell.swift in Sources */,
 				C5D6F7E626B1829D006FFCDF /* StateWiseHubListVC.swift in Sources */,
 				61A40A1E267378BF00D7D078 /* BasicConnectFlowModels.swift in Sources */,
@@ -2098,6 +2120,7 @@
 				277D189D25BEC8C3007CA5C7 /* NetworkCategoryCollectionCell.swift in Sources */,
 				C5AAB85826171896000557B6 /* LiquidCollectionViewLayout.swift in Sources */,
 				27B4E8FD25EF957D00623E45 /* SignUpModel.swift in Sources */,
+				C5E9A3AA26B7ED200005AE89 /* ProductRatingTableVCell.swift in Sources */,
 				279AB34625FF436C0061FCB3 /* CountryTable.swift in Sources */,
 				C507B8532668E5F60014344A /* MarketPlaceCreateStoreVC.swift in Sources */,
 				C56C286D268465A90042A0A3 /* MyStoreProductViewController.swift in Sources */,
@@ -2152,6 +2175,7 @@
 				C5989065262EAC1400507E84 /* ProfileCompletionModel.swift in Sources */,
 				C52920442677575D000C044B /* ConnectionProductTypeRouter.swift in Sources */,
 				C5B98116263FE65D002BFA23 /* UserPostsTableViewCell.swift in Sources */,
+				C5E9A3AD26B7F5E50005AE89 /* SimilarProductTableVCell.swift in Sources */,
 				C56C2879268465C60042A0A3 /* MyStoreDetailModels.swift in Sources */,
 				C5923F7A265FAE7B003A3465 /* HubUserListVC.swift in Sources */,
 				61EAB55C269A23B900793F18 /* PostCommentsPresenter.swift in Sources */,
@@ -2252,6 +2276,7 @@
 				27A443B125AE03720002BAAC /* DateExtended.swift in Sources */,
 				610D718C2628B24E000FA104 /* EventsPresenter.swift in Sources */,
 				273E5E7E25BB3848009AF5A4 /* ContactViewC.swift in Sources */,
+				C5E9A39E26B7DE5C0005AE89 /* ProductDetailVC.swift in Sources */,
 				C51C33832664FB52002EC412 /* MarketPlaceWalkthroughVC.swift in Sources */,
 				C554DBF4266A36B400D4EECC /* MarketPlaceConfirmationVC.swift in Sources */,
 				61A8CB4A261D98CA00B99233 /* ContactDetailModels.swift in Sources */,
@@ -2271,6 +2296,7 @@
 				27A4439325AE03720002BAAC /* NSString+Base64.m in Sources */,
 				C5D6F7F126B1829D006FFCDF /* HubCitiesListViewController.swift in Sources */,
 				C51D47852636C72500CD3863 /* PostDescTableViewCell.swift in Sources */,
+				C5E9A3A426B7EAC50005AE89 /* ProductDescriptionTableVC.swift in Sources */,
 				27A443C725AE03720002BAAC /* UITextFieldBorderWidthAndColor.swift in Sources */,
 				C5D6F7E526B1829D006FFCDF /* Checkmark.swift in Sources */,
 				C51D477D2636B67900CD3863 /* DiscoverCollectionViewCell.swift in Sources */,
@@ -2289,6 +2315,7 @@
 				C513C1A526146C280025CF27 /* WaterfallCollectionViewLayout.swift in Sources */,
 				6BC4C0D326006AED00791DCD /* PresentationController.swift in Sources */,
 				C56C2883268465F30042A0A3 /* MyStoreInquiriesPresenter.swift in Sources */,
+				C5E9A3A726B7EBB10005AE89 /* ProductDescOptionTableVC.swift in Sources */,
 				27A443A825AE03720002BAAC /* UIButtonExtended.swift in Sources */,
 				C51C337F2664F5CA002EC412 /* MarketPlaceHomeVC.swift in Sources */,
 				C56C286C268465A90042A0A3 /* MyStoreProductModels.swift in Sources */,
@@ -2309,6 +2336,7 @@
 				6B58C9AF26256EE300D250CD /* ReviewHubModel.swift in Sources */,
 				6B65FFB326034900002832C8 /* SelectRoleViewC.swift in Sources */,
 				27CC2D3025BEC40F00F4C005 /* NetworkViewC.swift in Sources */,
+				C5E9A3A126B7E3DD0005AE89 /* ProductDetailTableVC.swift in Sources */,
 				C5957A38265CF7E5004952D8 /* UserRoleCount.swift in Sources */,
 				C5D6F7EA26B1829D006FFCDF /* InactiveCollectionViewCell.swift in Sources */,
 				27CC2D3325BEC44B00F4C005 /* NetworkTableCell.swift in Sources */,
