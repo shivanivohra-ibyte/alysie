@@ -10,6 +10,12 @@ import UIKit
 class ProductDetailTableVC: UITableViewCell {
     
     @IBOutlet weak var collectonView: UICollectionView!
+    @IBOutlet weak var lblProductName: UILabel!
+    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var lblRating: UILabel!
+    @IBOutlet weak var lblProductCategory: UILabel!
+    @IBOutlet weak var lblProductPrice: UILabel!
+    var data: ProductDetailModel?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,6 +25,14 @@ class ProductDetailTableVC: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
+    }
+    
+    func configCell(_ data: ProductDetailModel){
+        self.data = data
+        lblProductName.text = data.product_detail?.title
+        lblProductCategory.text = data.product_detail?.product_category_name
+        lblProductPrice.text = "$" + (data.product_detail?.product_price ?? "")
+        //lblRating.text = data.
     }
 
 }
@@ -30,6 +44,7 @@ extension ProductDetailTableVC: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductImageColectionViewCell", for: indexPath) as? ProductImageColectionViewCell else {return UICollectionViewCell()}
+        cell.imgProduct.setImage(withString: kImageBaseUrl + String.getString(data?.product_gallery?[indexPath.row].attachment_url))
         return cell
     }
     
@@ -37,5 +52,14 @@ extension ProductDetailTableVC: UICollectionViewDelegate, UICollectionViewDataSo
 }
 
 class ProductImageColectionViewCell: UICollectionViewCell{
+    @IBOutlet weak var btnFavUnFav: UIButton!
+    @IBOutlet weak var imgProduct: UIImageView!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    @IBAction func btnFavUnFav(_ sender: UIButton){
+        
+    }
 }

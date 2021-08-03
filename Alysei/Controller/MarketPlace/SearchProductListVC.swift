@@ -19,7 +19,7 @@ class SearchProductListVC: UIViewController {
         super.viewDidLoad()
         self.sortFilterView.addShadow()
         lblTitle.text = selectProductName
-        let trimmed = selectProductName?.trimmingCharacters(in: .whitespaces)
+        let trimmed = selectProductName?.replacingOccurrences(of: " ", with: "")
         print("trimmed Character-------------------\(trimmed ?? "")")
         callSearcListhApi(trimmed ?? "")
         // Do any additional setup after loading the view.
@@ -50,6 +50,7 @@ extension SearchProductListVC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "ProductDetailVC") as? ProductDetailVC else {return}
+        nextVC.marketplaceProductId = "\(arrProductList?[indexPath.row].marketplaceProductId ?? 0)"
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
@@ -58,10 +59,16 @@ extension SearchProductListVC {
     func callSearcListhApi(_ text: String){
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kProductSearch + "product?keyword=" + "\(text )" + "&available_for_sample=" + "\("")" + "&sort_by=" + "\("")" + "&category=" + "\("")" + "&price_range=" + "\("")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             let response = dictResponse as? [String:Any]
+            switch statusCode{
+            case 200:
+            
             if  let data = response?["data"] as? [[String:Any]]{
                 self.arrProductList = data.map({ProductSearchListModel.init(with: $0)})
             }
             self.tableView.reloadData()
+            default:
+                self.showAlert(withMessage: "No products found")
+            }
         }
     }
 }
@@ -84,5 +91,6 @@ class ProductListTableVCell: UITableViewCell{
         lblStoreName.text = data.store_name
         lblProductCategoryName.text = data.product_category_name
         lblReview.text = "\(data.total_reviews ?? 0)"
+        self.imgProduct.setImage(withString: kImageBaseUrl + String.getString(data.product_gallery?.first?.attachment_url))
     }
 }
