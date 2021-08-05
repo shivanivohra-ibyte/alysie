@@ -2948,6 +2948,7 @@
                         <outlet property="lblUpdateLocation" destination="7e6-9J-6YG" id="g2f-VM-UFL"/>
                         <outlet property="mapView" destination="vul-SP-84L" id="kRw-Zm-0hn"/>
                         <outlet property="viewBottom" destination="nVm-UL-m1K" id="vhl-eQ-fny"/>
+                        <outlet property="viewBottomHeight" destination="pfK-Z4-a0Q" id="Vex-W4-qDg"/>
                         <outlet property="viewSearchLocation" destination="rf0-Ka-MNd" id="NvZ-zy-pPD"/>
                     </connections>
                 </viewController>
