@@ -8,20 +8,21 @@
 import UIKit
 
 class SearchProductListVC: UIViewController {
-
+    
     @IBOutlet weak var sortFilterView: UIView!
     var selectProductName: String?
     var arrProductList: [ProductSearchListModel]?
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lblTitle: UILabel!
+    //var trimmedProductName : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sortFilterView.addShadow()
         lblTitle.text = selectProductName
-        let trimmed = selectProductName?.replacingOccurrences(of: " ", with: "")
-        print("trimmed Character-------------------\(trimmed ?? "")")
-        callSearcListhApi(trimmed ?? "")
+        //trimmedProductName = selectProductName?.replacingOccurrences(of: " ", with: "")
+        print("selectProductName-------------------\(selectProductName ?? "")")
+        callSearchListApi(selectProductName ?? "")
         // Do any additional setup after loading the view.
     }
     @IBAction func backAction(_ sender: UIButton){
@@ -29,6 +30,20 @@ class SearchProductListVC: UIViewController {
     }
     @IBAction func seacrhAction(_ sender: UIButton){
         self.navigationController?.popViewController(animated: true)
+    }
+    @IBAction func btnSortAction(_ sender: UIButton){
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "SortProductViewController") as? SortProductViewController else {return}
+        nextVC.selectProductName = self.selectProductName
+        nextVC.callBackPassData = { arrSortList in
+            
+            self.arrProductList = arrSortList
+            self.tableView.reloadData()
+        }
+        self.present(nextVC, animated: true, completion: nil)
+    }
+    @IBAction func btnFilterAction(_ sender: UIButton){
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "FilterViewController") as? FilterViewController else {return}
+        self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 
@@ -38,8 +53,8 @@ extension SearchProductListVC: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-         
-         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListTableVCell", for: indexPath) as? ProductListTableVCell else {return UITableViewCell()}
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListTableVCell", for: indexPath) as? ProductListTableVCell else {return UITableViewCell()}
         cell.configCell(arrProductList?[indexPath.row] ?? ProductSearchListModel(with: [:]))
         return cell
     }
@@ -56,16 +71,34 @@ extension SearchProductListVC: UITableViewDelegate, UITableViewDataSource{
 }
 
 extension SearchProductListVC {
-    func callSearcListhApi(_ text: String){
-        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kProductSearch + "product?keyword=" + "\(text )" + "&available_for_sample=" + "\("")" + "&sort_by=" + "\("")" + "&category=" + "\("")" + "&price_range=" + "\("")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
-            let response = dictResponse as? [String:Any]
+    //    func callSearcListhApi(_ text: String){
+    //        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kProductSearch + "keyword=" + "\(text)" + "&available_for_sample=" + "" + "&sort_by=" + "" + "&category=" + "" + "&price_rfrom=" + "" + "&price_to=" + "", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+    //            let response = dictResponse as? [String:Any]
+    //            switch statusCode{
+    //            case 200:
+    //
+    //            if  let data = response?["data"] as? [[String:Any]]{
+    //                self.arrProductList = data.map({ProductSearchListModel.init(with: $0)})
+    //            }
+    //            self.tableView.reloadData()
+    //            default:
+    //                self.showAlert(withMessage: "No products found")
+    //            }
+    //        }
+    //    }
+    
+    func callSearchListApi(_ text: String){
+        
+        let urlString = APIUrl.kProductListing + "\(text)" + "&available_for_sample=" + "" + "&sort_by=" + "" + "&category=" + "" + "&price_rfrom=" + "" + "&price_to="
+        let urlString1 = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        TANetworkManager.sharedInstance.requestApi(withServiceName: urlString1, requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             switch statusCode{
             case 200:
-            
-            if  let data = response?["data"] as? [[String:Any]]{
-                self.arrProductList = data.map({ProductSearchListModel.init(with: $0)})
-            }
-            self.tableView.reloadData()
+                let response = dictResponse as? [String:Any]
+                if  let data = response?["data"] as? [[String:Any]]{
+                    self.arrProductList = data.map({ProductSearchListModel.init(with: $0)})
+                }
+                self.tableView.reloadData()
             default:
                 self.showAlert(withMessage: "No products found")
             }
@@ -80,6 +113,7 @@ class ProductListTableVCell: UITableViewCell{
     @IBOutlet weak var lblStoreName: UILabel!
     @IBOutlet weak var lblProductCategoryName: UILabel!
     @IBOutlet weak var lblReview: UILabel!
+    @IBOutlet weak var imgAvailableForSample: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -90,7 +124,12 @@ class ProductListTableVCell: UITableViewCell{
         lblProductPrice.text = "$" + (data.product_price ?? "")
         lblStoreName.text = data.store_name
         lblProductCategoryName.text = data.product_category_name
-        lblReview.text = "\(data.total_reviews ?? 0)"
+        lblReview.text = "\(data.total_reviews ?? 0) ratings"
         self.imgProduct.setImage(withString: kImageBaseUrl + String.getString(data.product_gallery?.first?.attachment_url))
+        if data.available_for_sample == "Yes" {
+            imgAvailableForSample.isHidden = false
+        }else {
+            imgAvailableForSample.isHidden = true
+        }
     }
 }

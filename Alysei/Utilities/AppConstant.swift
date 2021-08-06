@@ -209,8 +209,16 @@ struct APIUrl{
     static let kDeleteGalleryPic = "delete/gallery/image"
     static let kGetStateWiseHub = "get/state/wise/hubs?country_id="
     static let kProductRecentSearch = "recent/search/product"
-    static let kProductSearch = "search/"
+    static let kProductSearch = "search/product/listing?"
+    static let kProductListing = "get/search/product/listing?keyword="
+    static let kProductKeywordSearch = "search/product?keyword="
     static let kGetProductMarketDetail  = "get/product/detail?marketplace_product_id="
+    static let kLikeProductApi = "make/favourite/store/product"
+    static let kUnlikeProductApi = "make/unfavourite/store/product"
+    
+    static let kGetReview = "get/all/reviews?id="
+    
+    
     enum FeaturedProduct {
         static let delete = kBASEURL + "delete/featured/listing?featured_listing_id="
     }
@@ -490,6 +498,7 @@ struct APIConstants {
     static let kProductSubCategoryId = "product_subcategory_id"
     static let kbrandLabelId = "brand_label_id"
     static let kMarketPlaceProduct_id = "marketplace_product_id"
+    static let kfavourite_type  = "favourite_type"
     
 }
 

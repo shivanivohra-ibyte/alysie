@@ -10,6 +10,7 @@ import UIKit
 class ProductDescOptionTableVC: UITableViewCell {
     @IBOutlet weak var lblOptionTitle: UILabel!
     @IBOutlet weak var lblOptionValue: UILabel!
+    
 
     var arrTitle = ["Quantity Available:","Brand Label","Min Order Quantity","Sample Available"]
     override func awakeFromNib() {
@@ -28,7 +29,7 @@ class ProductDescOptionTableVC: UITableViewCell {
             self.lblOptionValue.text = data.product_detail?.quantity_available
         }else if currentIndex == 3 {
             self.lblOptionTitle.text = arrTitle[1]
-            self.lblOptionValue.text = data.product_detail?.brand_label_id
+            self.lblOptionValue.text = data.product_detail?.labels?.name
         }else if currentIndex == 4 {
             self.lblOptionTitle.text = arrTitle[2]
             self.lblOptionValue.text = data.product_detail?.min_order_quantity
