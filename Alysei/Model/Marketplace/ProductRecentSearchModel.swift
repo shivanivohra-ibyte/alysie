@@ -10,6 +10,7 @@ import Foundation
 class ProductDetailModel{
     var product_detail: ProductSearchListModel?
     var product_gallery: [ProductGalleryModel]?
+    var related_products: [ProductSearchListModel]?
     
     init(with data: [String:Any]) {
         
@@ -19,6 +20,10 @@ class ProductDetailModel{
         
         if let productGallery = data["product_gallery"] as? [[String:Any]]{
             self.product_gallery = productGallery.map({ProductGalleryModel.init(with: $0)})
+        }
+        
+        if let relatedProducts = data["related_products"] as? [[String:Any]]{
+            self.related_products =  relatedProducts.map({ProductSearchListModel.init(with: $0)})
         }
     }
 }
@@ -42,6 +47,11 @@ class ProductSearchListModel {
     var brand_label_id: String?
     var min_order_quantity: String?
     var product_gallery: [ProductGalleryModel]?
+    var is_favourite : Int?
+    var marketPlaceStoreId: Int?
+    var avg_rating: Int?
+    var labels: Labels?
+   
     
     init(with data: [String:Any]){
         self.marketplaceRecentSearchId = Int.getInt(data["marketplace_recent_search_id"])
@@ -60,8 +70,14 @@ class ProductSearchListModel {
         self.quantity_available = String.getString(data["quantity_available"])
         self.brand_label_id = String.getString(data["brand_label_id"])
         self.min_order_quantity = String.getString(data["min_order_quantity"])
+        self.avg_rating = Int.getInt(data["avg_rating"])
         if let productGallery = data["product_gallery"] as? [[String:Any]]{
             self.product_gallery = productGallery.map({ProductGalleryModel.init(with: $0)})
+        }
+        self.is_favourite = Int.getInt(data["is_favourite"])
+        self.marketPlaceStoreId = Int.getInt(data["marketplace_store_id"])
+        if let labels = data["labels"] as? [String:Any]{
+            self.labels = Labels.init(with: labels)
         }
     }
     

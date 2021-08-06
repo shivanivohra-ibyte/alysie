@@ -4,7 +4,6 @@
 //
 //  Created by SHALINI YADAV on 7/28/21.
 //
-
 import UIKit
 
 class SearchProductVC: UIViewController {
@@ -39,15 +38,17 @@ extension SearchProductVC: UITableViewDataSource, UITableViewDelegate{
         cell.selectionStyle = .none
         if isSearchEnable == false{
         cell.lblSearchText.text = arrRecentSearch?[indexPath.row].searchKeyword
+            cell.lblProductCategoryName.isHidden = true
         }else{
             cell.lblSearchText.text = arrRecentSearch?[indexPath.row].title
+            cell.lblProductCategoryName.isHidden = false
             cell.lblProductCategoryName.text = arrRecentSearch?[indexPath.row].product_category_name
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 55
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -87,12 +88,23 @@ extension SearchProductVC {
     }
     
     func callSearchApi(_ text: String){
-        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kProductSearch + "product?keyword=" + "\(txtSearch.text ?? "")" + "&available_for_sample=" + "\("")" + "&sort_by=" + "\("")" + "&category=" + "\("")" + "&price_range=" + "\("")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+        TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kProductKeywordSearch + "\(text)", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
+            switch statusCode{
+            case 200:
             let response = dictResponse as? [String:Any]
             if  let data = response?["data"] as? [[String:Any]]{
                 self.arrRecentSearch = data.map({ProductSearchListModel.init(with: $0)})
             }
             self.searchTableView.reloadData()
+            case 409:
+                self.arrRecentSearch = [ProductSearchListModel]()
+                self.searchTableView.reloadData()
+                self.showAlert(withMessage: "No Product found")
+                
+            default:
+                print("No Data")
+                //self.showAlert(withMessage: "No Product found")
+            }
         }
     }
 }
