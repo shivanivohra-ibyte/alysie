@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductDetailVC: UIViewController {
+class ProductDetailVC: AlysieBaseViewC {
    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerView: UIView!
@@ -49,6 +49,7 @@ class ProductDetailVC: UIViewController {
 //            self.callLikeApi()
 //        }
 //    }
+   
 
 }
 
@@ -89,6 +90,19 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource{
         }else if indexPath.row == 8{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductRatingTableVCell", for: indexPath) as? ProductRatingTableVCell else {return UITableViewCell()}
             cell.selectionStyle = .none
+            cell.pushCallBack = { tag in
+                
+                switch tag{
+                case 0:
+                guard let nextVC = self.storyboard?.instantiateViewController(identifier: "StoreDescViewController") as? StoreDescViewController else {return}
+                self.navigationController?.pushViewController(nextVC, animated: true)
+                
+                case 1:
+                    _ = self.pushViewController(withName: ReviewScreenViewController.id(), fromStoryboard: StoryBoardConstants.kMarketplace) as? ReviewScreenViewController
+                default:
+                print("No action")
+                }
+            }
             cell.lblTotalReview.text = "\(self.productDetail?.product_detail?.total_reviews ?? 0) reviews"
             cell.lblAvgRating.text = "\(self.productDetail?.product_detail?.avg_rating ?? 0)"
             cell.configCell(self.arrRatingReview?.first ?? RatingReviewModel(with: [:]))

@@ -14,7 +14,7 @@ class ProductRatingTableVCell: UITableViewCell {
     @IBOutlet weak var lblClientName: UILabel!
     @IBOutlet weak var lblClientReview: UILabel!
     @IBOutlet weak var lblReviewData: UILabel!
-    
+    var pushCallBack: ((Int) -> Void)? = nil
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -31,5 +31,12 @@ class ProductRatingTableVCell: UITableViewCell {
         //self.lblClientName.text = data.user?.companyName
         //self.lblReviewData.text = data.review
     }
-
+    
+    @IBAction func btnViewProfile(_ sender: UIButton){
+        self.pushCallBack?(sender.tag)
+    }
+    @IBAction func btnViewAllReview(_ sender: UIButton){
+        self.pushCallBack?(sender.tag)
+       
+    }
 }
