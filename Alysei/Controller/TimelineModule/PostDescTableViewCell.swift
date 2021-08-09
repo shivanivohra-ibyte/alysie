@@ -24,6 +24,11 @@ struct PostLikeUnlikeRequestModel: Codable, SocketData {
 
     let manager = SocketManager(socketURL: URL(string: "https://alyseisocket.ibyteworkshop.com")!, config: [.log(true), .compress])
 
+
+protocol ShareEditMenuProtocol {
+    func menuBttonTapped(_ postID: Int?)
+}
+
 class PostDescTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userName: UILabel!
@@ -39,6 +44,7 @@ class PostDescTableViewCell: UITableViewCell {
     @IBOutlet weak var commentImage: UIImageView!
     @IBOutlet weak var lblPostTime: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var menuButton: UIButton!
 
     var data: NewFeedSearchDataModel?
     var likeCallback:((Int) -> Void)? = nil
@@ -46,6 +52,7 @@ class PostDescTableViewCell: UITableViewCell {
     var islike: Int?
     var index: Int?
     var imageArray = [String]()
+    var menuDelegate: ShareEditMenuProtocol!
 //    let manager = SocketManager(socketURL: URL(string: "https://alyseisocket.ibyteworkshop.com")!, config: [.log(true), .compress])
 //    let socket = SocketManager(socketURL: URL(string: "https://alyseisocket.ibyteworkshop.com")!, config: [.log(true), .compress]).defaultSocket
 
@@ -74,6 +81,10 @@ class PostDescTableViewCell: UITableViewCell {
         showCommentsGesture.numberOfTapsRequired = 1
         self.commentImage.addGestureRecognizer(showCommentsGesture)
 
+
+        self.menuButton.imageView?.contentMode = .scaleAspectFit
+//        self.menuButton.backgroundColor = .green
+
         
         // Initialization code
     }
@@ -84,9 +95,13 @@ class PostDescTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+
+    @IBAction func menuButtonTapped(_ sender: UIButton) {
+        self.menuDelegate.menuBttonTapped(self.data?.postID)
+    }
     
     
-    func configCell(_ modelData: NewFeedSearchDataModel, _ index: Int){
+    func configCell(_ modelData: NewFeedSearchDataModel, _ index: Int) {
 
         let selfID = Int(kSharedUserDefaults.loggedInUserModal.userId ?? "-1") ?? 0
 

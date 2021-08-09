@@ -5098,15 +5098,18 @@ any other devices.</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0O-bi-o2Z">
-                                                            <rect key="frame" x="388" y="12" width="6" height="20"/>
+                                                            <rect key="frame" x="374" y="9.5" width="30" height="25"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="6" id="ETI-Rq-Xqb"/>
-                                                                <constraint firstAttribute="height" constant="20" id="H6E-b9-t3V"/>
+                                                                <constraint firstAttribute="width" constant="30" id="ETI-Rq-Xqb"/>
+                                                                <constraint firstAttribute="height" constant="25" id="H6E-b9-t3V"/>
                                                             </constraints>
                                                             <state key="normal" image="postmenu_icon"/>
+                                                            <connections>
+                                                                <action selector="menuButtonTapped:" destination="Xfd-Jb-N26" eventType="touchUpInside" id="SzR-d7-Tf1"/>
+                                                            </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It s a long established fact that a reader will be distracted by the readable content of a page when looking at its layout." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyM-S8-egc">
-                                                            <rect key="frame" x="20" y="67" width="374" height="48"/>
+                                                            <rect key="frame" x="20" y="67" width="384" height="48"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="48" id="gb0-DQ-Tj4"/>
                                                             </constraints>
@@ -5166,7 +5169,7 @@ any other devices.</string>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5mA-f6-gHq">
-                                                            <rect key="frame" x="259" y="384" width="150" height="25"/>
+                                                            <rect key="frame" x="269" y="384" width="150" height="25"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wnw-AO-1gc">
                                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="25"/>
@@ -5263,7 +5266,7 @@ any other devices.</string>
                                                         <constraint firstAttribute="trailing" secondItem="XhB-Ws-giN" secondAttribute="trailing" id="Mb5-Oc-2su"/>
                                                         <constraint firstItem="zrp-s8-bGY" firstAttribute="leading" secondItem="Ug0-tp-Dyp" secondAttribute="leading" id="Osq-Au-HHX"/>
                                                         <constraint firstItem="sbC-A6-3pD" firstAttribute="top" secondItem="XhB-Ws-giN" secondAttribute="bottom" constant="10" id="TA4-Nx-Y1N"/>
-                                                        <constraint firstAttribute="trailing" secondItem="T0O-bi-o2Z" secondAttribute="trailing" constant="20" id="Tg2-2h-r6q"/>
+                                                        <constraint firstAttribute="trailing" secondItem="T0O-bi-o2Z" secondAttribute="trailing" constant="10" id="Tg2-2h-r6q"/>
                                                         <constraint firstItem="sbC-A6-3pD" firstAttribute="leading" secondItem="Zh9-cx-y08" secondAttribute="leading" constant="20" id="WqF-zJ-IyI"/>
                                                         <constraint firstItem="d6a-ts-cZh" firstAttribute="top" secondItem="Zh9-cx-y08" secondAttribute="top" constant="5" id="XUW-h1-ESc"/>
                                                         <constraint firstItem="XhB-Ws-giN" firstAttribute="top" secondItem="pyM-S8-egc" secondAttribute="bottom" constant="8" id="Z0V-AW-k0A"/>
@@ -5294,6 +5297,7 @@ any other devices.</string>
                                             <outlet property="lblPostLikeCount" destination="2NK-dp-yCm" id="KhG-mh-z70"/>
                                             <outlet property="lblPostTime" destination="dhH-au-BeC" id="8sv-Ne-Un2"/>
                                             <outlet property="likeImage" destination="GUu-O1-BaE" id="AzO-aH-obW"/>
+                                            <outlet property="menuButton" destination="T0O-bi-o2Z" id="RQa-pp-dxb"/>
                                             <outlet property="pageControl" destination="sbC-A6-3pD" id="V4Z-Do-4qX"/>
                                             <outlet property="userImage" destination="d6a-ts-cZh" id="J8S-hr-Ge8"/>
                                             <outlet property="userName" destination="Ug0-tp-Dyp" id="5A9-Ef-WSX"/>
