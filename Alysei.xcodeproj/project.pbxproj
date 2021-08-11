@@ -181,7 +181,6 @@
 		610D71912628B24E000FA104 /* EventsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 610D718B2628B24D000FA104 /* EventsInteractor.swift */; };
 		61137769263210F500EEBFDA /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61137768263210F500EEBFDA /* Colors.swift */; };
 		6113776D263212B600EEBFDA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6113776C263212B600EEBFDA /* Colors.xcassets */; };
-		6116531526163A7C00BB97CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6116531426163A7B00BB97CA /* GoogleService-Info.plist */; };
 		61165344261642AC00BB97CA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61165343261642AC00BB97CA /* UserProfile.swift */; };
 		611BD9FB268C3D2900EAD7B5 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 611BD9FA268C3D2900EAD7B5 /* CHANGELOG.md */; };
 		6127F16E260B49DB005848B3 /* SaveResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6127F16D260B49DB005848B3 /* SaveResources.swift */; };
@@ -249,6 +248,7 @@
 		C513C19F26144E9A0025CF27 /* SettingsScreenCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C19E26144E9A0025CF27 /* SettingsScreenCollectionVC.swift */; };
 		C513C1A526146C280025CF27 /* WaterfallCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C1A426146C280025CF27 /* WaterfallCollectionViewLayout.swift */; };
 		C513C1A9261477640025CF27 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C1A8261477640025CF27 /* PinterestLayout.swift */; };
+		C519796E26C23530004BC87C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C519796D26C23530004BC87C /* GoogleService-Info.plist */; };
 		C51C337B2664EA78002EC412 /* Marketplace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C51C337A2664EA78002EC412 /* Marketplace.storyboard */; };
 		C51C337F2664F5CA002EC412 /* MarketPlaceHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51C337E2664F5CA002EC412 /* MarketPlaceHomeVC.swift */; };
 		C51C33832664FB52002EC412 /* MarketPlaceWalkthroughVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51C33822664FB52002EC412 /* MarketPlaceWalkthroughVC.swift */; };
@@ -575,7 +575,6 @@
 		610D718B2628B24D000FA104 /* EventsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsInteractor.swift; sourceTree = "<group>"; };
 		61137768263210F500EEBFDA /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		6113776C263212B600EEBFDA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
-		6116531426163A7B00BB97CA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		61165343261642AC00BB97CA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		611BD9FA268C3D2900EAD7B5 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		6127F16D260B49DB005848B3 /* SaveResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveResources.swift; sourceTree = "<group>"; };
@@ -644,6 +643,7 @@
 		C513C19E26144E9A0025CF27 /* SettingsScreenCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenCollectionVC.swift; sourceTree = "<group>"; };
 		C513C1A426146C280025CF27 /* WaterfallCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterfallCollectionViewLayout.swift; sourceTree = "<group>"; };
 		C513C1A8261477640025CF27 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
+		C519796D26C23530004BC87C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C51C337A2664EA78002EC412 /* Marketplace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Marketplace.storyboard; sourceTree = "<group>"; };
 		C51C337E2664F5CA002EC412 /* MarketPlaceHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceHomeVC.swift; sourceTree = "<group>"; };
 		C51C33822664FB52002EC412 /* MarketPlaceWalkthroughVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceWalkthroughVC.swift; sourceTree = "<group>"; };
@@ -1388,7 +1388,7 @@
 			isa = PBXGroup;
 			children = (
 				61C7BE42267CAFA6006DB3BB /* Countries.json */,
-				6116531426163A7B00BB97CA /* GoogleService-Info.plist */,
+				C519796D26C23530004BC87C /* GoogleService-Info.plist */,
 				27A443F725AE06F00002BAAC /* Info.plist */,
 				C5BA01F42648FA8900E1E542 /* AlyseiBGV.mp4 */,
 				27BC688C25AC564200A01B6A /* Assets.xcassets */,
@@ -2013,7 +2013,6 @@
 				C5D6F7AA26B18264006FFCDF /* HubNameCollectionViewCell.xib in Resources */,
 				27BC68A125AC56C000A01B6A /* LaunchScreen.storyboard in Resources */,
 				6BC4C0D826006C5D00791DCD /* OverLayForgetVC.xib in Resources */,
-				6116531526163A7C00BB97CA /* GoogleService-Info.plist in Resources */,
 				C5D6F7B126B18264006FFCDF /* CountrySelectionTableViewCell.xib in Resources */,
 				27A4439525AE03720002BAAC /* README.md in Resources */,
 				27A443DA25AE03720002BAAC /* Montserrat-Regular.ttf in Resources */,
@@ -2025,6 +2024,7 @@
 				6139AC852693A12500000CD8 /* Home.storyboard in Resources */,
 				6BC4C0CF26006AA600791DCD /* OverLayLoginViewController.xib in Resources */,
 				274635F025DC35AD0010C1C6 /* Splash.storyboard in Resources */,
+				C519796E26C23530004BC87C /* GoogleService-Info.plist in Resources */,
 				C5D6F7AB26B18264006FFCDF /* StateListVC.xib in Resources */,
 				C5D6F7B526B18264006FFCDF /* SelectCityTableViewCell.xib in Resources */,
 				C5D6F7B326B18264006FFCDF /* CountryListVC.xib in Resources */,

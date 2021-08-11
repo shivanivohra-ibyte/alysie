@@ -48,6 +48,7 @@ class ProductDetailTableVC: UITableViewCell {
         self.collectonView.reloadData()
     }
     @IBAction func likeUnlikeAction(_ sender: UIButton){
+        print("is Fav---------------------------\(data?.product_detail?.is_favourite ?? 0)")
         if data?.product_detail?.is_favourite == 0{
         self.callLikeUnikeCallback?(1)
         }else{
@@ -64,10 +65,13 @@ extension ProductDetailTableVC: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductImageColectionViewCell", for: indexPath) as? ProductImageColectionViewCell else {return UICollectionViewCell()}
-        //print("Current Page ---------------------\(indexPath.row ?? 0)")
-        self.pageControl.currentPage = indexPath.row
+        print("Current Page ---------------------\(indexPath.row )")
+      //  self.pageControl.currentPage = indexPath.row
         cell.imgProduct.setImage(withString: kImageBaseUrl + String.getString(data?.product_detail?.product_gallery?[indexPath.row].attachment_url))
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        self.pageControl.currentPage = indexPath.row
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

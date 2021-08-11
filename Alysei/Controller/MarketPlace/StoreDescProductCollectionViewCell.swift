@@ -8,5 +8,8 @@
 import UIKit
 
 class StoreDescProductCollectionViewCell: UICollectionViewCell {
-    
+    @IBOutlet weak var imgProduct: UIImageView!
+    @IBOutlet weak var labelProductName: UILabel!
+    @IBOutlet weak var lblavgRating: UILabel!
+    @IBOutlet weak var lblTotalRating: UILabel!
 }

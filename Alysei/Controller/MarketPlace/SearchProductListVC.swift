@@ -43,6 +43,7 @@ class SearchProductListVC: UIViewController {
     }
     @IBAction func btnFilterAction(_ sender: UIButton){
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "FilterViewController") as? FilterViewController else {return}
+        nextVC.selectedProductName = self.selectProductName
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }
@@ -114,6 +115,7 @@ class ProductListTableVCell: UITableViewCell{
     @IBOutlet weak var lblProductCategoryName: UILabel!
     @IBOutlet weak var lblReview: UILabel!
     @IBOutlet weak var imgAvailableForSample: UIImageView!
+    @IBOutlet weak var lblSampleAvailabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -127,8 +129,10 @@ class ProductListTableVCell: UITableViewCell{
         lblReview.text = "\(data.total_reviews ?? 0) ratings"
         self.imgProduct.setImage(withString: kImageBaseUrl + String.getString(data.product_gallery?.first?.attachment_url))
         if data.available_for_sample == "Yes" {
+            lblSampleAvailabel.isHidden = false
             imgAvailableForSample.isHidden = false
         }else {
+            lblSampleAvailabel.isHidden = true
             imgAvailableForSample.isHidden = true
         }
     }

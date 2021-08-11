@@ -12,6 +12,7 @@ class SearchProductVC: UIViewController {
     @IBOutlet weak var searchTableView: UITableView!
     @IBOutlet weak var txtSearch: UITextField!
     
+    
     var arrRecentSearch: [ProductSearchListModel]?
     var isSearchEnable = false
     override func viewDidLoad() {
@@ -48,7 +49,7 @@ extension SearchProductVC: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55
+        return 65
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

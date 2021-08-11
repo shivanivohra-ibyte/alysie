@@ -14,6 +14,7 @@ class SearchProductTableVC: UITableViewCell {
     @IBOutlet weak var imgLeftSide: UIImageView!
     @IBOutlet weak var imgRightSide: UIImageView!
    
+   
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -12,6 +12,7 @@ class ProductDetailVC: AlysieBaseViewC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerView: UIView!
     var arrRatingReview: [RatingReviewModel]?
+    @IBOutlet weak var lblProductName: UILabel!
    // @IBOutlet weak var btnLikeUnlike: UIButton!
 
     var marketplaceProductId : String?
@@ -20,9 +21,9 @@ class ProductDetailVC: AlysieBaseViewC {
     var expandedIndexPath = false
     var previousIndex: IndexPath?
     var nextIndex: IndexPath?
-    var handlingInstrSelected = false
-    var DispatchInstrSelected = false
-    
+//    var handlingInstrSelected = false
+//    var DispatchInstrSelected = false
+    var sellerName: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         headerView.addShadow()
@@ -78,7 +79,10 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource{
         }else if indexPath.row == 1 || indexPath.row == 5 || indexPath.row == 6{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductDescriptionTableVC", for: indexPath) as? ProductDescriptionTableVC else {return UITableViewCell()}
             cell.selectionStyle = .none
-            cell.lblDesc.numberOfLines = (self.handlingInstrSelected ) ? 0 : 2
+            //cell.lblDesc.numberOfLines = (self.handlingInstrSelected ) ? 0 : 2
+            cell.reloadTableView = {
+                self.tableView.reloadData()
+            }
             cell.configCell(productDetail ?? ProductDetailModel(with: [:]), indexPath.row)
            
             return cell
@@ -90,11 +94,13 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource{
         }else if indexPath.row == 8{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductRatingTableVCell", for: indexPath) as? ProductRatingTableVCell else {return UITableViewCell()}
             cell.selectionStyle = .none
+            cell.lblProducerName.text = self.productDetail?.product_detail?.store_detail?.name
+            cell.imgProducer.setImage(withString: kImageBaseUrl + String.getString(productDetail?.product_detail?.store_logo))
             cell.pushCallBack = { tag in
-                
                 switch tag{
                 case 0:
                 guard let nextVC = self.storyboard?.instantiateViewController(identifier: "StoreDescViewController") as? StoreDescViewController else {return}
+                    nextVC.passStoreId = "\(self.productDetail?.product_detail?.marketPlaceStoreId ?? 0)"
                 self.navigationController?.pushViewController(nextVC, animated: true)
                 
                 case 1:
@@ -129,16 +135,26 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource{
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? ProductDescriptionTableVC{
-            if indexPath.row == 5{
-                self.handlingInstrSelected = true
-            }else{
-                self.DispatchInstrSelected = true
-            }
-            self.tableView.reloadData()
-        }
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if let cell = tableView.cellForRow(at: indexPath) as? ProductDescriptionTableVC{
+//            if indexPath.row == 5{
+//                self.handlingInstrSelected = !self.handlingInstrSelected
+//                if self.self.handlingInstrSelected == true{
+//                cell.lblDesc.numberOfLines = 2
+//                }else{
+//                    cell.lblDesc.numberOfLines = 0
+//                }
+//            }else{
+//                self.DispatchInstrSelected = !self.DispatchInstrSelected
+//                if self.self.DispatchInstrSelected == true{
+//                cell.lblDesc.numberOfLines = 2
+//                }else{
+//                    cell.lblDesc.numberOfLines = 0
+//                }
+//            }
+//            self.tableView.reloadData()
+//        }
+//    }
     
 }
 
@@ -151,6 +167,7 @@ extension ProductDetailVC {
             if let data = response?["data"] as? [String:Any]{
                 self.productDetail = ProductDetailModel.init(with: data)
             }
+            self.lblProductName.text = self.productDetail?.product_detail?.title
             //self.setFavUnfavProduct()
             self.tableView.reloadData()
         }
@@ -164,11 +181,15 @@ extension ProductDetailVC {
         ]
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kLikeProductApi, requestMethod: .POST, requestParameters: params, withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             
-            let response = dictResponse as? [String:Any]
-            if let data = response?["data"] as? [String:Any]{
-                self.productDetail?.product_detail?.is_favourite = 1
+           // let response = dictResponse as? [String:Any]
+            switch statusCode{
+            case 200:
+               // self.productDetail?.product_detail?.is_favourite = 0
                 //self.setFavUnfavProduct()
-                //self.btnLikeUnlike.setImage(UIImage(named: "like_icon"), for: .normal)
+                self.callProductDetailApi()
+                //self.btnLikeUnlike.setImage(UIImage(named: "liked_icon"), for: .normal)
+            default:
+                 print("Error")
             }
            
         }
@@ -181,13 +202,14 @@ extension ProductDetailVC {
             APIConstants.kfavourite_type: "2"
         ]
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.kUnlikeProductApi, requestMethod: .POST, requestParameters: params, withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
-            
-            
-            let response = dictResponse as? [String:Any]
-            if let data = response?["data"] as? [String:Any]{
-                self.productDetail?.product_detail?.is_favourite = 0
+            switch statusCode{
+            case 200:
+               // self.productDetail?.product_detail?.is_favourite = 0
                 //self.setFavUnfavProduct()
+                self.callProductDetailApi()
                 //self.btnLikeUnlike.setImage(UIImage(named: "liked_icon"), for: .normal)
+            default:
+                 print("Error")
             }
         }
     }

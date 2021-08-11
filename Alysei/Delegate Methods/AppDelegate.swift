@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
   var window: UIWindow?
   //var locationManager: CLLocationManager!
   var googleAPIKey = "AIzaSyDX4HE7708TQYkE0WoOlzTDlq7_9nneUHY"
+ //var googleAPIKey = "AIzaSyCHoKV0CQU2zctfEt3-8H-cX2skMbMpmsM"
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     

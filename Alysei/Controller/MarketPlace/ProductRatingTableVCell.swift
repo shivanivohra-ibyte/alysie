@@ -14,9 +14,12 @@ class ProductRatingTableVCell: UITableViewCell {
     @IBOutlet weak var lblClientName: UILabel!
     @IBOutlet weak var lblClientReview: UILabel!
     @IBOutlet weak var lblReviewData: UILabel!
+    @IBOutlet weak var lblProducerName:UILabel!
+    @IBOutlet weak var imgProducer: UIImageView!
     var pushCallBack: ((Int) -> Void)? = nil
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.imgProducer.layer.cornerRadius = 25
         // Initialization code
     }
 

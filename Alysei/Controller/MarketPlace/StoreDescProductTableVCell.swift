@@ -9,7 +9,7 @@ import UIKit
 
 class StoreDescProductTableVCell: UITableViewCell {
     @IBOutlet weak var storeProductCollectionView: UICollectionView!
-
+    var storeProduct: [ProductSearchListModel]?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,15 +21,20 @@ class StoreDescProductTableVCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func configCell(_ data: [ProductSearchListModel]?){
+        self.storeProduct = data
+    }
 }
 
 extension StoreDescProductTableVCell: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return storeProduct?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = storeProductCollectionView.dequeueReusableCell(withReuseIdentifier: "StoreDescProductCollectionViewCell", for: indexPath) as? StoreDescProductCollectionViewCell else {return UICollectionViewCell()}
+        cell.imgProduct.setImage(withString: kImageBaseUrl + String.getString(storeProduct?[indexPath.row].product_gallery?.first?.attachment_url))
+        cell.labelProductName.text = storeProduct?[indexPath.row].title
         return cell
     }
     

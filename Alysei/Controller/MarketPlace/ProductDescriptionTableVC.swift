@@ -13,18 +13,20 @@ class ProductDescriptionTableVC: UITableViewCell {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var btnDropDown: UIButton!
     
-
-    
+    var handlingInstrSelected = true
+    //var DispatchInstrSelected = true
+    var reloadTableView:(() -> Void)? = nil
     var arrTitle = ["Product Info","Handling Instructions","Dispatch Instructions"]
-
+   // var
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.lblDesc.numberOfLines = 1
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -45,5 +47,19 @@ class ProductDescriptionTableVC: UITableViewCell {
             btnDropDown.isHidden = false
         }
     }
-
-}
+    @IBAction func btnDropDownAction(_ sender: UIButton){
+        self.handlingInstrSelected = !self.handlingInstrSelected
+        if self.handlingInstrSelected == false{
+            self.lblDesc.numberOfLines = 0
+            self.btnDropDown.setImage(UIImage(named: "up-arrow"), for: .normal)
+        }else{
+            self.lblDesc.numberOfLines = 1
+            self.btnDropDown.setImage(UIImage(named: "icons8_forward"), for: .normal)
+        }
+        self.reloadTableView?()
+    }
+    
+    }
+    
+//icons8_forward
+//up-arrow"
