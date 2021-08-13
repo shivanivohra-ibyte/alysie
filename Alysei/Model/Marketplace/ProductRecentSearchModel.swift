@@ -49,7 +49,7 @@ class ProductSearchListModel {
     var product_gallery: [ProductGalleryModel]?
     var is_favourite : Int?
     var marketPlaceStoreId: Int?
-    var avg_rating: Int?
+    var avg_rating: String?
     var labels: Labels?
     var store_detail : ProductSearchListModel?
     var name: String?
@@ -71,7 +71,7 @@ class ProductSearchListModel {
         self.quantity_available = String.getString(data["quantity_available"])
         self.brand_label_id = String.getString(data["brand_label_id"])
         self.min_order_quantity = String.getString(data["min_order_quantity"])
-        self.avg_rating = Int.getInt(data["avg_rating"])
+        self.avg_rating = String.getString(data["avg_rating"])
         self.name = String.getString(data["name"])
         self.store_logo = String.getString(data["store_logo"])
         if let productGallery = data["product_gallery"] as? [[String:Any]]{

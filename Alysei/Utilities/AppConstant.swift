@@ -222,7 +222,10 @@ struct APIUrl{
     
     static let kGetReview = "get/all/reviews?id="
     static let kGetSellerProfile = "get/seller/profile/"
-    static let kProductCategory = "get/marketplace/product/categories"
+    static let kProductCategory = "get/marketplace/product/categories/all"
+    
+    static let kSubmitReview = "do/review/store/product"
+    
     
     
     enum FeaturedProduct {
@@ -505,7 +508,8 @@ struct APIConstants {
     static let kbrandLabelId = "brand_label_id"
     static let kMarketPlaceProduct_id = "marketplace_product_id"
     static let kfavourite_type  = "favourite_type"
-    
+    static let kRating = "rating"
+    static let kReview = "review"
 }
 
 struct OtherConstant {
@@ -874,3 +878,4 @@ func print_debug(items: Any){
 func print_debug_fake(items: Any){
     
 }
+

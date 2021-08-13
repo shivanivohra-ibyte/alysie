@@ -52,7 +52,8 @@ class MyStoreProductDetail{
     var avg_rating:String?
     var total_reviews: String?
     var marketplace_product_category_id : Int?
-    
+    var isSelected: Bool?
+    var is_favourite: Int?
     var labels: Labels?
     init(with data: [String:Any]?) {
         self.marketplace_product_id = Int.getInt(data?["marketplace_product_id"])
@@ -79,6 +80,8 @@ class MyStoreProductDetail{
         self.total_reviews = String.getString(data?["total_reviews"])
         self.avg_rating = String.getString(data?["avg_rating"])
         self.marketplace_product_category_id = Int.getInt(data?["marketplace_product_category_id"])
+        self.isSelected = Bool.getBool(data?["is_selected"])
+        self.is_favourite = Int.getInt(data?["is_favourite"])
         if let product_gallery = data?["product_gallery"] as? [[String:Any]]{
             self.product_gallery = product_gallery.map({ProductGallery.init(with: $0)})
         }
