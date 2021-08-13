@@ -223,6 +223,29 @@ extension PostsViewController: ShareEditMenuProtocol {
 
     func deletePost(_ postID: Int) {
 
+        let url = APIUrl.Posts.deletePost
+        guard var urlRequest = WebServices.shared.buildURLRequest(url, method: .POST) else {
+            return
+        }
+
+        urlRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        do {
+            let model = Post.delete(postID: postID)
+            let body = try JSONEncoder().encode(model)
+
+            urlRequest.httpBody = body
+            WebServices.shared.request(urlRequest) { data, urlResponse, statusCode, error in
+
+            }
+
+        } catch {
+            print(error.localizedDescription)
+        }
+
+
+
+
+
     }
 
     func editPost(_ postID: Int) {
@@ -230,15 +253,6 @@ extension PostsViewController: ShareEditMenuProtocol {
     }
 
     func sharePost(_ postID: Int) {
-
-        let url = ""
-        guard let urlRequest = WebServices.shared.buildURLRequest(url, method: .POST) else {
-            return 
-        }
-
-        WebServices.shared.request(urlRequest) { data, urlResponse, statusCode, error in
-
-        }
 
     }
 

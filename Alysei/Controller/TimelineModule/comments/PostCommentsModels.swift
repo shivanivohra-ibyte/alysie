@@ -24,6 +24,16 @@ enum PostComments {
         }
     }
 
+    enum Reply {
+        struct Request: Codable {
+            var post_owner_id: Int
+            var user_id: Int
+            var post_id: Int
+            var comment_id: Int
+            var comment: String
+        }
+    }
+
     enum Comment {
         struct Request {
         }
@@ -36,6 +46,7 @@ enum PostComments {
 
         struct data: Codable {
             var body: String
+            var commentID: Int
             var updatedAt : String
             var createdAt : String
             var poster: poster?
@@ -45,6 +56,7 @@ enum PostComments {
                 case createdAt = "created_at"
                 case body
                 case poster
+                case commentID = "core_comment_id"
 
             }
 

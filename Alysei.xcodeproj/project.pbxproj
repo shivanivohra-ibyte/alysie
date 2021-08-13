@@ -212,6 +212,7 @@
 		61C7BE3F267C8EB8006DB3BB /* FlagCountryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C7BE3E267C8EB8006DB3BB /* FlagCountryList.swift */; };
 		61C7BE41267C8FDA006DB3BB /* FlagCountryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C7BE40267C8FDA006DB3BB /* FlagCountryListCell.swift */; };
 		61C7BE43267CB209006DB3BB /* Countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 61C7BE42267CAFA6006DB3BB /* Countries.json */; };
+		61C95C8126C1C4BB000BF4BA /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C95C8026C1C4BB000BF4BA /* PostModel.swift */; };
 		61EAB55C269A23B900793F18 /* PostCommentsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EAB556269A23B800793F18 /* PostCommentsPresenter.swift */; };
 		61EAB55D269A23B900793F18 /* PostCommentsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EAB557269A23B800793F18 /* PostCommentsWorker.swift */; };
 		61EAB55E269A23B900793F18 /* PostCommentsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EAB558269A23B800793F18 /* PostCommentsRouter.swift */; };
@@ -605,6 +606,7 @@
 		61C7BE3E267C8EB8006DB3BB /* FlagCountryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagCountryList.swift; sourceTree = "<group>"; };
 		61C7BE40267C8FDA006DB3BB /* FlagCountryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagCountryListCell.swift; sourceTree = "<group>"; };
 		61C7BE42267CAFA6006DB3BB /* Countries.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Countries.json; sourceTree = "<group>"; };
+		61C95C8026C1C4BB000BF4BA /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		61EAB556269A23B800793F18 /* PostCommentsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentsPresenter.swift; sourceTree = "<group>"; };
 		61EAB557269A23B800793F18 /* PostCommentsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentsWorker.swift; sourceTree = "<group>"; };
 		61EAB558269A23B800793F18 /* PostCommentsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentsRouter.swift; sourceTree = "<group>"; };
@@ -1862,6 +1864,7 @@
 			isa = PBXGroup;
 			children = (
 				C587D14C26413BE6002D72DF /* NewFeedModel.swift */,
+				61C95C8026C1C4BB000BF4BA /* PostModel.swift */,
 			);
 			path = PostModel;
 			sourceTree = "<group>";
@@ -2336,6 +2339,7 @@
 				27A4439D25AE03720002BAAC /* RSTextField.swift in Sources */,
 				C5CA9A9326C1579E00BDAE25 /* AddReviewViewController.swift in Sources */,
 				6B5A8284260C5CD100ED60B7 /* CompanyCertificates.swift in Sources */,
+				61C95C8126C1C4BB000BF4BA /* PostModel.swift in Sources */,
 				27B4E8FE25EF957D00623E45 /* WalkThroughModel.swift in Sources */,
 				27A4439725AE03720002BAAC /* NSData+Base64.m in Sources */,
 				61137769263210F500EEBFDA /* Colors.swift in Sources */,

@@ -47,24 +47,40 @@ Label</string>
                         <color key="textColor" name="blackColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xI5-aq-Zir">
-                        <rect key="frame" x="70" y="93" width="29.5" height="14"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 h" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xI5-aq-Zir">
+                        <rect key="frame" x="70" y="98" width="24" height="14"/>
                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                         <color key="textColor" name="grey2"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CXb-0K-UIE">
+                        <rect key="frame" x="114" y="95" width="40" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="duc-pD-uLb"/>
+                            <constraint firstAttribute="height" constant="20" id="h4y-l4-SSk"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <state key="normal" title="Reply">
+                            <color key="titleColor" name="grey2"/>
+                        </state>
+                        <connections>
+                            <action selector="replyButtonTapped" destination="cfk-7C-ZKB" eventType="touchUpInside" id="cYK-KS-7WF"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="SSP-Dm-3jQ" firstAttribute="top" secondItem="QDn-QJ-PlQ" secondAttribute="top" constant="10" id="3Un-Q4-ypm"/>
                     <constraint firstItem="THZ-L1-kt0" firstAttribute="top" secondItem="SSP-Dm-3jQ" secondAttribute="bottom" constant="5" id="B1G-JP-5N4"/>
                     <constraint firstAttribute="trailing" secondItem="SSP-Dm-3jQ" secondAttribute="trailing" constant="50" id="Jdn-nC-uj3"/>
                     <constraint firstItem="xI5-aq-Zir" firstAttribute="leading" secondItem="THZ-L1-kt0" secondAttribute="leading" id="P5K-rL-3vU"/>
+                    <constraint firstItem="CXb-0K-UIE" firstAttribute="centerY" secondItem="xI5-aq-Zir" secondAttribute="centerY" id="QC6-ES-KF0"/>
                     <constraint firstItem="THZ-L1-kt0" firstAttribute="leading" secondItem="SSP-Dm-3jQ" secondAttribute="leading" id="QWC-JC-Y5v"/>
                     <constraint firstItem="a6O-3W-3c8" firstAttribute="top" secondItem="QDn-QJ-PlQ" secondAttribute="top" constant="12" id="VWD-Dh-O8r"/>
                     <constraint firstItem="SSP-Dm-3jQ" firstAttribute="leading" secondItem="a6O-3W-3c8" secondAttribute="trailing" constant="15" id="fl8-UU-mMO"/>
-                    <constraint firstItem="xI5-aq-Zir" firstAttribute="top" secondItem="THZ-L1-kt0" secondAttribute="bottom" constant="10" id="l7C-7G-rh6"/>
+                    <constraint firstItem="xI5-aq-Zir" firstAttribute="top" secondItem="THZ-L1-kt0" secondAttribute="bottom" constant="15" id="l7C-7G-rh6"/>
                     <constraint firstItem="a6O-3W-3c8" firstAttribute="leading" secondItem="QDn-QJ-PlQ" secondAttribute="leading" constant="10" id="oIA-Rx-bE5"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xI5-aq-Zir" secondAttribute="bottom" constant="15" id="tOe-PA-93t"/>
+                    <constraint firstItem="CXb-0K-UIE" firstAttribute="leading" secondItem="xI5-aq-Zir" secondAttribute="trailing" constant="20" id="tQr-1Q-IJ5"/>
                     <constraint firstItem="THZ-L1-kt0" firstAttribute="trailing" secondItem="SSP-Dm-3jQ" secondAttribute="trailing" id="y1B-Cp-QWN"/>
                 </constraints>
             </tableViewCellContentView>
@@ -74,6 +90,7 @@ Label</string>
                 <outlet property="timeLabel" destination="xI5-aq-Zir" id="F7z-Sp-imB"/>
                 <outlet property="userImageView" destination="a6O-3W-3c8" id="blg-hM-40j"/>
                 <outlet property="userNameLabel" destination="SSP-Dm-3jQ" id="sW4-64-FGI"/>
+                <outlet property="viewReplyButton" destination="CXb-0K-UIE" id="Ptn-QP-ZLG"/>
             </connections>
             <point key="canvasLocation" x="70" y="0.0"/>
         </tableViewCell>

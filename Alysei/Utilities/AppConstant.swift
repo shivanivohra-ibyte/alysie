@@ -226,6 +226,7 @@ struct APIUrl{
     enum Posts {
         static let comments = kBASEURL + "get/post/comments?post_id="
         static let sharePost = kBASEURL + "share/post"
+        static let deletePost = kBASEURL + "delete/post"
     }
     
     enum Images {

@@ -7,6 +7,11 @@
 
 import UIKit
 
+
+protocol CommnentReplyProtocol {
+    func addReplyToComment(_ commentID: Int)
+}
+
 class SelfPostCommentsCell: UITableViewCell {
 
     @IBOutlet var userImageView: UIImageView!
@@ -15,11 +20,16 @@ class SelfPostCommentsCell: UITableViewCell {
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var viewReplyButton: UIButton!
 
+    var commentReplyDelegate: CommnentReplyProtocol!
     var model: PostComments.Comment.Response!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.userImageView.layer.cornerRadius = self.userImageView.frame.width / 2.0
+    }
+
+    @IBAction func replyButtonTapped() {
+        self.commentReplyDelegate.addReplyToComment(self.viewReplyButton.tag)
     }
 }
 
