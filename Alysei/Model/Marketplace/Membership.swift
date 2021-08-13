@@ -47,6 +47,13 @@ class MyStoreProductDetail{
     var banner_id: String?
     var product_gallery: [ProductGallery]?
     var store_gallery: [ProductGallery]?
+    var prefilled: SubjectData?
+    var totalCategory: Int?
+    var avg_rating:String?
+    var total_reviews: String?
+    var marketplace_product_category_id : Int?
+    var isSelected: Bool?
+    var is_favourite: Int?
     var labels: Labels?
     init(with data: [String:Any]?) {
         self.marketplace_product_id = Int.getInt(data?["marketplace_product_id"])
@@ -69,6 +76,12 @@ class MyStoreProductDetail{
         self.phone = String.getString(data?["phone"])
         self.logo_id = String.getString(data?["logo_id"])
         self.banner_id = String.getString(data?["banner_id"])
+        self.totalCategory = Int.getInt(data?["total_category"])
+        self.total_reviews = String.getString(data?["total_reviews"])
+        self.avg_rating = String.getString(data?["avg_rating"])
+        self.marketplace_product_category_id = Int.getInt(data?["marketplace_product_category_id"])
+        self.isSelected = Bool.getBool(data?["is_selected"])
+        self.is_favourite = Int.getInt(data?["is_favourite"])
         if let product_gallery = data?["product_gallery"] as? [[String:Any]]{
             self.product_gallery = product_gallery.map({ProductGallery.init(with: $0)})
         }
@@ -77,6 +90,9 @@ class MyStoreProductDetail{
         }
         if let labels = data?["labels"] as? [String:Any]{
             self.labels = Labels.init(with: labels)
+        }
+        if let storePreValue = data?["prefilled"] as? [String:Any]{
+            self.prefilled = SubjectData.init(with: storePreValue)
         }
         self.product_Name = String.getString(data?["product_category_name"])
     }

@@ -36,6 +36,7 @@ class UserModel: NSObject{
     var avatar: avatar?  // newly constructed struct for avater id
     var cover: cover?
     var phone: String?// newly constructed struct for cover id
+    var UserAvatar_id: UserAvatar?
  // var cover_id: AllProductsDataModel?
    
     
@@ -68,7 +69,11 @@ class UserModel: NSObject{
     self.restaurantName = String.getString(dictData[APIConstants.kRestaurantName])
     self.phone = String.getString(dictData[APIConstants.kPhone])
     self.role = UserRoles(rawValue: Int(self.memberRoleId ?? "") ?? 0) ?? .voyagers
-//    self.avatarId = String.getString(dictRoles[APIConstants.kAvatarId])
+    if let avatardata = dictData["avatar_id"] as? [String:Any]{
+        self.UserAvatar_id = UserAvatar.init(with: avatardata)
+    }
+  // self.avatarId = String.getString(dictRoles[APIConstants.kAvatarId])
+   
 
     if let avatarDict = dictData[APIConstants.kAvatarId] as? [String: Any] {
         self.avatar = imageAttachementModel(avatarDict, for: "coverPhoto-\(userId ?? "").jpg")
@@ -82,6 +87,16 @@ class UserModel: NSObject{
     print(self)
 
   }
+    
+    class UserAvatar{
+        var attachment_url: String?
+        var id: Int?
+        
+        init(with data: [String:Any]){
+            self.attachment_url = String.getString(data["attachment_url"])
+            self.id = Int.getInt(data["i"])
+        }
+    }
 
     typealias avatar = imageAttachementModel
     typealias cover = imageAttachementModel

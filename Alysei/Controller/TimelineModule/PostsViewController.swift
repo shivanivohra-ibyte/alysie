@@ -34,6 +34,7 @@ class PostsViewController: AlysieBaseViewC {
         let tap = UITapGestureRecognizer(target: self, action: #selector(openMarketPlace))
         self.marketplaceView.addGestureRecognizer(tap)
         
+        
         // Do any additional setup after loading the view.
     }
     

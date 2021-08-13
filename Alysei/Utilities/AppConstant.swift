@@ -31,6 +31,10 @@ let APP_BACKGROUND_THEME = UIColor.init(red: 237/255, green: 238/255, blue: 238/
 let BUTTON_BACKGROUND_THEME = UIColor.init(red: 226/255, green: 1888/255, blue: 157/255, alpha: 1)
 let APP_COLOR = UIColor.init(red: 84.0/255.0, green: 110.0/255.0, blue: 122.0/255.0, alpha: 1.0)
 
+//MARK: GoogleApi Key
+
+//var googleAPIKey = "AIzaSyCHoKV0CQU2zctfEt3-8H-cX2skMbMpmsM"
+
 // MARK: - Structure
 
 struct NumberContants {
@@ -217,6 +221,11 @@ struct APIUrl{
     static let kUnlikeProductApi = "make/unfavourite/store/product"
     
     static let kGetReview = "get/all/reviews?id="
+    static let kGetSellerProfile = "get/seller/profile/"
+    static let kProductCategory = "get/marketplace/product/categories/all"
+    
+    static let kSubmitReview = "do/review/store/product"
+    
     
     
     enum FeaturedProduct {
@@ -501,7 +510,8 @@ struct APIConstants {
     static let kbrandLabelId = "brand_label_id"
     static let kMarketPlaceProduct_id = "marketplace_product_id"
     static let kfavourite_type  = "favourite_type"
-    
+    static let kRating = "rating"
+    static let kReview = "review"
 }
 
 struct OtherConstant {
@@ -870,3 +880,4 @@ func print_debug(items: Any){
 func print_debug_fake(items: Any){
     
 }
+
