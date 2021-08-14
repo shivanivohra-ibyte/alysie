@@ -212,6 +212,7 @@
 		61C7BE41267C8FDA006DB3BB /* FlagCountryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C7BE40267C8FDA006DB3BB /* FlagCountryListCell.swift */; };
 		61C7BE43267CB209006DB3BB /* Countries.json in Resources */ = {isa = PBXBuildFile; fileRef = 61C7BE42267CAFA6006DB3BB /* Countries.json */; };
 		61C95C8126C1C4BB000BF4BA /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C95C8026C1C4BB000BF4BA /* PostModel.swift */; };
+		61D9B17126C71F700052A3D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 61D9B17026C71F700052A3D5 /* GoogleService-Info.plist */; };
 		61EAB55C269A23B900793F18 /* PostCommentsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EAB556269A23B800793F18 /* PostCommentsPresenter.swift */; };
 		61EAB55D269A23B900793F18 /* PostCommentsWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EAB557269A23B800793F18 /* PostCommentsWorker.swift */; };
 		61EAB55E269A23B900793F18 /* PostCommentsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EAB558269A23B800793F18 /* PostCommentsRouter.swift */; };
@@ -249,7 +250,6 @@
 		C513C19F26144E9A0025CF27 /* SettingsScreenCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C19E26144E9A0025CF27 /* SettingsScreenCollectionVC.swift */; };
 		C513C1A526146C280025CF27 /* WaterfallCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C1A426146C280025CF27 /* WaterfallCollectionViewLayout.swift */; };
 		C513C1A9261477640025CF27 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C513C1A8261477640025CF27 /* PinterestLayout.swift */; };
-		C519796E26C23530004BC87C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C519796D26C23530004BC87C /* GoogleService-Info.plist */; };
 		C51C337B2664EA78002EC412 /* Marketplace.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C51C337A2664EA78002EC412 /* Marketplace.storyboard */; };
 		C51C337F2664F5CA002EC412 /* MarketPlaceHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51C337E2664F5CA002EC412 /* MarketPlaceHomeVC.swift */; };
 		C51C33832664FB52002EC412 /* MarketPlaceWalkthroughVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C51C33822664FB52002EC412 /* MarketPlaceWalkthroughVC.swift */; };
@@ -606,6 +606,7 @@
 		61C7BE40267C8FDA006DB3BB /* FlagCountryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagCountryListCell.swift; sourceTree = "<group>"; };
 		61C7BE42267CAFA6006DB3BB /* Countries.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Countries.json; sourceTree = "<group>"; };
 		61C95C8026C1C4BB000BF4BA /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
+		61D9B17026C71F700052A3D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		61EAB556269A23B800793F18 /* PostCommentsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentsPresenter.swift; sourceTree = "<group>"; };
 		61EAB557269A23B800793F18 /* PostCommentsWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentsWorker.swift; sourceTree = "<group>"; };
 		61EAB558269A23B800793F18 /* PostCommentsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentsRouter.swift; sourceTree = "<group>"; };
@@ -645,7 +646,6 @@
 		C513C19E26144E9A0025CF27 /* SettingsScreenCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreenCollectionVC.swift; sourceTree = "<group>"; };
 		C513C1A426146C280025CF27 /* WaterfallCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterfallCollectionViewLayout.swift; sourceTree = "<group>"; };
 		C513C1A8261477640025CF27 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
-		C519796D26C23530004BC87C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C51C337A2664EA78002EC412 /* Marketplace.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Marketplace.storyboard; sourceTree = "<group>"; };
 		C51C337E2664F5CA002EC412 /* MarketPlaceHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceHomeVC.swift; sourceTree = "<group>"; };
 		C51C33822664FB52002EC412 /* MarketPlaceWalkthroughVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceWalkthroughVC.swift; sourceTree = "<group>"; };
@@ -1391,8 +1391,7 @@
 			isa = PBXGroup;
 			children = (
 				61C7BE42267CAFA6006DB3BB /* Countries.json */,
-				C519796D26C23530004BC87C /* GoogleService-Info.plist */,
-				27A443F725AE06F00002BAAC /* Info.plist */,
+				61D9B17026C71F700052A3D5 /* GoogleService-Info.plist */,
 				C5BA01F42648FA8900E1E542 /* AlyseiBGV.mp4 */,
 				27BC688C25AC564200A01B6A /* Assets.xcassets */,
 				2770AA5525AE1BBC00A2F10B /* AlysieBaseViewC.swift */,
@@ -2077,7 +2076,7 @@
 				6139AC852693A12500000CD8 /* Home.storyboard in Resources */,
 				6BC4C0CF26006AA600791DCD /* OverLayLoginViewController.xib in Resources */,
 				274635F025DC35AD0010C1C6 /* Splash.storyboard in Resources */,
-				C519796E26C23530004BC87C /* GoogleService-Info.plist in Resources */,
+				61D9B17126C71F700052A3D5 /* GoogleService-Info.plist in Resources */,
 				C5D6F7AB26B18264006FFCDF /* StateListVC.xib in Resources */,
 				C5D6F7B526B18264006FFCDF /* SelectCityTableViewCell.xib in Resources */,
 				C5D6F7B326B18264006FFCDF /* CountryListVC.xib in Resources */,

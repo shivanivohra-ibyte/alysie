@@ -19,6 +19,7 @@ class SelfPostCommentsCell: UITableViewCell {
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var viewReplyButton: UIButton!
+    @IBOutlet var tableView: UITableView!
 
     var commentReplyDelegate: CommnentReplyProtocol!
     var model: PostComments.Comment.Response!
@@ -26,6 +27,15 @@ class SelfPostCommentsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.userImageView.layer.cornerRadius = self.userImageView.frame.width / 2.0
+    }
+
+    func loadReplytable() {
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+
+        self.tableView.tableFooterView = UIView()
+
+        self.tableView.reloadData()
     }
 
     @IBAction func replyButtonTapped() {
@@ -39,10 +49,20 @@ class OtherUserPostCommentsCell: SelfPostCommentsCell {
 }
 
 class PostCommentWithReplyCell: SelfPostCommentsCell {
-    @IBOutlet var replyTableView: UITableView!
+//    @IBOutlet var replyTableView: UITableView!
+
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        self.tableView.delegate = self
+//        self.tableView.dataSource = self
+//
+//        if self.model.data.count > 0 {
+//            self.tableView.reloadData()
+//        }
+//    }
 }
 
-extension PostCommentWithReplyCell: UITableViewDelegate, UITableViewDataSource {
+extension SelfPostCommentsCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.data.count
     }
