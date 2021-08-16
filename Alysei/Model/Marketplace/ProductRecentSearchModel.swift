@@ -54,6 +54,9 @@ class ProductSearchListModel {
     var store_detail : ProductSearchListModel?
     var name: String?
     var store_logo: String?
+    var rating: String?
+    //var avg_rating: String?
+    
     init(with data: [String:Any]){
         self.marketplaceRecentSearchId = Int.getInt(data["marketplace_recent_search_id"])
         self.userId = Int.getInt(data["user_id"])
@@ -74,6 +77,8 @@ class ProductSearchListModel {
         self.avg_rating = String.getString(data["avg_rating"])
         self.name = String.getString(data["name"])
         self.store_logo = String.getString(data["store_logo"])
+        self.rating = String.getString(data["rating"])
+       // self.avg_rating = String.getString(data["avg_rating"])
         if let productGallery = data["product_gallery"] as? [[String:Any]]{
             self.product_gallery = productGallery.map({ProductGalleryModel.init(with: $0)})
         }

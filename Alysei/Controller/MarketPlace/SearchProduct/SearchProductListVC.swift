@@ -14,6 +14,9 @@ class SearchProductListVC: UIViewController {
     var arrProductList: [ProductSearchListModel]?
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lblTitle: UILabel!
+    var selectedSampleIndex: Int?
+    var selectedCategoryIndex: [String]?
+    var selectedPriceRangeIndex:Int?
     //var trimmedProductName : String?
     
     override func viewDidLoad() {
@@ -44,8 +47,15 @@ class SearchProductListVC: UIViewController {
     @IBAction func btnFilterAction(_ sender: UIButton){
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "FilterViewController") as? FilterViewController else {return}
         nextVC.selectedProductName = self.selectProductName
-        nextVC.passDataCallBack = { filterproductList in
+        nextVC.selectedSampleIndex = self.selectedSampleIndex
+        nextVC.selectedCategoryProductId = self.selectedCategoryIndex ?? [""]
+        nextVC.selectedPriceRangeIndex = self.selectedPriceRangeIndex
+        
+        nextVC.passDataCallBack = { filterproductList,selectedSampleIndex,selectedCategoryIndex,selectPriceRangeIndex in
             self.arrProductList = filterproductList
+            self.selectedSampleIndex = nextVC.selectedSampleIndex
+            self.selectedCategoryIndex = nextVC.selectedCategoryProductId
+            self.selectedPriceRangeIndex = nextVC.selectedPriceRangeIndex
             self.tableView.reloadData()
         }
         self.navigationController?.pushViewController(nextVC, animated: true)

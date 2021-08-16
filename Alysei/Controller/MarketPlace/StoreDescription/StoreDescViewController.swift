@@ -33,6 +33,11 @@ class StoreDescViewController: AlysieBaseViewC {
     var storeProducts: [ProductSearchListModel]?
     var passStoreId: String?
     var arrRatingReview: [RatingReviewModel]?
+    @IBOutlet weak var storeAvgStar1: UIImageView!
+    @IBOutlet weak var storeAvgStar2: UIImageView!
+    @IBOutlet weak var storeAvgStar3: UIImageView!
+    @IBOutlet weak var storeAvgStar4: UIImageView!
+    @IBOutlet weak var storeAvgStar5: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,8 +64,8 @@ class StoreDescViewController: AlysieBaseViewC {
         lblStoreDesc.text = storeDetails?.description
         lblProducerName.text = storeDetails?.prefilled?.companyName
         lblCategories.text = "\(storeDetails?.totalCategory ?? 0)"
-        // labelAvgRating.text = storeDetails?.avg_rating
-        //labelTotalReview.text = (storeDetails?.total_reviews ?? "0") + "Reviews"
+         labelAvgRating.text = storeDetails?.avg_rating
+        labelTotalReview.text = (storeDetails?.total_reviews ?? "0") + " Reviews"
         self.imgProfile.setImage(withString: kImageBaseUrl + String.getString(storeDetails?.logo_id))
         self.imgCover.setImage(withString: kImageBaseUrl + String.getString(storeDetails?.banner_id))
         self.imgProducer.setImage(withString: kImageBaseUrl + String.getString(storeDetails?.prefilled?.avatarId?.attachmentUrl))
@@ -77,7 +82,78 @@ class StoreDescViewController: AlysieBaseViewC {
             self.imgLikeUnlike.image = UIImage(named: "LikeIcon")
             
         }
-        
+        setStarUI()
+    }
+    
+    func setStarUI(){
+        if storeDetails?.avg_rating == "0.0" || storeDetails?.avg_rating == "0"{
+            storeAvgStar1.image = UIImage(named: "icons8_star")
+            storeAvgStar2.image = UIImage(named: "icons8_star")
+            storeAvgStar3.image = UIImage(named: "icons8_star")
+            storeAvgStar4.image = UIImage(named: "icons8_star")
+            storeAvgStar5.image = UIImage(named: "icons8_star")
+        }else if storeDetails?.avg_rating == "1.0"{
+            storeAvgStar1.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar2.image = UIImage(named: "icons8_star")
+            storeAvgStar3.image = UIImage(named: "icons8_star")
+            storeAvgStar4.image = UIImage(named: "icons8_star")
+            storeAvgStar5.image = UIImage(named: "icons8_star")
+        }else if storeDetails?.avg_rating == "1.5"{
+            storeAvgStar1.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar2.image = UIImage(named: "HalfStar")
+            storeAvgStar3.image = UIImage(named: "icons8_star")
+            storeAvgStar4.image = UIImage(named: "icons8_star")
+            storeAvgStar5.image = UIImage(named: "icons8_star")
+        }else if storeDetails?.avg_rating == "2.0"{
+            storeAvgStar1.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar2.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar3.image = UIImage(named: "icons8_star")
+            storeAvgStar4.image = UIImage(named: "icons8_star")
+            storeAvgStar5.image = UIImage(named: "icons8_star")
+        }else if storeDetails?.avg_rating == "2.5"{
+            storeAvgStar1.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar2.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar3.image = UIImage(named: "HalfStar")
+            storeAvgStar4.image = UIImage(named: "icons8_star")
+            storeAvgStar5.image = UIImage(named: "icons8_star")
+        }else if storeDetails?.avg_rating == "3.0"{
+            storeAvgStar1.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar2.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar3.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar4.image = UIImage(named: "icons8_star")
+            storeAvgStar5.image = UIImage(named: "icons8_star")
+        }else if storeDetails?.avg_rating == "3.5"{
+            storeAvgStar1.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar2.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar3.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar4.image = UIImage(named: "HalfStar")
+            storeAvgStar5.image = UIImage(named: "icons8_star")
+        }else if storeDetails?.avg_rating == "4.0"{
+            storeAvgStar1.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar2.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar3.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar4.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar5.image = UIImage(named: "icons8_star")
+        }else if storeDetails?.avg_rating == "4.5"{
+            storeAvgStar1.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar2.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar3.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar4.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar5.image = UIImage(named: "HalfStar")
+        }else if storeDetails?.avg_rating == "5.0"{
+            storeAvgStar1.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar2.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar3.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar4.image = UIImage(named: "icons8_christmas_star_2")
+            storeAvgStar5.image = UIImage(named: "icons8_christmas_star_2")
+        }else{
+            storeAvgStar1.image = UIImage(named: "icons8_star")
+            storeAvgStar2.image = UIImage(named: "icons8_star")
+            storeAvgStar3.image = UIImage(named: "icons8_star")
+            storeAvgStar4.image = UIImage(named: "icons8_star")
+            storeAvgStar5.image = UIImage(named: "icons8_star")
+            print("Invalid Rating")
+        }
     }
     
     @objc func callLikeDisLikeApi(){
@@ -118,6 +194,7 @@ extension StoreDescViewController: UITableViewDataSource, UITableViewDelegate {
             }
             cell.lblTotalReview.text = "\(self.storeDetails?.total_reviews ?? "0") reviews"
             cell.lblAvgRating.text = "\(self.storeDetails?.avg_rating ?? "0")"
+            cell.avgRating = storeDetails?.avg_rating
             cell.configCell(self.arrRatingReview?.first ?? RatingReviewModel(with: [:]))
             return cell
         }else {
@@ -136,7 +213,7 @@ extension StoreDescViewController: UITableViewDataSource, UITableViewDelegate {
                 return UITableView.automaticDimension + 250
             }
         }else {
-            return CGFloat((250 * ((self.storeProducts?.count ?? 0) / 2 )))
+            return CGFloat((280 * ((self.storeProducts?.count ?? 0) / 2 )))
             
             // return CGFloat((250 * (6 / 2)))
         }
