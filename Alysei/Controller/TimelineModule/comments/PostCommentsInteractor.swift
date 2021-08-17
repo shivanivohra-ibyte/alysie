@@ -138,6 +138,8 @@ class PostCommentsInteractor: PostCommentsBusinessLogic, PostCommentsDataStore {
 
     func postReply(_ request: PostComments.Reply.Request) {
         // post_owner_id, user_id, post_id, comment
+        socket.connect()
+
         let params: [String : Any] = ["post_owner_id": request.post_owner_id,
                                       "user_id": request.user_id,
                                       "post_id": request.post_id,
@@ -157,6 +159,7 @@ class PostCommentsInteractor: PostCommentsBusinessLogic, PostCommentsDataStore {
         socket.on("showReply") { showLikeData, showLikeAck in
             print("inside show Reply - start")
             print(showLikeData)
+
             do {
 
                 let json = try JSONSerialization.data(withJSONObject: showLikeData, options: [])
@@ -177,6 +180,11 @@ class PostCommentsInteractor: PostCommentsBusinessLogic, PostCommentsDataStore {
             }
             print("inside show like - end")
         }
+
+        socket.on(clientEvent: .error) { data, ack in
+            print(data)
+        }
+
     }
 
 
