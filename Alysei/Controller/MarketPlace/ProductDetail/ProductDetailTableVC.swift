@@ -17,6 +17,7 @@ class ProductDetailTableVC: UITableViewCell {
     @IBOutlet weak var lblProductPrice: UILabel!
     @IBOutlet weak var btnLikeUnlike: UIButton!
     @IBOutlet weak var lblTotalRatings: UILabel!
+   
     var callLikeUnikeCallback: ((Int) -> Void)? = nil
 
     

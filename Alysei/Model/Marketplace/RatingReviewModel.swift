@@ -11,7 +11,7 @@ class RatingReviewModel {
     var marketplace_review_rating_id: Int?
     var user_id: Int?
     var id: Int?
-    var rating: Int?
+    var rating: String?
     var review: String?
     var user: ReviewUserData?
     var created_at: String?
@@ -21,7 +21,7 @@ class RatingReviewModel {
         self.marketplace_review_rating_id = Int.getInt(data["marketplace_review_rating_id"])
         self.user_id = Int.getInt(data["user_id"])
         self.id = Int.getInt(data["id"])
-        self.rating = Int.getInt(data["rating"])
+        self.rating = String.getString(data["rating"])
         self.review = String.getString(data["review"])
         self.created_at = String.getString(data["created_at"])
         if let userData = data["user"] as? [String:Any]{
