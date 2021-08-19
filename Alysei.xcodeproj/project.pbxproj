@@ -183,6 +183,12 @@
 		6113776D263212B600EEBFDA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6113776C263212B600EEBFDA /* Colors.xcassets */; };
 		61165344261642AC00BB97CA /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61165343261642AC00BB97CA /* UserProfile.swift */; };
 		611BD9FB268C3D2900EAD7B5 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 611BD9FA268C3D2900EAD7B5 /* CHANGELOG.md */; };
+		612576F226CEFDC700E3EED5 /* SharePostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612576EC26CEFDC700E3EED5 /* SharePostPresenter.swift */; };
+		612576F326CEFDC700E3EED5 /* SharePostWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612576ED26CEFDC700E3EED5 /* SharePostWorker.swift */; };
+		612576F426CEFDC700E3EED5 /* SharePostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612576EE26CEFDC700E3EED5 /* SharePostRouter.swift */; };
+		612576F526CEFDC700E3EED5 /* SharePostModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612576EF26CEFDC700E3EED5 /* SharePostModels.swift */; };
+		612576F626CEFDC700E3EED5 /* SharePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612576F026CEFDC700E3EED5 /* SharePostViewController.swift */; };
+		612576F726CEFDC700E3EED5 /* SharePostInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612576F126CEFDC700E3EED5 /* SharePostInteractor.swift */; };
 		6127F16E260B49DB005848B3 /* SaveResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6127F16D260B49DB005848B3 /* SaveResources.swift */; };
 		6129994F2685E7F700B5DA46 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 6129994E2685E7F700B5DA46 /* SocketIO */; };
 		612999512687231300B5DA46 /* ProfileScreenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 612999502687231100B5DA46 /* ProfileScreenModels.swift */; };
@@ -578,6 +584,12 @@
 		6113776C263212B600EEBFDA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		61165343261642AC00BB97CA /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		611BD9FA268C3D2900EAD7B5 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		612576EC26CEFDC700E3EED5 /* SharePostPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostPresenter.swift; sourceTree = "<group>"; };
+		612576ED26CEFDC700E3EED5 /* SharePostWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostWorker.swift; sourceTree = "<group>"; };
+		612576EE26CEFDC700E3EED5 /* SharePostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostRouter.swift; sourceTree = "<group>"; };
+		612576EF26CEFDC700E3EED5 /* SharePostModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostModels.swift; sourceTree = "<group>"; };
+		612576F026CEFDC700E3EED5 /* SharePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostViewController.swift; sourceTree = "<group>"; };
+		612576F126CEFDC700E3EED5 /* SharePostInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostInteractor.swift; sourceTree = "<group>"; };
 		6127F16D260B49DB005848B3 /* SaveResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveResources.swift; sourceTree = "<group>"; };
 		612999502687231100B5DA46 /* ProfileScreenModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenModels.swift; sourceTree = "<group>"; };
 		6139AC842693A12500000CD8 /* Home.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -1502,6 +1514,28 @@
 			path = events;
 			sourceTree = "<group>";
 		};
+		612576EA26CEFD8C00E3EED5 /* post */ = {
+			isa = PBXGroup;
+			children = (
+				612576EB26CEFD9E00E3EED5 /* share post */,
+				6B09A87A26245A9F00483365 /* AddPost */,
+			);
+			path = post;
+			sourceTree = "<group>";
+		};
+		612576EB26CEFD9E00E3EED5 /* share post */ = {
+			isa = PBXGroup;
+			children = (
+				612576EC26CEFDC700E3EED5 /* SharePostPresenter.swift */,
+				612576ED26CEFDC700E3EED5 /* SharePostWorker.swift */,
+				612576EE26CEFDC700E3EED5 /* SharePostRouter.swift */,
+				612576EF26CEFDC700E3EED5 /* SharePostModels.swift */,
+				612576F026CEFDC700E3EED5 /* SharePostViewController.swift */,
+				612576F126CEFDC700E3EED5 /* SharePostInteractor.swift */,
+			);
+			path = "share post";
+			sourceTree = "<group>";
+		};
 		6127F16C260B49B6005848B3 /* local_storage-and-cache */ = {
 			isa = PBXGroup;
 			children = (
@@ -1649,7 +1683,7 @@
 			children = (
 				C51C337D2664F599002EC412 /* MarketPlace */,
 				C51D47742636A6E600CD3863 /* TimelineModule */,
-				6B09A87A26245A9F00483365 /* AddPost */,
+				612576EA26CEFD8C00E3EED5 /* post */,
 				2770AA6C25AE203800A2F10B /* LoginModule */,
 				A84EED0925B1D65E00429B1D /* HomeModule */,
 				2716627725BCB7EE000C0189 /* B2BModule */,
@@ -2317,9 +2351,12 @@
 				27A4439C25AE03720002BAAC /* RSImageView.swift in Sources */,
 				2742855C25B82EEC003F3DE5 /* AddFeatureViewC.swift in Sources */,
 				27B4E90025EF957D00623E45 /* GetRoleModel.swift in Sources */,
+				612576F526CEFDC700E3EED5 /* SharePostModels.swift in Sources */,
 				C56C287B268465C60042A0A3 /* MyStoreDetailInteractor.swift in Sources */,
 				61EAB55E269A23B900793F18 /* PostCommentsRouter.swift in Sources */,
+				612576F726CEFDC700E3EED5 /* SharePostInteractor.swift in Sources */,
 				C56C285B268465770042A0A3 /* MyStoreDashboardPresenter.swift in Sources */,
+				612576F426CEFDC700E3EED5 /* SharePostRouter.swift in Sources */,
 				27B4E8EB25EE9FA300623E45 /* SaveAddressViewC.swift in Sources */,
 				27A443BC25AE03720002BAAC /* RSPickerView.swift in Sources */,
 				27B87CEC25F6310400E38E85 /* FeaturedProductTableCell.swift in Sources */,
@@ -2354,6 +2391,7 @@
 				27A443B725AE03720002BAAC /* UIImageViewBorderWidthAndColor.swift in Sources */,
 				27A443A525AE03720002BAAC /* UILabelCornerRadius.swift in Sources */,
 				27A4439125AE03720002BAAC /* NetworkUrl.swift in Sources */,
+				612576F226CEFDC700E3EED5 /* SharePostPresenter.swift in Sources */,
 				2749AA2725BC6B1000DC55B2 /* ContactTableCell.swift in Sources */,
 				C56C2884268465F30042A0A3 /* MyStoreInquiriesWorker.swift in Sources */,
 				27D0FAB425CEE9FF00463FE0 /* SelectSubProductTableCell.swift in Sources */,
@@ -2398,6 +2436,7 @@
 				C5CA9A8D26C1520D00BDAE25 /* ReviewScreenTableViewCell.swift in Sources */,
 				61A8CB6F26204CE500B99233 /* AboutViewModel.swift in Sources */,
 				27A4439325AE03720002BAAC /* NSString+Base64.m in Sources */,
+				612576F326CEFDC700E3EED5 /* SharePostWorker.swift in Sources */,
 				C5D6F7F126B1829D006FFCDF /* HubCitiesListViewController.swift in Sources */,
 				C51D47852636C72500CD3863 /* PostDescTableViewCell.swift in Sources */,
 				C5E9A3A426B7EAC50005AE89 /* ProductDescriptionTableVC.swift in Sources */,
@@ -2475,6 +2514,7 @@
 				27D0FAC225CEEB5F00463FE0 /* SignUpFormSelectTableCell.swift in Sources */,
 				C56C287A268465C60042A0A3 /* MyStoreDetailViewController.swift in Sources */,
 				276E16B025DD8C5E00B17ACF /* SplashViewC.swift in Sources */,
+				612576F626CEFDC700E3EED5 /* SharePostViewController.swift in Sources */,
 				C53A040526663ED800D07797 /* MarketPlaceWalkThroughDescVC.swift in Sources */,
 				C5D68D542660CBF700B759F8 /* BusinessMultiOptionsVC.swift in Sources */,
 				27A443BB25AE03720002BAAC /* UINavigationControllerExtended.swift in Sources */,
