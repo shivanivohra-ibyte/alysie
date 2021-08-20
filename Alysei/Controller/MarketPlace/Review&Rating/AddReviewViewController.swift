@@ -34,28 +34,13 @@ class AddReviewViewController: UIViewController , UITextViewDelegate{
     }
     
     func setImage(){
-        let roleID = UserRoles(rawValue:Int.getInt(kSharedUserDefaults.loggedInUserModal.memberRoleId)  ) ?? .voyagers
+        _ = UserRoles(rawValue:Int.getInt(kSharedUserDefaults.loggedInUserModal.memberRoleId)  ) ?? .voyagers
         if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().profilePhoto) {
             self.userImage.image = profilePhoto
             self.userImage.layer.cornerRadius = (self.userImage.frame.width / 2.0)
             self.userImage.layer.borderWidth = 5.0
             self.userImage.layer.masksToBounds = true
-            switch roleID {
-            case .distributer1, .distributer2, .distributer3:
-                self.userImage.layer.borderColor = UIColor.init(hexString: RolesBorderColor.distributer1.rawValue).cgColor
-            case .producer:
-                self.userImage.layer.borderColor = UIColor.init(hexString: RolesBorderColor.producer.rawValue).cgColor
-            case .travelAgencies:
-                self.userImage.layer.borderColor = UIColor.init(hexString: RolesBorderColor.travelAgencies.rawValue).cgColor
-            case .voiceExperts:
-                self.userImage.layer.borderColor = UIColor.init(hexString: RolesBorderColor.voiceExperts.rawValue).cgColor
-            case .voyagers:
-                self.userImage.layer.borderColor = UIColor.init(hexString: RolesBorderColor.voyagers.rawValue).cgColor
-            case .restaurant :
-                self.userImage.layer.borderColor = UIColor.init(hexString: RolesBorderColor.restaurant.rawValue).cgColor
-            default:
-                self.userImage.layer.borderColor = UIColor.white.cgColor
-            }
+            
         }else{
             self.userImage.layer.cornerRadius = (self.userImage.frame.width / 2.0)
             self.userImage.layer.borderWidth = 5.0
@@ -74,8 +59,8 @@ class AddReviewViewController: UIViewController , UITextViewDelegate{
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func btnAddReview(_ sender: UIButton){
-        if (txtReview.text == "Leave a comment") || (txtReview.textColor == UIColor.lightGray){
-            self.showAlert(withMessage: "Please enter some comment")
+        if (reviewStarCount == 0){
+            self.showAlert(withMessage: "Please add ratings.")
         }else{
         callAddReviewApi()
         }

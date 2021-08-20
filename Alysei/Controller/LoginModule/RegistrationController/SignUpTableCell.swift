@@ -128,19 +128,29 @@ class SignUpTableCell: UITableViewCell, UITextFieldDelegate {
             }
         }
         if title == AppConstants.kZipCode {
-            if textField.text?.count ?? 0 < 10{
+            print("textField Count-------------------------\(textField.text?.count ?? 0)")
+             if textField.text?.count ?? 0 == 11 {
                 if let char = string.cString(using: String.Encoding.utf8) {
                     let isBackSpace = strcmp(char, "\\b")
                     if (isBackSpace == -92) {
                         print("Backspace was pressed")
                         return true
-                    }else{
+            }
+                }
+            }
+            if textField.text?.count ?? 0 <= 10{
+                if let char = string.cString(using: String.Encoding.utf8) {
+                    let isBackSpace = strcmp(char, "\\b")
+                    if (isBackSpace == -92) {
+                        print("Backspace was pressed")
+                        return true
+                    }else {
                         var strText: String? = textField.text
                         if strText == nil {
                             strText = ""
                         }
                         strText = strText?.replacingOccurrences(of: "-", with: "")
-                        if strText!.count > 1 && strText!.count % 5 == 0 && string != "" {
+                         if strText!.count > 1 && strText!.count % 5 == 0 && string != "" {
                             textField.text = "\(textField.text!)-\(string)"
                             return false
                         }

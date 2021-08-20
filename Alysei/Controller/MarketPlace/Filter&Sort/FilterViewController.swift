@@ -26,14 +26,15 @@ class FilterViewController: UIViewController {
     var selectedStartPriceOption: String?
     var selectedEndPriceOption: String?
     var filterViewSelectedIndex: Int?
-    //var selectedCategoryArr : Int?
+    var selectedCategoryCheckIndex = [Int]()
     var selectedIndex = 0
     var loadingFirstTime = true
-    var passDataCallBack: (([ProductSearchListModel]?,Int?,[String]?,Int?) -> Void)? = nil
+    var passDataCallBack: (([ProductSearchListModel]?,Int?,[String]?,[Int]?,Int?, Bool?) -> Void)? = nil
     var arrProductList: [ProductSearchListModel]?
     var selectedSampleIndex: Int?
    // var selectedCategoryIndex: [Int]?
     var selectedPriceRangeIndex:Int?
+    var firstLoading = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,9 +51,13 @@ class FilterViewController: UIViewController {
         //optionTableView.layer.backgroundColor = UIColor.init(hexString: "#E8E8E8").cgColor
         // Do any additional setup after loading the view.
         
-        setSaveSampleData()
-        setSavePriceFilter()
-        setSaveCategoryApi()
+        if firstLoading == false{
+            setSaveSampleData()
+        }
+        if firstLoading == false && (selectedPriceRangeIndex != nil) {
+            setSavePriceFilter()
+        }
+        
     }
     
     @IBAction func backAction(_ sender: UIButton){
@@ -83,15 +88,31 @@ class FilterViewController: UIViewController {
             arrSubFilterPriceModel[selectedPriceRangeIndex ?? 0].isSelected = true
         }
     }
-    func setSaveCategoryApi(){
-        for i in (0..<(self.selectedCategoryProductId.count )) {
-        //while selectedCategoryProductId.contains(selectedCategoryProductId[i]) {
-         //   if let index = selectedCategoryProductId.firstIndex(of: selectedCategoryProductId[i]) {
-               // arrProductCategory?[index].isSelected = true
-           // }
-        //}
-    }
-    }
+//    func setSaveCategoryApi(){
+//        for i in (0..<(self.selectedCategoryProductId.count )) {
+//        if selectedCategoryProductId.contains(selectedCategoryProductId[i]) {
+//            print("Id check---------------\(selectedCategoryProductId[i])")
+//            for i in (0..<(arrProductCategory?.count ?? 0)){
+//                if "\(arrProductCategory?[i].marketplace_product_category_id ?? -1)" == selectedCategoryProductId[i]{
+//                    print("Yes id match")
+//                    arrProductCategory?[i].isSelected = true
+//                }
+//                else {
+//                    print("arrProductCategory------------------------\(arrProductCategory?[i].marketplace_product_category_id ?? -1) not matches with \(selectedCategoryProductId[i])")
+//                }
+//            }
+//
+//          //  }
+//        }
+//    }
+//    }
+//    func setSaveCategoryApi(){
+//        for i in (0..<(self.selectedCategoryCheckIndex.count )) {
+//            print("selectedCategoryCheckIndex------------------\(selectedCategoryCheckIndex[i] )")
+//            arrProductCategory?[selectedCategoryCheckIndex[i]].isSelected = true
+//            print("selectedCategoryCheckIndex------------------\(arrProductCategory?[selectedCategoryCheckIndex[i]].isSelected ?? true)")
+//    }
+//    }
 }
 
 extension FilterViewController: UITableViewDelegate, UITableViewDataSource{
@@ -126,11 +147,16 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource{
             switch selectedIndex {
             case 0:
                 
-                cell.configCell(selectedIndex, arrSubFilterSampleModel[indexPath.row], MyStoreProductDetail(with: [:]))
+                cell.configCell(selectedIndex, arrSubFilterSampleModel[indexPath.row], MyStoreProductDetail(with: [:]), indexPath.row)
             case 1:
-                cell.configCell(selectedIndex, FilterModel(name: "", isSelected: false), arrProductCategory?[indexPath.row] ?? MyStoreProductDetail(with: [:]))
+                if firstLoading == true{
+                    print("No data")
+                }else{
+                cell.selectedCategory = selectedCategoryCheckIndex
+                }
+                cell.configCell(selectedIndex, FilterModel(name: "", isSelected: false), arrProductCategory?[indexPath.row] ?? MyStoreProductDetail(with: [:]),indexPath.row)
             default:
-                cell.configCell(selectedIndex, arrSubFilterPriceModel[indexPath.row], MyStoreProductDetail(with: [:]))
+                cell.configCell(selectedIndex, arrSubFilterPriceModel[indexPath.row], MyStoreProductDetail(with: [:]),indexPath.row)
             }
             
             return cell
@@ -183,16 +209,23 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource{
                     arrProductCategory?[indexPath.row].isSelected = false
                     
                     let Productid = "\(arrProductCategory?[indexPath.row].marketplace_product_category_id ?? 0)"
-                    while selectedCategoryProductId.contains(Productid) {
+                   // for i in (0..<(selectedCategoryProductId.count ?? 0)){
+                    //while selectedCategoryProductId.contains(Productid) {
+                        if selectedCategoryProductId.contains(obj: Productid){
                         if let itemToRemoveIndex = selectedCategoryProductId.firstIndex(of: Productid) {
                             selectedCategoryProductId.remove(at: itemToRemoveIndex)
+                            selectedCategoryCheckIndex.remove(at: itemToRemoveIndex)
+                            print("selectedCategoryCheckIndex------------------\(selectedCategoryCheckIndex.count )")
                         }
+                        
                     }
                 }else{
                     
                     arrProductCategory?[indexPath.row].isSelected = true
                     let SelectProductId = "\(arrProductCategory?[indexPath.row].marketplace_product_category_id ?? 0)"
                     selectedCategoryProductId.append(SelectProductId)
+                    selectedCategoryCheckIndex.append(indexPath.row)
+                    print("selectedCategoryCheckIndex------------------\(selectedCategoryCheckIndex.count )")
                 }
                 
             //                for i in (0..<(arrProductCategory?.count ?? 0)) {
@@ -258,7 +291,7 @@ extension FilterViewController{
                 if  let data = response?["data"] as? [[String:Any]]{
                     self.arrProductList = data.map({ProductSearchListModel.init(with: $0)})
                 }
-                self.passDataCallBack?(self.arrProductList,self.selectedSampleIndex, self.selectedCategoryProductId,self.selectedPriceRangeIndex)
+                self.passDataCallBack?(self.arrProductList,self.selectedSampleIndex,self.selectedCategoryProductId, self.selectedCategoryCheckIndex,self.selectedPriceRangeIndex,false)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.navigationController?.popViewController(animated: true)
                 }
@@ -279,10 +312,14 @@ extension FilterViewController{
                 if  let data = response?["data"] as? [[String:Any]]{
                     self.arrProductList = data.map({ProductSearchListModel.init(with: $0)})
                 }
-                self.passDataCallBack?(self.arrProductList,-1,[],-1)
+                self.passDataCallBack?(self.arrProductList,-1,[],[],-1, true)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.navigationController?.popViewController(animated: true)
                 }
+                self.selectedCategoryProductId = [""]
+                self.selectedSampleIndex = -1
+                self.selectedPriceRangeIndex = -1
+                
             default:
                 print("Error")
             // self.showAlert(withMessage: "No products found")

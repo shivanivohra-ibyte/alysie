@@ -10,6 +10,7 @@ import UIKit
 class FilterSubOptionsTableVCell: UITableViewCell {
     @IBOutlet weak var labelSubOptions: UILabel!
     @IBOutlet weak var btnOptionSelect: UIButton!
+    var selectedCategory: [Int]?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,7 +22,7 @@ class FilterSubOptionsTableVCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    func configCell(_ filterSelectedIndex: Int, _ data: FilterModel, _ category: MyStoreProductDetail){
+    func configCell(_ filterSelectedIndex: Int, _ data: FilterModel, _ category: MyStoreProductDetail, _ indexPath: Int?){
         
         switch filterSelectedIndex{
         case 0,2:
@@ -32,6 +33,10 @@ class FilterSubOptionsTableVCell: UITableViewCell {
             }
             labelSubOptions.text =  data.name
         case 1:
+            
+            if (selectedCategory?.contains(indexPath ?? -1) ?? false){
+                category.isSelected = true
+            }
             if category.isSelected == false{
             btnOptionSelect.setImage(UIImage(named: "icons_grey_checkbox"), for: .normal)
             }else{

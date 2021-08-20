@@ -37,9 +37,11 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
 //    var selectedAssets = [TLPHAsset]()
     var imagesFromSource = [UIImage]()
     var ypImages = [YPMediaItem]()
+    var descriptionPost: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        txtPost.text = AppConstants.kEnterText
         setUI()
         // Do any additional setup after loading the view.
     }
@@ -57,7 +59,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
         // collectionViewHeight.constant = 0
         //collectionViewImage.isHidden = true
         postPrivacyTableView.isHidden = true
-        txtPost.text = AppConstants.kEnterText
+        
         txtPost.layer.borderWidth = 0.5
         txtPost.layer.borderColor = UIColor.lightGray.cgColor
         txtPost.textColor = UIColor.lightGray
@@ -74,6 +76,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
         }
         userName.text = name
         if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().profilePhoto) {
+          //  if let profilePhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().coverPhoto) {
             self.userImage.image = profilePhoto
             self.userImage.layer.cornerRadius = (self.userImage.frame.width / 2.0)
             self.userImage.layer.borderWidth = 5.0
@@ -174,7 +177,7 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
         config.screens = [.library, .photo]
         config.library.maxNumberOfItems = 100000
         config.showsPhotoFilters = false
-
+        self.descriptionPost = txtPost.text
         config.library.preselectedItems = ypImages
         let picker = YPImagePicker(configuration: config)
 
@@ -185,9 +188,11 @@ class AddPostViewController: UIViewController, UITextViewDelegate , TLPhotosPick
                 case .photo(let photo):
                     self.imagesFromSource.append(photo.modifiedImage ?? photo.image)
                     print(photo)
+                
                 case .video(let video):
                     print(video)
                 }
+                self.txtPost.text = self.descriptionPost
             }
             self.collectionViewImage.reloadData()
             picker.dismiss(animated: true, completion: nil)
