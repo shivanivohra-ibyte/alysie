@@ -12,7 +12,7 @@ class DiscoverTableViewCell: UITableViewCell {
     @IBOutlet weak var discoverCollectionView: UICollectionView!
     
     var storyUser = ["Add Post","Elans","Patrik","Musky","Peter","Tesla"]
-    var storyImage  = ["icon_addProduct","user_icon_active","select_role2","select_role3","select_role1","select_role4"]
+    var storyImage  = ["AddStory","user_icon_active","select_role2","select_role3","select_role1","select_role4"]
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

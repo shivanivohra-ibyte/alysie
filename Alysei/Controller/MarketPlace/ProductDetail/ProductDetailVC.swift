@@ -15,6 +15,7 @@ class ProductDetailVC: AlysieBaseViewC {
     @IBOutlet weak var lblProductName: UILabel!
     
     
+    
     // @IBOutlet weak var btnLikeUnlike: UIButton!
     
     var marketplaceProductId : String?

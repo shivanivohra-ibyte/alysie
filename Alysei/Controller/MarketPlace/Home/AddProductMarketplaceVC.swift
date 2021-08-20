@@ -45,6 +45,8 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
     @IBOutlet weak var quantityView: UIView!
     @IBOutlet weak var lblQunatityLabel: UILabel!
     @IBOutlet weak var lblMinimumQuantity: UILabel!
+    @IBOutlet weak var lblHeadingLeading: NSLayoutConstraint!
+    @IBOutlet weak var btnback: UIButton!
     
     var uploadImageArray = [UIImage]()
     //var selectedAssets = [TLPHAsset]()
@@ -76,6 +78,13 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
         setDataUI()
         if fromVC == .myStoreDashboard{
             setEditProductDetail()
+        }
+        if fromVC == .myStoreDashboard{
+            self.lblHeadingLeading.constant = 15
+            btnback.isHidden = true
+        }else {
+            self.lblHeadingLeading.constant = 25
+            btnback.isHidden = true
         }
         callGetDashboardStoreDetail()
         let tap = UITapGestureRecognizer(target: self, action: #selector(openProductCategory))

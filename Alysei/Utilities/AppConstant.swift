@@ -53,11 +53,13 @@ struct FunctionsConstants {
 
 struct UserDetailBasedElements {
     var coverPhoto: String = {
-        return "coverPhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg"
+        //return "coverPhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg"
+        return "profilePhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg"
     }()
     
     var profilePhoto: String = {
-        return "profilePhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg"
+       // return "profilePhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg"
+        return "coverPhoto-\(kSharedUserDefaults.loggedInUserModal.userId ?? "").jpg"
     }()
 }
 

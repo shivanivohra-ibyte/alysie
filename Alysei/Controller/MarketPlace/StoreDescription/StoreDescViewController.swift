@@ -28,7 +28,9 @@ class StoreDescViewController: AlysieBaseViewC {
     @IBOutlet weak var imgCollectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var vwStoreLike: UIView!
     @IBOutlet weak var imgLikeUnlike: UIImageView!
-    
+    @IBOutlet weak var vwCall: UIView!
+    @IBOutlet weak var vwLoaction: UIView!
+    @IBOutlet weak var vwWebsite: UIView!
     var storeDetails: MyStoreProductDetail?
     var storeProducts: [ProductSearchListModel]?
     var passStoreId: String?

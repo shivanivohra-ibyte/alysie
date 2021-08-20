@@ -62,7 +62,8 @@ extension SelectedHubsTableCell: UICollectionViewDelegate, UICollectionViewDataS
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
     let width = (kScreenWidth - 70.0)/3
-    return CGSize(width: width, height: width + 32.0)
+    //return CGSize(width: width, height: width + 48.0)
+    return CGSize(width: width, height: 168)
   }
     
 }

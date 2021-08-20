@@ -14,18 +14,23 @@ class SearchProductListVC: UIViewController {
     var arrProductList: [ProductSearchListModel]?
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var lblTitle: UILabel!
+    
     var selectedSampleIndex: Int?
-    var selectedCategoryIndex: [String]?
+    var selectedCategoryId: [String]?
     var selectedPriceRangeIndex:Int?
+    var selectedCategoryCheckIndex: [Int]?
+    var firstLoading = true
     //var trimmedProductName : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.sortFilterView.addShadow()
         lblTitle.text = selectProductName
         //trimmedProductName = selectProductName?.replacingOccurrences(of: " ", with: "")
         print("selectProductName-------------------\(selectProductName ?? "")")
         callSearchListApi(selectProductName ?? "")
+        self.firstLoading = true
         // Do any additional setup after loading the view.
     }
     @IBAction func backAction(_ sender: UIButton){
@@ -47,15 +52,24 @@ class SearchProductListVC: UIViewController {
     @IBAction func btnFilterAction(_ sender: UIButton){
         guard let nextVC = self.storyboard?.instantiateViewController(identifier: "FilterViewController") as? FilterViewController else {return}
         nextVC.selectedProductName = self.selectProductName
-        nextVC.selectedSampleIndex = self.selectedSampleIndex
-        nextVC.selectedCategoryProductId = self.selectedCategoryIndex ?? [""]
-        nextVC.selectedPriceRangeIndex = self.selectedPriceRangeIndex
+        if self.firstLoading == true {
+            print("No pass")
+        }else{
         
-        nextVC.passDataCallBack = { filterproductList,selectedSampleIndex,selectedCategoryIndex,selectPriceRangeIndex in
+        nextVC.selectedSampleIndex = self.selectedSampleIndex
+        nextVC.selectedCategoryProductId = self.selectedCategoryId ?? [""]
+        nextVC.firstLoading = self.firstLoading
+        nextVC.selectedPriceRangeIndex = self.selectedPriceRangeIndex
+        nextVC.selectedCategoryCheckIndex = self.selectedCategoryCheckIndex ?? [-1]
+        }
+        nextVC.passDataCallBack = { filterproductList,selectedSampleIndex,selectedCategoryProductId,selectedCategoryIndex,selectPriceRangeIndex, isFirstloading in
             self.arrProductList = filterproductList
-            self.selectedSampleIndex = nextVC.selectedSampleIndex
-            self.selectedCategoryIndex = nextVC.selectedCategoryProductId
-            self.selectedPriceRangeIndex = nextVC.selectedPriceRangeIndex
+            self.selectedSampleIndex = selectedSampleIndex
+            self.selectedCategoryCheckIndex = selectedCategoryIndex
+            self.selectedCategoryId = nextVC.selectedCategoryProductId
+            self.selectedPriceRangeIndex = selectPriceRangeIndex
+            
+            self.firstLoading = isFirstloading ?? true
             self.tableView.reloadData()
         }
         self.navigationController?.pushViewController(nextVC, animated: true)
@@ -131,9 +145,11 @@ class ProductListTableVCell: UITableViewCell{
     @IBOutlet weak var imgAvailableForSample: UIImageView!
     @IBOutlet weak var lblSampleAvailabel: UILabel!
     @IBOutlet weak var lblAvgRating: UILabel!
+    @IBOutlet weak var vwCategory: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.vwCategory.layer.backgroundColor = UIColor.init(hexString: "#9CD39A").cgColor
     }
     
     func configCell(_ data: ProductSearchListModel){
