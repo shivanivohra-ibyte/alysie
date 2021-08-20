@@ -254,7 +254,7 @@ extension PostsViewController: ShareEditMenuProtocol {
     }
 
     func sharePost(_ postID: Int) {
-
+        self.performSegue(withIdentifier: "seguePostsToSharePost", sender: self)
     }
 
 }
