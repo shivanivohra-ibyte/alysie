@@ -16,6 +16,7 @@ import SocketIO
 protocol PostCommentsBusinessLogic {
     func fetchComments(_ postID: Int)
     func postComment(_ request: PostComments.Post.Request)
+    func postReply(_ request: PostComments.Reply.Request)
 }
 
 protocol PostCommentsDataStore {
@@ -111,7 +112,7 @@ class PostCommentsInteractor: PostCommentsBusinessLogic, PostCommentsDataStore {
         }
 
         socket.on("showComment") { showLikeData, showLikeAck in
-            print("inside show like - start")
+            print("inside show Comment - start")
             print(showLikeData)
             do {
 
@@ -133,6 +134,57 @@ class PostCommentsInteractor: PostCommentsBusinessLogic, PostCommentsDataStore {
             }
             print("inside show like - end")
         }
+    }
+
+    func postReply(_ request: PostComments.Reply.Request) {
+        // post_owner_id, user_id, post_id, comment
+        socket.connect()
+
+        let params: [String : Any] = ["post_owner_id": request.post_owner_id,
+                                      "user_id": request.user_id,
+                                      "post_id": request.post_id,
+                                      "comment_id": request.comment_id,
+                                      "comment": request.comment]
+
+        let sd = params.socketRepresentation()
+
+        socket.emit("doReply", with: [sd]) {
+            print("doComment - inside ")
+            DispatchQueue.main.async {
+                self.fetchComments(request.post_id)
+            }
+
+        }
+
+        socket.on("showReply") { showLikeData, showLikeAck in
+            print("inside show Reply - start")
+            print(showLikeData)
+
+            do {
+
+                let json = try JSONSerialization.data(withJSONObject: showLikeData, options: [])
+                print(json)
+                //                let data = Data(showl)
+                if let newTech = try JSONSerialization.jsonObject(with: json, options: []) as? dummy {
+                    print(newTech.comments.count)
+                }
+                if let newTech2 = try JSONSerialization.jsonObject(with: json, options: []) as? [comments] {
+                    print(newTech2)
+                }
+
+                let jsonResponse = try JSONSerialization.jsonObject(with: json, options: [])
+                print(jsonResponse)
+
+            } catch {
+                print(error.localizedDescription)
+            }
+            print("inside show like - end")
+        }
+
+        socket.on(clientEvent: .error) { data, ack in
+            print(data)
+        }
+
     }
 
 

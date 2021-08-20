@@ -30,6 +30,7 @@ class PostCommentsViewController: UIViewController, PostCommentsDisplayLogic {
     var postCommentsUserDataModel: PostCommentsUserData!
     var model: PostComments.Comment.Response!
     var postOwnerID: Int!
+    var commentID: Int! // this is to be used when user taps on reply button.
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -74,6 +75,8 @@ class PostCommentsViewController: UIViewController, PostCommentsDisplayLogic {
         self.tableView.dataSource = self
         self.tableView.allowsSelection = false
 
+        self.commentTextfield.delegate = self
+
         self.interactor?.fetchComments(self.postCommentsUserDataModel.postID)
         self.profilePhotoButton.layer.cornerRadius = self.profilePhotoButton.frame.width / 2.0
         self.profilePhotoButton.layer.masksToBounds = true
@@ -108,16 +111,9 @@ class PostCommentsViewController: UIViewController, PostCommentsDisplayLogic {
 //        }
     }
 
-    // MARK:- IBAction methods
-    @IBAction func backButtonTapped(_ sender: UIButtonExtended) {
-        self.navigationController?.popViewController(animated: true)
-    }
+    //MARK: custom methods
 
-    @IBAction func profilePhotoButtonTapped(_ sender: UIButtonExtended) {
-
-    }
-
-    @IBAction func sendCommentButtonTapped(_ sender: UIButtonExtended) {
+    func sendComment() {
         guard let text = self.commentTextfield.text else {
             showAlert(withMessage: "Comment can't be blank.")
             return
@@ -131,6 +127,38 @@ class PostCommentsViewController: UIViewController, PostCommentsDisplayLogic {
         self.interactor?.postComment(requestModel)
     }
 
+    func sendReply(_ commentID: Int) {
+        guard let text = self.commentTextfield.text else {
+            showAlert(withMessage: "Comment can't be blank.")
+            return
+        }
+
+        let selfID = Int(kSharedUserDefaults.loggedInUserModal.userId ?? "-1") ?? 0
+        let requestModel = PostComments.Reply.Request(post_owner_id: self.postCommentsUserDataModel.userID,
+                                                     user_id: selfID,
+                                                     post_id: self.postCommentsUserDataModel.postID,
+                                                     comment_id: commentID,
+                                                     comment: text)
+        self.interactor?.postReply(requestModel)
+    }
+
+    // MARK:- IBAction methods
+    @IBAction func backButtonTapped(_ sender: UIButtonExtended) {
+        self.navigationController?.popViewController(animated: true)
+    }
+
+    @IBAction func profilePhotoButtonTapped(_ sender: UIButtonExtended) {
+
+    }
+
+    @IBAction func sendCommentButtonTapped(_ sender: UIButtonExtended) {
+        if self.commentTextfield.placeholder == "Add a reply to comment" {
+            self.sendReply(self.commentID)
+        } else {
+            self.sendComment()
+        }
+    }
+
 }
 
 extension PostCommentsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -142,14 +170,33 @@ extension PostCommentsViewController: UITableViewDelegate, UITableViewDataSource
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? SelfPostCommentsCell else {
             return UITableViewCell()
         }
+        cell.commentReplyDelegate = self
         let commentData = self.model.data[indexPath.row]
         let name = commentData.poster?.name ?? commentData.poster?.restaurantName ?? commentData.poster?.companyName ?? ""
         cell.descriptionLabel.text = "\(commentData.body)"
         cell.userNameLabel.text = "\(name)"
         cell.timeLabel.text = "\(commentData.convertDate())"
         cell.model = self.model
+        cell.viewReplyButton.tag = commentData.commentID
+        cell.loadReplytable()
 //        cell.userImageView.setImage(withString: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=400")
         cell.userImageView.setImage(withString: "\(imageDomain)/\(commentData.poster?.avatarID?.attachmentUrl ?? "")")
         return cell
+    }
+}
+
+
+extension PostCommentsViewController: CommnentReplyProtocol {
+    func addReplyToComment(_ commentID: Int) {
+        self.commentID = commentID
+        self.commentTextfield.placeholder = "Add a reply to comment"
+        self.commentTextfield.becomeFirstResponder()
+    }
+
+}
+
+extension PostCommentsViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.commentTextfield.placeholder = "Leave a comment"
     }
 }

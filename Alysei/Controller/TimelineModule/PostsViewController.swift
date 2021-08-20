@@ -145,6 +145,8 @@ extension PostsViewController: UITableViewDelegate,UITableViewDataSource{
                     cell.likeImage.image = data.likeFlag == 0 ? UIImage(named: "like_icon") : UIImage(named: "liked_icon")
                 }
 
+                cell.menuDelegate = self
+
                 cell.commentCallback = { postCommentsUserData in
                     self.showCommentScreen(postCommentsUserData)
                 }
@@ -179,6 +181,82 @@ extension PostsViewController: UITableViewDelegate,UITableViewDataSource{
 //        }
 //    }
     
+}
+
+extension PostsViewController: ShareEditMenuProtocol {
+    func menuBttonTapped(_ postID: Int?) {
+        guard let postID = postID else {
+            return
+        }
+        let actionSheet = UIAlertController(style: .actionSheet)
+
+        let shareAction = UIAlertAction(title: "Share Post", style: .default) { action in
+            self.sharePost(postID)
+        }
+
+        let editPostAction = UIAlertAction(title: "Edit Post", style: .default) { action in
+            self.editPost(postID)
+        }
+
+        let deletePost = UIAlertAction(title: "Delete Post", style: .destructive) { action in
+            self.deletePost(postID)
+        }
+
+        let changePrivacyAction = UIAlertAction(title: "Change Privacy", style: .default) { action in
+            self.editPost(postID)
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+
+        }
+
+        actionSheet.addAction(shareAction)
+        actionSheet.addAction(editPostAction)
+        actionSheet.addAction(changePrivacyAction)
+        actionSheet.addAction(deletePost)
+        actionSheet.addAction(cancelAction)
+
+        self.present(actionSheet, animated: true, completion: nil)
+        if let userID = kSharedUserDefaults.loggedInUserModal.userId {
+        }
+    }
+
+
+    func deletePost(_ postID: Int) {
+
+        let url = APIUrl.Posts.deletePost
+        guard var urlRequest = WebServices.shared.buildURLRequest(url, method: .POST) else {
+            return
+        }
+
+        urlRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        do {
+            let model = Post.delete(postID: postID)
+            let body = try JSONEncoder().encode(model)
+
+            urlRequest.httpBody = body
+            WebServices.shared.request(urlRequest) { data, urlResponse, statusCode, error in
+
+            }
+
+        } catch {
+            print(error.localizedDescription)
+        }
+
+
+
+
+
+    }
+
+    func editPost(_ postID: Int) {
+
+    }
+
+    func sharePost(_ postID: Int) {
+
+    }
+
 }
 
 
