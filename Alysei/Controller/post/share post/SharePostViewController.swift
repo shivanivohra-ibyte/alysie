@@ -61,11 +61,52 @@ class SharePostViewController: UIViewController, SharePostDisplayLogic {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        var name = ""
+        if (kSharedUserDefaults.loggedInUserModal.displayName?.count ?? 0) > 0 {
+            name = kSharedUserDefaults.loggedInUserModal.displayName ?? ""
+        } else if (kSharedUserDefaults.loggedInUserModal.companyName?.count ?? 0) > 0 {
+            name = kSharedUserDefaults.loggedInUserModal.companyName ?? ""
+        } else if (kSharedUserDefaults.loggedInUserModal.restaurantName?.count ?? 0) > 0 {
+            name = kSharedUserDefaults.loggedInUserModal.restaurantName ?? ""
+        }
+//        let name = (kSharedUserDefaults.loggedInUserModal.displayName?.count ?? 0) > 0 ?  kSharedUserDefaults.loggedInUserModal.displayName : ""
+        
+//            ((kSharedUserDefaults.loggedInUserModal.companyName?.count > 0) ?  kSharedUserDefaults.loggedInUserModal.companyName :
+            // ?? kSharedUserDefaults.loggedInUserModal.companyName ?? kSharedUserDefaults.loggedInUserModal.restaurantName ?? ""
+        self.usernameLabel.text = "\(name)"
+
+        if let imageURLString = kSharedUserDefaults.loggedInUserModal.UserAvatar_id?.attachment_url {
+            self.userProfileImage.setImage(withString: "\(kImageBaseUrl)\(imageURLString)")
+
+            self.userProfileImage.contentMode = .scaleAspectFill
+            self.userProfileImage.layer.cornerRadius = self.userProfileImage.frame.height / 2.0
+            self.userProfileImage.layer.masksToBounds = true
+
+        }
+
     }
 
-    // MARK:- IBOutlets
-    //@IBOutlet weak var nameTextField: UITextField!
+    //MARK:- IBOutlets
 
+    @IBOutlet var backButton: UIButtonExtended!
+    @IBOutlet var userProfileImage: UIImageView!
+    @IBOutlet var usernameLabel: UILabel!
+    @IBOutlet var privacyTextfield: UITextField!
+    @IBOutlet var shareableTextLabel: UITextField!
+    @IBOutlet var imageCollectionView: UICollectionView!
+    @IBOutlet var postOwnerUsernameLabel: UILabel!
+
+    // MARK:- IBAction methods
+
+    @IBAction func backButtonTapped(_ sender: Any) {
+//        showAlert(withMessage: "dummy")
+        self.navigationController?.popViewController(animated: true)
+//        self.dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func postButtonTapped(_ sender: Any) {
+    }
     // MARK:- protocol methods
     
 }
