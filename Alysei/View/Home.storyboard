@@ -5414,7 +5414,7 @@ any other devices.</string>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Say something about this post..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NVD-7h-mGf">
-                                <rect key="frame" x="20" y="152" width="374" height="30"/>
+                                <rect key="frame" x="20" y="140" width="374" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="lR2-x3-CZq"/>
                                 </constraints>
@@ -5422,7 +5422,7 @@ any other devices.</string>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eNF-RX-8q6">
-                                <rect key="frame" x="20" y="215" width="374" height="374"/>
+                                <rect key="frame" x="20" y="185" width="374" height="374"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7p5-vu-2vf">
                                         <rect key="frame" x="20" y="338" width="334" height="21"/>
@@ -5430,23 +5430,38 @@ any other devices.</string>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fnH-EL-7KB">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fnH-EL-7KB">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="323"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WLW-c7-3FL">
-                                            <size key="itemSize" width="128" height="128"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WLW-c7-3FL">
+                                            <size key="itemSize" width="318" height="231"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Zb6-Q0-fvQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="Zb6-Q0-fvQ" customClass="SharePostCollectionViewCell" customModule="Alysei" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="2.5" width="338" height="318"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="p1t-xn-l4M">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="338" height="318"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kQ9-68-b3C" customClass="ImageLoader" customModule="Alysei" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="338" height="318"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="kQ9-68-b3C" firstAttribute="leading" secondItem="p1t-xn-l4M" secondAttribute="leading" id="56a-aC-9sx"/>
+                                                        <constraint firstItem="kQ9-68-b3C" firstAttribute="top" secondItem="p1t-xn-l4M" secondAttribute="top" id="JnH-3f-eg2"/>
+                                                        <constraint firstAttribute="trailing" secondItem="kQ9-68-b3C" secondAttribute="trailing" id="X1x-Li-Pl7"/>
+                                                        <constraint firstAttribute="bottom" secondItem="kQ9-68-b3C" secondAttribute="bottom" id="y3x-IJ-bN2"/>
+                                                    </constraints>
                                                 </collectionViewCellContentView>
+                                                <size key="customSize" width="338" height="318"/>
+                                                <connections>
+                                                    <outlet property="image" destination="kQ9-68-b3C" id="03Z-Gd-EHX"/>
+                                                </connections>
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
@@ -5465,7 +5480,7 @@ any other devices.</string>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" name="grey5"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
                             <constraint firstItem="Yyf-1d-PMO" firstAttribute="centerY" secondItem="8Tv-S4-Jr2" secondAttribute="centerY" id="7eQ-fK-Yjf"/>
                             <constraint firstItem="NVD-7h-mGf" firstAttribute="leading" secondItem="8Tv-S4-Jr2" secondAttribute="leading" id="88s-oW-blf"/>
@@ -5475,7 +5490,7 @@ any other devices.</string>
                             <constraint firstItem="Yyf-1d-PMO" firstAttribute="leading" secondItem="wXz-nC-2hf" secondAttribute="trailing" constant="20" id="OKE-vo-Lc8"/>
                             <constraint firstAttribute="trailing" secondItem="Sic-er-c9K" secondAttribute="trailing" id="T6P-vD-1aJ"/>
                             <constraint firstItem="eNF-RX-8q6" firstAttribute="trailing" secondItem="NVD-7h-mGf" secondAttribute="trailing" id="TxZ-1Q-8Bj"/>
-                            <constraint firstItem="NVD-7h-mGf" firstAttribute="top" secondItem="8Tv-S4-Jr2" secondAttribute="bottom" constant="27" id="Vf3-iE-j7L"/>
+                            <constraint firstItem="NVD-7h-mGf" firstAttribute="top" secondItem="8Tv-S4-Jr2" secondAttribute="bottom" constant="15" id="Vf3-iE-j7L"/>
                             <constraint firstItem="Sic-er-c9K" firstAttribute="top" secondItem="jri-ha-4D0" secondAttribute="bottom" id="WRF-sW-Wmp"/>
                             <constraint firstItem="wXz-nC-2hf" firstAttribute="leading" secondItem="8Tv-S4-Jr2" secondAttribute="trailing" constant="22" id="X9e-6P-A2v"/>
                             <constraint firstItem="Sic-er-c9K" firstAttribute="leading" secondItem="Rfc-2V-LSS" secondAttribute="leading" id="Xm8-wz-J0C"/>
@@ -5483,7 +5498,7 @@ any other devices.</string>
                             <constraint firstItem="8Tv-S4-Jr2" firstAttribute="top" secondItem="Sic-er-c9K" secondAttribute="bottom" constant="17" id="ZoF-T5-mSs"/>
                             <constraint firstItem="eNF-RX-8q6" firstAttribute="leading" secondItem="NVD-7h-mGf" secondAttribute="leading" id="csF-0S-YL1"/>
                             <constraint firstItem="8Tv-S4-Jr2" firstAttribute="leading" secondItem="Rfc-2V-LSS" secondAttribute="leading" constant="20" symbolic="YES" id="iEj-01-kWR"/>
-                            <constraint firstItem="eNF-RX-8q6" firstAttribute="top" secondItem="NVD-7h-mGf" secondAttribute="bottom" constant="33" id="oTG-xb-Mus"/>
+                            <constraint firstItem="eNF-RX-8q6" firstAttribute="top" secondItem="NVD-7h-mGf" secondAttribute="bottom" constant="15" id="oTG-xb-Mus"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kof-00-oCj"/>
@@ -5499,7 +5514,7 @@ any other devices.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="033-wP-LB9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1317" y="-1853"/>
+            <point key="canvasLocation" x="1315.9420289855072" y="-1853.2366071428571"/>
         </scene>
         <!--Post Comments View Controller-->
         <scene sceneID="TC7-rm-xei">

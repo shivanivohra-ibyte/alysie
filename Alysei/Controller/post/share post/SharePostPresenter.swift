@@ -13,11 +13,16 @@
 import UIKit
 
 protocol SharePostPresentationLogic {
+    func postShared()
 }
 
 class SharePostPresenter: SharePostPresentationLogic {
     weak var viewController: SharePostDisplayLogic?
     
     // MARK:- protocol methods
+
+    func postShared() {
+        self.viewController?.dismissSelf()
+    }
     
 }

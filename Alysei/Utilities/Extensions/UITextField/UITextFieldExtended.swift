@@ -9,6 +9,20 @@
 import Foundation
 import UIKit
 
+
+extension UITextField {
+    func addImageToRight(_ imageName: String) {
+        self.rightViewMode = .always
+        let baseView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 40.0, height: self.frame.height))
+        let image = UIImageView(frame: CGRect(x: 5.0, y: 3.0, width: 40.0, height: baseView.frame.height - 6.0))
+        image.image = UIImage(named: imageName)
+        image.contentMode = .center
+        baseView.addSubview(image)
+        self.rightView = baseView
+    }
+}
+
+
 class UITextFieldExtended: UITextFieldBorderWidthAndColor
 {
   

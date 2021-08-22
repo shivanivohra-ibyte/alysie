@@ -227,6 +227,7 @@
 		61EAB561269A23B900793F18 /* PostCommentsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EAB55B269A23B800793F18 /* PostCommentsInteractor.swift */; };
 		61EAB563269A273400793F18 /* PostCommentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EAB562269A273400793F18 /* PostCommentsCell.swift */; };
 		61EAB565269A285000793F18 /* PostCommentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61EAB564269A285000793F18 /* PostCommentsCell.xib */; };
+		61F84E2426D251EA00435AB8 /* SharePostCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F84E2326D251EA00435AB8 /* SharePostCollectionViewCell.swift */; };
 		6B09A87C26245AC800483365 /* AddPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B09A87B26245AC800483365 /* AddPostViewController.swift */; };
 		6B2F94F626202F3A0030928E /* Timeline.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B2F94F526202F3A0030928E /* Timeline.storyboard */; };
 		6B58C9AF26256EE300D250CD /* ReviewHubModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B58C9AE26256EE300D250CD /* ReviewHubModel.swift */; };
@@ -627,6 +628,7 @@
 		61EAB55B269A23B800793F18 /* PostCommentsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentsInteractor.swift; sourceTree = "<group>"; };
 		61EAB562269A273400793F18 /* PostCommentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentsCell.swift; sourceTree = "<group>"; };
 		61EAB564269A285000793F18 /* PostCommentsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCommentsCell.xib; sourceTree = "<group>"; };
+		61F84E2326D251EA00435AB8 /* SharePostCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePostCollectionViewCell.swift; sourceTree = "<group>"; };
 		6B09A87B26245AC800483365 /* AddPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostViewController.swift; sourceTree = "<group>"; };
 		6B2F94F526202F3A0030928E /* Timeline.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Timeline.storyboard; sourceTree = "<group>"; };
 		6B58C9AE26256EE300D250CD /* ReviewHubModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHubModel.swift; sourceTree = "<group>"; };
@@ -1532,6 +1534,7 @@
 				612576EF26CEFDC700E3EED5 /* SharePostModels.swift */,
 				612576F026CEFDC700E3EED5 /* SharePostViewController.swift */,
 				612576F126CEFDC700E3EED5 /* SharePostInteractor.swift */,
+				61F84E2326D251EA00435AB8 /* SharePostCollectionViewCell.swift */,
 			);
 			path = "share post";
 			sourceTree = "<group>";
@@ -2518,6 +2521,7 @@
 				C53A040526663ED800D07797 /* MarketPlaceWalkThroughDescVC.swift in Sources */,
 				C5D68D542660CBF700B759F8 /* BusinessMultiOptionsVC.swift in Sources */,
 				27A443BB25AE03720002BAAC /* UINavigationControllerExtended.swift in Sources */,
+				61F84E2426D251EA00435AB8 /* SharePostCollectionViewCell.swift in Sources */,
 				272EA31225C1B1AB009E0259 /* SelectedHubsTableCell.swift in Sources */,
 				274D50E525E4254100EDE55C /* ResetPasswordViewC.swift in Sources */,
 				27E5694B25BDDDCB0028DEBF /* SelectedHubsViewC.swift in Sources */,
