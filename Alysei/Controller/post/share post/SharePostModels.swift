@@ -15,12 +15,33 @@ import UIKit
 enum SharePost {
     // MARK: Use cases
     
-    enum Something {
-        struct Request {
+    enum Share {
+        struct RequestModel: Codable {
+            var privacyLabel: String
+            var actionType: String
+            var postID: Int
+            var body: String?
+
+            private enum CodingKeys: String, CodingKey {
+                case privacyLabel = "privacy"
+                case actionType = "action_type"
+                case postID = "shared_post_id"
+                case body = "body"
+            }
+
         }
         struct Response {
         }
         struct ViewModel {
+        }
+    }
+
+    enum PostData {
+        struct post {
+            var attachments: [Attachments]?
+            var postOwnerDetail: SubjectData?
+            var postDescription: String?
+            var postID: Int
         }
     }
 }

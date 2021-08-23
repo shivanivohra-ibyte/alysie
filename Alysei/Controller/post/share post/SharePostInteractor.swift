@@ -13,6 +13,7 @@
 import UIKit
 
 protocol SharePostBusinessLogic {
+    func sharePost(_ model: SharePost.Share.RequestModel)
 }
 
 protocol SharePostDataStore {
@@ -25,4 +26,31 @@ class SharePostInteractor: SharePostBusinessLogic, SharePostDataStore {
     //var name: String = ""
 
     // MARK:- protocol methods
+
+    func sharePost(_ model: SharePost.Share.RequestModel) {
+
+        let url = APIUrl.Posts.sharePost
+        guard var urlRequest = WebServices.shared.buildURLRequest(url, method: .POST) else {
+            return
+        }
+
+        urlRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        do {
+
+            let body = try JSONEncoder().encode(model)
+
+            urlRequest.httpBody = body
+            WebServices.shared.request(urlRequest) { data, urlResponse, statusCode, error in
+                self.presenter?.postShared()
+            }
+
+        } catch {
+            print(error.localizedDescription)
+        }
+
+
+
+
+
+    }
 }

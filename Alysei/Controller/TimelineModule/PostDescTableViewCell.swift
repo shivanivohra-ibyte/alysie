@@ -82,7 +82,7 @@ class PostDescTableViewCell: UITableViewCell {
         self.commentImage.addGestureRecognizer(showCommentsGesture)
 
 
-        self.menuButton.imageView?.contentMode = .scaleAspectFit
+        self.menuButton?.imageView?.contentMode = .scaleAspectFit
 //        self.menuButton.backgroundColor = .green
 
         

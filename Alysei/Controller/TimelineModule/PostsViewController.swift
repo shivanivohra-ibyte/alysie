@@ -76,6 +76,14 @@ class PostsViewController: AlysieBaseViewC {
                 }
             }
         }
+
+        if segue.identifier == "seguePostsToSharePost" {
+            if let dataModel = sender as? SharePost.PostData.post {
+                if let viewCon = segue.destination as? SharePostViewController {
+                    viewCon.postDataModel = dataModel
+                }
+            }
+        }
     }
 
     
@@ -254,7 +262,14 @@ extension PostsViewController: ShareEditMenuProtocol {
     }
 
     func sharePost(_ postID: Int) {
-
+        let data = arrNewFeedDataModel.filter({ $0.postID == postID })
+        if let searchDataModel = data.first {
+            let sharePostDataModel = SharePost.PostData.post(attachments: searchDataModel.attachments,
+                                                             postOwnerDetail: searchDataModel.subjectId,
+                                                             postDescription: "\(searchDataModel.body)",
+                                                             postID: postID)
+            self.performSegue(withIdentifier: "seguePostsToSharePost", sender: sharePostDataModel)
+        }
     }
 
 }
