@@ -80,11 +80,11 @@ class AddProductMarketplaceVC: AlysieBaseViewC,TLPhotosPickerViewControllerDeleg
             setEditProductDetail()
         }
         if fromVC == .myStoreDashboard{
-            self.lblHeadingLeading.constant = 15
-            btnback.isHidden = true
-        }else {
             self.lblHeadingLeading.constant = 25
             btnback.isHidden = true
+        }else {
+            self.lblHeadingLeading.constant = 60
+            btnback.isHidden = false
         }
         callGetDashboardStoreDetail()
         let tap = UITapGestureRecognizer(target: self, action: #selector(openProductCategory))
