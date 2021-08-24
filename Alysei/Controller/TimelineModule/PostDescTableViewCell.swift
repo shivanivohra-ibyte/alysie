@@ -26,7 +26,7 @@ struct PostLikeUnlikeRequestModel: Codable, SocketData {
 
 
 protocol ShareEditMenuProtocol {
-    func menuBttonTapped(_ postID: Int?)
+    func menuBttonTapped(_ postID: Int?, userID: Int)
 }
 
 class PostDescTableViewCell: UITableViewCell {
@@ -97,7 +97,8 @@ class PostDescTableViewCell: UITableViewCell {
     }
 
     @IBAction func menuButtonTapped(_ sender: UIButton) {
-        self.menuDelegate.menuBttonTapped(self.data?.postID)
+        self.menuDelegate.menuBttonTapped(self.data?.postID, userID: self.data?.subjectId?.userId ?? 0)
+        
     }
     
     
