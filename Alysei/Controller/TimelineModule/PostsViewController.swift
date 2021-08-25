@@ -250,14 +250,18 @@ extension PostsViewController: ShareEditMenuProtocol {
             return
         }
 
-        urlRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
             let model = Post.delete(postID: postID)
             let body = try JSONEncoder().encode(model)
 
             urlRequest.httpBody = body
             WebServices.shared.request(urlRequest) { data, urlResponse, statusCode, error in
-
+                if (statusCode ?? 0) >= 400 {
+                    self.showAlert(withMessage: "Some error occured")
+                } else {
+                    self.callNewFeedApi(1)
+                }
             }
 
         } catch {
