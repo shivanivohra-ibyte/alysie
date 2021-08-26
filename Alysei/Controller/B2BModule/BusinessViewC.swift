@@ -51,10 +51,10 @@ class BusinessViewC: AlysieBaseViewC {
     var extraCell: Int?
     var restPickUp: String?
     var restDelivery:String?
-   var paginationData = false
+    var paginationData = false
     var searchImpDone = false
     
-   
+    
     
     private var currentChild: UIViewController {
         return self.children.last!
@@ -101,19 +101,19 @@ class BusinessViewC: AlysieBaseViewC {
     }
     
     //MARK:- Pagination
-     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-         // calculates where the user is in the y-axis
-         let offsetY = scrollView.contentOffset.y
-         let contentHeight = scrollView.contentSize.height
-         if offsetY > contentHeight - scrollView.frame.size.height - (self.view.frame.height * 2) {
-             if indexOfPageToRequest >= newSearchModel?.lastPage ?? 0{
-                 print("No Data")
-             }else{
-             // increments the number of the page to request
-             indexOfPageToRequest += 1
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // calculates where the user is in the y-axis
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        if offsetY > contentHeight - scrollView.frame.size.height - (self.view.frame.height * 2) {
+            if indexOfPageToRequest >= newSearchModel?.lastPage ?? 0{
+                print("No Data")
+            }else{
+                // increments the number of the page to request
+                indexOfPageToRequest += 1
                 self.searchImpDone = true
                 paginationData = true
-             // call your API for more data
+                // call your API for more data
                 switch  self.currentIndex {
                 case 1:
                     callSearchProducerApi()
@@ -125,18 +125,18 @@ class BusinessViewC: AlysieBaseViewC {
                     callSearchTravelApi()
                 case B2BSearch.Expert.rawValue:
                     callSearchExpertApi()
-                
+                    
                 default:
                     break
                 }
                 
-
-             // tell the table view to reload with the new data
-    
-               
-             }
-         }
-     }
+                
+                // tell the table view to reload with the new data
+                
+                
+            }
+        }
+    }
     
     //MARK: - Private Methods -
     
@@ -188,7 +188,7 @@ class BusinessViewC: AlysieBaseViewC {
         
         let businessButtonTableCell = tblViewSearchOptions.dequeueReusableCell(withIdentifier: BusinessButtonTableCell.identifier()) as! BusinessButtonTableCell
         if self.searchImpDone == false{
-        businessButtonTableCell.configureData(withBusinessDataModel: self.businessViewModel.arrBusinessData[indexPath.row], currentIndex: self.currentIndex)
+            businessButtonTableCell.configureData(withBusinessDataModel: self.businessViewModel.arrBusinessData[indexPath.row], currentIndex: self.currentIndex)
         }else{
             print("No update")
         }
@@ -372,7 +372,7 @@ class BusinessViewC: AlysieBaseViewC {
         businessButtonTableCell.passCellCallback = { country in
             if self.businessViewModel.arrBusinessData[indexPath.row + 1].businessHeading == AppConstants.SelectState || self.businessViewModel.arrBusinessData[indexPath.row + 1].businessHeading == AppConstants.SelectRegion {
                 if country == "Italy" || country == "italy"{
-                self.businessViewModel.arrBusinessData[indexPath.row + 1].businessHeading = AppConstants.SelectRegion
+                    self.businessViewModel.arrBusinessData[indexPath.row + 1].businessHeading = AppConstants.SelectRegion
                 }else if country == "United States" || country == "USA"{
                     self.businessViewModel.arrBusinessData[indexPath.row + 1].businessHeading = AppConstants.SelectState
                 }else{
@@ -380,7 +380,7 @@ class BusinessViewC: AlysieBaseViewC {
                 }
                 self.selectTravelRegionId = ""
                 self.selectExpertRegionId = ""
-              //  self.businessViewModel.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.ProductTypeBusiness))
+                //  self.businessViewModel.arrBusinessData.append(BusinessDataModel(businessHeading: AppConstants.ProductTypeBusiness))
                 self.tblViewSearchOptions.reloadRows(at: [IndexPath(row: indexPath.row + 1, section: 0)], with: .automatic)
             }
             
@@ -392,7 +392,7 @@ class BusinessViewC: AlysieBaseViewC {
         
         let businessFiltersTableCell = tblViewSearchOptions.dequeueReusableCell(withIdentifier: BusinessFiltersTableCell.identifier()) as! BusinessFiltersTableCell
         if self.searchImpDone == false{
-        businessFiltersTableCell.configureData(withBusinessDataModel: self.businessViewModel.arrBusinessData[indexPath.row])
+            businessFiltersTableCell.configureData(withBusinessDataModel: self.businessViewModel.arrBusinessData[indexPath.row])
         }else{
             print("No update")
         }
@@ -471,7 +471,36 @@ class BusinessViewC: AlysieBaseViewC {
         return businessListTableCell
     }
     
-    
+    func removeSelectedOption(){
+        self.selectStateId = ""
+        self.searchImpDone = false
+        self.selectImpHubId = ""
+        self.selectImpRoleId = ""
+        self.selectImpProductId = ""
+        self.selectImpRegionTypeId = ""
+        self.horecaValue = ""
+        self.privateValue = ""
+        self.alyseiBrandValue = ""
+        self.selectProducerHubId = ""
+        self.selectProducerProductType = ""
+        self.selectProducerRegionId = ""
+        self.horecaValue = ""
+        self.privateValue = ""
+        self.alyseiBrandValue = ""
+        self.resHubId = ""
+        self.resTypeId = ""
+        self.restPickUp = ""
+        self.restDelivery = ""
+        self.selectExpertHubId = ""
+        self.selectExpertExpertiseId = ""
+        self.selectExpertTitleId = ""
+        self.selectExpertCountryId = ""
+        self.selectExpertRegionId = ""
+        self.selectTravelHubId = ""
+        self.selectTravelSpecialityId = ""
+        self.selectTravelCountryId = ""
+        self.selectTravelRegionId = ""
+    }
 }
 
 //MARK: - CollectionView Methods -
@@ -482,7 +511,7 @@ extension BusinessViewC: UICollectionViewDelegate, UICollectionViewDataSource,UI
         if kSharedUserDefaults.loggedInUserModal.memberRoleId == "10"{
             return 1
         }else{
-        return StaticArrayData.kBusinessCategoryDict.count
+            return StaticArrayData.kBusinessCategoryDict.count
         }
     }
     
@@ -533,6 +562,7 @@ extension BusinessViewC: UICollectionViewDelegate, UICollectionViewDataSource,UI
         }
         
         //self.businessViewModel = BusinessViewModel(currentIndex: indexPath.item)
+        self.removeSelectedOption()
         collectionViewBusinessCategory.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         //self.tblViewHeightConstraint.constant = (CGFloat(self.businessViewModel.arrBusinessData.count) * 70.0) + 90.0
         self.collectionViewBusinessCategory.reloadData()
@@ -605,7 +635,6 @@ extension BusinessViewC: UITableViewDataSource, UITableViewDelegate{
         let index = indexPath.row - (self.extraCell ?? 0)
         controller?.userID = arrSearchimpotrDataModel[index].userId
         
-        
     }
     
 }
@@ -630,8 +659,8 @@ extension BusinessViewC {
                 self.newSearchModel = NewFeedSearchModel.init(with: data)
                 if self.indexOfPageToRequest == 1 { self.arrSearchDataModel.removeAll() }
                 self.arrSearchDataModel.append(contentsOf: self.newSearchModel?.data ?? [NewFeedSearchDataModel(with: [:])])
-               // self.selectStateId = ""
-               // self.searchImpDone = false
+                // self.selectStateId = ""
+                // self.searchImpDone = false
             }
             self.businessViewModel = BusinessViewModel(currentIndex: self.currentIndex)
             self.collectionViewBusinessCategory.reloadData()
@@ -643,7 +672,7 @@ extension BusinessViewC {
         if paginationData == false{
             arrSearchimpotrDataModel.removeAll()
         }
-       
+        
         cellCount = 0
         TANetworkManager.sharedInstance.requestApi(withServiceName: APIUrl.B2BModule.kSearchApi + "\(searchType ?? 1)" + "&role_id=" + "\(UserRoles.distributer3.rawValue)" + "&hubs=" + "\(self.selectImpHubId ?? "")" + "&user_type=" + "\(selectImpRoleId ?? "")" + "&product_type=" + "\(self.selectImpProductId ?? "")" + "&horeca=" + "\(self.horecaValue ?? "")" + "&private_label=" + "\(self.privateValue ?? "")" + "&alysei_brand_label=" + "\(self.alyseiBrandValue ?? "")", requestMethod: .GET, requestParameters: [:], withProgressHUD: true) { (dictResponse, error, errorType, statusCode) in
             let dictResponse = dictResponse as? [String:Any]
@@ -654,15 +683,15 @@ extension BusinessViewC {
                 //self.arrSearchDataModel.append(contentsOf: self.newSearchModel?.data ?? [NewFeedSearchDataModel(with: [:])])
                 
                 self.arrSearchimpotrDataModel.append(contentsOf: self.newSearchModel?.importerSeacrhData ?? [SubjectData(with: [:])])
-               // self.searchImpDone = false
+                // self.searchImpDone = false
             }
             self.extraCell = B2BSeacrhExtraCell.producrImporterTravel.rawValue
-//            self.selectImpHubId = ""
-//            self.selectImpProductId = ""
-//            self.selectImpRegionTypeId = ""
-//            self.horecaValue = ""
-//            self.privateValue = ""
-//            self.alyseiBrandValue = ""
+            //            self.selectImpHubId = ""
+            //            self.selectImpProductId = ""
+            //            self.selectImpRegionTypeId = ""
+            //            self.horecaValue = ""
+            //            self.privateValue = ""
+            //            self.alyseiBrandValue = ""
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
             cellCount = self.arrSearchimpotrDataModel.count
             
@@ -688,18 +717,18 @@ extension BusinessViewC {
                 self.newSearchModel = NewFeedSearchModel.init(with: data)
                 if self.indexOfPageToRequest == 1 { self.arrSearchimpotrDataModel.removeAll() }
                 self.arrSearchimpotrDataModel.append(contentsOf: self.newSearchModel?.importerSeacrhData ?? [SubjectData(with: [:])])
-               // self.searchImpDone = false
+                // self.searchImpDone = false
             }
             //self.collectionViewBusinessCategory.reloadData()
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
             cellCount = self.arrSearchimpotrDataModel.count
             self.extraCell = B2BSeacrhExtraCell.producrImporterTravel.rawValue
-//            self.selectProducerHubId = ""
-//            self.selectProducerProductType = ""
-//            self.selectProducerRegionId = ""
-//            self.horecaValue = ""
-//            self.privateValue = ""
-//            self.alyseiBrandValue = ""
+            //            self.selectProducerHubId = ""
+            //            self.selectProducerProductType = ""
+            //            self.selectProducerRegionId = ""
+            //            self.horecaValue = ""
+            //            self.privateValue = ""
+            //            self.alyseiBrandValue = ""
             //self.tblViewSearchOptions.reloadRows(at: [IndexPath(row: 4, section: 0)], with: .automatic)
             self.paginationData = false
             self.businessViewModel = BusinessViewModel(currentIndex: self.currentIndex)
@@ -721,16 +750,16 @@ extension BusinessViewC {
                 self.newSearchModel = NewFeedSearchModel.init(with: data)
                 if self.indexOfPageToRequest == 1 {self.arrSearchDataModel.removeAll() }
                 self.arrSearchimpotrDataModel.append(contentsOf: self.newSearchModel?.importerSeacrhData ?? [SubjectData(with: [:])])
-               // self.searchImpDone = false
+                // self.searchImpDone = false
             }
             //self.collectionViewBusinessCategory.reloadData()
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
             cellCount = self.arrSearchimpotrDataModel.count
             self.extraCell = B2BSeacrhExtraCell.restaurant.rawValue
-//            self.resHubId = ""
-//            self.resTypeId = ""
-//            self.restPickUp = ""
-//            self.restDelivery = ""
+            //            self.resHubId = ""
+            //            self.resTypeId = ""
+            //            self.restPickUp = ""
+            //            self.restDelivery = ""
             self.paginationData = false
             self.businessViewModel = BusinessViewModel(currentIndex: self.currentIndex)
             self.tblViewSearchOptions.reloadData()
@@ -751,18 +780,18 @@ extension BusinessViewC {
                 self.newSearchModel = NewFeedSearchModel.init(with: data)
                 if self.indexOfPageToRequest == 1 {self.arrSearchimpotrDataModel.removeAll() }
                 self.arrSearchimpotrDataModel.append(contentsOf: self.newSearchModel?.importerSeacrhData ?? [SubjectData(with: [:])])
-               // self.searchImpDone = false
+                // self.searchImpDone = false
             }
             //self.collectionViewBusinessCategory.reloadData()
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
             cellCount = self.arrSearchimpotrDataModel.count
             self.extraCell = B2BSeacrhExtraCell.voExpert.rawValue
             
-//            self.selectExpertHubId = ""
-//            self.selectExpertExpertiseId = ""
-//            self.selectExpertTitleId = ""
-//            self.selectExpertCountryId = ""
-//            self.selectExpertRegionId = ""
+            //            self.selectExpertHubId = ""
+            //            self.selectExpertExpertiseId = ""
+            //            self.selectExpertTitleId = ""
+            //            self.selectExpertCountryId = ""
+            //            self.selectExpertRegionId = ""
             self.paginationData = false
             self.businessViewModel = BusinessViewModel(currentIndex: self.currentIndex)
             self.tblViewSearchOptions.reloadData()
@@ -789,10 +818,10 @@ extension BusinessViewC {
             print("CountImpSearch------------------------\(self.arrSearchimpotrDataModel.count)")
             cellCount = self.arrSearchimpotrDataModel.count
             self.extraCell = B2BSeacrhExtraCell.producrImporterTravel.rawValue
-//            self.selectTravelHubId = ""
-//            self.selectTravelSpecialityId = ""
-//            self.selectTravelCountryId = ""
-//            self.selectTravelRegionId = ""
+            //            self.selectTravelHubId = ""
+            //            self.selectTravelSpecialityId = ""
+            //            self.selectTravelCountryId = ""
+            //            self.selectTravelRegionId = ""
             self.paginationData = false
             self.businessViewModel = BusinessViewModel(currentIndex: self.currentIndex)
             self.tblViewSearchOptions.reloadData()
