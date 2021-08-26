@@ -226,6 +226,7 @@ extension PostsViewController: ShareEditMenuProtocol {
 
         if let loggedInUserID = kSharedUserDefaults.loggedInUserModal.userId {
             if Int(loggedInUserID) == userID {
+                actionSheet.addAction(shareAction)
                 actionSheet.addAction(editPostAction)
                 actionSheet.addAction(changePrivacyAction)
                 actionSheet.addAction(deletePost)
