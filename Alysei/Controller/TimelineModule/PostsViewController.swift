@@ -192,7 +192,8 @@ extension PostsViewController: UITableViewDelegate,UITableViewDataSource{
 }
 
 extension PostsViewController: ShareEditMenuProtocol {
-    func menuBttonTapped(_ postID: Int?) {
+    func menuBttonTapped(_ postID: Int?, userID: Int) {
+        
         guard let postID = postID else {
             return
         }
@@ -214,19 +215,31 @@ extension PostsViewController: ShareEditMenuProtocol {
             self.editPost(postID)
         }
 
+        let reportAction = UIAlertAction(title: "Report Action", style: .destructive) { action in
+        }
+
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
 
         }
 
-        actionSheet.addAction(shareAction)
-        actionSheet.addAction(editPostAction)
-        actionSheet.addAction(changePrivacyAction)
-        actionSheet.addAction(deletePost)
+
+
+        if let loggedInUserID = kSharedUserDefaults.loggedInUserModal.userId {
+            if Int(loggedInUserID) == userID {
+                actionSheet.addAction(editPostAction)
+                actionSheet.addAction(changePrivacyAction)
+                actionSheet.addAction(deletePost)
+            } else {
+                actionSheet.addAction(shareAction)
+                actionSheet.addAction(reportAction)
+            }
+        }
+
         actionSheet.addAction(cancelAction)
 
+
         self.present(actionSheet, animated: true, completion: nil)
-        if let userID = kSharedUserDefaults.loggedInUserModal.userId {
-        }
+
     }
 
 
