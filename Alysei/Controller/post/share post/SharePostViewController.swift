@@ -188,12 +188,11 @@ extension SharePostViewController: UICollectionViewDelegate, UICollectionViewDat
         let imageString = kImageBaseUrl + "\(self.postDataModel.attachments?[indexPath.row].attachmentLink?.attachmentUrl ?? "")"
 
         if let url = URL(string: imageString) {
-            cell.image.contentMode = .scaleAspectFit
+            cell.image.contentMode = .scaleAspectFill
             cell.image.loadImageWithUrl(url)
-            cell.image.contentMode = .scaleAspectFit
             print("size:  \(cell.image.getSize())")
-            cell.image.frame.size = CGSize(width: cell.frame.width, height: cell.frame.height)
-            cell.layoutSubviews()
+//            cell.image.frame.size = CGSize(width: cell.frame.width, height: cell.frame.height)
+//            cell.layoutSubviews()
         }
 //        cell.image.setImage(withString: "\(imageString)")
 //        cell.image.setImage(withString: "\(imageString)", placeholder: nil) { image in
@@ -223,9 +222,9 @@ extension SharePostViewController: UICollectionViewDelegate, UICollectionViewDat
 //        cell.sizeToFit()
 
 
-        cell.backgroundColor = .green
-        cell.contentView.backgroundColor = .yellow
-        cell.image.backgroundColor = .brown
+//        cell.backgroundColor = .green
+//        cell.contentView.backgroundColor = .yellow
+//        cell.image.backgroundColor = .brown
 
         return cell
     }
@@ -233,8 +232,8 @@ extension SharePostViewController: UICollectionViewDelegate, UICollectionViewDat
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 //        let size = CGSize(width: 200.0, height: 200.0)
-        let width = collectionView.frame.width * 0.6
-        let height = collectionView.frame.height
+        let width = collectionView.frame.width
+        let height = collectionView.frame.width
         let size = CGSize(width: width, height: height)
         return size
     }
