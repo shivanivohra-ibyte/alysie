@@ -34,7 +34,7 @@ class SharePostInteractor: SharePostBusinessLogic, SharePostDataStore {
             return
         }
 
-        urlRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
 
             let body = try JSONEncoder().encode(model)
