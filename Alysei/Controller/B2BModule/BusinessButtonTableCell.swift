@@ -40,6 +40,8 @@ class BusinessButtonTableCell: UITableViewCell {
     var userRoleId: String?
     var pushVCCallback: (([HubCityArray]?,GetRoleViewModel,ProductType, [StateModel],[SignUpOptionsDataModel],String) -> Void)? = nil
     
+    var pushToProductTypeScreen:((ProductType) -> Void)? = nil
+    
     
     
   override func awakeFromNib() {
@@ -189,6 +191,7 @@ func callStateApi() {
                 //self.opendropDown()
                 if self.fieldValueId == B2BFieldId.productType.rawValue{
                     self.pushVCCallback?([HubCityArray](),GetRoleViewModel([:]),self.productType ?? ProductType(with: [:]),[StateModel](),[SignUpOptionsDataModel](),AppConstants.ProductTypeBusiness)
+                   // self.pushToProductTypeScreen?(self.productType ?? ProductType(with: [:]))
                 }else if self.fieldValueId == B2BFieldId.restaurantType.rawValue{
                     self.pushVCCallback?([HubCityArray](),GetRoleViewModel([:]),self.productType ?? ProductType(with: [:]),[StateModel](),[SignUpOptionsDataModel](),AppConstants.RestaurantType)
                 }else if self.fieldValueId == B2BFieldId.expertise.rawValue{

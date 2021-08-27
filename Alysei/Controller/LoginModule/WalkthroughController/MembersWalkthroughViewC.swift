@@ -105,25 +105,4 @@ extension MembersWalkthroughViewC: NextButtonDelegate{
   }
 }
 
-extension MembersWalkthroughViewC{
-  
-  override func didUserGetData(from result: Any, type: Int) {
-    
-    let dicResponse = kSharedInstance.getDictionary(result)
-    let dicData = kSharedInstance.getDictionary(dicResponse[APIConstants.kData])
-    switch type {
-    case 0:
-      kSharedInstance.signUpViewModel = SignUpViewModel(dicData, roleId: self.getRoleDataModel)
-      self.postRequestToGetCountries()
-    case 1:
-      let filterCountry = kSharedInstance.signUpViewModel.arrSignUpStepOne.filter({$0.name == APIConstants.kCountry})
-      if let array = dicResponse[APIConstants.kData] as? ArrayOfDictionary{
-        filterCountry.first?.arrOptions = array.map({SignUpOptionsDataModel(withDictionary: $0)})
-      }
-     let controller = pushViewController(withName: SignUpViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? SignUpViewC
-      controller?.getRoleDataModel = self.getRoleDataModel
-    default:
-      break
-    }
-  }
-}
+

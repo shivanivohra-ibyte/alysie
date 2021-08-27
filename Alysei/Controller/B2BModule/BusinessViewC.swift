@@ -54,7 +54,7 @@ class BusinessViewC: AlysieBaseViewC {
     var paginationData = false
     var searchImpDone = false
     
-    
+    var signUpStepOneDataModel: SignUpStepOneDataModel!
     
     private var currentChild: UIViewController {
         return self.children.last!
@@ -193,6 +193,12 @@ class BusinessViewC: AlysieBaseViewC {
             print("No update")
         }
         
+        businessButtonTableCell.pushToProductTypeScreen = { productType in
+            guard let controller = UIStoryboard(name: StoryBoardConstants.kHome, bundle: nil).instantiateViewController(identifier: SelectB2BProductViewController.id()) as? SelectB2BProductViewController else {return}
+            controller.arrProductType = productType
+            
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
         businessButtonTableCell.pushVCCallback = { arruserHubs,getRoleViewModel,productType,stateModel,arrStateRegionById,selectFieldType in
             let controller = self.pushViewController(withName: BusinessMultiOptionsVC.id(), fromStoryboard: StoryBoardConstants.kHome) as? BusinessMultiOptionsVC
             controller?.arrUserHubs = arruserHubs ?? [HubCityArray]()
@@ -845,4 +851,62 @@ extension UITableView {
             }
         }
     }
+}
+//SelectProduct Tapped Done
+
+extension BusinessViewC: TappedDoneStepOne{
+    
+    func tapDone(_ signUpStepOneDataModel: SignUpStepOneDataModel) {
+        
+        self.signUpStepOneDataModel = nil
+        self.signUpStepOneDataModel = signUpStepOneDataModel
+        signUpStepOneDataModel.selectedValue = self.createStringForProducts()
+        self.navigationController?.popViewController(animated: true)
+        self.tblViewSearchOptions.reloadData()
+    }
+    private func createStringForProducts() -> String {
+        let filteredSelectedProduct = self.signUpStepOneDataModel.arrOptions.map({$0}).filter({$0.isSelected == true})
+        
+        var selectedProductNames: [String] = []
+        var selectedProductOptionIds: [String] = []
+        var selectedSubProductOptionIds: [String] = []
+        
+        for index in 0..<filteredSelectedProduct.count {
+            
+            //var selectedProductId: [String] = []
+            var selectedSubProductIdLocal: [String] = []
+            
+            selectedProductNames.append(String.getString(filteredSelectedProduct[index].optionName))
+            selectedProductOptionIds.append(String.getString(filteredSelectedProduct[index].userFieldOptionId))
+            
+            let sections = filteredSelectedProduct[index].arrSubSections
+            
+            for sectionIndex in 0..<sections.count {
+                
+                print("arrSelectedSubOptions",sections[sectionIndex].arrSelectedSubOptions)
+                selectedSubProductIdLocal.append(contentsOf: sections[sectionIndex].arrSelectedSubOptions.map({$0}))
+            }
+            selectedSubProductOptionIds.append(contentsOf: selectedSubProductIdLocal)
+        }
+        
+        switch filteredSelectedProduct.count {
+        case 0:
+            print("No Products found")
+            self.signUpStepOneDataModel.selectedOptionName = ""
+        case 1:
+            self.signUpStepOneDataModel.selectedOptionName = selectedProductNames[0]
+        //     case 2:
+        //      self.signUpStepOneDataModel.selectedOptionName = selectedProductNames[0] + ", " + selectedProductNames[1]
+        default:
+            let remainingProducts = (selectedProductNames.count - 1)
+            self.signUpStepOneDataModel.selectedOptionName = selectedProductNames[0] + " & " + String.getString(remainingProducts) + " more"
+        }
+        print("product",selectedProductOptionIds)
+        print("sub product",selectedSubProductOptionIds)
+        
+        let mergeArray = selectedProductOptionIds + selectedSubProductOptionIds
+        return mergeArray.joined(separator: ", ")
+    }
+   
+
 }
