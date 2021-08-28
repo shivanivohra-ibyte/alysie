@@ -47,6 +47,7 @@ class NewFeedSearchDataModel{
     var country: CountryModel?
     var state: CountryModel?
     var id: Int?
+    var sharedPostData: SharedPostData?
     
     init(with dictResponse: [String:Any]){
         self.activityActionId = Int.getInt(dictResponse["activity_action_id"])
@@ -75,6 +76,18 @@ class NewFeedSearchDataModel{
         
         if let state = dictResponse["state"] as? [String:Any]{
             self.state = CountryModel.init(data: state)
+        }
+
+        if let sharedPostDict = dictResponse["shared_post"] {
+            do {
+                let data = try JSONSerialization.data(withJSONObject: sharedPostDict, options: .prettyPrinted)
+                print(data)
+
+                let jsonData = try JSONDecoder().decode(SharedPostData.self, from: data)
+                self.sharedPostData = jsonData
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 
@@ -164,4 +177,29 @@ class AttachmentLink: Codable {
     private enum CodingKeys: String, CodingKey {
         case attachmentUrl = "attachment_url"
     }
+}
+
+class SharedPostData: Codable {
+//    var activityActionId: Int?
+//    var subjectId: SubjectData?
+    var body: String?
+
+    //var shared_post_id:
+
+//    var postID: Int?
+//    var attachmentCount: Int?
+//    var commentCount: Int?
+//    var likeCount: Int?
+//    var privacy: String?
+//    var likeFlag: Int?
+//    var posted_at: String?
+//    var attachments: [Attachments]?
+//    var title: String?
+//    var image: AttachmentLink?
+
+//    var country: CountryModel?
+//    var state: CountryModel?
+
+
+//    var id: Int?
 }

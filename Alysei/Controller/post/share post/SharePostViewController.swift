@@ -134,10 +134,16 @@ class SharePostViewController: UIViewController, SharePostDisplayLogic {
     }
 
     @IBAction func postButtonTapped(_ sender: Any) {
+//        var privacyText = ""
+//
+//        switch self.privacyTextfield.text  {
+//        case "public" :
+//            privacyText = "public"
+//        }
         let model = SharePost.Share.RequestModel(privacyLabel: "\(self.privacyTextfield.text ?? "")",
                                                  actionType: "post",
                                                  postID: self.postDataModel.postID,
-                                                 body: self.privacyTextfield.text)
+                                                 body: self.shareableTextLabel.text)
         self.interactor?.sharePost(model)
 
     }
@@ -157,11 +163,11 @@ extension SharePostViewController: UITextFieldDelegate {
                 self.privacyTextfield.text = "Public"
             }))
             alertController.addAction(UIAlertAction(title: "Followers", style: .default, handler: { (action: UIAlertAction!) in
-                self.privacyTextfield.text = "Private"
+                self.privacyTextfield.text = "Followers"
             }))
 
             alertController.addAction(UIAlertAction(title: "Just Me", style: .default, handler: { (action: UIAlertAction!) in
-                self.privacyTextfield.text = "Private"
+                self.privacyTextfield.text = "Just Me"
             }))
 
             alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action: UIAlertAction!) in
