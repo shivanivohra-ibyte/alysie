@@ -1,4 +1,10 @@
 //
+//  SelectB2BProductViewController.swift
+//  Alysei
+//
+//  Created by SHALINI YADAV on 8/26/21.
+//
+//
 //  SelectOptionViewC.swift
 //  ScreenBuild
 //
@@ -7,18 +13,18 @@
 
 import UIKit
 
-protocol TappedDoneStepOne {
-  
+protocol TappedB2BDoneStepOne {
+
   func tapDone(_ signUpStepOneDataModel: SignUpStepOneDataModel) -> Void
-  
+
 }
 
-protocol TappedDoneStepTwo {
-  
+protocol TappedB2BDoneStepTwo {
+
   func tapDone(_ signUpStepTwoDataModel: SignUpStepTwoDataModel) -> Void
 }
 
-class SelectProductViewC: AlysieBaseViewC {
+class SelectB2BProductViewController: AlysieBaseViewC {
 
   //MARK:  - Outlet -
     
@@ -30,24 +36,15 @@ class SelectProductViewC: AlysieBaseViewC {
   
   var signUpStepOneDataModel: SignUpStepOneDataModel!
   var signUpStepTwoDataModel: SignUpStepTwoDataModel!
-  var stepOneDelegate: TappedDoneStepOne?
-  var stepTwoDelegate: TappedDoneStepTwo?
+  var stepOneDelegate: TappedB2BDoneStepOne?
+  var stepTwoDelegate: TappedB2BDoneStepTwo?
     var fromVC: isCameFrom?
-  
+    var arrProductType: ProductType?
   //MARK:  - ViewLifeCycle Methods -
     
    override func viewDidLoad() {
     super.viewDidLoad()
-//    if fromVC == .B2B {
-//
-//    }else{
-    if self.signUpStepOneDataModel != nil{
-      self.lblNavigation.text = AppConstants.Select.capitalized + " " + String.getString(self.signUpStepOneDataModel.title)
-    }
-    else{
-      self.lblNavigation.text = AppConstants.Select.capitalized + " " + String.getString(self.signUpStepTwoDataModel.title)
-    }
-    //}
+    //self.signUpStepOneDataModel.map({arrProductType?.options})
    }
   
   override func viewDidLayoutSubviews() {
@@ -97,7 +94,6 @@ class SelectProductViewC: AlysieBaseViewC {
    private func getSelectProductTableCell(_ indexPath: IndexPath) -> UITableViewCell{
       
     let selectProductTableCell = tblViewSelectProduct.dequeueReusableCell(withIdentifier: SelectProductTableCell.identifier(), for: indexPath) as! SelectProductTableCell
-    selectProductTableCell.delegate = self
     if self.signUpStepOneDataModel != nil{
       selectProductTableCell.configure(withSignUpOptionsDataModel: self.signUpStepOneDataModel.arrOptions[indexPath.row])
     }
@@ -110,12 +106,13 @@ class SelectProductViewC: AlysieBaseViewC {
 
 //MARK:  - TableView Methods -
 
-extension SelectProductViewC: UITableViewDataSource, UITableViewDelegate{
+extension SelectB2BProductViewController: UITableViewDataSource, UITableViewDelegate{
   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
     
       if self.signUpStepOneDataModel != nil{
-        return self.signUpStepOneDataModel?.arrOptions.count ?? 0
+       // return self.signUpStepOneDataModel?.arrOptions.count ?? 0
+        return self.arrProductType?.options?.count ?? 0
       }
       else{
         return self.signUpStepTwoDataModel?.arrOptions.count ?? 0
@@ -195,9 +192,5 @@ extension SelectProductViewC: UITableViewDataSource, UITableViewDelegate{
 }
 
 
-extension SelectProductViewC: SectionInfoTapped{
-  
-  func tapInfo(_ sectionModel: SignUpSubSectionModel) {
-    showAlert(withMessage: String.getString(sectionModel.hint))
-  }
-}
+
+

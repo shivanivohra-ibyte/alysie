@@ -172,6 +172,7 @@ enum isCameFrom {
     case addFeatureProduct
     case connectionRequest
     case locateHub
+    case B2B
 }
 //class UserImage: {
 //

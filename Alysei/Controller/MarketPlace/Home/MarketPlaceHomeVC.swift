@@ -24,7 +24,7 @@ class MarketPlaceHomeVC: AlysieBaseViewC {
     var storeCreated: Int?
     
     var marketPlaceOptions = ["marketplace_Store","icons8_wooden_beer_keg_1", "icons8_geography","icons8_sorting","icons8_property_script","icons8_certificate_1","Group 649","hot","icons8_popular"]
-    var arrMarketPlace = ["Producer Store","Conservation Method","Italian Regions","Categories","Product Properties","FDA Certified","Product Name","Most Popular","Promotions"]
+    var arrMarketPlace = ["Producer Store","Conservation Method","Italian Regions","Categories","Product Properties","FDA Certified","My Favourite","Most Popular","Promotions"]
     //
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,7 +118,16 @@ extension MarketPlaceHomeVC: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if indexPath.row == 2 {
+            guard let nextVC = self.storyboard?.instantiateViewController(identifier: "MarketPlaceRegionViewController") as? MarketPlaceRegionViewController else {return}
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        }else{
+        guard let nextVC = self.storyboard?.instantiateViewController(identifier: "MarketPlaceOptionViewController") as? MarketPlaceOptionViewController else {return}
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        }
+    }
 }
 extension MarketPlaceHomeVC{
     func callCheckIfStoredCreated(){

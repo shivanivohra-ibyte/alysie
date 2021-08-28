@@ -315,7 +315,11 @@
 		C56C28BD26846EEA0042A0A3 /* AnalyticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56C28BC26846EEA0042A0A3 /* AnalyticsTableViewCell.swift */; };
 		C56C28C026846FE40042A0A3 /* AnalyticsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56C28BF26846FE40042A0A3 /* AnalyticsCollectionViewCell.swift */; };
 		C56C28C32684A9090042A0A3 /* MyStoreProductCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56C28C22684A9090042A0A3 /* MyStoreProductCVCell.swift */; };
+		C571082926D8E04F00BEB31C /* MarketPlaceOptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C571082826D8E04F00BEB31C /* MarketPlaceOptionViewController.swift */; };
+		C571082C26D8E58800BEB31C /* MarketPlaceRegionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C571082B26D8E58800BEB31C /* MarketPlaceRegionViewController.swift */; };
+		C571082F26D8F63A00BEB31C /* MarketPlaceProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C571082E26D8F63A00BEB31C /* MarketPlaceProductListViewController.swift */; };
 		C5753EB32653B6B90024E5C7 /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5753EB22653B6B80024E5C7 /* StateModel.swift */; };
+		C57979D526D7AE620040D716 /* SelectB2BProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57979D426D7AE620040D716 /* SelectB2BProductViewController.swift */; };
 		C57B97B92679EF0C00B158D8 /* ConnectionConfirmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57B97B82679EF0C00B158D8 /* ConnectionConfirmVC.swift */; };
 		C5861B4426C6306A00AB35C1 /* MarketPlaceHomeCollectionVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5861B4326C6306A00AB35C1 /* MarketPlaceHomeCollectionVCell.swift */; };
 		C587D14D26413BE6002D72DF /* NewFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C587D14C26413BE6002D72DF /* NewFeedModel.swift */; };
@@ -718,7 +722,11 @@
 		C56C28BC26846EEA0042A0A3 /* AnalyticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsTableViewCell.swift; sourceTree = "<group>"; };
 		C56C28BF26846FE40042A0A3 /* AnalyticsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsCollectionViewCell.swift; sourceTree = "<group>"; };
 		C56C28C22684A9090042A0A3 /* MyStoreProductCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStoreProductCVCell.swift; sourceTree = "<group>"; };
+		C571082826D8E04F00BEB31C /* MarketPlaceOptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceOptionViewController.swift; sourceTree = "<group>"; };
+		C571082B26D8E58800BEB31C /* MarketPlaceRegionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceRegionViewController.swift; sourceTree = "<group>"; };
+		C571082E26D8F63A00BEB31C /* MarketPlaceProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceProductListViewController.swift; sourceTree = "<group>"; };
 		C5753EB22653B6B80024E5C7 /* StateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
+		C57979D426D7AE620040D716 /* SelectB2BProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectB2BProductViewController.swift; sourceTree = "<group>"; };
 		C57B97B82679EF0C00B158D8 /* ConnectionConfirmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionConfirmVC.swift; sourceTree = "<group>"; };
 		C5861B4326C6306A00AB35C1 /* MarketPlaceHomeCollectionVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketPlaceHomeCollectionVCell.swift; sourceTree = "<group>"; };
 		C587D14C26413BE6002D72DF /* NewFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedModel.swift; sourceTree = "<group>"; };
@@ -833,6 +841,7 @@
 				C5957A34265CEFF2004952D8 /* HubCollectionViewCell.swift */,
 				C5923F79265FAE7B003A3465 /* HubUserListVC.swift */,
 				C5D68D532660CBF700B759F8 /* BusinessMultiOptionsVC.swift */,
+				C57979D426D7AE620040D716 /* SelectB2BProductViewController.swift */,
 			);
 			path = B2BModule;
 			sourceTree = "<group>";
@@ -1795,6 +1804,9 @@
 				C554DB98266A29D800D4EECC /* AddProductMarketplaceVC.swift */,
 				C554DBF3266A36B400D4EECC /* MarketPlaceConfirmationVC.swift */,
 				C5861B4326C6306A00AB35C1 /* MarketPlaceHomeCollectionVCell.swift */,
+				C571082826D8E04F00BEB31C /* MarketPlaceOptionViewController.swift */,
+				C571082B26D8E58800BEB31C /* MarketPlaceRegionViewController.swift */,
+				C571082E26D8F63A00BEB31C /* MarketPlaceProductListViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -2209,6 +2221,7 @@
 				279AB32725FF42010061FCB3 /* HubsModels.swift in Sources */,
 				272EA30F25C1B00B009E0259 /* BusinessSearchTableCell.swift in Sources */,
 				61A40A1F267378BF00D7D078 /* BasicConnectFlowViewController.swift in Sources */,
+				C571082C26D8E58800BEB31C /* MarketPlaceRegionViewController.swift in Sources */,
 				61A8CB49261D98CA00B99233 /* ContactDetailRouter.swift in Sources */,
 				27D0FAB125CEE9FF00463FE0 /* LoginAccountViewC.swift in Sources */,
 				277803BC25D1AD91008CC701 /* SignUpMultiCheckboxTableCell.swift in Sources */,
@@ -2222,6 +2235,7 @@
 				610D71902628B24E000FA104 /* EventsViewController.swift in Sources */,
 				61EAB561269A23B900793F18 /* PostCommentsInteractor.swift in Sources */,
 				2742855B25B82EEC003F3DE5 /* EditUserSettingsTableCell.swift in Sources */,
+				C57979D526D7AE620040D716 /* SelectB2BProductViewController.swift in Sources */,
 				C56C286A268465A90042A0A3 /* MyStoreProductWorker.swift in Sources */,
 				279AB34825FF436C0061FCB3 /* HubsListTable.swift in Sources */,
 				6140882B26697BB100A98B0E /* UserPhotosGridCollectionViewCell.swift in Sources */,
@@ -2350,6 +2364,7 @@
 				2779F19725EE588D00A76816 /* MapViewC.swift in Sources */,
 				C5D6F7F326B1829D006FFCDF /* HubListViewController.swift in Sources */,
 				C5A2F35726C134150072DA8D /* StoreDescImageCollectionVCell.swift in Sources */,
+				C571082926D8E04F00BEB31C /* MarketPlaceOptionViewController.swift in Sources */,
 				C5D6F7DE26B1829D006FFCDF /* HubsViaCityCell.swift in Sources */,
 				27A4439C25AE03720002BAAC /* RSImageView.swift in Sources */,
 				2742855C25B82EEC003F3DE5 /* AddFeatureViewC.swift in Sources */,
@@ -2521,6 +2536,7 @@
 				C53A040526663ED800D07797 /* MarketPlaceWalkThroughDescVC.swift in Sources */,
 				C5D68D542660CBF700B759F8 /* BusinessMultiOptionsVC.swift in Sources */,
 				27A443BB25AE03720002BAAC /* UINavigationControllerExtended.swift in Sources */,
+				C571082F26D8F63A00BEB31C /* MarketPlaceProductListViewController.swift in Sources */,
 				61F84E2426D251EA00435AB8 /* SharePostCollectionViewCell.swift in Sources */,
 				272EA31225C1B1AB009E0259 /* SelectedHubsTableCell.swift in Sources */,
 				274D50E525E4254100EDE55C /* ResetPasswordViewC.swift in Sources */,
