@@ -90,6 +90,7 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
         self.phoneTextField.placeholder = "999-999-9999"
         self.facebookTextField.placeholder = "https://www.facebook.com"
         self.websiteTextField.placeholder = "https://www.yourwebsite.com"
+        phoneTextField.delegate = self
 
 
         if viewModel != nil {
@@ -153,7 +154,13 @@ class ContactDetailViewController: UIViewController, ContactDetailDisplayLogic {
             case .authorizedAlways, .authorizedWhenInUse:
                 let controller = pushViewController(withName: MapViewC.id(), fromStoryboard: StoryBoardConstants.kLogin) as? MapViewC
                 controller?.dismiss = { [weak self] (mapAddressModel , latitude, longitude) in
+                    if mapAddressModel.address2 == "" {
+                        self?.addressTextField.text = "\(mapAddressModel.address1), \(mapAddressModel.mapAddress)".capitalized
+                    }else if mapAddressModel.address1 == "" {
+                        self?.addressTextField.text = "\(mapAddressModel.address2), \(mapAddressModel.mapAddress)".capitalized
+                    }else{
                     self?.addressTextField.text = "\(mapAddressModel.address1), \(mapAddressModel.address2), \(mapAddressModel.mapAddress)".capitalized
+                    }
                 }
 //                controller?.delegate = self
             default:
@@ -269,6 +276,26 @@ extension ContactDetailViewController: UITextFieldDelegate {
             self.addressTextFieldSelected(textField)
             return false
         }
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == phoneTextField {
+            if let char = string.cString(using: String.Encoding.utf8) {
+                let isBackSpace = strcmp(char, "\\b")
+                if (isBackSpace == -92) {
+                    print("Backspace was pressed")
+                    return true
+                }
+            }
+            if (textField.text?.count ?? 0) < 10 {
+                return true
+            }else{
+                return false
+            }
+
+        }
+
         return true
     }
 }

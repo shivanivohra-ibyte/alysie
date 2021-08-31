@@ -32,22 +32,19 @@ class SelectProductViewC: AlysieBaseViewC {
   var signUpStepTwoDataModel: SignUpStepTwoDataModel!
   var stepOneDelegate: TappedDoneStepOne?
   var stepTwoDelegate: TappedDoneStepTwo?
-    var fromVC: isCameFrom?
-  
+   
   //MARK:  - ViewLifeCycle Methods -
     
    override func viewDidLoad() {
     super.viewDidLoad()
-//    if fromVC == .B2B {
-//
-//    }else{
+
     if self.signUpStepOneDataModel != nil{
       self.lblNavigation.text = AppConstants.Select.capitalized + " " + String.getString(self.signUpStepOneDataModel.title)
     }
     else{
       self.lblNavigation.text = AppConstants.Select.capitalized + " " + String.getString(self.signUpStepTwoDataModel.title)
     }
-    //}
+   
    }
   
   override func viewDidLayoutSubviews() {

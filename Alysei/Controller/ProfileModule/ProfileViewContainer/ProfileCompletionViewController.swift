@@ -15,6 +15,7 @@ class ProfileCompletionViewController: AlysieBaseViewC {
     @IBOutlet weak var tblViewProfileCompletion: UITableView!
     @IBOutlet weak var progressbar: UIProgressView!
     @IBOutlet weak var percentageLabel: UILabel!
+    
     //MARK: - Properties -
     
     var currentIndex: Int = 0

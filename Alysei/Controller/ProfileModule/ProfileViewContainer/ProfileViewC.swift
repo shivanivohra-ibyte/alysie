@@ -273,6 +273,10 @@ class ProfileViewC: AlysieBaseViewC{
         .lightContent
     }
     //MARK: - IBAction -
+    
+    @IBAction func btnLogout(_ sender: UIButton){
+        kSharedUserDefaults.clearAllData()
+    }
 
     @IBAction func tapSideMenu(_ sender: UIButton) {
 
