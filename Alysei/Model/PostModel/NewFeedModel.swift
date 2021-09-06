@@ -78,17 +78,17 @@ class NewFeedSearchDataModel{
             self.state = CountryModel.init(data: state)
         }
 
-        if let sharedPostDict = dictResponse["shared_post"] {
-            do {
-                let data = try JSONSerialization.data(withJSONObject: sharedPostDict, options: .prettyPrinted)
-                print(data)
-
-                let jsonData = try JSONDecoder().decode(SharedPostData.self, from: data)
-                self.sharedPostData = jsonData
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
+//        if let sharedPostDict = dictResponse["shared_post"] {
+//            do {
+//                let data = try JSONSerialization.data(withJSONObject: sharedPostDict, options: .prettyPrinted)
+//                print(data)
+//
+//                let jsonData = try JSONDecoder().decode(SharedPostData.self, from: data)
+//                self.sharedPostData = jsonData
+//            } catch {
+//                print(error.localizedDescription)
+//            }
+//        }
     }
 
 
@@ -110,6 +110,8 @@ class SubjectData: Codable {
     var companyName: String?
     var restaurantName: String?
     var avatarId: Avatar?
+    var firstName: String?
+    var lastName: String?
 
     init(with dictResponse: [String:Any]){
         self.userId = Int.getInt(dictResponse["user_id"])
@@ -121,6 +123,8 @@ class SubjectData: Codable {
         if let avatar = dictResponse["avatar_id"] as? [String:Any]{
             self.avatarId = Avatar.init(with: avatar)
         }
+        self.firstName = String.getString(dictResponse[APIConstants.kFirstName])
+        self.lastName = String.getString(dictResponse[APIConstants.kLastName])
     }
 
 

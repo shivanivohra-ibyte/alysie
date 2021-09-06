@@ -627,7 +627,7 @@ extension BusinessViewC: UITableViewDataSource, UITableViewDelegate{
             return 100.0
         case .collectionHubs:
             // let cellSize = CGFloat(model.cellCount) / 3.0
-            return 180.0  //* cellSize
+            return 220.0  //* cellSize
         case .tableListCell:
             return 66.0
         default:

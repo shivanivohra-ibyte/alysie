@@ -45,13 +45,14 @@ class ProfileViewC: AlysieBaseViewC{
     @IBOutlet weak var tblViewProfileCompletion: UITableView!
     @IBOutlet weak var progressbar: UIProgressView!
     @IBOutlet weak var percentageLabel: UILabel!
-
+    @IBOutlet weak var percentageSlider: UISlider!
 
     @IBOutlet weak var menuButton: UIButtonExtended!
     @IBOutlet weak var respondeButton: UIButtonExtended!
     @IBOutlet weak var messageButton: UIButtonExtended!
     @IBOutlet weak var connectButton: UIButtonExtended!
     @IBOutlet weak var backButton: UIButtonExtended!
+    @IBOutlet weak var lblPercentage: UILabel!
     //  @IBOutlet weak var btnBack: UIButton!
 
     //MARK: - Properties -
@@ -452,9 +453,9 @@ class ProfileViewC: AlysieBaseViewC{
         } else {
         }
     }
-    //    @IBAction func btnback(_ sender: UIButton){
-    //        self.navigationController?.popViewController(animated: true)
-    //    }
+        @IBAction func btnback(_ sender: UIButton){
+            self.navigationController?.popViewController(animated: true)
+        }
 
     @IBAction func messageButtonTapped(_ sender: UIButton) {
         self.messageButtonTapped()
@@ -465,8 +466,14 @@ class ProfileViewC: AlysieBaseViewC{
     //    func updateProductsInEditProfile() {
     //        editProfileViewCon?.tableViewEditProfile?.reloadData()
     //    }
-
+    func setUI(){
+        
+        let trackRect =  self.percentageSlider.trackRect(forBounds: self.percentageSlider.bounds)
+        let thumbRect = self.percentageSlider.thumbRect(forBounds: self.percentageSlider.bounds, trackRect: trackRect, value: self.percentageSlider.value)
+        self.lblPercentage.transform = CGAffineTransform(translationX: thumbRect.origin.x + self.percentageSlider.frame.origin.x - 9, y: self.percentageSlider.frame.origin.y + 35)
+    }
     private func initialSetUp() -> Void{
+       // self.setUI()
 
         //    self.lblEmail.text = kSharedUserDefaults.loggedInUserModal.email
         //    self.lblEmailNavigation.text = kSharedUserDefaults.loggedInUserModal.email
@@ -662,8 +669,12 @@ class ProfileViewC: AlysieBaseViewC{
                 self.lblDisplayNameNavigation.text = "\(name)".capitalized
                 let userPercentage = responseModel.data?.userData?.profilePercentage ?? 0
                 self.percentageLabel.text = "\(responseModel.data?.userData?.profilePercentage ?? 0)% completed"
+                self.lblPercentage.text = "\(responseModel.data?.userData?.profilePercentage ?? 0)%"
+               
                 let floatPercentage = Float(userPercentage )
                 self.progressbar.setProgress((floatPercentage/100), animated: false)
+                self.percentageSlider.setValue(floatPercentage, animated: true)
+               // self.setUI()
                 if responseModel.data?.userData?.profilePercentage == ProfilePercentage.percent100.rawValue {
 //                    self.viewProfileCompletion.isHidden = true
 //                    self.viewProfileHeight.constant = 0
@@ -691,6 +702,7 @@ class ProfileViewC: AlysieBaseViewC{
             }
             if (error != nil) { print(error.debugDescription) }
         }
+       
     }
 
 
@@ -1195,6 +1207,8 @@ extension ProfileViewC: AnimationProfileCallBack{
         case ProfileCompletion.ContactInfo:
             print("Contact")
             self.performSegue(withIdentifier: "segueProfileTabToContactDetail", sender: self)
+        case ProfileCompletion.FeaturedProducts:
+            self.addFeaturedProductButtonTapped(UIButton())
         default:
             // let controller = pushViewController(withName: EditProfileViewC.id(), fromStoryboard: StoryBoardConstants.kHome) as? EditProfileViewC
             // controller?.signUpViewModel = self.signUpViewModel
@@ -1203,7 +1217,17 @@ extension ProfileViewC: AnimationProfileCallBack{
             guard let controller = self.storyboard?.instantiateViewController(identifier: "EditProfileViewC") as? EditProfileViewC else {return}
             controller.signUpViewModel = self.signUpViewModel
             controller.userType = self.userType ?? .voyagers
+            controller.fromProfileCompletion = true
+            if profileCompletionModel?[indexPath.row].title == ProfileCompletion.ProfilePicture {
+                controller.forProfileCompletionProfile = true
+                controller.forProfileCompletionCover = false
+            }else if profileCompletionModel?[indexPath.row].title == ProfileCompletion.CoverImage {
+                controller.forProfileCompletionCover = true
+                controller.forProfileCompletionProfile = false
+            }
+           
             self.editProfileViewCon = controller
+            
             self.navigationController?.pushViewController(controller, animated: true)
 
         }

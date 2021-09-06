@@ -36,13 +36,22 @@ class EditProfileViewC: AlysieBaseViewC, AddProductCallBack {
     var signUpViewModel: SignUpViewModel!
     var signUpStepOneDataModel: SignUpStepOneDataModel!
     var isCameProfileUpdate : isCameFrom?
+    var fromProfileCompletion: Bool?
+    var forProfileCompletionProfile: Bool?
+    var forProfileCompletionCover: Bool?
 
     //MARK:  - ViewLifeCycle Methods -
 
     override func viewDidLoad() {
 
         super.viewDidLoad()
-
+        
+        if fromProfileCompletion == true && forProfileCompletionProfile == true{
+            self.tapProfilePhoto(UIButton())
+        }
+        if fromProfileCompletion == true && forProfileCompletionCover == true{
+            self.tapCoverPhoto(UIButton())
+        }
         if let coverPhoto = LocalStorage.shared.fetchImage(UserDetailBasedElements().coverPhoto) {
            //, (kSharedUserDefaults.loggedInUserModal.cover != nil) {
             self.coverPhotoAlreadyExists = true
@@ -592,7 +601,7 @@ extension EditProfileViewC: UIImagePickerControllerDelegate, UINavigationControl
                 self.profilePhoto = selectedImage
                 self.imgViewProfile.image = selectedImage
             }
-            else{
+            else if self.btnCoverPhoto.isSelected == true{
                 self.isCoverPhotoCaptured = true
                 self.coverPhoto = selectedImage
                 self.imgViewCoverPhoto.image = selectedImage

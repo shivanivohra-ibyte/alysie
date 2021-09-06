@@ -188,6 +188,17 @@ extension StoreDescViewController: UITableViewDataSource, UITableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "StoreRatingReviewTableVCell", for: indexPath) as? StoreRatingReviewTableVCell else {return UITableViewCell()}
             
             cell.selectionStyle = .none
+            cell.totalOneStar.text = "\(storeDetails?.total_one_star ?? 0)"
+            cell.totalTwoStar.text = "\(storeDetails?.total_two_star ?? 0)"
+            cell.totalThreeeStar.text = "\(storeDetails?.total_three_star ?? 0)"
+            cell.totalFourStar.text = "\(storeDetails?.total_four_star ?? 0)"
+            cell.totalFiveStar.text = "\(storeDetails?.total_five_star ?? 0)"
+            
+            cell.totalOneStarProgress.setProgress((Float(storeDetails?.total_one_star ?? 0) / 100), animated: true)
+            cell.totalTwoStarProgress.setProgress(Float((storeDetails?.total_two_star ?? 0) / 100), animated: true)
+            cell.totalThreeeStarProgress.setProgress(Float((storeDetails?.total_three_star ?? 0) / 100), animated: true)
+            cell.totalFourStarProgress.setProgress(Float((storeDetails?.total_four_star ?? 0)  / 100), animated: true)
+            cell.totalFiveStarProgress.setProgress(Float((storeDetails?.total_five_star ?? 0) / 100), animated: true)
             if arrRatingReview?.count == nil || arrRatingReview?.count == 0{
                 cell.viewComment.isHidden = true
             }else{
@@ -210,7 +221,7 @@ extension StoreDescViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0{
             if arrRatingReview?.count == nil || arrRatingReview?.count == 0 {
-                return 150
+                return 170
             }else{
                 return UITableView.automaticDimension + 250
             }

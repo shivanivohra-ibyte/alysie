@@ -103,6 +103,17 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource{
         }else if indexPath.row == 8{
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductRatingTableVCell", for: indexPath) as? ProductRatingTableVCell else {return UITableViewCell()}
             cell.selectionStyle = .none
+            cell.totalOneStar.text = "\(productDetail?.product_detail?.total_one_star ?? 0)"
+            cell.totalTwoStar.text = "\(productDetail?.product_detail?.total_two_star ?? 0)"
+            cell.totalThreeeStar.text = "\(productDetail?.product_detail?.total_three_star ?? 0)"
+            cell.totalFourStar.text = "\(productDetail?.product_detail?.total_four_star ?? 0)"
+            cell.totalFiveStar.text = "\(productDetail?.product_detail?.total_five_star ?? 0)"
+            
+            cell.totalOneStarProgress.setProgress((Float(productDetail?.product_detail?.total_one_star ?? 0) / 100), animated: true)
+            cell.totalTwoStarProgress.setProgress(Float((productDetail?.product_detail?.total_two_star ?? 0) / 100), animated: true)
+            cell.totalThreeeStarProgress.setProgress(Float((productDetail?.product_detail?.total_three_star ?? 0) / 100), animated: true)
+            cell.totalFourStarProgress.setProgress(Float((productDetail?.product_detail?.total_four_star ?? 0)  / 100), animated: true)
+            cell.totalFiveStarProgress.setProgress(Float((productDetail?.product_detail?.total_five_star ?? 0) / 100), animated: true)
             if arrRatingReview?.count == nil || arrRatingReview?.count == 0{
                 cell.viewComment.isHidden = true
             }else{
@@ -157,7 +168,7 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource{
         }else if indexPath.row == 8 {
             
             if arrRatingReview?.count == nil || arrRatingReview?.count == 0 {
-                return 200
+                return 250
             }else{
                 return UITableView.automaticDimension + 300
             }

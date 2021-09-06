@@ -28,6 +28,19 @@ class ProductRatingTableVCell: UITableViewCell {
     @IBOutlet weak var userRatingStar3: UIImageView!
     @IBOutlet weak var userRatingStar4: UIImageView!
     @IBOutlet weak var userRatingStar5: UIImageView!
+    
+    @IBOutlet weak var totalOneStar: UILabel!
+    @IBOutlet weak var totalTwoStar: UILabel!
+    @IBOutlet weak var totalThreeeStar: UILabel!
+    @IBOutlet weak var totalFourStar: UILabel!
+    @IBOutlet weak var totalFiveStar: UILabel!
+    
+    @IBOutlet weak var totalOneStarProgress: UIProgressView!
+    @IBOutlet weak var totalTwoStarProgress: UIProgressView!
+    @IBOutlet weak var totalThreeeStarProgress: UIProgressView!
+    @IBOutlet weak var totalFourStarProgress: UIProgressView!
+    @IBOutlet weak var totalFiveStarProgress: UIProgressView!
+    
     var avgRating:String?
     var data: RatingReviewModel?
     var pushCallBack: ((Int) -> Void)? = nil

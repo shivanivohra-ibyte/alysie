@@ -55,6 +55,11 @@ class ProductSearchListModel {
     var name: String?
     var store_logo: String?
     var rating: String?
+    var total_five_star: Int?
+    var total_four_star: Int?
+    var total_one_star: Int?
+    var total_three_star: Int?
+    var total_two_star: Int?
     //var avg_rating: String?
     
     init(with data: [String:Any]){
@@ -78,6 +83,11 @@ class ProductSearchListModel {
         self.name = String.getString(data["name"])
         self.store_logo = String.getString(data["store_logo"])
         self.rating = String.getString(data["rating"])
+        self.total_one_star = Int.getInt(data["total_one_star"])
+        self.total_two_star = Int.getInt(data["total_two_star"])
+        self.total_three_star = Int.getInt(data["total_three_star"])
+        self.total_four_star = Int.getInt(data["total_four_star"])
+        self.total_five_star = Int.getInt(data["total_five_star"])
        // self.avg_rating = String.getString(data["avg_rating"])
         if let productGallery = data["product_gallery"] as? [[String:Any]]{
             self.product_gallery = productGallery.map({ProductGalleryModel.init(with: $0)})

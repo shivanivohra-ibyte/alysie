@@ -124,6 +124,7 @@ extension MyStoreProductViewController: UICollectionViewDataSource, UICollection
         cell.configCell(productList?[indexPath.row] ?? MyStoreProductDetail(with: [:]))
         cell.deleteButton.tag = indexPath.row
         cell.editButton.tag = indexPath.row
+        cell.totalRating.text = "\(productList?[indexPath.row].total_reviews ?? "0") Reviews"
         cell.deleteCallBack = { deleteProductId in
             self.interactor?.callDeleteProductApi(deleteProductId)
         }

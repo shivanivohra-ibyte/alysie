@@ -55,6 +55,13 @@ class MyStoreProductDetail{
     var isSelected: Bool?
     var is_favourite: Int?
     var labels: Labels?
+    var rating: String?
+    var total_five_star: Int?
+    var total_four_star: Int?
+    var total_one_star: Int?
+    var total_three_star: Int?
+    var total_two_star: Int?
+    
     init(with data: [String:Any]?) {
         self.marketplace_product_id = Int.getInt(data?["marketplace_product_id"])
         self.user_id = Int.getInt(data?["user_id"])
@@ -82,6 +89,12 @@ class MyStoreProductDetail{
         self.marketplace_product_category_id = Int.getInt(data?["marketplace_product_category_id"])
         self.isSelected = Bool.getBool(data?["is_selected"])
         self.is_favourite = Int.getInt(data?["is_favourite"])
+        self.rating = String.getString(data?["rating"])
+        self.total_one_star = Int.getInt(data?["total_one_star"])
+        self.total_two_star = Int.getInt(data?["total_two_star"])
+        self.total_three_star = Int.getInt(data?["total_three_star"])
+        self.total_four_star = Int.getInt(data?["total_four_star"])
+        self.total_five_star = Int.getInt(data?["total_five_star"])
         if let product_gallery = data?["product_gallery"] as? [[String:Any]]{
             self.product_gallery = product_gallery.map({ProductGallery.init(with: $0)})
         }

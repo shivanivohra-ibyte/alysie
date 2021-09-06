@@ -380,6 +380,7 @@ struct ProfileCompletion {
     static let CoverImage = "Cover Image"
     static let About = "About"
     static let Featuredlisting = "Featured listing"
+    static let FeaturedProducts = "Featured Products"
     static let OurProducts = "Our Products"
     static let FeaturedRecipe = "Featured Recipe"
     static let FeaturedBlog = "Featured Blog"
